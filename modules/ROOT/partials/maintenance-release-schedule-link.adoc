@@ -1,0 +1,2 @@
+NOTE: See the https://github.com/owncloud/core/wiki/Maintenance-and-Release-Schedule[Maintenance and Release schedule] for full release schedule details. 
+

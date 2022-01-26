@@ -1,0 +1,6 @@
+.drone.yml
+cache/
+node_modules/
+public/
+pdf_web/
+tmp/

@@ -1,0 +1,59 @@
+{
+  "private": true,
+  "name": "owncloud-docs",
+  "description": "The ownCloud Core documentation",
+  "version": "2.0.0",
+  "license": "AGPL-3.0",
+  "author": "The ownCloud Team <docs@owncloud.com>",
+  "homepage": "https://github.com/owncloud/docs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/owncloud/docs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/owncloud/docs/issues"
+  },
+  "contributors": [
+    {
+      "name": "Martin Mattel",
+      "email": "github@diemattels.at"
+    },
+    {
+      "name": "Edith Parzefall"
+    },
+    {
+      "name": "Phil Davis"
+    }
+  ],
+  "scripts": {
+    "serve": "http-server public/ -d -i",
+    "antora": "antora --stacktrace generate --cache-dir cache --redirect-facility static --generator ./generator/generate-site.js --clean --fetch --attribute format=html site.yml",
+    "antora-local": "antora --stacktrace generate --cache-dir cache --redirect-facility static --generator ./generator/generate-site.js --clean --fetch --attribute format=html --url http://localhost:8080 site.yml",
+    "antora-staging": "antora --stacktrace generate --cache-dir cache --redirect-facility static --generator ./generator/generate-site.js --clean --fetch --attribute format=html --url https://doc.staging.owncloud.com site.yml",
+    "validate": "antora --stacktrace generate --cache-dir cache --redirect-facility disabled --generator ./generator/xref-validator.js --clean --fetch --attribute format=html site.yml",
+    "linkcheck": "broken-link-checker --filter-level 3 --recursive --verbose"
+  },
+  "dependencies": {
+    "@antora/cli": "^2.3",
+    "@antora/site-generator-default": "^2.3",
+    "@asciidoctor/core": "^2.2.6",
+    "@elastic/elasticsearch": "^7.16.0",
+    "asciidoctor-kroki": "^0.15.4",
+    "cheerio": "^1.0.0-rc.10",
+    "html-entities": "2.3.2",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "broken-link-checker": "^0.7.8",
+    "http-server": "^14.1.0"
+  },
+  "resolutions": {
+    "glob-parent": "^6.0"
+  },
+  "keywords": [
+    "antora",
+    "asciidoc",
+    "documentation",
+    "owncloud"
+  ]
+}
