@@ -1,3 +1,3 @@
 = Introduction to ownCloud Server
 
-Welcome to the ownCloud Server documentation. This guide provides information on installation, configuration and administration tasks respectively the developer documentation.
+Welcome to the ownCloud Server documentation. These documents provide an admin guide with information for installation, configuration and administrative tasks respectively the documentation for developers.
