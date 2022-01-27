@@ -1,7 +1,5 @@
 = User Commands
 
-:temp-dir-url: https://systemd.io/TEMPORARY_DIRECTORIES/
-
 The `user` commands provide a range of functionality for managing ownCloud users. 
 This includes: creating and removing users, resetting user passwords, displaying a report which shows how many users you have, and when a user was last logged in.
 The full list, of commands is:
@@ -13,14 +11,12 @@ user
  user:delete                         Deletes the specified user
  user:disable                        Disables the specified user
  user:enable                         Enables the specified user
- user:home                           List home directories and users in a particular home
  user:inactive                       Reports users who are known to owncloud,
                                      but have not logged in for a certain number of days
  user:lastseen                       Shows when the user was logged in last time
  user:list                           List users
  user:list-groups                    List groups for a user
  user:modify                         Modify user details
- user:move-home                      Move a user's home folder to a new location
  user:report                         Shows how many users have access
  user:resetpassword                  Resets the password of the named user
  user:setting                        Read and modify user application settings
@@ -62,8 +58,7 @@ It cannot be set to `0`.
 | Email address for the user (optional).
 The user will be emailed a link to set their password, _if_ email is configured correctly.
 
-| `-g [GROUP]` +
-`--group=[GROUP]`
+| `-g [GROUP]` `--group=[GROUP]`
 | The groups the user should be added to.
 The group will be created if it does not exist.
 Multiple values are allowed.
@@ -172,89 +167,6 @@ NOTE: Once users are disabled, their connected browsers will be disconnected. Us
 | The user name.
 |====
 
-== List User Home Directories
-
-List all available root directories for user homes that are currently in use. For details see xref:configuration/user/user_management.adoc#moving-the-user-home[Moving the User Home] documentation.
-
-This command is complementary when using `user:move-home`.
-
-[source,console,subs="attributes+"]
-----
-{occ-command-example-prefix} user:home:list-dirs [options]
-----
-
-=== Options
-
-[width="100%",cols="20%,70%"]
-|===
-| `--output=[OUTPUT]`
-| Output format (plain, json or json_pretty, default is plain) [default: "plain"].
-|===
-
-=== Examples
-
-[source,console,subs="attributes+"]
-----
-{occ-command-example-prefix} user:home:list-dirs
-  - /var/www/owncloud/data
-----
-
-== List all Users For a Given Home Directory
-
-List all users that have their home in a given path. For details see xref:configuration/user/user_management.adoc#moving-the-user-home[Moving the User Home] documentation.
-
-This command is complementary when using `user:move-home`.
-
-[source,console,subs="attributes+"]
-----
-{occ-command-example-prefix} user:home:list-users [options] [--] [<path>]
-----
-
-=== Arguments
-
-[width="100%",cols="20%,70%"]
-|===
-| `path`
-| Path where the user home must be located
-|===
-
-=== Options
-
-[width="100%",cols="20%,70%"]
-|===
-| `--all`
-| List all users for every home path.
-
-| `--output=[OUTPUT]`
-| Output format (plain, json or json_pretty, default is plain) [default: "plain"].
-|===
-
-=== Examples
-
-Note for the example below, some user accounts originated from LDAP.
-
-[source,console,subs="attributes+"]
-----
-{occ-command-example-prefix} user:home:list-users /var/www/owncloud/data
-  - admin
-  - aca4c3ec-691d-103b-8380-55a4da3d3a76
-  - 9918b614-6a2e-103b-89a7-f5edf5d332f5
-  - c298ae18-6a2e-103b-89a8-f5edf5d332f5
-  - dbcca7b4-7306-103b-813a-19652cf0a9d2
-----
-
-Run the following command to list all users from all available home directories. The example shows, that user `lisa` has been moved to a different home directory with `user:move-home`.
-
-[source,console,subs="attributes+"]
-----
-{occ-command-example-prefix} user:home:list-users --all
-  - /mnt/newhome_1
-    - lisa
-  - /var/www/owncloud/data 
-    - admin
-    - user01
-----
-
 == Finding Inactive Users
 
 To view a list of users who've not logged in for a given number of days, use the `user:inactive` command.
@@ -358,20 +270,12 @@ If you do not provide a search-pattern then all users are listed.
 
 [width="90%",cols="40%,80%",]
 |====
-| `--output=[OUTPUT]`
-| Output format (plain, json or json-pretty, default is plain).
-
-| `-a [ATTRIBUTES]` +
-`--attributes=[ATTRIBUTES]`
-| Adds more details to the output. +
+| `--output=[OUTPUT]`       | Output format (plain, json or json-pretty, default is plain).
+| `-a [ATTRIBUTES] +
+--attributes=[ATTRIBUTES]` | Adds more details to the output. +
 Allowed attributes, multiple values possible: +
 `uid`, `displayName`, `email`, `quota`, `enabled`, `lastLogin`, `home`, +
 `backend`, `cloudId`, `searchTerms` [default: [`displayName`]]
-
-| `-s` +
-`--show-all-attributes`
-| All attributes to include from `uid`, `displayName`, `email`, `quota`, +
-`enabled`, `lastLogin`, `home`, `backend`, `cloudId`, `searchTerms`
 |====
 
 This example lists user IDs containing the string `ron`
@@ -481,43 +385,6 @@ All three arguments are mandatory and can not be empty. Example to set the email
 ----
 
 The email address of `carla` is updated to `foobar@foo.com`.
-
-== Move a Users Home Folder
-
-This command moves a user's home folder to a new location. For details see xref:configuration/user/user_management.adoc#moving-the-user-home[Moving the User Home] documentation. Note that moving a users home is only possible for POSIX file systems. Also see the `user:home` commands for additional support.
-
-[source,console,subs="attributes+"]
-----
-{occ-command-example-prefix} user:move-home <user_id> <new_location>
-----
-
-=== Arguments
-
-[width="100%",cols="20%,70%",]
-|====
-| `user_id`
-| ID of the user whose home folder is to be moved.
-
-| `new_location`
-| Absolute path to the parent folder of the new location of the home folder.
-|====
-
-[NOTE]
-====
-You must not use temp directories like `/tmp` and `/var/tmp` as target directory.
-
-* Any data located in one of the two directories will not survive a reboot
-* For systemd services, they are private sub-directories of the host’s real /tmp/ and /var/tmp/, and thus not system-wide locations anymore, but service-specific ones. For more details see {temp-dir-url}[Using /tmp/ and /var/tmp/ Safely]
-====
-
-Example:
-
-[source,console,subs="attributes+"]
-----
-{occ-command-example-prefix} user:move-home lisa /mnt/newhome_1
-----
-
-This command moves the home directory of user `lisa` to the new location `/mnt/newhome_1`
 
 == Generating a User Count Report
 
@@ -819,10 +686,9 @@ Synchronize users from a given backend to the accounts table.
 
 === Arguments:
 
-[width="90%",cols="50%,80%",]
+[width="90%",cols="40%,80%",]
 |===
-| `backend-class`
-| The quoted PHP class name for the backend, e.g., +
+| `backend-class` | The quoted PHP class name for the backend, e.g., +
 - LDAP:        `"OCA\User_LDAP\User_Proxy"` +
 - Samba:       `"OCA\User\SMB"` +
 - Shibboleth:  `"OCA\User_Shibboleth\UserBackend"` +
@@ -830,33 +696,21 @@ Synchronize users from a given backend to the accounts table.
 
 === Options
 
-[width="90%",cols="50%,80%",]
+[width="90%",cols="40%,80%",]
 |===
-| `-l` +
-`--list`
-| List all enabled backend classes.
-
+| `-l, --list`      | List all enabled backend classes.
 | `-u [UID]` +
-`--uid=[UID]`
-| Sync only the user with the given user id.
-
-| `-s` +
-`--seenOnly`
-| Sync only seen users.
-
-| `-c` +
-`--showCount`
-| Calculate user count before syncing.
-
+`--uid=[UID]` | Sync only the user with the given user id.
+| `-s, --seenOnly`  | Sync only seen users.
+| `-c, --showCount` | Calculate user count before syncing.
 | `-m [MISSING-ACCOUNT-ACTION]` +
-`--missing-account-action[=MISSING-ACCOUNT-ACTION]`
-| Action to take if the account isn't connected to a backend any longer. +
+ +
+`--missing-account-action[=MISSING-ACCOUNT-ACTION]` | Action to take if the account isn't
+connected to a backend any longer. +
 Options are `disable` and `remove`. +
 Note that removing the account will also remove the stored data and files for that account
-
-| `-r` +
-`--re-enable`
-| When syncing multiple accounts re-enable accounts that are disabled in ownCloud but available in the synced backend.
+| `-r, --re-enable` | When syncing multiple accounts re-enable accounts that are disabled in ownCloud
+but available in the synced backend.
 |===
 
 Below are examples of how to use the command with an _LDAP_, _Samba_,

@@ -3,7 +3,7 @@
 
 == Introduction
 
-The ownCloud preview system generates thumbnails and previews of files for all ownCloud apps that display files such as the Files or the Files Mediaviewer app.
+The ownCloud thumbnail system generates previews of files for all ownCloud apps that display files, such as the Files app.
 
 The following image shows some examples of previews of various file types.
 
@@ -45,7 +45,6 @@ The default list of enabled preview providers which do not need to be explicitly
 OC\Preview\BMP
 OC\Preview\GIF
 OC\Preview\JPEG
-OC\Preview\WEBP
 OC\Preview\MarkDown
 OC\Preview\MP3
 OC\Preview\PNG
@@ -57,7 +56,7 @@ If you want to add or change the default list, you MUST define all elements used
 
 == Prerequisites
 
-When defining your own preview providers, some things need to be considered. For some file types, ownCloud uses ImageMagick to generate previews. By default, the delivered version of ImageMagick for Ubuntu 20.04 is version 6, and the wrapper for php is version 3.4. This version of ImageMacick is _not_ capable of processing additional file formats like SVG or HEIC and many others. If you want to use those providers, you must upgrade ImageMagick to version 7 and the php wrapper to version 3.5. See the xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc#php-imagick-library[php-imagick Library] section in the installation guide for more information.
+When defining your own preview providers, some things need to be considered. For some file types, ownCloud uses ImageMagick to generate previews. By default, the delivered version of ImageMagick for Ubuntu 18.04 and 20.04 is version 6, and the wrapper for php is version 3.4. This version of ImageMacick is _not_ capable of processing additional file formats like SVG or HEIC and many others. If you want to use those providers, you must upgrade ImageMagick to version 7 and the php wrapper to version 3.5. See the xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc#php-imagick-library[php-imagick Library] section in the installation guide for more information.
 
 === Notes for PDF Preview Generation
 
