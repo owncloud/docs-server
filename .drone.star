@@ -103,18 +103,8 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
                 "name": "docs-build",
                 "pull": "always",
                 "image": "owncloudci/nodejs:16",
-                "environment": {
-                    "BUILD_SEARCH_INDEX": ctx.build.branch == deployment_branch,
-                    "UPDATE_SEARCH_INDEX": ctx.build.branch == deployment_branch,
-                    "ELASTICSEARCH_NODE": from_secret("elasticsearch_node"),
-                    "ELASTICSEARCH_INDEX": from_secret("elasticsearch_index"),
-                    "ELASTICSEARCH_READ_AUTH": from_secret("elasticsearch_read_auth"),
-                    "ELASTICSEARCH_WRITE_AUTH": from_secret("elasticsearch_write_auth"),
-                    "latestVersion": latest_version,
-                },
                 "commands": [
                     "yarn antora --fetch --attribute format=html",
-                    "bin/optimize_crawl -x",
                 ],
             },
             {
@@ -142,6 +132,10 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
                     "event": [
                         "push",
                         "cron",
+                    ],
+                    "branch": [
+                        deployment_branch,
+                        base_branch,
                     ],
                 },
             },
@@ -183,30 +177,6 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
                     ],
                     "branch": [
                         pdf_branch,
-                    ],
-                },
-            },
-            {
-                "name": "upload-html",
-                "pull": "always",
-                "image": "plugins/s3-sync",
-                "settings": {
-                    "bucket": "uploads",
-                    "endpoint": from_secret("docs_s3_server"),
-                    "access_key": from_secret("docs_s3_access_key"),
-                    "secret_key": from_secret("docs_s3_secret_key"),
-                    "path_style": "true",
-                    "source": "public/",
-                    "target": "/deploy",
-                    "delete": "true",
-                },
-                "when": {
-                    "event": [
-                        "push",
-                        "cron",
-                    ],
-                    "branch": [
-                        deployment_branch,
                     ],
                 },
             },
@@ -258,7 +228,7 @@ def trigger(ctx, environment, latest_version, deployment_branch, base_branch, pd
         },
         "steps": [
             {
-                "name": "trigger-%s" % deployment_branch,
+                "name": "trigger-docs",
                 "pull": "always",
                 "image": "plugins/downstream",
                 "settings": {
@@ -266,7 +236,7 @@ def trigger(ctx, environment, latest_version, deployment_branch, base_branch, pd
                     "token": from_secret("drone_token"),
                     "fork": "true",
                     "repositories": [
-                        "owncloud/docs@%s" % deployment_branch,
+                        "owncloud/docs@master",
                     ],
                 },
             },
@@ -276,6 +246,7 @@ def trigger(ctx, environment, latest_version, deployment_branch, base_branch, pd
         ],
         "trigger": {
             "ref": [
+                "refs/heads/%s" % deployment_branch,
                 "refs/heads/%s" % base_branch,
             ],
         },
