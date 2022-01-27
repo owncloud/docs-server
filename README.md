@@ -1,60 +1,55 @@
-# ownCloud Documentation
+# ownCloud Server Documentation
 
-[![Build Status](http://drone.owncloud.com/api/badges/owncloud/docs/status.svg?branch=master)](http://drone.owncloud.com/owncloud/docs)
+## Building the Docs
 
-1. The platform and tools used to build the documentation is [Antora](./docs/what-is-antora.md).
-2. The file format that the documentation is written in is [AsciiDoc](./docs/what-is-asciidoc.md).
-3. The <abbr title="User Interface">UI</abbr> & <abbr title="User Experience">UX</abbr> of the documentation can be found at [docs-ui](https://github.com/owncloud/docs-ui)
+The ownCloud Server documentation is not built independently. Instead, it is built together with the [main documentation](https://github.com/owncloud/docs/). However, you can build a local copy of the ownCloud Server documentation to preview changes you are making.
+
+Whenever a Pull Request of this repo gets merged, it automatically triggers a full docs build.
+
+## General Notes
+
+To make life easier, most of the content written in [docs](https://github.com/owncloud/docs#readme) applies also here. For ease of reading, the most important steps are documented here too. For more information see the link provided. Only a few topics of this repo are unique like the branching.
 
 ## Antora Site Structure for Docs
 
-Refer to the [Antora Site Structure for Docs](./docs/antora-site-structure.md) for more information. 
+Refer to the [Antora Site Structure for Docs](https://github.com/owncloud/docs/blob/master/docs/antora-site-structure.md) for more information. 
 
-## Documentation Guidelines
+## Prepare Your Environment
 
-Refer to the [Documentation Guidelines](./docs/doc-guidelines.md) for more information about backgrounds and processes.
+To prepare your local environment, some steps need to be made:
 
-## Contributing to the Documentation
+1.) Have the [necessary prerequisites](https://github.com/owncloud/docs/blob/master/docs/build-the-docs.md#install-the-prerequisites) installed.
 
-To get started contributing to the documentation, please refer to the [Getting Started Guide](./docs/getting-started.md).
+2.) Clone this repository and run
+```
+yarn install
+```
+to setup all necessary dependencies.
 
-With regard to language and style issues, consult the [Style Guide](./docs/style-guide.md).
+## Building the ownCloud Server Documentation
 
-## Generating the Documentation
+Run the following command to build the client documentation locally
 
-To generate the documentation, whether in HTML or PDF format, please refer to the [Building the Documentation guide](./docs/build-the-docs.md).
+```
+yarn antora-local
+```
 
-## Common Content and Styling the Documentation
+## Previewing the Generated Docs
 
-If you want to suggest an improvement to the ownCloud documentation theme, such as the layout, the header or the footer text, or if you find a bug, all the information that you need is in the `docs-ui` repository. Changes made in `docs-ui` are valid for the whole documentation.
+Assuming that there are no build errors, the next thing to do is to view the result in your browser. In case you have already installed a web server to access local pages, you need to configure a virtual host (or similar) which points to the directory `public/`, located in the root directory of this repository. This directory contains the generated documentation. Alternatively, use the simple web server `serve` bundled with the current package.json, just execute the following command to serve the documentation at [http://localhost:8080/server/](http://localhost:8080/server/):
 
-Please read how to test un-merged [docs-ui](./docs/test-ui-bundle.md) changes with content from the ownCloud documentation.
-
-## Best Practices and Tips
-
-Refer to [Best Practices and Tips for writing in AsciiDoc](./docs/best-practices.md) for more information.
+```
+yarn serve
+```
 
 ## Target Branch and Backporting
 
-Please always do your changes in `master` and backport them to the relevant branches.
-The **ONLY** reason for doing a PR in a branch directly is, to fix an issue which is
-_only_ present in that particular branch! When creating a PR and it is necessary to backport,
-document in the PR to which branches a backport is needed.
+See the the [following section](https://github.com/owncloud/docs#target-branch-and-backporting) as the same rules and notes apply.
 
-When backporting, consider using the [backport script](https://doc.owncloud.com/server/developer_manual/general/backporting.html)
-which eases life a lot and speeds up the process. It is also very benificial when using the
-extended code provided, because a clear naming structure of the backport PR is generated automatically.
+## Branching Workflow
 
-## When Does a Change Get Published to the Docs Web Site?
+Please refer to the [Branching Workflow for ownCloud Server](https://github.com/owncloud/docs-server/blob/master/docs/the-branching-workflow.md) or more information.
 
-Changes made will get published to the web under the following conditions:
+## Create a New Version Branch for ownCloud Server
 
-1. A nightly running drone job pulls the documentation from the Client, IOS and Android repo.
-This pull will also be used for any builds triggered by the scenarios outlined below. This means for changes made in one of these
-repos, a merge to master or one of the used branches in docs the next day is necessary to get them published.
-2. A merge to one of the defined version branches triggers as a last step a master branch build.
-3. A merge to master triggers a site build which then pushes all versions defined in site.yml.
-
-## Create a New Version Branch for Docs
-
-Please refer to [Create a New Version Branch for Docs](./docs/new-version-branch.md) for more information.
+Please refer to [Create a New Version Branch for ownCloud Server](https://github.com/owncloud/docs-server/blob/master/docs/new-version-branch.md) for more information.

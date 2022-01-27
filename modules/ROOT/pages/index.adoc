@@ -1,34 +1,3 @@
-= ownCloud Documentation Overview
-:toc: right
-:toclevels: 3
+= Introduction to ownCloud Server
 
-== Getting ownCloud
-
-You can download and install ownCloud on your own Linux server, try some prefab cloud or virtual machine images, or sign up for hosted ownCloud services.
-See the https://owncloud.com/get-started/[Get Started] page for more information.
-
-== Useful pages
-
-Note that this section always points to the latest server version available. In case you need a different version, select your topic and manually switch to one of the available.
-
-* xref:{latest-server-version}@admin_manual:installation/manual_installation/index.adoc[Manual Installation]
-
-* xref:{latest-server-version}@admin_manual:installation/docker/index.adoc[Installation with Docker]
-
-* xref:{latest-server-version}@admin_manual:configuration/server/occ_command.adoc[OCC Commands]
-
-* xref:{latest-server-version}@admin_manual:configuration/server/config_sample_php_parameters.adoc[Config Parameters]
-
-* xref:{latest-server-version}@admin_manual:configuration/server/caching_configuration.adoc#small-organization-single-server-setup[File Locking and Caching Configuration]
-
-* xref:{latest-server-version}@admin_manual:maintenance/manual_upgrade.adoc[Manual Upgrade]
-
-== ownCloud Release Documentation
-
-See the xref:server_releases.adoc[ownCloud Server Releases] page for the documentation on different server releases. +
-See the xref:client_releases.adoc[ownCloud Client Releases] page for the documentation on different client releases.
-
-== Reporting Documentation Bugs & How to Contribute
-
-If you find errors or omissions in any of the manuals, we welcome your bug reports and contributions in fixing them.
-Please refer to the xref:how_to_contribute.adoc[contributing guide] for instructions.
+Welcome to the ownCloud Server documentation. This guide provides information on installation, configuration and administration tasks respectively the developer documentation.

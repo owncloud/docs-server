@@ -6,7 +6,7 @@
 #
 # Note that filenames MUST NOT contain blanks
 
-AVAILABLE_MANUALS=( ROOT )
+AVAILABLE_MANUALS=( admin user developer ROOT )
 # dependend of root or not, the manual name gets a postfix added, name see below
 ROOT_NAME="ROOT"
 # all main nav files from the modules have the name nav.adoc

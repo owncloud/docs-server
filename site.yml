@@ -1,5 +1,5 @@
 site:
-  title: ownCloud Documentation
+  title: ownCloud Server Documentation
   url: https://doc.owncloud.com
 
 content:
@@ -7,31 +7,8 @@ content:
   - url: .
     branches:
     - HEAD
-  - url: https://github.com/owncloud/docs.git
-    branches:
-    - '10.9'
-    - '10.8'
-  - url: https://github.com/owncloud/docs-client-desktop.git
-    branches:
-    - master
-    - '2.10'
-    - '2.9'
-  - url: https://github.com/owncloud/docs-client-ios-app.git
-    branches:
-    - master
-    - '11.8'
-    - '11.7'
-  - url: https://github.com/owncloud/docs-client-android.git
-    branches:
-    - master
-    - '2.19'
-    - '2.18'
-  - url: https://github.com/owncloud/docs-client-branding.git
-    branches:
-    - master
 
 ui:
-  supplemental_files: overlay
   output_dir: assets
   bundle:
     snapshot: true
@@ -51,14 +28,6 @@ asciidoc:
     latest-server-download-version: '10.9.1'
     previous-server-version: '10.8'
     current-server-version: '10.9'
-    latest-desktop-version: '2.10'
-    previous-desktop-version: '2.9'
-    latest-ios-version: '11.8'
-    previous-ios-version: '11.7'
-    latest-android-version: '2.19'
-    previous-android-version: '2.18'
-    latest-branded-version: 'next'
-    previous-branded-version: 'next'
     docs-base-url: 'https://doc.owncloud.com'
     oc-contact-url: 'https://owncloud.com/contact/'
     oc-help-url: 'https://owncloud.com/docs-guides/'

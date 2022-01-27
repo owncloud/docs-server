@@ -3,8 +3,7 @@ title: ownCloud Server
 version: next
 start_page: ROOT:index.adoc
 nav:
-- modules/ROOT/partials/nav_root.adoc
-- modules/ROOT/partials/nav_server.adoc
+- modules/ROOT/partials/nav.adoc
 
 asciidoc:
   attributes:
