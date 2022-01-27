@@ -10,15 +10,15 @@
 
 == Introduction
 
-The ownCloud tar archive contains all of the required third-party PHP libraries.
-As a result, no extra ones are, strictly, necessary.
+The ownCloud tar archive contains all of the required third-party PHP libraries. 
+As a result, no extra ones are, strictly, necessary. 
 However, ownCloud does require that PHP has a set of extensions installed, enabled, and configured.
 
 This section lists both the required and optional PHP extensions.
 If you need further information about a particular extension, please consult the relevant section of the {php-net-url}/manual/en/extensions.php[extensions section of the PHP manual].
 
-If you are using a Linux distribution, it should have packages for all the required extensions.
-You can check the presence of a module by typing `php -m | grep -i <module_name>`.
+If you are using a Linux distribution, it should have packages for all the required extensions. 
+You can check the presence of a module by typing `php -m | grep -i <module_name>`. 
 If you get a result, the module is present.
 
 == Required Prerequisites
@@ -29,8 +29,8 @@ ownCloud can run with following PHP versions: {supported-php-versions}
 
 [IMPORTANT]
 ====
-ownCloud recommends PHP 7.4 for new installations.
-Sites using a version earlier than PHP 7.3 are *strongly encouraged* to migrate at least to PHP 7.3.
+ownCloud recommends PHP 7.3 or 7.4 for new installations.
+Sites using a version earlier than PHP 7.2 are *strongly encouraged* to migrate at least to PHP 7.2.
 ====
 
 ==== PHP Extensions

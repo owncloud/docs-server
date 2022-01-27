@@ -14,6 +14,7 @@
 ***** xref:admin_manual:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide]
 ****** xref:admin_manual:installation/installation_wizard.adoc[The Installation Wizard]
 ***** xref:admin_manual:installation/quick_guides/index.adoc[Quick Installation Guides]
+****** xref:admin_manual:installation/quick_guides/ubuntu_18_04.adoc[Install ownCloud on Ubuntu 18.04]
 ****** xref:admin_manual:installation/quick_guides/ubuntu_20_04.adoc[Install ownCloud on Ubuntu 20.04]
 ***** xref:admin_manual:installation/linux_packetmanager_install.adoc[Linux Package Manager]
 *** xref:admin_manual:installation/troubleshooting.adoc[Troubleshooting]
@@ -102,7 +103,6 @@
 **** xref:admin_manual:configuration/server/oc_server_tuning.adoc[Server Tuning]
 **** xref:admin_manual:configuration/server/thirdparty_php_configuration.adoc[Third Party PHP Configuration]
 **** xref:admin_manual:configuration/server/virus-scanner-support.adoc[Virus Scanner Support]
-**** xref:admin_manual:configuration/server/ui-configuration.adoc[UI Configuration]
 
 *** xref:admin_manual:configuration/user/index.adoc[User]
 **** xref:admin_manual:configuration/user/user_management.adoc[User Management]
@@ -120,7 +120,6 @@
 ** xref:admin_manual:maintenance/index.adoc[Maintenance]
 *** xref:admin_manual:maintenance/upgrading/upgrade.adoc[Upgrading]
 **** xref:admin_manual:maintenance/upgrading/manual_upgrade.adoc[Manual Upgrade]
-**** xref:admin_manual:maintenance/upgrading/database_upgrade.adoc[Database Upgrade]
 **** xref:admin_manual:maintenance/upgrading/package_upgrade.adoc[Upgrading from Package]
 **** xref:admin_manual:maintenance/upgrading/update.adoc[Using the Updater App]
 **** xref:admin_manual:maintenance/upgrading/upgrade_php.adoc[Upgrading PHP]

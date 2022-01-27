@@ -382,17 +382,6 @@ make test-acceptance-api DEBUG_ACCEPTANCE_API_CALLS=true BEHAT_SUITE=apiTags
 
 === Optional Environment Variables
 
-If you define `SEND_SCENARIO_LINE_REFERENCES` then the API tests will send an extra `X-Request-Id` header in each request
-to the API. The value sent is a string that indicates the test suite, feature, scenario and line number of the step.
-For example, `apiComments/editComments.feature:26-28` indicates the apiComments test suite, editComments feature,
-the scenario at line 26 and the test step at line 28. A system-under-test could write that string into log entries,
-or report in a way that makes it easier to correlate the test runner API requests with the events in the system-under-test.
-
-[source,bash]
-----
-make test-acceptance-api BEHAT_SUITE=apiTags SEND_SCENARIO_LINE_REFERENCES=true
-----
-
 If you want to use an alternative home name using the `env` variable add to the execution `OC_TEST_ALT_HOME=1`, as in the following example:
 
 [source,bash]
@@ -847,16 +836,6 @@ When writing scenarios for new or fixed federated features that are not expected
 @skipOnFedOcV10.5.0
 ----
 
-If there are significant changes for a new release and many test scenarios have to be modified and skipped on older ownCloud versions
-then the old scenarios can be left in the feature files for when the test suite is used against an older version of ownCloud.
-Tag the older scenarios like the following. Add logic to `tests/acceptance/run.sh` when you need to add new tags for
-newer versions.
-
-[source,gherkin]
-----
-@skipOnAllVersionsGreaterThanOcV10.8.0
-----
-
 ==== Skip Tests In Other Environments
 
 [cols="20,80",options="header"]
@@ -1049,7 +1028,7 @@ Usage:
 'phpunit': {
     'allDatabases' : {
       'phpVersions': [
-        '7.3',
+        '7.2',
       ],
       'skip': True
   },

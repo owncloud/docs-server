@@ -297,19 +297,8 @@ These appear on the User page, on user's Personal pages and are used by some app
 'allow_user_to_change_display_name' => true,
 ....
 
-=== Allow or disallow users to change their email addresses
-`true` allows users to change their email address (on their Personal pages),
-`false` prevents them from changing their email address.
-
-==== Code Sample
-
-[source,php]
-....
-'allow_user_to_change_mail_address' => true,
-....
-
-=== Define the lifetime of the remember-login cookie
-The remember-login cookie is set when the user clicks the `remember` checkbox
+=== Define the lifetime of the remember login cookie
+The remember login cookie is set when the user clicks the `remember` checkbox
 on the login screen. The default is 15 days, expressed in seconds.
 
 ==== Code Sample
@@ -411,7 +400,7 @@ https://web.dev/schemeful-samesite/
 === Define the directory where the skeleton files are located
 These files will be copied to the data directory of new users.
 
-Set this to the empty string if you do not want to copy any skeleton files.
+Leave this directory empty if you do not want to copy any skeleton files.
 A valid path must be given for this key otherwise errors will be generated in owncloud.log.
 
 ==== Code Sample
@@ -1339,7 +1328,6 @@ The following providers are enabled by default if no other providers are selecte
 
 - OC\Preview\PNG
 - OC\Preview\JPEG
-- OC\Preview\WEBP
 - OC\Preview\GIF
 - OC\Preview\BMP
 - OC\Preview\XBitmap
@@ -1359,7 +1347,6 @@ See the Previews Configuration documentation for more details.
 	'OC\Preview\Heic',
 	'OC\Preview\PNG',
 	'OC\Preview\JPEG',
-	'OC\Preview\WEBP',
 	'OC\Preview\GIF',
 	'OC\Preview\BMP',
 	'OC\Preview\XBitmap',
@@ -1367,29 +1354,6 @@ See the Previews Configuration documentation for more details.
 	'OC\Preview\TXT',
 	'OC\Preview\MarkDown'
   ],
-....
-
-=== Define the jpeg preview quality
-
-This setting defines the JP(E)G image quality in [%] for displaying thumbnails and image
-previews for apps like 'files_mediaviewer'. Note that this setting is for displaying
-only and has no impact on the stored thumbnail / preview quality or size.
-The scale ranges from 1 to 100, where 1 is the lowest and 100 the highest.
-It defaults to -1 which is equivalent to approximately 75% of the original
-image quality.
-
-Note that any value over 80 may result in an unnecessary increase of the
-displayed image and has larger responses sizes when requesting images,
-without much increase of the image quality.
-
-For more information see:
-https://www.php.net/manual/en/function.imagejpeg.php
-
-==== Code Sample
-
-[source,php]
-....
-'previewJPEGImageDisplayQuality' => -1,
 ....
 
 == Comments
@@ -1692,29 +1656,6 @@ instead of hard forcing HTTPS
 [source,php]
 ....
 'sharing.federation.allowHttpFallback' => false,
-....
-
-=== Show a quick action for the public link creation
-Set this to true to display a quick action for creating public links
-in the filelist. A public link created this way will be read-only per default.
-
-Note: if enforced password protection for read-only links is enabled, the
-quick action will not be displayed!
-
-==== Code Sample
-
-[source,php]
-....
-'sharing.showPublicLinkQuickAction' => false,
-....
-
-=== Save and display version of uploaded and edited files.
-
-==== Code Sample
-
-[source,php]
-....
-'file_storage.save_version_author' => false,
 ....
 
 == All other configuration options
@@ -2063,9 +2004,6 @@ same storage as the upload target. Setting this to false will store the part
 files in the root of the user's folder which might be required to work with certain
 external storage setups that have limited rename capabilities.
 
-Note that setting this to false causes issues with the following apps: Encryption,
-Document classification, Anti-Virus and Ransomware Protection.
-
 ==== Code Sample
 
 [source,php]
@@ -2284,19 +2222,6 @@ Set this property to true if you want to enable debug logging for SMB access.
 [source,php]
 ....
 'dav.enable.async' => false,
-....
-
-=== Allow propfind depth infinity
-
-With this setting that defaults to true, propfind requests will now be streamed to reduce memory usage
-with large responses. It tells the clients whether `depth=infinity` is allowed for propfind requests.
-For details see: https://datatracker.ietf.org/doc/html/rfc4918#section-10.2
-
-==== Code Sample
-
-[source,php]
-....
-'dav.propfind.depth_infinity' => true,
 ....
 
 === Show the grace period popup
