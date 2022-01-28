@@ -25,6 +25,8 @@ asciidoc:
     idprefix: ''
     idseparator: '-'
     experimental: ''
+    # the page-component-build-list is used in docs-ui
+    page-component-build-list: 'docs, server, ocis, user, desktop, ios-app, android'
 #   common
     docs-base-url: 'https://doc.owncloud.com'
     oc-contact-url: 'https://owncloud.com/contact/'
