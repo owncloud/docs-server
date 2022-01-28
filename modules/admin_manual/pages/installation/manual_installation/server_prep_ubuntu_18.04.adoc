@@ -4,7 +4,6 @@
 :toc: right
 :toclevels: 1
 :page-partial:
-:disabling-thp-url: https://stackoverflow.com/questions/48743100/why-thp-transparent-huge-pages-are-not-recommended-for-databases-like-oracle-a
 :discover-samba-hosts-url: https://ubuntuforums.org/showthread.php?t=2384959
 :mcrypt-link-url: https://websiteforstudents.com/install-php-7-2-mcrypt-module-on-ubuntu-18-04-lts/
 :mcrypt-pecl-url: https://pecl.php.net/package/mcrypt
