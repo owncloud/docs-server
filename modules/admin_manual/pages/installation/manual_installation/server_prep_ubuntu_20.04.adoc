@@ -5,7 +5,6 @@
 :ubuntu_upgrade_url: https://www.cyberciti.biz/faq/upgrade-ubuntu-18-04-to-20-04-lts-using-command-line/
 :remove_ppa_url: https://itsfoss.com/how-to-remove-or-delete-ppas-quick-tip/
 :php-common: https://tecadmin.net/enable-disable-php-modules-ubuntu/
-:disabling-thp-url: https://stackoverflow.com/questions/48743100/why-thp-transparent-huge-pages-are-not-recommended-for-databases-like-oracle-a
 :ondrej-php-url: https://launchpad.net/~ondrej/+archive/ubuntu/php
 :libsmbclient-php_url: https://github.com/eduardok/libsmbclient-php
 :update-alternatives_url: https://manpages.ubuntu.com/manpages/precise/man8/update-alternatives.8.html
