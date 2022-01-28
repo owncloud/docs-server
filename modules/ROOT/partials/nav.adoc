@@ -1,5 +1,5 @@
 .ownCloud Server Documentation
 * xref:index.adoc[Introduction]
-include::admin_manual:{partialsdir}nav.adoc[]
-include::user_manual:{partialsdir}nav.adoc[]
-include::developer_manual:{partialsdir}nav.adoc[]
+include::admin_manual:partial$nav.adoc[]
+include::user_manual:partial$nav.adoc[]
+include::developer_manual:partial$nav.adoc[]
