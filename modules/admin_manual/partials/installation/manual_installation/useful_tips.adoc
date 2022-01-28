@@ -1,6 +1,7 @@
 :iscsi_initiator-url: https://ubuntu.com/server/docs/service-iscsi
 :overriding-vendor-settings-url: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 :transport-huge-pages-url: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/performance_tuning_guide/s-memory-transhuge
+:disabling-thp-url: https://stackoverflow.com/questions/48743100/why-thp-transparent-huge-pages-are-not-recommended-for-databases-like-oracle-a
 
 == Start a Service After a Resource is Mounted
 
