@@ -66,6 +66,14 @@ apt install -y \
 
 Note : php 7.4 is the default version installable with Ubuntu 20.04
 
+Note : if apache reports conflicts with mpm_event, then try
+----
+a2dismod mpm_event
+systemctl restart apache2
+a2enmod mpm_prefork
+systemctl restart apache2
+----
+
 === Install the Recommended Packages
 
 ----
