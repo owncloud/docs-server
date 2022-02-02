@@ -67,18 +67,11 @@ apt install -y \
 
 Note : php 7.4 is the default version installable with Ubuntu 20.04
 
-Note : if apache reports conflicts with mpm_event, then try
-
-[source,console]
-----
-sudo a2dismod mpm_event
-sudo systemctl restart apache2
-sudo a2enmod mpm_prefork
-sudo systemctl restart apache2
-----
+See the important note using the correct xref:installation/manual_installation/manual_installation_apache.adoc#multi-processing-module-mpm[Multi-Processing Module (MPM)].
 
 === Install the Recommended Packages
 
+[source,console]
 ----
 apt install -y \
   ssh bzip2 rsync curl jq \
