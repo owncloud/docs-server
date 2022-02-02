@@ -192,6 +192,8 @@ The following command installs the Apache Web Server.
 sudo apt install libapache2-mod-php apache2
 ----
 
+See the important note using the correct xref:installation/manual_installation/manual_installation_apache.adoc#multi-processing-module-mpm[Multi-Processing Module (MPM)].
+
 Even not supported by ownCloud, you can configure Apache to use `php-fpm`, the
 FastCGI Process Manager, which is a non-standard setup and not covered by this document.
 
