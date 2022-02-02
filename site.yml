@@ -1,6 +1,7 @@
 site:
   title: ownCloud Server Documentation
   url: https://doc.owncloud.com
+  start_page: server::index.adoc
 
 content:
   sources:
