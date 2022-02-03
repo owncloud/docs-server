@@ -66,7 +66,7 @@ apt install -y \
 
 Note : php 7.4 is the default version installable with Ubuntu 20.04
 
-See the important note using the correct xref:installation/manual_installation/manual_installation_apache.adoc#multi-processing-module-mpm[Multi-Processing Module (MPM)].
+See the important note on using the correct xref:installation/manual_installation/manual_installation_apache.adoc#multi-processing-module-mpm[Multi-Processing Module (MPM)].
 
 === Install the Recommended Packages
 
