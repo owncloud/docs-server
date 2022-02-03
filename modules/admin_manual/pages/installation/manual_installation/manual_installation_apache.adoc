@@ -123,4 +123,17 @@ sudo service apache2 reload
 `worker` with `mod_php`, because PHP is currently {php-net-url}/manual/en/install.unix.apache2.php[not thread safe].
 
 If you want to use a threaded MPM, look at a FastCGI configuration where PHP is running
-in its own memory space. ownCloud limit´s its support to Apache prefork only.
+in its own memory space. ownCloud limits its support to Apache prefork only.
+
+[NOTE]
+====
+In case you have enabled `mpm_event` during an earlier setup of Apache, you may get conflict notes from Apache. Use the following commands to solve this issue. The order of commands is recommended to ensure a smooth transition. 
+
+[source,console]
+----
+sudo a2dismod mpm_event
+sudo systemctl restart apache2
+sudo a2enmod mpm_prefork
+sudo systemctl restart apache2
+----
+====
