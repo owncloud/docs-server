@@ -59,7 +59,7 @@ When you have identified the `ID` of the background job to  be removed, run foll
 
 [source,console,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:status ID
+{occ-command-example-prefix} background:queue:delete ID
 ----
 
 WARNING: Deleting a job cannot be undone. Be sure that you want to delete the job before doing so.
