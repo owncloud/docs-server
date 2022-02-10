@@ -1,6 +1,6 @@
 = Introduction
 
-Welcome to the ownCloud Classic Server Developer Guide. If you want to contribute please read the
+Welcome to the ownCloud Classic Server Developer Guide. If you want to contribute, please read the
 https://owncloud.com/contribute/join-the-development/contributor-agreement/[Contributor agreement] first.
 
 [width="100%",cols="25%,36%,39%",]
