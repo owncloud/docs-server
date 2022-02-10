@@ -1,4 +1,3 @@
-.ownCloud Server Documentation
 * xref:index.adoc[Introduction]
 include::admin_manual:partial$nav.adoc[]
 include::user_manual:partial$nav.adoc[]
