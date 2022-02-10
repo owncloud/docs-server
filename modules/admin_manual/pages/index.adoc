@@ -3,7 +3,7 @@
 :ownCloud-channel-url: https://www.youtube.com/channel/UC_4gez4lsWqciH-otOlXo5w
 :community-channel-url: https://www.youtube.com/channel/UCA8Ehsdu3KaxSz5KOcCgHbw
 
-Welcome to the ownCloud Server Administration Guide. This guide describes administration tasks for ownCloud, the flexible open source file synchronization and sharing solution. ownCloud includes the ownCloud server, which runs on Linux, client applications for Microsoft Windows, Mac OS X and Linux, and mobile clients for the Android and Apple iOS operating systems.
+Welcome to the ownCloud Classic Server Administration Guide. This guide describes administration tasks for ownCloud, the flexible open source file synchronization and sharing solution. ownCloud includes the ownCloud server, which runs on Linux, client applications for Microsoft Windows, Mac OS X and Linux, and mobile clients for the Android and Apple iOS operating systems.
 
 Current editions of ownCloud manuals are always available online at {docs-base-url}[doc.owncloud.com].
 
