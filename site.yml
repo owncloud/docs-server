@@ -8,7 +8,7 @@ content:
   - url: .
     branches:
     - HEAD
-  # the docs git is just present for the test build to satisfy used refrences
+  # the docs git is just present for the test build to satisfy used references
   # the real build is made in the docs repo using correct values
   - url: https://github.com/owncloud/docs.git
     branches:
