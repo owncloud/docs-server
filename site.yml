@@ -8,6 +8,11 @@ content:
   - url: .
     branches:
     - HEAD
+  # the docs git is just present for the test build to satisfy used refrences
+  # the real build is made in the docs repo using correct values
+  - url: https://github.com/owncloud/docs.git
+    branches:
+    - master
 
 ui:
   output_dir: assets
@@ -35,6 +40,9 @@ asciidoc:
     oc-marketplace-url: 'https://marketplace.owncloud.com'
     oc-central-url: 'https://central.owncloud.org'
     oc-support-url: 'https://owncloud.com/support'
+#   docs
+    latest-docs-version: 'next'
+    previous-docs-version: 'next'
 #   server
     latest-server-version: '10.9'
     latest-server-download-version: '10.9.1'
@@ -56,6 +64,21 @@ asciidoc:
     std-port-memcache: '11211'
     std-port-mysql: '3306'
     std-port-redis: '6379'
+#   ocis
+    latest-ocis-version: 'next'
+    previous-ocis-version: 'next'
+#   desktop
+    latest-desktop-version: 'next'
+    previous-desktop-version: 'next'
+#   ios-app
+    latest-ios-version: 'next'
+    previous-ios-version: 'next'
+#   android
+    latest-android-version: 'next'
+    previous-android-version: 'next'
+#   branded
+    latest-branded-version: 'next'
+    previous-branded-version: 'next'
   extensions:
     - ./lib/extensions/tabs.js
     - ./lib/extensions/remote-include-processor.js
