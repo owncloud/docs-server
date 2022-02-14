@@ -9,12 +9,11 @@ There are two scripts you can copy and paste for easy installation and upgrades 
 
 The scripts are written for the `bash` shell. After you copy and paste them, save both in a location where you can easily reuse them.
 
-WARNING: Use the following scripts at your own risk. They may not work as expected if not
-properly configured.
+WARNING: Use the following scripts at your own risk. They may not work as expected if not properly configured.
 
 NOTE: The scripts are only working with tar archives as sources for installations and upgrades.
 
-TIP: You can also use these scripts if you want to set strong permissions.
+TIP: You can also use these scripts if you want to set or reapply strong permissions.
 
 == Configuration
 
@@ -72,11 +71,13 @@ The script asks you a couple of questions which follow a logical path. Default a
 the script extracts the files with tar and automatically extracts them to the target location without copying.
 
 .In case of an upgrade
-the old instance path is backed up by renaming and adding a time stamp. A new target folder with the old name is created. This ensures that in case of extracting and preparation issues, you can easily go back to the previous version. After a successful upgrade, you must manually remove the backup folder.
+the old instance path is backed up by _renaming and adding a time stamp_. A new target folder with the old name is created. This ensures that in case of extracting and preparation issues, you can easily go back to the previous version. After a successful upgrade, you must manually remove the backup folder.
 
 TIP: If you do not install or upgrade, the script sets ownership and permissions only.
 
-NOTE: In case of upgrading, if you have customized the `.htaccess` file in the ownCloud webroot, you have to manually backup your changes and reapply the changes made after the script has finished. Only backup the changes made but not the complete file as this file will be recreated on upgrades and may contain different settings provided by ownCloud. Customizing `.htaccess` can be necessary when you e.g. xref:configuration/integration/ms-teams.adoc[Integrate ownCloud into Microsoft Teams].
+NOTE: In case of upgrading, if you have customized the `.htaccess` or `.user.ini` file in the ownCloud webroot, you have to manually restore any changes made after the script has finished from the backup folder. Take care to only restore the changes made but not the complete file as this file will be recreated on upgrades by the tar source and may contain different settings provided by ownCloud. Customizing `.htaccess` can be necessary when you e.g. xref:configuration/integration/ms-teams.adoc[Integrate ownCloud into Microsoft Teams].
+
+NOTE: In case of upgrading, if you have used links for the apps, apps-external and data directory, the script will relink these directories. If you have used normal directories, you manually have to copy any content of these directories back after the script has run. Note you have take care not to overwrite new app versions with older ones.
 
 === Script Questions
 
