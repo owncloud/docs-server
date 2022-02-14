@@ -93,7 +93,7 @@ gpg --verify {oc-complete-name}.tar.bz2.asc o{oc-complete-name}.tar.bz2
 === Script-Guided Installation
 
 Use the xref:installation/manual_installation/script_guided_install.adoc[Script-Guided Installation]
-if you want to easily install or upgrade ownCloud or manage ownership and permissions. The page
+if you want to easily **install** or **upgrade** ownCloud or **manage ownership and permissions**. The page
 contains detailed instructions about downloading and usage.
 
 TIP: Using the _Script Guided Installation_, you can handle many useful installation and update
