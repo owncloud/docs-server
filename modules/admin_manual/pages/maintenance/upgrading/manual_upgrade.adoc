@@ -79,7 +79,7 @@ Download the latest https://owncloud.org/download/[ownCloud server release] to t
 [source,console,subs="attributes+"]
 ----
 cd /var/www/
-sudo wget https://download.owncloud.org/community/owncloud-{oc-complete-name}.tar.bz2
+sudo wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2
 ----
 
 == Script-Guided Upgrade
@@ -117,7 +117,7 @@ Extract the new server release in the location where your previous ownCloud inst
 
 [source,console,subs="attributes+"]
 ----
-sudo tar -xf owncloud-{oc-complete-name}.tar.bz2
+sudo tar -xf {oc-complete-name}.tar.bz2
 ----
 
 === Copy the data/ Directory
