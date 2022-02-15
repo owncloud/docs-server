@@ -107,6 +107,7 @@ service apache2 reload
 === Configure the Database
 
 ----
+systemctl start mariadb
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; \
 GRANT ALL PRIVILEGES ON owncloud.* \
   TO owncloud@localhost \
