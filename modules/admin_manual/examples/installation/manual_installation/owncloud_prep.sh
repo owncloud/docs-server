@@ -1,4 +1,5 @@
 #!/bin/bash
+# Script Version 2022.02.15
 
 # To setup this script for your environment, hand over the following variables according your needs:
 #
@@ -39,7 +40,7 @@ arguments=6
 
 filmod="0640"
 dirmod="0750"
-htamod="0644"
+htamod="0640"
 
 # Because the data directory can be huge or on external storage, an automatic chmod/chown can take a while.
 # Therefore this directory can be treated differently.
@@ -279,7 +280,9 @@ fi
 # tell to remove the old instance, do upgrade and end maintenance mode ect.
 printf "\nSUCCESS\n\n"
 if [ "$do_upgrade" = "y" ]; then
+  echo "Please manually run: cd $ocroot/$ocname"
   echo "Please manually run: sudo -u$htuser ./occ upgrade"
+  echo "Copy any changes manually added in .user.ini and .htaccess from the backup"
   echo "Please manually run: sudo -u$htuser ./occ maintenance:mode --off"
   echo "Please manually remove the directory of the old instance: $oldocpath"
   echo "When successfully done, re-run this script to secure your .htaccess files"
