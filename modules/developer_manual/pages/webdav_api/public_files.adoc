@@ -43,7 +43,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/dav/public_files/view_public_link.sh[]
+include::example$core/scripts/curl/dav/public_files/view_public_link.sh[]
 ----
 --
 PHP::
@@ -51,7 +51,7 @@ PHP::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/dav/public_files/view_public_link.php[]
+include::example$core/scripts/php/dav/public_files/view_public_link.php[]
 ----
 --
 ====
@@ -62,14 +62,14 @@ ifeval::["{format}" == "pdf"]
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/dav/public_files/view_public_link.sh[]
+include::example$core/scripts/curl/dav/public_files/view_public_link.sh[]
 ----
 
 === PHP
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/dav/public_files/view_public_link.php[]
+include::example$core/scripts/php/dav/public_files/view_public_link.php[]
 ----
 endif::[]
 
@@ -87,19 +87,19 @@ If the public link is available, then output similar to the following will be di
 
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/public_files/response/public-link-is-available.xml[]
+include::example$core/webdav_api/public_files/response/public-link-is-available.xml[]
 ----
 
 If the share token is missing or invalid, then you will see output similar to the following:
 
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/public_files/response/listing-members-is-disabled.xml[]
+include::example$core/webdav_api/public_files/response/listing-members-is-disabled.xml[]
 ----
 
 If the user does not have read privileges on the public link, then they will see output similar to the following:
 
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/public_files/response/listing-members-is-disabled.xml[]
+include::example$core/webdav_api/public_files/response/listing-members-is-disabled.xml[]
 ----

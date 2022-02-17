@@ -39,7 +39,7 @@ If the file _is_ found but has only one version, then a response, similar to the
 
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/files_versions/successful-response-which-contains-one-version.xml[]
+include::example$core/webdav_api/files_versions/successful-response-which-contains-one-version.xml[]
 ----
 
 ==== File Is Found and Has Multiple Versions
@@ -48,7 +48,7 @@ If the file _is_ found and has multiple versions, then a response, similar to th
 
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/files_versions/successful-response-which-contains-multiple-versions.xml[]
+include::example$core/webdav_api/files_versions/successful-response-which-contains-multiple-versions.xml[]
 ----
 
 ==== File Is Not Found

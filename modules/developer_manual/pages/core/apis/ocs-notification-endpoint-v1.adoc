@@ -38,7 +38,7 @@ JSON::
 --
 [source,json]
 ----
-include::{examplesdir}core/apis/ocs/notifications/get-server-capabilities-response.json[]
+include::example$core/apis/ocs/notifications/get-server-capabilities-response.json[]
 ----
 --
 
@@ -47,7 +47,7 @@ XML::
 --
 [source,xml]
 ----
-include::{examplesdir}core/apis/ocs/notifications/get-server-capabilities-response.xml[]
+include::example$core/apis/ocs/notifications/get-server-capabilities-response.xml[]
 ----
 --
 ====
@@ -58,14 +58,14 @@ ifeval::["{format}" == "pdf"]
 
 [source,json]
 ----
-include::{examplesdir}core/apis/ocs/notifications/get-server-capabilities-response.json[]
+include::example$core/apis/ocs/notifications/get-server-capabilities-response.json[]
 ----
 
 ==== XML
 
 [source,xml]
 ----
-include::{examplesdir}core/apis/ocs/notifications/get-server-capabilities-response.xml[]
+include::example$core/apis/ocs/notifications/get-server-capabilities-response.xml[]
 ----
 endif::[]
 
@@ -79,7 +79,7 @@ Curl::
 --
 [source,bash,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/notifications/get-server-capabilities.sh[]
+include::example$core/scripts/curl/ocs/notifications/get-server-capabilities.sh[]
 ----
 --
 ====
@@ -90,7 +90,7 @@ ifeval::["{format}" == "pdf"]
 
 [source,bash,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/notifications/get-server-capabilities.sh[]
+include::example$core/scripts/curl/ocs/notifications/get-server-capabilities.sh[]
 ----
 endif::[]
 
@@ -142,7 +142,7 @@ JSON::
 --
 [source,json]
 ----
-include::{examplesdir}core/apis/ocs/notifications/get-user-notifications-response.json[]
+include::example$core/apis/ocs/notifications/get-user-notifications-response.json[]
 ----
 --
 ====
@@ -153,7 +153,7 @@ ifeval::["{format}" == "pdf"]
 
 [source,json]
 ----
-include::{examplesdir}core/apis/ocs/notifications/get-user-notifications-response.json[]
+include::example$core/apis/ocs/notifications/get-user-notifications-response.json[]
 ----
 endif::[]
 
@@ -167,7 +167,7 @@ JSON::
 --
 [source,json]
 ----
-include::{examplesdir}core/apis/ocs/notifications/get-user-notifications-no-notifications-response.json[]
+include::example$core/apis/ocs/notifications/get-user-notifications-no-notifications-response.json[]
 ----
 --
 ====
@@ -178,7 +178,7 @@ ifeval::["{format}" == "pdf"]
 
 [source,json]
 ----
-include::{examplesdir}core/apis/ocs/notifications/get-user-notifications-no-notifications-response.json[]
+include::example$core/apis/ocs/notifications/get-user-notifications-no-notifications-response.json[]
 ----
 endif::[]
 
@@ -281,7 +281,7 @@ Curl::
 --
 [source,bash,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/notifications/get-user-notifications.sh[]
+include::example$core/scripts/curl/ocs/notifications/get-user-notifications.sh[]
 ----
 --
 ====
@@ -292,7 +292,7 @@ ifeval::["{format}" == "pdf"]
 
 [source,bash,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/notifications/get-user-notifications.sh[]
+include::example$core/scripts/curl/ocs/notifications/get-user-notifications.sh[]
 ----
 endif::[]
 
