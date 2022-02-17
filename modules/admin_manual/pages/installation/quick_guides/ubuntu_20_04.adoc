@@ -8,8 +8,7 @@
 
 == Introduction
 
-This is a short guide to installing ownCloud on a fresh installation of Ubuntu 20.04.
-Run the following commands in your terminal to complete the installation.
+This is a short guide to installing ownCloud on a fresh installation of Ubuntu 20.04. Run the following commands in your terminal to complete the installation.
 
 NOTE: This guide can not go into details and has its limits by nature. If you experience issues like with dependencies of PHP or other relevant things like the operating system, web server or database, look at the xref:installation/manual_installation/manual_installation.adoc#ubuntu-20-04-lts-server[Detailed Installation Guide]
 for more information.
@@ -217,7 +216,6 @@ cd /var/www/
 chown -R www-data. owncloud
 ----
 
-**ownCloud is now installed.
-You can confirm that it is ready to use by pointing your web browser to your ownCloud installation.**
+**ownCloud is now installed. You can confirm that it is ready to use by pointing your web browser to your ownCloud installation.**
 
 IMPORTANT: We recommend you check out the section xref:configuration/server/harden_server.adoc[Hardening and Security Guidance] next.
