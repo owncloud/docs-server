@@ -11,12 +11,14 @@
 *** xref:admin_manual:installation/index.adoc[Installation Options]
 **** xref:admin_manual:installation/docker/index.adoc[Installing With Docker]
 **** xref:admin_manual:installation/manual_installation/index.adoc[Manual Installation on Linux]
-***** xref:admin_manual:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide]
-****** xref:admin_manual:installation/installation_wizard.adoc[The Installation Wizard]
-***** xref:admin_manual:installation/quick_guides/index.adoc[Quick Installation Guides]
-****** xref:admin_manual:installation/quick_guides/ubuntu_18_04.adoc[Install ownCloud on Ubuntu 18.04]
-****** xref:admin_manual:installation/quick_guides/ubuntu_20_04.adoc[Install ownCloud on Ubuntu 20.04]
-***** xref:admin_manual:installation/linux_packetmanager_install.adoc[Linux Package Manager]
+***** Detailed Installation Guide
+****** xref:admin_manual:installation/manual_installation/manual_installation.adoc[Install ownCloud on Ubuntu 20.04]
+***** Quick Installation Guides
+****** xref:admin_manual:installation/quick_guides/ubuntu_18_04.adoc[Quick Install ownCloud on Ubuntu 18.04]
+****** xref:admin_manual:installation/quick_guides/ubuntu_20_04.adoc[Quick Install ownCloud on Ubuntu 20.04]
+***** Linux Package Manager
+****** xref:admin_manual:installation/linux_packetmanager_install.adoc[Linux Package Manager Installation]
+***** xref:admin_manual:installation/installation_wizard.adoc[The Installation Wizard]
 *** xref:admin_manual:installation/troubleshooting.adoc[Troubleshooting]
 *** xref:admin_manual:installation/changing_the_web_route.adoc[Changing Your ownCloud URL]
 *** xref:admin_manual:installation/apps_management_installation.adoc[Installing and Managing Apps]
@@ -117,20 +119,20 @@
 **** xref:admin_manual:configuration/user/guests_app.adoc[Guests App]
 **** xref:admin_manual:configuration/user/oidc/oidc.adoc[OpenID Connect (OIDC)]
 
-** xref:admin_manual:maintenance/index.adoc[Maintenance]
+** Maintenance
 *** xref:admin_manual:maintenance/upgrading/upgrade.adoc[Upgrading]
 **** xref:admin_manual:maintenance/upgrading/manual_upgrade.adoc[Manual Upgrade]
 **** xref:admin_manual:maintenance/upgrading/package_upgrade.adoc[Upgrading from Package]
 **** xref:admin_manual:maintenance/upgrading/update.adoc[Using the Updater App]
 **** xref:admin_manual:maintenance/upgrading/upgrade_php.adoc[Upgrading PHP]
 **** xref:admin_manual:maintenance/upgrading/marketplace_apps.adoc[Marketplace Apps]
-*** xref:admin_manual:maintenance/backup_and_restore/index.adoc[Backup and Restore]
+*** Backup and Restore
 **** xref:admin_manual:maintenance/backup_and_restore/backup.adoc[Backup]
 **** xref:admin_manual:maintenance/backup_and_restore/restore.adoc[Restore]
 *** xref:admin_manual:maintenance/enable_maintenance.adoc[Maintenance Mode]
 *** xref:admin_manual:maintenance/export_import_instance_data.adoc[Export and Import Instance Data]
 *** xref:admin_manual:maintenance/manually-moving-data-folders.adoc[Manually Moving Data Folders]
-*** xref:admin_manual:maintenance/encryption/index.adoc[Encryption]
+*** Encryption
 **** xref:admin_manual:maintenance/encryption/migrating-from-user-key-to-master-key.adoc[Migrating from User Key to Master Key Encryption]
 *** xref:admin_manual:maintenance/migrating.adoc[Migrating to a Different Server]
 
