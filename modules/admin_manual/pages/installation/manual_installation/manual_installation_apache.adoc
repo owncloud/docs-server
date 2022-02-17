@@ -87,7 +87,7 @@ Next, compare the value set for `UNIQUE_ID` in the output of `phpinfo()` with th
 
 [source,json]
 ----
-include::{examplesdir}installation/webservers/apache/log-entry.json[]
+include::example$installation/webservers/apache/log-entry.json[]
 ----
 
 === Using SSL
