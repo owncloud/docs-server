@@ -50,7 +50,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/validate-totp.sh[]
+include::example$core/scripts/curl/ocs/validate-totp.sh[]
 ----
 --
 ====
@@ -59,7 +59,7 @@ endif::[]
 ifeval::["{format}" == "pdf"]
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/validate-totp.sh[]
+include::example$core/scripts/curl/ocs/validate-totp.sh[]
 ----
 --
 endif::[]
@@ -90,7 +90,7 @@ JSON::
 --
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/json/totp-is-valid.json[]
+include::example$core/apis/ocs/totp-validation/responses/json/totp-is-valid.json[]
 ----
 --
 
@@ -99,7 +99,7 @@ XML::
 --
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/xml/totp-is-valid.xml[]
+include::example$core/apis/ocs/totp-validation/responses/xml/totp-is-valid.xml[]
 ----
 --
 ====
@@ -110,7 +110,7 @@ ifeval::["{format}" == "pdf"]
 
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/json/totp-is-valid.json[]
+include::example$core/apis/ocs/totp-validation/responses/json/totp-is-valid.json[]
 ----
 
 ===== XML
@@ -118,7 +118,7 @@ include::{examplesdir}core/apis/ocs/totp-validation/responses/json/totp-is-valid
 --
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/xml/totp-is-valid.xml[]
+include::example$core/apis/ocs/totp-validation/responses/xml/totp-is-valid.xml[]
 ----
 endif::[]
 
@@ -132,7 +132,7 @@ JSON::
 --
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/json/totp-is-invalid.json[]
+include::example$core/apis/ocs/totp-validation/responses/json/totp-is-invalid.json[]
 ----
 --
 
@@ -141,7 +141,7 @@ XML::
 --
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/xml/totp-is-invalid.xml[]
+include::example$core/apis/ocs/totp-validation/responses/xml/totp-is-invalid.xml[]
 ----
 --
 ====
@@ -152,14 +152,14 @@ ifeval::["{format}" == "pdf"]
 
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/json/totp-is-invalid.json[]
+include::example$core/apis/ocs/totp-validation/responses/json/totp-is-invalid.json[]
 ----
 
 ===== XML
 
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/xml/totp-is-invalid.xml[]
+include::example$core/apis/ocs/totp-validation/responses/xml/totp-is-invalid.xml[]
 ----
 endif::[]
 
@@ -173,7 +173,7 @@ JSON::
 --
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/json/totp-user-is-not-found.json[]
+include::example$core/apis/ocs/totp-validation/responses/json/totp-user-is-not-found.json[]
 ----
 --
 
@@ -182,7 +182,7 @@ XML::
 --
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/xml/totp-user-is-not-found.xml[]
+include::example$core/apis/ocs/totp-validation/responses/xml/totp-user-is-not-found.xml[]
 ----
 --
 ====
@@ -193,14 +193,14 @@ ifeval::["{format}" == "pdf"]
 
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/json/totp-user-is-not-found.json[]
+include::example$core/apis/ocs/totp-validation/responses/json/totp-user-is-not-found.json[]
 ----
 
 ===== XML
 
 [source,console]
 ----
-include::{examplesdir}core/apis/ocs/totp-validation/responses/xml/totp-user-is-not-found.xml[]
+include::example$core/apis/ocs/totp-validation/responses/xml/totp-user-is-not-found.xml[]
 ----
 endif::[]
 
