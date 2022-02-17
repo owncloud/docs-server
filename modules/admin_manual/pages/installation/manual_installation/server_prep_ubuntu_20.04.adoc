@@ -15,15 +15,15 @@
 
 == Introduction
 
-The target audience for this document are more sophisticated admins with additional needs and setup scenarios. Ubuntu 20.04 default only provides PHP 7.4. In case you are running a PHP version lower than 7.4, your PHP version is either already EOL or, for PHP 7.3, it will be EOL in 2021. Consider upgrading to PHP 7.4. For more information see {php-supported-versions-url}[Currently Supported PHP Versions]. This document considers two basic scenarios. You have/plan to upgrade from 18.04 LTS to 20.04 LTS or you have a fresh Ubuntu 20.04 LTS installation.
+The target audience for this document are experienced admins with additional needs and setup scenarios. Ubuntu 20.04 by default only provides PHP 7.4. In case you are running a PHP version lower than 7.4, your PHP version is already EOL. Consider upgrading to PHP 7.4. For more information see {php-supported-versions-url}[Currently Supported PHP Versions]. This document considers two basic scenarios. You have/plan to upgrade from 18.04 LTS to 20.04 LTS or you have a fresh Ubuntu 20.04 LTS installation.
 
 IMPORTANT: PHP 8.0 is not currently supported by the ownCloud server.
 
-NOTE: The commands and links provided in this description should give you proper hints but are without any responsibility.
+NOTE: The commands and links provided in this description should give you proper hints but we cannot take any responsibility.
 
 == Upgrading from Ubuntu 18.04 to 20.04
 
-Without going into the upgrade details, you can now upgrade directly from to Ubuntu 18.04 LTS to 20.04 LTS without using the _development_ (`-d`) option when using the `do-release-upgrade` command. For more details see an example description at {ubuntu_upgrade_url}[Upgrade Ubuntu 18.04 to 20.04 LTS using command line]
+Without going into the upgrade details, you can now upgrade directly from Ubuntu 18.04 LTS to 20.04 LTS without using the _development_ (`-d`) option when using the `do-release-upgrade` command. For more details see an example description at {ubuntu_upgrade_url}[Upgrade Ubuntu 18.04 to 20.04 LTS using command line]
 
 [source,console]
 ----
@@ -35,7 +35,7 @@ sudo apt install update-manager-core
 sudo do-release-upgrade
 ----
 
-In case you have upgraded successfully and you had previously installed any versions of PHP, it is advised to uninstall all PHP versions and ALL extensions and focus on a fresh PHP 7.4 native installation. This is especially true when using the `ondrej php` PPA as it installs all available PHP versions, which are either no longer needed or supported or will run EOL in 2021. To do so, stop any services which depend on or use PHP like your Web Server. Then get a list of all PHP related programs and extensions by typing:
+If you have upgraded successfully and had previously installed any versions of PHP, better uninstall all PHP versions and ALL extensions and perform a fresh PHP 7.4 native installation. This is especially true when using the `ondrej php` PPA as it installs all available PHP versions, which are either no longer needed or supported. To do so, stop any services which depend on or use PHP like your Web Server. Then get a list of all PHP related programs and extensions by typing:
 
 [source,console]
 ----
@@ -73,7 +73,7 @@ sudo apt update
 
 You can also follow this guide to remove PPAs: {remove_ppa_url}[How to Remove or Delete PPA in Ubuntu].
 
-WARNING: If you have not cleanly removed that ppa you may get conflicts when installing php.
+WARNING: If you have not cleanly removed that ppa you may get conflicts when installing PHP.
 
 After deinstallation of all versions and extensions of PHP and cleaning up all remnants, you should have an empty `/etc/php` directory. You can proceed like on a fresh installation of Ubuntu 20.04 LTS.
 
@@ -118,7 +118,7 @@ sudo pear upgrade-all
 pear version
 ----
 
-If you get any notices containing `You should add "extension=...`, check if the extension is listed in `/etc/php/7.4/mods-available`. If it is not present, add the .ini file as required manually and xref:useful-commands-for-managing-php-extensions[enable it].
+If you get any notices containing `You should add "extension=...`, check if the extension is listed in `/etc/php/7.4/mods-available`. If it is not present, add the .ini file manually and xref:useful-commands-for-managing-php-extensions[enable it].
 
 Post upgrading pear, you can safely remove the directory `/tmp/pear/cache`.
 
@@ -128,7 +128,7 @@ Please see the xref:php-imagick-library[php-imagick Library] section for reason 
 
 On Ubuntu 18.04, the default `smbclient` version was 4.7.6. With Ubuntu 20.04 the version provided is 4.11.6, the actual compilable version is 4.15.x. If you have successfully configured and connected `smbclient` under Ubuntu 18.04 to a Windows Server, you may now get issues connecting to older NAS systems. Some requirements are now stricter than before or have changed.
 
-If you needed to set `client max protocol = NT1` before in `smb.conf` to connect, you may get with samba 4.11+ a response like `Max protocol NT1 is less than min protocol SMB2_02` which highlights a disabled former connectivity. Starting with Samba version 4.11, the NT1 protocol has been removed completely.
+If you needed to set `client max protocol = NT1` before in `smb.conf` to connect, with Samba 4.11+ you may get a response like `Max protocol NT1 is less than min protocol SMB2_02` which highlights a disabled former connectivity. Starting with Samba version 4.11, the NT1 protocol has been removed completely.
 
 To check if you are affected connecting to a particular file server, do tests with the Ubuntu provided version like:
 
@@ -153,7 +153,7 @@ tree connect failed: NT_STATUS_INVALID_PARAMETER
 
 shows, that this target server is affected. This may impact your onwCloud installation when using SMB shares with that file server.
 
-The only solution that can be suggested is, to compile a working Samba version on your own.
+The only solution is to compile a working Samba version yourself.
 This xref:installation/manual_installation/compile_samba.adoc[Compact Samba Compiling Guide]
 helps how to do that.
 
@@ -254,13 +254,13 @@ PHP    compiled with module API=20180731
 These options need to match
 ----
 
-As you see above, the API modules do not match and have been compiled with different versions and therefore will not work. To fix this, uninstall the Pecl module with `pecl uninstall <extension_name>`, set the correct `update-alternatives` as described above and reinstall it.
+As you see above, the API modules do not match and have been compiled with different versions and therefore will not work. To fix this, uninstall the PECL module with `pecl uninstall <extension_name>`, set the correct `update-alternatives` as described above and reinstall it.
 
 == libsmbclient-php Library
 
-`libsmbclient-php` is a PHP extension that uses Samba's libsmbclient library to provide Samba-related functions to PHP programs. You need to install it, if you have installed `smbclient` as described above. `smbclient` is e.g. necessary, if you are using the 
+`libsmbclient-php` is a PHP extension that uses Samba's libsmbclient library to provide Samba-related functions to PHP programs. You need to install it if you have installed `smbclient` as described above. `smbclient` is e.g. necessary if you are using the 
 xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drives app]
-from ownClouds Enterprise Edition. To install it, run the commands described below. You can find more information about `smbclient` and the latest version on {pecl_url}[PECL].
+from ownCloud's Enterprise Edition. To install it, run the commands described below. You can find more information about `smbclient` and the latest version on {pecl_url}[PECL].
 
 [source,console]
 ----
@@ -314,7 +314,7 @@ Type the command without parameters or see this {php-common}[guide] to read more
 
 == Notes for PHP Library phpseclib
 
-phpseclib's BigInteger uses the php-gmp (GNU Multiple Precision Arithmetic Library), php-bcmath and OpenSSL extensions, if they're available, for speed, but doesn't require them to maintain maximum compatibility. The GMP library uses an internal resource type, while the BCMath library uses strings as datatype. The most salient difference is, that GMP works on _arbitrary precision integer values_, whereas BCMath allows _arbitrary precision] decimal / float-like values_.
+phpseclib's BigInteger uses the php-gmp (GNU Multiple Precision Arithmetic Library), php-bcmath and OpenSSL extensions, if they're available, for speed, but doesn't require them to maintain maximum compatibility. The GMP library uses an internal resource type, while the BCMath library uses strings as datatype. The most salient difference is that GMP works on _arbitrary precision integer values_ whereas BCMath allows _arbitrary precision] decimal / float-like values_.
 
 == Database Installation
 
