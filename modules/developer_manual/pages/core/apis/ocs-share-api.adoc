@@ -78,31 +78,31 @@ If the user that you're connecting with is not authorized, then you will see out
 
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/not-authorised-response.xml[]
+include::example$core/scripts/responses/not-authorised-response.xml[]
 ----
 
 If the user that you're connecting with _is_ authorized, then you will see output similar to the following:
 
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/shares/get-all-shares-success-no-shares.xml[]
+include::example$core/scripts/responses/shares/get-all-shares-success-no-shares.xml[]
 ----
 
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/shares/list-share-details-failure.xml[]
+include::example$core/scripts/responses/shares/list-share-details-failure.xml[]
 ----
 
 .Files shared with the current user in XML format.
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/shares/list-share-details-success.xml[]
+include::example$core/scripts/responses/shares/list-share-details-success.xml[]
 ----
 
 .Files shared with the current user in JSON format.
 [source,json]
 ----
-include::{examplesdir}core/scripts/responses/shares/list-share-details-success.json[]
+include::example$core/scripts/responses/shares/list-share-details-success.json[]
 ----
 
 ==== Code Example
@@ -115,7 +115,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/list-share-details.sh[]
+include::example$core/scripts/curl/list-share-details.sh[]
 ----
 --
 PHP::
@@ -123,7 +123,7 @@ PHP::
 --
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/list-share-details.php[]
+include::example$core/scripts/php/list-share-details.php[]
 ----
 --
 Ruby::
@@ -131,7 +131,7 @@ Ruby::
 --
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/list-share-details.rb[]
+include::example$core/scripts/ruby/list-share-details.rb[]
 ----
 --
 Go::
@@ -139,7 +139,7 @@ Go::
 --
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/list-share-details.go[]
+include::example$core/scripts/go/list-share-details.go[]
 ----
 --
 ====
@@ -150,28 +150,28 @@ ifeval::["{format}" == "pdf"]
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/list-share-details.sh[]
+include::example$core/scripts/curl/list-share-details.sh[]
 ----
 
 ===== PHP
 
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/list-share-details.php[]
+include::example$core/scripts/php/list-share-details.php[]
 ----
 
 ===== Ruby
 
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/list-share-details.rb[]
+include::example$core/scripts/ruby/list-share-details.rb[]
 ----
 
 ===== Go
 
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/list-share-details.go[]
+include::example$core/scripts/go/list-share-details.go[]
 ----
 endif::[]
 
@@ -210,7 +210,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/get-share-info.sh[]
+include::example$core/scripts/curl/get-share-info.sh[]
 ----
 --
 PHP::
@@ -218,7 +218,7 @@ PHP::
 --
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/get-share-info.php[]
+include::example$core/scripts/php/get-share-info.php[]
 ----
 --
 Ruby::
@@ -226,7 +226,7 @@ Ruby::
 --
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/get-share-info.rb[]
+include::example$core/scripts/ruby/get-share-info.rb[]
 ----
 --
 Go::
@@ -234,7 +234,7 @@ Go::
 --
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/get-share-info.go[]
+include::example$core/scripts/go/get-share-info.go[]
 ----
 --
 Kotlin::
@@ -242,7 +242,7 @@ Kotlin::
 --
 [source,kotlin,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/kotlin/get-share-info.kt[]
+include::example$core/scripts/kotlin/get-share-info.kt[]
 ----
 --
 Java::
@@ -250,7 +250,7 @@ Java::
 --
 [source,java,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/java/get-share-info.java[]
+include::example$core/scripts/java/get-share-info.java[]
 ----
 --
 ====
@@ -261,42 +261,42 @@ ifeval::["{format}" == "pdf"]
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/get-share-info.sh[]
+include::example$core/scripts/curl/get-share-info.sh[]
 ----
 
 ===== PHP
 
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/get-share-info.php[]
+include::example$core/scripts/php/get-share-info.php[]
 ----
 
 ===== Ruby
 
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/get-share-info.rb[]
+include::example$core/scripts/ruby/get-share-info.rb[]
 ----
 
 ===== Go
 
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/get-share-info.go[]
+include::example$core/scripts/go/get-share-info.go[]
 ----
 
 ===== Kotlin
 
 [source,kotlin,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/kotlin/get-share-info.kt[]
+include::example$core/scripts/kotlin/get-share-info.kt[]
 ----
 
 ===== Java
 
 [source,java,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/java/get-share-info.java[]
+include::example$core/scripts/java/get-share-info.java[]
 ----
 endif::[]
 
@@ -312,7 +312,7 @@ Success::
 --
 [source,console]
 ----
-include::{examplesdir}core/scripts/responses/shares/get-share-info-success.xml[]
+include::example$core/scripts/responses/shares/get-share-info-success.xml[]
 ----
 --
 Failure::
@@ -320,7 +320,7 @@ Failure::
 --
 [source,console]
 ----
-include::{examplesdir}core/scripts/responses/shares/get-share-info-failure.xml[]
+include::example$core/scripts/responses/shares/get-share-info-failure.xml[]
 ----
 --
 ====
@@ -331,14 +331,14 @@ ifeval::["{format}" == "pdf"]
 
 [source,console]
 ----
-include::{examplesdir}core/scripts/responses/shares/get-share-info-success.xml[]
+include::example$core/scripts/responses/shares/get-share-info-success.xml[]
 ----
 
 ===== Failure
 
 [source,console]
 ----
-include::{examplesdir}core/scripts/responses/shares/get-share-info-failure.xml[]
+include::example$core/scripts/responses/shares/get-share-info-failure.xml[]
 ----
 endif::[]
 
@@ -392,7 +392,7 @@ Success::
 .Pending share was successfully accepted
 [source,console]
 ----
-include::{examplesdir}core/scripts/responses/shares/accept-pending-share-success.xml[]
+include::example$core/scripts/responses/shares/accept-pending-share-success.xml[]
 ----
 --
 Failure::
@@ -401,7 +401,7 @@ Failure::
 .The share id does not exist.
 [source,console]
 ----
-include::{examplesdir}core/scripts/responses/shares/accept-pending-share-failure.xml[]
+include::example$core/scripts/responses/shares/accept-pending-share-failure.xml[]
 ----
 --
 ====
@@ -413,7 +413,7 @@ ifeval::["{format}" == "pdf"]
 .Pending share was successfully accepted
 [source,console]
 ----
-include::{examplesdir}core/scripts/responses/shares/accept-pending-share-success.xml[]
+include::example$core/scripts/responses/shares/accept-pending-share-success.xml[]
 ----
 
 ===== Failure
@@ -421,7 +421,7 @@ include::{examplesdir}core/scripts/responses/shares/accept-pending-share-success
 .The share id does not exist.
 [source,console]
 ----
-include::{examplesdir}core/scripts/responses/shares/accept-pending-share-failure.xml[]
+include::example$core/scripts/responses/shares/accept-pending-share-failure.xml[]
 ----
 endif::[]
 
@@ -435,7 +435,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/accept-pending-share.sh[]
+include::example$core/scripts/curl/accept-pending-share.sh[]
 ----
 --
 PHP::
@@ -443,7 +443,7 @@ PHP::
 --
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/accept-pending-share.php[]
+include::example$core/scripts/php/accept-pending-share.php[]
 ----
 --
 Ruby::
@@ -451,7 +451,7 @@ Ruby::
 --
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/accept-pending-share.rb[]
+include::example$core/scripts/ruby/accept-pending-share.rb[]
 ----
 --
 Go::
@@ -459,7 +459,7 @@ Go::
 --
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/accept-pending-share.go[]
+include::example$core/scripts/go/accept-pending-share.go[]
 ----
 --
 ====
@@ -470,28 +470,28 @@ ifeval::["{format}" == "pdf"]
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/accept-pending-share.sh[]
+include::example$core/scripts/curl/accept-pending-share.sh[]
 ----
 
 ===== PHP
 
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/accept-pending-share.php[]
+include::example$core/scripts/php/accept-pending-share.php[]
 ----
 
 ===== Ruby
 
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/accept-pending-share.rb[]
+include::example$core/scripts/ruby/accept-pending-share.rb[]
 ----
 
 ===== Go
 
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/accept-pending-share.go[]
+include::example$core/scripts/go/accept-pending-share.go[]
 ----
 endif::[]
 
@@ -574,7 +574,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/decline-pending-share.sh[]
+include::example$core/scripts/curl/decline-pending-share.sh[]
 ----
 --
 PHP::
@@ -582,7 +582,7 @@ PHP::
 --
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/decline-pending-share.php[]
+include::example$core/scripts/php/decline-pending-share.php[]
 ----
 --
 Ruby::
@@ -590,7 +590,7 @@ Ruby::
 --
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/decline-pending-share.rb[]
+include::example$core/scripts/ruby/decline-pending-share.rb[]
 ----
 --
 Go::
@@ -598,7 +598,7 @@ Go::
 --
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/decline-pending-share.go[]
+include::example$core/scripts/go/decline-pending-share.go[]
 ----
 --
 ====
@@ -609,28 +609,28 @@ ifeval::["{format}" == "pdf"]
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/decline-pending-share.sh[]
+include::example$core/scripts/curl/decline-pending-share.sh[]
 ----
 --
 ===== PHP
 
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/decline-pending-share.php[]
+include::example$core/scripts/php/decline-pending-share.php[]
 ----
 
 ===== Ruby
 
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/decline-pending-share.rb[]
+include::example$core/scripts/ruby/decline-pending-share.rb[]
 ----
 
 ===== Go
 
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/decline-pending-share.go[]
+include::example$core/scripts/go/decline-pending-share.go[]
 ----
 endif::[]
 
@@ -731,7 +731,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/create-share.sh[]
+include::example$core/scripts/curl/create-share.sh[]
 ----
 --
 PHP::
@@ -739,7 +739,7 @@ PHP::
 --
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/create-share.php[]
+include::example$core/scripts/php/create-share.php[]
 ----
 --
 Ruby::
@@ -747,7 +747,7 @@ Ruby::
 --
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/create-share.rb[]
+include::example$core/scripts/ruby/create-share.rb[]
 ----
 --
 Go::
@@ -755,7 +755,7 @@ Go::
 --
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/create-share.go[]
+include::example$core/scripts/go/create-share.go[]
 ----
 --
 ====
@@ -766,28 +766,28 @@ ifeval::["{format}" == "pdf"]
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/create-share.sh[]
+include::example$core/scripts/curl/create-share.sh[]
 ----
 
 ===== PHP
 
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/create-share.php[]
+include::example$core/scripts/php/create-share.php[]
 ----
 
 ===== Ruby
 
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/create-share.rb[]
+include::example$core/scripts/ruby/create-share.rb[]
 ----
 
 ===== Go
 
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/create-share.go[]
+include::example$core/scripts/go/create-share.go[]
 ----
 endif::[]
 
@@ -797,14 +797,14 @@ Failure
 
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/shares/create-share-failure.xml[]
+include::example$core/scripts/responses/shares/create-share-failure.xml[]
 ----
 
 Success
 
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/shares/create-share-success.xml[]
+include::example$core/scripts/responses/shares/create-share-success.xml[]
 ----
 
 ==== Response Attributes
@@ -922,7 +922,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/delete-share.sh[]
+include::example$core/scripts/curl/delete-share.sh[]
 ----
 --
 PHP::
@@ -930,7 +930,7 @@ PHP::
 --
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/delete-share.php[]
+include::example$core/scripts/php/delete-share.php[]
 ----
 --
 Ruby::
@@ -938,7 +938,7 @@ Ruby::
 --
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/delete-share.rb[]
+include::example$core/scripts/ruby/delete-share.rb[]
 ----
 --
 Go::
@@ -946,7 +946,7 @@ Go::
 --
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/delete-share.go[]
+include::example$core/scripts/go/delete-share.go[]
 ----
 --
 ====
@@ -958,7 +958,7 @@ Curl
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/delete-share.sh[]
+include::example$core/scripts/curl/delete-share.sh[]
 ----
 --
 PHP::
@@ -966,7 +966,7 @@ PHP::
 --
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/delete-share.php[]
+include::example$core/scripts/php/delete-share.php[]
 ----
 --
 Ruby::
@@ -974,7 +974,7 @@ Ruby::
 --
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/delete-share.rb[]
+include::example$core/scripts/ruby/delete-share.rb[]
 ----
 --
 Go::
@@ -982,7 +982,7 @@ Go::
 --
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/delete-share.go[]
+include::example$core/scripts/go/delete-share.go[]
 ----
 endif::[]
 
@@ -992,14 +992,14 @@ Failure
 
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/shares/delete-share-success.xml[]
+include::example$core/scripts/responses/shares/delete-share-success.xml[]
 ----
 
 Success
 
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/shares/delete-share-failure.xml[]
+include::example$core/scripts/responses/shares/delete-share-failure.xml[]
 ----
 
 === Update Share
@@ -1054,7 +1054,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/update-share.sh[]
+include::example$core/scripts/curl/update-share.sh[]
 ----
 --
 PHP::
@@ -1062,7 +1062,7 @@ PHP::
 --
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/update-share.php[]
+include::example$core/scripts/php/update-share.php[]
 ----
 --
 Ruby::
@@ -1070,7 +1070,7 @@ Ruby::
 --
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/update-share.rb[]
+include::example$core/scripts/ruby/update-share.rb[]
 ----
 --
 Go::
@@ -1078,7 +1078,7 @@ Go::
 --
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/update-share.go[]
+include::example$core/scripts/go/update-share.go[]
 ----
 --
 ====
@@ -1089,28 +1089,28 @@ ifeval::["{format}" == "pdf"]
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/update-share.sh[]
+include::example$core/scripts/curl/update-share.sh[]
 ----
 
 ===== PHP
 
 [source,php,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/update-share.php[]
+include::example$core/scripts/php/update-share.php[]
 ----
 
 ===== Ruby
 
 [source,ruby,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/ruby/update-share.rb[]
+include::example$core/scripts/ruby/update-share.rb[]
 ----
 
 ===== Go
 
 [source,go,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/go/update-share.go[]
+include::example$core/scripts/go/update-share.go[]
 ----
 endif::[]
 
@@ -1120,14 +1120,14 @@ Failure
 
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/shares/update-share-failure.xml[]
+include::example$core/scripts/responses/shares/update-share-failure.xml[]
 ----
 
 Success
 
 [source,xml]
 ----
-include::{examplesdir}core/scripts/responses/shares/update-share-success.xml[]
+include::example$core/scripts/responses/shares/update-share-success.xml[]
 ----
 
 == Federated Cloud Shares

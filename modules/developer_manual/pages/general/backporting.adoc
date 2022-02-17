@@ -46,7 +46,7 @@ WARNING: While adding, renaming or changing files has no issues for backporting,
 
 [source,console]
 ----
-include::{examplesdir}scripts/backport.sh[]
+include::example$scripts/backport.sh[]
 ----
 
 TIP: It is highly recommended to use the merge SHA1 hash when backporting a Pull Request. The merge commit includes all PR sub commits to be backported. With that, no individual sub commit backporting is necessary.
