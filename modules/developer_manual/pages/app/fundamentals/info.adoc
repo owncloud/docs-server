@@ -7,7 +7,7 @@ explanation of what each of file's elements.
 
 [source,xml,subs="attributes+"]
 ----
-include::{partialsdir}app/fundamentals/complete-info.xml[]
+include::partial$app/fundamentals/complete-info.xml[]
 ----
 
 == id

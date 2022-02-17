@@ -13,4 +13,4 @@ The files versions API allows for two things:
 
 //Note that "xref:restore-another-version-of-a-file" is missing in the included partial... using git log --follow -p modules/developer_manual/pages/_partials/webdav_api/files_versions/list_files_versions.adoc does not return a deletion = it was missing from teh beginning
 
-include::{partialsdir}webdav_api/files_versions/list_files_versions.adoc[leveloffset=+1]
+include::partial$webdav_api/files_versions/list_files_versions.adoc[leveloffset=+1]
