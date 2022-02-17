@@ -63,7 +63,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/notify-public-link-by-email.sh[]
+include::example$core/scripts/curl/ocs/notify-public-link-by-email.sh[]
 ----
 --
 PHP::
@@ -71,7 +71,7 @@ PHP::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/notify-public-link-by-email.php[]
+include::example$core/scripts/php/notify-public-link-by-email.php[]
 ----
 --
 ====
@@ -82,14 +82,14 @@ ifeval::["{format}" == "pdf"]
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/notify-public-link-by-email.sh[]
+include::example$core/scripts/curl/ocs/notify-public-link-by-email.sh[]
 ----
 
 === PHP
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/notify-public-link-by-email.php[]
+include::example$core/scripts/php/notify-public-link-by-email.php[]
 ----
 endif::[]
 

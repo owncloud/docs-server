@@ -384,5 +384,5 @@ and then add it to the `/etc/fstab` file, for example:
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}installation/deployment_recommendations/set_session_path.sh[]
+include::example$installation/deployment_recommendations/set_session_path.sh[]
 ----

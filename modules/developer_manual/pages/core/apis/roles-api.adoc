@@ -92,7 +92,7 @@ JSON::
 --
 [source,json,subs="attributes+"]
 ----
-include::{examplesdir}core/apis/ocs/roles/responses/success.json[]
+include::example$core/apis/ocs/roles/responses/success.json[]
 ----
 --
 XML::
@@ -100,7 +100,7 @@ XML::
 --
 [source,xml,subs="attributes+"]
 ----
-include::{examplesdir}core/apis/ocs/roles/responses/success.xml[]
+include::example$core/apis/ocs/roles/responses/success.xml[]
 ----
 --
 ====
@@ -111,14 +111,14 @@ ifeval::["{format}" == "pdf"]
 
 [source,json,subs="attributes+"]
 ----
-include::{examplesdir}core/apis/ocs/roles/responses/success.json[]
+include::example$core/apis/ocs/roles/responses/success.json[]
 ----
 
 === XML
 
 [source,xml,subs="attributes+"]
 ----
-include::{examplesdir}core/apis/ocs/roles/responses/success.xml[]
+include::example$core/apis/ocs/roles/responses/success.xml[]
 ----
 endif::[]
 

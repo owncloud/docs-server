@@ -10,7 +10,7 @@ Inside your database layer class you can now start running queries like:
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/database-access.php[]
+include::example$app/fundamentals/database/database-access.php[]
 ----
 
 == Database Programming Guidelines
@@ -50,7 +50,7 @@ in the example below
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/authormapper.php[]
+include::example$app/fundamentals/database/authormapper.php[]
 ----
 
 The cursor is closed automatically for all *INSERT*, *DELETE*, *UPDATE* queries and when calling the methods *findOneQuery*, *findEntities*, *findEntity*, *delete*, *insert* and *update*. 
@@ -79,7 +79,7 @@ Table rows are mapped from lower case and underscore separated names to pascal c
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/author.php[]
+include::example$app/fundamentals/database/author.php[]
 ----
 
 == Types
@@ -98,7 +98,7 @@ Since all attributes should be protected, getters and setters are automatically 
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/author-access-attributes.php[]
+include::example$app/fundamentals/database/author-access-attributes.php[]
 ----
 
 == Custom Attribute to Database Column Mapping
@@ -109,7 +109,7 @@ To define a custom mapping, simply override the `columnToProperty` and `property
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/custom-attribute-to-database-column-mapping.php[]
+include::example$app/fundamentals/database/custom-attribute-to-database-column-mapping.php[]
 ----
 
 == Slugs
@@ -119,7 +119,7 @@ Since the URL allows only certain values, the entity `baseclass` provides a `slu
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/slug.php[]
+include::example$app/fundamentals/database/slug.php[]
 ----
 
 == Database Migrations
@@ -148,7 +148,7 @@ Below is a migration code sample for creating an application’s core table.
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/migrations.php[]
+include::example$app/fundamentals/database/migrations.php[]
 ----
 
 You can see examples of how to create the three migration types in the next section.
@@ -177,7 +177,7 @@ The simple migration step skeleton looks like this:
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/create-migration-step.php[]
+include::example$app/fundamentals/database/create-migration-step.php[]
 ----
 
 === A SQL Migration Step
@@ -186,7 +186,7 @@ A SQL migration step skeleton looks like this:
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/sql-migration-step.php[]
+include::example$app/fundamentals/database/sql-migration-step.php[]
 ----
 
 Within the `sql()` method you can generate any number of SQL commands.
@@ -203,7 +203,7 @@ A schema migration step skeleton looks like this:
 
 [source,php]
 ----
-include::{examplesdir}app/fundamentals/database/schema-migration-step.php[]
+include::example$app/fundamentals/database/schema-migration-step.php[]
 ----
 
 Within the `changeSchema()` method, you can use the {dbal-class-schema-url}[Class Schema] to manipulate the existing database schema.
@@ -233,7 +233,7 @@ An example database XML file would look like this:
 
 [source,xml]
 ----
-include::{examplesdir}app/fundamentals/database/schema-update.xml[]
+include::example$app/fundamentals/database/schema-update.xml[]
 ----
 
 To update the tables used by the app: adjust the `database.xml` file to reflect the changes which you want to make. 

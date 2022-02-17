@@ -198,7 +198,7 @@ The notification has a number of properties set that help identify the app that 
 
 [source,php]
 ----
-include::{examplesdir}app/advanced/notifications/intro-notification.php[]
+include::example$app/advanced/notifications/intro-notification.php[]
 ----
 
 TIP: Make sure the app set in the notification matches the one you're expecting, because other notifications for other apps might reach your notifier. 
@@ -216,5 +216,5 @@ You can see an example of how to perform all of these steps in the example below
 
 [source,php]
 ----
-include::{examplesdir}app/advanced/notifications/notification-with-object.php[]
+include::example$app/advanced/notifications/notification-with-object.php[]
 ----
