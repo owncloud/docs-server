@@ -1,7 +1,7 @@
 :section-title: Enterprise User Management
 :section-preamble-ender: to configure enterprise user management in ownCloud 
 
-include::{partialsdir}section_page.adoc[]
+include::partial$section_page.adoc[]
 
 * xref:enterprise/user_management/user_auth_shibboleth.adoc[Shibboleth Integration]
 
