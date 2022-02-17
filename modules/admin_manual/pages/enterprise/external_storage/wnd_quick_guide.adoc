@@ -2,35 +2,33 @@
 :toc: right
 :toclevels: 2
 
+== Introduction
+
+This is a quick guide for installing and configuring the Windows Network Drive (WND) app.
+
+== Prerequisites
+
+To successfully use the Windows Network Drive app, you must meet the prerequisits which can be found in the xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc[Server Preparation for Ubuntu 20.04]. In particular, these are the sections required which address `smbclient` (
+xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc#clean-ubuntu-20-04-installation[Clean Ubuntu 20.04 Installation]) and `libsmbclient-php` (
+xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc#libsmbclient-php-library[libsmbclient-php Library]).
+
 == Installation
 
-NOTE: If you are using Ubuntu 20.04 as your OS, you will need to add this repository:
+Install the WND app either via the Web Interface or the command line:
 
-[source,console]
-----
-sudo add-apt-repository ppa:ondrej/php
-----
+WebUI::
+* The Windows Network Drive app has to be downloaded from the Market App. Navigate to the Market app, search for Windows Network Drive and install it.
+* Post installing enable it via menu:Settings[Admin > Apps].
 
-First, you need to install the samba packages and libraries that are required for the Windows Network Drives app.
-
-[source,console]
-----
-sudo apt-get update
-sudo apt-get install -y smbclient php-smbclient coreutils libsmbclient
-----
-
-Next, you have to enable the Windows Network Drives app, either in the Web Interface or the command line:
-
-**WebUI**
-
-The Windows Network Drive app has to be downloaded from in the Market App.
-Navigate to the Market app, search for Windows Network Drives and install it.
-
-**Commandline**
-
+Command line::
 [source,console,subs="attributes+"]
 ----
 {occ-command-example-prefix} market:install windows_network_drive
+----
+
+[source,console,subs="attributes+"]
+----
+{occ-command-example-prefix} app:enable windows_network_drive
 ----
 
 == Configuration
@@ -39,7 +37,7 @@ Navigate to the Market app, search for Windows Network Drives and install it.
 
 Enable external shares:
 
-* Navigate to admin -> settings -> storage (in the admin section)
+* Navigate to menu:Settings[Admin > Storage]
 * Enable the external storage
 * Create a new share and choose Windows network Drives
 
@@ -62,8 +60,7 @@ If you plan to use a desktop client, you need to continue and configure the WND 
 
 **Commandline**
 
-Lastly, you need to setup the wnd listener and process queue to propagate the changes made directly on the
-storage of your share to the sync client.
+Lastly, you need to setup the wnd listener and process queue to propagate the changes made directly on the storage of your share to the sync client.
 
 This can be done in 2 ways:
 
@@ -75,16 +72,31 @@ This can be done in 2 ways:
 Create a service for systemd following the instructions below that checks the share for changes:
 
 * For each WND mount point distinguished by a SERVER - SHARE pair:
-** Place one copy of a file with following content under `/etc/systemd/system/owncloud-wnd-listen-SERVER-SHARE.service`
-** Replace the all upper case words `SERVER`, `SHARE`, `USER` and `PASSWORD` in both,
- the **filename** and in the **contents** below with their respective values.
+** Replace the all upper case words `SERVER`, `SHARE`, `USER` and `PASSWORD` in both, the **filename** and in the **contents** below with their respective values.
+** Place one copy of a file with the content from below under `/etc/systemd/system/owncloud-wnd-listen-SERVER-SHARE.service` +
+To do so, enter the following command and replace <name> with `owncloud-wnd-listen-SERVER-SHARE`:
++
+[source,console]
+----
+sudo systemctl edit <name>.service
+----
++
+Reload the deamon to make it available:
++
+[source,console]
+----
+sudo systemctl daemon-reload
+----
 ** Take care to also adjust the paths in `WorkingDirectory` and `ExecStart` according to your installation.
-** Password: Create a file readable only by the www-data and outside the directories handled by apache
+** Password: Create a file readable only by the www-data user and outside the directories handled by Apache
  (let's suppose in /tmp/mypass). The file must contain only the password for the share. In this example our
  file is: "/tmp/mypass". The listener will read the contents of the file and use them as the password for
-the account. This way, only root and the apache user should have access to the password.
-** "--password-trim" removes blank characters from the password file added by 3rdparty software or other services.
+the account. This way, only root and the Apache user should have access to the password.
+** `--password-trim` in directive `ExecStart` removes blank characters from the password file added by 3rdparty software or other services.
+
+* Content template for `owncloud-wnd-listen-SERVER-SHARE`
 +
+[source,console]
 ----
 [Unit]
 Description=ownCloud WND Listener for SERVER SHARE
@@ -95,7 +107,7 @@ Requires=apache2.service
 User=www-data
 Group=www-data
 WorkingDirectory=/var/www/owncloud
-ExecStart=/usr/bin/php ./occ wnd:listen -vvv SERVER SHARE USER --password-file=/tmp/mypass --password-trim
+ExecStart=/usr/bin/php ./occ wnd:listen -vvv SERVER SHARE USER --password-file=/opt/mypass --password-trim
 Type=simple
 StandardOutput=journal
 StandardError=journal
