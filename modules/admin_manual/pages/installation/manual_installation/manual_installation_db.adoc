@@ -35,7 +35,7 @@ MariaDB is the ownCloud recommended database. It may be used with either ownClou
 xref:configuration/database/linux_database_configuration.adoc[Database Configuration on Linux]
 guides.
 
-include::{partialsdir}installation/manual_installation/mariadb.adoc[leveloffset=+1]
+include::partial$installation/manual_installation/mariadb.adoc[leveloffset=+1]
 
 == PostgreSQL
 

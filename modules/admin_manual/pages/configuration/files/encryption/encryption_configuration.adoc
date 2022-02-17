@@ -74,7 +74,7 @@ Section: Files Which Are Never Encrypted
 is also used in the user guide, therefore included
 ////
 
-include::{partialsdir}/configuration/files/encryption/not-encrypted-files.adoc[]
+include::partial$/configuration/files/encryption/not-encrypted-files.adoc[]
 
 == Using a Hardware Security Module (HSM)
 
