@@ -70,7 +70,7 @@ apt install -y \
 
 [source,console]
 ----
-apt-get install -y libsmbclient-dev php-dev
+apt-get install -y libsmbclient-dev php-dev php-pear
 pecl install smbclient-stable
 echo "extension=smbclient.so" > /etc/php/7.4/mods-available/smbclient.ini
 phpenmod smbclient
