@@ -21,13 +21,9 @@
 
 == Introduction
 
-The {oc-marketplace-url}/apps/windows_network_drive[External Storage: Windows Network Drives app]
-creates a control panel in your Admin page for seamlessly integrating Windows and Samba/CIFS shared network
-drives as external storages.
+The {oc-marketplace-url}/apps/windows_network_drive[Windows Network Drives app] creates a control panel in your Admin page for seamlessly integrating Windows and Samba/CIFS shared network drives as external storages.
 
-Any Windows file share and Samba servers on Linux and other Unix-type operating systems use the SMB/CIFS
-file-sharing protocol. The files and directories on the SMB/CIFS server will be visible on your Files page
-just like your other ownCloud files and folders.
+Any Windows file share and Samba servers on Linux and other Unix-type operating systems use the SMB/CIFS file-sharing protocol. The files and directories on the SMB/CIFS server will be visible on your Files page just like your other ownCloud files and folders.
 
 Compared to standard SMB access, WND has advanced features like:
 
@@ -311,10 +307,31 @@ Create a service for `systemd` following the instructions below that checks for 
 ====
 
 * For each WND mount point distinguished by a SERVER - SHARE pair:
-** Create a file for each `SERVER-SHARE` pair named `owncloud-wnd-listen-SERVER-SHARE.service` and locate it in `/etc/systemd/system/`
-** Password: For security reasons, create a file readable only by `www-data` and outside the directories handled by apache (let's suppose in /opt/mypass). The file must contain only the password for the share. In this example our file is: "/opt/mypass". The listener will read the contents of the file and use them as the password for the account. This way, only root and the apache user should have access to the password.
-** `--password-trim` removes blank characters from the password file added by 3rdparty software or other services.
+** Replace the all upper case words `SERVER`, `SHARE`, `USER` and `PASSWORD` in both, the **filename** and in the **contents** below with their respective values.
+** Place one copy of a file with the content from below under `/etc/systemd/system/owncloud-wnd-listen-SERVER-SHARE.service` +
+To do so, enter following command and replace <name> with `owncloud-wnd-listen-SERVER-SHARE`:
 +
+[source,console]
+----
+sudo systemctl edit <name>.service
+----
++
+Reload the deamon to make it available for enablement:
++
+[source,console]
+----
+sudo systemctl daemon-reload
+----
+** Take care to also adjust the paths in `WorkingDirectory` and `ExecStart` according to your installation.
+** Password: Create a file readable only by the www-data and outside the directories handled by apache
+ (let's suppose in /tmp/mypass). The file must contain only the password for the share. In this example our
+ file is: "/tmp/mypass". The listener will read the contents of the file and use them as the password for
+the account. This way, only root and the apache user should have access to the password.
+** `--password-trim` in directive `ExecStart` removes blank characters from the password file added by 3rdparty software or other services.
+
+* Content template for `owncloud-wnd-listen-SERVER-SHARE`
++
+[source,console]
 ----
 [Unit]
 Description=ownCloud WND Listener for SERVER SHARE
@@ -325,7 +342,7 @@ Requires=apache2.service
 User=www-data
 Group=www-data
 WorkingDirectory=/var/www/owncloud
-ExecStart=/usr/bin/php ./occ wnd:listen -vvv SERVER SHARE USER --password-file=/opt/mypass --password-trim
+ExecStart=/usr/bin/php ./occ wnd:listen -vvv SERVER SHARE USER --password-file=/tmp/mypass --password-trim
 Type=simple
 StandardOutput=journal
 StandardError=journal
@@ -361,8 +378,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart owncloud-wnd-listen-SERVER-SHARE.service
 ----
 
-For more information about configuring services for systemd, read  
-{manage-systemd-services-url}[How To Use Systemctl to Manage Systemd Services and Units]
+For more information about configuring services for systemd, read {manage-systemd-services-url}[How To Use Systemctl to Manage Systemd Services and Units]
 
 ==== WND Process Queue Configuration
 
@@ -712,7 +728,7 @@ Use Vault's ACLs to limit access to the token. Destroy the token after starting 
 If both the argument and the option are passed, e.g.,
 [source,console,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> <password> --password-file=/tmp/pass`
+{occ-command-example-prefix} wnd:listen <host> <share> <username> <password> --password-file=/opt/pass`
 ----
 then the `--password-file` option will take precedence.
 
