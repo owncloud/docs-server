@@ -338,7 +338,7 @@ Since ownCloud Server 10.5, the dedicated enterprise docker image `registry.ownc
 
 [source,yaml]
 ----
-include::{examplesdir}installation/docker/docker-compose.yml[Example Docker Compose YAML configuration file for ownCloud Server.]
+include::example$installation/docker/docker-compose.yml[Example Docker Compose YAML configuration file for ownCloud Server.]
 ----
 
 == Troubleshooting

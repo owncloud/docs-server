@@ -90,7 +90,7 @@ The configuration example below shows how to add a second directory, called `app
 
 [source,php]
 ----
-include::{examplesdir}installation/custom-app-directory-configuration.php[]
+include::example$installation/custom-app-directory-configuration.php[]
 ----
 
 After you add a new directory configuration, you can then move apps from the original app directory to the new one. 
