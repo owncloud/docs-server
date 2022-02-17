@@ -11,9 +11,9 @@
 
 This endpoint returns a list of all custom groups.
 
-include::{partialsdir}/webdav_api/uri_request_table.adoc[]
+include::partial$/webdav_api/uri_request_table.adoc[]
 
-include::{partialsdir}/webdav_api/core_curl_request.adoc[]
+include::partial$/webdav_api/core_curl_request.adoc[]
 
 .{request_data_file}
 [source,xml]
@@ -52,9 +52,9 @@ This endpoint allows a custom group to be renamed.
 
 NOTE: Only group admins can rename the groups that they manage.
 
-include::{partialsdir}/webdav_api/uri_request_table.adoc[]
+include::partial$/webdav_api/uri_request_table.adoc[]
 
-include::{partialsdir}/webdav_api/core_curl_request.adoc[]
+include::partial$/webdav_api/core_curl_request.adoc[]
 
 .{request_data_file}
 [source,xml]
@@ -71,7 +71,7 @@ No other information will be returned or displayed.
 
 ===== Failure
 
-include::{partialsdir}webdav_api/responses/insufficient-privileges-overview.adoc[]
+include::partial$webdav_api/responses/insufficient-privileges-overview.adoc[]
 
 ====== Missing Group
 
@@ -91,9 +91,9 @@ This endpoint allows for a custom group to be deleted.
 
 NOTE: Only group admins can delete a group.
 
-include::{partialsdir}/webdav_api/uri_request_table.adoc[]
+include::partial$/webdav_api/uri_request_table.adoc[]
 
-include::{partialsdir}/webdav_api/core_curl_request.adoc[]
+include::partial$/webdav_api/core_curl_request.adoc[]
 
 ==== Responses
 
@@ -104,7 +104,7 @@ No other information will be returned or displayed.
 
 ===== Failure
 
-include::{partialsdir}webdav_api/responses/insufficient-privileges-overview.adoc[]
+include::partial$webdav_api/responses/insufficient-privileges-overview.adoc[]
 
 ===  Create Group
 :request_method: MKCOL
@@ -114,9 +114,9 @@ This endpoint allows for creating a custom group.
 
 NOTE:  The group's creator automatically becomes the group's admin and its initial member.
 
-include::{partialsdir}/webdav_api/uri_request_table.adoc[]
+include::partial$/webdav_api/uri_request_table.adoc[]
 
-include::{partialsdir}/webdav_api/core_curl_request.adoc[]
+include::partial$/webdav_api/core_curl_request.adoc[]
 
 ==== Responses
 
@@ -127,5 +127,5 @@ No other information will be returned or displayed.
 
 ===== Failure
 
-include::{partialsdir}/webdav_api/responses/insufficient-privileges-overview.adoc[]
+include::partial$/webdav_api/responses/insufficient-privileges-overview.adoc[]
 

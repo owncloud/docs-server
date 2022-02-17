@@ -15,7 +15,7 @@ When installed, they replace ownCloud's default search provider and the search A
 TIP: When using the default search provider, if you use the search string "_ownCloud_", files whose filename has "ownCloud" in it will be matched. 
 However, if installed https://github.com/owncloud/search_elastic[the search_elastic app], the report also retrieves files that have "_ownCloud_" in the file's contents.
 
-include::{partialsdir}/webdav_api/core_request_details.adoc[leveloffset=+1]
+include::partial$/webdav_api/core_request_details.adoc[leveloffset=+1]
 
 == The Request
 
@@ -72,7 +72,7 @@ include::example$core/webdav_api/search/request/search_files/limit_number_of_res
 
 However, if a specific list of properties is required for each file, then a `prop` element needs to be included in the response body, such as in the example below.
 
-include::{partialsdir}/webdav_api/search/file_properties.adoc[]
+include::partial$/webdav_api/search/file_properties.adoc[]
 
 [source,xml]
 ----

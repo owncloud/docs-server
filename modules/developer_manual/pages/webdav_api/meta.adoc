@@ -18,7 +18,7 @@ TIP: To retrieve a list of available files, use the
 xref:webdav_api/search.adoc#limiting-returned-file-properties[Filter Files endpoint],
 and ensure that returned properties includes `fileid`. 
 
-include::{partialsdir}webdav_api/core_request_details.adoc[leveloffset=+1]
+include::partial$webdav_api/core_request_details.adoc[leveloffset=+1]
 
 == Request Parameters
 
