@@ -45,7 +45,7 @@ If the file of folder is found, then a response similar to the following will be
 
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/meta/response-success.xml[]
+include::example$core/webdav_api/meta/response-success.xml[]
 ----
 
 === Failure
@@ -55,7 +55,7 @@ If the file is not found, then the following response will be returned with an
 
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/meta/response-failure.xml[]
+include::example$core/webdav_api/meta/response-failure.xml[]
 ----
 
 == Example Request
@@ -81,5 +81,5 @@ curl -u {oc-examples-username}:{oc-examples-password} \
 
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/meta/meta-files-filter.xml[]
+include::example$core/webdav_api/meta/meta-files-filter.xml[]
 ----

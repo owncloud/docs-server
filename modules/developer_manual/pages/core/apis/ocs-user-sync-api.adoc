@@ -51,7 +51,7 @@ The request returns the following status codes.
 
 [source,xml]
 ----
-include::{examplesdir}core/apis/ocs/user-sync/successful-response.xml[]
+include::example$core/apis/ocs/user-sync/successful-response.xml[]
 ----
 
 == Code Example
@@ -64,7 +64,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/user-sync.sh[]
+include::example$core/scripts/curl/ocs/user-sync.sh[]
 ----
 --
 
@@ -73,7 +73,7 @@ PHP::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/ocs/user-sync.php[]
+include::example$core/scripts/php/ocs/user-sync.php[]
 ----
 --
 ====
@@ -84,13 +84,13 @@ ifeval::["{format}" == "pdf"]
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/ocs/user-sync.sh[]
+include::example$core/scripts/curl/ocs/user-sync.sh[]
 ----
 
 === PHP
 
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/php/ocs/user-sync.php[]
+include::example$core/scripts/php/ocs/user-sync.php[]
 ----
 endif::[]

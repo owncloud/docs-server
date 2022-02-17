@@ -57,7 +57,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/dav/trashbin_api/list-files-in-trashbin.sh[]
+include::example$core/scripts/curl/dav/trashbin_api/list-files-in-trashbin.sh[]
 ----
 --
 ====
@@ -66,7 +66,7 @@ endif::[]
 ifeval::["{format}" == "pdf"]
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/dav/trashbin_api/list-files-in-trashbin.sh[]
+include::example$core/scripts/curl/dav/trashbin_api/list-files-in-trashbin.sh[]
 ----
 endif::[]
 
@@ -86,7 +86,7 @@ Curl::
 --
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/trashbin/list-files-in-trashbin-success-response.xml[]
+include::example$core/webdav_api/trashbin/list-files-in-trashbin-success-response.xml[]
 ----
 --
 ====
@@ -95,7 +95,7 @@ endif::[]
 ifeval::["{format}" == "pdf"]
 [source,xml]
 ----
-include::{examplesdir}core/webdav_api/trashbin/list-files-in-trashbin-success-response.xml[]
+include::example$core/webdav_api/trashbin/list-files-in-trashbin-success-response.xml[]
 ----
 endif::[]
 
@@ -133,7 +133,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/dav/trashbin_api/delete-file-from-trashbin.sh[]
+include::example$core/scripts/curl/dav/trashbin_api/delete-file-from-trashbin.sh[]
 ----
 --
 ====
@@ -142,7 +142,7 @@ endif::[]
 ifeval::["{format}" == "pdf"]
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/dav/trashbin_api/delete-file-from-trashbin.sh[]
+include::example$core/scripts/curl/dav/trashbin_api/delete-file-from-trashbin.sh[]
 ----
 endif::[]
 
@@ -205,7 +205,7 @@ Curl::
 --
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/dav/trashbin_api/restore-file-to-trashbin.sh[]
+include::example$core/scripts/curl/dav/trashbin_api/restore-file-to-trashbin.sh[]
 ----
 --
 ====
@@ -214,7 +214,7 @@ endif::[]
 ifeval::["{format}" == "pdf"]
 [source,console,subs="attributes+"]
 ----
-include::{examplesdir}core/scripts/curl/dav/trashbin_api/restore-file-to-trashbin.sh[]
+include::example$core/scripts/curl/dav/trashbin_api/restore-file-to-trashbin.sh[]
 ----
 endif::[]
 
