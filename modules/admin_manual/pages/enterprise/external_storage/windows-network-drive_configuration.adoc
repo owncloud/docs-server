@@ -316,17 +316,17 @@ To do so, enter following command and replace <name> with `owncloud-wnd-listen-S
 sudo systemctl edit <name>.service
 ----
 +
-Reload the deamon to make it available for enablement:
+Reload the deamon to make it available:
 +
 [source,console]
 ----
 sudo systemctl daemon-reload
 ----
 ** Take care to also adjust the paths in `WorkingDirectory` and `ExecStart` according to your installation.
-** Password: Create a file readable only by the www-data and outside the directories handled by apache
+** Password: Create a file readable only by the www-data user and outside the directories handled by Apache
  (let's suppose in /tmp/mypass). The file must contain only the password for the share. In this example our
  file is: "/tmp/mypass". The listener will read the contents of the file and use them as the password for
-the account. This way, only root and the apache user should have access to the password.
+the account. This way, only root and the Apache user should have access to the password.
 ** `--password-trim` in directive `ExecStart` removes blank characters from the password file added by 3rdparty software or other services.
 
 * Content template for `owncloud-wnd-listen-SERVER-SHARE`
