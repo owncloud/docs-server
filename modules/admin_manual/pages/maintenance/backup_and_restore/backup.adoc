@@ -1,7 +1,8 @@
 = Backing up ownCloud
 :toc: right
 :page-aliases: go/admin-backup.adoc, \
-maintenance/backup.adoc
+maintenance/backup.adoc, \
+maintenance/backup_and_restore/index.adoc
 
 == Introduction
 
