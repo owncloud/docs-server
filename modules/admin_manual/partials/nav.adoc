@@ -12,7 +12,7 @@
 **** xref:admin_manual:installation/docker/index.adoc[Installing With Docker]
 **** xref:admin_manual:installation/manual_installation/index.adoc[Manual Installation on Linux]
 ***** Detailed Installation Guide
-****** xref:admin_manual:installation/manual_installation/manual_installation.adoc[Install ownCloud on Ubuntu 20.04]
+****** xref:admin_manual:installation/manual_installation/manual_installation.adoc[Install ownCloud on Ubuntu 18.04 or 20.04]
 ***** Quick Installation Guides
 ****** xref:admin_manual:installation/quick_guides/ubuntu_18_04.adoc[Quick Install ownCloud on Ubuntu 18.04]
 ****** xref:admin_manual:installation/quick_guides/ubuntu_20_04.adoc[Quick Install ownCloud on Ubuntu 20.04]
