@@ -17,7 +17,7 @@
 ****** xref:admin_manual:installation/quick_guides/ubuntu_20_04.adoc[Quick Install ownCloud on Ubuntu 20.04]
 ***** Linux Package Manager
 ****** xref:admin_manual:installation/linux_packetmanager_install.adoc[Linux Package Manager Installation]
-***** xref:admin_manual:installation/installation_wizard.adoc[The Installation Wizard]
+**** xref:admin_manual:installation/installation_wizard.adoc[The Installation Wizard]
 *** xref:admin_manual:installation/troubleshooting.adoc[Troubleshooting]
 *** xref:admin_manual:installation/changing_the_web_route.adoc[Changing Your ownCloud URL]
 *** xref:admin_manual:installation/apps_management_installation.adoc[Installing and Managing Apps]
