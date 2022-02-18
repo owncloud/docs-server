@@ -1,6 +1,6 @@
 [IMPORTANT]
 ====
-When upgrading, also check the minimum and maximum supported PHP version of the ownCloud target release. An ownCloud release may require a particular minimum and/or maximum PHP version. Check that the PHP version provided by the Operating System meets the requirements. For details see the xref:{latest-docs-version}@docs:ROOT:server_release_notes.adoc[Server Release Notes] and  the xref:{latest-server-version}@server:installation/system_requirements.adoc[System Requirements] for the latest Release.
+When upgrading, also check the minimum and maximum supported PHP version of the ownCloud target release. An ownCloud release may require a particular minimum and/or maximum PHP version. Check that the PHP version provided by the Operating System meets the requirements. For details see the xref:{latest-docs-version}@docs:ROOT:server_release_notes.adoc[Server Release Notes] and the xref:{latest-server-version}@server:installation/system_requirements.adoc[System Requirements] for the latest Release.
 ====
 
 [TIP]
@@ -16,42 +16,42 @@ Here are some examples:
 |===
 |Version
 |Can Upgrade to {latest-server-download-version} ?
-|Requirements
+|Requirements (always check the xref:{latest-server-version}@server:installation/system_requirements.adoc[System Requirements] too)
 
 |10.X.Y
 |Yes
-|
+| PHP 7.2 to 7.4
 
-|9.1.8
-|Yes
-|
+| 9.1.8
+| Yes
+| PHP 7.0
 
-|9.1.0
-|Yes
-|
+| 9.1.0
+| Yes
+| PHP 7.0
 
-|9.0.9
-|Yes
-|
+| 9.0.9
+| Yes
+| PHP 7.0
 
-|9.0.8
-|*No*
-|Must upgrade to 9.0.9 first.
+| 9.0.8
+| *No*
+| PHP 7.0, must upgrade to 9.0.9 first
 
-|8.2.11
-|Yes
-|
+| 8.2.11
+| Yes
+| PHP 5.6 or 7.0
 
-|8.2.10
-|*No*
-|Must upgrade to 8.2.11 first.
+| 8.2.10
+| *No*
+| PHP 5.6, must upgrade to 8.2.11 first
 
-|7.0.15
-|*No*
-|Must upgrade to 8.0.16, then to 8.1.12, and then to 8.2.11 first.
+| 7.0.15
+| *No*
+| PHP 5.6, must upgrade to 8.0.16, then to 8.1.12, and then to 8.2.11 first.
 
-|7.0.10
-|*No*
-|Must upgrade to 7.0.15, then to 8.0.16, then to 8.1.12, and then to 8.2.11 first.
+| 7.0.10
+| *No*
+| PHP 5.6, must upgrade to 7.0.15, then to 8.0.16, then to 8.1.12, and then to 8.2.11 first.
 |===
 ====
