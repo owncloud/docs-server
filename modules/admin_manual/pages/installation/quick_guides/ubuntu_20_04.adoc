@@ -162,8 +162,8 @@ service apache2 reload
 [source,console]
 ----
 cd /var/www/
-wget https://download.owncloud.org/community/owncloud-complete-latest.tar.bz2 && \
-tar -xjf owncloud-complete-latest.tar.bz2 && \
+wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2 && \
+tar -xjf {oc-complete-name}.tar.bz2 && \
 chown -R www-data. owncloud
 ----
 
