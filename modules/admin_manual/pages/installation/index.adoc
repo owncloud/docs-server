@@ -3,7 +3,7 @@
 
 == Introduction
 
-This is an overview about the possible installation options for ownCloud Server. You can install ownCloud Server manually or use a Docker based installation.
+This is an overview about the possible installation options for ownCloud Server. You can install ownCloud Server manually or use a Docker-based installation.
 
 == Manual Installation
 
@@ -11,11 +11,11 @@ This is an overview about the possible installation options for ownCloud Server.
 +
 This guide covers Ubuntu server preperations like dependencies, required packages and other necessary components or configurations including Ubuntu upgrades if necessary, descriptions, explanations and easy copy and paste example commands where possible. You will also get directed to other necessary or recommended sections in the documentation to have a well working ownCloud Server base ready for production. 
 
-* The xref:installation/quick_guides/ubuntu_20_04.adoc[Quick Installation Guide] is a quick guide for installing ownCloud. This guide cannot go into details and has its limits by nature. If you experience issues like with dependencies of PHP or other relevant things like the operating system, web server or database, you have to use the xref:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide]
+* The xref:installation/quick_guides/ubuntu_20_04.adoc[Quick Installation Guide] is a quick guide for installing ownCloud. This guide cannot go into details and has its limits by nature. If you experience issues like with dependencies of PHP or other relevant things like the operating system, web server or database, you have to use the xref:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide].
 
-== Using a Docker Based Installation
+== Using a Docker-Based Installation
 
-This guide shows you how to install xref:installation/docker/index.adoc[ownCloud with Docker] using Docker Compose with a YAML file provided by ownCloud .
+This guide shows you how to install xref:installation/docker/index.adoc[ownCloud with Docker] using Docker Compose with a YAML file provided by ownCloud.
 
 == Linux Package Manager Installation
 
