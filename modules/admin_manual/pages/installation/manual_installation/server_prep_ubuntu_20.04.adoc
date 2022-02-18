@@ -329,4 +329,4 @@ to install it.
 
 == Useful Tips
 
-include::{partialsdir}installation/manual_installation/useful_tips.adoc[leveloffset=+1]
+include::partial$installation/manual_installation/useful_tips.adoc[leveloffset=+1]

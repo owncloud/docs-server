@@ -122,7 +122,7 @@ encryption|enabled|yes
 encryption|useMasterKey|1
 ----
 
-include::{partialsdir}/configuration/server/disable-single-user-mode.adoc[leveloffset=+1]
+include::partial$/configuration/server/disable-single-user-mode.adoc[leveloffset=+1]
 
 == Post Note
 
