@@ -21,7 +21,7 @@ When the ownCloud prerequisites are fulfilled and all ownCloud files are install
 
 image:installation/install-wizard-a.jpg[Installation Wizard, width=50%]
 
-You’re now finished and can start using your new ownCloud server. Of course, there is much more that you _can_ do to set up your ownCloud server for best performance and security. In the following sections we will cover important installation and post-installation steps.
+Now you can start using your new ownCloud server. Of course, there is much more that you could do to set up your ownCloud server for best performance and security. In the following sections, we will cover important installation and post-installation steps.
 
 == Detailed Guide
 
@@ -47,7 +47,7 @@ You can find your HTTP user in your HTTP server configuration files, or you can 
 NOTE: When using an NFS mount for the data directory, do not change its ownership from the default. The simple act of mounting the drive will set proper permissions for ownCloud to write to the directory. Changing ownership could cause problems if the NFS mount is lost.
 
 An easy way to set the correct permissions is to use the scripts provided in the
-xref:installation/manual_installation/script_guided_install.adoc[Script Guided Installation].
+xref:installation/manual_installation/script_guided_install.adoc[Script-Guided Installation].
 
 === Configuration Options
 
@@ -58,7 +58,7 @@ image:installation/install-wizard-a1.jpg[Installation Configuration Options, wid
 CAUTION: For security reasons, the `data` directory of your ownCloud should be located outside the webroot of your server.
 
 The location of the `data` directory can either be defined by entering the path here or when installing the ownCloud files. For more information on the latter, see the
-xref:installation/manual_installation/script_guided_install.adoc[Script Guided Installation].
+xref:installation/manual_installation/script_guided_install.adoc[Script-Guided Installation].
 
 If you define the path here, the respective setting in your config.php file will be adjusted. Alternatively, you can create a link `data` pointing to the directory containing the actual files. In this case, the config.php setting for the data directory remains unchanged.
 

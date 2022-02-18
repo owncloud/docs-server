@@ -20,7 +20,7 @@ include::partial$maintenance/major_release_note.adoc[]
 
 == Prerequisites
 
-We strongly recommend that you always maintain xref:maintenance/backup_and_restore/backup.adoc[regular backups] as well as make a fresh backup before every upgrade. We also recommend that you review any installed xref:maintenance/manual_upgrade.adoc#review-third-party-apps[third-party apps] for compatibility with the new ownCloud release. Ensure that they are all disabled before beginning the upgrade. After the upgrade is complete re-enable any which are compatible with the new release.
+We strongly recommend that you always maintain xref:maintenance/backup_and_restore/backup.adoc[regular backups] as well as make a fresh backup before every upgrade. We also recommend that you review any installed xref:maintenance/manual_upgrade.adoc#review-third-party-apps[third-party apps] for compatibility with the new ownCloud release. Ensure that they are all disabled before beginning the upgrade. After the upgrade is complete, enable all those that are compatible with the new release again.
 
 CAUTION: Unsupported apps may disrupt your upgrade.
 
