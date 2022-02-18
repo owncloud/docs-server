@@ -1,20 +1,22 @@
-= Installation
+= Installation Options
 :page-aliases: go/admin-install.adoc
 
-You can install ownCloud in multiple ways, here are our trusted guides:
+== Introduction
 
-== xref:installation/manual_installation/index.adoc[Manual Installation]
+This is an overview about the possible installation options for ownCloud Server. You can install ownCloud Server manually or use a Docker-based installation.
 
-This is a thorough guide to installing ownCloud, containing all the information needed for the prerequisites, the dependencies, the actual installation and the configuration afterwards.
+== Manual Installation
 
-== xref:installation/docker/index.adoc[Installing With Docker]
+* The xref:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide] is a thorough guide for installing ownCloud, containing all the information needed for the prerequisites, the dependencies, the actual installation and the configuration afterwards. The example installation is based on Ubuntu Server.
++
+This guide covers Ubuntu server preperations like dependencies, required packages and other necessary components or configurations including Ubuntu upgrades if necessary, descriptions, explanations and easy copy and paste example commands where possible. You will also get directed to other necessary or recommended sections in the documentation to have a well working ownCloud Server base ready for production. 
 
-This guide will show you how to install ownCloud with Docker Compose using our YAML file.
+* The xref:installation/quick_guides/ubuntu_20_04.adoc[Quick Installation Guide] is a quick guide for installing ownCloud. This guide cannot go into details and has its limits by nature. If you experience issues like with dependencies of PHP or other relevant things like the operating system, web server or database, you have to use the xref:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide].
 
-== xref:installation/quick_guides/index.adoc[Example Installation on Ubuntu]
+== Using a Docker-Based Installation
 
-This is an example installation on an Ubuntu Server. This guide takes you from a clean Ubuntu server to a finished ownCloud installation in the minimal steps required. All commands are written down and are easy to copy and paste in to your terminal.
+This guide shows you how to install xref:installation/docker/index.adoc[ownCloud with Docker] using Docker Compose with a YAML file provided by ownCloud.
 
-== xref:installation/linux_packetmanager_install.adoc[Linux Package Manager]
+== Linux Package Manager Installation
 
-This guide shows you how to install ownCloud with the Ubuntu Package Manager.
+While this is not a recommended method installing ownCloud Server, this guide shows you how to use the xref:installation/linux_packetmanager_install.adoc[Linux Package Manager] method.
