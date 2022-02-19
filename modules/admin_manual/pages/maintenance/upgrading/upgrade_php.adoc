@@ -14,7 +14,7 @@ This guide takes you through upgrading your installation of PHP to one of the su
 :to-version: 7.3
 :to-pkg-version: 73
 
-include::{partialsdir}/maintenance/upgrading/upgrade_steps.adoc[leveloffset=+1]
+include::partial$/maintenance/upgrading/upgrade_steps.adoc[leveloffset=+1]
 
 == Restart Apache
 

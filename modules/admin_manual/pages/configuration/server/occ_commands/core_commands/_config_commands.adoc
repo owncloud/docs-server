@@ -235,7 +235,7 @@ By default, passwords and other sensitive data are omitted from the report so th
 
 [source,json]
 ----
-include::{partialsdir}configuration/server/occ_command/config-list-report.json[]
+include::partial$configuration/server/occ_command/config-list-report.json[]
 ----
 
 === Displaying Sensitive Information

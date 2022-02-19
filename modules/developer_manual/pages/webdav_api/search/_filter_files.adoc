@@ -8,7 +8,7 @@
 
 The `filter-files` report allows for retrieving a list of files in an ownCloud user's filesystem, based on two criteria:
 
-include::{partialsdir}/webdav_api/core_request_details.adoc[leveloffset=+1]
+include::partial$/webdav_api/core_request_details.adoc[leveloffset=+1]
 
 == The Request
 
@@ -67,7 +67,7 @@ include::example$core/webdav_api/search/request/filter_files/minimal_filter_file
 
 If only a specific list of properties is required for each file, then a `prop` element needs to be included in the response body, such as in the example below.
 
-include::{partialsdir}/webdav_api/search/file_properties.adoc[]
+include::partial$/webdav_api/search/file_properties.adoc[]
 
 [source,xml]
 ----
@@ -114,4 +114,4 @@ include::example$core/webdav_api/search/response/filter_files/success.xml[indent
 
 === Failure
 
-include::{partialsdir}/webdav_api/search/common_error_responses.adoc[]
+include::partial$/webdav_api/search/common_error_responses.adoc[]
