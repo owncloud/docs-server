@@ -1,6 +1,5 @@
 = Install ownCloud on Ubuntu 20.04
 :toc: right
-:page-aliases: installation/quick_guides/ubuntu_18_04.adoc
 
 == Introduction
 
