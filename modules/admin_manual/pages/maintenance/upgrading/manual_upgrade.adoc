@@ -152,7 +152,7 @@ In addition, if there are installed apps (whether compatible or incompatible wit
 
 If you are using third party or enterprise applications, look in your new `/var/www/owncloud/apps/` or `/var/www/owncloud/apps-external/` directory to see if they are present. If not, copy them from your old instance to your new one.
 
-NOTE: Make sure that all app directories that are defined in the `apps_paths` section of your `config.php` file do exist in your new `/var/www/owncloud/` directory. Also, make sure, that all ap directories listed in `apps_path` actually exist. If `occ` complains about missing `apps-external` then try
+NOTE: Make sure that all app directories that are defined in the `apps_paths` section of your `config.php` file do exist in your new `/var/www/owncloud/` directory. Also, make sure, that all app directories listed in `apps_path` actually exist. If `occ` complains about missing `apps-external` then try
 [source,console]
 ----
 sudo mkdir /var/www/owncloud/apps-external
