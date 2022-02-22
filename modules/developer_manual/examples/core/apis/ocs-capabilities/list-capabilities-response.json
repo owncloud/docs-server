@@ -76,7 +76,7 @@
                   "maintenance" : "false",
                   "version" : "10.0.3.3"
                },
-               "pollinterval" : 60
+               "pollinterval" : 30000
             }
          }
       }

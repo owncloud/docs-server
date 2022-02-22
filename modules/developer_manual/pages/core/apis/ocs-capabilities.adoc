@@ -35,7 +35,7 @@ and their values.
 == Core
 
 Stored under the `core` capabilities element, this returns the server’s
-core status settings, the interval to poll for server side changes, and
+core status settings, the interval to poll for server side changes in milliseconds, and
 it’s WebDAV API root.
 
 == Checksums
