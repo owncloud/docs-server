@@ -66,7 +66,7 @@ apt install -y \
 
 === Install smbclient php module
 
-First run the installation of the required packages
+First install the required packages:
 
 [source,console]
 ----
@@ -99,7 +99,7 @@ smbclient
 
 === Install the Recommended Packages
 
-Additional useful tools helpful for debugging
+Additional useful tools helpful for debugging:
 
 [source,console]
 ----
