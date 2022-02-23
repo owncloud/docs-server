@@ -61,14 +61,23 @@ apt install -y \
   php-gd php-imap php-intl \
   php-json php-mbstring php-mysql \
   php-ssh2 php-xml php-zip \
-  php-apcu php-redis php-ldap 
+  php-apcu php-redis php-ldap \
+  php-opcache
 ----
 
 === Install smbclient php module
 
+First install the required packages:
+
 [source,console]
 ----
 apt-get install -y libsmbclient-dev php-dev php-pear
+----
+
+Install smblclient php module using pecl
+
+[source,console]
+----
 pecl install smbclient-stable
 echo "extension=smbclient.so" > /etc/php/7.4/mods-available/smbclient.ini
 phpenmod smbclient
@@ -81,26 +90,27 @@ Check if it was successfully activated
 ----
 php -m | grep smbclient
 ----
+This should show the following output
+
+[source,console]
+----
+libsmbclient
+smbclient
+----
 
 === Install the Recommended Packages
+
+Additional useful tools helpful for debugging:
 
 [source,console]
 ----
 apt install -y \
-  ssh bzip2 rsync curl jq \
-  inetutils-ping coreutils \
-  imagemagick unzip
+  unzip bzip2 rsync curl jq \
+  inetutils-ping  ldap-utils\
+  smbclient
 ----
 
 === Configure Apache
-
-==== Change the Document Root
-
-[source,console]
-----
-sed -i "s#html#owncloud#" /etc/apache2/sites-available/000-default.conf
-service apache2 restart
-----
 
 ==== Create a Virtual Host Configuration
 
@@ -108,11 +118,14 @@ service apache2 restart
 ----
 FILE="/etc/apache2/sites-available/owncloud.conf"
 /bin/cat <<EOM >$FILE
-Alias /owncloud "/var/www/owncloud/"
-
-<Directory /var/www/owncloud/>
-  Options +FollowSymlinks
+<VirtualHost *:80>
+# ServerName <add a valid ServerName> and uncommment
+DirectoryIndex index.php index.html
+DocumentRoot /var/www/owncloud
+<Directory /var/www/owncloud>
+  Options +FollowSymlinks -Indexes
   AllowOverride All
+  Require all granted
 
  <IfModule mod_dav.c>
   Dav off
@@ -121,6 +134,7 @@ Alias /owncloud "/var/www/owncloud/"
  SetEnv HOME /var/www/owncloud
  SetEnv HTTP_HOME /var/www/owncloud
 </Directory>
+</VirtualHost>
 EOM
 ----
 
@@ -128,8 +142,9 @@ EOM
 
 [source,console]
 ----
+a2dissite 000-default
 a2ensite owncloud.conf
-service apache2 reload
+systemctl reload apache2
 ----
 
 === Configure the Database
