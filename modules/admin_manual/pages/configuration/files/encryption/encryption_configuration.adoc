@@ -120,16 +120,17 @@ To enable the encryption app, run the following command:
 ----
 {occ-command-example-prefix} app:enable encryption
 {occ-command-example-prefix} encryption:enable
-{occ-command-example-prefix} encryption:select-encryption-type masterkey
+{occ-command-example-prefix} encryption:select-encryption-type masterkey -y
 ----
 
-If the encryption app is successfully enabled, you should see the following confirmation:
+If the encryption app is successfully enabled, you should see the following confirmations:
 
 ----
 encryption enabled
 Encryption enabled
 
 Default module: OC_DEFAULT_MODULE
+Master key successfully enabled.
 ----
 
 === Enable Encryption in the Web-UI
