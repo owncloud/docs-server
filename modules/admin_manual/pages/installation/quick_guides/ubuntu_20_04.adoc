@@ -267,7 +267,7 @@ sudo /bin/cat <<EOM >$FILE
 EOM
 ----
 
-==== Finalise the Installation
+==== Finalize the Installation
 
 Make sure the permissions are correct:
 
