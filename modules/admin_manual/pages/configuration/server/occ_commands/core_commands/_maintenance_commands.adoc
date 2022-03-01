@@ -18,7 +18,7 @@ maintenance
 Users who are not already logged in cannot log in until maintenance mode is turned off. 
 When you take the server out of maintenance mode logged-in users must refresh their Web browsers to continue working.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --on
 {occ-command-example-prefix} maintenance:mode --off
@@ -27,7 +27,7 @@ When you take the server out of maintenance mode logged-in users must refresh th
 Putting your ownCloud server into single-user mode allows admins to log in and work, but not ordinary users. 
 This is useful for performing maintenance and troubleshooting on a running server.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --on
 Single user mode enabled
@@ -35,7 +35,7 @@ Single user mode enabled
 
 Turn it off when you're finished:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --off
 Single user mode disabled
@@ -88,7 +88,7 @@ a|Increase the verbosity of messages:
 
 Here is an example of running the command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:repair
 ----
@@ -121,7 +121,7 @@ OCA\DAV\Repair\RemoveInvalidShares -> Remove invalid calendar and addressbook sh
 
 To run a single repair step, use either the `-s` or `--single` options, as in the following example.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:repair --single="OCA\DAV\Repair\RemoveInvalidShares"
 ----

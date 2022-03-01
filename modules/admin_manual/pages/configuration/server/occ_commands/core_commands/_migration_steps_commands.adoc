@@ -2,7 +2,7 @@
 
 You can run migration steps with the `migrations` command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} migrations:execute <app> <version>
 ----
@@ -19,7 +19,7 @@ You can run migration steps with the `migrations` command.
 
 This example executes the migration step for the core app:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} migrations:execute core 20181220085457
 ----

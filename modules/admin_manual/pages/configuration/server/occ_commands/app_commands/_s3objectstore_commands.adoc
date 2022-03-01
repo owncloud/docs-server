@@ -6,7 +6,7 @@ Marketplace URL: {oc-marketplace-url}/apps/files_primary_s3[S3 Primary Object St
 
 == List objects, buckets or versions of an object
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} s3:list
 ----
@@ -21,7 +21,7 @@ Marketplace URL: {oc-marketplace-url}/apps/files_primary_s3[S3 Primary Object St
 
 == Create a bucket as necessary to be used
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} s3:create-bucket
 ----

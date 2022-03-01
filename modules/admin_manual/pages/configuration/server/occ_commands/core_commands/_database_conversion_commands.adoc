@@ -17,7 +17,7 @@ You need:
 
 This is example converts SQLite to MySQL/MariaDB:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} db:convert-type mysql oc_dbuser 127.0.0.1 oc_database
 ----

@@ -11,7 +11,7 @@ Ignore all CLI triggered events.
 
 To ignore all CLI triggered events, you can set the following option, defaults to track cli events:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set \
      "admin_audit ignore_cli_events" \
@@ -22,7 +22,7 @@ To ignore all CLI triggered events, you can set the following option, defaults t
 
 This command reads the value of `admin_audit ignore_cli_events`:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:get "admin_audit ignore_cli_events"
 ----
@@ -36,7 +36,7 @@ yes
 
 This command completely removes the key and the value:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete "admin_audit ignore_cli_events"
 ----

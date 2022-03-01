@@ -8,7 +8,7 @@ ownCloud and system administrators can use the `incoming-shares:poll` command to
 
 NOTE: The command polls all received federated shares, so does not require a path.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} incoming-shares:poll
 ----
