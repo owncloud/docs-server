@@ -72,7 +72,6 @@ With this information, you can begin customizing a rate-limiting solution specif
 
 === Give PHP read access to `/dev/urandom`
 
-
 ownCloud uses a https://tools.ietf.org/html/rfc4086#section-5.2[RFC 4086 (`Randomness Requirements for Security`)]
 compliant mixer to generate cryptographically secure pseudo-random numbers.
 When generating a random number, ownCloud will request multiple random
@@ -93,7 +92,6 @@ where possible. See xref:installation/selinux_configuration.adoc[SELinux Configu
 === Place data directory outside of the web root
 
 A simple but efficient way to increase the security of your data is to place your `data` directory outside of the Web root (i.e. outside of `/var/www`), ideally at the time of installation.
-
 
 === Disable preview image generation
 
@@ -128,6 +126,7 @@ this can be achieved by adding a setting such as the following in the
 Apache VirtualHosts configuration containing the `<VirtualHost *:80>`
 entry:
 
+[source,apache]
 ----
 Redirect permanent / https://example.com/
 ----
@@ -184,7 +183,7 @@ attack.
 == Use a dedicated domain for ownCloud
 
 Administrators are encouraged to install ownCloud on a dedicated domain
-such as cloud.domain.tld instead of domain.tld to benefit
+such as `cloud.domain.tld` instead of `domain.tld` to benefit
 from the same-origin policy.
 
 == Ensure that your ownCloud instance is installed in a DMZ
@@ -304,6 +303,7 @@ This filter needs to be loaded when Fail2ban starts, so a further
 configuration entry is required to be added in
 `/etc/fail2ban/jail.d/defaults-debian.conf`, which you can see below:
 
+[source,conf]
 ----
 [owncloud]
 enabled = true
@@ -326,6 +326,7 @@ If this does not point to the correct log file, Fail2ban will either not work pr
 
 After saving the file, restart Fail2ban by running the following command:
 
+[source,bash]
 ----
 service fail2ban restart
 ----
@@ -333,6 +334,7 @@ service fail2ban restart
 To test that the new ownCloud configuration has been loaded, use the
 following command:
 
+[source,bash]
 ----
 fail2ban-client status
 ----
@@ -341,6 +343,7 @@ If "owncloud" is listed in the console output, the filter is both
 loaded and active. If you want to test the filter, run the following
 command, adjusting the path to your `owncloud.log` if necessary:
 
+[source,bash]
 ----
 fail2ban-regex /var/owncloud_data/owncloud.log /etc/fail2ban/filter.d/owncloud.conf
 ----
@@ -348,6 +351,7 @@ fail2ban-regex /var/owncloud_data/owncloud.log /etc/fail2ban/filter.d/owncloud.c
 The output will look similar to the following if you had one failed
 login attempt:
 
+[source,bash]
 ----
 fail2ban-regex /var/www/owncloud_data/owncloud.log /etc/fail2ban/filter.d/owncloud.conf
 
@@ -379,6 +383,7 @@ The `Failregex` counter increases in increments of 1 for every failed login atte
 To unban an IP locked either during testing or
 unintentionally, use the following command:
 
+[source,bash]
 ----
 fail2ban-client set owncloud unbanip <IP>
 ----
@@ -386,6 +391,7 @@ fail2ban-client set owncloud unbanip <IP>
 You can check the status of your ownCloud filter with the following
 command:
 
+[source,bash]
 ----
 fail2ban-client status owncloud
 ----
