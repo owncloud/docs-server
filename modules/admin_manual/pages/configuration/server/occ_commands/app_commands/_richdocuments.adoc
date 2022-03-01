@@ -36,7 +36,7 @@ This command sets the WOPI Server to `[IP/URL]:port` +
 
 Adding the port is only necessary when not using standard ports.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set richdocuments wopi_url --value='[IP/URL]:port'
 ----
@@ -47,7 +47,7 @@ Enable Secure View (possible values: true/false, default: false).
 
 The following example command enables secure view globally on the system:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set richdocuments secure_view_option --value='true'
 ----
@@ -58,7 +58,7 @@ A watermark pattern is displayed in the document when it is viewed. It can be an
 
 The following example command sets the watermark pattern displayed in the document:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set richdocuments watermark_text --value='Restricted to \{viewer-email}'
 ----
@@ -69,7 +69,7 @@ By default, documents will open in a new tab if not otherwise defined. You can c
 
 The following example command makes documents open in the same tab:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set richdocuments open_in_new_tab --value='false'
 ----
@@ -80,7 +80,7 @@ Enable documents in secure view mode to be printed and exported (possible values
 
 The following example command enables the option to globally print and export documents although secure view is enabled:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set secure_view_can_print_default --value='true'
 ----
@@ -91,7 +91,7 @@ Open documents in secure view with watermark by default (possible values: true/f
 
 The following example command enables the option to globally enforce displaying the watermark when documents are viewed:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set richdocuments secure_view_open_action_default --value='true'
 ----
@@ -100,14 +100,14 @@ The following example command enables the option to globally enforce displaying 
 
 You can delete a key with the following example command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete richdocuments secure_view_open_action_default
 ----
 
 You can change a key with the following example command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set richdocuments secure_view_option --value='false'
 ----

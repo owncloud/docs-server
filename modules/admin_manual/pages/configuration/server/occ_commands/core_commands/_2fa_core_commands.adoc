@@ -17,7 +17,7 @@ The following commands are available for the two-factor authentication:
 
 Disable two-factor authentication for a user:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} twofactorauth:disable [options] [--] <uid>
 ----
@@ -34,7 +34,7 @@ Disable two-factor authentication for a user:
 
 Enable two-factor authentication for a user:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} twofactorauth:enable [options] [--] <uid>
 ----

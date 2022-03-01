@@ -41,7 +41,7 @@ encryption
 `occ encryption:status` shows whether you have active encryption and your default encryption module. 
 To enable encryption you must first enable the Encryption app and then run `occ encryption:enable`:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable encryption
 {occ-command-example-prefix} encryption:enable
@@ -54,7 +54,7 @@ To enable encryption you must first enable the Encryption app and then run `occ 
 
 Server-side encryption for local storage like the users home and remote storages like Google Drive can operate independently of each other. By doing so, you can encrypt a remote storage without also having to encrypt the users home storage on your ownCloud server. Possible values are `0` and `1`
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 config:app:set encryption encryptHomeStorage --value '1' 
 ----
@@ -65,14 +65,14 @@ config:app:set encryption encryptHomeStorage --value '1'
 It takes one argument, which defines your new root folder. 
 The folder must exist and the path is relative to your data directory.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:change-key-storage-root ../data/security/oc-keys
 ----
 
 You can see the current location of your keys folder:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:show-key-storage-root
 Current key storage root:  default storage location (data/)
@@ -103,7 +103,7 @@ This argument automatically answers, potential, questions with "yes", which is p
 
 `encryption:decrypt-all` decrypts all user data files, or optionally a single user:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:decrypt freda
 ----
@@ -163,7 +163,7 @@ The `-y` switch can be supplied to automate acceptance of user input.
 
 == Fix Encrypted Version
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:fix-encrypted-version [options] [--] <user>
 ----
@@ -199,7 +199,7 @@ Searches in increments from -n to +n. [default: "5"]
 
 === Export or Import the Masterkey
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:hsmdaemon [options]
 ----
@@ -225,7 +225,7 @@ The private key file in the directory may be named like `master_08ea43b7.private
 
 Allows to test the `hsmdaemon` setup by providing an encrypted string to ownCloud and test if it can be decrypted.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:hsmdaemon:decrypt [options] [--] <decrypt>
 ----
@@ -253,7 +253,7 @@ Allows to test the `hsmdaemon` setup by providing an encrypted string to ownClou
 
 Set the url on which the `hsmdaemon` REST-API is reachable.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set encryption hsm.url --value 'http://127.0.0.1:8513'
 ----
@@ -262,7 +262,7 @@ Set the url on which the `hsmdaemon` REST-API is reachable.
 
 To access the `hsmdaemon` API, ownCloud must authenticate with a JWT (JSON Web Token). The given secret is shared between the `hsdmdaemon` (see the hsmdaemon.toml configuration file) and ownCloud to sign the JWT. See the xref:configuration/server/security/hsmdaemon/index.adoc[HSM documentation] for an example how to generate a secret.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set encryption hsm.jwt.secret --value '7a7d1826-b514-4d9f-afc7-a7485084e8de'
 ----
@@ -271,7 +271,7 @@ To access the `hsmdaemon` API, ownCloud must authenticate with a JWT (JSON Web T
 
 The JWT described above has an expiry timestamp. In case the time clocks on ownCloud and hsmdaemon system drift or skew apart, additional time is added to the expiry time to counteract this situation. Set or change the clockskew only if ownCloud advises to do so. Defaults to 120, value is in seconds.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set encryption hsm.jwt.clockskew --value '120' 
 ----

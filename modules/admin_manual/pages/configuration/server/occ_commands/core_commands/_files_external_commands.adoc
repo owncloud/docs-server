@@ -58,7 +58,7 @@ files_external:list [--show-password] [--full] [-a|--all] [-s|--short] [--] [<us
 
 === Example
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files_external:list user_1 --short
 +----------+------------------+----------+

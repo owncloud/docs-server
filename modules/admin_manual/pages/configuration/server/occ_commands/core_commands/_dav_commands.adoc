@@ -18,7 +18,7 @@ NOTE: These commands are not available in xref:maintenance-commands[single-user 
 
 `dav:cleanup-chunks` cleans up outdated chunks (uploaded files) more than a certain number of days old. By default, the command cleans up chunks more than 2 days old. However, by supplying the number of days to the command, the range can be increased.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:cleanup-chunks [options] [--] [<minimum-age-in-days>]
 ----
@@ -44,7 +44,7 @@ NOTE: These commands are not available in xref:maintenance-commands[single-user 
 
 In the example below, chunks older than 10 days will be removed.
  
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:cleanup-chunks 10
 
@@ -58,7 +58,7 @@ Cleaning chunks for admin
 
 Create a dav address book.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:create-addressbook <user> <name>
 ----
@@ -78,7 +78,7 @@ Create a dav address book.
 
 This example creates the address book `mollybook` for the user molly:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:create-addressbook molly mollybook
 ----
@@ -89,7 +89,7 @@ Molly will immediately see her address book.
 
 Create a dav calendar.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:create-calendar <user> <name>
 ----
@@ -109,7 +109,7 @@ Create a dav calendar.
 
 This example creates a new calendar `mollycal` for user molly:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:create-calendar molly mollycal
 ----
@@ -123,7 +123,7 @@ Molly will immediately see her calendar.
 
 Synchronizes the birthday calendar. It adds all birthdays to your calendar from address books shared with you.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:sync-birthday-calendar [<user>]
 ----
@@ -140,7 +140,7 @@ Synchronizes the birthday calendar. It adds all birthdays to your calendar from 
 
 This example syncs to your calendar from user `bernie`:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:sync-birthday-calendar bernie
 ----
@@ -149,7 +149,7 @@ This example syncs to your calendar from user `bernie`:
 
 Synchronizes all users to the system addressbook.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:sync-system-addressbook
 ----

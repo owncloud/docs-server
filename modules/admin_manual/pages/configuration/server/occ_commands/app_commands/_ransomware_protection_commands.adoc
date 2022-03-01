@@ -8,7 +8,7 @@ You can find more information about the application in xref:enterprise/security/
 
 == Command Description
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ransomguard:scan <timestamp> <user>
 ----
@@ -21,7 +21,7 @@ You can find more information about the application in xref:enterprise/security/
 `<user>`          | Report all changes in a user's account, starting from timestamp.
 |===
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ransomguard:restore <timestamp> <user>
 ----
@@ -34,7 +34,7 @@ You can find more information about the application in xref:enterprise/security/
 `<user>`          | Revert all operations in a user account after a point in time.
 |===
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ransomguard:lock <user>
 ----
@@ -47,7 +47,7 @@ You can find more information about the application in xref:enterprise/security/
 malicious activity is suspected.
 |===
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ransomguard:unlock <user>
 ----

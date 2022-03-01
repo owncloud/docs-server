@@ -17,7 +17,7 @@ The following commands are available for the 2-Factor Authentication app:
 
 Delete the redundant secrets of non-existing users:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} twofactor_totp:delete-redundant-secret
 ----
@@ -26,7 +26,7 @@ Delete the redundant secrets of non-existing users:
 
 Set secret verification status of specified users or all users:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix}  twofactor_totp:set-secret-verification-status [options] [--] <set-verified>
 ----

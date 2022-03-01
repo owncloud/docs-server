@@ -13,7 +13,7 @@ trashbin
 The `trashbin:cleanup` command removes the deleted files of the specified users in a space-delimited list, or all users if none are specified. 
 This example removes all the deleted files of all users:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} trashbin:cleanup
 Remove all deleted files
@@ -27,7 +27,7 @@ Remove deleted files for users on backend Database
 
 This example removes the deleted files of users `molly` and `freda`:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} trashbin:cleanup molly freda
 Remove deleted files of   molly

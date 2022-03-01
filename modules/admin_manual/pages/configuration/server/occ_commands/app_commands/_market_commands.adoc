@@ -31,7 +31,7 @@ To install an application from the Marketplace, you need to supply the app’s i
 For example, the URL for _Two factor backup codes_ is {oc-marketplace-url}/apps/twofactor_backup_codes.
 So its app id is `twofactor_backup_codes`.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} market:install <ids> [option]
 ----
@@ -57,7 +57,7 @@ Only `zip`, `gzip`, and `bzip2` archives are supported.
 
 == Usage Example
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 # Install an app from the marketplace.
 {occ-command-example-prefix} market:install twofactor_backup_codes
@@ -72,7 +72,7 @@ NOTE: The target directory has to be *accessible to the webserver user* and you 
 
 To uninstall an application use the following commands:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} market:uninstall <ids>
 ----
@@ -89,7 +89,7 @@ To uninstall an application use the following commands:
 This command lists apps available on the marketplace.
 It returns the ids of the apps.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} market:list
 ----
@@ -98,7 +98,7 @@ It returns the ids of the apps.
 
 Install new app versions if available on the marketplace by using following commands:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} market:upgrade <ids> [options]
 ----
