@@ -77,12 +77,3 @@ Using the occ command::
 ----
 {occ-command-example-prefix} config:app:set files lock_timeout_max --value 86400
 ----
-+
-* Define lock breaker groups
-+
-The example below defines two lock breaker groups named `unlockers` and `admin`.
-+
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} config:app:set core lock-breaker-groups --value '["unlockers","admin"]'
-----
