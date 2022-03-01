@@ -31,6 +31,7 @@ NOTE: You can do the same for MySQL by replacing `mariadb.conf.d/50-server.cnf` 
 key_buffer_size         = 32M
 table_cache             = 400
 query_cache_size        = 128M
+
 #in InnoDB:
 innodb_flush_method=O_DIRECT
 innodb_flush_log_at_trx_commit=1
@@ -53,7 +54,7 @@ collation-server      = utf8mb4_general_ci
 
 When you have changed the database parameters, restart your database by running following command:
 
-[source,console]
+[source,bash]
 ----
 sudo service mysql restart
 ----
@@ -62,7 +63,7 @@ sudo service mysql restart
 
 After you have restarted the database, run the following occ command in your ownCloud root folder, to convert the database to the new format:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} db:convert-type [options] type username hostname database
 ----
@@ -73,7 +74,7 @@ The converter searches for apps in your configured app folders and uses the sche
 As a result, tables of removed apps will not be converted — even with option `--all-apps`
 For example:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} db:convert-type --all-apps mysql oc_mysql_user 127.0.0.1 new_db_name
 ----
@@ -87,10 +88,9 @@ ownCloud config `config.php`.
 == Unconvertible Tables
 
 If you updated your ownCloud installation then the old tables, which are
-not used anymore, might still exist. The converter will tell you which
-ones.
+not used anymore, might still exist. The converter will tell you which ones.
 
-[source,console]
+[source,text]
 ----
 The following tables will not be converted:
   oc_permissions

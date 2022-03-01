@@ -97,14 +97,14 @@ When you are finished reviewing your information you must delete `phpinfo.php`, 
 
 To retrieve your PHP version, run the following command:
 
-[source,console]
+[source,bash]
 ----
 php -v
 ----
 
 To retrieve a list of PHP's active modules, run the following command.
 
-[source,console]
+[source,bash]
 ----
 php -m
 ----
@@ -173,10 +173,10 @@ directive to your Apache configuration, whether in the general Apache
 config, in a configuration include file, or in ownCloud’s .htaccess
 file.
 
+[source,apache]
 ----
 SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 ----
-
 
 == Missing Data Directory
 

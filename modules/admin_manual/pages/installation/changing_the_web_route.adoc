@@ -14,6 +14,7 @@ To do so on Debian/Ubuntu Linux, you need to edit these files:
 Edit the `Alias` directive in `/etc/apache2/sites-enabled/owncloud.conf`
 to alias your ownCloud directory to the Web server root:
 
+[source,apache]
 ----
 Alias / "/var/www/owncloud/"
 ----
@@ -21,6 +22,7 @@ Alias / "/var/www/owncloud/"
 Edit the `overwrite.cli.url` parameter in
 `/var/www/owncloud/config/config.php`:
 
+[source,text]
 ----
 'overwrite.cli.url' => 'http://localhost/',
 ----

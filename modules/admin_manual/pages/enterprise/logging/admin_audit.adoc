@@ -33,7 +33,7 @@ image:enterprise/logging/admin_auditing.png[Auditing]
 
 It is advised to redirect messages into a separate file. To do so, add these lines to `config.php` and adjust the target path accordingly. Note that the target path must be writeable for the web server user:
 
-[source,console]
+[source,php]
 ----
 'log.conditions' => [
 	[
@@ -47,7 +47,7 @@ NOTE: All messages regardless of log level will be logged there.
 
 To ignore all CLI triggered events (default is to include them), set the following option:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set admin_audit ignore_cli_events --value='yes'
 ----
@@ -56,7 +56,7 @@ To ignore all CLI triggered events (default is to include them), set the followi
 
 With each log message, a number of users are calculated to be the 'audit context'. This is the list of users which are related to the log message. Additionally, each log message includes a list of groups that the users are a member of, to enable filtering / splitting of the log messages at a later date. In cases when users are members of many groups, to reduce the data output, the group list can be filtered by adding the following to your `config.php`. Change the groups needed accordingly:
 
-[source,console]
+[source,php]
 ----
 'admin_audit.groups' => [
     'group1',
@@ -90,7 +90,7 @@ Connect to the deployment server, change `input-prd-your-server-here` according 
 
 To Monitor the ownCloud Splunk audit log, add this to `inputs.conf`, assuming you use the custom logging path/file from above:
 
-[source,console]
+[source,text]
 ----
 [monitor://var/www/owncloud/data/admin_audit.log]
  disabled = false
@@ -100,7 +100,7 @@ To Monitor the ownCloud Splunk audit log, add this to `inputs.conf`, assuming yo
 
 Finally, configure the following `props.conf` to ensure the time field is correctly used and the fields are extracted.
 
-[source,console]
+[source,text]
 ----
 [_json]
  INDEXED_EXTRACTIONS = json

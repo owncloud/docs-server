@@ -25,7 +25,7 @@ IMPORTANT: If you have customized user home directories or a custom location for
 
 To ensure a secure restore process, stop your web server to prevent users from accessing ownCloud via the web. As an alternative, you can stop serving the virtual host for ownCloud:
 
-[source,console,subs="attributes+"]
+[source,bash]
 ----
 sudo service apache2 stop
 ----
@@ -50,7 +50,7 @@ After you have completed restoring files, see how to xref:installation/manual_in
 
 If possible, simply copy the directories from your backup to your new ownCloud environment, for example by running the following command from the backup directory. The following example command copies all directories mentioned above:
 
-[source,console]
+[source,bash]
 ----
 sudo rsync -Aax config data apps apps-external /var/www/owncloud/
 ----
@@ -61,7 +61,7 @@ There are many ways to restore normal files from backup. Use whatever method you
 
 Before restoring the database, set your ownCloud instance into maintenance mode:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --on
 ----
@@ -72,14 +72,14 @@ NOTE: This guide assumes that your previous backup is called `owncloud-dbbackup.
 
 Depending on the database version and the setup, username and password may not be necessary. To restore MySQL/MariaDB:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 sudo mysql -h [server] -u [username] -p[password] [db_name] < owncloud-dbbackup.bak
 ----
 
 === SQLite
 
-[source,console]
+[source,bash]
 ----
 sudo rm data/owncloud.db
 sudo sqlite3 data/owncloud.db < owncloud-dbbackup.bak
@@ -174,20 +174,20 @@ If it's not suitable for yours, you might need to run an OCC command that does t
 Perform the following tasks to reactivate your ownCloud instance:
 
 .Update the systems data-fingerprint after a backup is restored
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:data-fingerprint
 ----
 
 .Bring back ownCloud into normal operation mode
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----
 
 .Enable browser access
 Start your web server, or alternatively enable the virtual host serving ownCloud:
-[source,console]
+[source,bash]
 ----
 sudo service apache2 start
 ----
@@ -196,7 +196,7 @@ sudo service apache2 start
 
 This is only necessary if you accidentally deleted the crontab entries, or you're restoring to a different server to carry out a physical migration or you need to set up a server from scratch.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 sudo crontab -u www-data < www-data_crontab.bak
 ----

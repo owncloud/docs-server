@@ -55,17 +55,16 @@ clients/users and many parallel operations). This requires a disabled or correct
 binary logging when using MySQL or MariaDB. Your system is affected if you see the following
 in your log file during the installation or update of ownCloud:
 
-[source]
+[source,text]
 ----
 An unhandled exception has been thrown: exception `PDOException' with message `SQLSTATE[HY000]: General error: 1665 Cannot execute statement: impossible to write to binary log since BINLOG_FORMAT = STATEMENT and at least one table uses a storage engine limited to row-based logging. InnoDB is limited to row-logging when transaction isolation level is READ COMMITTED or READ UNCOMMITTED.'
 ----
 
-There are two solutions.
-One is to disable binary logging.
-Binary logging records all changes to your database, and how long each change took.
-The purpose of binary logging is to enable replication and to support backup operations.
+There are two solutions:
 
-The other is to change the BINLOG_FORMAT = STATEMENT in your database configuration file,
+* One is to disable binary logging. Binary logging records all changes to your database, and how long each change took. The purpose of binary logging is to enable replication and to support backup operations.
+
+* The other is to change the BINLOG_FORMAT = STATEMENT in your database configuration file,
 or possibly in your database startup script, to BINLOG_FORMAT = MIXED or BINLOG_FORMAT = ROW.
 See {mariadb-binary-log-overview-url}[Overview of the Binary Log] and
 {mysql-binary-log-overview-url}[The Binary Log] for detailed information.
@@ -160,6 +159,7 @@ need to do two things:
 . In your MySQL configuration, add the configuration settings below.
 If you already have them configured, update them to reflect the values specified:
 +
+[source,mysql]
 ----
 [mysqld]
 innodb_large_prefix=ON
@@ -169,7 +169,7 @@ innodb_file_per_table=ON
 
 . Run the following occ command:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} db:convert-mysql-charset
 ----
@@ -202,7 +202,7 @@ If you decide to use a PostgreSQL database, make sure that you have installed an
 configuration in `/etc/php/{recommended-php-version}/apache2/conf.d/20-pgsql.ini`
 could look like this:
 
-[source,console]
+[source,bash]
 ----
 # configuration for PHP PostgreSQL module
 extension=pdo_pgsql.so
@@ -226,7 +226,7 @@ authentication method is used in your setup.
 
 To start the PostgreSQL command-line mode use:
 
-[source,console]
+[source,bash]
 ----
 sudo -u postgres psql -d template1
 ----
@@ -277,7 +277,7 @@ for an example.
 To check the server’s network availability, use the ping command on the server's hostname
 (`db.server.com` in this example):
 
-[source,console]
+[source,bash]
 ----
 ping db.server.com
 
@@ -299,7 +299,7 @@ The easiest way to test if a database can be accessed is by starting the command
 Assuming the database server is installed on the same system you’re running the command
 from, use:
 
-[source,console]
+[source,bash]
 ----
 mysql -uUSERNAME -p
 ----
@@ -307,7 +307,7 @@ mysql -uUSERNAME -p
 To access a MySQL installation on a different machine, add the -h option with the
 respective hostname:
 
-[source,console]
+[source,bash]
 ----
 mysql -uUSERNAME -p -h HOSTNAME
 ----
@@ -329,14 +329,14 @@ mysql> quit
 Assuming the database server is installed on the same system you’re running the command
 from, use:
 
-[source,console]
+[source,psql]
 ----
 psql -Uusername -downcloud
 ----
 
 To access a PostgreSQL installation on a different machine, add the `-h` option with the applicable hostname:
 
-[source,console]
+[source,psql]
 ----
 psql -Uusername -downcloud -h HOSTNAME
 ----

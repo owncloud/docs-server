@@ -30,6 +30,7 @@ image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google 
   This job is required to get the verification token from the other server to establish a federation connection between two servers. 
   The resetting ensures that it will be executed when we run xref:configuration/server/background_jobs_configuration.adoc#cron[system:cron] later.
 +
+[source,bash]
 ----
 mysql -u root -e "update oc_jobs set last_run=0 where class='OCA\\Federation\\SyncJob';" owncloud;
 mysql -u root -e "update oc_jobs set last_checked=0 where class='OCA\\Federation\\SyncJob';" owncloud;
@@ -39,21 +40,21 @@ mysql -u root -e "update oc_jobs set last_checked=0 where class='OCA\\Federation
 . Add **server 2** to the trusted servers on **server 1**.
 . Now run the cron job in your ownCloud directory (for example `/var/www/owncloud/`).
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} system:cron
 ----
 . Now the check should be green
 . Sync now your users with
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:sync-system-addressbook
 {occ-command-example-prefix} federation:sync-addressbook
 ----
 . Configure automatic acceptance of new federated shares.
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set federation auto_accept_trusted --value '0'
 {occ-command-example-prefix} config:app:set federatedfilesharing auto_accept_trusted --value 'yes'
@@ -108,7 +109,7 @@ image:configuration/files/sharing/federated-cloud-sharing/scan-cronjob.png[Check
 
 Alternatively you can use the command line:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_enabled --value 'yes'
 ----
@@ -117,28 +118,28 @@ You can also configure these settings of the cronjob:
 
 . the minimum amount of time since last login of a user so that a scan is triggered (ensures only active users get fed shares synced)
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_min_login --value <integer-seconds>
 ----
 
 . the minimum amount of time since last scanned so that the next scan is triggered (avoid frequent scan when active collaboration)
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_min_scan --value <integer-seconds>
 ----
 
 . the maximum number of federated share scans per 10 minutes (scan performed only if fed share files got updated)
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_batch --value <integer-number>
 ----
 
 Use the following command to force a run of the scanner cronjob:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} background:queue:execute --force --accept-warning <id-of-fed-scanner-job>
 ----
@@ -166,7 +167,7 @@ The following functionality has been recorded:
 
 It is possible to configure the VCARD properties that are searched in order to retrieve a list of federated users in the share dialog. By default, ownCloud uses CLOUD and FN properties, however this list may be configured by the admin:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set dav remote_search_properties --value=CLOUD,FN,EMAIL
 ----
@@ -188,14 +189,14 @@ Currently there is no ownCloud `occ` command to list federated shares, that's wh
 
 Federated shares are saved in your database. 
 
-[source,mysql]
+[source,bash]
 ----
 sudo mysql -u <ownCloud_DB_User> -p<ownCloud_DB_Password> -h <ownCloud_DB_Host> <ownCloud_DB_Name>
 ----
 
 Incoming shares can be listed with the following query:
 
-[source,mysql]
+[source,sql]
 ----
 select * from oc_share where share_type=6;
 ----
@@ -205,7 +206,7 @@ Each unique ID gives you an incoming federated share.
 Outgoing shares can be listed with the following query:
 (replace `cloud.example.com` with your instance URL)
 
-[source,mysql]
+[source,sql]
 ----
 select * from oc_share_external where remote NOT IN ('https//cloud.example.com'); 
 ----
@@ -214,7 +215,7 @@ Each unique ID gives you an outgoing federated share.
 
 Exit the database console with this command:
 
-[source,mysql]
+[source,sql]
 ----
 quit
 ----

@@ -18,12 +18,14 @@ Please note that you have to have the configreport app enabled.
 Check if it's already enabled by going to the apps section of the admin settings.
 You can enable this app using the following commands:
 
-[source,console,subs="attributes+"]
+Install it, if it’s not already installed:
+[source,bash,subs="attributes+"]
 ----
-# Install it, if it’s not already installed
 {occ-command-example-prefix} market:install configreport
 
-# Or enable it, if it’s already installed
+Or enable it, if it’s already installed:
+[source,bash,subs="attributes+"]
+----
 {occ-command-example-prefix}:app enable configreport
 ----
 
@@ -36,11 +38,10 @@ menu:Settings[Admin > General > "Generate Config report" > "Download ownCloud co
 
 To generate a config report from the command line, run the following command from the root directory of your ownCloud installation:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} configreport:generate > config_report.txt
 ----
-
 
 == ownCloud Server Log File
 
@@ -54,15 +55,17 @@ menu:Settings[Admin > General > Log > "Download logfile"].
 If the log file is too big, you will need to transfer it from the command line. 
 The location of the log file can be found in your config.php. It's in your data directory. 
 
-....
+[source,php]
+----
  'datadirectory' => '/var/www/owncloud/data',
-....
+----
 
 You also can specify a different location of the log file.
 
-....
+[source,php]
+----
 'logfile' => '/home/www-data/owncloud.log',
-....
+----
 
 Note that the web server user has to have rights to write in that directory.
 
@@ -71,7 +74,7 @@ Note that the web server user has to have rights to write in that directory.
 Assuming that LDAP is used, viewing the LDAP configuration is important when checking for errors between your ownCloud instance and your LDAP server.
 To get the output file, execute this command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:show-config > ldap_config.txt
 ----

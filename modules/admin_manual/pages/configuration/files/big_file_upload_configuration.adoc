@@ -42,7 +42,7 @@ PrivateTmp=false
 
 When done, you need to reload the daemon and restart the service:
 
-[source,console]
+[source,bash]
 ----
 sudo systemctl daemon-reload
 sudo systemctl restart httpd
@@ -169,7 +169,7 @@ Disable mod_reqtimeout on Ubuntu::
 +
 On Ubuntu, you can disable the module by running the following command:
 +
-[source,console]
+[source,bash]
 ----
 sudo a2dismod reqtimeout
 ----

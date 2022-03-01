@@ -112,7 +112,7 @@ image:qnap/DDNS_qnap-cropped.png[DDNS Configuration on QNAP]
 If you want to assign a static IP address, you need to access your QNAP device via `ssh` on the command line and edit the file `custom/user.config.php` in your top-level ownCloud app directory, e.g. `/share/CACHEDEV1_DATA/.qpkg/ownCloud`.
 Create an entry like in the following example with the correct IP address:
 
-[source,console]
+[source,php]
 ----
 <?php
 $CONFIG = array(
@@ -170,7 +170,7 @@ You are logged in to the QNAP NAS Console Management - Main menu.
 
 Open a terminal and enter the command:
 
-[source,console]
+[source,bash]
 ----
 ssh admin@<your-nas-IP>
 ----
@@ -181,7 +181,7 @@ Enter the admin user's password and you'll be in the QNAP Console Management - M
 
 In the Console Management you have several options that might be useful at some point:
 
-[source,console]
+[source,text]
 ----
  +-------------------------------------------------------------------------+
   |  Console Management - Main menu                                         |
@@ -212,7 +212,7 @@ To issue `occ` commands, you need to use `ssh` to log in to your QNAP device. Th
 
 ownCloud on QNAP lives in a Docker container, therefore `occ` commands look a little different than on regular installations. The prefix `docker exec` is needed:
 
-[source,console]
+[source,bash]
 ----
 docker exec --user www-data <owncloud-container-name> php occ <your-command>
 ----
@@ -225,7 +225,7 @@ CAUTION: Unless you know exactly what you are doing, you shouldn't run commands 
 
 To prevent data loss, the ownCloud database should be backed up regularly. To do so, you need to log in to your QNAP device via `ssh` and navigate to the ownCloud app root directory, e.g. `/share/CACHEDEV1_DATA/.qpkg/ownCloud`. Here you can create a database snapshot with a time stamp by entering the following command:
 
-[source,console]
+[source,docker]
 ----
 system-docker-compose exec db pg_dumpall -c -U owncloud > \
   ownCloud_database_$(date +%Y-%m-%d_%H_%M_%S).sql
@@ -235,13 +235,21 @@ For more information, see section xref:maintenance/backup_and_restore/backup.ado
 
 Should something happen and you need to restore the data, perform the following commands:
 
-[source,console]
+Delete / drop the current database
+[source,docker]
 ----
-# delete / drop the current database
 system-docker-compose exec db dropdb owncloud -U owncloud
-# create new database
+----
+
+Create a new database
+[source,docker]
+----
 system-docker-compose exec db createdb owncloud -U owncloud
-# restore data to database
+----
+
+Restore data to database
+[source,bash]
+----
 cat ownCloud_database_xxxxx.sql | system-docker-compose exec \
    -T db psql -U owncloud -d owncloud
 ----

@@ -132,6 +132,7 @@ Now you just need to add the tag to the folder or file, and then block the tag w
 
 Block by System Tag:
 
+[source,text]
 ----
 System file tag:   is       "Confidential"
 IP Range (IPv4):   is not   "192.168.1.0/24"

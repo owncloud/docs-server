@@ -257,14 +257,14 @@ NOTE: You can increase the command's verbosity by using `-vvv`. Doing so display
 
 The simplest way, useful for initial testing is, to start the `wnd:listen` process manually, as follows:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username>
 ----
 
 The password is an optional parameter and you will be asked for it if you didn't provide it as in the example above. In order to start `wnd:listen` without any user interaction like as service, provide the password from a password file.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file \
@@ -287,7 +287,7 @@ the verbosity by calling `wnd:process-queue -vvv`.
 
 As a simple example, you can check the following:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:process-queue <host> <share>
 ----
@@ -311,14 +311,14 @@ Create a service for `systemd` following the instructions below that checks for 
 ** Place one copy of a file with the content from below under `/etc/systemd/system/owncloud-wnd-listen-SERVER-SHARE.service` +
 To do so, enter following command and replace <name> with `owncloud-wnd-listen-SERVER-SHARE`:
 +
-[source,console]
+[source,bash]
 ----
 sudo systemctl edit <name>.service
 ----
 +
 Reload the deamon to make it available:
 +
-[source,console]
+[source,bash]
 ----
 sudo systemctl daemon-reload
 ----
@@ -331,7 +331,7 @@ the account. This way, only root and the Apache user should have access to the p
 
 * Content template for `owncloud-wnd-listen-SERVER-SHARE`
 +
-[source,console]
+[source,text]
 ----
 [Unit]
 Description=ownCloud WND Listener for SERVER SHARE
@@ -356,7 +356,7 @@ WantedBy=multi-user.target
 
 * Run the following command, once for each created file:
 +
-[source,console]
+[source,bash]
 ----
 sudo systemctl daemon-reload
 sudo systemctl enable owncloud-wnd-listen-SERVER-SHARE.service
@@ -365,14 +365,14 @@ sudo systemctl start  owncloud-wnd-listen-SERVER-SHARE.service
 
 * To list all systemd wnd listeners for ownCloud run the following command, assuming you use the naming convention described above:
 +
-[source,console]
+[source,bash]
 ----
 systemctl list-units | grep owncloud-wnd-listen
 ----
 
 * Please re-run the following commands if you are changing the contents of a particular listener service:
 +
-[source,console]
+[source,bash]
 ----
 sudo systemctl daemon-reload
 sudo systemctl restart owncloud-wnd-listen-SERVER-SHARE.service
@@ -388,7 +388,7 @@ NOTE: The commands must be **strictly sequential**. This can be done by using `f
 
 * Make a `crontab` entry to run a script iterating over all `SERVER SHARE` pairs with an appropriate `occ wnd:process-queue` command.
 +
-[source,console]
+[source,bash]
 ----
 * * * * *  sudo -u www-data /usr/bin/php /var/www/owncloud/occ wnd:process-queue <HOST> <SHARE>
 ----
@@ -405,7 +405,7 @@ use {anacron-examples}[Anacron], which seems to have an option for this scenario
 If you need to serialize the execution of the `wnd:process-queue`, check the following example with
 {shell-flock-intro}[flock]
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 flock -n /opt/my-lock-file {occ-command-example-prefix} wnd:process-queue <host> <share>
 ----
@@ -419,7 +419,7 @@ The lock file `/opt/my-lock-file` itself will be created as an empty file by the
 
 You can use flock also in cron, see the example below:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 * * * * *  flock -n /opt/my-lock-file -c 'sudo -u www-data /usr/bin/php /var/www/owncloud/occ wnd:process-queue <HOST> <SHARE>'
 ----
@@ -539,7 +539,7 @@ smbclient -U Username -L //Servername
 
 Take the example of attempting to connect to the host MyHost, the share named `MyData` using `occ wnd:listen` replacing user and password accordingly. Running the following command would work:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen MyHost MyData user password
 ----
@@ -553,6 +553,7 @@ need to set up the `HOME` variable in Apache to prevent a segmentation fault. If
 `libsmbclient 4.1.6` and higher, it doesn't seem to be an issue, so you won't have to change your `HOME`
 variable. To set up the `HOME` variable on Ubuntu, modify the `/etc/apache2/envvars` file:
 
+[source,bash]
 ----
 unset HOME
 export HOME=/var/www
@@ -561,6 +562,7 @@ export HOME=/var/www
 In Red Hat/CentOS, modify the `/etc/sysconfig/httpd` file and add the following line to set the HOME
 variable in Apache:
 
+[source,bash]
 ----
 export HOME=/usr/share/httpd
 ----
@@ -569,7 +571,7 @@ By default, CentOS has activated SELinux, and the `httpd` process can not make o
 This will cause problems with the `curl`, `ldap` and `samba` libraries.  You'll need to get around this
 to make this work. First, check the status:
 
-[source,console]
+[source,bash]
 ----
 getsebool -a | grep httpd
 httpd_can_network_connect --> off
@@ -577,14 +579,14 @@ httpd_can_network_connect --> off
 
 Then enable support for network connections:
 
-[source,console]
+[source,bash]
 ----
 setsebool -P httpd_can_network_connect 1
 ----
 
 In openSUSE, modify the `/usr/sbin/start_apache2` file:
 
-[source,console]
+[source,bash]
 ----
 export HOME=/var/lib/apache2
 ----
@@ -630,13 +632,13 @@ There are several ways to supply a password:
 
 . Interactively in response to a password prompt.
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username>
 ----
 . Sent as a parameter to the command.
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username> <password>
 ----
@@ -645,13 +647,13 @@ password must be in plain text inside the file, and neither spaces nor newline c
 from the file by default, unless the `--password-trim` option is added. The password file must be readable
 by the apache user (or www-data)
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file
 ----
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file \
@@ -686,7 +688,7 @@ Third party password managers or processes can be integrated. The only requireme
 
 This provides a bit more security because the `/tmp/plainpass` password as shown below should be owned by root and only root should be able to read the file (0400 permissions); Apache, particularly, shouldn't be able to read it. It's expected that root will be the one to run this command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 cat /tmp/plainpass | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
 ----
@@ -695,7 +697,7 @@ cat /tmp/plainpass | {occ-command-example-prefix} wnd:listen <host> <share> <use
 
 Similar to plainpass, the content in this case gets encoded in the {base64-url}[Base64 format]. There's not much security, but it has additional obfuscation.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 base64 -d /tmp/encodedpass | \
    {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
@@ -707,7 +709,7 @@ Example using "pass"
 
 * You can go through {pass-url}[manage passwords from the command line] to set up the keyring for whoever will fetch the password (probably root) and then use something like the following:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 pass the-password-name | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
 ----
@@ -716,7 +718,7 @@ pass the-password-name | {occ-command-example-prefix} wnd:listen <host> <share> 
 
 This example uses {vaultproject-url}[Vault] as the secrets store. See {hashicorp-url}[HCP Vault] on how to setup the secrets store. Then use something like the following:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 vault kv get -field=password secret/samba | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
 ----
@@ -726,7 +728,7 @@ Use Vault's ACLs to limit access to the token. Destroy the token after starting 
 === Password Option Precedence
 
 If both the argument and the option are passed, e.g.,
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username> <password> --password-file=/opt/pass`
 ----
@@ -842,7 +844,7 @@ location for all the server. We might need to provide a specific serializer for 
 
 === Basic Command Execution Examples
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen host share username password
 
@@ -861,14 +863,14 @@ location for all the server. We might need to provide a specific serializer for 
 
 To set it up, make sure the listener is running as a system service:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen host share username password
 ----
 
 Setup a Cron job or similar with something like the following two commands:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:process-queue host share -c 500 \
      --serializer-type file \

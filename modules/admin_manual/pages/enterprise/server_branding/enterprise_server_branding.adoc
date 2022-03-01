@@ -47,8 +47,9 @@ you want, for example `myBrandedTheme`. Then configure your ownCloud
 server to use your branded theme by entering it in your `config.php`
 file:
 
+[source,php]
 ----
-"theme" => "myBrandedTheme"
+'theme' => 'myBrandedTheme'
 ----
 
 If anything goes wrong with your new theme, comment out this line to

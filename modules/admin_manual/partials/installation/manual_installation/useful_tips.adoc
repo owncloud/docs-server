@@ -29,7 +29,7 @@ resource:foreign_path local_path nfs (<your options>),_netdev
 * Make sure that all mounts in `/etc/fstab` are mounted by running:
 +
 --
-[source,console]
+[source,bash]
 ----
 sudo mount -a
 ----
@@ -38,7 +38,7 @@ sudo mount -a
 * Run the following command to list mounts which must be up first:
 +
 --
-[source,console]
+[source,bash]
 ----
 systemctl list-units | grep -nP "\.mount"
 ----
@@ -57,14 +57,14 @@ where `<folder.mount>` and `<local_path>` are examples!
 * Edit the service you want to change:
 +
 --
-[source,console]
+[source,bash]
 ----
 sudo systemctl edit <name>.service
 ----
 
 Add the following directive in the editor opened, using your chosen `folder.mount` from above:
 
-[source,console]
+[source,text]
 ----
 [Unit]
 After=folder.mount
@@ -93,7 +93,7 @@ It is recommended to keep things simple and future-proof by creating an override
 * Run the following command to apply your changes:
 +
 --
-[source,console]
+[source,bash]
 ----
 sudo systemctl daemon-reload
 ----
@@ -102,7 +102,7 @@ sudo systemctl daemon-reload
 * Check if `<name>.service` has been properly added:
 +
 --
-[source,console]
+[source,bash]
 ----
 sudo systemctl show <name>.service | grep "After="
 ----
@@ -112,7 +112,7 @@ sudo systemctl show <name>.service | grep "After="
 * Restart your service by invoking:
 +
 --
-[source,console]
+[source,bash]
 ----
 sudo system <name> restart
 ----
@@ -129,7 +129,7 @@ To disable Transparent Huge Pages, follow these steps:
 * Create in `/etc/systemd/system` a file like `disable-thp.service` add the following content:
 +
 --
-[source,console]
+[source,text]
 ----
 [Unit]
 Description=Disable Transparent Huge Pages
@@ -150,7 +150,7 @@ WantedBy=basic.target
 * Run the following command to apply and activate your changes and start it automatically at boot time:
 +
 --
-[source,console]
+[source,bash]
 ----
 sudo systemctl daemon-reload
 sudo systemctl enable disable-thp
