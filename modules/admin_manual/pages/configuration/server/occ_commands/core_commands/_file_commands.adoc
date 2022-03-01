@@ -33,7 +33,7 @@ As such, the cases where you need to run this command should be extremely rare.
 This is why this command is only provided to check for one file instead of scanning the whole of ownCloud's filesystem.
 ====
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:check-cache --help
  Usage:
@@ -57,14 +57,14 @@ This is why this command is only provided to check for one file instead of scann
 
 Examples of checking files for user maria:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:check-cache maria welcome.txt
 
 welcome.txt has been accessed properly
 ----
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:check-cache maria maria@smbhome/myfile.txt
 
@@ -88,7 +88,7 @@ CAUTION: Executing this command might take some time depending on the file count
 
 Below is sample output that you can expect to see when using the command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:checksums:verify
 
@@ -131,7 +131,7 @@ The `files:scan` command
 
 File scans can be performed per-user, for a space-delimited list of users, for groups of users, and for all users.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:scan --help
  Usage:
@@ -183,7 +183,7 @@ For example:
 In the example above, the user_id `alice` is determined implicitly from the path component given.
 To get a list of scannable mounts for a given user, use the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files_external:list user_id
 ----
@@ -215,7 +215,7 @@ The `--repair` option can be run within two different scenarios:
 The following commands show how to enable single user mode, run a repair file scan in bulk on all storages, and then disable single user mode.
 This way is much faster than running the command for every user separately, but it requires single user mode.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --on
 {occ-command-example-prefix} files:scan --all --repair
@@ -224,7 +224,7 @@ This way is much faster than running the command for every user separately, but 
 
 The following command filters by the storage of the specified user.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:scan USERID --repair
 ----
@@ -241,7 +241,7 @@ If the target users don't exist, they will be created.
 
 This command is useful before removing users.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:transfer-ownership --help
  Usage:
@@ -268,7 +268,7 @@ For example --path="folder_name"
 
 For example, to move all files from `<source-user>` to `<destination-user>`, use the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:transfer-ownership \
     <source-user> \
@@ -278,10 +278,21 @@ For example, to move all files from `<source-user>` to `<destination-user>`, use
 You can also move a limited set of files from `<source-user>` to `<destination-user>` by making use of the `--path` switch, as in the example below.
 Ownership of `folder/to/move` and all files and folders which it contains will be transferred to `<destination-user>`.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:transfer-ownership \
     --path="folder/to/move" \
+    <source-user> \
+    <destination-user>
+----
+
+If the entire user folder of `<source-user>` needs to be migrated to `<destination-user>` user folder, use the `--destination-use-user-folder` switch, as in the example below.
+The destination user needs to be created but never log in, we recommend using owncloud maintenance mode for this operation.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} files:transfer-ownership \
+    --destination-use-user-folder \
     <source-user> \
     <destination-user>
 ----
@@ -304,7 +315,7 @@ For example, transferred shares that may now have an invalid share owner.
 
 NOTE: By default, the command performs a dry run and displays the problems found to the console output.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:troubleshoot-transfer-ownership --help
  Usage:
@@ -329,7 +340,7 @@ NOTE: By default, the command performs a dry run and displays the problems found
 
 Run the command with one of the type arguments:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:troubleshoot-transfer-ownership \
     <all|invalid-owner|invalid-initiator>
@@ -338,7 +349,7 @@ Run the command with one of the type arguments:
 The command can attempt to fix the issues with the `--fix` flag, +
 or execute for a single user using `--uid <uid>`
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:troubleshoot-transfer-ownership all \
     --fix \

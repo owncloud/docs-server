@@ -20,7 +20,7 @@ These commands manage the configurations of apps. Keys and values are stored in 
 
 == config:app:delete
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete [options] [--] <app> <name>
 ----
@@ -43,7 +43,7 @@ These commands manage the configurations of apps. Keys and values are stored in 
 
 === Examples:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete myappname provisioning_api
 Config value provisioning_api of app myappname deleted
@@ -52,7 +52,7 @@ Config value provisioning_api of app myappname deleted
 The delete command will by default not complain if the configuration was not set before. 
 If you want to be notified in that case, set the `--error-if-not-exists` flag.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete doesnotexist --error-if-not-exists
 Config provisioning_api of app appname could not be deleted because it did not exist
@@ -60,7 +60,7 @@ Config provisioning_api of app appname could not be deleted because it did not e
 
 == config:app:get
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:get [options] [--] <app> <name>
 ----
@@ -84,7 +84,7 @@ the command will exit with 1.
 
 === Examples
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:get activity installed_version
 2.2.1
@@ -92,7 +92,7 @@ the command will exit with 1.
 
 == config:app:set
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set [options] [--] <app> <name>
 ----
@@ -116,7 +116,7 @@ the command will exit with 1.
 
 === Examples
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set \
    files_sharing \
@@ -128,7 +128,7 @@ Config value incoming_server2server_share_enabled for app files_sharing set to y
 
 The `config:app:set` command creates the value, if it does not already exist. To update an existing value, set `--update-only`:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set \
    doesnotexist \
@@ -147,14 +147,14 @@ The exported content can also be imported again to allow the fast setup of simil
 The import command will only add or update values. 
 Values that exist in the current configuration, but not in the one that is being imported are left untouched.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:import filename.json
 ----
 
 It is also possible to import remote files, by piping the input:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:import < local-backup.json
 ----
@@ -166,7 +166,7 @@ Use the `occ app:enable`, `occ app:disable` and `occ update` commands instead.
 
 The `config:list` command lists all configuration values for your ownCloud setup as well as for any apps.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:list [options] [--] [<app>]
 ----
@@ -198,7 +198,7 @@ include::partial$configuration/server/occ_command/config-list-report.json[]
 
 To generate a full report which includes sensitive values, such as passwords and salts, use the `--private` option, as in the following example.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:list --private
 ----
@@ -208,7 +208,7 @@ To generate a full report which includes sensitive values, such as passwords and
 The output can be filtered to just the core information, core and apps, or one specific app.
 In the example below, you can see how to filter for each of these categories.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 # List only system configuration details
 {occ-command-example-prefix} config:list -- system
@@ -241,7 +241,7 @@ These commands manage system configurations.
 
 == config:system:delete
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:delete [options] [--] <name> (<name>)...
 ----
@@ -263,7 +263,7 @@ These commands manage system configurations.
 
 === Examples:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:delete maintenance:mode
 System config value maintenance:mode deleted
@@ -271,7 +271,7 @@ System config value maintenance:mode deleted
 
 == config:system:get
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:get [options] [--] <name> (<name>)...
 ----
@@ -294,7 +294,7 @@ the command will exit with 1.
 
 === Examples:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:get version
 10.7.0.4
@@ -302,7 +302,7 @@ the command will exit with 1.
 
 == config:system:set
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:set [options] [--] <name> (<name>)...
 ----
@@ -331,7 +331,7 @@ NOTE: In order to write a boolean, float, JSON, or integer value to the configur
 
 Disable the maintenance mode:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:set maintenance \
    --value=false \
@@ -343,7 +343,7 @@ System config value maintenance set to boolean false
 
 Create the `app_paths` config setting (using a JSON payload because of multi array values):
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:set apps_paths \
       --type=json \
@@ -363,7 +363,7 @@ Create the `app_paths` config setting (using a JSON payload because of multi arr
 
 Adding Redis to the configuration:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:set \
    redis \
@@ -376,7 +376,7 @@ System config value redis set to json {"host": "{oc-examples-server-ip}", "port"
 Some configurations (e.g., the trusted domain setting) are an array of data. 
 The array starts counting with 0. In order to set (and also get) the value of one key, you can specify multiple `config` names separated by spaces:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:get trusted_domains
 localhost
@@ -386,7 +386,7 @@ sample.tld
 
 To replace `sample.tld` with `example.com` trusted_domains => 2 needs to be set:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:set trusted_domains 2 --value=example.com
 System config value trusted_domains => 2 set to string example.com

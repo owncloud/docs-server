@@ -13,7 +13,7 @@ As a result, any user(s) who the share was re-shared with will now get an error 
 That's why the command is available.
 So, to cleanup all orphaned remote storages, run it as follows:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} sharing:cleanup-remote-storages
 ----

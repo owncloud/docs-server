@@ -39,7 +39,7 @@ A full text search index is created for all users, if this value is omitted.
 
 This example creates a full text search index for the user with user id `testuser`.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:create testuser
 
@@ -50,7 +50,7 @@ Indexing user testuser
 
 This example creates a full text search index for the users with user ids `admin` and `testuser`.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:create admin testuser
 
@@ -143,7 +143,7 @@ The command `search:index:reset` resets (recreates and clears) the full text sea
 
 === Example
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:reset
 This will delete the whole search index! Do you want to proceed?
@@ -174,7 +174,7 @@ The command `search:index:update` updates the full text search index by running 
 
 This example updates the full text search index for all users.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:update
 Start Updating the Elastic search index:

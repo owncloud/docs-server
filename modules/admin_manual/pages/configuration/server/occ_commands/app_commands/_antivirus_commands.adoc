@@ -7,7 +7,7 @@ Parametrisation must be done with the `occ config` command set.
 
 == List the Current Settings
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:list files_antivirus
 ----
@@ -16,7 +16,7 @@ Parametrisation must be done with the `occ config` command set.
 
 To set a new value, use the command below and replace `<Key>` and value `<Value>` accordingly.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus <Key> --value=<Value> --update-only
 ----

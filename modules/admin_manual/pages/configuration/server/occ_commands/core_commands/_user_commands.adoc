@@ -27,7 +27,7 @@ user
 
 You can create a new user with the `user:add` command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:add \
     [--password-from-env] \
@@ -70,7 +70,7 @@ This example adds new user, Layla Smith, and adds her to the `users` and `db-adm
 If either group does not exist, it is created.
 
 .Create a user with a password, email address, and display name, and add them to two groups
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:add \
   --display-name="Layla Smith" \
@@ -87,7 +87,7 @@ If either group does not exist, it is created.
 ----
 
 .Create a user with a temporary password (the user will receive a link to set their password).
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:add \
   --display-name "Layla Smith" \
@@ -106,7 +106,7 @@ User layla added to group db-admins
 
 To delete a user, you use the `user:delete` command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:delete [options] [--] <uid>
 ----
@@ -128,7 +128,7 @@ To delete a user, you use the `user:delete` command.
 | Try to force the deletion of the user data even if the user is missing.
 |===
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:delete fred
 ----
@@ -137,7 +137,7 @@ To delete a user, you use the `user:delete` command.
 
 Admins can disable users via the occ command too:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:disable <uid>
 ----
@@ -154,7 +154,7 @@ NOTE: Once users are disabled, their connected browsers will be disconnected. Us
 
 == Enable Users
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:enable <uid>
 ----
@@ -167,11 +167,94 @@ NOTE: Once users are disabled, their connected browsers will be disconnected. Us
 | The user name.
 |====
 
+== List User Home Directories
+
+List all available root directories for user homes that are currently in use. For details see xref:configuration/user/user_management.adoc#moving-the-user-home[Moving the User Home] documentation.
+
+This command is complementary when using `user:move-home`.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} user:home:list-dirs [options]
+----
+
+=== Options
+
+[width="100%",cols="20%,70%"]
+|===
+| `--output=[OUTPUT]`
+| Output format (plain, json or json_pretty, default is plain) [default: "plain"].
+|===
+
+=== Examples
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} user:home:list-dirs
+  - /var/www/owncloud/data
+----
+
+== List all Users For a Given Home Directory
+
+List all users that have their home in a given path. For details see xref:configuration/user/user_management.adoc#moving-the-user-home[Moving the User Home] documentation.
+
+This command is complementary when using `user:move-home`.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} user:home:list-users [options] [--] [<path>]
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%"]
+|===
+| `path`
+| Path where the user home must be located
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%"]
+|===
+| `--all`
+| List all users for every home path.
+
+| `--output=[OUTPUT]`
+| Output format (plain, json or json_pretty, default is plain) [default: "plain"].
+|===
+
+=== Examples
+
+Note for the example below, some user accounts originated from LDAP.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} user:home:list-users /var/www/owncloud/data
+  - admin
+  - aca4c3ec-691d-103b-8380-55a4da3d3a76
+  - 9918b614-6a2e-103b-89a7-f5edf5d332f5
+  - c298ae18-6a2e-103b-89a8-f5edf5d332f5
+  - dbcca7b4-7306-103b-813a-19652cf0a9d2
+----
+
+Run the following command to list all users from all available home directories. The example shows, that user `lisa` has been moved to a different home directory with `user:move-home`.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} user:home:list-users --all
+  - /mnt/newhome_1
+    - lisa
+  - /var/www/owncloud/data 
+    - admin
+    - user01
+----
+
 == Finding Inactive Users
 
 To view a list of users who've not logged in for a given number of days, use the `user:inactive` command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:inactive [options] [--] <days>
 ----
@@ -194,7 +277,7 @@ To view a list of users who've not logged in for a given number of days, use the
 
 The example below searches for users inactive for five days or more:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:inactive 5
 ----
@@ -232,7 +315,7 @@ Using the output option `json_pretty` will render the output formatted as follow
 
 To view a user's most recent login, use the `user:lastseen` command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:lastseen <uid>
 ----
@@ -247,7 +330,7 @@ To view a user's most recent login, use the `user:lastseen` command:
 
 Example
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:lastseen layla
   layla's last login: 09.01.2015 18:46
@@ -257,7 +340,7 @@ Example
 
 You can list existing users with the `user:list` command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:list [options] [<search-pattern>]
 ----
@@ -280,7 +363,7 @@ Allowed attributes, multiple values possible: +
 
 This example lists user IDs containing the string `ron`
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:list ron
  - aaron: Aaron Smith
@@ -288,7 +371,7 @@ This example lists user IDs containing the string `ron`
 
 The output can be formatted in JSON with the output option `json` or `json_pretty`.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:list --output=json_pretty
  {
@@ -300,7 +383,7 @@ The output can be formatted in JSON with the output option `json` or `json_prett
 
 This example lists all users including the attribute `enabled`.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:list -a enabled
  - admin: true
@@ -311,7 +394,7 @@ This example lists all users including the attribute `enabled`.
 
 You can list the group membership of a user with the `user:list-groups` command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:list-groups [options] [--] <uid>
 ----
@@ -336,7 +419,7 @@ You can list the group membership of a user with the `user:list-groups` command.
 
 This example lists group membership of user `julie`:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:list-groups julie
  - Executive
@@ -345,7 +428,7 @@ This example lists group membership of user `julie`:
 
 The output can be formatted in JSON with the output option `json` or `json_pretty`:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:list-groups --output=json_pretty julie
  [
@@ -358,7 +441,7 @@ The output can be formatted in JSON with the output option `json` or `json_prett
 
 This command modifies either the users username or email address.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:modify [options] [--] <uid> <key> <value>
 ----
@@ -379,26 +462,63 @@ This command modifies either the users username or email address.
 
 All three arguments are mandatory and can not be empty. Example to set the email address:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:modify carla email foobar@foo.com
 ----
 
 The email address of `carla` is updated to `foobar@foo.com`.
 
+== Move a Users Home Folder
+
+This command moves a user's home folder to a new location. For details see xref:configuration/user/user_management.adoc#moving-the-user-home[Moving the User Home] documentation. Note that moving a users home is only possible for POSIX file systems. Also see the `user:home` commands for additional support.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} user:move-home <user_id> <new_location>
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|====
+| `user_id`
+| ID of the user whose home folder is to be moved.
+
+| `new_location`
+| Absolute path to the parent folder of the new location of the home folder.
+|====
+
+[NOTE]
+====
+You must not use temp directories like `/tmp` and `/var/tmp` as target directory.
+
+* Any data located in one of the two directories will not survive a reboot
+* For systemd services, they are private sub-directories of the host’s real /tmp/ and /var/tmp/, and thus not system-wide locations anymore, but service-specific ones. For more details see {temp-dir-url}[Using /tmp/ and /var/tmp/ Safely]
+====
+
+Example:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} user:move-home lisa /mnt/newhome_1
+----
+
+This command moves the home directory of user `lisa` to the new location `/mnt/newhome_1`
+
 == Generating a User Count Report
 
 Generate a simple report that counts all users including users on external user authentication servers such as LDAP,
 and guest users which are created by the guests app.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:report
 ----
 
 There are no arguments and no options beside the default once to parametrize the output.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:report
 +--------------------------+-----+
@@ -421,7 +541,7 @@ NOTE: A user directory is created, when a local user has logged on the first tim
 
 Resets the password of the named user.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:resetpassword [options] [--] <user>
 ----
@@ -472,7 +592,7 @@ User "fred" added to group "users"
 
 You can reset any user's password, including administrators (see xref:configuration/user/reset_admin_password.adoc[Reset Admin Password]):
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:resetpassword layla
   Enter a new password:
@@ -493,7 +613,7 @@ Successfully reset password for layla
 This example emails a password reset link to the user.
 Additionally, when the command completes, it outputs the password reset link to the console:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:resetpassword \
   --send-email \
@@ -517,7 +637,7 @@ To manage application settings for a user, use the `user:setting` command. This 
 * Set a setting value
 * Delete a setting
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:setting [options] [--] <uid> [[<app> [<key>]]
 ----
@@ -583,7 +703,7 @@ A complete list cannot be supplied as it is impossible to know the entire list o
 
 To retrieve settings for a user, you need to call the `user:setting` command and supply at least the user's user name. You can drill down restricting results to a particular app and a key in the app.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:setting <uid> [<app>] [<key>]
 ----
@@ -606,7 +726,7 @@ To retrieve settings for a user, you need to call the `user:setting` command and
 
 . Retrieve all settings set for a given user:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:setting layla
   - core:
@@ -621,7 +741,7 @@ Here we see that the user has settings for the application `core`, when they las
 
 . Retrieve all settings set restricted to application `core` for a given user:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:setting layla core
  - core:
@@ -632,7 +752,7 @@ In the output, you can see that one setting is in effect, `lang`, which is set t
 
 . Retrieve all settings set restricted to application `core`, key `lang` for a given user
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:setting layla core lang
 ----
@@ -641,7 +761,7 @@ This will display the value for that setting, such as `en`.
 
 === Setting and Deleting a Setting
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:setting [options] [--] <uid> [<app>] [<key>]
 ----
@@ -650,7 +770,7 @@ IMPORTANT: In case you want to change the email address, use xref:modify-user-de
 
 Here's an example of how you would set the language of the user `layla`.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:setting layla core lang --value=en
 ----
@@ -659,7 +779,7 @@ Deleting a setting is quite similar to setting a setting.
 In this case, you supply the username, application (or setting category) and key as above. 
 Then, in addition, you supply the `--delete` flag.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:setting layla core lang --delete
 ----
@@ -718,14 +838,14 @@ and _Shibboleth_ backend.
 
 === LDAP
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy"
 ----
 
 === Samba
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:sync "OCA\User\SMB" -vvv
 ----
@@ -734,7 +854,7 @@ Below are examples of how to use the command with the *LDAP* backend along with 
 
 === Example 1
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
   Analysing all users ...
@@ -750,7 +870,7 @@ Below are examples of how to use the command with the *LDAP* backend along with 
 
 === Example 2
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
   Analysing all users ...
@@ -770,7 +890,7 @@ Below are examples of how to use the command with the *LDAP* backend along with 
 
 === Example 3
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
   Analysing all users ...
@@ -791,7 +911,7 @@ Below are examples of how to use the command with the *LDAP* backend along with 
 
 === Example 4
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
   Analysing all users ...
@@ -810,7 +930,7 @@ Below are examples of how to use the command with the *LDAP* backend along with 
 
 === Example 5
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m remove
 
@@ -818,7 +938,7 @@ Below are examples of how to use the command with the *LDAP* backend along with 
 
 === Example 6
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy"
 If unknown users are found, what do you want to do with their accounts? (removing the account will also remove its data)

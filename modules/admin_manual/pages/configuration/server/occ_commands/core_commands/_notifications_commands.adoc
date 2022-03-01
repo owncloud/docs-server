@@ -10,7 +10,7 @@ notifications
 
 == Command Description
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} notifications:generate [-u|--user USER] [-g|--group GROUP] [-l|--link <linktext>] [--] <subject> [<message>]
 ----
@@ -40,7 +40,7 @@ At least one user or group must be set.
 A link can be useful for notifications shown in client apps.
 Example:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} notifications:generate -g Office "Emergency Alert" "Rebooting in 5min"
 ----

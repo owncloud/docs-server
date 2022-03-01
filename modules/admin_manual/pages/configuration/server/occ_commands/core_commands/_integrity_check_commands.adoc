@@ -15,7 +15,7 @@ integrity
 
 After creating your signing key, sign your app like this example:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} integrity:sign-app \
    --privateKey=/Users/karlmay/contacts.key \
@@ -25,7 +25,7 @@ After creating your signing key, sign your app like this example:
 
 Verify your app:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} integrity:check-app --path=/pathto/app appname
 ----
