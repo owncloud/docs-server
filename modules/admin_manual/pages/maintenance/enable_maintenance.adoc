@@ -10,7 +10,7 @@ You must put your ownCloud server into maintenance mode before performing upgrad
 
 To enable maintenance mode, run the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --on
 ----
@@ -26,7 +26,7 @@ You may also put your server into this mode by editing config/config.php.
 
 To disable maintenance mode, run the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----

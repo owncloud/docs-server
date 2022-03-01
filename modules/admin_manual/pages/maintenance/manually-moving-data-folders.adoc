@@ -35,7 +35,7 @@ Look at each section below for a detailed description.
 
 To save time, here are the commands which you can copy/paste for Apache and rsync:
 
-[source,console]
+[source,bash]
 ----
 sudo service apache2 stop
 
@@ -51,14 +51,14 @@ NOTE: Check your commands for how to start or stop your webserver if you are not
 It is necessary to enable maintenance mode to avoid running cron jobs.
 To enable maintenance mode, run the following command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --on
 ----
 
 To disable maintenance mode of your instance run the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----
@@ -150,7 +150,7 @@ Individual apps may reference the data directory separately from the core system
 For those apps, you have to change the configured path.
 Run the following command to list app configs.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:list
 ----
@@ -174,7 +174,7 @@ Here is an example of the output which you may see:
 In the example above, the app "fictitious" sets the data directory to `/var/www/owncloud/data`.
 Change this value by using the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set --value /mnt/owncloud/data fictitious datadir
 ----

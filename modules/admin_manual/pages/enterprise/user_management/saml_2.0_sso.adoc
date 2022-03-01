@@ -26,7 +26,7 @@ and mod-shib, ask your ADFS admin for the relevant server URLs. These are:
 
 Then, make sure that the web server is accessible with a trusted certificate:
 
-[source,console]
+[source,bash]
 ----
 sudo a2enmod ssl
 sudo a2ensite default-ssl
@@ -37,7 +37,7 @@ sudo service apache2 restart
 
 Firstly, install {libapache2-mod-shib-url}[mod-shib]. You can do this using the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo apt-get install libapache2-mod-shib2
 ----
@@ -45,7 +45,7 @@ sudo apt-get install libapache2-mod-shib2
 This will install packages needed for mod-shib, including `shibd`.
 Then, generate certificates for the `shibd` daemon by running the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo shib-keygen
 ----
@@ -54,7 +54,7 @@ sudo shib-keygen
 
 The metadata provided by ADFS cannot be automatically imported, and must be cleaned up before using it with the file based `MetadataProvider`. To do so, use `adfs2fed.php`, as in the following command:
 
-[source,php]
+[source,bash]
 ----
 php apps/user_shibboleth/tools/adfs2fed.php \
    https://<ADFS server FQDN>/FederationMetadata/2007-06/FederationMetadata.xml \
@@ -70,7 +70,7 @@ To do this, in `/etc/shibboleth/shibboleth2.xml`:
 
 Use the URL of the ownCloud instance as the `entityID` in the `ApplicationDefaults`
 
-[source,console]
+[source,bash]
 ----
 <ApplicationDefaults entityID="https://<owncloud server FQDN>/login/saml" REMOTE_USER="eppn upn">
 ----
@@ -95,7 +95,7 @@ NOTE: Grab `<ADFS server FQDN>/<URI>/` from the filtered-metadata.xml.
 
 Configure an XML `MetadataProvider` with the local `filtered-metadata.xml` file
 
-[source,sml]
+[source,xml]
 ----
 <MetadataProvider type="XML" path="/etc/shibboleth/filtered-metadata.xml"/>
 ----
@@ -145,10 +145,10 @@ In the "User Authentication" settings for Shibboleth the `upn` environment varia
 
 Use `upn` as `uid` and set the app mode to 'SSO Only' by running:
 
-[source,console]
+[[source,bash,subs="attributes+"]
 ----
-occ shibboleth:mode ssoonly
-occ shibboleth:mapping -u upn
+{occ-command-example-prefix} shibboleth:mode ssoonly
+{occ-command-example-prefix} shibboleth:mapping -u upn
 ----
 
 `displayName` and email are only relevant for `autoprovisioning` mode.
@@ -169,22 +169,34 @@ Add Claims in ADFS and map them in the `attribute-map.xml` if needed.
   - Add "Windows Authentication" to the "Service" -> "Authentication Methods" for "Intranet"
   - Run the following Powershell script for Firefox:
 
+Save the list of currently supported browser user-agents to a variable
 [source,console]
 ----
-# Save the list of currently supported browser user-agents to a variable
-$browsers=Get-ADFSProperties | Select -ExpandProperty WIASupportedUseragents
+$ browsers=Get-ADFSProperties | Select -ExpandProperty WIASupportedUseragents
+----
 
-# Add Mozilla/5.0 user-agent to the list
-$browsers+="Mozilla/5.0"
+Add Mozilla/5.0 user-agent to the list
+[source,console]
+----
+$ browsers+="Mozilla/5.0"
+----
 
-# Apply the new list
-Set-ADFSProperties -WIASupportedUseragents $browsers
+Apply the new list
+[source,console]
+----
+$ Set-ADFSProperties -WIASupportedUseragents $browsers
+----
 
-# Turn off Extended Protection
-#Set-ADFSProperties –ExtendedProtectionTokenCheck None
+Turn off Extended Protection
+[source,console]
+----
+$ Set-ADFSProperties –ExtendedProtectionTokenCheck None
+----
 
-# Restart the AD FS service
-Restart-Service ADFSsrv
+Restart the AD FS service
+[source,console]
+----
+$ Restart-Service ADFSsrv
 ----
 
 - On the Windows client:

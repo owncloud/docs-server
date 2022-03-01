@@ -40,7 +40,7 @@ Have a backup of your database to rollback in case of issues.
 
 . Set ownCloud in maintenance mode
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --on
 ----
@@ -49,15 +49,16 @@ Have a backup of your database to rollback in case of issues.
 +
 Stop your web server to prevent users from trying to access ownCloud via the web. As an alternative, you can stop serving the virtual host for ownCloud.
 +
-[source,console]
+Stop the web server:
++
+[source,bash]
 ----
-# Stop the web server
 sudo service apache2 stop
 ----
 
 . Run an occ command to prepare the database for the upgrade
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} db:restore-default-row-format
 ----
@@ -68,7 +69,7 @@ Follow the instructions in the {upgrade-mariadb-url}[Upgrading MariaDB] guide.
 
 . Set ownCloud back to normal operation mode:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----
@@ -76,7 +77,7 @@ Follow the instructions in the {upgrade-mariadb-url}[Upgrading MariaDB] guide.
 . Enable browser access +
 Start your web server, Alternatively, enable the virtual host serving ownCloud again:
 +
-[source,console]
+[source,bash]
 ----
 sudo service apache2 start
 ----

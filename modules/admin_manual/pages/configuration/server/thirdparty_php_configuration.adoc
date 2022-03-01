@@ -16,6 +16,7 @@ folder, starting at the ownCloud web root.
 
 An example of what these parameters might look like is as follows:
 
+[source,php]
 ----
 <?php
 

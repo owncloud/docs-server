@@ -21,7 +21,7 @@ security:routes [options]
 
 Example 1:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} security:routes
 ----
@@ -40,7 +40,7 @@ Example 1:
 
 Example 2:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} security:routes --output=json-pretty
 ----
@@ -57,7 +57,7 @@ Example 2:
 
 Example 3:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} security:routes --with-details
 ----
@@ -84,21 +84,21 @@ security:certificates:remove  Remove trusted certificate
 
 This example lists your installed certificates:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} security:certificates
 ----
 
 Import a new certificate:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} security:certificates:import /path/to/certificate
 ----
 
 Remove a certificate:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} security:certificates:remove [certificate name]
 ----

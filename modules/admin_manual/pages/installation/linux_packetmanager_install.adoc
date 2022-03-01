@@ -36,14 +36,14 @@ apt-mark hold owncloud-complete-files
 
 To see if owncloud-complete-files has already been held, use the `showhold` command, as in the following example. If it’s printed out to the console, then it’s being held.
 
-[source,console]
+[source,bash]
 ----
 apt-mark showhold owncloud-complete-files
 ----
 
 To unset `owncloud-complete-files` as held back, use the `unhold` command, as in the example below.
 
-[source,console]
+[source,bash]
 ----
 apt-mark unhold owncloud-complete-files
 ----
@@ -59,28 +59,28 @@ If you are using Yum, there are two options that you can take to lock packages f
 
 If the `versionlock` plugin is not installed, install it by running:
 
-[source,console]
+[source,bash]
 ----
 yum install yum-plugin-versionlock
 ----
 
 When it is installed, you can lock `owncloud-complete-files` run:
 
-[source,console]
+[source,bash]
 ----
 yum versionlock add owncloud-complete-files
 ----
 
 To confirm that it is locked, run: 
 
-[source,console]
+[source,bash]
 ----
 yum versionlock list
 ----
 
 To unlock `owncloud-complete-files`, run: 
 
-[source,console]
+[source,bash]
 ----
 yum versionlock delete owncloud-complete-files
 ----
@@ -89,14 +89,14 @@ yum versionlock delete owncloud-complete-files
 
 If you are using Zypper, use the `addlock` or `al` commands. Similar to `apt-mark hold` these add a package lock that prevents the package from being modified. The example below shows how to use the command to lock `owncloud-complete-files`.
 
-[source,console]
+[source,bash]
 ----
 zypper addlock owncloud-complete-files
 ----
 
 To see if the package has already been locked, use the `locks` command.  If `owncloud-complete-files` is already locked, then you will see output similar to the below example.
 
-[source,console]
+[source,text]
 ----
 # | Name                    | Type    | Repository
 --+-------------------------+---------+-----------
@@ -105,7 +105,7 @@ To see if the package has already been locked, use the `locks` command.  If `own
 
 To unlock `owncloud-complete-files`, if it is already locked, use the `removelocks` or `rl` commands, as in the example below.
 
-[source,console]
+[source,bash]
 ----
 zypper removelock owncloud-complete-files
 ----

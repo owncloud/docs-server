@@ -8,7 +8,7 @@ If not, please refer to the documentation on configuring xref:installation/manua
 
 Apply the xref:installation/manual_installation/manual_installation.adoc#script-guided-installation[correct permissions] to your ownCloud directories. Then choose your `occ` options. This lists your available options:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} occ
 ownCloud is not installed - only a limited number of commands are available
@@ -45,7 +45,7 @@ Available commands:
 
 Display your `maintenance:install` options.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} help maintenance:install
 ownCloud is not installed - only a limited number of commands are available
@@ -110,7 +110,7 @@ sales=
 
 This example completes the installation:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 cd /var/www/owncloud/
 {occ-command-example-prefix} maintenance:install \

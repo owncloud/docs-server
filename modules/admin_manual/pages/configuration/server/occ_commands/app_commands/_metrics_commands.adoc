@@ -21,7 +21,7 @@ Writes the key `metrics_shared_secret` and the secret to config.php. The name mu
 Note: You can also set the config key/value manually into your config.php file.
 
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:set \
      "metrics_shared_secret" \
@@ -39,7 +39,7 @@ The above command adds the following at the end of `config.php`:
 
 This command reads the value of the `metrics_shared_secret` key from config.php:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:get "metrics_shared_secret"
 ----
@@ -53,7 +53,7 @@ your-metrics-secret
 
 This command completely removes the key and the value from config.php:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:delete "metrics_shared_secret"
 ----

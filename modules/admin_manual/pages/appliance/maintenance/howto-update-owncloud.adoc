@@ -121,6 +121,7 @@ Once logged in, check if there is an upgrade available.
 You can use the command `univention-app info`. This command lists
 information about the current state of every installed App.
 
+[source,console]
 ----
 root@ucs-9446:~# univention-app info
 UCS: 4.2-1 errata165
@@ -148,6 +149,7 @@ version of ownCloud. As in the example below, you should see that the
 installed version is now higher than before, and that ownCloud is no
 longer upgradable.
 
+[source,console]
 ----
 root@ucs-9446:~# univention-app info
 UCS: 4.2-1 errata165
@@ -167,7 +169,7 @@ version suffix in the name. For example the ownCloud 8.2 app is named
 
 For ownCloud 8.2 users: during the ownCloud App upgrade, user files will be moved to the new Docker data directory, `/var/lib/univention-appcenter/apps/owncloud/data/files`.  Essentially, the following the command will be executed:
 
-[source,console]
+[source,bash]
 ----
 mv /var/lib/owncloud/* /var/lib/univention-appcenter/apps/owncloud/data/files
 ----
@@ -177,9 +179,9 @@ Please check your filesystems and mountpoints and make sure enough space is avai
 Given that, you first have to uninstall the existing version and then
 install the 10.x version. To do so, run the following commands:
 
+The following assumes that owncloud82 is the currently installed version
 [source,console]
 ----
-# Assumes that owncloud82 is the currently installed version
 univention-app remove owncloud82
 univention-app update
 univention-app install owncloud

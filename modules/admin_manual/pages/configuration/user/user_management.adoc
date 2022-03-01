@@ -206,6 +206,7 @@ experimental, and may not work as expected. The default is to not count
 external storage as part of user storage quotas. If you prefer to
 include it, then change the default `false` to `true`.:
 
+[source,php]
 ----
 'quota_include_external_storage' => false,
 ----
@@ -259,7 +260,7 @@ For details of the occ user commands used below, see the xref:configuration/serv
 
 . To report a users home, use the following command:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:list lisa -a home
   - lisa: /var/www/owncloud/data/lisa
@@ -279,7 +280,7 @@ Use the OS methods to create one or more new mount points for users home directo
 * The target folder *can contain* other user folders.
 ====
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:move-home lisa /mnt/newhome_1
 ----
@@ -298,7 +299,7 @@ NOTE: If you are using LDAP and the xref:enterprise/external_storage/ldap_home_c
 
 . To check the user's new home, use the following command:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:list lisa -a home
   - lisa: /mnt/newhome_1/lisa
@@ -310,7 +311,7 @@ Here you can see that the home of user `lisa` is now located in `/mnt/newhome_1/
 +
 The following command lists all available user homes. Note a home only gets listed, if it contains at least one user.
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:home:list-dirs
   - /var/www/owncloud/data
@@ -320,10 +321,9 @@ The following command lists all available user homes. Note a home only gets list
 . To list all users from a users home root directory, use the following command:
 +
 The following command lists all users from a given home.
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:home:list-users /var/www/owncloud/data
   - admin
   - user01
 ----
-

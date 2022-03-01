@@ -17,7 +17,7 @@ app
 List all of your installed apps or optionally provide a search pattern to restrict the list of apps to those whose name matches the given regular expression. 
 The output shows whether they are enabled or disabled.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:list [--] [<search-pattern>]
 ----
@@ -59,7 +59,7 @@ When used, the output will contain the app's version number as well.
 
 Enable an app, for example the Market app.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable market
 market enabled
@@ -67,7 +67,7 @@ market enabled
 
 == Disable an App
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:disable market
 market disabled
@@ -84,7 +84,7 @@ NOTE: Be aware that the following apps cannot be disabled: _DAV_, _FederatedFile
 
 By default all checks are enabled. The Activity app is an example of a correctly-formatted app.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:check-code notifications
 App is compliant - awesome job!
@@ -92,7 +92,7 @@ App is compliant - awesome job!
 
 If your app has issues, you'll see output like this.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:check-code foo_app
 Analysing /var/www/owncloud/apps/files/foo_app.php
@@ -107,7 +107,7 @@ Analysing /var/www/owncloud/apps/files/foo_app.php
 
 You can get the full file path to an app.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:getpath notifications
 /var/www/owncloud/apps/notifications

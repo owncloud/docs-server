@@ -21,12 +21,12 @@ WebUI::
 * Post installing enable it via menu:Settings[Admin > Apps].
 
 Command line::
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} market:install windows_network_drive
 ----
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable windows_network_drive
 ----
@@ -76,14 +76,14 @@ Create a service for systemd following the instructions below that checks the sh
 ** Place one copy of a file with the content from below under `/etc/systemd/system/owncloud-wnd-listen-SERVER-SHARE.service` +
 To do so, enter the following command and replace <name> with `owncloud-wnd-listen-SERVER-SHARE`:
 +
-[source,console]
+[source,bash]
 ----
 sudo systemctl edit <name>.service
 ----
 +
 Reload the deamon to make it available:
 +
-[source,console]
+[source,bash]
 ----
 sudo systemctl daemon-reload
 ----
@@ -96,7 +96,7 @@ the account. This way, only root and the Apache user should have access to the p
 
 * Content template for `owncloud-wnd-listen-SERVER-SHARE`
 +
-[source,console]
+[source,text]
 ----
 [Unit]
 Description=ownCloud WND Listener for SERVER SHARE
@@ -121,7 +121,7 @@ WantedBy=multi-user.target
 
 * Run the following command, once for each created file:
 +
-[source,console]
+[source,bash]
 ----
 sudo systemctl enable owncloud-wnd-listen-SERVER-SHARE.service
 sudo systemctl start  owncloud-wnd-listen-SERVER-SHARE.service
@@ -135,7 +135,7 @@ Create or add a `crontab` file in `/etc/cron.d/oc-wnd-process-queue`.
   appropriate `occ wnd:process-queue` command. The commands must be **strictly sequential**. 
   This can be done by using `flock -n` and tuning the `-c` parameter of `occ wnd:process-queue`
 
-[source,console]
+[source,bash]
 ----
 * * * * *  sudo -u www-data /usr/bin/php /var/www/owncloud/occ wnd:process-queue <HOST> <SHARE>
 ----
@@ -151,6 +151,7 @@ use Anacron, which seems to have an option for this scenario, or wrap the comman
 
 If you need to serialize the execution of the wnd:process-queue, check the following example with flock
 
+[source,bash]
 ----
 * * * * * flock -n /tmp/wnd001 occ wnd:process-queue server1 share1
 * * * * * flock -n /tmp/wnd002 occ wnd:process-queue server1 share2
@@ -167,7 +168,7 @@ If you encounter issues using Windows network drive, then try the following trou
 Check the connection to the share by using smbclient on the command line of the ownCloud server.
 Here is an example:
 
-[source,console]
+[source,bash]
 ----
 smbclient -U Username -L //Servername
 ----
@@ -175,7 +176,7 @@ smbclient -U Username -L //Servername
 Take the example of attempting to connect to the share named MyData using occ wnd:listen.
 Running the following command would work:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen MyHost MyData svc_owncloud password
 ----

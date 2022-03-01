@@ -226,7 +226,7 @@ LDAP Email Address::
 ====
 Disallowing login with LDAP Email Address requires enabling strict login checking to be effective:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:system:set --type boolean --value true strict_login_enforced
 ----
@@ -556,7 +556,7 @@ If it isn't available for a user, then that user will not be able to login.
 Also, the filesystem will not be set up for that user, so their file shares will not be available to other users. 
 For older versions you may enforce the home folder rule with the `occ` command, like this example on Ubuntu:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set user_ldap enforce_home_folder_naming_rule --value=1
 ----
@@ -679,7 +679,7 @@ New LDAP logins can attempt to reuse _existing_ user and group accounts if:
 To enable this functionality, the `reuse_accounts` config setting must be set to `yes`.
 To enable it, run the following command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ....
 {occ-command-example-prefix} config:app:set user_ldap reuse_accounts --value=yes
 ....
@@ -715,6 +715,7 @@ look for **verify return:1**
 
 Try an ldapsearch query
 
+[source,bash]
 ----
 ldapsearch \
 -H ldaps://ad16.oc.local:636 \
