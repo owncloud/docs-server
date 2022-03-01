@@ -22,6 +22,7 @@ Install it, if it’s not already installed:
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} market:install configreport
+----
 
 Or enable it, if it’s already installed:
 [source,bash,subs="attributes+"]

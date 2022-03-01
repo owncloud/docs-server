@@ -118,4 +118,6 @@ You can run
 ----
 sudo dpkg-reconfigure phpmyadmin
 ----
-to reconfigure phpmyadmin. 
+to reconfigure phpmyadmin.
+====
+ 
