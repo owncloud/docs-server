@@ -197,7 +197,7 @@ In the Console Management you have several options that might be useful at some 
   |                                                                         |
   |                                                                         |
   +-------------------------------------------------------------------------+
-  >> 
+  >>
 ----
 
 Press kbd:[q] to quit and confirm with kbd:[y] for yes and you'll be logged in with your regular shell.
@@ -210,11 +210,11 @@ Besides the web interface, ownCloud also offers a command-line interface (occ) f
 
 To issue `occ` commands, you need to use `ssh` to log in to your QNAP device. Then navigate to the top-level directory of your ownCloud app, e.g. `/share/CACHEDEV1_DATA/.qpkg/ownCloud`.
 
-ownCloud on QNAP lives in a Docker container, therefore `occ` commands look a little different than on regular installations. The prefix `docker exec` is needed:
+ownCloud on QNAP lives in a Docker container, therefore `occ` commands look a little different than on regular installations. The prefix `system-docker-compose exec --user www-data owncloud` is needed:
 
 [source,bash]
 ----
-docker exec --user www-data <owncloud-container-name> php occ <your-command>
+system-docker-compose exec --user www-data owncloud occ <your-command>
 ----
 
 For more information on which `occ` commands are available and how to use them, check out section xref:configuration/server/occ_command.adoc[Using the occ Command].
@@ -269,5 +269,3 @@ TIP: The event notifications in the top toolbar will also tell you if something 
 * What to do if you forgot to install the Container Station?
 
 An error message will pop up during the installation of ownCloud. Click on the link "System Event Log" in the pop-up window to find out what actually went wrong or hit btn:[OK] and install the Container Station. Then start the installation of ownCloud again.
-
-
