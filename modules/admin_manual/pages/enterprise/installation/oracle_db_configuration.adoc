@@ -66,7 +66,7 @@ need to download two Oracle Instant Client packages:
 
 Then, to install them, use the following commands:
 
-[source,console]
+[source,bash]
 ----
 rpm --install oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm \
   oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm
@@ -88,7 +88,7 @@ With the extension installed, you now need to configure it, by creating
 a configuration file for it. You can do so using the command below,
 substituting `FILE_PATH` with one from the list below the command.
 
-[source,console]
+[source,bash]
 ----
 cat << EOF > FILE_PATH
 ; Oracle Instant Client Shared Object extension
@@ -125,7 +125,7 @@ RedHat, Centos, & Fedora
 With all that done, confirm that it’s been installed and available in
 your PHP distribution, run the following command:
 
-[source,console]
+[source,bash]
 ----
 php -m | grep -i oci8
 ----
@@ -184,10 +184,12 @@ The configuration file should look something like this:
 
 On the machine where your Oracle database is installed, type:
 
+[source,bash]
 ----
 sqlplus username
 ----
 
+[source,sql]
 ----
 SQL> select * from v$version;
 
@@ -204,24 +206,28 @@ SQL> exit
 
 *Show Database Users*:
 
+[source,sql]
 ----
 Oracle    : SELECT * FROM all_users;
 ----
 
 *Show available Databases*:
 
+[source,sql]
 ----
 Oracle    : SELECT name FROM v$database; (requires DBA privileges)
 ----
 
 *Show ownCloud Tables in Database*:
 
+[source,sql]
 ----
 Oracle    : SELECT table_name FROM user_tables;
 ----
 
 *Quit Database*:
 
+[source,sql]
 ----
 Oracle    : quit
 ----

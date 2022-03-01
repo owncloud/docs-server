@@ -19,7 +19,7 @@ information, prerequisites and requirements.
 
 To ensure that you can connect to your file server with SMB, do a small test upfront like the following.
 
-[source,console]
+[source,bash]
 ----
 sudo smbclient -L <file_server_name> -U <full_domain_name>/<user_name>
 ----

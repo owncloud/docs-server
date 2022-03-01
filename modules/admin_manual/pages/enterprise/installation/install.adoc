@@ -46,12 +46,8 @@ ownCloud configuration file `config/config.php` like in this example:
 'license-key' => 'test-20150101-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-YYYYYY',
 ----
 
-It is also possible to activate your Enterprise Edition on the webUI. Open owncloud and navigate to:
-----
-settings > admin-settings > general
-----
-Copy your license key into the field `Enter a new license:` and click `Save` to confirm.
-
+It is also possible to activate your Enterprise Edition on the webUI. Open owncloud and navigate to: 
+menu:Settings[Admin > General]. Copy your license key into the field `Enter a new license:` and click `Save` to confirm.
 
 Each running instance of ownCloud requires a license key. Keys will work
 across upgrades without issue, so new keys will not be required when you

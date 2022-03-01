@@ -49,7 +49,7 @@ which requires three commands to be executed. These commands are:
 
 You can see an example of calling the commands listed below, configured to require no user interaction.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:decrypt-all --continue=yes && \
   {occ-command-example-prefix} encryption:disable --no-interaction && \
@@ -79,7 +79,7 @@ SELECT * FROM `oc_appconfig` WHERE `appid` LIKE 'encryption'
 With the database updated, next, the `files_encryption` directory needs to be removed.
 Below is an example of how to do so, to save you time.
 
-[source,console]
+[source,bash]
 ----
 cd <your owncloud root directory>
 find ./data* -name files_encryption -exec rm -rvf {} \;
@@ -97,7 +97,7 @@ This requires the following steps:
 
 The following example shows how to do this on the command line.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable encryption && \
   {occ-command-example-prefix} encryption:enable && \

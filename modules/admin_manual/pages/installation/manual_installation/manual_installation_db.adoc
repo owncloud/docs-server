@@ -41,14 +41,14 @@ include::partial$installation/manual_installation/mariadb.adoc[leveloffset=+1]
 
 To install postgres, use the following command (or that of your preferred package manager):
 
-[source,console]
+[source,bash]
 ----
 sudo apt-get install postgresql
 ----
 
 In order to allow ownCloud access to the database, create a known password for the default user, `postgres`, which was added when the database was installed.
 
-[source,console]
+[source,bash]
 ----
 sudo -i -u postgres psql
 postgres=# \password

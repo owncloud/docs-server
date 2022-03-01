@@ -56,19 +56,18 @@ NOTE: Scanner exit status rules are used to handle errors when ClamAV is run in 
 
 Install ClamAV on Ubuntu with the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo apt install clamav clamav-daemon
 ----
 
 This automatically creates the default configuration files and launches the `clamd` and `freshclam` daemons.
 
-
 ==== Enabling and Running ClamAV
 
 Enable and start the `clamd` service with following commands.
 
-[source,console]
+[source,bash]
 ----
 sudo systemctl daemon-reload
 sudo systemctl enable clamav-daemon.service
@@ -88,14 +87,14 @@ Executing: /lib/systemd/systemd-sysv-install enable clamav-daemon
 
 . You can manually start the updating process with this command:
 +
-[source,console]
+[source,bash]
 ----
 sudo freshclam
 ----
 +
 You should update manually at least once before using ClamAV within ownCloud. The initial update can take several minutes. In case of persisting issues running `freshclam`, you can gently end the process with the following command:
 +
-[source,console]
+[source,bash]
 ----
 sudo pkill -15 -x freshclam
 ----
@@ -104,7 +103,7 @@ and retry manually updating again.
 
 . To automate the update process, run this cron entry for example.
 +
-[source,console]
+[source,bash]
 ----
 # m   h  dom mon dow  command
 47  *  *  *  *  /usr/bin/freshclam --quiet
@@ -120,7 +119,7 @@ image:apps/files_antivirus/antivirus-app.png[image, width=70%]
 
 To install the App directly via the occ command, execute:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} market:install files_antivirus
 ----

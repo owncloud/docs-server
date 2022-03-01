@@ -20,7 +20,7 @@ include::partial$/maintenance/upgrading/upgrade_steps.adoc[leveloffset=+1]
 
 Finally, you need to restart Apache to make the changes permanent, as in the command below.
 
-[source,console]
+[source,bash]
 ----
 service httpd restart
 ----

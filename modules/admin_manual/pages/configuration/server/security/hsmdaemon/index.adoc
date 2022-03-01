@@ -78,7 +78,7 @@ At least one PKCS11 library is necessary. This is typically provided by an HSM v
 
 Now we can initialize the token:
 
-[source,console]
+[source,bash]
 ----
 sudo softhsm2-util --init-token --slot 0 --label "My token 1"
 ----
@@ -97,7 +97,7 @@ To use the PKCS11 API on the CLI, we need to install {opensc-wiki-url}[OpenSC].
 
 To install OpenSC on Debian and Ubuntu, run the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo apt install -y opensc
 ----
@@ -115,7 +115,7 @@ sudo zypper install -y --auto-agree-with-licenses opensc
 
 To install OpenSC on Fedora and Red Hat Enterprise Linux and Centos, run the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo yum install --assumeyes opensc
 ----
@@ -124,7 +124,7 @@ sudo yum install --assumeyes opensc
 
 You can list available tokens using the {pkcs11-tool-url}[pkcs11-tool] by running the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo pkcs11-tool --module </path/to/libsofthsm2.so> -l --pin <user-pin> -O
 ----
@@ -166,7 +166,7 @@ Installing hsmdaemon requires several steps. These are:
 
 After you have obtained the `hsmdaemon` from ownCloud, you need to move the `hsmdaemon` binary to a directory located in your system path and make the binary executable:
 
-[source,console]
+[source,bash]
 ----
 sudo install -m 755 ./hsmdaemon /usr/local/bin/hsmdaemon
 ----
@@ -175,13 +175,15 @@ sudo install -m 755 ./hsmdaemon /usr/local/bin/hsmdaemon
 
 The default location where `hsmdaemon` looks for its config file is `/etc/hsmdaemon/hsmdaemon.toml`. To create it from the example config file available in the provided package, run the following commands:
 
-[source,console]
+Create the hsmdaemon configuration directory:
+[source,bash]
 ----
-# Create the hsmdaemon configuration directory
 sudo mkdir /etc/hsmdaemon
+----
 
-# Copy the example config file
-# Allow only root and users in the root group to read & write the configuration file
+Copy the example config file, allow only root and users in the root group to read & write the configuration file:
+[source,bash]
+----
 sudo install -m 640 ./hsmdaemon.toml /etc/hsmdaemon/hsmdaemon.toml
 ----
 
@@ -189,7 +191,7 @@ sudo install -m 640 ./hsmdaemon.toml /etc/hsmdaemon/hsmdaemon.toml
 
 Now that the binary is available and the configuration file is in place, `hsmdaemon` must be installed as a system service. To do so, run it with the `install` option as in the example below.
 
-[source,console]
+[source,bash]
 ----
 sudo /usr/local/bin/hsmdaemon install
 sudo service hsmdaemon start
@@ -226,7 +228,7 @@ module = "/usr/lib/x86_64-linux-gnu/softhsm/libsofthsm2.so"
 
 This command lists the available slots.
 
-[source,console]
+[source,bash]
 ----
 sudo hsmdaemon listslots
 
@@ -276,6 +278,7 @@ TIP: See the {opensc-wiki-url}[OpenSC Wiki] for more information.
 
 Define which slot to use and if a PIN is needed. Update `/etc/hsmdaemon/hsmdaemon.toml` with the information gathered in the `pkcs11` section as in the example below.
 
+[source.toml]
 ----
 [pkcs11]
 # softhsm v2
@@ -298,7 +301,7 @@ If no PIN is supplied, generating a new key might be protected by an operator ca
 
 For testing the key generation, run the following example command:
 
-[source,console]
+[source,bash]
 ----
 sudo hsmdaemon genkey test
 
@@ -319,7 +322,7 @@ jwIDAQAB
 
 To show an existing key, use the `hsmdaemon showkey` command with the key's id as in the following example.
 
-[source,console]
+[source,bash]
 ----
 sudo hsmdaemon showkey 9bac3719-2b8d-11e9-aeab-0242b5ece4c3
 ----
@@ -328,11 +331,9 @@ sudo hsmdaemon showkey 9bac3719-2b8d-11e9-aeab-0242b5ece4c3
 
 For testing data encryption, run the following example commands:
 
-[source,console]
+The first argument is the `Id:` value from running the genkey command above. The second is the `base64-encoded data` to be encrypted.
+[source,bash]
 ----
-# The first argument is the `Id:` value from running the genkey command above.
-# The second is the `base64-encoded data` to be encrypted.
-
 sudo hsmdaemon encrypt 9bac3719-2b8d-11e9-aeab-0242b5ece4c3 Zm9vYmFy
 ----
 
@@ -351,7 +352,7 @@ WcezVb2N6bF8wlDooKZcmFn3tZgoIpoFGx6wQetx9sp1nK7JW2Y4OKt7P+0VKKlFO7yXaffVDD2Q6jZZ
 
 For testing data decryption, run the following example commands:
 
-[source,console]
+[source,bash]
 ----
 sudo grep "generated keypair" /var/log/hsm.log
 ----
@@ -365,7 +366,7 @@ You should see output similar to the example below:
 {"level":"debug","ts":"2021-06-19T03:10:03.710+0200","msg":"generated keypair","tokenID":"13cd3f95-d09b-11eb-83c8-960000c05f34"}
 ----
 
-[source,console]
+[source,bash]
 ----
 key_id=$(sudo grep "generated keypair" /var/log/hsm.log | head -1 | jq .tokenID -r)
 
@@ -376,7 +377,7 @@ echo "$hello" | base64
 SGVsbG8sIHdvcmxkIQo=
 ----
 
-[source,console]
+[source,bash]
 ----
 test_enc=$(sudo ./hsmdaemon encrypt $key_id $(echo "$hello" | base64) | tee /dev/stderr)
 ----
@@ -386,14 +387,14 @@ test_enc=$(sudo ./hsmdaemon encrypt $key_id $(echo "$hello" | base64) | tee /dev
 ep6Y1aAVAYpAesZ1+sQzzUepjO82o34kjmm63Drmz+6KED4oIBARQkXeW/OoxgUg6kQhQK1thA/3Ww33aaRxIESzVQF598qjXhhEXQ/OGL6BC+3tPclC7ujUZaA7CG1NDkMneLFDd2+Tbax4OM+/w0zhfTMPgT0I1NrH/03owVglbWHjgLZmN/vxpPZKm/lyAV9tI2HW36UjVLEMD2qtPFXqjLU4YjZOVnMdETxQNSCWIVauFw0+VQQ/RiAqiXzRXEgO6YKxOBk0n9IMT6XEH4MkMQTgb9pB12jrNSa9aMHbCvCneEmhd0CHBxPX499EkxxwtoEnXe6PATXsOg3VRA==
 ----
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix}  encryption:hsmdaemon:decrypt --keyId $key_id "$test_enc"
 
 decrypted string (base64 encoded): 'SGVsbG8sIHdvcmxkIQo='
 ----
 
-[source,console]
+[source,bash]
 ----
 sudo tail -5 /var/log/hsm.log
 ----
@@ -427,7 +428,7 @@ For more options see the self-documented default config file `hsmdaemon.toml`.
 ====
 During ownCloud config, you might want to run the hsmdaemon service in the foreground to see what is going on. You can do so using the following command (which also shows example console output, formatted for readability):
 
-[source,console]
+[source,bash]
 ----
 sudo hsmdaemon
 
@@ -461,7 +462,7 @@ Configuring ownCloud to work with the `hsmdaemon` requires the following steps:
 
 Generate a shared secret to use for the `hsmdaemon`.
 
-[source,console]
+[source,bash]
 ----
 cat /proc/sys/kernel/random/uuid
 
@@ -470,6 +471,7 @@ cat /proc/sys/kernel/random/uuid
 
 Use this generated secret for hsmdaemon in `/etc/hsmdaemon/hsmdaemon.toml`
 
+[source,toml]
 ----
 [jwt]
 secret = "7a7d1826-b514-4d9f-afc7-a7485084e8de"
@@ -477,14 +479,14 @@ secret = "7a7d1826-b514-4d9f-afc7-a7485084e8de"
 
 Set the generated secret for ownCloud:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set encryption hsm.jwt.secret --value '7a7d1826-b514-4d9f-afc7-a7485084e8de'
 ----
 
 If the command succeeds, you should see the following console output:
 
-[source,console]
+[source]
 ----
 Config value hsm.jwt.secret for app encryption set to 7a7d1826-b514-4d9f-afc7-a7485084e8de
 ----
@@ -493,7 +495,7 @@ Config value hsm.jwt.secret for app encryption set to 7a7d1826-b514-4d9f-afc7-a7
 
 Enable the HSM mode and enable encryption by running the commands in the following example:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable encryption
 {occ-command-example-prefix} config:app:set encryption hsm.url --value 'http://localhost:8513'
@@ -503,7 +505,7 @@ Enable the HSM mode and enable encryption by running the commands in the followi
 
 If the commands are successful, you should see the following console output:
 
-[source,console]
+[source,bash]
 ----
 encryption enabled
 

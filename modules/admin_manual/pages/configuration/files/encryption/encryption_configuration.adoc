@@ -116,7 +116,7 @@ Before you can use encryption, you must enable the encryption app. You can do th
 
 To enable the encryption app, run the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable encryption
 {occ-command-example-prefix} encryption:enable
@@ -125,6 +125,7 @@ To enable the encryption app, run the following command:
 
 If the encryption app is successfully enabled, you should see the following confirmations:
 
+[source,console]
 ----
 encryption enabled
 Encryption enabled
@@ -154,28 +155,28 @@ You can do basic configuration of encryption via the Web-UI, but it is recommend
 
 To be safe and avoid any issues on a running instance, put your server in single user mode with the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --on
 ----
 
 Enabling encryption via the command line involves several commands. If not already done, enable the default encryption module app with the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable encryption
 ----
 
 Then enable encryption, using the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:enable
 ----
 
 After that, enable the master key, using the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:select-encryption-type masterkey
 ----
@@ -184,7 +185,7 @@ NOTE: The master key mode has to be set up in a newly created instance.
 
 Finally, encrypt all data, using the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:encrypt-all --yes
 ----
@@ -193,7 +194,7 @@ NOTE: This command is not typically required as the master key is often enabled 
 
 Now you can turn off the single user mode:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --off
 ----
@@ -202,7 +203,7 @@ Now you can turn off the single user mode:
 
 Get the current encryption status and the loaded encryption module:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:status
 ----
@@ -215,7 +216,7 @@ If the master key needs replacement, for example because it has been compromised
 
 You must first put your ownCloud server into single-user mode to prevent any user activity until encryption is completed.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --on
 Single user mode is currently enabled
@@ -223,7 +224,7 @@ Single user mode is currently enabled
 
 Decrypt all user data files, or optionally a single user:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:decrypt-all [username]
 ----
@@ -232,7 +233,7 @@ Decrypt all user data files, or optionally a single user:
 
 To disable encryption, put your ownCloud server into single-user mode, and then disable your encryption module with these commands:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --on
 {occ-command-example-prefix} encryption:disable
@@ -240,7 +241,7 @@ To disable encryption, put your ownCloud server into single-user mode, and then 
 
 Take it out of single-user mode when you are finished, by using the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --off
 ----
@@ -267,42 +268,42 @@ You may only disable encryption by using the xref:configuration/server/occ_comma
 
 To avoid any issues on a running instance, put your server in single user mode with the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --on
 ----
 
 If not already done, enable the default encryption module app, using the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable encryption
 ----
 
 After that, enable encryption, using the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:enable
 ----
 
 Then, enable the user-key, using the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:select-encryption-type user-keys
 ----
 
 Finally, encrypt all data, using the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:encrypt-all --yes
 ----
 
 Now you can turn off the single user mode:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --off
 ----
@@ -311,7 +312,7 @@ Now you can turn off the single user mode:
 
 Get the current encryption status and the loaded encryption module:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:status
 ----
@@ -361,7 +362,7 @@ IMPORTANT: Replacing the recovery key will mean that all users will lose the pos
 
 You must first put your ownCloud server into single-user mode to prevent any user activity until encryption is completed.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --on
 Single user mode is currently enabled
@@ -371,7 +372,7 @@ Single user mode is currently enabled
 
 You may disable encryption only with `occ`. Make sure you have backups of all the encryption keys, including those for all users. Next, put your ownCloud server into single-user mode, and then disable your encryption module with this command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --on
 {occ-command-example-prefix} encryption:disable
@@ -383,7 +384,7 @@ If you don’t have access to at least one of these then there is no way to decr
 Then, take it out of single-user mode when you are finished with this
 command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:singleuser --off
 ----
@@ -396,7 +397,7 @@ NOTE: It is *not* planned to move this to the next user login or a background jo
 
 View current location of keys:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:show-key-storage-root
 Current key storage root:  default storage location (data/)
@@ -404,7 +405,7 @@ Current key storage root:  default storage location (data/)
 
 You can move the keys to another folder inside your data directory. Moving your keys outside of your data folder is not supported. The folder must already exist, be owned by and restricted to root and the webserver group. This example is for Ubuntu Linux. Note that the new folder is relative to your data directory:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 mkdir /var/www/owncloud/data/new_keys
 chown -R root:www-data /var/www/owncloud/data/new_keys

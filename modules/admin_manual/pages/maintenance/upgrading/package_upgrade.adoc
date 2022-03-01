@@ -38,14 +38,14 @@ xref:{latest-docs-version}@docs:ROOT:server_release_notes.adoc#changes-in-9-1[re
 
 Upgrading ownCloud from our {oc-install-package-url}[package repositories] works like any normal Linux upgrade. For example, on Debian or Ubuntu Linux the standard system upgrade command is:
 
-[source,console]
+[source,bash]
 ----
 sudo apt-get update && apt-get upgrade
 ----
 
 Or you can upgrade just ownCloud with this command:
 
-[source,console]
+[source,bash]
 ----
 sudo apt-get update && apt-get install owncloud-files
 ----
@@ -53,21 +53,21 @@ sudo apt-get update && apt-get install owncloud-files
 On Fedora, CentOS, and Red Hat Linux use `yum` to see all available
 updates:
 
-[source,console]
+[source,bash]
 ----
 sudo yum check-update
 ----
 
 You can apply all available updates with this command:
 
-[source,console]
+[source,bash]
 ----
 sudo yum update
 ----
 
 Or update only ownCloud:
 
-[source,console]
+[source,bash]
 ----
 sudo yum update owncloud-files
 ----
@@ -78,7 +78,7 @@ image:upgrade-1.png[image]
 
 Then use `occ` to complete the upgrade. You must run `occ` as your HTTP user. This example is for Debian/Ubuntu as well as CentOS/RHEL/Fedora:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} upgrade
 ----

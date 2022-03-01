@@ -92,7 +92,7 @@ php -m | grep smbclient
 ----
 This should show the following output
 
-[source,console]
+[source,bash]
 ----
 libsmbclient
 smbclient
