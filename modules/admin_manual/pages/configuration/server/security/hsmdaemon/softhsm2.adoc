@@ -30,7 +30,7 @@ NOTE: Installing these two packages also installs `/usr/lib/x86_64-linux-gnu/sof
 
 To install SoftHSM2 on either Debian or Ubuntu, run the command below.
 
-[source,console]
+[source,bash]
 ----
 sudo apt-get update
 sudo apt-get install -y softhsm2 libsofthsm2
@@ -41,7 +41,7 @@ sudo apt-get install -y softhsm2 libsofthsm2
 To install SoftHSM2, you first have to ensure that you have {opensuse-security-repositories-url}[the official security repository] for your server enabled in your server's repositories list. 
 To check if it is, run the command `zypper lr`, which will show you output similar to the following:
 
-[source,console]
+[source,text]
 ----
 #  | Alias                     | Name                                    | Enabled | GPG Check | Refresh
 ---+---------------------------+-----------------------------------------+---------+-----------+--------
@@ -63,7 +63,7 @@ TIP: Use the `-d` flag to show the URI for each repository as well.
 
 If there is no security repository listed, then add it using the following command for openSUSE Leap 15.3:
 
-[source,console]
+[source,bash]
 ----
 sudo zypper addrepo \
   --check \
@@ -75,7 +75,7 @@ sudo zypper addrepo \
 
 Running `zypper lr` again should now display an additional line:
 
-[source,console]
+[source,bash]
 ----
 13 | security                 | openSUSE-Leap-15.3-Security             | Yes     | (r ) Yes  | No
 ----
@@ -84,7 +84,7 @@ For different Leap versions, SUSE Linux Enterprise or openSUSE Tumbleweed, chang
 
 With the repository enabled, install SoftHSM2 by running the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo zypper install -y --auto-agree-with-licenses softhsm
 ----
@@ -93,7 +93,7 @@ sudo zypper install -y --auto-agree-with-licenses softhsm
 
 To install SoftHSM2 on Fedora and Red Hat Enterprise Linux and Centos, run the command below.
 
-[source,console]
+[source,bash]
 ----
 sudo yum install --assumeyes softhsm
 ----

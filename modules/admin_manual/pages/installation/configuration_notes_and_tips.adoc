@@ -25,12 +25,13 @@ This can be the case, for example, for the `date.timezone` setting.
 
 For PHP version {minimum-php-printed} onward, replace `php_version` with the version number installed, e.g., `{minimum-php-version}` in the following examples.
 
+[source,text]
 ----
 /etc/php/[php_version]/apache2/php.ini
 ----
 
 or
-
+[source,text]
 ----
 /etc/php/[php_version]/fpm/php.ini
 ----
@@ -39,6 +40,7 @@ or
 
 === php.ini - used by the php-cli and so by ownCloud CRON jobs
 
+[source,text]
 ----
 /etc/php/[php_version]/cli/php.ini
 ----
@@ -106,6 +108,7 @@ The easiest way to get the quantity of PHP files is to use cloc, which
 can be installed by running `sudo apt-get install cloc`. The cloc
 package is available for nearly all distributions.
 
+[source,bash]
 ----
 sudo cloc /var/www/owncloud --exclude-dir=data --follow-links
    12179 text files.
@@ -160,6 +163,7 @@ may be in a sub-directory.
 Usually, you will find some or all of the environment variables already
 in the file, but commented out like this:
 
+[source,text]
 ----
 ;env[HOSTNAME] = $HOSTNAME
 ;env[PATH] = /usr/local/bin:/usr/bin:/bin
@@ -171,6 +175,7 @@ in the file, but commented out like this:
 Uncomment the appropriate existing entries. Then run `printenv PATH` to
 confirm your paths, for example:
 
+[source,console]
 ----
 $ printenv PATH
 /home/user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:

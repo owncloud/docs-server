@@ -16,7 +16,7 @@ NOTE: Version 1.0.0 of the Full Text Search app only works with Elasticsearch ve
 The ingest-attachment processor lets Elasticsearch extract file attachments in common formats. 
 To install the processor, run the following command from your Elasticsearch installation directory:
 
-[source=console]
+[source=bash]
 ----
 bin/elasticsearch-plugin install ingest-attachment
 service elasticsearch restart

@@ -25,7 +25,7 @@ NOTE: The commands and links provided in this description should give you proper
 
 Without going into the upgrade details, you can now upgrade directly from Ubuntu 18.04 LTS to 20.04 LTS without using the _development_ (`-d`) option when using the `do-release-upgrade` command. For more details see an example description at {ubuntu_upgrade_url}[Upgrade Ubuntu 18.04 to 20.04 LTS using command line]
 
-[source,console]
+[source,bash]
 ----
 sudo apt update
 sudo apt upgrade
@@ -37,7 +37,7 @@ sudo do-release-upgrade
 
 If you have upgraded successfully and had previously installed any versions of PHP, better uninstall all PHP versions and ALL extensions and perform a fresh PHP 7.4 native installation. This is especially true when using the `ondrej php` PPA as it installs all available PHP versions, which are either no longer needed or supported. To do so, stop any services which depend on or use PHP like your Web Server. Then get a list of all PHP related programs and extensions by typing:
 
-[source,console]
+[source,bash]
 ----
 dpkg -l | grep php | awk '{print $2}' | tr "\n" " "
 ----
@@ -47,14 +47,14 @@ xref:useful-commands-for-managing-php-extensions[Useful Commands For Managing PH
 
 Then purge them step by step
 
-[source,console]
+[source,bash]
 ----
 sudo apt purge <package name from the list above>
 ----
 
 Alternatively, if you are fine removing all packages listed, you can run:
 
-[source,console]
+[source,bash]
 ----
 sudo apt purge `dpkg -l | grep php | awk '{print $2}' | tr "\n" " "`
 ----
@@ -63,7 +63,7 @@ NOTE: Keep a copy of your relevant `php.ini` and other configuration files as re
 
 If you had installed the `ondrej php` PPA, remove it, else it will reinstall PHP from this source again. To do so run:
 
-[source,console]
+[source,bash]
 ----
 sudo apt install ppa-purge
 sudo ppa-purge ppa:ondrej/php
@@ -82,7 +82,7 @@ After deinstallation of all versions and extensions of PHP and cleaning up all r
 After you have installed your Ubuntu 20.04 LTS server from scratch, use the following commands to
 install PHP 7.4 and necessary extensions:
 
-[source,console]
+[source,bash]
 ----
 sudo apt install php-fpm php-cgi
 sudo apt install php
@@ -94,7 +94,7 @@ sudo apt install php-dev libsmbclient-dev php-pear
 
 Use the following commands to install some common prerequisites:
 
-[source,console]
+[source,bash]
 ----
 sudo apt install smbclient
 sudo apt install redis-server
@@ -106,7 +106,7 @@ sudo apt install imagemagick
 
 The following step is necessary to upgrade PEAR because of a change in PHP 7.4.1+ Note that you should always use the {pear-package_url}[latest stable PEAR release].
 
-[source,console]
+[source,bash]
 ----
 pear version
 sudo mkdir -p /tmp/pear/cache
@@ -132,21 +132,21 @@ If you needed to set `client max protocol = NT1` before in `smb.conf` to connect
 
 To check if you are affected connecting to a particular file server, do tests with the Ubuntu provided version like:
 
-[source,console]
+[source,bash]
 ----
 host -t SRV _ldap._tcp.<full_domain_name>
 ----
 
 If you do not get SRV records printed, your dns settings may need a change. The first DNS server must be able to resolve your LDAP Active Directory request properly. If not, `smbclient` can not find a KDC to check credentials.
 
-[source,console]
+[source,bash]
 ----
 sudo smbclient -L <file_server_name> -U <full_domain_name>/<user_name>
 ----
 
 Any other output than a list of shares, like the error message
 
-[source,console]
+[source,bash]
 ----
 tree connect failed: NT_STATUS_INVALID_PARAMETER
 ----
@@ -161,7 +161,7 @@ helps how to do that.
 
 The following command installs the Apache Web Server.
 
-[source,console]
+[source,bash]
 ----
 sudo apt install libapache2-mod-php apache2
 ----
@@ -174,7 +174,7 @@ Although it's not supported by ownCloud, you can configure Apache to use `php-fp
 
 If you have multiple concurrent PHP versions installed, which will happen when using the {ondrej-php-url}[ondrej/php] PPA, you must tell your Web Server and your CLI environment which one to use. Using the `ondrej/php` PPA may be needed if you want to test or prepare for the latest PHP version like PHP 8. Please note that `ondrej/php` installs _ALL_ versions of PHP. To list all available versions installed and choose one from them, use the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo update-alternatives --config php
 ----
@@ -195,14 +195,14 @@ Press <enter> to keep the current choice[*], or type selection number:
 
 You can also directly set the required PHP version:
 
-[source,console]
+[source,bash]
 ----
 sudo update-alternatives --set php /usr/bin/php7.4
 ----
 
 WARNING: After selecting your PHP version, it is **highly** recommended to switch to the correct compiling environment which is essential e.g. when using PECL!
 
-[source,console]
+[source,bash]
 ----
 sudo update-alternatives --set phar /usr/bin/phar7.4
 sudo update-alternatives --set phar.phar /usr/bin/phar.phar7.4
@@ -222,7 +222,7 @@ WARNING: You may get completely unexpected behaviour or a broken environment if 
 
 If you are using a PECL install later on, check the output of the installation command soon after it has started. You will find a text like:
 
-[source,console]
+[source,text]
 ----
 ...
 PHP Api Version:         20190902
@@ -232,21 +232,21 @@ Zend Module Api No:      20190902
 
 Then do a test by just entering the following command:
 
-[source,console]
+[source,bash]
 ----
 php -i | grep extension_dir
 ----
 
 If the output is different than the style below, there is a problem that needs fixing:
 
-[source,console]
+[source,text]
 ----
 extension_dir => /usr/lib/php/20180731 => /usr/lib/php/20180731
 ----
 
 This is the output that shows a fix is needed:
 
-[source,console]
+[source,text]
 ----
 PHP Warning:  PHP Startup: smbclient: Unable to initialize module
 Module compiled with module API=20190902
@@ -262,7 +262,7 @@ As you see above, the API modules do not match and have been compiled with diffe
 xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drives app]
 from ownCloud's Enterprise Edition. To install it, run the commands described below. You can find more information about `smbclient` and the latest version on {pecl_url}[PECL].
 
-[source,console]
+[source,bash]
 ----
 sudo pecl channel-update pecl.php.net
 sudo pecl install smbclient
@@ -274,7 +274,7 @@ When the commands complete, you then have to (assuming you use PHP 7.4):
 - Enable the module by running `phpenmod smbclient`.
 - Restart PHP and your web server by running the following command:
 +
-[source,console]
+[source,bash]
 ----
 sudo service apache2 restart
 ----
@@ -293,7 +293,7 @@ When using new or extended formats for previews like HEIC or SVG, the standard i
 
 If you want to retrieve a list of enabled PHP extensions run following command:
 
-[source,console]
+[source,bash]
 ----
 ls `php -i | grep "^extension_dir" | sed -e 's/.*=> //'` | sort
 ----
@@ -303,10 +303,13 @@ ls `php -i | grep "^extension_dir" | sed -e 's/.*=> //'` | sort
 To enable or disable a PHP extension for CLI, FPM or Apache, use the commands `phpenmod` or `phpdismod`.
 
 Example:
-[source,console]
+[source,bash]
 ----
 sudo phpenmod php-ldap
-# or
+----
+or
+[source,bash]
+----
 sudo phpdismod php-ldap
 ----
 

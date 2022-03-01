@@ -29,7 +29,7 @@ steps described below to do so.
 NOTE: Copy your smb.conf or other configurations files you may want to keep to reuse them later on.
 Purging deletes the config files and helps to make a clean basis. 
 
-[source,console]
+[source,bash]
 ----
 sudo phpdismod smbclient
 sudo pecl uninstall smbclient
@@ -42,7 +42,7 @@ sudo apt autoremove
 To compile Samba, you need to install necessary packages. Copy the {samba_req_pack_url}[Bootstrap Dependencies Script] from Samba for Ubuntu 20.04. You will find it in section _Verified Package Dependencies_. Post downloading, make the script executable and execute it, which will install all required packages for a successful samba compilation. For your convenience, you can directly download the
 link:{attachmentsdir}/installation/manual_installation/bootstrap.sh[bootstrap samba master] shell script here.
 
-[source,console]
+[source,bash]
 ----
 sudo ./bootstrap.sh
 ----
@@ -58,7 +58,7 @@ as client, download this version. You can choose any version that fits your need
 provided by the OS delivered version. Keep the downloaded (and later configured) version at a location for
 later reuse. This will be necessary if you would like to uninstall it properly. The example uses `/opt`.
 
-[source,console]
+[source,bash]
 ----
 cd /opt
 sudo wget https://download.samba.org/pub/samba/stable/samba-4.10.18.tar.gz
@@ -66,7 +66,7 @@ sudo wget https://download.samba.org/pub/samba/stable/samba-4.10.18.tar.gz
 
 === Extract Samba Sources
 
-[source,console]
+[source,bash]
 ----
 sudo tar -xvf samba-4.10.18.tar.gz
 cd samba-4.10.18
@@ -90,7 +90,7 @@ from the options below. Read more on details {samba_conf_options_url}[config opt
 For your convenience, you can directly download a
 link:{attachmentsdir}/installation/manual_installation/compile_samba.sh[compile samba] shell script here.
 
-[source,console]
+[source,bash]
 ----
 sudo ./configure \
 	--prefix=/usr \
@@ -120,7 +120,7 @@ multiple jobs in parallel by adding `-j <n>`. This optimizes the CPU utilisation
 the time needed. In the example below, four jobs are enabled to utilize the 4 available cores
 of the CPU.
 
-[source,console]
+[source,bash]
 ----
 sudo make -j 4
 ----
@@ -129,7 +129,7 @@ sudo make -j 4
 
 To install the compiled software run following command:
 
-[source,console]
+[source,bash]
 ----
 sudo make install -j 4
 ----
@@ -139,7 +139,7 @@ sudo make install -j 4
 If you do not have an existing or already configured `smb.conf` file, you can create a default one.
 The following command creates a new `smb.conf` if it does not exist, but does not overwrite an existing one.
 
-[source,console]
+[source,bash]
 ----
 sudo cp -n examples/smb.conf.default /etc/samba/smb.conf
 ----
@@ -149,7 +149,7 @@ sudo cp -n examples/smb.conf.default /etc/samba/smb.conf
 Uninstalling can be necessary, if you want to have a clean base. This is useful if you want to compile a
 different version or the version provided by the OS. To uninstall the compiled software run following command:
 
-[source,console]
+[source,bash]
 ----
 sudo make uninstall -j 4
 ----
@@ -161,13 +161,13 @@ sudo make uninstall -j 4
 When the installation has completed, test your result. If you have used a `smb.conf` file before,
 copy it back to its original location (`/etc/samba/`).
 
-[source,console]
+[source,bash]
 ----
 sudo smbclient --version
 Version 4.10.18
 ----
 
-[source,console]
+[source,bash]
 ----
 sudo smbclient -L <file_server_name> -U <full_domain_name>/<user_name>
 ----
@@ -182,7 +182,7 @@ The smbd service is necessary that your server can act as simple smb file server
 
 First create a link to the smb service.
 
-[source,console]
+[source,bash]
 ----
 sudo ln -s /lib/systemd/system/smb.service /etc/systemd/system/smbd.service
 ----
@@ -190,7 +190,7 @@ sudo ln -s /lib/systemd/system/smb.service /etc/systemd/system/smbd.service
 Then, change some startup parameters. These will not be overwritten on the source file, but be added
 via a separate non-destructive process.
 
-[source,console]
+[source,bash]
 ----
 sudo systemctl edit smbd.service
 ----
@@ -198,6 +198,7 @@ sudo systemctl edit smbd.service
 Add the following content and save the result. The location and naming will be done automatically.
 Just say save.
 
+[source,text]
 ----
 [Unit]
 After=
@@ -212,14 +213,14 @@ ExecStart=/usr/sbin/smbd --configfile=/etc/samba/smb.conf
 
 When finished, reload the daemon to recognize the update:
 
-[source,console]
+[source,bash]
 ----
 sudo systemctl daemon-reload
 ----
 
 Finally, you can start (stop, reload ect), the smbd service with:
 
-[source,console]
+[source,bash]
 ----
 sudo service smbd start
 ----
@@ -232,7 +233,7 @@ the smbd service. You should then be able to connect to this standalone samba se
 
 If you had removed `pecl smbcient` before, you can reinstall it now with:
 
-[source,console]
+[source,bash]
 ----
 sudo pecl channel-update pecl.php.net
 sudo pecl install smbclient
@@ -264,14 +265,14 @@ Download the scripts:
 
 Make the scripts executable:
  
-[source,console]
+[source,bash]
 ----
 sudo chmod +x <script_name>
 ----
 
 Change into the extracted samba directory you want to compile, e.g. `samba-4.10.18`, and run the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo ../install_samba.sh
 ----

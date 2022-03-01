@@ -40,7 +40,7 @@ Please note that the ownCloud preview system comes already with sensible default
 
 The default list of enabled preview providers which do not need to be explicitly enabled in the config are:
 
-[source,console]
+[source,text]
 ----
 OC\Preview\BMP
 OC\Preview\GIF
@@ -62,23 +62,23 @@ When defining your own preview providers, some things need to be considered. For
 
 If you handle the security risk and decide to allow creating previews for PDF files, change the following imagick security policy. Use an editor of your choice like `nano` and change the following file, adapt the path if using ImageMagick 7:
 
-[source,console]
+[source,bash]
 ----
 sudo nano /etc/ImageMagick-6/policy.xml
-or
+ or
 sudo nano /etc/ImageMagick-7/policy.xml
 ----
 
 Search for the following content:
 
-[source,console]
+[source,text]
 ----
 <policy domain="coder" rights="none" pattern="PDF" />
 ----
 
 and change:
 
-[source,console]
+[source,text]
 ----
 rights="none" --> rights="read|write"
 ----
@@ -89,7 +89,7 @@ After changing the policy file for ImageMagic, restart your Apache web server or
 
 To be able to create previews for video files when using the `OC\Preview\Movie` provider, you must install `ffmpeg`. There can be significant load on the server during conversion when video thumbnail generation is enabled.
 
-[source,console]
+[source,bash]
 ----
 sudo apt install -y ffmpeg
 ----
@@ -98,7 +98,7 @@ sudo apt install -y ffmpeg
 
 To get a list of file extensions linked to the image or video provider, change into the `owncloud` directory and run the following example command. Use a different filter for other provider types.
 
-[source,console]
+[source,bash]
 ----
 cat resources/config/mimetypemapping.dist.json | grep image
 ----
@@ -107,7 +107,7 @@ cat resources/config/mimetypemapping.dist.json | grep image
 
 The following providers require the php `imagick` extension:
 
-[source,console]
+[source,text]
 ----
 OC\Preview\AI
 OC\Preview\EPS
@@ -122,7 +122,7 @@ OC\Preview\TTF
 
 The following providers are only available if either LibreOffice or OpenOffice is installed on the server:
 
-[source,console]
+[source,text]
 ----
 OC\Preview\MSOfficeDoc
 OC\Preview\MSOffice2003
@@ -133,7 +133,7 @@ OC\Preview\StarOffice
 
 The following providers are available, but disabled by default due to performance or privacy/security concerns:
 
-[source,console]
+[source,text]
 ----
 OC\Preview\Font
 OC\Preview\Illustrator
@@ -158,7 +158,7 @@ Under certain circumstances, for example if the server has limited resources, yo
 
 Set the configuration option `enable_previews` to `false`:
 
-[source,console]
+[source,php]
 ----
   'enable_previews' => false,
 ----
@@ -167,7 +167,7 @@ Set the configuration option `enable_previews` to `false`:
 
 The example below adds the preview provider for `SGI` and `HEIC` images:
 
-[source,console]
+[source,php]
 ----
 'enabledPreviewProviders' => [
 	'OC\Preview\SGI',
@@ -191,7 +191,7 @@ There are two configuration options for setting the maximum size (in pixels) of 
 
 The following example would limit previews to a maximum size of 100 px × 100 px:
 
-[source,console]
+[source,php]
 ----
   'preview_max_x' => 100,
   'preview_max_y' => 100,
@@ -203,21 +203,21 @@ NOTE: If you want no limit applied for one or both of these values then set them
 
 If a lot of small pictures are stored on the ownCloud instance and the preview system generates blurry previews, you might want to consider setting a maximum scale factor. By default, pictures are upscaled to 10 times the original size:
 
-[source,console]
+[source,php]
 ----
   'preview_max_scale_factor' => 10,
 ----
 
 If you want to disable scaling at all, you can set the config value to `1':
 
-[source,console]
+[source,php]
 ----
   'preview_max_scale_factor' => 1,
 ----
 
 If you want to disable the maximum scaling factor, you can set the config value to `null`:
 
-[source,console]
+[source,php]
 ----
   'preview_max_scale_factor' => null,
 ----
@@ -226,7 +226,7 @@ If you want to disable the maximum scaling factor, you can set the config value 
 
 The JP(E)G image quality can be defined in [%] for displaying thumbnails and image previews for apps like Files or Files Mediaviewer. Note that this setting is for displaying only and has no impact on the stored thumbnail / preview quality or size.
 
-[source,console]
+[source,php]
 ----
   'previewJPEGImageDisplayQuality' => -1,
 ----

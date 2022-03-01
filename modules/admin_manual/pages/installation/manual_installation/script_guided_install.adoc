@@ -88,7 +88,7 @@ This is the name of the root user, usually `root`.
 
 It is mandatory to run this script with root privileges, because files and directories will be created and ownership and permissions will be set. Call the instance script like:
 
-[source,console]
+[source,bash]
 ----
 sudo ./instance.sh
 ----
@@ -141,7 +141,7 @@ Edit your version of the `instance.sh` script with the parameters that apply to 
 
 Next, make both scripts executable (use the correct script names instead of the placeholder):
 
-[source,console]
+[source,bash]
 ----
 sudo chmod +x scriptname.sh
 ----
@@ -173,7 +173,7 @@ Follow the steps printed on the screen. Do not forget to reapply manually made c
 
 .How to get the difference of two files quickly
 The following example command eases to find the differences of two files, which is helpful for reapplying manually added changes to `.htaccess` and `.user.ini`. Replace that paths, directories and files accordingly.
-[source,console]
+[source,bash]
 ----
 diff -y -W 70 --suppress-common-lines owncloud/.user.ini owncloud_2022-02-15-09.18.48/.user.ini
 post_max_size=513M                |     post_max_size=1G

@@ -42,7 +42,7 @@ sudo ln -s /etc/apache2/sites-available/owncloud.conf /etc/apache2/sites-enabled
 
 * For ownCloud to work correctly, you need the module `mod_rewrite`. Enable it by running: `a2enmod rewrite`. Additionally recommended modules are `mod_headers`, `mod_env`, `mod_dir`, `mod_mime`, and `mod_unique_id`. To enable them, run the following commands:
 +
-[source,console]
+[source,bash]
 ----
 sudo a2enmod headers
 sudo a2enmod env
@@ -55,6 +55,7 @@ NOTE: If you want to use the {oc-marketplace-url}/apps/oauth2[OAuth2 app], then 
 
 * You must disable any server-configured authentication for ownCloud since it uses basic authentication internally for DAV services. If you have turned on authentication on a parent folder (e.g. via an `AuthType Basic` directive), you can disable the authentication specifically for the ownCloud entry. As in the above example configuration file, add the following line in the `Directory` section:
 +
+[source,apache]
 ----
 Satisfy Any
 ----
@@ -63,6 +64,7 @@ Satisfy Any
 
 * Now restart Apache
 +
+[source,bash]
 ----
 sudo service apache2 restart
 ----
@@ -110,7 +112,7 @@ NOTE: Self-signed certificates have their drawbacks - especially when you plan t
 
 Using the simple self-signed certificate provided by the Apache installation, all you have to do is to enable the `ssl` module and the default site. Open a terminal and run:
 
-[source,console]
+[source,bash]
 ----
 sudo a2enmod ssl
 sudo a2ensite default-ssl
@@ -129,7 +131,7 @@ in its own memory space. ownCloud limits its support to Apache prefork only.
 ====
 In case you have enabled `mpm_event` during an earlier setup of Apache, you may get conflict notes from Apache. Use the following commands to solve this issue. The order of commands is recommended to ensure a smooth transition. 
 
-[source,console]
+[source,bash]
 ----
 sudo a2dismod mpm_event
 sudo systemctl restart apache2

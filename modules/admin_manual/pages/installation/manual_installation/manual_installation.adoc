@@ -71,7 +71,7 @@ wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2
 
 . Download the corresponding checksum file like:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2.md5
   or
@@ -80,7 +80,7 @@ wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2.sha256
 
 . Verify the MD5 or SHA256 sum:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 sudo md5sum -c {oc-complete-name}.tar.bz2.md5 < {oc-complete-name}.tar.bz2
  or
@@ -89,7 +89,7 @@ sudo sha256sum -c {oc-complete-name}tar.bz2.sha256 < {oc-complete-name}.tar.bz2
 
 . You can also verify the PGP signature:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2.asc
 
@@ -113,7 +113,7 @@ if you plan on improving your setup from step one.
 
 * Extract the archive contents and run the unpacking command for your tar archive:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 tar -xjf {oc-complete-name}.tar.bz2
 ----
@@ -123,7 +123,7 @@ tar -xjf {oc-complete-name}.tar.bz2
   If you are running the Apache HTTP server, you may safely install ownCloud in your Apache document root.
   Assuming your document root is in `/var/www`.
 +
-[source,console]
+[source,bash]
 ----
 cp -r owncloud /var/www
 ----
@@ -152,7 +152,7 @@ If you want to finalize the installation via the command line, use the following
 command. The command assumes that you have unpacked the source to `/var/www/owncloud/`.
 Replace all the parameters according to your needs.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 cd /var/www/owncloud/
 {occ-command-example-prefix} maintenance:install \
