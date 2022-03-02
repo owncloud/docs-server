@@ -206,6 +206,7 @@ experimental, and may not work as expected. The default is to not count
 external storage as part of user storage quotas. If you prefer to
 include it, then change the default `false` to `true`.:
 
+[source,php]
 ----
 'quota_include_external_storage' => false,
 ----

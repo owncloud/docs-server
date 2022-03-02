@@ -44,7 +44,7 @@ Go to menu:Settings[Admin > Additional]
 image::configuration/files/manual_file_locking/manual-file-locking-without-lock-breaker.png[Enable file locking]
 
 Using the occ command::
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files enable_lock_file_action --value yes
 ----
@@ -66,14 +66,14 @@ The image is the same as shown above when enabling or disabling _Manual File Loc
 Using the occ command::
 * Default locks timeout
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files lock_timeout_default --value 1800
 ----
 +
 * Maximum locks timeout
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files lock_timeout_max --value 86400
 ----

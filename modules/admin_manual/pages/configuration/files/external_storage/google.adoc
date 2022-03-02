@@ -32,11 +32,12 @@ because the Google interface is a bit of a maze and it’s easy to get lost.
 In the examples used, `<your domain>` represents how you access your ownCloud server,
 where you see the login screen. This may look like:
 
+[source,text]
 ----
 https://example.com
-or
+ or
 http://example.com
-or
+ or
 IP/owncloud
 ----
 
@@ -102,9 +103,10 @@ To configure _Authorized Redirect URIs_, select one of the two possible URI Sche
 If you are configuring storage as an administrator - choose the admin URI,
 if you are a user and configure your personal storage - pick the personal URI.
 
+[source,text]
 ----
 https://<your domain>/index.php/settings/admin?sectionid=storage
-or
+ or
 https://<your domain>/index.php/settings/personal?sectionid=storage
 ----
 

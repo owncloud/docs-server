@@ -53,7 +53,7 @@ The cache directory defaults to `data/$user/cache` where `$user` is the current 
 
 Opcache should be enabled by default in your php installation. To check it, run the following command:
 
-[source,php]
+[source,bash]
 ----
 php -r 'phpinfo();' | grep opcache.enable
 ----
@@ -64,9 +64,9 @@ The easiest cache to use is APCu, because it is a data cache, very fast and noth
 
 ==== Installing APCu
 
-[source,console]
+On Ubuntu/Debian/Mint systems:
+[source,bash]
 ----
-# On Ubuntu/Debian/Mint systems
 sudo apt install php-apcu
 ----
 
@@ -87,7 +87,7 @@ NOTE: The default shipped Redis version and the php-redis extension for Ubuntu 2
 
 If you have Ubuntu 16.04 or higher:
 
-[source,console]
+[source,bash]
 ----
 sudo apt install redis-server php-redis
 ----
@@ -100,11 +100,11 @@ After that, assuming that you don’t encounter any errors, restart Apache and t
 
 APCu is faster at local caching than Redis. If you have enough memory, use APCu for memory caching and Redis for file locking. If you are low on memory, use Redis for both.
 
-
 ==== Clearing the Redis Cache
 
 The Redis cache can be flushed from the command-line using the {rediscli_url}[redis-cli tool], as in the following example:
 
+[source,bash]
 ----
 sudo redis-cli
 SELECT <dbIndex>
@@ -133,7 +133,7 @@ NOTE: Be sure to install the *memcached* PHP module, and not _memcache_, as in t
 
 On Ubuntu/Debian/Mint run the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo apt-get install memcached php-memcached
 ----
@@ -158,7 +158,7 @@ After that, assuming that you don’t encounter any errors:
 
 The Memcached cache can be flushed from the command line, using a range of common Linux/Unix tools including `netcat` and `telnet`. The following example uses telnet to log in, run the {flushall_url}[flush_all command], and log out:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 telnet localhost {std-port-memcache}
 flush_all
@@ -247,7 +247,7 @@ If setting up Redis to be accessed via a Unix socket from a webserver user, then
 
 To see a benchmark comparison, run:
 
-[source,console]
+[source,bash]
 ----
 sudo redis-benchmark -q -n 100000
 sudo redis-benchmark -s /var/run/redis/redis-server.sock -q -n 100000

@@ -13,7 +13,7 @@ background
 
 == Examples
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 # Set the background scheduler to Ajax
 {occ-command-example-prefix} background:ajax

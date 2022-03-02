@@ -8,7 +8,7 @@ The combination of `uid` and `IP address` is used to trigger the ban.
 
 == List the Current Settings
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:list brute_force_protection
 ----
@@ -17,7 +17,7 @@ The combination of `uid` and `IP address` is used to trigger the ban.
 
 To set a new value, use the command below and replace `<Key>` and value `<Value>` accordingly.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set brute_force_protection <Key> --value=<Value> --update-only
 ----

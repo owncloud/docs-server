@@ -12,7 +12,7 @@ The `activity` command is used for sending automated activity email notification
 
 The `activity:send-emails` command sends all pending activity emails immediately, regardless of the time they are scheduled.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} activity:send-emails
 ----
@@ -23,21 +23,21 @@ Starting with Activity app version 2.7.0, rename and move action notifications c
 
 === Enable Rename and Move Action Notifications
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set activity enable_move_and_rename_activities --value "yes"
 ----
 
 === Disable Rename and Move Action Notifications
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set activity enable_move_and_rename_activities --value "no"
 ----
 
 or
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete activity enable_move_and_rename_activities
 ----

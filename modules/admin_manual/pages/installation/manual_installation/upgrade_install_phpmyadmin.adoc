@@ -20,7 +20,7 @@ NOTE: The guide has been tested, is at it is and comes without any warranty.
 Please note, you must already have an existing, configured and working `phpmyadmin` installation.
 Check your existing version with following command:
 
-[source,console]
+[source,bash]
 ----
 sudo apt-cache policy phpmyadmin
 ----
@@ -42,7 +42,7 @@ correct location.
 The following example uses `phpMyAdmin-5.0.4-all-languages` as basis for upgrading. It renames the
 old installation because we need to keep some basic configuration settings.
 
-[source,console]
+[source,bash]
 ----
 cd /tmp
 sudo wget https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz
@@ -60,7 +60,7 @@ based on the former settings coming from the Ubuntu installation. The file to ch
 in `/usr/share/phpmyadmin/libraries/vendor_config.php`. To keep a copy of the original file from
 the update, create a backup with:
 
-[source,console]
+[source,bash]
 ----
 cd /usr/share/
 sudo cp phpmyadmin/libraries/vendor_config.php phpmyadmin/libraries/vendor_config.php.orig
@@ -96,7 +96,7 @@ image:installation/manual_installation/phpmyadmin_v5.0.4.png[]
 
 When you are fine with your upgrade, you can safely delete the old installation files.
 
-[source,console]
+[source,bash]
 ----
 cd /usr/share/
 sudo rm -r /usr/share/phpmyadmin.old

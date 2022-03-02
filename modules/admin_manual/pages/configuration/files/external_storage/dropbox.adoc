@@ -37,12 +37,14 @@ Examples:
 
 When configuring as an *admin*:
 
+[source,text]
 ----
 http(s)://<<Server_Address>>/settings/admin?sectionid=storage
 ----
 
 When configuring as a *user*:
 
+[source,text]
 ----
 http(s)://<<Server_Address>>/settings/personal?sectionid=storage
 ----

@@ -32,7 +32,7 @@ This is because ownCloud needs to integrate in to a diverse range of environment
 If you are yet to implement a rate-limiting solution for your ownCloud instance, start by retrieving a list of all active routes.
 This information is obtained by running xref:configuration/server/occ_command.adoc#security[occ's security:routes command], as in the following example.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} security:routes
 ----
@@ -144,6 +144,7 @@ warnings.
 This can be achieved by adding the following settings in the Apache
 VirtualHost file containing the `<VirtualHost *:443>` entry:
 
+[source,apache]
 ----
 <IfModule mod_headers.c>
   Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
@@ -260,6 +261,7 @@ NOTE: If you’re not familiar with what’s going on, this snippet highlights a
 
 On Ubuntu, you can install Fail2ban using the following commands:
 
+[source,bash]
 ----
 apt update && apt upgrade
 apt install fail2ban
@@ -272,6 +274,7 @@ ownCloud uses your local timezone for writing log entries; otherwise,
 fail2ban cannot react appropriately to attacks. To do this, edit your
 `config.php` file and add the following line:
 
+[source,php]
 ----
 'logtimezone' => 'Europe/Berlin',
 ----
@@ -290,6 +293,7 @@ Next, define a new Fail2ban filter rule for ownCloud. To do so, create a
 new file called `/etc/fail2ban/filter.d/owncloud.conf`, and insert the
 following configuration:
 
+[source,conf]
 ----
 [Definition]
 failregex={.*Login failed: \'.*\' \(Remote IP: \'<HOST>\'\)"}

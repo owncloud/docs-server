@@ -19,7 +19,7 @@ ldap
 
 Search for an LDAP user, using this syntax:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:search [options] [--] <search>
 ----
@@ -111,7 +111,7 @@ The best way understanding `offset` and `limit` is the following table when usin
 
 Searches match at the beginning of the attribute value only. This example searches for `givenNames` that start with 'rob':
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:search "rob"
 ----
@@ -119,14 +119,14 @@ Searches match at the beginning of the attribute value only. This example search
 This will find "robbie", "roberta", and "robin".
 Broaden the search to find, for example, `jeroboam` with the asterisk wildcard:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:search "*rob"
 ----
 
 The following examples use `offset` and `limit` options:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:search "re"
 Rebecca OShea (Rebecca.OShea)
@@ -136,7 +136,7 @@ Rekha Cox (Rekha.Cox)
 Rekha Craft (Rekha.Craft)
 ----
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:search "re" --offset 0 --limit 3
 Rebecca OShea (Rebecca.OShea)
@@ -144,7 +144,7 @@ Rebecca Vintin (Rebecca.Vintin)
 Rebekka Da-Cahuna (Rebekka.Da-Cahuna)
 ----
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:search "re" --offset 3 --limit 3
 Rekha Cox (Rekha.Cox)
@@ -155,7 +155,7 @@ Rekha Craft (Rekha.Craft)
 
 This only works if the ownCloud server is connected to an LDAP server.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 ldap:check-user [options] [--] <ocName>
 ----
@@ -178,14 +178,14 @@ ldap:check-user [options] [--] <ocName>
 
 Example:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:check-user robert
 ----
 
 `ldap:check-user` will not run a check when it finds a disabled LDAP connection. This prevents users that exist on disabled LDAP connections from being marked as deleted. If you know for sure that the user you are searching for is not in one of the disabled connections and exists on an active connection, use the `--force` option to force a check of all active LDAP connections.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:check-user --force robert
 ----
@@ -194,7 +194,7 @@ Example:
 
 Create an empty LDAP configuration.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 ldap:create-empty-config [<configID>]
 ----
@@ -209,7 +209,7 @@ ldap:create-empty-config [<configID>]
 
 Configurations that you create without assigning a <configID> are automatically assigned IDs.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:create-empty-config
    Created new configuration with configID 's01'
@@ -219,7 +219,7 @@ Configurations that you create without assigning a <configID> are automatically 
 
 You can list and view your configurations:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:show-config [options] [--] [<configID>]
 ----
@@ -247,14 +247,14 @@ You can list and view your configurations:
 
 If you omit the `configID`, all configuration ID's with their settings are listed:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:show-config
 ----
 
 View the configuration for a single `configID`:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:show-config s01
 ----
@@ -263,7 +263,7 @@ View the configuration for a single `configID`:
 
 Deletes an existing LDAP configuration.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
  ldap:delete-config <configID>
 ----
@@ -276,7 +276,7 @@ Deletes an existing LDAP configuration.
 |  The configuration ID
 |===
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:delete  s01
 Deleted configuration with configID 's01'
@@ -286,7 +286,7 @@ Deleted configuration with configID 's01'
 
 This command invalidates the LDAP cache for all users:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:invalidate-cache
 ----
@@ -295,7 +295,7 @@ This command invalidates the LDAP cache for all users:
 
 This command manipulates LDAP configurations.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:set-config <configID> <configKey> <configValue>
 ----
@@ -318,7 +318,7 @@ If a `configKey` allows multiple entries like the key `ldapAttributesForUserSear
 
 This example sets search attributes:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:set-config s01 ldapAttributesForUserSearch "cn;givenname;sn;displayname;mail"
 ----
@@ -384,7 +384,7 @@ Available keys, along with default values for configValue, are listed in the tab
 
 Tests whether your configuration is correct and can bind to the server.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:test-config <configID>
 ----
@@ -399,7 +399,7 @@ Tests whether your configuration is correct and can bind to the server.
 
 Example:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:test-config s01
 The configuration is valid and the connection could be established!
@@ -407,7 +407,7 @@ The configuration is valid and the connection could be established!
 
 == Set and Unset LDAP App Configurations
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set user_ldap updateAttributesInterval --value=7200
 ----
@@ -422,7 +422,7 @@ Config value updateAttributesInterval for app user_ldap set to 7200
 
 If you want to reset (or unset) the setting, then you can use the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete user_ldap updateAttributesInterval
 ----
@@ -433,7 +433,7 @@ If you want to allow new LDAP logins to attempt to reuse existing `oc_accounts` 
 
 Below is an example of how to do so.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set user_ldap reuse_accounts --value="yes"
 ----

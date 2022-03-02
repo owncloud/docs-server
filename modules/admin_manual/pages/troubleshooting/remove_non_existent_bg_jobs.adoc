@@ -33,14 +33,14 @@ It is also possible that a background job is triggered manually by the admin whe
 
 Use the following command to list all active background jobs triggered by ownCloud:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} background:queue:status
 ----
 
 The output may look like the following:
 
-[source,console]
+[source,text]
 ----
 +----+---------------------------------------------------+---------------------------+---------------+
 | Id | Job                                               | Last run                  | Job Arguments |
@@ -57,7 +57,7 @@ The output may look like the following:
 
 When you have identified the `ID` of the background job to  be removed, run following command to remove it, replace `ID` with the job number of the list:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} background:queue:delete ID
 ----
@@ -68,14 +68,14 @@ WARNING: Deleting a job cannot be undone. Be sure that you want to delete the jo
 
 If an erroring job as been added manually in `crontab`, remove the job from the crontab queue list. First, list the entries of crontab for the web server user:
 
-[source,console]
+[source,bash]
 ----
 sudo -uwww-data crontab -l
 ----
 
 Then edit the crontab job list to remove the job by invoking following command:
 
-[source,console]
+[source,bash]
 ----
 sudo -uwww-data crontab -e
 ----

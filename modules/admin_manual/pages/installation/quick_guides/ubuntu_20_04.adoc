@@ -20,7 +20,7 @@ This guide can not go into details and has its limits by nature. If you experien
 First, ensure that all the installed packages are entirely up to date, and that PHP is available in the APT repository.
 To do so, follow the instructions below:
 
-[source,console]
+[source,bash]
 ----
 apt update && \
   apt upgrade -y
@@ -30,7 +30,7 @@ apt update && \
 
 Create a helper script to simplify running xref:configuration/server/occ_command.adoc[occ commands]:
 
-[source,console]
+[source,bash]
 ----
 FILE="/usr/local/bin/occ"
 /bin/cat <<EOM >$FILE
@@ -42,14 +42,14 @@ EOM
 
 Make the helper script executable:
 
-[source,console]
+[source,bash]
 ----
 chmod +x /usr/local/bin/occ
 ----
 
 === Install the Required Packages
 
-[source,console]
+[source,bash]
 ----
 apt install -y \
   apache2 \
@@ -68,14 +68,14 @@ apt install -y \
 
 First install the required packages:
 
-[source,console]
+[source,bash]
 ----
 apt-get install -y libsmbclient-dev php-dev php-pear
 ----
 
 Install smblclient php module using pecl
 
-[source,console]
+[source,bash]
 ----
 pecl install smbclient-stable
 echo "extension=smbclient.so" > /etc/php/7.4/mods-available/smbclient.ini
@@ -85,13 +85,13 @@ systemctl restart apache2
 
 Check if it was successfully activated 
 
-[source,console]
+[source,bash]
 ----
 php -m | grep smbclient
 ----
 This should show the following output
 
-[source,console]
+[source,bash]
 ----
 libsmbclient
 smbclient
@@ -101,7 +101,7 @@ smbclient
 
 Additional useful tools helpful for debugging:
 
-[source,console]
+[source,bash]
 ----
 apt install -y \
   unzip bzip2 rsync curl jq \
@@ -113,7 +113,7 @@ apt install -y \
 
 ==== Create a Virtual Host Configuration
 
-[source,console]
+[source,apache]
 ----
 FILE="/etc/apache2/sites-available/owncloud.conf"
 /bin/cat <<EOM >$FILE
@@ -139,7 +139,7 @@ EOM
 
 ==== Enable the Virtual Host Configuration
 
-[source,console]
+[source,bash]
 ----
 a2dissite 000-default
 a2ensite owncloud.conf
@@ -148,7 +148,7 @@ systemctl reload apache2
 
 === Configure the Database
 
-[source,console]
+[source,bash]
 ----
 systemctl start mariadb
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; \
@@ -159,7 +159,7 @@ GRANT ALL PRIVILEGES ON owncloud.* \
 
 ==== Enable the Recommended Apache Modules
 
-[source,console]
+[source,bash]
 ----
 echo "Enabling Apache Modules"
 a2enmod dir env headers mime rewrite setenvif
@@ -170,7 +170,7 @@ service apache2 reload
 
 === Download ownCloud
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 cd /var/www/
 wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2 && \
@@ -180,7 +180,7 @@ chown -R www-data. owncloud
 
 === Install ownCloud
 
-[source,console]
+[source,bash]
 ----
 occ maintenance:install \
     --database "mysql" \
@@ -194,7 +194,7 @@ occ maintenance:install \
 
 === Configure ownCloud's Trusted Domains
 
-[source,console]
+[source,bash]
 ----
 myip=$(hostname -I|cut -f1 -d ' ')
 occ config:system:set trusted_domains 1 --value="$myip"
@@ -204,14 +204,14 @@ occ config:system:set trusted_domains 1 --value="$myip"
 
 Set your background job mode to cron:
 
-[source,console]
+[source,bash]
 ----
 occ background:cron
 ----
 
 Configure the execution of the cron job to every 15 min:
 
-[source,console]
+[source,bash]
 ----
 echo "*/15  *  *  *  * /var/www/owncloud/occ system:cron" \
   > /var/spool/cron/crontabs/www-data
@@ -224,7 +224,7 @@ chmod 0600 /var/spool/cron/crontabs/www-data
 If you need to sync your users from an LDAP or Active Directory Server, add this additional xref:configuration/server/background_jobs_configuration.adoc[Cron job]. Every 15 minutes this cron job will sync LDAP users in ownCloud and disable the ones who are not available for ownCloud. Additionally, you get a log file in `/var/log/ldap-sync/user-sync.log` for debugging.
 ====
 
-[source]
+[source,bash]
 ----
 echo "*/15 * * * * /var/www/owncloud/occ user:sync 'OCA\User_LDAP\User_Proxy' -m disable -vvv >> /var/log/ldap-sync/user-sync.log 2>&1" >> /var/spool/cron/crontabs/www-data
 chown www-data.crontab  /var/spool/cron/crontabs/www-data
@@ -236,7 +236,7 @@ chown www-data. /var/log/ldap-sync/user-sync.log
 
 === Configure Caching and File Locking
 
-[source,php]
+[source,bash]
 ----
 occ config:system:set \
    memcache.local \
@@ -252,7 +252,7 @@ occ config:system:set \
 
 === Configure Log Rotation
 
-[source,console]
+[source,bash]
 ----
 FILE="/etc/logrotate.d/owncloud"
 sudo /bin/cat <<EOM >$FILE
@@ -271,7 +271,7 @@ EOM
 
 Make sure the permissions are correct:
 
-[source,console]
+[source,bash]
 ----
 cd /var/www/
 chown -R www-data. owncloud
@@ -281,7 +281,7 @@ chown -R www-data. owncloud
 
 To check if you have installed the correct vesion of ownCloud and that the occ command is working, execute the following:
 
-[source,console]
+[source,bash]
 ----
 occ -V
 ----

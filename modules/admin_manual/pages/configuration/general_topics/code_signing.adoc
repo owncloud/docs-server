@@ -209,9 +209,11 @@ manually with the `occ` command. The first command scans the ownCloud
 core files, and the second command scans the named app. There is not yet
 a command to manually scan all apps:
 
+
+[source,bash,subs="attributes+"]
 ----
-occ integrity:check-core
-occ integrity:check-app $appid
+{occ-command-example-prefix} integrity:check-core
+{occ-command-example-prefix} integrity:check-app <appid>
 ----
 
 TIP: See xref:configuration/server/occ_command.adoc[the occ command] to learn more about using `occ`.

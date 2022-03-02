@@ -51,7 +51,7 @@ TIP: You only have to conduct this process once when setting up File Lifecycle M
 
 Example to set missing upload time values to November, 1st 2019: 
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} lifecycle:set-upload-time 2019-11-01
 ----
@@ -78,7 +78,7 @@ Example to set the time passed since upload (or restore) for archiving files to 
 ----
 
 To query existing values, use this example command:
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:get files_lifecycle archive_period
 ----
@@ -90,7 +90,7 @@ To query existing values, use this example command:
 The _soft policy_ aims at use cases where users should be allowed to restore files from the archive in self-service if they are still needed. It imposes a soft archiving enforcement but on the other hand relieves IT departments when archived files need to be restored.
 The _soft policy_ is used by default. To switch from the hard policy to the soft policy, use this _occ_ command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_lifecycle policy --value='soft'
 ----
@@ -103,7 +103,7 @@ TIP: When the _hard policy_ is in place only administrators (or also group admin
 
 To put the _hard policy_ in place, use this _occ_ command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_lifecycle policy --value='hard'
 ----
@@ -115,7 +115,7 @@ To put File Lifecycle Management into actual operation, there are two _occ_ comm
 ==== Archiving Background Job
 To move files scheduled for archiving (days since upload/restore > `archive_time`) into the archive, execute the following _occ_ command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} lifecycle:archive
 ----
@@ -125,7 +125,7 @@ TIP: There is a dry-run mode (append `-d`) that simulates the execution of this 
 ==== Archive Expiration Background Job
 To permanently delete files from the archive that have met the policy rules (days since archiving > `expire_period`), execute the following _occ_ command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} lifecycle:expire
 ----
@@ -143,7 +143,7 @@ Apart from that, system administrators can restore files from the archive using 
 ==== Restoration by Path
 When a user `alice` requests to restore all files, e.g., in the folder `/work/projects/project1`, a system administrator can execute the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} lifecycle:restore /alice/archive/files/work/projects/project1
 ----
@@ -151,7 +151,7 @@ When a user `alice` requests to restore all files, e.g., in the folder `/work/pr
 ==== Restoring All Files from All Archives
 File Lifecycle Management provides a way to restore all files from all archives back to their owners' file directories. To do this, system administrators can use the `restore-all` _occ_ command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} lifecycle:restore-all
 ----
@@ -164,14 +164,14 @@ TIP: There is a dry-run mode (append `-d`) that simulates the execution of this 
 
 In some scenarios it can be desired to disable the whole user interface for this app. This can be done by setting the following configuration value:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_lifecycle disable_ui --value='yes'
 ----
 
 To enable the user interface components again, this config value needs to be removed:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete files_lifecycle disable_ui
 ----

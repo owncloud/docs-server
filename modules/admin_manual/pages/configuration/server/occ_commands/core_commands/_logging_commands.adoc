@@ -13,7 +13,7 @@ log
 
 Run `log:owncloud` to see your current logging status:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} log:owncloud
 Log backend ownCloud: enabled
@@ -45,7 +45,7 @@ Options for `log:manage`:
 
 Log level can be adjusted by entering the number or the name:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} log:manage --level 4
 {occ-command-example-prefix} log:manage --level error

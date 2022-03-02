@@ -209,6 +209,7 @@ no-reply@example.com
 
 Use the ping command to check the server availability
 
+[source,bash]
 ----
 ping smtp.server.dom
 ----
@@ -222,11 +223,12 @@ PING smtp.server.dom (ip-address) 56(84) bytes of data.
 
 The best way to get mail server information is to ask your mail server admin. If you are the mail server admin, or need information in a hurry, you can use the `netstat` command. This example shows all active servers on your system, and the ports they are listening on. The SMTP server is listening on localhost port 25.
 
+[source,bash]
 ----
-# netstat -pant
+netstat -pant
 ----
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 Active Internet connections (servers and established)
 Proto Recv-Q Send-Q Local Address   Foreign Address  State  ID/Program name
@@ -253,6 +255,7 @@ SMTP servers usually announce the availability of STARTTLS immediately after a c
 
 NOTE: You must enter the marked lines to obtain the information displayed.
 
+[source,bash]
 ----
 telnet smtp.domain.dom 25
 ----
