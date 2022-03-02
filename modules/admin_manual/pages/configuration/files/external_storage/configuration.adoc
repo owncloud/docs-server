@@ -127,7 +127,7 @@ in the folder hierarchy of the external storage.
 
 You might need to setup a cron job that runs
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:scan --all`
 ----

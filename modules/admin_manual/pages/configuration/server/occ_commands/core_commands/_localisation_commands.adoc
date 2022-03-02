@@ -40,7 +40,7 @@ $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";
 
 After that, run the following command to create the translation.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} l10n:createjs comments de_AT
 ----
@@ -51,7 +51,7 @@ This will generate two translation files, `de_AT.js` and `de_AT.json`, in `/var/
 
 To create translations in multiple languages simultaneously, supply multiple languages to the command, as in the following example:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} l10n:createjs comments de_AT de_DE hu_HU es fr
 ----

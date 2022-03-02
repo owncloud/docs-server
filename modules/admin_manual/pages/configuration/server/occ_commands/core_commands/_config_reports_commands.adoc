@@ -5,7 +5,7 @@ This command generates the same JSON-based report as the Admin Config Report, wh
 
 From the command-line in the root directory of your ownCloud installation, run it as your webserver user as follows, (assuming your webserver user is `www-data`):
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} configreport:generate
 ----
@@ -13,14 +13,14 @@ From the command-line in the root directory of your ownCloud installation, run i
 This will generate the report and send it to `STDOUT`. 
 You can optionally pipe the output to a file and then attach it to an email to ownCloud support, by running the following command:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} configreport:generate > generated-config-report.txt
 ----
 
 Alternatively, you could generate the report and email it all in one command, by running:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} configreport:generate | mail \
     -s "configuration report" \

@@ -5,7 +5,7 @@ List all options, like this example on CentOS Linux:
 
 == Command Description
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} upgrade --help
 Usage:
@@ -25,7 +25,7 @@ PHP scripts invoked from the Web interface are limited to 3600 seconds.
 In larger environments this may not be enough, leaving the system in an inconsistent state.
 After performing all the preliminary steps (see xref:maintenance/upgrade.adoc[the maintenance upgrade documentation]) use this command to upgrade your databases, like this example on CentOS Linux:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} upgrade
 ownCloud or one of the apps require upgrade - only a limited number of
@@ -42,7 +42,7 @@ Turned off maintenance mode
 
 Note how it details the steps. Enabling verbosity displays timestamps:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} upgrade -v
 ownCloud or one of the apps require upgrade - only a limited number of commands are available

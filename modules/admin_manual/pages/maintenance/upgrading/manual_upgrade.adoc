@@ -34,9 +34,9 @@ TIP: In a clustered environment, check that all nodes are in maintenance mode.
 
 With those steps completed, stop your webserver to prevent users trying to access ownCloud via the web. As an alternative, you can stop serving the virtual host for ownCloud.
 
-[source,console]
+Stop the web server:
+[source,bash]
 ----
-# Stop the web server
 sudo service apache2 stop
 ----
 
@@ -53,12 +53,17 @@ or not listed in xref:installation/apps_supported.adoc[Supported Apps in ownClou
 
 . Disable Apps via Command Line
 +
-[source,console,subs="attributes+"]
+This command lists all apps by <app-id> and app version:
++
+[source,bash,subs="attributes+"]
 ----
-# This command lists all apps by <app-id> and app version
 {occ-command-example-prefix} app:list
-
-# This command disables the app with the given <app-id>
+----
++
+This command disables the app with the given <app-id>:
++
+[source,bash,subs="attributes+"]
+----
 {occ-command-example-prefix} app:disable <app-id>
 ----
 
@@ -76,7 +81,8 @@ If you have made changes in `.user.ini` located at the webroot of ownCloud, you 
 === Download the Latest Release
 
 Download the latest https://owncloud.org/download/[ownCloud server release] to the same location where your previous instance is located, in this example the default directory `/var/www/`.
-[source,console,subs="attributes+"]
+
+[source,bash,subs="attributes+"]
 ----
 cd /var/www/
 sudo wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2
@@ -104,10 +110,9 @@ After the upgrade is finished, you can re-run this script to secure the `.htacce
 
 Although you have already made a backup, move your current ownCloud directory to a different location for easy access later:
 
-[source,console]
+This example assumes Ubuntu Linux and MariaDB, rename the ownCloud directory:
+[source,bash]
 ----
-# This example assumes Ubuntu Linux and MariaDB
-# Rename ownCloud directory
 sudo mv /var/www/owncloud /var/www/backup_owncloud
 ----
 
@@ -115,7 +120,7 @@ sudo mv /var/www/owncloud /var/www/backup_owncloud
 
 Extract the new server release in the location where your previous ownCloud installation used to be.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 sudo tar -xf {oc-complete-name}.tar.bz2
 ----
@@ -124,7 +129,7 @@ sudo tar -xf {oc-complete-name}.tar.bz2
 
 If you keep your `data/` directory _inside_ your `owncloud/` directory, move it from your old version of ownCloud to your new version:
 
-[source,console]
+[source,bash]
 ----
 sudo mv /var/www/backup_owncloud/data /var/www/owncloud/data
 ----
@@ -137,7 +142,7 @@ If you keep your `data` **outside** of your `owncloud` directory, then you donâ€
 
 With the new source files now in place of where the old ones used to be, copy the `config.php` file from your old ownCloud directory to your new ownCloud directory:
 
-[source,console]
+[source,bash]
 ----
 sudo cp /var/www/backup_owncloud/config/config.php /var/www/owncloud/config/config.php
 ----
@@ -153,7 +158,8 @@ In addition, if there are installed apps (whether compatible or incompatible wit
 If you are using third party or enterprise applications, look in your new `/var/www/owncloud/apps/` or `/var/www/owncloud/apps-external/` directory to see if they are present. If not, copy them from your old instance to your new one.
 
 NOTE: Make sure that all app directories that are defined in the `apps_paths` section of your `config.php` file do exist in your new `/var/www/owncloud/` directory. Also, make sure, that all app directories listed in `apps_path` actually exist. If `occ` complains about missing `apps-external` then try
-[source,console]
+
+[source,bash]
 ----
 sudo mkdir /var/www/owncloud/apps-external
 ----
@@ -165,19 +171,19 @@ To finalize the preparation of the upgrade, you need to set the correct ownershi
 .Set correct ownership
 Set the ownership for all files and folders to `root:www-data` **except** the `config` and `data` directory:
 
-[source,console]
+[source,bash]
 ----
 sudo find -L /var/www/owncloud \( -path ./data -o -path ./config \) -prune -o -type d -exec chown root:www-data {} \+
 ----
 
-[source,console]
+[source,bash]
 ----
 sudo find -L /var/www/owncloud \( -path ./data -o -path ./config \) -prune -o -type f -exec chown root:www-data {} \+
 ----
 
 Set the ownership for all files and folders to `www-data:www-data` for the `config` and `data` directory. Note that it is not mandatory to set the ownership of the `data/` directory as it should already have the correct ownership and it can take a while to finish, depending on the size:
 
-[source,console]
+[source,bash]
 ----
 sudo chown -R www-data:www-data /var/www/owncloud/config
 sudo chown -R www-data:www-data /var/www/owncloud/data
@@ -188,14 +194,14 @@ Use `chmod` on files and directories with different permissions:
 
 * For all files use `0640`
 +
-[source,console]
+[source,bash]
 ----
 sudo find /var/www/owncloud -type f -exec chmod 640 {} \;
 ----
 
 * For all directories use `0750`
 +
-[source,console]
+[source,bash]
 ----
 sudo find /var/www/owncloud -type d -exec chmod 750 {} \;
 ----
@@ -208,7 +214,7 @@ If you have configured a script for xref:installation/manual_installation/script
 
 With the apps disabled and ownCloud in maintenance mode, start the xref:configuration/server/occ_command.adoc#command-line-upgrade[upgrade process] from the command line:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 # Here is an example on Ubuntu Linux. 
 # Execute this within the ownCloud root folder.
@@ -222,7 +228,8 @@ The upgrade operation can take anywhere from a few minutes to a few hours, depen
 Reapply any manual changes made to `.htaccess` files and the `.user.ini` file located in the owncloud webroot. 
 
 The following example command eases to find the differences of two files, which is helpful for reapplying manually added changes to `.htaccess` and `.user.ini`. Replace that paths, directories and files accordingly.
-[source,console]
+
+[source,bash]
 ----
 diff -y -W 70 --suppress-common-lines owncloud/.user.ini owncloud_2022-02-15-09.18.48/.user.ini
 post_max_size=513M                |     post_max_size=1G
@@ -236,11 +243,10 @@ If you have configured a script for xref:installation/manual_installation/script
 
 === Disable Maintenance Mode
 
-Assuming your upgrade succeeded, disable maintenance mode.
+Assuming your upgrade succeeded, disable maintenance mode using the occ command.
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
-# Disable maintenance mode using the occ command.
 {occ-command-example-prefix} maintenance:mode --off
 ----
 
@@ -248,7 +254,7 @@ Assuming your upgrade succeeded, disable maintenance mode.
 
 With all that done, restart your web server, or alternatively re-enable the virtual host serving ownCloud:
 
-[source,console]
+[source,bash]
 ----
 sudo service apache2 start
 ----
@@ -287,7 +293,7 @@ Please refer to xref:configuration/database/linux_database_configuration.adoc#my
 In the unlikely case that files do not show up in the web-ui after the upgrade, use the xref:configuration/server/occ_command.adoc#the-filesscan-command[files:scan command] to make them visible again.
 Here is an example of how to do so:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} files:scan --all
 ----
@@ -298,21 +304,21 @@ Sometimes, ownCloud can get _stuck in an upgrade_.
 This is usually due to the process taking too long and running into a PHP time-out.
 Stop the upgrade process this way:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----
 
 Then start the manual process:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} upgrade
 ----
 
 If this does not work properly, try the repair function:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:repair
 ----

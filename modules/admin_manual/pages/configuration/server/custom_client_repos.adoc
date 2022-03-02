@@ -4,6 +4,7 @@ You may configure the URLs to your own download repositories for your
 ownCloud desktop clients and mobile apps in config/config.php. This
 example shows the default download locations:
 
+[source,php]
 ----
 <?php
 
@@ -18,12 +19,14 @@ repos.
 You may test alternate URLs without editing config/config.php by setting
 a test URL as an environment variable:
 
+[source,bash]
 ----
 export OCC_UPDATE_URL=https://test.example.com
 ----
 
 When you’re finished testing you can disable the environment variable:
 
+[source,bash]
 ----
 unset OCC_UPDATE_URL
 ----
