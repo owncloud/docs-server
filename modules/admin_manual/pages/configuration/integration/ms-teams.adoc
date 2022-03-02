@@ -67,7 +67,7 @@ IMPORTANT: For the time being, if you add the header to the ownCloud's `.htacces
 +
 This key is necessary for security reasons. Users will be asked to click a login button each time when accessing the ownCloud app after a fresh start of their Microsoft Teams app or after idle time. This behavior is by design. The button name can be freely set based on your requirements.
 +
-[source,console]
+[source,php]
 ----
 'msteamsbridge' => [
    "loginButtonName" => "Login to ownCloud with Azure AD",
