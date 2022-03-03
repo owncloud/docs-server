@@ -12,7 +12,7 @@ docker-compose setup.
 
 Grant docker command privileges to certain users by adding them to the group `docker`:
 
-[source,console]
+[source,bash]
 ----
 sudo usermod -aG docker <your-user>
 ----
@@ -26,7 +26,7 @@ Users not added to the `docker` group can run docker commands with a preceding `
 
 An example `occ` command looks like this:
 
-[source,console]
+[source,docker]
 ----
 docker exec --user www-data <owncloud-container-name> php occ <your-command>
 ----
@@ -36,14 +36,14 @@ docker exec --user www-data <owncloud-container-name> php occ <your-command>
 NOTE: The commands and links provided in the following descriptions are intended to showcase basic docker usage, but we cannot take responsibility for their proper functioning.
 If you only want to take a peek and are content with SQLite as database, which is not supported by ownCloud for production purposes, try the following:
 
-[source,console,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
 docker run --rm --name oc-eval -d -e OWNCLOUD_DOMAIN=localhost:{std-port-http} -p{std-port-http}:{std-port-http} owncloud/server
 ----
 
 This starts a docker container with the name "oc-eval" in the background (option `-d`). `owncloud/server` is the docker image downloaded from Docker Hub. If you don't start the container with option `-d`, the logs will be displayed in the shell. If you are running it in the background as in the example above, you can display the logs with the command:
 
-[source,console]
+[source,docker]
 ----
 docker logs oc-eval
 ----
@@ -56,14 +56,14 @@ NOTE: Access only works with http, not https.
 
 Now, if you like what you see but want a supported installation with MariaDB, you should remove the eval version before proceeding with the next section.
 
-[source,console]
+[source,docker]
 ----
 docker kill oc-eval
 ----
 
 This removes the container if you used the option `--rm` as suggested in the example above. If you omitted that option, you need to first run the command:
 
-[source,console]
+[source,docker]
 ----
 docker rm oc-eval
 ----
@@ -121,17 +121,22 @@ values in the .env file. To change them, you'll need to do `docker volume prune`
 Then, you can start the container, using your preferred Docker _command-line tool_.
 The example below shows how to use {docker-compose-url}[Docker Compose].
 
-[source,console,subs="attributes+"]
+Create a new project directory
+[source,bash]
 ----
-# Create a new project directory
 mkdir owncloud-docker-server
-
 cd owncloud-docker-server
+----
 
-# Copy docker-compose.yml from the GitHub repository
+Copy docker-compose.yml from the GitHub repository
+[source,bash]
+----
 wget https://raw.githubusercontent.com/owncloud/docs-server/master/modules/admin_manual/examples/installation/docker/docker-compose.yml
+----
 
-# Create the environment configuration file
+Create the environment configuration file
+[source,bash,subs="attributes+"]
+----
 cat << EOF > .env
 OWNCLOUD_VERSION={latest-server-version}
 OWNCLOUD_DOMAIN=localhost:{std-port-http}
@@ -139,8 +144,11 @@ ADMIN_USERNAME=admin
 ADMIN_PASSWORD=admin
 HTTP_PORT={std-port-http}
 EOF
+----
 
-# Build and start the container
+Build and start the container
+[source,docker]
+----
 docker-compose up -d
 ----
 
@@ -180,15 +188,16 @@ All files stored in this setup are contained in Docker volumes rather than a phy
 It is the admin's responsibility to make the files persistent.
 
 To inspect the volumes run:
-[source,console]
+[source,docker]
 ----
 docker volume ls | grep ownclouddockerserver
 ----
+
 To export the files as a tar archive run:
-[source,console]
+[source,docker]
 ----
 docker run -v ownclouddockerserver_files:/mnt \
-            ubuntu tar cf - -C /mnt . > files.tar
+       ubuntu tar cf - -C /mnt . > files.tar
 ----
 ====
 
@@ -197,7 +206,7 @@ docker run -v ownclouddockerserver_files:/mnt \
 Although the containers are up and running, it may still take a few minutes until ownCloud is fully
 functional. +
 To inspect the log output:
-[source,console]
+[source,docker]
 ----
 docker-compose logs --follow owncloud
 ----
@@ -207,7 +216,7 @@ Wait until the output shows **Starting apache daemon...** before you access the 
 [IMPORTANT]
 ====
 Although all important data persists after:
-[source,console]
+[source,docker]
 ----
 docker-compose down; docker-compose up -d
 ----
@@ -229,13 +238,13 @@ Note that these will not change between deploys even if you change the values in
 
 Again we assume you used `docker-compose` like in the previous example. +
 To stop the containers use:
-[source,console]
+[source,docker]
 ----
 docker-compose stop
 ----
 
 To stop and remove containers along with the related networks, images and volumes:
-[source,console]
+[source,docker]
 ----
 docker-compose down --rmi all --volumes
 ----
@@ -246,7 +255,7 @@ If you want to run an occ command, first go to the directory where your `.yaml` 
 Here, you are able to run any command referring to
 xref:configuration/server/occ_command.adoc[Using the occ Command] by entering:
 
-[source,console]
+[source,docker]
 ----
 docker-compose exec owncloud occ <command>
 ----
@@ -265,14 +274,14 @@ these simple steps:
 . Go to your docker directory where your `.yaml` and `.env` files exist.
 . Put ownCloud into maintenance mode with the following command:
 +
-[source,console]
+[source,docker]
 ----
 docker-compose exec owncloud occ maintenance:mode --on
 ----
 
 . Create a backup in case something goes wrong during the upgrade process, using the following command:
 +
-[source,console]
+[source,docker]
 ----
 docker-compose exec mariadb \
      /usr/bin/mysqldump -u root --password=owncloud \
@@ -283,7 +292,7 @@ NOTE: You need to adjust the password and database name if you have changed it i
 
 . Shutdown the containers:
 +
-[source,console]
+[source,docker]
 ----
 docker-compose down
 ----
@@ -291,22 +300,23 @@ docker-compose down
 . Update the version number of ownCloud in your `.env` file. You can use sed
 for it, as in the following example.
 +
-[source,console]
+Make sure that you adjust the example to match your installation.
++
+[source,bash]
 ----
-# Make sure that you adjust the example to match your installation.
 sed -i 's/^OWNCLOUD_VERSION=.*$/OWNCLOUD_VERSION=<newVersion>/' /compose/*/.env
 ----
 
 . View the file to ensure the change has been implemented.
 +
-[source,console]
+[source,bash]
 ----
 cat .env
 ----
 
 . Start your docker instance again.
 +
-[source,console]
+[source,docker]
 ----
 docker-compose up -d
 ----
@@ -315,14 +325,14 @@ Now you should have the current ownCloud running with `docker-compose`. Note tha
 automatically run `occ upgrade` when starting up. If you notice the container starting over and over again,
 you can check the update log with the following command:
 +
-[source,console]
+[source,docker]
 ----
 docker-compose logs --timestamp owncloud
 ----
 
 . If all went well, end maintenance mode:
 +
-[source,console]
+[source,docker]
 ----
 docker-compose exec owncloud occ maintenance:mode --off
 ----
@@ -362,7 +372,7 @@ OWNCLOUD_LOGLEVEL=0
 
 If your container fails to start on Raspberry Pi or other ARM devices, you most likely have an old version of `libseccomp2` on your host. This should only affect distros based on Rasbian Buster 32 bit. Install a newer version with the following command:
 
-[source,console]
+[source,bash]
 ----
 cd /tmp
 wget http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.5.1-1_armhf.deb
@@ -371,7 +381,7 @@ sudo dpkg -i libseccomp2_2.5.1-1_armhf.deb
 
 Alternatively you can add the backports repo for Debian Buster:
 
-[source,console]
+[source,bash]
 ----
 sudo apt-key adv --keyserver keyserver.ubuntu.com \
      --recv-keys 04EE7237B7D453EC 648ACFD622F3D138
