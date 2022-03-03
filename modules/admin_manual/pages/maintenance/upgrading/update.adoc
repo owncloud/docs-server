@@ -201,8 +201,7 @@ Add a line like this to your crontab to automatically create daily checkpoints:
 
 [source,bash,subs="attributes+"]
 ----
-2 15 * * * {occ-command-example-prefix} /path/to/owncloud/updater/application.php
-upgrade:checkpoint --create > /dev/null 2>&1
+2 15 * * * {occ-command-example-prefix} /path/to/owncloud/updater/application.php upgrade:checkpoint --create > /dev/null 2>&1
 ----
 
 == updater.secret value in config.php
