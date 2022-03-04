@@ -222,7 +222,7 @@ WARNING: You may get completely unexpected behaviour or a broken environment if 
 
 If you are using a PECL install later on, check the output of the installation command soon after it has started. You will find a text like:
 
-[source,text]
+[source]
 ----
 ...
 PHP Api Version:         20190902
@@ -239,14 +239,14 @@ php -i | grep extension_dir
 
 If the output is different than the style below, there is a problem that needs fixing:
 
-[source,text]
+[source]
 ----
 extension_dir => /usr/lib/php/20180731 => /usr/lib/php/20180731
 ----
 
 This is the output that shows a fix is needed:
 
-[source,text]
+[source]
 ----
 PHP Warning:  PHP Startup: smbclient: Unable to initialize module
 Module compiled with module API=20190902
