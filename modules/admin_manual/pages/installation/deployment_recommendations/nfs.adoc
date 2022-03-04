@@ -175,12 +175,20 @@ You can find the set values by working with the output of the `mount` command on
 [source,console]
 ----
 root@server:~# mount | egrep -o rsize=[0-9]*
+----
+
+[source,plaintext]
+----
 rsize=65536
 ----
 
 [source,console]
 ----
 root@server:~# mount | egrep -o wsize=[0-9]*
+----
+
+[source,plaintext]
+----
 wsize=65536
 ----
 
@@ -194,7 +202,7 @@ mount 192.168.0.104:/data /mnt -o rsize=65536,wsize=65536
 ----
 
 .Example for a set of NFS mount options:
-[source,console]
+[source,plaintext]
 ----
 bg,nfsvers=3,wsize=65536,rsize=65536,tcp,_netdev
 ----

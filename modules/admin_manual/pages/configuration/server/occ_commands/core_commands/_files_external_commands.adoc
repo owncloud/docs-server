@@ -3,7 +3,7 @@
 These commands replace the `data/mount.json` configuration file used in ownCloud releases before 9.0.
 Commands for managing external storage.
 
-[source,console]
+[source,plaintext]
 ----
 files_external
  files_external:applicable  Manage applicable users and groups for a mount
@@ -31,7 +31,7 @@ List configured mounts.
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 files_external:list [--show-password] [--full] [-a|--all] [-s|--short] [--] [<user_id>]
 ----
@@ -81,7 +81,7 @@ Manage applicable users and groups for a mount.
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 files_external:applicable
     [--add-user     ADD-USER]
@@ -120,7 +120,7 @@ Show available authentication and storage backends.
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 files_external:backends [options]
     [--]
@@ -149,7 +149,7 @@ Manage backend configuration for a mount.
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 files_external:config [options]
     [--]
@@ -181,7 +181,7 @@ Create a new mount configuration.
 
 === Usage
 
-[source,console]
+[source,plaintext
 ----
 files_external:create [options]
     [--]
@@ -260,7 +260,7 @@ Delete an external mount.
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 files_external:delete [options] [--] <mount_id>
 ----
@@ -284,7 +284,7 @@ files_external:delete [options] [--] <mount_id>
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 files_external:export [options] [--] [<user_id>]
 ----
@@ -310,7 +310,7 @@ Import mount configurations.
 
 === Usage
 
-[source,console]
+[source,plaintext
 ----
 files_external:import [options] [--] <path>
 ----
@@ -338,7 +338,7 @@ Manage mount options for a mount.
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 files_external:option <mount_id> <key> [<value>]
 ----
@@ -359,7 +359,7 @@ Verify mount configuration.
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 files_external:verify [options] [--] <mount_id>
 ----

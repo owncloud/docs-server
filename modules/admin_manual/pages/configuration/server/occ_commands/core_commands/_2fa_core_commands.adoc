@@ -6,7 +6,7 @@ If a two-factor provider app is enabled, it is enabled for all users by default 
 
 The following commands are available for the two-factor authentication:
 
-[source,console]
+[source,plaintext]
 ----
  twofactorauth
   twofactorauth:disable  Disable two-factor authentication for a user.

@@ -2,7 +2,7 @@
 
 The `app` commands list, enable, and disable apps.
 
-[source,console]
+[source,plaintext]
 ----
 app
  app:check-code   check code to be compliant

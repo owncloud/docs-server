@@ -4,7 +4,7 @@ Marketplace URL: {oc-marketplace-url}/apps/user_shibboleth[SAML/SSO Integration]
 
 `shibboleth:mode` sets your Shibboleth mode to `notactive`, `autoprovision`, or `ssoonly`
 
-[source,console]
+[source,bash,subs="attributes+"]
 ----
-shibboleth:mode [mode]
+{occ-command-example-prefix} shibboleth:mode [mode]
 ----
