@@ -96,7 +96,7 @@ zypper addlock owncloud-complete-files
 
 To see if the package has already been locked, use the `locks` command.  If `owncloud-complete-files` is already locked, then you will see output similar to the below example.
 
-[source]
+[source,plaintext]
 ----
 # | Name                    | Type    | Repository
 --+-------------------------+---------+-----------
@@ -153,7 +153,7 @@ Downgrading is not supported and risks corrupting your data! If you want to reve
 
 See installation_wizard for important steps, such as choosing the best database and setting correct directory permissions. See the xref:installation/selinux_configuration.adoc[SELinux Configuration Guide] for a suggested configuration for SELinux-enabled distributions such as _Fedora_ and _CentOS_.
 
-If your distribution is not listed, your Linux distribution may maintain its own ownCloud packages or you may prefer to xref:installation/manual_installation/manual_installation.adoc[install from source].
+If your distribution is not listed, your Linux distribution may maintain its own ownCloud packages or you may prefer to xref:installation/manual_installation/manual_installation.adoc[install from source,plaintext].
 
 === Archlinux
 

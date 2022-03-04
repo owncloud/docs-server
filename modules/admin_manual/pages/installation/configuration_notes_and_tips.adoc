@@ -25,13 +25,13 @@ This can be the case, for example, for the `date.timezone` setting.
 
 For PHP version {minimum-php-printed} onward, replace `php_version` with the version number installed, e.g., `{minimum-php-version}` in the following examples.
 
-[source]
+[source,plaintext]
 ----
 /etc/php/[php_version]/apache2/php.ini
 ----
 
 or
-[source]
+[source,plaintext]
 ----
 /etc/php/[php_version]/fpm/php.ini
 ----
@@ -40,7 +40,7 @@ or
 
 === php.ini - used by the php-cli and so by ownCloud CRON jobs
 
-[source]
+[source,plaintext]
 ----
 /etc/php/[php_version]/cli/php.ini
 ----
@@ -114,7 +114,10 @@ sudo cloc /var/www/owncloud --exclude-dir=data --follow-links
    12179 text files.
    11367 unique files.
    73126 files ignored.
+----
 
+[source,plaintext]
+----
 http://cloc.sourceforge.net v 1.60  T=1308.98 s (6.4 files/s, 1283.5 lines/s)
 --------------------------------------------------------------------------------
 Language                      files          blank        comment           code
@@ -163,7 +166,7 @@ may be in a sub-directory.
 Usually, you will find some or all of the environment variables already
 in the file, but commented out like this:
 
-[source]
+[source,plaintext]
 ----
 ;env[HOSTNAME] = $HOSTNAME
 ;env[PATH] = /usr/local/bin:/usr/bin:/bin
@@ -175,9 +178,9 @@ in the file, but commented out like this:
 Uncomment the appropriate existing entries. Then run `printenv PATH` to
 confirm your paths, for example:
 
-[source,console]
+[source,bash]
 ----
-$ printenv PATH
+printenv PATH
 /home/user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:
 /sbin:/bin:/
 ----

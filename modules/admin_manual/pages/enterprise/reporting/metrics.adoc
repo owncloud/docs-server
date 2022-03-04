@@ -109,7 +109,7 @@ The dashboard is enabled by default. You can disable it with the following comma
 
 To query for the Metrics data, use the following endpoint:
 
-[source]
+[source,plaintext]
 ----
 https://<your owncloud>/ocs/v1.php/apps/metrics/api/v1/metrics
 ----
