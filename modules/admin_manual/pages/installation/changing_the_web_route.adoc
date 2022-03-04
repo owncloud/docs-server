@@ -22,7 +22,7 @@ Alias / "/var/www/owncloud/"
 Edit the `overwrite.cli.url` parameter in
 `/var/www/owncloud/config/config.php`:
 
-[source,text]
+[source,php]
 ----
 'overwrite.cli.url' => 'http://localhost/',
 ----

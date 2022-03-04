@@ -202,7 +202,7 @@ For very long-running uploads *those lasting longer than 1h* to public folders, 
 
 To estimate a good value, use the following formula:
 
-[source,text]
+[source]
 ----
 time_in_seconds = (maximum_upload_file_size / slowest_assumed_upload_connection).
 ----
