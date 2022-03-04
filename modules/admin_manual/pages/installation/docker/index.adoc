@@ -70,7 +70,6 @@ docker rm oc-eval
 
 If you now run `docker ps` again, the entry for oc-eval should be gone.
 
-
 == Docker Compose
 
 The configuration:
@@ -363,7 +362,7 @@ The loglevel is set to the fixed value 2: _"Warnings, errors, and fatal issues"_
 
 .To get the highest log level "Everything" (including debug output), use:
 
-[source,console]
+[source,plaintext]
 ----
 OWNCLOUD_LOGLEVEL=0
 ----

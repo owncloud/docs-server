@@ -68,7 +68,12 @@ sudo apt remove php-imagick
 [source,bash]
 ----
 sudo service apache2 restart
+----
+
 or
+
+[source,bash]
+----
 sudo service php7.4-fpm restart
 ----
 
@@ -162,7 +167,9 @@ Check the version installed. The version printed may be different than in the ex
 [source,bash]
 ----
 convert -version | grep -i version
-
+----
+[source,plaintext]
+----
 Version: ImageMagick 7.1.0-2 ...
 ----
 
@@ -170,10 +177,13 @@ Version: ImageMagick 7.1.0-2 ...
 
 Type the following commands to get a list of supported formats:
 
-[source,console]
+[source,bash]
 ----
 convert identify -list format
+----
 
+[source,plaintext]
+----
    Format  Module    Mode  Description
 ----------------------------------------------------
       3FR  DNG       r--   Hasselblad CFV/H3D39II
@@ -223,7 +233,7 @@ sudo nano /etc/php/7.4/mods-available/imagick.ini
 
 with following content:
 
-[source,console]
+[source,plaintext]
 ----
 ; configuration for php imagick module
 extension=imagick.so

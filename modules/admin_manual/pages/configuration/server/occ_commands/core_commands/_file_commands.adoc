@@ -2,7 +2,7 @@
 
 `occ` has the following commands for managing files in ownCloud.
 
-[source,console]
+[source,plaintext]
 ----
 files
  files:check-cache          Check if the target file exists in the primary storage

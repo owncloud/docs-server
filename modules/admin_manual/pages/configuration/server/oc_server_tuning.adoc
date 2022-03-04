@@ -40,7 +40,7 @@ sizeable instances.
 If you raised the TCP-backlog setting, the following warning appears in
 the Redis logs:
 
-[source,console]
+[source,plaintext]
 ----
 WARNING: The TCP backlog setting of 20480 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of..
 ----
@@ -69,7 +69,7 @@ After the next reboot, 65535 connections will be allowed, instead of the default
 If you are experiencing latency problems with Redis, the following
 warning may appear in your Redis logs:
 
-[source,console]
+[source,plaintext]
 ----
 WARNING you have Transparent Huge Pages (THP) support enabled in your kernel.
 This creates both latency and memory usage issues with Redis.

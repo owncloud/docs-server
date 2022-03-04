@@ -72,13 +72,13 @@ Starting in Windows 10, version 1607, MAX_PATH limitations have been removed fro
 (*)::
 In Unix environments, PATH_MAX with 4096 bytes and NAME_MAX with 255 bytes are very common limitations for applications including the Shell. You can get the current limitations by typing the following example commands, see the {getconf-url}[getconf manpage] for details:
 +
-[source,console]
+[source,plaintext]
 ----
 getconf NAME_MAX /
 255
 ----
 +
-[source,console]
+[source,plaintext]
 ----
 getconf PATH_MAX /
 4096
@@ -87,13 +87,13 @@ getconf PATH_MAX /
 (**)::
 Although not officially documented, when searching on the internet there is a limit with path names exceeding 1024 bytes. Users report warnings in Finder, the Shell or apps about this behavior. This can be verified with:
 +
-[source,console]
+[source,plaintext]
 ----
 getconf NAME_MAX /
 255
 ----
 +
-[source,console]
+[source,plaintext]
 ----
 getconf PATH_MAX /
 1024

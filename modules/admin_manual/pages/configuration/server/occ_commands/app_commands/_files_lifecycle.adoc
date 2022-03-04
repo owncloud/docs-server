@@ -8,7 +8,7 @@ xref:enterprise/file_management/files_lifecycle.adoc[File Lifecycle Management] 
 The `lifecycle` commands configure the File Lifecycle Management app.
 
 .App Configuration
-[source,console]
+[source,plaintext]
 ----
 lifecycle
  lifecycle:archive          Archive files which have reached a certain age
@@ -23,7 +23,7 @@ lifecycle
 
 
 .Policy Configuration
-[source,console]
+[source,plaintext]
 ----
  config:app:get|set
  files_lifecycle archive_period   Number of days since upload (or restore)

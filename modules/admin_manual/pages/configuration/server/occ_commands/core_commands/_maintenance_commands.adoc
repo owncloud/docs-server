@@ -2,7 +2,7 @@
 
 Use these commands when you upgrade ownCloud, manage encryption, perform backups and other tasks that require locking users out until you are finished.
 
-[source,console]
+[source,plaintext]
 ----
 maintenance
  maintenance:data-fingerprint        Update the systems data-fingerprint after a backup is restored
@@ -96,6 +96,7 @@ Here is an example of running the command:
 To list all off the possible repair steps, use the `--list` option. 
 It should output the following list to the console:
 
+[source,plaintext]
 ----
 Found 16 repair steps
 

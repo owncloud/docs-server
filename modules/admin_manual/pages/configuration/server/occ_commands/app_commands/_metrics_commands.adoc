@@ -9,7 +9,7 @@ Set a secret for authenticating requests at the endpoint.
 
 In case you want to generate a random secret, use the following example command: +
 
-[source,console]
+[source,bash]
 ----
 echo $(tr -dc 'a-z0-9' < /dev/urandom | head -c 20)
 ----
@@ -30,7 +30,7 @@ Note: You can also set the config key/value manually into your config.php file.
 
 The above command adds the following at the end of `config.php`:
 
-[source,console]
+[source,php]
 ----
 'metrics_shared_secret' => 'your-metrics-secret',
 ----
@@ -44,7 +44,7 @@ This command reads the value of the `metrics_shared_secret` key from config.php:
 {occ-command-example-prefix} config:system:get "metrics_shared_secret"
 ----
 
-[source,console]
+[source,plaintext]
 ----
 your-metrics-secret
 ----

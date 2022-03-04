@@ -4,7 +4,7 @@ The `user` commands provide a range of functionality for managing ownCloud users
 This includes: creating and removing users, resetting user passwords, displaying a report which shows how many users you have, and when a user was last logged in.
 The full list, of commands is:
 
-[source,console]
+[source,plaintext]
 ----
 user
  user:add                            Adds a user
@@ -201,6 +201,7 @@ The example below searches for users inactive for five days or more:
 
 By default, this will generate output in the following format:
 
+[source,plaintext]
 ----
 - 0:
   - uid: admin
@@ -461,6 +462,7 @@ NOTE: To use `send-email`, the ownCloud instance must have email access fully co
 
 Add a new user, called Fred Jones:
 
+[source,plaintext]
 ----
 export OC_PASS=newpassword
 su -s /bin/sh www-data -c 'php occ user:add --password-from-env
@@ -482,6 +484,7 @@ Successfully reset password for layla
 
 You may also use `password-from-env` to reset passwords:
 
+[source,plaintext]
 ----
 export OC_PASS=newpassword
 su -s /bin/sh www-data -c 'php occ user:resetpassword \
@@ -504,6 +507,7 @@ The password reset link is: http://localhost:{std-port-http}/index.php/lostpassw
 
 If the specified user does not have a valid email address set, then the following error will be output to the console, and the email will not be sent:
 
+[source,plaintext]
 ----
 Email address is not set for the user layla
 ----
@@ -678,6 +682,7 @@ NOTE: This command replaces the old `show-remnants` functionality, and brings th
 
 === Usage
 
+[source,plaintext]
 ----
 user:sync [options] [--] [<backend-class>]
 ----
@@ -831,9 +836,13 @@ If unknown users are found, what do you want to do with their accounts? (removin
 
 Here is an example for syncing with LDAP four times a day on Ubuntu:
 
+[source,bash]
 ----
 crontab -e -u www-data
+----
 
+[source,plaintext]
+----
 * */6 * * * /usr/bin/php /var/www/owncloud/occ user:sync -vvv \
     --missing-account-action="disable" \
     -n "OCA\User_LDAP\User_Proxy"

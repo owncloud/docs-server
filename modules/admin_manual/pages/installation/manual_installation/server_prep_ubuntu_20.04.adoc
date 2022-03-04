@@ -180,7 +180,7 @@ sudo update-alternatives --config php
 ----
 Here is an example output:
 
-[source,console]
+[source,plaintext]
 ----
 There are 2 choices for the alternative php (providing /usr/bin/php).
 
@@ -281,7 +281,7 @@ sudo service apache2 restart
 
 NOTE: Do not get confused by the name `smbclient`. It is on the one hand a {smbclient_url}[command-line SMB/CIFS client for Unix], and on the other hand the package name for the {pecl_url}[PECL smbclient] PHP extension
 
-NOTE: Alternatively you can install `smbclient` from {libsmbclient-php_url}[source,plaintext].
+NOTE: Alternatively you can install `smbclient` from {libsmbclient-php_url}[source].
 
 == php-imagick Library
 
@@ -307,7 +307,9 @@ Example:
 ----
 sudo phpenmod php-ldap
 ----
+
 or
+
 [source,bash]
 ----
 sudo phpdismod php-ldap

@@ -64,7 +64,7 @@ Download the archive of the latest ownCloud version:
   You can download either the `.tar.bz2` or `.zip` archive. Based on the example below, copy the
   link of the selected file and run the following command to download it: +
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2
 ----

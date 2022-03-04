@@ -7,7 +7,7 @@ xref:enterprise/collaboration/collabora_secure_view.adoc[Collabora Online / Secu
 
 `config:app` commands to configure the Collabora Online app.
 
-[source,console]
+[source,plaintext]
 ----
  config:app:get|set
  richdocuments wopi_url            WOPI Server URL
