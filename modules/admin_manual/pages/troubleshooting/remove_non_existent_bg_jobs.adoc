@@ -9,7 +9,7 @@ During the lifecycle of ownCloud, some background jobs may get removed as they a
 
 If the ownCloud log files contain errors like:
 
-[source,text]
+[source]
 ----
 "Exception: {"Exception":"OCP\AppFramework\QueryException","Message":"Could not resolve OCA\User_LDAP\Jobs\UpdateGroups! Class OCA\User_LDAP\Jobs\UpdateGroups does not exist","Code":0,"Trace":"
 
@@ -40,7 +40,7 @@ Use the following command to list all active background jobs triggered by ownClo
 
 The output may look like the following:
 
-[source,text]
+[source]
 ----
 +----+---------------------------------------------------+---------------------------+---------------+
 | Id | Job                                               | Last run                  | Job Arguments |

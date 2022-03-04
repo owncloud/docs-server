@@ -72,7 +72,7 @@ Three options are available for controlling the archiving and expiration policie
 
 Example to set the time passed since upload (or restore) for archiving files to 90 days:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_lifecycle archive_period --value='90'
 ----

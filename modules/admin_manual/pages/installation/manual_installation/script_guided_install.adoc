@@ -19,7 +19,7 @@ TIP: You can also use these scripts if you want to set or reapply strong permiss
 
 * This is a brief overview of main directories in case you use linking. Note that `/mnt/owncloud_data` can be for example nfs mounted. The script takes care of proper linking the source to the target.
 +
-[source,text]
+[source]
 ----
 /mnt/owncloud_data
  └ apps-external
@@ -34,7 +34,7 @@ TIP: You can also use these scripts if you want to set or reapply strong permiss
 
 * This is a brief overview of main directories in case you use standard directories
 +
-[source,text]
+[source]
 ----
 /var/www/owncloud
  └ apps

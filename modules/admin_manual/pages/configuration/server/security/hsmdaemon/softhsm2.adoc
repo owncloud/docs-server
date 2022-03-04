@@ -41,7 +41,7 @@ sudo apt-get install -y softhsm2 libsofthsm2
 To install SoftHSM2, you first have to ensure that you have {opensuse-security-repositories-url}[the official security repository] for your server enabled in your server's repositories list. 
 To check if it is, run the command `zypper lr`, which will show you output similar to the following:
 
-[source,text]
+[source]
 ----
 #  | Alias                     | Name                                    | Enabled | GPG Check | Refresh
 ---+---------------------------+-----------------------------------------+---------+-----------+--------

@@ -96,7 +96,7 @@ the account. This way, only root and the Apache user should have access to the p
 
 * Content template for `owncloud-wnd-listen-SERVER-SHARE`
 +
-[source,text]
+[source]
 ----
 [Unit]
 Description=ownCloud WND Listener for SERVER SHARE

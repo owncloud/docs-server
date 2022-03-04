@@ -40,7 +40,7 @@ Please note that the ownCloud preview system comes already with sensible default
 
 The default list of enabled preview providers which do not need to be explicitly enabled in the config are:
 
-[source,text]
+[source]
 ----
 OC\Preview\BMP
 OC\Preview\GIF
@@ -72,14 +72,14 @@ sudo nano /etc/ImageMagick-7/policy.xml
 
 Search for the following content:
 
-[source,text]
+[source]
 ----
 <policy domain="coder" rights="none" pattern="PDF" />
 ----
 
 and change:
 
-[source,text]
+[source]
 ----
 rights="none" --> rights="read|write"
 ----
@@ -108,7 +108,7 @@ cat resources/config/mimetypemapping.dist.json | grep image
 
 The following providers require the php `imagick` extension:
 
-[source,text]
+[source]
 ----
 OC\Preview\AI
 OC\Preview\EPS
@@ -123,7 +123,7 @@ OC\Preview\TTF
 
 The following providers are only available if either LibreOffice or OpenOffice is installed on the server:
 
-[source,text]
+[source]
 ----
 OC\Preview\MSOfficeDoc
 OC\Preview\MSOffice2003
@@ -134,7 +134,7 @@ OC\Preview\StarOffice
 
 The following providers are available, but disabled by default due to performance or privacy/security concerns:
 
-[source,text]
+[source]
 ----
 OC\Preview\Font
 OC\Preview\Illustrator
