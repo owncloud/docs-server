@@ -70,7 +70,7 @@ To do this, in `/etc/shibboleth/shibboleth2.xml`:
 
 Use the URL of the ownCloud instance as the `entityID` in the `ApplicationDefaults`
 
-[source,bash]
+[source,xml]
 ----
 <ApplicationDefaults entityID="https://<owncloud server FQDN>/login/saml" REMOTE_USER="eppn upn">
 ----
@@ -105,7 +105,6 @@ Configure an XML `MetadataProvider` with the local `filtered-metadata.xml` file
 Under `\https://<owncloud server FQDN>/Shibboleth.sso/Metadata` shibd exposes the metadata that is needed by ADFS to add the SP as a Relying party.
 
 == Active Directory Federation Services (ADFS)
-
 
 This part needs to be done by an ADFS administrator.
 Let him do his job while you continue with the Apache configuration below.

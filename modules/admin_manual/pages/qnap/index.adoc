@@ -179,7 +179,7 @@ Enter the admin user's password and you'll be in the QNAP Console Management - M
 
 In the Console Management you have several options that might be useful at some point:
 
-[source,text]
+[source]
 ----
 +--------------------------------------------------------------------+
 |  Console Management - Main menu                                    |

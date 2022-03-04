@@ -14,11 +14,11 @@ See xref:configuration/files/file_sharing_configuration.adoc#transferring-files-
 
 == How do I deal with problems caused by using self-signed SSL certificates?
 
-See xref:configuration/server/occ_command.adoc#security[the security section of the OCC command].
+See the xref:configuration/server/occ_command.adoc#security[security section of the OCC command].
 
 == I’m the admin and I lost my password! What do I do now!
 
-See xref:configuration/user/reset_admin_password.adoc[the reset admin password documentation].
+See the xref:configuration/user/reset_admin_password.adoc[reset admin password documentation].
 
 == What is a Federated System?
 

@@ -12,7 +12,7 @@ As the ownCloud server administrator, you have two `occ` commands for
 permanently deleting files from the Trashbin manually, without waiting
 for the normal aging-out process:
 
-[source,text]
+[source]
 ----
 trashbin
  trashbin:cleanup   Remove deleted files
