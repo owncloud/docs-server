@@ -157,7 +157,7 @@ Edit Raw Filter Instead::
 Clicking on this text toggles the filter mode, and you can enter the raw LDAP filter directly. 
 Example:
 
-[source]
+[source,plaintext]
 ----
 include::example$configuration/user/user_auth_ldap/group_filter.ldif[]
 ----
@@ -175,7 +175,7 @@ Active Directory offers "_Recursive retrieval of all AD group memberships of a u
 This means that you would be able to search the group you enter and all the other child groups from this group for users.
 Enter this filter to access this feature for a single group:
 
-[source]
+[source,plaintext]
 ----
 include::example$configuration/user/user_auth_ldap/single_group_search.ldif[]
 ----
@@ -183,7 +183,7 @@ include::example$configuration/user/user_auth_ldap/single_group_search.ldif[]
 Enter your group name instead of the `<groupname>` placeholder.
 If you want to search multiple groups with this feature, adjust your filter like this:
 
-[source]
+[source,plaintext]
 ----
 include::example$configuration/user/user_auth_ldap/multi_group_search.ldif[]
 ----
@@ -256,7 +256,7 @@ include::example$configuration/user/user_auth_ldap/only_username.ldif[]
 
 * Username or Email Address:
 +
-[source]
+[source,plaintext]
 ----
 include::example$configuration/user/user_auth_ldap/username_email.ldif[]
 ----
@@ -772,7 +772,7 @@ and show only active users.
 
 Here is what the full filter can look like.
 
-[source]
+[source,plaintext]
 ----
 &(|(objectclass=organizationalPerson))
   (!(userAccountControl:1.2.840.113556.1.4.803:=2))
