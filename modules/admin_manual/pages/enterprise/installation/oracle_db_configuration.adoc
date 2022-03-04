@@ -79,7 +79,7 @@ OCI8 extension.
 
 NOTE: Provide: `instantclient,/usr/lib/oracle/12.2/client64/lib` when requested, or let it auto-detect the location (if possible).
 
-[source,console]
+[source,bash]
 ----
 pecl install oci8
 ----

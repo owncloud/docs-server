@@ -47,7 +47,7 @@ TIP: The following OpenSSL command may take quite a while to complete, so be pat
 
 You can place the generated SSL certificate into any directory of your choice by running the following command and changing the value supplied to the `-out` option. We recommend storing it in  `/etc/apache2/` in this guide, solely for simplicity.
 
-[source,console]
+[source,bash]
 ----
 sudo openssl dhparam -out /etc/apache2/dh4096.pem 4096
 ----
@@ -84,7 +84,7 @@ After that, add an Alias directive for the `/.well-known/acme-challenge` locatio
 
 We recommend creating a separate file for storing the `SSL` directives for each site. If these directives already exist on the virtual host for the site, delete them and include the file instead. This way, after the certificate has been created, you can use the file in any virtual host configuration with SSL enabled for which the certificate is valid without reissuing the SSL certificate. It also eases the management for the web site certificate files, as you can easily include or exclude the file in the virtual config with a single remark and it keeps the files' contents compact. 
 
-[source,console]
+[source,bash]
 ----
 cd /etc/apache2/
 sudo mkdir ssl_rules
@@ -134,7 +134,7 @@ IMPORTANT: For the moment, comment out the `Include` directive, as the certifica
 
 With the configuration created, test it by running one of the following two commands:
 
-[source,console]
+[source,bash]
 ----
 sudo apache2ctl configtest
 sudo apache2ctl -t 
@@ -142,7 +142,7 @@ sudo apache2ctl -t
 
 It should not display any errors. If it doesn't, load your new Apache configuration by running the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo apache2ctl graceful
 ----
@@ -175,7 +175,7 @@ Finally, reload (or restart) Apache.
 
 It is now ready to serve HTTPS request for the given domain using the issued certificates.
 
-[source,console]
+[source,bash]
 ----
 sudo service apache2 reload
 ----

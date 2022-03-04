@@ -11,9 +11,9 @@ image:enterprise/external_storage/onedrive/register-an-application.png[Register 
 
 To create a new application:
 
-* Open https://apps.dev.microsoft.com/ in your browser of choice and click "__Create App__".
-* Under "__Properties__", set the application’s name.
-* Click "__Create__".
+* Open https://apps.dev.microsoft.com/ in your browser of choice and click btn:[Create App].
+* Under menu:Properties[], set the application’s name.
+* Click btn:[Create].
 
 With the application created, you can then add a range of further
 settings. However, only a few of them are required for use with
@@ -23,7 +23,7 @@ ownCloud.
 
 image:enterprise/external_storage/onedrive/set-application-name.png[Set the application's name.]
 
-Under "__Application Secrets__", click "__Generate New Password__",
+Under menu:Application Secrets[], click btn:[Generate New Password],
 which generates a password and displays it in a popup window. It is
 required later during when configuring a mount point.
 
@@ -31,9 +31,9 @@ Copy the password to your preferred password manager, as it is only displayed *o
 
 === Redirect URLs
 
-Under "__Platforms__", click "__Add Platform__" and choose
-"__Web__" in the popup window which appears. Only one redirect URL
-field is visible at first, so click "__Add URL__" to add another one.
+Under menu:[Platforms], click btn:[Add Platform] and choose
+btn:[Web] in the popup window which appears. Only one redirect URL
+field is visible at first, so click btn:[Add URL] to add another one.
 
 With two fields available, add two redirect URLs; one for
 `settings/admin` and one for `settings/personal`, as you can see in the

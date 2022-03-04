@@ -49,7 +49,7 @@ restorecon -Rv '/var/www/html/owncloud/'
 If you have customized SELinux policies and these examples do not work,
 you must give the HTTP server write access to these directories:
 
-[source,text]
+[source]
 ----
 /var/www/html/owncloud/data
 /var/www/html/owncloud/config
