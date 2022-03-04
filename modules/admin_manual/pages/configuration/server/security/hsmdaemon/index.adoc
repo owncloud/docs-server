@@ -486,7 +486,7 @@ Set the generated secret for ownCloud:
 
 If the command succeeds, you should see the following console output:
 
-[source]
+[source,plaintext]
 ----
 Config value hsm.jwt.secret for app encryption set to 7a7d1826-b514-4d9f-afc7-a7485084e8de
 ----

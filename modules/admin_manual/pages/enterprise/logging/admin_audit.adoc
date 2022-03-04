@@ -90,7 +90,7 @@ Connect to the deployment server, change `input-prd-your-server-here` according 
 
 To Monitor the ownCloud Splunk audit log, add this to `inputs.conf`, assuming you use the custom logging path/file from above:
 
-[source]
+[source,plaintext]
 ----
 [monitor://var/www/owncloud/data/admin_audit.log]
  disabled = false
@@ -100,7 +100,7 @@ To Monitor the ownCloud Splunk audit log, add this to `inputs.conf`, assuming yo
 
 Finally, configure the following `props.conf` to ensure the time field is correctly used and the fields are extracted.
 
-[source]
+[source,plaintext]
 ----
 [_json]
  INDEXED_EXTRACTIONS = json
