@@ -9,7 +9,7 @@ ownCloud provides several authentication options for mounting storages. Dependin
 
 The following table shows which authentication option is available for which edition of ownCloud. 
 
-[width="70%",cols="35%,^20%,^20%",options="header"]
+[width="80%",cols="35%,^20%,^20%",options="header"]
 |===
 | Authentication Method
 | Free Edition
@@ -184,7 +184,7 @@ Note that sub-keys, except the password key are not used as elements for the mou
 +
 Nested arrays are beneficial when having more than one server (host) with a password, but keeping them together in one master key. To access a particular sub-key in the mount definition, use the following scheme:
 +
-[source,text]
+[source]
 ----
 <key>#<sub-key-level-1>#<sub-key-level-2>...
 ----
@@ -199,7 +199,7 @@ From the example above, +
 Single array::
 Taking the single array example above to use the password for the mount, the value to be entered would be like:
 +
-[source,text]
+[source]
 ----
 customApp.config
 ----
@@ -207,7 +207,7 @@ customApp.config
 Nested arrays::
 Taking the nested array example above to use the password for the mount for the host with sub-key `server1`, the value to be entered would be like:
 +
-[source,text]
+[source]
 ----
 customApp.config#server1
 ----

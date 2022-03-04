@@ -174,10 +174,13 @@ You can find the set values by working with the output of the `mount` command on
 
 [source,console]
 ----
-#root@server:~# mount | egrep -o rsize=[0-9]*
+root@server:~# mount | egrep -o rsize=[0-9]*
 rsize=65536
+----
 
-#root@server:~# mount | egrep -o wsize=[0-9]*
+[source,console]
+----
+root@server:~# mount | egrep -o wsize=[0-9]*
 wsize=65536
 ----
 
@@ -185,13 +188,13 @@ The information can also be retrieved using the command set of your dedicated st
 Once you've determined the best sizes, set them permanently by passing the (`rsize` and `wsize`) options when mounting the share or in the share's mount configuration.
 
 .Specifying the read and write block sizes when calling mount
-[source, console]
+[source,bash]
 ----
-mount 192.168.0.104:/data  /mnt -o rsize=65536,wsize=65536
+mount 192.168.0.104:/data /mnt -o rsize=65536,wsize=65536
 ----
 
 .Example for a set of NFS mount options:
-[source, console]
+[source,console]
 ----
 bg,nfsvers=3,wsize=65536,rsize=65536,tcp,_netdev
 ----
@@ -209,7 +212,7 @@ Keep in mind that MTU = payload (`packetsize`) + 28.
 You can find the current MTU size for each interface using _netstat_, _ifconfig_, _ip_, and _cat_, as in the following examples:
 
 .Retrieve interface MTU size with netstat
-[source,console]
+[source,bash]
 ----
 netstat -i
 
@@ -220,7 +223,7 @@ eth0      1500  3138292      0      0 0       2049155      0      0      0 BMR
 ----
 
 .Retrieve interface MTU size with ifconfig
-[source,console]
+[source,bash]
 ----
 ifconfig| grep -i MTU
 
@@ -229,7 +232,7 @@ eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 ----
 
 .Retrieve interface MTU size with ip
-[source,console]
+[source,bash]
 ----
 ip addr | grep mtu
 
@@ -238,7 +241,7 @@ ip addr | grep mtu
 ----
 
 .Retrieve interface MTU size with cat
-[source,console]
+[source,bash]
 ----
 cat /sys/class/net/<interface>/mtu
 ----
@@ -247,7 +250,7 @@ cat /sys/class/net/<interface>/mtu
 
 To check if a particular packet size will be fragmented on the way to the target, run the following command:
 
-[source, console]
+[source,bash]
 ----
 ping <your-storage-backend> -c 3 -M do -s <packetsize>
 ----
@@ -256,14 +259,14 @@ ping <your-storage-backend> -c 3 -M do -s <packetsize>
 
 To get the optimal MTU size, run following command:
 
-[source, console]
+[source,bash]
 ----
 tracepath <your-storage-backend>
 ----
 
 You can expect to see output like the following:
 
-[source, console]
+[source,console]
 ----
  1?: [LOCALHOST]                      pmtu 1500 <1>
  1:  <your-storage-backend>                              0.263ms reached <2>

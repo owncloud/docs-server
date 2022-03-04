@@ -84,11 +84,14 @@ The configuration is done in several steps:
 
 For enhanced security, create a file where the credentials are stored accessing the cifs share like:
 
-`/etc/credentials`
+[source]
+----
+/etc/credentials
+----
 
 with the username and password on separate lines, replacing the values according your setup:
 
-[source,text]
+[source]
 ----
 username=winhomeuser
 password=winhomepassword
@@ -96,7 +99,7 @@ password=winhomepassword
 
 Create an entry in `/etc/fstab` for the remote Windows root home directory mount and use the credentials file created above, substitute and adapt your parameters and filenames:
 
-[source,text]
+[source]
 ----
 //192.168.1.58/home /mnt/share/users cifs credentials=/etc/credentials,uid=33,gid=33
 ----
