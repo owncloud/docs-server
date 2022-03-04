@@ -2,7 +2,7 @@
 
 The `activity` command is used for sending automated activity email notifications in ownCloud server.
 
-[source,console]
+[source,plaintext]
 ----
  activity
   activity:send-emails  Send all pending activity emails now

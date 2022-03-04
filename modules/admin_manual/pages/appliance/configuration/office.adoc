@@ -20,7 +20,7 @@ First you have to get to the Appcenter. Here are the steps to do that:
 
 . Connect to your appliance using the IP address or domain name.
 
-[source,console]
+[source,plaintext]
 ----
 https://172.16.40.100
 # or
@@ -142,7 +142,7 @@ image:appliance/ucs/onlyoffice/021-ucs-owncloud-settings-general.png[General sec
 
 ** Enter the OnlyOffice server address in the following format and *save* it:
 +
-[source,console]
+[source,plaintext]
 ----
 https://<your-domain-name>/onlyoffice-documentserver/
 ----
@@ -173,6 +173,7 @@ Here are the required steps:
 
 If you purchased the ONLYOFFICE Enterprise Edition and received the `license.lic` file, you need to import it:
 
+[source,plaintext]
 ----
 /var/lib/univention-appcenter/apps/onlyoffice-ie/Data/license.lic
 ----

@@ -397,7 +397,7 @@ postgres=# \q
 
 === How to Solve Deadlock Errors
 
-[source,console]
+[source,plaintext]
 ----
 SQLSTATE[40001]: Serialization failure: 1213 Deadlock found when trying to get lock; try restarting transaction
 ----

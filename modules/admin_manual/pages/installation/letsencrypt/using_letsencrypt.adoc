@@ -55,6 +55,7 @@ sudo certbot register --agree-tos --email <your-email-address>
 
 When it executes, you’ll see a question similar to the following, which you can answer "Yes" or "No":
 
+[source,plaintext]
 ----
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
 
@@ -69,6 +70,7 @@ our work to encrypt the web, protect its users and defend digital rights.
 
 When that completes, you’ll see a message similar to the following:
 
+[source,plaintext]
 ----
 IMPORTANT NOTES:
  1. Your account credentials have been saved in your Certbot
@@ -142,7 +144,7 @@ If you're logged in to your server as a user other than root, you'll likely need
 
 This file defines some default settings used by Certbot. Use the email address you registered with. Comment or uncomment the post-hook parameter depending on if you want to run post hooks. Running post hooks will reload the web server configuration automatically if a certificate has been renewed.
 
-[source,console]
+[source,ini]
 ----
 include::example$installation/lets_encrypt/cli.ini[]
 ----
@@ -151,7 +153,7 @@ include::example$installation/lets_encrypt/cli.ini[]
 ====
 For the following scripts, replace the path to Certbot and the Certbot script name based on your installation. You can find it by running:
 
-[source,console]
+[source,plaintext]
 ----
 which certbot
 ----
@@ -161,7 +163,7 @@ which certbot
 
 This script lists all your issued certificates.
 
-[source,console]
+[source,bash]
 ----
 include::example$installation/lets_encrypt/list.sh[]
 ----
@@ -173,7 +175,7 @@ This script:
 * Renews all your issued certificates.
 * In case you have enabled the post hook for your web server in `cli.ini`, it will reload the web server configuration automatically if a certificate has been renewed.
 
-[source,console]
+[source,bash]
 ----
 include::example$installation/lets_encrypt/renew.sh[]
 ----
@@ -187,7 +189,7 @@ This script:
 
 NOTE: This script is intended for use via Cron.
 
-[source,console]
+[source,bash]
 ----
 include::example$installation/lets_encrypt/renew-cron.sh[]
 ----
@@ -197,7 +199,7 @@ include::example$installation/lets_encrypt/renew-cron.sh[]
 This script deletes an issued certificate. +
 Use the `list.sh` script to list issued certificates.
 
-[source,console]
+[source,bash]
 ----
 include::example$installation/lets_encrypt/delete.sh[]
 ----
@@ -211,7 +213,7 @@ The following example script creates a certificate for a domain or sub-domains, 
 You can create different certificates for different sub-domains, such as `example.com`, `www.example.com`, and `subdomain.example.com` by creating different scripts.
 ====
 
-[source,console]
+[source,bash]
 ----
 include::example$installation/lets_encrypt/your-domain-name.sh[]
 ----

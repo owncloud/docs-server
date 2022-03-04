@@ -6,7 +6,7 @@ Group names are case-sensitive, so "Finance" and "finance" are two different gro
 
 The full list of commands is:
 
-[source,console]
+[source,plaintext]
 ----
 group
  group:add                           Adds a group

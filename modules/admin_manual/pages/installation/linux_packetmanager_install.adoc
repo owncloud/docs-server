@@ -29,7 +29,7 @@ Here are the ways to do so for xref:apt[APT], xref:yum[Yum], and xref:zypper[Zyp
 
 If you are using APT, use {apt-mark-hold-url}[apt-mark hold] to  mark the `owncloud-complete-files` package as held. Here’s an example of how to do so:
 
-[source,console]
+[source,bash]
 ----
 apt-mark hold owncloud-complete-files
 ----
@@ -153,7 +153,7 @@ Downgrading is not supported and risks corrupting your data! If you want to reve
 
 See installation_wizard for important steps, such as choosing the best database and setting correct directory permissions. See the xref:installation/selinux_configuration.adoc[SELinux Configuration Guide] for a suggested configuration for SELinux-enabled distributions such as _Fedora_ and _CentOS_.
 
-If your distribution is not listed, your Linux distribution may maintain its own ownCloud packages or you may prefer to xref:installation/manual_installation/manual_installation.adoc[install from source,plaintext].
+If your distribution is not listed, your Linux distribution may maintain its own ownCloud packages or you may prefer to xref:installation/manual_installation/manual_installation.adoc[install from source].
 
 === Archlinux
 

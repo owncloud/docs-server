@@ -2,7 +2,7 @@
 
 These commands view and configure your ownCloud logging preferences.
 
-[source,console]
+[source,plaintext]
 ----
 log
  log:manage     Manage logging configuration

@@ -135,7 +135,7 @@ If an upgrade is available, you then need to run the
 
 [source,console]
 ----
-univention-app upgrade owncloud
+root@ucs-9446:~# univention-app upgrade owncloud
 ----
 
 You will have to enter your Administrator password to start the upgrade.

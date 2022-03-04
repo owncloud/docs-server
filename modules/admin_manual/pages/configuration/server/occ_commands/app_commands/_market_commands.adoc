@@ -4,7 +4,7 @@ Marketplace URL: {oc-marketplace-url}/apps/market[Market]
 
 The `market` commands _install_, _uninstall_, _list_, and _upgrade_ applications from the ownCloud Marketplace.
 
-[source,console]
+[source,plaintext]
 ----
 market
   market:install    Install apps from the marketplace. If already installed and

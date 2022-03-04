@@ -4,7 +4,7 @@ Use these commands when you manage full text search related tasks.
 
 == Command Description
 
-[source,console]
+[source,plaintext]
 ----
 search
   search:index:create    Create initial Search Index for one or all users. 
