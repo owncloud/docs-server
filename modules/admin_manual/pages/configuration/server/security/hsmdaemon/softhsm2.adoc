@@ -75,7 +75,7 @@ sudo zypper addrepo \
 
 Running `zypper lr` again should now display an additional line:
 
-[source,bash]
+[source,plaintext]
 ----
 13 | security                 | openSUSE-Leap-15.3-Security             | Yes     | (r ) Yes  | No
 ----
