@@ -115,7 +115,7 @@ zypper removelock owncloud-complete-files
 The package comes without dependencies which means, that the server will not directly run after installing it.
 
 To get the dependencies installed and configured, follow one of the guides provided in section 
-xref:installation/manual_installation/index.adoc[Manual Installation on Linux]
+xref:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux]
 
 NOTE: See the system_requirements for the recommended ownCloud setup and supported platforms.
 
