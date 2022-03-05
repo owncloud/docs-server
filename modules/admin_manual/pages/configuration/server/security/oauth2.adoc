@@ -80,7 +80,7 @@ To install the application, download the {oc-marketplace-url}/apps/oauth2[OAuth2
 
 To enable token-only based app or client logins in `config/config.php`, set `token_auth_enforced` to `true`. See xref:configuration/server/config_sample_php_parameters.adoc[config sample file] for more details.
 
-TIP: The OAuth2 app comes with a set of ´occ´ commands to configure clients. For more information on usage of ´occ´ for OAuth2, see section xref:server/occ_commands/app_commands/_oauth2_commands.adoc[OAuth2 Commands].
+TIP: The OAuth2 app comes with a set of ´occ´ commands to configure clients. For more information on usage of ´occ´ for OAuth2, see section xref:configuration/server/occ_commands/app_commands/_oauth2_commands.adoc[OAuth2 Commands].
 
 ==== Trusting Clients
 
