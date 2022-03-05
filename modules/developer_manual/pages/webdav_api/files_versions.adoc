@@ -6,11 +6,14 @@
 
 == Introduction
 
-The files versions API allows for two things:
+// The files versions API allows for two things:
+
+The files versions API allows the following:
 
 * xref:list-file-versions[Listing file versions]
-* xref:restore-another-version-of-a-file[Restoring previous versions of files]
 
-//Note that "xref:restore-another-version-of-a-file" is missing in the included partial... using git log --follow -p modules/developer_manual/pages/_partials/webdav_api/files_versions/list_files_versions.adoc does not return a deletion = it was missing from teh beginning
+// * xref:restore-another-version-of-a-file[Restoring previous versions of files]
+
+// Note that "xref:restore-another-version-of-a-file" is missing in the included partial... using git log --follow -p modules/developer_manual/pages/_partials/webdav_api/files_versions/list_files_versions.adoc does not return a deletion = it was missing from the beginning
 
 include::partial$webdav_api/files_versions/list_files_versions.adoc[leveloffset=+1]
