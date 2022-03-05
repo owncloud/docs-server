@@ -199,6 +199,7 @@ sudo service hsmdaemon start
 
 If it installs successfully, you should see the following console output:
 
+[source,plaintext]
 ----
 Install HSM Daemon:           [  OK  ]
 ----
@@ -218,6 +219,7 @@ The daemon is managed using the following three commands:
 
 To set the path to the PKCS11 module, update the line below in `/etc/hsmdaemon/hsmdaemon.toml`, with the appropriate path on your system.
 
+[source,toml]
 ----
 [pkcs11]
 # softhsm v2
@@ -231,7 +233,10 @@ This command lists the available slots.
 [source,bash]
 ----
 sudo hsmdaemon listslots
+----
 
+[source,plaintext]
+----
 {"level":"debug","ts":"2019-02-14T09:27:02.068+0100","caller":"hsmdaemon/keymanager.go:27","msg":"initialize pkcs11 module","module":"/usr/lib/softhsm/libsofthsm2.so"}
 {"level":"info","ts":"2019-02-14T09:27:02.087+0100","caller":"hsmdaemon/keymanager.go:65","msg":"Slots found","slotIds":[550099622,1989683358,2]}
 Available slots:
@@ -369,9 +374,15 @@ You should see output similar to the example below:
 [source,bash]
 ----
 key_id=$(sudo grep "generated keypair" /var/log/hsm.log | head -1 | jq .tokenID -r)
+----
 
+[source,plaintext]
+----
 hello="Hello, world!"
+----
 
+[source,bash]
+----
 echo "$hello" | base64
 
 SGVsbG8sIHdvcmxkIQo=
@@ -431,7 +442,10 @@ During ownCloud config, you might want to run the hsmdaemon service in the foreg
 [source,bash]
 ----
 sudo hsmdaemon
+----
 
+[source,plaintext]
+----
 {
     "level": "info",
     "ts": "2019-02-14T09:32:59.081+0100",
@@ -465,7 +479,9 @@ Generate a shared secret to use for the `hsmdaemon`.
 [source,bash]
 ----
 cat /proc/sys/kernel/random/uuid
-
+----
+[source,plaintext]
+----
 7a7d1826-b514-4d9f-afc7-a7485084e8de
 ----
 
@@ -505,7 +521,7 @@ Enable the HSM mode and enable encryption by running the commands in the followi
 
 If the commands are successful, you should see the following console output:
 
-[source,bash]
+[source,plaintext]
 ----
 encryption enabled
 

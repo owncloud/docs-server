@@ -3,6 +3,7 @@
 
 Welcome to the ownCloud Appliance. Here are the login credentials.
 
+[source,plaintext]
 ----
 username: owncloud
 password: owncloud
@@ -10,6 +11,7 @@ password: owncloud
 
 Log in to the Appliance via command line or SSH with the root account.
 
+[source,plaintext]
 ----
 username: root
 password: <Administrator password>
@@ -23,6 +25,7 @@ univention-app shell owncloud
 
 Set ownCloud as the default page instead of the Univention Portal
 
+[source,bash]
 ----
 ucr set apache2/startsite=/owncloud
 service apache2 restart
@@ -30,18 +33,21 @@ service apache2 restart
 
 ownCloud's data directory is under the following path:
 
+[source,bash]
 ----
 /var/lib/univention-appcenter/apps/owncloud/data
 ----
 
 ownCloud's config directory, containing config.php:
 
+[source,bash]
 ----
 /var/lib/univention-appcenter/apps/owncloud/conf
 ----
 
 File extension blacklist for the Ransomware app:
 
+[source,bash]
 ----
 /var/lib/univention-appcenter/apps/owncloud/data/custom/ransomware_protection/blacklist.txt.dist
 ----

@@ -10,6 +10,7 @@ instead of `\https://example.com/index.php/apps/files/`, you can enable it by fo
 
 Log in to the Docker container running ownCloud, and execute the following command on the host system of the appliance:
 
+[source,bash]
 ----
 univention-app shell owncloud
 ----
@@ -17,6 +18,7 @@ univention-app shell owncloud
 Your web server needs to have the following modules enabled: `mod_rewrite` and `mod_env`.
 If you have not yet enabled these modules, or are not sure if you have, execute these commands:
 
+[source,apache]
 ----
 a2enmod env rewrite
 ----
@@ -25,6 +27,7 @@ You need an *owncloud.conf* in your `/etc/apache2/sites-available/` directory.
 
 Open `/etc/apache2/sites-available/owncloud.conf` in nano, Vim, or your editor of choice, and paste the following:
 
+[source,apache]
 ----
 Alias /owncloud "/var/www/owncloud/"
 
@@ -44,6 +47,7 @@ Alias /owncloud "/var/www/owncloud/"
 
 Then create a symlink to `/etc/apache2/sites-enabled`, as follows:
 
+[source,bash]
 ----
 ln -s /etc/apache2/sites-available/owncloud.conf /etc/apache2/sites-enabled/owncloud.conf
 ----
@@ -52,6 +56,7 @@ ln -s /etc/apache2/sites-available/owncloud.conf /etc/apache2/sites-enabled/ownc
 
 Adjust your config.php to look like the following:
 
+[source,php]
 ----
 'overwrite.cli.url' => 'https://example.com/owncloud',
 'htaccess.RewriteBase' => '/owncloud',
@@ -59,12 +64,14 @@ Adjust your config.php to look like the following:
 
 Execute the command:
 
+[source,bash,subs="attributes+"]
 ----
-occ maintenance:update:htaccess
+{occ-command-example-prefix} maintenance:update:htaccess
 ----
 
 Restart or reload your Apache server, by running the following command:
 
+[source,bash]
 ----
 service apache2 reload
 ----
