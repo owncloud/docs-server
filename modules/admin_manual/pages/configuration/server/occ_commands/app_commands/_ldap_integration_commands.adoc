@@ -356,7 +356,7 @@ Available keys, along with default values for configValue, are listed in the tab
 | ldapGroupMemberAssocAttr      | uniqueMember
 | ldapHost                      | ldap://host
 | ldapIgnoreNamingRules         |
-| ldapLoginFilteplaintext       | (&((objectclass=inetOrgPerson))(uid=%uid))
+| ldapLoginFilter               | (&((objectclass=inetOrgPerson))(uid=%uid))
 | ldapLoginFilterAttributes     |
 | ldapLoginFilterEmail          | 0
 | ldapLoginFilterMode           | 0
