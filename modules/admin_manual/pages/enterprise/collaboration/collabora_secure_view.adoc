@@ -53,7 +53,7 @@ Once enabled, default share permissions for all users can be enabled. Currently,
 
 * *{secure-view-label}*. 
    When enabled, files are shared in secure view mode. In this mode, all the
-   xref:secure-view-limitations[Secure View Limitations] take effect. 
+   xref:limitations-and-security-hardening[Limitations and Security Hardening] take effect. 
    When this mode and "_can edit_" are disabled, the share is a regular "read-only" share.
 * *Can print / export PDF*. 
 +
