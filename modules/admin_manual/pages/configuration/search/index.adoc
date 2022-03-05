@@ -38,7 +38,7 @@ TIP: The index can also be managed from the command line, via the xref:configura
 
 These commands let administrators _create_, _rebuild_, _reset_, and _update_ the search index.
 
-To find out more about usage, check out the section in the User Manual: xref:user_manual:/files/webgui/search.adoc[Search & Full Text Search].
+To find out more about usage, check out the section in the User Manual: xref:{latest-webui-version}@webui:classic_ui:files/webgui/search.adoc[Search & Full Text Search].
 
 == Known Limitations
 

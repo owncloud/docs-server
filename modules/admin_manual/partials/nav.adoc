@@ -10,7 +10,7 @@
 *** xref:admin_manual:installation/configuration_notes_and_tips.adoc[Configuration Notes and Tips]
 *** xref:admin_manual:installation/index.adoc[Installation Options]
 **** xref:admin_manual:installation/docker/index.adoc[Installing With Docker]
-**** xref:admin_manual:installation/manual_installation/index.adoc[Manual Installation on Linux]
+**** Manual Installation on Linux
 ***** Detailed Installation Guide
 ****** xref:admin_manual:installation/manual_installation/manual_installation.adoc[Install ownCloud on Ubuntu 20.04]
 ***** Quick Installation Guide

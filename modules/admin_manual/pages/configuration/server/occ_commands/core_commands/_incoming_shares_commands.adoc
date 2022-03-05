@@ -2,7 +2,7 @@
 
 This command must be used if received federated shares are being referenced by desktop clients but not regularly accessed via the webUI.
 This is because, for performance reasons, federated shares do not update automatically.
-Instead, federated share directories are only updated when users browse them using the xref:user_manual:files/webgui/overview.adoc[webUI].
+Instead, federated share directories are only updated when users browse them using the xref:{latest-webui-version}@webui:classic_ui:files/webgui/overview.adoc[webUI].
 
 ownCloud and system administrators can use the `incoming-shares:poll` command to poll federated shares for updates.
 

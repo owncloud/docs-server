@@ -125,7 +125,7 @@ image:configuration/integration/ms-teams/download-zip-msteamsgen.png[,width=80%]
 .. {manage-apps-url}[Manage your apps in the Microsoft Teams admin center]
 .. {teams-app-setup-policies-url}[Manage app setup policies in Microsoft Teams] 
 
-See the xref:user_manual:integration/ms-teams.adoc[users documentation] about their necessary steps how to integrate ownCloud into Microsoft Teams.
+See the xref:{latest-webui-version}@webui:classic_ui:integration/ms-teams.adoc[users documentation] about their necessary steps how to integrate ownCloud into Microsoft Teams.
 
 === Alternative ownCloud Website Tab
 
