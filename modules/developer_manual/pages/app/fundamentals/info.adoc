@@ -150,7 +150,7 @@ Common places are: (where `$name` is the name of your app, e.g.
 $DOCUMENTATION_BASE = 'https://doc.owncloud.com';
 $DOCUMENTATION_DEVELOPER = $DOCUMENTATION_BASE.'/server/'.$VERSIONS_SERVER_MAJOR_DEV_DOCS.'/developer_manual/$name/';`
 $DOCUMENTATION_ADMIN = $DOCUMENTATION_BASE.'/server/'.$VERSIONS_SERVER_MAJOR_STABLE.'/admin_manual/$name/';
-$DOCUMENTATION_USER = $DOCUMENTATION_BASE.'/server/'.$VERSIONS_SERVER_MAJOR_STABLE.'/user_manual/$name/';
+$DOCUMENTATION_USER = $DOCUMENTATION_BASE.'/webui/next/classic_ui/.$name/';
 ----
 
 These places are maintained at

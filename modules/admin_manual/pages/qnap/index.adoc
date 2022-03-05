@@ -48,7 +48,7 @@ image:qnap/qnap_main_menu.png[QNAP Main Menu and ownCloud installed]
 
 Log in as user `admin`. The default password is `admin` until you change it. In the upper right-hand corner, click on menu:Admin[Settings]. In the left-hand navigation bar, you find personal configuration options and administration-specific options. Under menu:Personal[General] you can change the password of your admin user.
 
-For more information on the web interface, refer to the xref:user_manual:webinterface.adoc[Web UI] documentation.
+For more information on the web interface, refer to the xref:{latest-webui-version}@webui:classic_ui:webinterface.adoc[Web UI] documentation.
 
 === Configure your Email.
 

@@ -129,7 +129,7 @@ characters in length.
 The comment is attributed to the user making the request.
 
 To retrieve a file id, refer to the
-xref:user_manual:files/access_webdav.adoc[relevant section of the documentation].
+xref:{latest-webui-version}@webui:classic_ui:files/access_webdav.adoc[relevant section of the documentation].
 
 === Response
 
