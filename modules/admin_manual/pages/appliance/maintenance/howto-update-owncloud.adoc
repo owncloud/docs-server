@@ -124,6 +124,10 @@ information about the current state of every installed App.
 [source,console]
 ----
 root@ucs-9446:~# univention-app info
+
+----
+[source,plaintext]
+----
 UCS: 4.2-1 errata165
 App Center compatibility: 4
 Installed: 4.1/owncloud=10.0.1-20170523
@@ -152,6 +156,10 @@ longer upgradable.
 [source,console]
 ----
 root@ucs-9446:~# univention-app info
+----
+
+[source,plaintext]
+----
 UCS: 4.2-1 errata165
 App Center compatibility: 4
 Installed: 4.1/owncloud=10.0.3-20170918
@@ -180,6 +188,7 @@ Given that, you first have to uninstall the existing version and then
 install the 10.x version. To do so, run the following commands:
 
 The following assumes that owncloud82 is the currently installed version
+
 [source,console]
 ----
 univention-app remove owncloud82
