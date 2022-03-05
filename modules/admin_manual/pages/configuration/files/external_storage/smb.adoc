@@ -12,7 +12,7 @@ ownCloud can connect to Windows file servers, and other SMB-compatible servers (
 == Dependencies
 
 To connect ownCloud to an SMB file server, you need to prepare your server. Please see the
-xref:installation/manual_installation/index.adoc[Manual Installation on Linux] guides for more
+xref:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux] guides for more
 information, prerequisites and requirements.
 
 == Access Testing
