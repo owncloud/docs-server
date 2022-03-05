@@ -21,7 +21,7 @@ TIP: For the opt-in function to work, ImageMagick and php-imagick are required t
 
 === Tasks for the User
 
-Because the user has to opt in, see the xref:user_manual:personal_settings/security.adoc[Security section in Personal Settings] for tasks on the user side.
+Because the user has to opt in, see the xref:{latest-webui-version}@webui:classic_ui:personal_settings/security.adoc[Security section in Personal Settings] for tasks on the user side.
 
 === Second Factor is Inaccessible
 

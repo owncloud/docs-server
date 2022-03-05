@@ -10,7 +10,7 @@ The {oc-marketplace-url}/apps/workflow[Workflow App] enables admins to specify r
 * Retention
 
 The Workflow App should be enabled by default (Apps page), and the three configuration modules will be visible on your ownCloud Admin page. See
-xref:user_manual:files/webgui/tagging.adoc[Tagging Files]
+xref:{latest-webui-version}@webui:classic_ui:files/webgui/tagging.adoc[Tagging Files]
 in the ownCloud User manual to learn how to apply and filter tags on files.
 
 == Tag Manager
