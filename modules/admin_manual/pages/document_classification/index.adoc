@@ -59,7 +59,7 @@ Employing document classification and respective policies in ownCloud generally 
 
 === Tags for Classification
 
-Document classification levels in ownCloud are represented via xref:user_manual:files/webgui/tagging.adoc[Collaborative Tags].
+Document classification levels in ownCloud are represented via xref:{latest-webui-version}@webui:classic_ui:files/webgui/tagging.adoc[Collaborative Tags].
 Different categories of tags can be used to achieve different behaviors for users; these are detailed in the table below.
 
 .Tag Categories Available in ownCloud
@@ -158,7 +158,7 @@ There are three default BAF categories that come with different classification l
 - National Security
 - Export Control
 
-Assume you want to use the BAF category "_Intellectual Property_" and take the classification level for documents classified as "_Confidential_" over to ownCloud, to set up a policy that prevents said documents from being shared via a xref:user_manual:files/public_link_shares.adoc[public link].
+Assume you want to use the BAF category "_Intellectual Property_" and take the classification level for documents classified as "_Confidential_" over to ownCloud, to set up a policy that prevents said documents from being shared via a xref:{latest-webui-version}@webui:classic_ui:files/public_link_shares.adoc[public link].
 This is how you set up an automated classification and the feature policy in ownCloud:
 
 * As an ownCloud administrator, navigate to menu:Settings[Workflows & Tags].

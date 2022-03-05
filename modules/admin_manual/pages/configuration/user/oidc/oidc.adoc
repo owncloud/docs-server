@@ -233,7 +233,7 @@ If your users are logged in to their desktop and mobile clients via basic authen
 
 Once the OpenID Connect App is enabled, token-only authentication is enforced and service discovery is properly set up, the ownCloud clients will ask the users to re-authenticate. After a successful re-authentication, the migration is done.
 
-To connect legacy clients, users have to generate xref:user_manual:personal_settings/security.adoc#app-passwords-tokens[special app passwords (tokens)].
+To connect legacy clients, users have to generate xref:{latest-webui-version}@webui:classic_ui:personal_settings/security.adoc#app-passwords-tokens[special app passwords (tokens)].
 
 === Migrate Clients from OAuth2 to OIDC
 

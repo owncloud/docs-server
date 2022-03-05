@@ -13,6 +13,9 @@ content:
   - url: https://github.com/owncloud/docs.git
     branches:
     - master
+  - url: https://github.com/owncloud/docs-webui.git
+    branches:
+    - master
 
 ui:
   output_dir: assets
