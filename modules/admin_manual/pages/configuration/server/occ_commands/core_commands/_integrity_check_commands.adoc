@@ -4,7 +4,7 @@ Apps which have an official tag *must* be code signed.
 Unsigned official apps won't be installable anymore. 
 Code signing is optional for all third-party applications.
 
-[source,console]
+[source,plaintext]
 ----
 integrity
  integrity:check-app                 Check app integrity using a signature.

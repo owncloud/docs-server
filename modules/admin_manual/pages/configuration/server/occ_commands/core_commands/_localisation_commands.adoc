@@ -5,7 +5,7 @@ This command creates JavaScript and JSON translation files for ownCloud applicat
 NOTE: The command does not update existing translations if the source translation file has been updated. 
 It only creates translation files when none are present for a given language.
 
-[source,console]
+[source,plaintext]
 ----
 l10n
   l10n:createjs                Create Javascript translation files for a given app

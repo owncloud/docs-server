@@ -2,7 +2,7 @@
 
 Marketplace URL: {oc-marketplace-url}/apps/user_ldap[LDAP Integration]
 
-[source,console]
+[source,plaintext]
 ----
 ldap
  ldap:check-user               Checks whether a user exists on LDAP
@@ -155,7 +155,7 @@ Rekha Craft (Rekha.Craft)
 
 This only works if the ownCloud server is connected to an LDAP server.
 
-[source,bash,subs="attributes+"]
+[source,plaintext]
 ----
 ldap:check-user [options] [--] <ocName>
 ----
@@ -194,7 +194,7 @@ Example:
 
 Create an empty LDAP configuration.
 
-[source,bash,subs="attributes+"]
+[source,plaintext]
 ----
 ldap:create-empty-config [<configID>]
 ----
@@ -263,7 +263,7 @@ View the configuration for a single `configID`:
 
 Deletes an existing LDAP configuration.
 
-[source,bash,subs="attributes+"]
+[source,plaintext]
 ----
  ldap:delete-config <configID>
 ----
@@ -356,7 +356,7 @@ Available keys, along with default values for configValue, are listed in the tab
 | ldapGroupMemberAssocAttr      | uniqueMember
 | ldapHost                      | ldap://host
 | ldapIgnoreNamingRules         |
-| ldapLoginFilter               | (&((objectclass=inetOrgPerson))(uid=%uid))
+| ldapLoginFilteplaintext       | (&((objectclass=inetOrgPerson))(uid=%uid))
 | ldapLoginFilterAttributes     |
 | ldapLoginFilterEmail          | 0
 | ldapLoginFilterMode           | 0
@@ -415,7 +415,7 @@ The configuration is valid and the connection could be established!
 In the example above, the interval is being set to 7200 seconds.
 Assuming the above example was used, the command would output the following:
 
-[source,console]
+[source,plaintext]
 ----
 Config value updateAttributesInterval for app user_ldap set to 7200
 ----

@@ -4,7 +4,7 @@ Marketplace URL: {oc-marketplace-url}/apps/oauth2[OAuth2]
 
 Use these commands to configure OAuth2 clients via the OAuth2 app:
 
-[source,console]
+[source,plaintext]
 ----
 oauth2
   oauth2:add-client     Adds an OAuth2 client
@@ -17,7 +17,7 @@ oauth2
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 oauth2:add-client <name> <client-id> <client-secret> <redirect-url> [<allow-sub-domains> [<trusted> [<force-trust>]]]
 ----
@@ -52,7 +52,7 @@ oauth2:add-client <name> <client-id> <client-secret> <redirect-url> [<allow-sub-
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 oauth2:list-clients [options]
 ----
@@ -66,7 +66,7 @@ oauth2:list-clients [options]
 |===
 
 .Example Output
-[source]
+[source,plaintext]
 ----
   - Desktop Client:
     - name: Desktop Client
@@ -95,7 +95,7 @@ oauth2:list-clients [options]
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 oauth2:modify-client <name> <key> <value>
 ----
@@ -119,7 +119,7 @@ oauth2:modify-client <name> <key> <value>
 
 === Usage
 
-[source,console]
+[source,plaintext]
 ----
 oauth2:remove-client <client-id>
 ----

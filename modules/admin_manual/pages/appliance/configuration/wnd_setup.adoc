@@ -26,6 +26,7 @@ with following content under +
 Take care to also adjust the paths in `WorkingDirectory` and `ExecStart`
 according to your installation.
 +
+[source,plaintext]
 ----
 [Unit]
 Description=ownCloud WND Listener for SERVER SHARE
@@ -49,7 +50,7 @@ WantedBy=multi-user.target
 
 * Run once for each created file the following commands:
 +
-[source,console]
+[source,bash]
 ----
 sudo systemctl enable owncloud-wnd-listen-SERVER-SHARE.service
 sudo systemctl start  owncloud-wnd-listen-SERVER-SHARE.service

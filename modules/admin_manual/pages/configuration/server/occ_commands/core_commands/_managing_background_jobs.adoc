@@ -2,7 +2,7 @@
 
 Use the `background:queue` command to manage background jobs.
 
-[source,console]
+[source,plaintext]
 ----
 background:queue
  background:queue:delete     Delete a job from the queue
@@ -15,6 +15,7 @@ background:queue
 The command `background:queue:delete` deletes a queued background job.
 It requires the job id of the job to be deleted.
 
+[source,plaintext]
 ----
 background:queue:delete <Job ID>
 ----
@@ -42,6 +43,7 @@ Job has been deleted.
 The command `background:queue:execute` executes a queued background job.
 It requires the job id of the job to be executed.
 
+[source,plaintext]
 ----
 background:queue:execute [options] [--] <Job ID>
 ----
@@ -82,6 +84,7 @@ Finished in 0 seconds
 
 The command `background:queue:status` will list queued background jobs, including details when it last ran.
 
+[source,plaintext]
 ----
 background:queue:status
 ----

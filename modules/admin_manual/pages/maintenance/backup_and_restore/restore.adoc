@@ -87,7 +87,7 @@ sudo sqlite3 data/owncloud.db < owncloud-dbbackup.bak
 
 === PostgreSQL
 
-[source,console]
+[source,plaintext]
 ----
 PGPASSWORD="password" pg_restore -c -d owncloud -h [server] -U [username] owncloud-dbbackup.bak
 ----
@@ -140,11 +140,14 @@ If it's not suitable for yours, you might need to run an OCC command that does t
 2. In the live database instance, find the `fileid` of the file to restore by
    running the query below, substituting the placeholders for the retrieved
    values, and store the value for later reference.
-
-   SELECT fileid
-   FROM oc_filecache
-   WHERE path = 'path/to/the/file/to/restore'
-     AND storage = <numeric_id>
++
+[source,sql]
+----
+SELECT fileid
+FROM oc_filecache
+WHERE path = 'path/to/the/file/to/restore'
+  AND storage = <numeric_id>
+----
 
 3. Retrieve the backup, which includes the data folder and database.
 
@@ -154,18 +157,24 @@ If it's not suitable for yours, you might need to run an OCC command that does t
    the query below and store the value for later reference.
    The example query assumes the storage was the same and the file was in the same location.
    If not, you will need to track down where the file was before.
-
-   SELECT encrypted
-   FROM oc_filecache
-   WHERE path = 'path/to/the/file/to/restore'
-     AND storage = <numeric_id>
++
+[source,sql]
+----
+SELECT encrypted
+FROM oc_filecache
+WHERE path = 'path/to/the/file/to/restore'
+  AND storage = <numeric_id>
+----
 
 6. Update the live database instance with the retrieved information, by running the
    following query, substituting the placeholders with the retrieved values:
-
-   UPDATE oc_filecache
-     SET encrypted = <encrypted>
-     WHERE fileid = <fileid>.
++
+[source,sql]
+----
+UPDATE oc_filecache
+  SET encrypted = <encrypted>
+  WHERE fileid = <fileid>.
+----
 
 == Final Tasks
 
@@ -173,19 +182,22 @@ If it's not suitable for yours, you might need to run an OCC command that does t
 
 Perform the following tasks to reactivate your ownCloud instance:
 
-.Update the systems data-fingerprint after a backup is restored
+==== Update the systems data-fingerprint after a backup is restored
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:data-fingerprint
 ----
 
-.Bring back ownCloud into normal operation mode
+==== Bring back ownCloud into normal operation mode
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----
 
-.Enable browser access
+==== Enable browser access
+
 Start your web server, or alternatively enable the virtual host serving ownCloud:
 [source,bash]
 ----

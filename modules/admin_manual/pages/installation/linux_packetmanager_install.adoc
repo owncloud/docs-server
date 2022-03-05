@@ -29,7 +29,7 @@ Here are the ways to do so for xref:apt[APT], xref:yum[Yum], and xref:zypper[Zyp
 
 If you are using APT, use {apt-mark-hold-url}[apt-mark hold] to  mark the `owncloud-complete-files` package as held. Here’s an example of how to do so:
 
-[source,console]
+[source,bash]
 ----
 apt-mark hold owncloud-complete-files
 ----
@@ -96,7 +96,7 @@ zypper addlock owncloud-complete-files
 
 To see if the package has already been locked, use the `locks` command.  If `owncloud-complete-files` is already locked, then you will see output similar to the below example.
 
-[source]
+[source,plaintext]
 ----
 # | Name                    | Type    | Repository
 --+-------------------------+---------+-----------

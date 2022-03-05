@@ -6,7 +6,7 @@ You can use this information to grant strict access via firewalls, proxies or lo
 
 == Command Description
 
-[source,console]
+[source,plaintext]
 ----
 security:routes [options]
 ----
@@ -26,6 +26,7 @@ Example 1:
 {occ-command-example-prefix} security:routes
 ----
 
+[source,plaintext]
 ----
 +-----------------------------------------------------------+-----------------+
 | Path                                                      | Methods         |
@@ -45,6 +46,7 @@ Example 2:
 {occ-command-example-prefix} security:routes --output=json-pretty
 ----
 
+[source,plaintext]
 ----
 [
   {
@@ -62,6 +64,7 @@ Example 3:
 {occ-command-example-prefix} security:routes --with-details
 ----
 
+[source,plaintext]
 ----
 +---------------------------------------------+---------+-------------------------------------------------------+--------------------------------+
 | Path                                        | Methods | Controller                                            | Annotations                    |
@@ -75,7 +78,7 @@ Example 3:
 The following commands manage server-wide SSL certificates. 
 These are useful when you create federation shares with other ownCloud servers that use self-signed certificates.
 
-[source,console]
+[source,plaintext]
 ----
 security:certificates         List trusted certificates
 security:certificates:import  Import trusted certificate

@@ -181,7 +181,7 @@ sudo update-alternatives --config php
 ----
 Here is an example output:
 
-[source,console]
+[source,plaintext]
 ----
 There are 2 choices for the alternative php (providing /usr/bin/php).
 
@@ -223,7 +223,7 @@ WARNING: You may get completely unexpected behaviour or a broken environment if 
 
 If you are using a PECL install later on, check the output of the installation command soon after it has started. You will find a text like:
 
-[source]
+[source,plaintext]
 ----
 ...
 PHP Api Version:         20190902
@@ -240,14 +240,14 @@ php -i | grep extension_dir
 
 If the output is different than the style below, there is a problem that needs fixing:
 
-[source]
+[source,plaintext]
 ----
 extension_dir => /usr/lib/php/20180731 => /usr/lib/php/20180731
 ----
 
 This is the output that shows a fix is needed:
 
-[source]
+[source,plaintext]
 ----
 PHP Warning:  PHP Startup: smbclient: Unable to initialize module
 Module compiled with module API=20190902
@@ -308,7 +308,9 @@ Example:
 ----
 sudo phpenmod php-ldap
 ----
+
 or
+
 [source,bash]
 ----
 sudo phpdismod php-ldap

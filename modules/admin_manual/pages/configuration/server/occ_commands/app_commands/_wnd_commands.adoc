@@ -7,7 +7,7 @@ xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Window
 
 The `wnd` commands configure the WND app.
 
-[source,console]
+[source,plaintext]
 ----
 wnd
  wnd:listen                 Listen to smb changes and store notifications for later processing
