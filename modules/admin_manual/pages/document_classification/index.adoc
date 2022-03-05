@@ -193,7 +193,7 @@ Apart from the concrete examples above, a generalized method to employ document 
   Below you find a generalized example where `classification-property` is a placeholder for the property to evaluate.
 +
 --
-[source]
+[source,plaintext]
 ----
 property[@name='classification-property']/vt:lpwstr
 ----
@@ -332,7 +332,7 @@ To set it up, add the desired property XPath to the "_Document ID XPath_" field 
 Each uploaded file will generate three entries with different log levels.
 See some exemplary entries below:
 
-[source]
+[source,plaintext]
 ----
 INFO:  "Checking classified file 'confidential.xlsx' with document id '2'"
 INFO:  "Alice uploaded a classified file 'confidential.xlsx' with document class 'Confidential'"

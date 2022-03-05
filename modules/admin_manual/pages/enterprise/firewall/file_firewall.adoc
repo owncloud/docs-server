@@ -115,7 +115,7 @@ The File Firewall supports regular expressions, allowing you to create custom ru
 
 You can combine multiple rules into one rule, e.g., if a rule applies to both the support and the qa-team you could write your rule like this:
 
-[source]
+[source,plaintext]
 ----
 Regular Expression > ^(support|qa-team)$ > is > User group
 ----
@@ -132,7 +132,7 @@ Now you just need to add the tag to the folder or file, and then block the tag w
 
 Block by System Tag:
 
-[source]
+[source,plaintext]
 ----
 System file tag:   is       "Confidential"
 IP Range (IPv4):   is not   "192.168.1.0/24"

@@ -198,7 +198,7 @@ sudo systemctl edit smbd.service
 Add the following content and save the result. The location and naming will be done automatically.
 Just say save.
 
-[source]
+[source,plaintext]
 ----
 [Unit]
 After=

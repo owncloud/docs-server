@@ -2,7 +2,7 @@
 
 A set of commands to create and sync address books and calendars:
 
-[source,console]
+[source,plaintext]
 ----
 dav
  dav:cleanup-chunks            Cleanup outdated chunks

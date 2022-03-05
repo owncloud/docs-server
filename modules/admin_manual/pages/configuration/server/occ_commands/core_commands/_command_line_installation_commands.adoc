@@ -52,7 +52,7 @@ ownCloud is not installed - only a limited number of commands are available
 Usage:
 ----
 
-[source,console]
+[source,plaintext]
 ----
 maintenance:install [--database=["..."]] [--database-connection-string=["..."]] \
                     [--database-name=["..."]] [--database-host=["..."]] \
@@ -82,7 +82,7 @@ For example:
 
 *Example*
 
-[source,console]
+[source,plaintext]
 ----
 sales=
  (DESCRIPTION= 
