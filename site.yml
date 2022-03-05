@@ -64,6 +64,9 @@ asciidoc:
     std-port-memcache: '11211'
     std-port-mysql: '3306'
     std-port-redis: '6379'
+#   webui
+    latest-webui-version: 'next'
+    previous-webui-version: 'next'
 #   ocis
     latest-ocis-version: 'next'
     previous-ocis-version: 'next'
