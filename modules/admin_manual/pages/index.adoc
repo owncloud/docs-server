@@ -22,7 +22,7 @@ See the
 
 This guide is for administrators who want to install, administer, and optimize their ownCloud servers. To learn more about the ownCloud Web user interface, and desktop and mobile clients, please refer to their respective manuals. See the developer manual if you would like to contribute:
 
-* xref:user_manual:index.adoc[ownCloud User Manual]
+* xref:{latest-webui-version}@webui:classic_ui:index.adoc[ownCloud User Manual]
 * xref:developer_manual:index.adoc[ownCloud Developer Manual]
 * {docs-base-url}/desktop/[ownCloud Desktop Client]
 * {docs-base-url}/ios-app/[ownCloud iOS App]
