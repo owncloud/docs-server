@@ -27,7 +27,7 @@ service elasticsearch restart
 To install the app, use the Marketplace app on your ownCloud server or proceed manually:
 
 . Download and extract the tarball of {search_elastic-app-url}[the Full Text Search app] to the apps directory (or xref:installation/apps_management_installation.adoc#using-custom-app-directories[custom apps directory]) of your ownCloud instance.
-. Use the xref:configuration/server/occ_command.adoc#apps-commands[occ app:enable] to enable the search_elastic application.
+. Use the xref:configuration/server/occ_command.adoc#apps-commands[occ app:enable] to enable the `search_elastic` application.
 
 To configure the Full Text Search, go to menu:admin[Settings > Search] and set the hostname (or IP address) and port of the Elasticsearch server and click btn:["Setup index"].
 
