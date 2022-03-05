@@ -106,7 +106,7 @@ sudo apt install -y opensc
 
 To install OpenSC on openSUSE and SUSE Linux Enterprise Server, run the following command:
 
-[source,console]
+[source,bash]
 ----
 sudo zypper install -y --auto-agree-with-licenses opensc
 ----
@@ -339,7 +339,7 @@ sudo hsmdaemon encrypt 9bac3719-2b8d-11e9-aeab-0242b5ece4c3 Zm9vYmFy
 
 If successful, you should see output similar to the example below:
 
-[source,console,options="nowrap"]
+[source,plaintext,options="nowrap"]
 ----
 {"level":"debug","ts":"2019-03-20T12:43:40.540+0100","caller":"hsmdaemon/keymanager.go:27","msg":"initialize pkcs11 module","module":"/usr/lib/softhsm/libsofthsm2.so"}
 {"level":"debug","ts":"2019-03-20T12:43:40.545+0100","caller":"hsmdaemon/keymanager.go:205","msg":"openHSMSession","slotID":858597139}
@@ -359,7 +359,7 @@ sudo grep "generated keypair" /var/log/hsm.log
 
 You should see output similar to the example below:
 
-[source,console,options="nowrap"]
+[source,plaintext,options="nowrap"]
 ----
 {"level":"debug","ts":"2021-06-19T03:10:01.562+0200","msg":"generated keypair","tokenID":"1262668f-d09b-11eb-b283-960000c05f34"}
 {"level":"debug","ts":"2021-06-19T03:10:03.043+0200","msg":"generated keypair","tokenID":"1374447f-d09b-11eb-83c8-960000c05f34"}
@@ -382,7 +382,7 @@ SGVsbG8sIHdvcmxkIQo=
 test_enc=$(sudo ./hsmdaemon encrypt $key_id $(echo "$hello" | base64) | tee /dev/stderr)
 ----
 
-[source,console,options="nowrap"]
+[source,plaintext,options="nowrap"]
 ----
 ep6Y1aAVAYpAesZ1+sQzzUepjO82o34kjmm63Drmz+6KED4oIBARQkXeW/OoxgUg6kQhQK1thA/3Ww33aaRxIESzVQF598qjXhhEXQ/OGL6BC+3tPclC7ujUZaA7CG1NDkMneLFDd2+Tbax4OM+/w0zhfTMPgT0I1NrH/03owVglbWHjgLZmN/vxpPZKm/lyAV9tI2HW36UjVLEMD2qtPFXqjLU4YjZOVnMdETxQNSCWIVauFw0+VQQ/RiAqiXzRXEgO6YKxOBk0n9IMT6XEH4MkMQTgb9pB12jrNSa9aMHbCvCneEmhd0CHBxPX499EkxxwtoEnXe6PATXsOg3VRA==
 ----
@@ -399,7 +399,7 @@ decrypted string (base64 encoded): 'SGVsbG8sIHdvcmxkIQo='
 sudo tail -5 /var/log/hsm.log
 ----
 
-[source,console,options="nowrap"]
+[source,plaintext,options="nowrap"]
 ----
 {"level":"debug","ts":"2021-06-20T23:46:11.958+0200","msg":"openHSMSession","slotID":757826573}
 {"level":"debug","ts":"2021-06-20T23:46:11.960+0200","msg":"created new session"}
@@ -486,7 +486,7 @@ Set the generated secret for ownCloud:
 
 If the command succeeds, you should see the following console output:
 
-[source]
+[source,plaintext]
 ----
 Config value hsm.jwt.secret for app encryption set to 7a7d1826-b514-4d9f-afc7-a7485084e8de
 ----

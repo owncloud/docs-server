@@ -27,7 +27,7 @@ This command reads the value of `admin_audit ignore_cli_events`:
 {occ-command-example-prefix} config:app:get "admin_audit ignore_cli_events"
 ----
 
-[source,console]
+[source,plaintext]
 ----
 yes
 ----

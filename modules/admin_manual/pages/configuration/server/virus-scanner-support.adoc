@@ -76,7 +76,7 @@ sudo systemctl start clamav-daemon.service
 
 When successful, an output similar to the following should appear on the terminal:
 
-[source,console]
+[source,plainetxt]
 ----
 Synchronizing state of clamav-daemon.service with SysV service script with
 /lib/systemd/systemd-sysv-install.
@@ -103,7 +103,7 @@ and retry manually updating again.
 
 . To automate the update process, run this cron entry for example.
 +
-[source,bash]
+[source,plaintext]
 ----
 # m   h  dom mon dow  command
 47  *  *  *  *  /usr/bin/freshclam --quiet
@@ -149,7 +149,7 @@ image:apps/files_antivirus/antivirus-daemon.png[The Antivirus Configuration pane
 
 All of the configuration settings for ClamAV are configurable by passing the relevant key and value to the `occ config:app:set files_antivirus` command. For example:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_socket --value="/var/run/clamav/clamd.ctl"
@@ -157,7 +157,7 @@ All of the configuration settings for ClamAV are configurable by passing the rel
 
 To get a current option run for example:
 
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:get files_antivirus \
     av_socket
@@ -230,7 +230,7 @@ ClamAV runs in one of three modes:
 [TIP]
 ====
 In both daemon modes, background scans are enabled by default. If you want to disable them, run the command:
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus av_scan_background --value 'false'
 ----
@@ -247,7 +247,7 @@ image:apps/files_antivirus/antivirus-daemon-socket.png[image]
 +
 You can run `ss` (a utility to investigate sockets) to verify it, as in the example below:
 +
-[source,console]
+[source,bash]
 ----
 sudo ss -a | grep -iq clamav && echo "ClamAV is running"
 ----
@@ -255,7 +255,7 @@ sudo ss -a | grep -iq clamav && echo "ClamAV is running"
 [TIP]
 ====
 If you don't have `ss` installed, you may have `netstat` installed. If so, you can run the following to check if ClamAV is running:
-[source,console]
+[source,bash]
 ----
 netstat -a | grep -q clam && echo "ClamAV is running"
 ----
@@ -294,7 +294,7 @@ NOTE: If you had configured the path and command line options before via the use
 . Set btn:[Mode] to "*Executable*".
 . Set btn:[Path to clamscan] to the path of `clamscan`, which is the interactive ClamAV scanning command, on your server. To find the exact path, run
 +
-[source,console]
+[source,bash]
 ----
 which clamscan
 ----
@@ -423,14 +423,14 @@ To delete an existing rule, click the btn:[rubbish bin] icon on the far right-ha
 
 . If you haven't done so already, install the {oc-marketplace-url}/apps/files_antivirus[Anti-Virus app] from the ownCloud marketplace. Alternatively, use this occ command:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} market:install files_antivirus
 ----
 
 . Enable the app as admin in ownCloud under menu:Settings[Apps] in the category `Security` or with the following occ command:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable files_antivirus
 ----
@@ -480,7 +480,7 @@ You can configure the ownCloud Anti-Virus app either via the Web interface or th
 
 . Set the IP address of your anti-virus server:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_host --value="172.17.0.3"
@@ -488,7 +488,7 @@ You can configure the ownCloud Anti-Virus app either via the Web interface or th
 
 . Specify the port of the anti-virus server:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_port --value="1344"
@@ -496,7 +496,7 @@ You can configure the ownCloud Anti-Virus app either via the Web interface or th
 
 . Set the mode to ICAP:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_mode --value="icap"
@@ -506,7 +506,7 @@ NOTE: The setting `icap` triggers a grace period of 24 hours if you don't have a
 
 . Specify what to do with the offending file:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_infected_action --value="delete"
@@ -524,7 +524,7 @@ Depending on your ICAP server, select one of the following example configuration
 
 . To use ClamAV, set the mode to `c-icap with ClamAV` either from the Web interface or via command line:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_request_service --value="avscan"
@@ -532,7 +532,7 @@ Depending on your ICAP server, select one of the following example configuration
 
 . Set the respective response header:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_response_header --value="X-Infection-Found"
@@ -546,7 +546,7 @@ Depending on your ICAP server, select one of the following example configuration
 
 . To use KAV, set the mode to `req` either from the Web interface or via command line:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_request_service --value="req"
@@ -554,7 +554,7 @@ Depending on your ICAP server, select one of the following example configuration
 
 . Set the respective response header:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_response_header --value="X-Virus-ID"
@@ -570,7 +570,7 @@ Note, McAfee version 7.8.2 and up provide ICAP support. Follow this procedure to
 
 . To use McAfee, set the mode to `wwreqmod` either from the Web interface or via command line:
 +
-[source,console,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_request_service --value="wwreqmod"

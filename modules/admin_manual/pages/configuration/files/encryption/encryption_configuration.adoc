@@ -125,7 +125,7 @@ To enable the encryption app, run the following command:
 
 If the encryption app is successfully enabled, you should see the following confirmations:
 
-[source,console]
+[source,plaintext]
 ----
 encryption enabled
 Encryption enabled
