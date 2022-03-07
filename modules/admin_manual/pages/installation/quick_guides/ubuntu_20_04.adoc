@@ -214,10 +214,9 @@ Configure the execution of the cron job to every 15 min:
 
 [source,bash]
 ----
+
 echo "*/15  *  *  *  * /var/www/owncloud/occ system:cron" \
-  > /var/spool/cron/crontabs/www-data
-chown www-data.crontab /var/spool/cron/crontabs/www-data
-chmod 0600 /var/spool/cron/crontabs/www-data
+  | sudo -u www-data -g crontab tee -a /var/spool/cron/crontabs/www-data
 ----
 
 [NOTE]
@@ -227,9 +226,8 @@ If you need to sync your users from an LDAP or Active Directory Server, add this
 
 [source,bash]
 ----
-echo "*/15 * * * * /var/www/owncloud/occ user:sync 'OCA\User_LDAP\User_Proxy' -m disable -vvv >> /var/log/ldap-sync/user-sync.log 2>&1" >> /var/spool/cron/crontabs/www-data
-chown www-data.crontab  /var/spool/cron/crontabs/www-data
-chmod 0600  /var/spool/cron/crontabs/www-data
+echo "*/15 * * * * /var/www/owncloud/occ user:sync 'OCA\User_LDAP\User_Proxy' -m disable -vvv >> /var/log/ldap-sync/user-sync.log 2>&1" \
+  | sudo -u www-data -g crontab tee -a /var/spool/cron/crontabs/www-data
 mkdir -p /var/log/ldap-sync
 touch /var/log/ldap-sync/user-sync.log
 chown www-data. /var/log/ldap-sync/user-sync.log
