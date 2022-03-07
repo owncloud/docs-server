@@ -237,7 +237,7 @@ chown www-data. /var/log/ldap-sync/user-sync.log
 
 === Configure Caching and File Locking
 
-[source,bash]
+[source,bash,subs="attributes+"]
 ----
 occ config:system:set \
    memcache.local \
@@ -247,7 +247,7 @@ occ config:system:set \
    --value '\OC\Memcache\Redis'
 occ config:system:set \
    redis \
-   --value '{"host": "127.0.0.1", "port": "{std-port-redis}"}' \
+   --value '{"host": "{oc-examples-server-ip}", "port": "{std-port-redis}"}' \
    --type json
 ----
 
