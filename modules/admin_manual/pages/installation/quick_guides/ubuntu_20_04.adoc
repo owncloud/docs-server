@@ -45,7 +45,7 @@ Make the helper script executable:
 
 [source,bash]
 ----
-chmod +x /usr/local/bin/occ
+chmod +x $FILE
 ----
 
 === Install the Required Packages
