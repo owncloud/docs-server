@@ -33,7 +33,7 @@ Create a helper script to simplify running xref:configuration/server/occ_command
 [source,bash]
 ----
 FILE="/usr/local/bin/occ"
-/bin/cat <<EOM >$FILE
+cat <<EOM >$FILE
 #! /bin/bash
 cd /var/www/owncloud
 sudo -E -u www-data /usr/bin/php /var/www/owncloud/occ "\$@"
@@ -116,7 +116,7 @@ apt install -y \
 [source,apache]
 ----
 FILE="/etc/apache2/sites-available/owncloud.conf"
-/bin/cat <<EOM >$FILE
+cat <<EOM >$FILE
 <VirtualHost *:80>
 # ServerName <add a valid ServerName> and uncommment
 DirectoryIndex index.php index.html
@@ -255,7 +255,7 @@ occ config:system:set \
 [source,bash]
 ----
 FILE="/etc/logrotate.d/owncloud"
-sudo /bin/cat <<EOM >$FILE
+sudo cat <<EOM >$FILE
 /var/www/owncloud/data/owncloud.log {
   size 10M
   rotate 12
