@@ -2,10 +2,10 @@
 :toc: right
 :toclevels: 1
 :msoffice-online-server-url: https://www.microsoft.com/en-us/microsoft-365/blog/2016/05/04/office-online-server-now-available/
-:office365-url: https://products.office.com/en-us/business/office 
-:wopi-protocol-url: https://wopi.readthedocs.io/en/latest/
+:office365-url: https://products.office.com/en-us/business/office
+:wopi-protocol-url: https://docs.microsoft.com/en-us/microsoft-365/cloud-storage-partner-program/rest/
 :office-online-server-url: https://docs.microsoft.com/de-de/officeonlineserver/deploy-office-online-server
-:wopi-timeout-documentation-url: https://wopi.readthedocs.io/projects/wopirest/en/latest/concepts.html#term-lock
+:wopi-timeout-documentation-url: https://docs.microsoft.com/en-us/microsoft-365/cloud-storage-partner-program/rest/concepts#lock-length
 :tls-office: https://docs.microsoft.com/de-de/officeonlineserver/enable-tls-1-1-and-tls-1-2-support-in-office-online-server
 :tls-chrome: https://help.hotschedules.com/hc/en-us/articles/360020184072-Enabling-TLS-1-2-on-web-browsers#Chrome
 :shared-locked-url: https://answers.microsoft.com/en-us/msoffice/forum/all/errorthe-file-is-locked-for-shared-use/8b852d6a-c1d5-4765-8734-9b4a4ebdd3aa
@@ -58,7 +58,7 @@ NOTE: If the key is not defined, then all users have access to this Microsoft Of
 
 == Locking the Document
 
-If you open a document with Microsoft Office Online in ownCloud, it makes use of the WebDAV file locking functionality available in ownCloud server. The idea is to lock the file so other users with access can't make changes to the document while you're editing it. 
+If you open a document with Microsoft Office Online in ownCloud, it makes use of the WebDAV file locking functionality available in ownCloud server. The idea is to lock the file so other users with access can't make changes to the document while you're editing it.
 
 In other words, the feature ensures that you are the "master editor". Your changes will always be the "master state".  Other users can make changes, e.g., with the desktop client, but those will create conflict files for them, which can be resolved afterward. When you close the document, Microsoft Office Online unlocks the file so others can edit it.
 
@@ -91,4 +91,4 @@ Checklist if something is not working:
 Make sure TLS 1.2 is being used:
 
 * {tls-chrome}[Enable TLS 1.2 Support in Chrome]
-* {tls-office}[Enable TLS 1.2 Support in Microsoft Office Online Server] 
+* {tls-office}[Enable TLS 1.2 Support in Microsoft Office Online Server]
