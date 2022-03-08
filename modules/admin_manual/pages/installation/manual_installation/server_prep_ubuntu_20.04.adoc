@@ -7,7 +7,7 @@
 :php-common: https://tecadmin.net/enable-disable-php-modules-ubuntu/
 :ondrej-php-url: https://launchpad.net/~ondrej/+archive/ubuntu/php
 :libsmbclient-php_url: https://github.com/eduardok/libsmbclient-php
-:update-alternatives_url: https://manpages.ubuntu.com/manpages/precise/man8/update-alternatives.8.html
+:update-alternatives_url: https://manpages.ubuntu.com/manpages/focal/en/man1/update-alternatives.1.html
 :smbclient_url: https://packages.ubuntu.com/search?keywords=smbclient
 :pecl_url: https://pecl.php.net/package/smbclient
 :phpmyadmin_latest_url: https://www.phpmyadmin.net/downloads/
