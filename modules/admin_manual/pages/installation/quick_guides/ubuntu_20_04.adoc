@@ -213,7 +213,6 @@ Configure the execution of the cron job to every 15 min:
 
 [source,bash]
 ----
-
 echo "*/15  *  *  *  * /var/www/owncloud/occ system:cron" \
   | sudo -u www-data -g crontab tee -a /var/spool/cron/crontabs/www-data
 ----
