@@ -12,8 +12,8 @@
 :nfs-man-page-url: https://linux.die.net/man/5/nfs
 :nfs-read-write-delegations-url: https://tools.ietf.org/html/rfc7530#section-1.4.6
 :nfs-strong-security-architecture-url: https://tools.ietf.org/html/rfc7530#section-3 
-:nmcli-url: https://manpages.ubuntu.com/manpages/disco/man1/nmcli.1.html
-:nmtui-url: https://manpages.ubuntu.com/manpages/disco/man1/nmtui.1.html
+:nmcli-url: https://manpages.ubuntu.com/manpages/focal/man1/nmcli.1.html
+:nmtui-url: https://manpages.ubuntu.com/manpages/focal/man1/nmtui.1.html
 :rpc-statd-url: https://linux.die.net/man/8/rpc.statd
 :man-nfs-ubuntu-url: http://manpages.ubuntu.com/manpages/focal/man5/nfs.5.html
 :innodb_flush_method-url: https://mariadb.com/kb/en/library/innodb-system-variables/#innodb_flush_method
