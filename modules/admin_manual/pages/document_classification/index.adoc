@@ -1,6 +1,7 @@
 = Document Classification and Policy Enforcement
 :toc: right
 :iso_27001_url: https://www.iso.org/isoiec-27001-information-security.html
+:vda_url: https://www.vda.de/vda/en/Topics/digitalisierung/daten/informationssicherheit
 :novapath_url: https://www.m-und-h.de/en-novapath/
 :msft_azure_info_protection_url: https://azure.microsoft.com/en-us/services/information-protection/
 
@@ -41,7 +42,7 @@ This adds the capability to ensure that sensitive data is handled as required by
 
 Specifically, it enables ownCloud providers to:
 
-* Comply with information security standards, such as https://www.iso.org/isoiec-27001-information-security.html[ISO 27001/2] as https://www.vda.de/en/services/Publications/information-security-assessment.html[recommended by the German Association of the Automotive Industry (VDA)] and get certified to work securely within your value chain.
+* Comply with information security standards, such as {iso_27001_url}[ISO 27001/2] as {vda_url}[recommended by the German Association of the Automotive Industry (VDA)] and get certified to work securely within your value chain.
 * Handle data in compliance with GDPR
 * Manage risks effectively and cover potential data breaches.
 * Separate information based on metadata.
@@ -212,8 +213,7 @@ Apart from automated classification based on document metadata, uploaded files m
 * Furthermore, administrators can define shared folders to automatically classify files uploaded to such folders, by tagging the respective folder and creating a _Workflow_ rule based on the chosen _System file tag_.
 * Additionally, the rules may be linked to achieving a more granular classification behavior (e.g., PDF files uploaded by a specific group of users should be classified as _Confidential_).
 
-Assume you want to automatically classify all PDF documents uploaded by users that are members of the "**Management**" group.
-You can construct a workflow rule using the following steps:
+Assume you want to automatically classify all PDF documents uploaded by users that are members of the "**Management**" group. You can construct a workflow rule using the following steps:
 
 * Within user management create the group "_Management_" and add some users.
 * Navigate to menu:Settings[Workflows & Tags].
