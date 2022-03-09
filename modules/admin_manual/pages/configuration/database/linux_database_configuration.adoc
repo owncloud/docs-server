@@ -158,7 +158,7 @@ then you don’t need to do anything, as support is checked during setup and use
 
 However, if
 
-*  you have an existing ownCloud installation that you need to convert to use 4-byte Unicode support *or*
+* you have an existing ownCloud installation that you need to convert to use 4-byte Unicode support *or*
 * you are working with a MySQL version _earlier_ than version 5.7
 
 then you need to do two things:
