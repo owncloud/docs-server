@@ -147,14 +147,21 @@ would therefore contain entries like this:
 ==== Configure MySQL for 4-byte Unicode Support
 
 For supporting such features as emoji, both MySQL (or MariaDB) *and* ownCloud need to be
-configured to use 4-byte Unicode support instead of the default 3-byte. If you are setting
-up a new ownCloud installation, using version 10.0 or above, *and* you’re using a minimum
-MySQL version of 5.7, then you don’t need to do anything, as support is checked during setup
-and used if available. 
+configured to use 4-byte Unicode support instead of the default 3-byte.
 
-However, if you have an existing ownCloud installation that you need to convert to use
-4-byte Unicode support or you are working with MySQL earlier than version 5.7, then you
-need to do two things:
+If you are setting up
+
+* a new ownCloud installation, using version 10.0 or above, *and* 
+* you’re using a _minimum_ MySQL version of 5.7
+
+then you don’t need to do anything, as support is checked during setup and used if available. 
+
+However, if you have an
+
+* existing ownCloud installation that you need to convert to use 4-byte Unicode support *or*
+* you are working with MySQL _earlier_ than version 5.7
+
+then you need to do two things:
 
 . In your MySQL configuration, add the configuration settings below.
 If you already have them configured, update them to reflect the values specified:
