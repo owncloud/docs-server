@@ -43,19 +43,17 @@ To install postgres, use the following command (or that of your preferred packag
 
 [source,bash]
 ----
-sudo apt-get install postgresql
+sudo apt-get install postgresql php-pgsql
 ----
 
-In order to allow ownCloud access to the database, create a known password for the default user, `postgres`, which was added when the database was installed.
+In order to allow ownCloud access to the database, create a an ownlcoud user who owns the owncloud database.
 
 [source,bash]
 ----
-sudo -i -u postgres psql
-postgres=# \password
+sudo -u postgres -c "createuser -e -P owncloud" 
 Enter new password:
 Enter it again:
-postgres=# \q
-exit
+sudo -u postgres -c "createdb -e -O owncloud owncloud
 ----
 
 == Oracle 11g
