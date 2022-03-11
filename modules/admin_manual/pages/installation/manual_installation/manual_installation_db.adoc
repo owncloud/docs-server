@@ -46,7 +46,7 @@ To install postgres, use the following command (or that of your preferred packag
 sudo apt-get install postgresql php-pgsql
 ----
 
-In order to allow ownCloud access to the database, create a an ownlcoud user who owns the owncloud database.
+In order to allow ownCloud access to the database, create an ownlcoud user who owns the owncloud database.
 
 [source,bash]
 ----
