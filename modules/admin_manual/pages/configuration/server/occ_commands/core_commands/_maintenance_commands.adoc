@@ -6,6 +6,7 @@ Use these commands when you upgrade ownCloud, manage encryption, perform backups
 ----
 maintenance
  maintenance:data-fingerprint        Update the systems data-fingerprint after a backup is restored
+ maintenance:install                 Install ownCloud
  maintenance:mimetype:update-db      Update database mimetypes and update filecache
  maintenance:mimetype:update-js      Update mimetypelist.js
  maintenance:mode                    Set maintenance mode
@@ -14,44 +15,154 @@ maintenance
  maintenance:update:htaccess         Updates the .htaccess file
 ----
 
-`maintenance:mode` locks the sessions of all logged-in users, including administrators, and displays a status screen warning that the server is in maintenance mode. 
-Users who are not already logged in cannot log in until maintenance mode is turned off. 
-When you take the server out of maintenance mode logged-in users must refresh their Web browsers to continue working.
+== Update the Systems Data-Fingerprint
+
+When a backup has been restored, the ETag information which is necessary when accessing ownCloud with clients has been changed. Run following command to tell desktop and mobile clients that a server backup has been restored.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} maintenance:data-fingerprint
+----
+
+This command changes the ETag for all files in the communication with sync clients, informing them that one or more files were modified. After the command completes, users will be prompted to resolve any conflicts between newer and older file versions.
+
+== Install owncloud
+
+NOTE: This command is only available if the following key in your `config.php` is not present or set to `false`. This is the case when the installation has not been made or not finalized. This key automatically turns to `true` after a successful installation resulting that the command is not longer available.
+
+[source,php]
+----
+'installed' => false,
+----
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} maintenance:install [options]
+----
+
+The `maintenance:install` command supports the following options:
+
+[cols="30%,75%",options="header"]
+|===
+| Option 
+| Description
+
+| `--database`=DATABASE
+| Supported database type. [default: `sqlite`] +
+Possible values: `sqlite` ,`mysql`, `pgsql`, `oci` +
+Note that `oci` (Oracle) is only available with the Enterprise license 
+
+| `--database-connection-string`=DATABASE-CONNECTION-STRING
+| Oracle specific connection string. As soon as this parameter is provided other parameters like database-host and database-name are not used and do not need to be provided
+
+| `--database-name`=DATABASE-NAME
+| Name of the database.
+
+| `--database-host`=DATABASE-HOST
+| Hostname of the database. [default: "localhost"]
+
+| `--database-user`=DATABASE-USER
+| User name to connect to the database.
+
+| `--database-pass`=DATABASE-PASS
+| Password of the database user.
+
+| `--database-table-prefix`=DATABASE-TABLE-PREFIX
+| Prefix for all tables (default: oc_).
+
+| `--admin-user`=ADMIN-USER
+| User name of the admin account. [default: "admin"]
+
+| `--admin-pass`=ADMIN-PASS
+|  Password of the admin account.
+
+| `--data-dir`=DATA-DIR
+| Path to the data directory. [default: "/var/www/owncloud/data"]
+|===
+
+== Update Database Mimetypes
+
+Update database mimetypes and file cache.
+
+Usage:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} maintenance:mimetype:update-db [options]
+----
+
+The `maintenance:mimetype:update-db` command supports the following options:
+
+[cols="25%,75%",options="header"]
+|===
+| Option 
+| Description
+
+| `--repair-filecache`
+| Repair the file cache for all mimetypes, not just the new ones.
+|===
+
+== Update the mimetypelist.js File
+
+This command updates the `mimetypelist.js` file.
+
+Usage:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} maintenance:update-js
+----
+
+== Enable or Disable Maintenance Mode
+
+`maintenance:mode` command locks the sessions of all logged-in users, including administrators, and displays a status screen warning that the server is in maintenance mode. Users who are not already logged in cannot log in until maintenance mode is turned off. When you take the server out of maintenance mode logged-in users must refresh their Web browsers to continue working.
+
+Usage:
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} maintenance:mode [options]
+----
+
+The `maintenance:repair` command supports the following options:
+
+[cols="25%,75%",options="header"]
+|===
+| Option 
+| Description
+
+| `--on`
+| Enable maintenance mode.
+
+| `--off`
+| Disable maintenance mode.
+|===
+
+Turn on maintenance mode:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --on
+----
+
+Turn it off when you’re finished with the maintenance tasks:
+
+[source,bash,subs="attributes+"]
+----
 {occ-command-example-prefix} maintenance:mode --off
 ----
 
-Putting your ownCloud server into single-user mode allows admins to log in and work, but not ordinary users. 
-This is useful for performing maintenance and troubleshooting on a running server.
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} maintenance:singleuser --on
-Single user mode enabled
-----
-
-Turn it off when you're finished:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} maintenance:singleuser --off
-Single user mode disabled
-----
-
-Run `maintenance:data-fingerprint` to tell desktop and mobile clients that a server backup has been restored. 
-This command changes the ETag for all files in the communication with sync clients, informing them that one or more files were modified. 
-After the command completes, users will be prompted to resolve any conflicts between newer and older file versions.
-
 == Installation Repair Commands
 
-The `maintenance:repair` command helps administrators repair an installation.
-The command runs automatically during upgrades to clean up the database. 
-So, while you can run it manually, there usually isn't a need to.
+The `maintenance:repair` command helps administrators repair an installation. The command runs automatically during upgrades to clean up the database. So, while you can run it manually, there usually isn't a need to.
 
 NOTE: Your ownCloud installation needs to be in maintenance mode to use the `maintenance:repair` command.
+
+Usage:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} maintenance:repair [options]
+----
 
 === Repair Command Options
 
@@ -59,32 +170,20 @@ The `maintenance:repair` command supports the following options:
 
 [cols="25%,75%",options="header"]
 |===
-|Option 
-|Description
-a|`--ansi`
-|Force ANSI output.
-a|`--include-expensive`
-|Use this option when you want to include resource and load expensive tasks.
-a|`--list`
-|Lists all possible repair steps
-a|`--no-ansi`
-|Disable ANSI output.
-a|`-n` `--no-interaction`
-|Do not ask any interactive question.
-a|`--no-warnings`
-|Skip global warnings, show command output only.
-a|`-q` `--quiet`
-|Do not output any message.
-a|`-s` `--single=SINGLE`
-|Run just one repair step given its class name.
-a|`-V` `--version`
-|Display this application version.
-a|`-v\|vv\|vvv` `--verbose`
-a|Increase the verbosity of messages:
+| Option 
+| Description
 
-* 1 for normal output
-* 2 for more verbose output and 3 for debug
+| `--list`
+| Lists all possible repair steps
+
+| `-s` `--single=SINGLE`
+| Run just one repair step given its class name.
+
+| `--include-expensive`
+| Use this option when you want to include resource and load expensive tasks.
 |===
+
+=== Running All Repair Steps
 
 Here is an example of running the command:
 
@@ -93,8 +192,7 @@ Here is an example of running the command:
 {occ-command-example-prefix} maintenance:repair
 ----
 
-To list all off the possible repair steps, use the `--list` option. 
-It should output the following list to the console:
+To list all off the possible repair steps, use the `--list` option. It should output the following list to the console:
 
 [source,plaintext]
 ----
@@ -122,10 +220,43 @@ OCA\DAV\Repair\RemoveInvalidShares -> Remove invalid calendar and addressbook sh
 
 To run a single repair step, use either the `-s` or `--single` options, as in the following example.
 
+Usage:
+
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:repair --single="OCA\DAV\Repair\RemoveInvalidShares"
+{occ-command-example-prefix} maintenance:repair \
+     --single="OCA\DAV\Repair\RemoveInvalidShares"
 ----
 
 TIP: The step's name must be quoted, otherwise you will see the following warning message appear, and the command will fail:
 "_Repair step not found. Use --list to show available steps._"
+
+== Single User Mode
+
+Putting your ownCloud server into single-user mode allows admins to log in and work, but not ordinary users. 
+This is useful for performing maintenance and troubleshooting on a running server.
+
+Usage:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} maintenance:singleuser --on
+----
+
+Turn it off when you're finished:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} maintenance:singleuser --off
+----
+
+== Update the .htaccess File
+
+This command updates the `.htaccess` file.
+
+Usage:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} maintenance:update:htaccess
+----
