@@ -1,5 +1,6 @@
 = Oracle Database Setup & Configuration
 :toc: right
+:php_oci8_url: https://pecl.php.net/package/oci8
 
 == Introduction
 
@@ -74,14 +75,13 @@ rpm --install oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm \
 
 === Install the OCI8 PHP Extension
 
-With the Oracle packages installed you’re now ready to install PHP’s
-OCI8 extension.
+With the Oracle packages installed you’re now ready to install PHP’s {php_oci8_url}[oci8] extension, where you have to specify the correct oci8 version. For PHP7.x use `oci8-2.2.0`
 
 NOTE: Provide: `instantclient,/usr/lib/oracle/12.2/client64/lib` when requested, or let it auto-detect the location (if possible).
 
 [source,bash]
 ----
-pecl install oci8
+sudo pecl install oci8-2.2.0
 ----
 
 With the extension installed, you now need to configure it, by creating
