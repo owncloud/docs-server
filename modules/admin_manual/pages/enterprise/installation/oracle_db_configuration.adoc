@@ -1,7 +1,7 @@
 = Oracle Database Setup & Configuration
 :toc: right
 :php_oci8_url: https://pecl.php.net/package/oci8
-:ubuntu_community_guide: https://help.ubuntu.com/community/Oracle%20Instant%20Client
+:ubuntu_community_guide_url: https://help.ubuntu.com/community/Oracle%20Instant%20Client
 
 == Introduction
 
@@ -50,35 +50,31 @@ instructions to install the client.
 
 ==== Ubuntu
 
-If you’re using Ubuntu, we recommend that you use
-{ubuntu_community_guide}[this very thorough guide] from the Ubuntu Community Wiki to install the
-OCI8 extension.
+If you’re using Ubuntu, we recommend that you use this very thorough guide to install the {ubuntu_community_guide_url}[Oracle Instant Client] (OCI8) extension from the Ubuntu Community Wiki.
 
-NOTE: This _should_ work for other Debian-based distributions, however your mileage may vary.
+NOTE: This _should_ work for other Debian-based distributions too, however your mileage may vary.
 
 ==== RedHat / Centos / Fedora
 
 To install the OCI8 extension on a RedHat-based distribution, you first
 need to download two Oracle Instant Client packages:
 
-* Instant Client Package - Basic
-(`oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm`)
-* Instant Client Package - SDK
-(`oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm`)
+* Instant Client Package - Basic (`oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm`)
+* Instant Client Package - SDK (`oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm`)
 
 Then, to install them, use the following commands:
 
 [source,bash]
 ----
 rpm --install oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm \
-  oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm
+    oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm
 ----
 
 === Install the OCI8 PHP Extension
 
-With the Oracle packages installed you’re now ready to install PHP’s {php_oci8_url}[oci8] extension, where you have to specify the correct oci8 version. For PHP7.x use `oci8-2.2.0`
+With the Oracle packages installed you’re now ready to install PHP’s {php_oci8_url}[OCI8] extension, where you have to specify the correct OCI8 version. For PHP7.x use `oci8-2.2.0`
 
-NOTE: Provide: `instantclient,/usr/lib/oracle/12.2/client64/lib` when requested, or let it auto-detect the location (if possible).
+NOTE: Provide: `instantclient,/usr/lib/oracle/12.2/client64/lib` when requested, or let it auto-detect the location, if possible.
 
 [source,bash]
 ----
