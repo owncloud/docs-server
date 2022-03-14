@@ -17,7 +17,7 @@ maintenance
 
 == Update the Systems Data-Fingerprint
 
-When a backup has been restored, the ETag information which is necessary when accessing ownCloud with clients has been changed. Run following command to tell desktop and mobile clients that a server backup has been restored.
+When a backup has been restored, the ETag information, which is necessary when accessing ownCloud with clients, has been changed. Run the following command to tell desktop and mobile clients that a server backup has been restored.
 
 [source,bash,subs="attributes+"]
 ----
@@ -26,9 +26,9 @@ When a backup has been restored, the ETag information which is necessary when ac
 
 This command changes the ETag for all files in the communication with sync clients, informing them that one or more files were modified. After the command completes, users will be prompted to resolve any conflicts between newer and older file versions.
 
-== Install owncloud
+== Install ownCloud
 
-NOTE: This command is only available if the following key in your `config.php` is not present or set to `false`. This is the case when the installation has not been made or not finalized. This key automatically turns to `true` after a successful installation resulting that the command is not longer available.
+NOTE: This command is only available if the following key in your `config.php` is not present or set to `false`. This is the case when the installation has not been made or not finalized. This key automatically turns to `true` after a successful installation. This results in the command no longer being available.
 
 [source,php]
 ----
@@ -50,10 +50,10 @@ The `maintenance:install` command supports the following options:
 | `--database`=DATABASE
 | Supported database type. [default: `sqlite`] +
 Possible values: `sqlite` ,`mysql`, `pgsql`, `oci` +
-Note that `oci` (Oracle) is only available with the Enterprise license 
+Note that `oci` (Oracle) is only available with the Enterprise license.
 
 | `--database-connection-string`=DATABASE-CONNECTION-STRING
-| Oracle specific connection string. As soon as this parameter is provided other parameters like database-host and database-name are not used and do not need to be provided
+| Oracle specific connection string. As soon as this parameter is provided, other parameters like database-host and database-name are not used and do not need to be provided.
 
 | `--database-name`=DATABASE-NAME
 | Name of the database.
@@ -115,7 +115,7 @@ Usage:
 
 == Enable or Disable Maintenance Mode
 
-`maintenance:mode` command locks the sessions of all logged-in users, including administrators, and displays a status screen warning that the server is in maintenance mode. Users who are not already logged in cannot log in until maintenance mode is turned off. When you take the server out of maintenance mode logged-in users must refresh their Web browsers to continue working.
+`maintenance:mode` command locks the sessions of all logged-in users, including administrators, and displays a status screen warning that the server is in maintenance mode. Users who are not already logged in cannot log in until maintenance mode is turned off. Once you take the server out of maintenance mode, logged-in users must refresh their Web browsers to continue working.
 
 Usage:
 [source,bash,subs="attributes+"]
@@ -174,7 +174,7 @@ The `maintenance:repair` command supports the following options:
 | Description
 
 | `--list`
-| Lists all possible repair steps
+| Lists all possible repair steps.
 
 | `-s` `--single=SINGLE`
 | Run just one repair step given its class name.
