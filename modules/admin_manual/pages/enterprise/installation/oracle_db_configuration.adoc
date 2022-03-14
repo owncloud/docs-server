@@ -1,6 +1,7 @@
 = Oracle Database Setup & Configuration
 :toc: right
 :php_oci8_url: https://pecl.php.net/package/oci8
+:ubuntu_community_guide: https://help.ubuntu.com/community/Oracle%20Instant%20Client
 
 == Introduction
 
@@ -50,7 +51,7 @@ instructions to install the client.
 ==== Ubuntu
 
 If you’re using Ubuntu, we recommend that you use
-this very thorough guide from the Ubuntu Community Wiki to install the
+{ubuntu_community_guide}[this very thorough guide] from the Ubuntu Community Wiki to install the
 OCI8 extension.
 
 NOTE: This _should_ work for other Debian-based distributions, however your mileage may vary.
