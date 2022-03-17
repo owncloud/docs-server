@@ -323,9 +323,10 @@ If users encrypt their files and lose their ownCloud password, they lose access 
 
 In such a case, you’ll see a yellow banner warning:
 
-""
+[source,plaintext]
+----
 Please provide an admin recovery password; otherwise, all user data will be lost.
-""
+----
 
 To avoid all this, create a Recovery Key. To do so, go to the Encryption section of your Admin page and set a recovery key password.
 
