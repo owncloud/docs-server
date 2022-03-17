@@ -33,10 +33,10 @@ NOTE: Independent of the technical measures, you can decide at any time the ownC
 
 == General Recommendations
 
-""
+____
 What is the best way to install and maintain ownCloud? +
 The answer to that is, as always: _'it depends'_.
-""
+____
 
 This is because every ownCloud customer has their own particular needs and IT infrastructure. However, both ownCloud and the LAMP stack are highly configurable. Given that, in this document we present a set of general recommendations, followed by three typical scenarios, and finish up with making best-practice recommendations for both software and hardware.
 
