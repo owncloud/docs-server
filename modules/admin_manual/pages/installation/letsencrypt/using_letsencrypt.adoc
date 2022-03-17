@@ -134,10 +134,9 @@ sudo chmod +x <script-name>
 [NOTE]
 ====
 All scripts have to be executed with `sudo` as certbot {certbot-sudo-url}[requires enhanced privileges].
-
-""
+____
 If you're logged in to your server as a user other than root, you'll likely need to put sudo before your Certbot commands so that they run as root (for example, sudo certbot instead of just certbot)
-""
+____
 ====
 
 === cli.ini
