@@ -3,6 +3,7 @@
 
 == Introduction
 
+This is a consulting app, in order to get access to it you need to contact sales@owncloud.com first.
 Follow this guide to use Microsoft OneDrive as an external storage option in ownCloud.
 
 == Create an Application Configuration
