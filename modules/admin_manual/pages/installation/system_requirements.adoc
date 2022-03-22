@@ -54,7 +54,7 @@ For _best performance_, _stability_, _support_, and _full functionality_ we offi
 |
 * MySQL 8+ or MariaDB 10.2, 10.3, 10.4 or 10.5 ^1^ (*Recommended*)
 * Oracle 11 and 12
-* PostgreSQL 9 and 10
+* PostgreSQL 9, 10, 11, 12, 13 or 14
 * SQLite (*Not for production*)
 
 |Web server
