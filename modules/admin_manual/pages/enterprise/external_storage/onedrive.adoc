@@ -3,7 +3,7 @@
 
 == Introduction
 
-Follow this guide to use Microsoft OneDrive as an external storage option in ownCloud.
+To use the ownCloud OneDrive app, you mandatory need consulting first. Contact sales@owncloud.com to get access to. When granted, follow this guide to use Microsoft OneDrive as an external storage option in ownCloud.
 
 == Create an Application Configuration
 
