@@ -111,9 +111,9 @@ A comprehensive guide to tuning MySQL and MariaDB is outside the scope
 of the ownCloud documentation. However, here are three links that can
 help you find further information:
 
-* https://github.com/major/MySQLTuner-perl/[MySQLTuner].
+* https://github.com/major/MySQLTuner-perl/[MySQLTuner]
 * https://tools.percona.com/wizard[Percona Tools for MySQL]
-* https://mariadb.com/kb/en/optimization-and-tuning/[Optimizing and Tuning MariaDB].
+* https://mariadb.com/kb/en/optimization-and-tuning/[Optimizing and Tuning MariaDB]
 
 === Tune PostgreSQL
 
@@ -175,6 +175,7 @@ latency by as much as 50%. We recommend to keep the KeepAliveTimeout between 3 a
 Higher numbers can block the Server with inactive connections.
 In combination with the periodic checks of the sync client the following settings are recommended:
 
+[source,bash]
 ----
 KeepAlive On
 KeepAliveTimeout 3
