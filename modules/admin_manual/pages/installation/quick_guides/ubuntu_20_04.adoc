@@ -201,7 +201,7 @@ chown -R www-data. owncloud
 
 === Install ownCloud
 
-IMPORTANT: Remember to set a strong password for your owncloud admin user and provide the previously set password for the database user as the --database-pass argument.
+IMPORTANT: Remember to set a strong password for your owncloud admin user and provide the previously set password for the database user as the `--database-pass` argument.
 
 [source,bash]
 ----
