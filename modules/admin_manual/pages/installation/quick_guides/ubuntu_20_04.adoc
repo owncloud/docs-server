@@ -18,6 +18,17 @@ This guide can not go into details and has its limits by nature. If you experien
 
 == Preparation
 
+=== Set your domain name
+
+[source,bash]
+----
+my_domain="Your.Domain.tld"
+
+hostnamectl set-hostname $my_domain
+----
+
+=== Update your system
+
 First, ensure that all the installed packages are entirely up to date and that PHP is available in the APT repository.
 To do so, follow the instructions below:
 
@@ -67,6 +78,8 @@ apt install -y \
 
 === Install smbclient php module
 
+If you want to connect to external storage via SMB you need to install the smbclient php module.
+
 First install the required packages:
 
 [source,bash]
@@ -74,23 +87,26 @@ First install the required packages:
 apt-get install -y libsmbclient-dev php-dev php-pear
 ----
 
-Install smblclient php module using pecl
+Then install smblclient php module using pecl:
 
 [source,bash]
 ----
+pecl channel-update pecl.php.net
+mkdir -p /tmp/pear/cache
 pecl install smbclient-stable
 echo "extension=smbclient.so" > /etc/php/7.4/mods-available/smbclient.ini
 phpenmod smbclient
 systemctl restart apache2
 ----
 
-Check if it was successfully activated 
+Check if it was successfully activated: 
 
 [source,bash]
 ----
 php -m | grep smbclient
 ----
-This should show the following output
+
+This should show the following output:
 
 [source,bash]
 ----
@@ -119,7 +135,7 @@ apt install -y \
 FILE="/etc/apache2/sites-available/owncloud.conf"
 cat <<EOM >$FILE
 <VirtualHost *:80>
-# ServerName <add a valid ServerName> and uncommment
+#ServerName $my_domain #uncommment if varible was set
 DirectoryIndex index.php index.html
 DocumentRoot /var/www/owncloud
 <Directory /var/www/owncloud>
@@ -144,27 +160,32 @@ EOM
 ----
 a2dissite 000-default
 a2ensite owncloud.conf
-systemctl reload apache2
 ----
 
 === Configure the Database
 
+IMPORTANT: It's recommended to execute `mysql_secure_installation` to secure the mariadb installation and set a strong password for the database user.
+
+Ensure transaction-isolation level is set and performance_schema on.
+
 [source,bash]
 ----
+sed -i "/\[mysqld\]/atransaction-isolation = READ-COMMITTED\nperformance_schema = on" /etc/mysql/mariadb.conf.d/50-server.cnf
 systemctl start mariadb
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; \
 GRANT ALL PRIVILEGES ON owncloud.* \
   TO owncloud@localhost \
-  IDENTIFIED BY 'password'";
+  IDENTIFIED BY 'replace-with-strong-password'";
 ----
+
+It is recommended to run mysqltuner script to analyse database configuration after running with load for several days.
 
 ==== Enable the Recommended Apache Modules
 
 [source,bash]
 ----
-echo "Enabling Apache Modules"
 a2enmod dir env headers mime rewrite setenvif
-service apache2 reload
+systemctl restart apache2
 ----
 
 == Installation
@@ -181,27 +202,30 @@ chown -R www-data. owncloud
 
 === Install ownCloud
 
+IMPORTANT: Remember to set a strong password for your owncloud admin user and provide the previously set password for the database user as the --database-pass argument.
+
 [source,bash]
 ----
 occ maintenance:install \
     --database "mysql" \
     --database-name "owncloud" \
     --database-user "owncloud" \
-    --database-pass "password" \
+    --database-pass "replace-with-strong-password-from-before" \
     --data-dir "/var/www/owncloud/data" \
     --admin-user "admin" \
-    --admin-pass "admin"
+    --admin-pass "another-strong-password"
 ----
 
 === Configure ownCloud's Trusted Domains
 
 [source,bash]
 ----
-myip=$(hostname -I|cut -f1 -d ' ')
-occ config:system:set trusted_domains 1 --value="$myip"
+my_ip=$(hostname -I|cut -f1 -d ' ')
+occ config:system:set trusted_domains 1 --value="$my_ip"
+occ config:system:set trusted_domains 2 --value="$my_domain"
 ----
 
-=== Set Up a Cron Job
+=== Configure the cron jobs
 
 Set your background job mode to cron:
 
@@ -210,23 +234,26 @@ Set your background job mode to cron:
 occ background:cron
 ----
 
-Configure the execution of the cron job to every 15 min:
+Configure the execution of the cron job to every 15 min and the cleanup of chunks every night at 2 am:
 
 [source,bash]
 ----
 echo "*/15  *  *  *  * /var/www/owncloud/occ system:cron" \
   | sudo -u www-data -g crontab tee -a \
   /var/spool/cron/crontabs/www-data
+echo "0  2  *  *  * /var/www/owncloud/occ dav:cleanup-chunks" \
+  | sudo -u www-data -g crontab tee -a \
+  /var/spool/cron/crontabs/www-data
 ----
 
 [NOTE]
 ====
-If you need to sync your users from an LDAP or Active Directory Server, add this additional xref:configuration/server/background_jobs_configuration.adoc[Cron job]. Every 15 minutes this cron job will sync LDAP users in ownCloud and disable the ones who are not available for ownCloud. Additionally, you get a log file in `/var/log/ldap-sync/user-sync.log` for debugging.
+If you need to sync your users from an LDAP or Active Directory Server, add this additional xref:configuration/server/background_jobs_configuration.adoc[Cron job]. Every 4 hours this cron job will sync LDAP users in ownCloud and disable the ones who are not available for ownCloud. Additionally, you get a log file in `/var/log/ldap-sync/user-sync.log` for debugging.
 ====
 
 [source,bash]
 ----
-echo "*/15 * * * * /var/www/owncloud/occ user:sync \
+echo "1 */6 * * * /var/www/owncloud/occ user:sync \
   'OCA\User_LDAP\User_Proxy' -m disable -vvv >> \
   /var/log/ldap-sync/user-sync.log 2>&1" \
   | sudo -u www-data -g crontab tee -a \
@@ -279,7 +306,7 @@ cd /var/www/
 chown -R www-data. owncloud
 ----
 
-**ownCloud is now installed. You can confirm that it is ready to use by pointing your web browser to your ownCloud installation.**
+**ownCloud is now installed. You can confirm that it is ready to enable HTTPS xref:installation/letsencrypt/using_letsencrypt.adoc[(for example using Let's Encrypt)] by pointing your web browser to your ownCloud installation.**
 
 To check if you have installed the correct vesion of ownCloud and that the occ command is working, execute the following:
 
