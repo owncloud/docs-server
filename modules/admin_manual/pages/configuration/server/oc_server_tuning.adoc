@@ -111,9 +111,9 @@ A comprehensive guide to tuning MySQL and MariaDB is outside the scope
 of the ownCloud documentation. However, here are three links that can
 help you find further information:
 
-* https://github.com/major/MySQLTuner-perl/[MySQLTuner].
+* https://github.com/major/MySQLTuner-perl/[MySQLTuner]
 * https://tools.percona.com/wizard[Percona Tools for MySQL]
-* https://mariadb.com/kb/en/optimization-and-tuning/[Optimizing and Tuning MariaDB].
+* https://mariadb.com/kb/en/optimization-and-tuning/[Optimizing and Tuning MariaDB]
 
 === Tune PostgreSQL
 
@@ -175,6 +175,7 @@ latency by as much as 50%. We recommend to keep the KeepAliveTimeout between 3 a
 Higher numbers can block the Server with inactive connections.
 In combination with the periodic checks of the sync client the following settings are recommended:
 
+[source,apache]
 ----
 KeepAlive On
 KeepAliveTimeout 3
@@ -186,6 +187,10 @@ MaxKeepAliveRequests 200
 [source,bash]
 ----
 cat /etc/httpd/conf/httpd.conf
+----
+
+[source,plaintext]
+----
     ...
 HostnameLookups off
 ----
@@ -193,5 +198,4 @@ HostnameLookups off
 ==== Log files
 
 Log files should be switched off for maximum performance. 
-To do that, comment out the https://httpd.apache.org/docs/current/mod/mod_log_config.html#customlog[CustomLog] directive. 
-However, keep https://httpd.apache.org/docs/2.4/logs.html#errorlog[ErrorLog] set, so errors can be tracked down.
+To do that, comment out the https://httpd.apache.org/docs/current/mod/mod_log_config.html#customlog[CustomLog] directive. However, keep https://httpd.apache.org/docs/2.4/logs.html#errorlog[ErrorLog] set, so errors can be tracked down.
