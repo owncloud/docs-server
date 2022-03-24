@@ -134,7 +134,7 @@ apt install -y \
 FILE="/etc/apache2/sites-available/owncloud.conf"
 cat <<EOM >$FILE
 <VirtualHost *:80>
-#ServerName $my_domain #uncommment if varible was set
+#ServerName $my_domain #uncommment if variable was set
 DirectoryIndex index.php index.html
 DocumentRoot /var/www/owncloud
 <Directory /var/www/owncloud>
