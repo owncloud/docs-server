@@ -17,7 +17,7 @@ This guide can not go into details and has its limits by nature. If you experien
 
 == Preparation
 
-=== Set your domain name
+=== Set Your Domain Name
 
 [source,bash]
 ----
@@ -28,7 +28,7 @@ hostnamectl set-hostname $my_domain
 hostname -f
 ----
 
-=== Generate strong passwords
+=== Generate Strong Passwords
 
 ----
 sec_admin_pwd=$(openssl rand -base64 18)
@@ -38,7 +38,7 @@ sec_db_pwd=$(openssl rand -base64 18)
 echo $sec_db_pwd > /etc/.sec_db_pwd.txt
 ----
 
-=== Update your system
+=== Update Your System
 
 First, ensure that all the installed packages are entirely up to date and that PHP is available in the APT repository.
 To do so, follow the instructions below:
@@ -87,7 +87,7 @@ apt install -y \
   php-opcache
 ----
 
-=== Install smbclient php module
+=== Install smbclient php Module
 
 If you want to connect to external storage via SMB you need to install the smbclient php module.
 
@@ -237,7 +237,7 @@ occ config:system:set trusted_domains 1 --value="$my_ip"
 occ config:system:set trusted_domains 2 --value="$my_domain"
 ----
 
-=== Configure the cron jobs
+=== Configure the cron Jobs
 
 Set your background job mode to cron:
 
