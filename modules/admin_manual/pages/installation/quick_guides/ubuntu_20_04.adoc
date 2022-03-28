@@ -23,8 +23,20 @@ This guide can not go into details and has its limits by nature. If you experien
 [source,bash]
 ----
 my_domain="Your.Domain.tld"
+echo $my_domain
 
 hostnamectl set-hostname $my_domain
+hostname -f
+----
+
+=== Generate strong passwords
+
+----
+sec_admin_pwd=$(openssl rand -base64 18)
+echo $sec_admin_pwd > /etc/.sec_admin_pwd.txt
+
+sec_db_pwd=$(openssl rand -base64 18)
+echo $sec_db_pwd > /etc/.sec_db_pwd.txt
 ----
 
 === Update your system
@@ -135,7 +147,8 @@ apt install -y \
 FILE="/etc/apache2/sites-available/owncloud.conf"
 cat <<EOM >$FILE
 <VirtualHost *:80>
-#ServerName $my_domain #uncommment if variable was set
+# uncommment the line below if variable was set
+#ServerName $my_domain 
 DirectoryIndex index.php index.html
 DocumentRoot /var/www/owncloud
 <Directory /var/www/owncloud>
@@ -175,7 +188,7 @@ systemctl start mariadb
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; \
 GRANT ALL PRIVILEGES ON owncloud.* \
   TO owncloud@localhost \
-  IDENTIFIED BY 'replace-with-strong-password'";
+  IDENTIFIED BY '${sec_db_pwd}'";
 ----
 
 It is recommended to run mysqltuner script to analyse database configuration after running with load for several days.
@@ -210,10 +223,10 @@ occ maintenance:install \
     --database "mysql" \
     --database-name "owncloud" \
     --database-user "owncloud" \
-    --database-pass "replace-with-strong-password-from-before" \
+    --database-pass ${sec_db_pwd} \
     --data-dir "/var/www/owncloud/data" \
     --admin-user "admin" \
-    --admin-pass "another-strong-password"
+    --admin-pass ${sec_admin_pwd}
 ----
 
 === Configure ownCloud's Trusted Domains
@@ -313,6 +326,12 @@ To check if you have installed the correct vesion of ownCloud and that the occ c
 [source,bash]
 ----
 occ -V
+echo "Your Admin password is: "$sec_admin_pwd
+echo "It's documented at /etc/.sec_admin_pwd.txt"
+echo "Your Database Password is: "$sec_db_pwd
+echo "It's documented at /etc/.sec_db_pwd.txt and in your config.php"
+echo "Your ownCloud is accessable under: "$my_domain
+echo "The Installation is complete."
 ----
 
 IMPORTANT: We recommend you check out the section xref:configuration/server/harden_server.adoc[Hardening and Security Guidance] next.
