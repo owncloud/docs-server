@@ -18,7 +18,7 @@ However, it is still up to the server administrator to review and maintain syste
 == Limit on Password Length
 
 ownCloud uses the https://en.m.wikipedia.org/wiki/Bcrypt[bcrypt]
-algorithm. it only verifies the
+algorithm. It only verifies the
 first 72 characters of passwords. This applies to all passwords you
 use in ownCloud: user passwords, passwords on link shares and passwords
 on external shares.
