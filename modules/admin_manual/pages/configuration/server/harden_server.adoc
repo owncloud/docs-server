@@ -18,8 +18,7 @@ However, it is still up to the server administrator to review and maintain syste
 == Limit on Password Length
 
 ownCloud uses the https://en.m.wikipedia.org/wiki/Bcrypt[bcrypt]
-algorithm. For security reasons (e.g., denial
-of service) and performance reasons as CPU load increases exponentially, it only verifies the
+algorithm. It only verifies the
 first 72 characters of passwords. This applies to all passwords you
 use in ownCloud: user passwords, passwords on link shares and passwords
 on external shares.
@@ -69,18 +68,6 @@ With this information, you can begin customizing a rate-limiting solution specif
 * https://www.fir3net.com/Loadbalancers/F5-BIG-IP/f5-ltm-ratelimiting.html[Rate limiting with F5]
 
 == Operating system
-
-=== Give PHP read access to `/dev/urandom`
-
-ownCloud uses a https://tools.ietf.org/html/rfc4086#section-5.2[RFC 4086 (`Randomness Requirements for Security`)]
-compliant mixer to generate cryptographically secure pseudo-random numbers.
-When generating a random number, ownCloud will request multiple random
-numbers from different sources and create from these the final random number.
-
-The random number generator also tries to request random numbers from
-`/dev/urandom`, therefore you should allow PHP to read from the device.
-
-NOTE: If you configure an `open_basedir` in your `php.ini` file, make sure to include `/dev/urandom`.
 
 === Enable hardening modules such as SELinux
 
