@@ -19,8 +19,7 @@ properly accessed as per SharePoint rules.
 
 The plugin uses the Simple Object Access Protocol (SOAP) and WebDAV for
 the uploads and downloads to talk to SharePoint servers. Your ownCloud
-server must have `php-seclib` and `php-soap` or `php7-soap` installed; and enabled soap as a php module.
-A webserver restart may be needed after changing php modules.
+server must have the php modules `php-seclib` and `php-soap` installed and enabled, a webserver restart may be needed after adding/changing php modules.
 
 The supported authentication methods are:
 
