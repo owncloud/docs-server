@@ -207,7 +207,7 @@ NOTE: In the following the paths to the logfiles of a default Debian installatio
 
 * The logfile of Apache2 is located in `/var/log/apache2/error.log`.
 * The logfile of PHP can be configured in your
-`/etc/php5/apache2/php.ini`. You need to set the directive `log_errors`
+`/etc/php/7.4/apache2/php.ini`. You need to set the directive `log_errors`
 to `On` and choose the path to store the logfile in the `error_log`
 directive. After those changes you need to restart your Web server.
 * The logfile of ownCloud is located in the data directory
@@ -224,7 +224,7 @@ overview of these modules:
 
 ==== Apache
 
-* libapache2-mod-php5filter (use libapache2-mod-php5 instead)
+* libapache2-mod-php7.4 (or a lower supported version if necessary)
 * mod_dav
 * mod_deflate
 * mod_evasive
@@ -232,7 +232,7 @@ overview of these modules:
 * mod_proxy_html (can cause broken PDF downloads)
 * mod_reqtimeout
 * mod_security
-* mod_spdy together with libapache2-mod-php5 / mod_php (use fcgi or php-fpm instead)
+* mod_spdy together with libapache2-mod-php7.4 (see above) / mod_php (use fcgi or php-fpm instead)
 * mod_xsendfile / X-Sendfile (causing broken downloads if not configured correctly)
 
 ==== PHP
