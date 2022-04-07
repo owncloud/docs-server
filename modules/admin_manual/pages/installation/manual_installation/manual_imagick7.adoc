@@ -69,9 +69,9 @@ sudo apt remove php-imagick
 ----
 sudo service apache2 restart
 ----
-
++
 or
-
++
 [source,bash]
 ----
 sudo service php7.4-fpm restart
