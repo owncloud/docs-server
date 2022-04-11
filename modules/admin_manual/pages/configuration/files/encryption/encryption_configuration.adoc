@@ -251,7 +251,7 @@ Take it out of single-user mode when you are finished, by using the following co
 You may only disable encryption by using the xref:configuration/server/occ_command.adoc#encryption[occ Encryption Commands]. Make sure you have backups of all encryption keys, including those for all your users if user key encryption was selected.
 ====
 
-== User-Key-Based Encryption (Legacy / Depricated )
+== User-Key-Based Encryption (Depricated )
 
 === Limitations of User-Key-Based Encryption 
 
