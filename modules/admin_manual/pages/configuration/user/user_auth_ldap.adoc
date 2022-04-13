@@ -1,9 +1,7 @@
 = LDAP Integration
 :toc: right
 :toclevels: 3
-:page-aliases: go/admin-ldap.adoc
-:linkattrs:
-// URLS
+
 :activate-ldap-directory-syntax-filters-url: http://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx
 :ad-group-membership-with-powershell-url: http://blogs.technet.com/b/heyscriptingguy/archive/2014/11/25/active-directory-week-explore-group-membership-with-powershell.aspx
 :ad-ldap-filters-syntax-url: https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx
@@ -514,7 +512,6 @@ image:apps/user_ldap/ldap-wizard/advanced-tab-special-attributes.png[LDAP Wizard
 Quota Field::
   The name of the LDAP attribute to retrieve the user quota limit from. You have to decide which LDAP attribute you want to use and set a value to it in the Attribute Editor.
 
-
 Quota Default::
 +
 --
@@ -766,6 +763,7 @@ Now you can modify and enable the configuration.
 With this filter you can filter out the deactivated users
 and show only active users.
 
+[source,plaintext]
 ----
 !(userAccountControl:1.2.840.113556.1.4.803:=2)
 ----
@@ -774,7 +772,7 @@ Here is what the full filter can look like.
 
 [source,plaintext]
 ----
-&(|(objectclass=organizationalPerson))
+(&(|(objectclass=organizationalPerson))
   (!(userAccountControl:1.2.840.113556.1.4.803:=2))
   (|(|(memberof=CN=Domain Users,CN=Users,DC=dp,DC=mosreg,DC=ru)(primaryGroupID=513)))
 )
