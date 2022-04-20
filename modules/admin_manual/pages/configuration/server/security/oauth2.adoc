@@ -225,7 +225,6 @@ check out this {stackoverflow-url}[answer on StackOverflow].
 - Since the app does not handle user passwords, only master key encryption works (similar to the {shibboleth-app-url}[Shibboleth app]).
 - Clients cannot migrate accounts from Basic Authorization to OAuth2, if they are currently using the `user_ldap` backend.
 - It is not possible to explicitly end user sessions when using OAuth2. Have a read through {oauth2-user-auth-url}[User Authentication with OAuth 2.0] to find out more.
-- Do not attempt to log in with a disabled user.
 
 == Further Reading
 
