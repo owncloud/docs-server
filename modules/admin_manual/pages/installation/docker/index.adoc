@@ -278,13 +278,16 @@ these simple steps:
 docker-compose exec owncloud occ maintenance:mode --on
 ----
 
-. Create a backup in case something goes wrong during the upgrade process, using the following command:
+. Create a backup of the database in case something goes wrong during the upgrade process, using the following command:
 +
 [source,docker]
 ----
 docker-compose exec mariadb \
-     /usr/bin/mysqldump -u root --password=owncloud \
-     owncloud > owncloud_$(date +%Y%m%d).sql
+    /usr/bin/mysqldump \
+    -u root \
+    --password=owncloud \
+    --single-transaction \
+    owncloud > owncloud_$(date +%Y%m%d).sql
 ----
 +
 NOTE: You need to adjust the password and database name if you have changed it in your deployment.
