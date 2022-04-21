@@ -247,7 +247,7 @@ Restrict access to Microsoft Office Online to a defined group. Please note, only
 ....
 
 === Define if Business Flow Is Enabled
-This _global_ option defines if Office users are business users. In case, Office Online will check that the user logged in has an Office 365 business account. If not, the user must sign in and Office Online will check if the subscription is valid. Use `yes` to enable it and `no` or remove the key at all to disable it. To use this option, you need at minimum ownClouds {oc-marketplace-url}/apps/wopi[Microsoft Office Online] app version 1.6.0.
+This _global_ option defines if Office users are business users. In that case, Office Online will check if the user logged in has an Office 365 business account. If not, the user must sign in and Office Online will check if the subscription is valid. Use `yes` to enable it and `no` to disable it or remove the key completely. To use this option, you need at least ownClouds {oc-marketplace-url}/apps/wopi[Microsoft Office Online] app version 1.6.0.
 
 ==== Code Sample
 
