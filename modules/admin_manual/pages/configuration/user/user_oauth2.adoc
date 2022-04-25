@@ -21,6 +21,3 @@ When using OAuth2 a unique access token is generated for each device or third pa
 == The OAuth2 App
 
 OAuth2 functionality is available in ownCloud via the {oc-marketplace-url}/apps/oauth2[OAuth2] application which is available from the ownCloud Marketplace. For more information on how to set it up, see section xref:configuration/server/security/oauth2.adoc[Open Authentication (OAuth2)]
-
-CAUTION: When using OAuth2, never try to log in with a disabled user.
-
