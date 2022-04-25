@@ -166,6 +166,8 @@
 *** xref:admin_manual:enterprise/collaboration/index.adoc[Collaboration]
 **** xref:admin_manual:enterprise/collaboration/collabora_secure_view.adoc[Collabora Online / Secure View]
 **** xref:admin_manual:enterprise/collaboration/msoffice-wopi-integration.adoc[Microsoft Office Online / WOPI Integration]
+*** xref:admin_manual:enterprise/document_classification/index.adoc[Document Classification]
+**** xref:admin_manual:enterprise/document_classification/classification_and_policy_enforcement.adoc[Classify Documents and Enforce Policies]
 *** xref:admin_manual:enterprise/external_storage/index.adoc[External Storage]
 **** xref:admin_manual:enterprise/external_storage/enterprise_only_auth.adoc[Enterprise Only Authentication]
 **** xref:admin_manual:enterprise/external_storage/ldap_home_connector_configuration.adoc[LDAP Home Connector Configuration]
@@ -191,7 +193,6 @@
 *** xref:admin_manual:enterprise/user_management/index.adoc[User Management]
 **** xref:admin_manual:enterprise/user_management/user_auth_shibboleth.adoc[Shibboleth Integration]
 **** xref:admin_manual:enterprise/user_management/saml_2.0_sso.adoc[SAML 2.0 Based SSO]
-** xref:admin_manual:document_classification/index.adoc[Document Classification]
 
 ** xref:admin_manual:troubleshooting/index.adoc[Troubleshooting]
 *** xref:admin_manual:troubleshooting/path_filename_length.adoc[Path and Filename Length Limitations]
