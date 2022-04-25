@@ -1,5 +1,7 @@
 = Document Classification and Policy Enforcement
 :toc: right
+:page-aliases: document_classification/index.adoc, enterprise/classification_and_policy_enforcement.adoc
+
 :iso_27001_url: https://www.iso.org/isoiec-27001-information-security.html
 :vda_url: https://www.vda.de/vda/en/Topics/digitalisierung/daten/informationssicherheit
 :novapath_url: https://www.m-und-h.de/en-novapath/
