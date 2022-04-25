@@ -1,0 +1,4 @@
+:section-title: Document Classification
+:section-preamble-ender: to configure document classification in ownCloud
+
+include::partial$section_page.adoc[]
