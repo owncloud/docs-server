@@ -73,7 +73,7 @@ For Linux distributions, we support, if technically feasible, the latest two ver
 === Hypervisors
 
 * Hyper-V
-* VMware ESX - ownCloud must run without overcommitment of cores or RAM for larger (1000+ users) installations 
+* VMware ESX - ownCloud must run without overcommitment of cores or RAM for larger installations (1000+ users).
 * Xen
 * KVM
 
