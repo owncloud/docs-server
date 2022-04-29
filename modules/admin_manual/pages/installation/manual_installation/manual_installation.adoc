@@ -66,16 +66,16 @@ Download the archive of the latest ownCloud version:
 +
 [source,bash,subs="attributes+"]
 ----
-wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2
+wget {oc-complete-base-url}/{oc-complete-name}.tar.bz2
 ----
 
 . Download the corresponding checksum file like:
 +
 [source,bash,subs="attributes+"]
 ----
-wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2.md5
+wget {oc-complete-base-url}/{oc-complete-name}.tar.bz2.md5
   or
-wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2.sha256
+wget {oc-complete-base-url}/{oc-complete-name}.tar.bz2.sha256
 ----
 
 . Verify the MD5 or SHA256 sum:
@@ -91,7 +91,7 @@ sudo sha256sum -c {oc-complete-name}tar.bz2.sha256 < {oc-complete-name}.tar.bz2
 +
 [source,bash,subs="attributes+"]
 ----
-wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2.asc
+wget {oc-complete-base-url}/{oc-complete-name}.tar.bz2.asc
 
 gpg --verify {oc-complete-name}.tar.bz2.asc o{oc-complete-name}.tar.bz2
 ----
