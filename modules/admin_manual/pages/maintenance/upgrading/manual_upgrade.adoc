@@ -187,6 +187,7 @@ Set the ownership for all files and folders to `www-data:www-data` for the `conf
 ----
 sudo chown -R www-data:www-data /var/www/owncloud/config
 sudo chown -R www-data:www-data /var/www/owncloud/data
+sudo chown -R www-data:www-data /var/www/owncloud/apps
 ----
 
 .Set correct permissions
