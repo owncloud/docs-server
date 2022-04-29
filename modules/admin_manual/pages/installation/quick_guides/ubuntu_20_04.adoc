@@ -208,7 +208,7 @@ systemctl restart apache2
 [source,bash,subs="attributes+"]
 ----
 cd /var/www/
-wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2 && \
+wget {oc-complete-base-url}/{oc-complete-name}.tar.bz2 && \
 tar -xjf {oc-complete-name}.tar.bz2 && \
 chown -R www-data. owncloud
 ----
