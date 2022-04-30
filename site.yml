@@ -38,6 +38,7 @@ asciidoc:
     page-component-build-list: 'docs, server, ocis, user, desktop, ios-app, android'
 #   common
     docs-base-url: 'https://doc.owncloud.com'
+    oc-complete-base-url: 'https://download.owncloud.com/server/stable'
     oc-contact-url: 'https://owncloud.com/contact/'
     oc-help-url: 'https://owncloud.com/docs-guides/'
     oc-marketplace-url: 'https://marketplace.owncloud.com'
@@ -57,7 +58,6 @@ asciidoc:
     oc-examples-server-ip: '127.0.0.1'
     oc-examples-username: 'username'
     oc-examples-password: 'password'
-    oc-complete-base-url: 'https://download.owncloud.com/server/stable'
     oc-complete-name: 'owncloud-complete-latest'
     occ-command-example-prefix: 'sudo -u www-data php occ'
     occ-command-example-prefix-no-sudo: 'php occ'
