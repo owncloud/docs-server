@@ -336,26 +336,6 @@ even if he isn't active in the web UI.
 'session_keepalive' => true,
 ....
 
-=== Enable to force user logout
-Force the user to get logged out after the specified number of seconds when
-the tab or browser gets closed. A negative or 0 value disables this feature.
-
-Note that the user can still access the page without re-authenticating
-(having valid access) if the timeout has not been reached.
-The recommended minimum value is 5 or 10 seconds. Using a lower value
-might cause unwanted logouts for users.
-
-Note that this feature works properly if the user uses one tab only.
-If a user uses multiple tabs, closing one of them will likely
-force the rest to re-authenticate.
-
-==== Code Sample
-
-[source,php]
-....
-'session_forced_logout_timeout' => 0,
-....
-
 === Enforce token only authentication for apps and clients connecting to ownCloud
 If enabled, all access requests using the user's password are blocked for enhanced security.
 
@@ -1996,20 +1976,6 @@ NOTE: Lowering this value may lead to unexpected behaviour, and can include data
 'minimum.supported.desktop.version' => '2.3.3',
 ....
 
-=== Define the suggested poll interval for clients
-Specifies how often clients should poll the server for changes.
-
-The value is in milliseconds. The value is not enforced.
-Clients may use this value to decide how frequently to check the server for
-changes.
-
-==== Code Sample
-
-[source,php]
-....
-'pollinterval' => 30000,
-....
-
 === Define whether to include external storage in quota calculation
 EXPERIMENTAL: option whether to include external storage in quota
 calculation, defaults to false.
@@ -2279,20 +2245,6 @@ Set this property to true if you want to enable debug logging for SMB access.
 [source,php]
 ....
 'dav.enable.async' => false,
-....
-
-=== Enable propfind depth infinity requests
-Tell the clients whether `depth=infinity` is allowed for propfind requests.
-
-Streamed infinite depth propfind requests can reduce memory usage
-with large responses.
-For details see: https://datatracker.ietf.org/doc/html/rfc4918#section-10.2
-
-==== Code Sample
-
-[source,php]
-....
-'dav.propfind.depth_infinity' => false,
 ....
 
 === Show the grace period popup
