@@ -309,6 +309,11 @@ on the login screen. The default is 15 days, expressed in seconds.
 ....
 
 === Define the lifetime of a session after inactivity
+The web UI might send a "heartbeat" based on the activity happening
+in order to extend the session lifetime and keeping it from timing out
+prematurely. If there is no activity happening and the lifetime is
+reached, you'll have to login again.
+
 The default is 20 minutes, expressed in seconds.
 
 ==== Code Sample
@@ -318,8 +323,11 @@ The default is 20 minutes, expressed in seconds.
 'session_lifetime' => 60 * 20,
 ....
 
-=== Enable or disable session keep-alive when a user is logged in to the Web UI
-Enabling this sends a "heartbeat" to the server to keep it from timing out.
+=== Enable session keep-alive when a user is logged in to the Web UI
+Enabling this sends a "heartbeat" to the server to keep it from
+timing out regardless of any activity happening. This heartbeat will
+keep extending the session over again, so the user won't be logged out
+even if he isn't active in the web UI.
 
 ==== Code Sample
 
@@ -383,8 +391,8 @@ WARNING: leave this as is if you're not sure what it does.
 ....
 
 === Define how to relax same site cookie settings
-
 Possible values: `Strict`, `Lax` or `None`.
+
 Setting the same site cookie to `None` is necessary in case of OpenID Connect.
 For more information about the impact of the values see:
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite#values and
@@ -706,7 +714,6 @@ user clicks an alert like this, they will be redirected to that URL and must log
 ....
 
 === Define the Web base URL
-
 This key is necessary for the navigation item to the new ownCloud Web UI and for redirecting
 public and private links.
 
@@ -718,8 +725,8 @@ public and private links.
 ....
 
 === Define rewrite private and public links
-
 Rewrite private and public links to the new ownCloud Web UI (if available).
+
 If web.rewriteLinks is set to 'true', public and private links will be redirected to this url.
 The Web UI will handle these links accordingly.
 
@@ -735,7 +742,6 @@ by ownCloud to 'http://web.example.com/index.html#/s/THoQjwYYMJvXMdW'.
 ....
 
 === Define clean URLs without `/index.php`
-
 This parameter will be written as `RewriteBase` on update and installation of
 ownCloud to your `.htaccess` file. While this value is often simply the URL
 path of the ownCloud installation it cannot be set automatically properly in
@@ -1390,7 +1396,6 @@ These options are for halting user activity when you are performing server
 maintenance.
 
 === Enable maintenance mode to disable ownCloud
-
 If you want to prevent users from logging in to ownCloud before you start
 doing some maintenance work, you need to set the value of the maintenance
 parameter to true. Please keep in mind that users who are already logged-in
@@ -1437,7 +1442,6 @@ who are not in the `admin` group.
 ....
 
 == Memory caching backend configuration
-
 Available cache backends:
 
 * `\OC\Memcache\APCu`       APC user backend
@@ -1509,16 +1513,15 @@ See http://redis.io/topics/security for more information.
 ....
 
 === Define Redis Cluster connection details
-
 Only for use with Redis Clustering, for Sentinel-based setups use the single
 server configuration above, and perform HA on the hostname.
 
 Redis Cluster support requires the php module phpredis in version 3.0.0 or higher.
 
 Available failover modes:
-- \RedisCluster::FAILOVER_NONE       - only send commands to master nodes (default)
-- \RedisCluster::FAILOVER_ERROR      - failover to slaves for read commands if master is unavailable
-- \RedisCluster::FAILOVER_DISTRIBUTE - randomly distribute read commands across master and slaves
+- \RedisCluster::FAILOVER_NONE       - only send commands to primary nodes (default)
+- \RedisCluster::FAILOVER_ERROR      - failover to replicas for read commands if primary is unavailable
+- \RedisCluster::FAILOVER_DISTRIBUTE - randomly distribute read commands across primary and replica nodes
 
 ==== Code Sample
 
@@ -1725,8 +1728,7 @@ https://titanwolf.org/Network/Articles/Article?AID=58c487d4-7e0f-4fbe-9262-42855
 'mysql.utf8mb4' => false,
 ....
 
-=== Force a specific database platform class.
-
+=== Force a specific database platform class
 False means that autodetection will take place.
 
 E.g. to fix MariaDB 1.2.7+ taken for MySQL
@@ -2144,15 +2146,14 @@ Set to `false` to disable.
 'upgrade.automatic-app-update' => true,
 ....
 
-=== Place this ownCloud instance into debugging mode
-
+=== Enable debugging mode for this ownCloud instance
 Only enable this for local development and not in production environments
 This will disable the minifier and outputs some additional debug information
 
 WARNING:
-   Be warned that, if you set this to `true`, exceptions display
-   stack traces on the web interface, *including passwords*, — **in plain text!**.
-   We strongly encourage you never to use it in production.
+Be warned that, if you set this to `true`, exceptions display
+stack traces on the web interface, *including passwords*, — **in plain text!**.
+We strongly encourage you never to use it in production.
 
 ==== Code Sample
 
@@ -2162,7 +2163,6 @@ WARNING:
 ....
 
 === Define the data-fingerprint of the current data served
-
 This is a property used by the clients to find out if a backup has been
 restored on the server. Once a backup is restored run
 {occ-command-example-prefix} maintenance:data-fingerprint
