@@ -181,7 +181,7 @@ sudo find -L /var/www/owncloud \( -path ./data -o -path ./config \) -prune -o -t
 sudo find -L /var/www/owncloud \( -path ./data -o -path ./config \) -prune -o -type f -exec chown root:www-data {} \+
 ----
 
-Set the ownership for all files and folders to `www-data:www-data` for the `config` and `data` directory. Note that it is not mandatory to set the ownership of the `data/` directory as it should already have the correct ownership and it can take a while to finish, depending on the size:
+Set the ownership for all files and folders to `www-data:www-data` for the `config`, `data` and `apps` directories. Note that it is not mandatory to set the ownership of the `data/` directory as it should already have the correct ownership and it can take a while to finish, depending on the size:
 
 [source,bash]
 ----
