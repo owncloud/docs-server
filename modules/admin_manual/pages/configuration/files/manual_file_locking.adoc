@@ -39,7 +39,7 @@ a|image::configuration/files/manual_file_locking/file-locked-unlock-symbol.png[F
 Administrators can enable _Manual File Locking_ for users either via the web interface or by executing an occ command: 
 
 Web interface::
-Go to menu:Settings[Admin > Additional]
+Go to menu:Settings[Admin > General]
 +
 image::configuration/files/manual_file_locking/manual-file-locking-with-lock-breaker.png[Enable file locking]
 
@@ -63,7 +63,7 @@ Maximum lifetime of locks which is allowed to be set by calling the WebDAV Locks
 Users who are a member of these groups can break locks set by another user.
 
 Web interface::
-Go to menu:Settings[Admin > Additional] +
+Go to menu:Settings[Admin > General] +
 The image is the same as shown above when enabling or disabling _Manual File Locking_.
 
 Using the occ command::
