@@ -162,7 +162,7 @@ classes and parameters we can decide whether to use full instances or
 replace certain classes. Because they are slow we don’t want as many
 integration tests as unit tests.
 
-In our case we want to create an integration test for the udpate method
+In our case we want to create an integration test for the update method
 without mocking out the `NoteMapper` class so we actually write to the
 existing database. To do that create a new file called
 `ownnotes/tests/Integration/NoteIntegrationTest.php` with the following

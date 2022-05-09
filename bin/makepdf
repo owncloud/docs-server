@@ -52,10 +52,10 @@ STYLES_DIRECTORY="resources/themes"
 BOOKS_DIRECTORY="book_templates"
 FONTS_DIRECTORY="fonts"
 
-# the target pdf directory must be present and contains a .gitignore file which exludes ALL content
-# from being upladed. the directory is used to store local pdf builds. on the server side when running a
+# the target pdf directory must be present and contains a .gitignore file which excludes ALL content
+# from being uploaded. the directory is used to store local pdf builds. on the server side when running a
 # pdf build, the pdf´s are created there - but they will NEVER be added/synced !!
-# if there is a pdf on the servers side to be removed, we need to unlik them in den releases from the adoc
+# if there is a pdf on the servers side to be removed, we need to unlink them in the releases from the adoc
 # file and tell the sysadmins to remove the pdf from the web folder.
 TARGET_PDF_DIRECTORY="pdf_web"
 
@@ -172,7 +172,7 @@ function validate_manual()
 }
 
 # this function builds the pdf manual
-# it is parametrisized by the "build_manuals" function
+# it is parametrized by the "build_manuals" function
 function build_pdf_manual()
 {
 	# manual name
@@ -249,7 +249,7 @@ function build_pdf_manual()
 	echo "Dated:       ${release_date}"
 	echo
 
-	# even that schould not be necessary, create the local pdf directoy
+	# even that should not be necessary, create the local pdf directory
 	mkdir -p "$build_directory"
 
 	# https://docs.asciidoctor.org/asciidoctor.js/latest/cli/options/
@@ -301,7 +301,7 @@ function build_manuals()
 {
 	local actual_manual
 
-	# if no specific manual is named, then build them all, even only one manual is avalable
+	# if no specific manual is named, then build them all, even only one manual is available
 	# the manual name comes from the available manuals array
 	if [ -z "${MANUAL_NAME}" ]; then
 		for actual_manual in "${AVAILABLE_MANUALS[@]}"

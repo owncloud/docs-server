@@ -320,7 +320,7 @@ chown -R www-data. owncloud
 
 **ownCloud is now installed. You can confirm that it is ready to enable HTTPS xref:installation/letsencrypt/using_letsencrypt.adoc[(for example using Let's Encrypt)] by pointing your web browser to your ownCloud installation.**
 
-To check if you have installed the correct vesion of ownCloud and that the occ command is working, execute the following:
+To check if you have installed the correct version of ownCloud and that the occ command is working, execute the following:
 
 [source,bash]
 ----
