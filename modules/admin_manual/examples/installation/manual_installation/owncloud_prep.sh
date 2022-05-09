@@ -10,7 +10,7 @@
 # htgroup       the webserver group
 # rootuser      the root user
 
-# Short description for paramters used in find
+# Short description for parameters used in find
 #
 # -L       ... Follow symbolic links. Needed in case if links are used or present
 # -path    ... The path to process
@@ -128,7 +128,7 @@ if [ "$do_new" = "y" ]; then
   get_tar
 fi
 
-# in case of upgrade or new, extrect the source
+# in case of upgrade or new, extract the source
 if [ "$do_upgrade" = "y" ] || [ "$do_new" = "y" ]; then
   mkdir -p $ocpath
   tar xvf "$tarFile" -C $ocpath --strip-components=1

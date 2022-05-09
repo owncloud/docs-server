@@ -33,7 +33,7 @@ function clone_example_theme
 
   echo "Downloading ownCloud example theme."
 
-  # getting the exmple theme from git
+  # getting the example theme from git
   if ! wget --output-document="$DOWNLOAD_FILE" --tries=3 --continue \
     --timeout=3 --dns-timeout=3 --connect-timeout=3 --read-timeout=3  \
     "$THEME_ARCHIVE_URL" >/dev/null 2>&1
