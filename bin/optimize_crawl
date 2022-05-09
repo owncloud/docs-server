@@ -11,7 +11,7 @@
 #
 # the script is intended to be called from the root of this repo.
 #
-# see the "PRODUCTS" variable for eligable repos
+# see the "PRODUCTS" variable for eligible repos
 #
 # note, no file should be created manually or by an other process with the extension defined in BACKUP_EXT.
 #
@@ -141,7 +141,7 @@ function run()
 			i=$((i+1))
 			actual[$i]="${line}"
 
-			# starting the block. we expect that <url> </url> are in seperate lines
+			# starting the block. we expect that <url> </url> are in separate lines
 			if [[ "${line}" == "<url>"  ]]; then
 				url=true
 				first=false
@@ -190,7 +190,7 @@ function run()
 		# the last actual array contains all lines after the last </url>
 		new_xml_content="${new_xml_content}"$(printf '%s\n' "${actual[@]}")
 
-		# create a disallow entry for the particular product containig non- "next" entries
+		# create a disallow entry for the particular product containing non- "next" entries
 		unset actual
 		add_robot_content= #$'\n'
 		for actual in "${unuseable_releases[@]}"
@@ -236,7 +236,7 @@ function run()
 #		break
 	done
 
-	# remove any emtpy lines at the END of the script
+	# remove any empty lines at the END of the script
 	# this keeps the content compact if not adding disallows
 	sed -i -e :a -e '/^\n*$/{$d;N;ba' -e '}' "${current_robot}"
 
@@ -298,7 +298,7 @@ function get_sitemaps()
 	local b=("$@")					# Rebuild the products array with rest of arguments
 	local found_sitemaps=()			# the list of sitemap files found 
 	
-	# append .xml to each availabe product and sort the outcome
+	# append .xml to each available product and sort the outcome
 	a=( "${b[@]/%/.xml}" )
 	readarray -t available_products < <(printf '%s\n' "${a[@]}" | sort)
 	#printf '%s\n' "${available_products[@]}"

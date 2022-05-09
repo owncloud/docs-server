@@ -54,7 +54,7 @@ Get all share recipients for the provided search term.
 |============================================
 
 === Example Request Response Payloads
-If the users admin, user1, user2 and the groups group1 and group2 were registerd on a server.
+If the users admin, user1, user2 and the groups group1 and group2 were registered on a server.
 
 [source,json]
 ----

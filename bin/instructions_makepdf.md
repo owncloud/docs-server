@@ -2,11 +2,11 @@
 
 ## Introduction
 
-`makepdf` generates a pdf version from a manual. Dependening on the parametrization on the command line, it builds either a given manual or all available. To create a pdf manual, `asciidoctor-pdf` is used as processor. Compared to the build to html which uses a different software from the same family, the parametrization of `asciidoctor-pdf` can not use the ui-styles, templates and attributes from the html build. In particular with regard to attributes, this can lead to unresolved "variables" which are printed as defined in the build made. To overcome this issue, an additional software (`yamlparse`) based on bash is used to dynamically create an attribute list from `site.yml` and `antora.yml` which is then added as parameter list to the pdf built. Whenever an attribute change is made in one of the `.yml` files, a new pdf build will use these attributes automatically.
+`makepdf` generates a pdf version from a manual. Depending on the parametrization on the command line, it builds either a given manual or all available. To create a pdf manual, `asciidoctor-pdf` is used as processor. Compared to the build to html which uses a different software from the same family, the parametrization of `asciidoctor-pdf` can not use the ui-styles, templates and attributes from the html build. In particular with regard to attributes, this can lead to unresolved "variables" which are printed as defined in the build made. To overcome this issue, an additional software (`yamlparse`) based on bash is used to dynamically create an attribute list from `site.yml` and `antora.yml` which is then added as parameter list to the pdf built. Whenever an attribute change is made in one of the `.yml` files, a new pdf build will use these attributes automatically.
 
 ## Where are PDF Files Generated to
 
-When running `makepdf` locally, pdf files are generated into the `pdf_web` directory. This is for local viewing purposes only! The folder and the files will not get synced by git - it is exluded via the .gitignore file in the root of the repo. When CI triggers a `makepdf` run, it saves the files to a different location relevant for the webserver. The generated files are quasi-static and will only be overwritten if they exist, but not removed. This means that when having a branch switch, the former pdf file will stay untouched and can be linked - as long it will not get deleted manually! 
+When running `makepdf` locally, pdf files are generated into the `pdf_web` directory. This is for local viewing purposes only! The folder and the files will not get synced by git - it is excluded via the .gitignore file in the root of the repo. When CI triggers a `makepdf` run, it saves the files to a different location relevant for the webserver. The generated files are quasi-static and will only be overwritten if they exist, but not removed. This means that when having a branch switch, the former pdf file will stay untouched and can be linked - as long it will not get deleted manually! 
 
 ##  Manual Usage
 
@@ -54,7 +54,7 @@ The general idea of `asciidoctor-pdf` is to create a pdf from a given single fil
 The ownCloud Team <docs@owncloud.com>
 {revnumber}, {revdate}
 ```
-You can adjust the settings as needed. `:module_base_path:` is the path to the base document files of the buildable manuals and must be set accordingly. The script takes the chosen template file, adds based on the table of contents of the manual (`nav.adoc`) include statemens like below
+You can adjust the settings as needed. `:module_base_path:` is the path to the base document files of the buildable manuals and must be set accordingly. The script takes the chosen template file, adds based on the table of contents of the manual (`nav.adoc`) include statements like below
 ```
 include::{module_base_path}index.adoc[leveloffset=+1]
 
