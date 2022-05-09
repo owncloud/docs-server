@@ -90,7 +90,7 @@ sudo wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2
 
 == Script-Guided Upgrade
 
-When using the script-guided upgrade, the script from the xref:installation/manual_installation/manual_installation.adoc#script-guided-installation[Script-Guided Installation] is used. This script can not only **install** a new instance of ownCloud, but also **upgarde** an existing one or can **manage ownership and permissions**. When using the script for upgrading, the script renames the current instance and creates a new instance, copies `config.php` set ownership and permissions etc.
+When using the script-guided upgrade, the script from the xref:installation/manual_installation/manual_installation.adoc#script-guided-installation[Script-Guided Installation] is used. This script can not only **install** a new instance of ownCloud, but also **upgrade** an existing one or can **manage ownership and permissions**. When using the script for upgrading, the script renames the current instance and creates a new instance, copies `config.php` set ownership and permissions etc.
 
 The script xref:installation/manual_installation/script_guided_install.adoc#script-questions[asks questions] and beside other parameters, the *upgrade an existing installation* question is selected.
 
