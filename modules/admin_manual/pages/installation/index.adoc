@@ -9,7 +9,7 @@ This is an overview about the possible installation options for ownCloud Server.
 
 * The xref:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide] is a thorough guide for installing ownCloud, containing all the information needed for the prerequisites, the dependencies, the actual installation and the configuration afterwards. The example installation is based on Ubuntu Server.
 +
-This guide covers Ubuntu server preperations like dependencies, required packages and other necessary components or configurations including Ubuntu upgrades if necessary, descriptions, explanations and easy copy and paste example commands where possible. You will also get directed to other necessary or recommended sections in the documentation to have a well working ownCloud Server base ready for production. 
+This guide covers Ubuntu server preparations like dependencies, required packages and other necessary components or configurations including Ubuntu upgrades if necessary, descriptions, explanations and easy copy and paste example commands where possible. You will also get directed to other necessary or recommended sections in the documentation to have a well working ownCloud Server base ready for production.
 
 * The xref:installation/quick_guides/ubuntu_20_04.adoc[Quick Installation Guide] is a quick guide for installing ownCloud. This guide cannot go into details and has its limits by nature. If you experience issues like with dependencies of PHP or other relevant things like the operating system, web server or database, you have to use the xref:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide].
 

@@ -4,7 +4,7 @@
 LE_PATH="/usr/bin"
 LE_CB="certbot"
 
-# Assumes that example.com www.example.com and subomain.example.com are the domains 
+# Assumes that example.com www.example.com and subdomain.example.com are the domains
 # that you want a certificate for
 export DOMAINS="-d example.com -d www.example.com -d subdomain.example.com"
 

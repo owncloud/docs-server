@@ -10,4 +10,4 @@ This is due to the fact that "Antora does not classify files located at the root
 
 As a result, the antora.yml file only contains the main ROOT/nav.adoc file.
 
-This is benificial, as we now can structure products and their content in a better way.
+This is beneficial, as we now can structure products and their content in a better way.

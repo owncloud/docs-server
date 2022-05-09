@@ -11,6 +11,6 @@ MANUAL_POSTFIX_NAME="_manual"
 # note that this name must be part of the book filename in books/
 # a part of the file name is composed by available_manuals+manual_postfix
 AVAILABLE_MANUALS=(admin developer)
-# define if the first letter of the manual name must be captitalized (Desktop)
+# define if the first letter of the manual name must be capitalized (Desktop)
 # make empty in case it can be also lower case (like iOS-App)
 FIRST_LETTER_CAPITAL="Y"

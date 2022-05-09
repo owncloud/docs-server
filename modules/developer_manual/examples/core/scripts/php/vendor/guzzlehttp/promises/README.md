@@ -61,7 +61,7 @@ $promise->then(
 
 *Resolving* a promise means that you either fulfill a promise with a *value* or
 reject a promise with a *reason*. Resolving a promises triggers callbacks
-registered with the promises's `then` method. These callbacks are triggered
+registered with the promise's `then` method. These callbacks are triggered
 only once and in the order in which they were added.
 
 
