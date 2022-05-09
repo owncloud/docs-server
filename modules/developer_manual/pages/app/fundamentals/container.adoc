@@ -228,7 +228,7 @@ constructor parameter will fail.
 ** If a `routes.php` file returns an array, and an
 `appname/lib/AppInfo/Application.php` exists, include it, create a new
 instance of `\\OCA\\AppName\\AppInfo\\Application.php` and register the
-routes on it. That way a container can be used while still benefitting
+routes on it. That way a container can be used while still benefiting
 from the new routes behavior
 ** If a `routes.php` file returns an array, but there is no
 `appname/lib/AppInfo/Application.php`, create a new
