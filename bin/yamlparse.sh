@@ -6,7 +6,7 @@
 
 # Two lines have been changed compared to the source to adopt for special needs
 
-# See the yamltest.sh script to get a testoutput, created to exctract asciidoc attributes 
+# See the yamltest.sh script to get a test output, created to extract asciidoc attributes
 
 parse_yaml() {
     local yaml_file=$1
