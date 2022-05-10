@@ -290,3 +290,8 @@ sudo apt remove imei-imagemagick,imei-libaom,imei-libheif,imei-libjxl
 === Change Configuration Settings of ImageMagick-7
 
 You can change configuration settings of ImageMagick-7 at any time according to your needs. In case you do so, restart your web server of the php-fpm service post changing the settings so they can take effect for web services.
+
+
+=== Previews Configuration Rules
+
+If you need to configure or enable previews like you want for formats not enabled by default, see xref:configuration/files/previews_configuration.adoc#notes-for-pdf-preview-generation[Notes for PDF Preview Generation] which can serve as a template.
