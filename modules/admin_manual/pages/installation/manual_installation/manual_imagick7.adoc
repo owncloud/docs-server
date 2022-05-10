@@ -294,4 +294,4 @@ You can change configuration settings of ImageMagick-7 at any time according to 
 
 === Previews Configuration Rules
 
-If you need to configure or enable previews like you want for formats not enabled by default, see xref:configuration/files/previews_configuration.adoc#notes-for-pdf-preview-generation[Notes for PDF Preview Generation] which can serve as a template.
+If you need to configure or enable previews for formats not enabled by default, see xref:configuration/files/previews_configuration.adoc#notes-for-pdf-preview-generation[Notes for PDF Preview Generation] which can serve as a template.
