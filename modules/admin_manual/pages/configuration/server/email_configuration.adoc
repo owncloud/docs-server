@@ -291,6 +291,8 @@ NOTE: Immediately after pressing the btn:[Send email] button, as described befor
 
 == Using Email Templates
 
+NOTE: You have to install and enable a custom theme in order to use and customize email templates. Additionally you need to have the Mail Template Editor app installed and enabled.
+
 Most emails sent from ownCloud are based on editable email templates, which are a mixture of PHP and HTML. The currently available templates are:
 
 [cols="40%,15%,40%,50%",options="header",]
@@ -343,10 +345,12 @@ Most emails sent from ownCloud are based on editable email templates, which are 
 
 In addition to providing the email templates, this feature enables you to apply any pre-configured themes to the email. To modify an email template to users:
 
-1.  Access the Admin page.
-2.  Scroll to the Mail templates section.
+1.  Log in as the admin user.
+2.  Navigate to admin > settings > general (admin section).
 3.  Select a template from the drop-down menu.
 4.  Make any desired modifications to the template.
+
+NOTE: If you don't see the drop down menu, instead you see "You need to activate own theme to edit email templates" then you haven't installed and configured a custom theme yet.
 
 The templates are written in PHP and HTML, and are already loaded with the relevant variables such as _username_, _share links_, and _filenames_. You can, if you are careful, edit these — even without knowing PHP or HTML. Don’t touch any of the code, but it’s OK to edit the text portions of the messages.
 
