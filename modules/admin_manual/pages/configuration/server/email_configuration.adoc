@@ -348,9 +348,10 @@ In addition to providing the email templates, this feature enables you to apply 
 1.  Log in as the admin user.
 2.  Navigate to menu:Settings[Admin > General > Mail Templates].
 3.  Select a template from the drop-down menu.
-4.  Make any desired modifications to the template.
++
+NOTE: If you don't see the drop down menu but instead _You need to activate own theme to edit email templates_, you haven't installed and configured a custom theme yet.
 
-NOTE: If you don't see the drop down menu, instead you see "You need to activate own theme to edit email templates" then you haven't installed and configured a custom theme yet.
+4.  Make any desired modifications to the template.
 
 The templates are written in PHP and HTML, and are already loaded with the relevant variables such as _username_, _share links_, and _filenames_. You can, if you are careful, edit these — even without knowing PHP or HTML. Don’t touch any of the code, but it’s OK to edit the text portions of the messages.
 
