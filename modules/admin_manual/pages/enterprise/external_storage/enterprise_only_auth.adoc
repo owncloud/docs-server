@@ -152,21 +152,15 @@ Key/value pairs in config.php must have the following structure:
 .Example having a single array
 [source,php]
 ----
-'customApp.config' => [
-    'password' => 'the_password',
-]
+'customApp.config' => 'the_password',
 ----
 
 .Example having nested arrays
 [source,php]
 ----
 'customApp.config' => [
-  'server1' => [
-    'password' => 'the_first_password',
-  ],
-  'server2' => [
-    'password' => 'the_second_password',
-  ],
+  'server1' => 'the_first_password',
+  'server2' => 'the_second_password',
   ....
 ]
 ----
@@ -174,15 +168,10 @@ Key/value pairs in config.php must have the following structure:
 customApp.config::
 The naming of this key must be a string that is valid as an array key in a PHP array like the above `customApp.config` or as another example `my.config.key`, but not any reserved ownCloud key.
 
-password::
-Each array element **must** have exactly one key named `password` present and a corresponding value, even if empty.
-
-Nested arrays::
-You can use nested arrays as described in the example above. When using nested arrays, you can use as many sub-keys according your needs where the naming of the sub-key must be a string that is valid as an array key in a PHP array.
+Arrays::
+You can use an array as described in the example above. When using an array, you can use as many sub-keys according your needs where the naming of the sub-key must be a string that is valid as an array key in a PHP array.
 +
-Note that sub-keys, except the password key are not used as elements for the mount point. Sub-keys are only present to optimize grouping and accessing the passwords.
-+
-Nested arrays are beneficial when having more than one server (host) with a password, but keeping them together in one master key. To access a particular sub-key in the mount definition, use the following scheme:
+The array syntax is beneficial when having more than one server (host) with a password, but keeping them together in one master key. To access a particular sub-key in the mount definition, use the following scheme:
 +
 [source,plaintext]
 ----
