@@ -90,7 +90,7 @@ sudo wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2
 
 == Script-Guided Upgrade
 
-When using the script-guided upgrade, the script from the xref:installation/manual_installation/manual_installation.adoc#script-guided-installation[Script-Guided Installation] is used. This script can not only **install** a new instance of ownCloud, but also **upgarde** an existing one or can **manage ownership and permissions**. When using the script for upgrading, the script renames the current instance and creates a new instance, copies `config.php` set ownership and permissions etc.
+When using the script-guided upgrade, the script from the xref:installation/manual_installation/manual_installation.adoc#script-guided-installation[Script-Guided Installation] is used. This script can not only **install** a new instance of ownCloud, but also **upgrade** an existing one or can **manage ownership and permissions**. When using the script for upgrading, the script renames the current instance and creates a new instance, copies `config.php` set ownership and permissions etc.
 
 The script xref:installation/manual_installation/script_guided_install.adoc#script-questions[asks questions] and beside other parameters, the *upgrade an existing installation* question is selected.
 
@@ -149,7 +149,7 @@ sudo cp /var/www/backup_owncloud/config/config.php /var/www/owncloud/config/conf
 
 === Market and Marketplace App Upgrades
 
-Before getting too far into the upgrade process, consider how the Market app and its configuration options affect the upgrade process. The Market app — and other apps from the Marketplace — will not be updated when you upgrade ownCloud if `upgrade.automatic-app-update` is set to `true` in config.php.
+Before getting too far into the upgrade process, consider how the Market app and its configuration options affect the upgrade process. The Market app — and other apps from the Marketplace — will not be updated when you upgrade ownCloud if `upgrade.automatic-app-update` is set to `false` in config.php.
 
 In addition, if there are installed apps (whether compatible or incompatible with the next version, or missing source code) and the Market app is enabled but there is no internet connection available, these apps will need to be manually updated once the upgrade is finished.
 
@@ -181,12 +181,13 @@ sudo find -L /var/www/owncloud \( -path ./data -o -path ./config \) -prune -o -t
 sudo find -L /var/www/owncloud \( -path ./data -o -path ./config \) -prune -o -type f -exec chown root:www-data {} \+
 ----
 
-Set the ownership for all files and folders to `www-data:www-data` for the `config` and `data` directory. Note that it is not mandatory to set the ownership of the `data/` directory as it should already have the correct ownership and it can take a while to finish, depending on the size:
+Set the ownership for all files and folders to `www-data:www-data` for the `config`, `data` and `apps` directories. Note that it is not mandatory to set the ownership of the `data/` directory as it should already have the correct ownership and it can take a while to finish, depending on the size:
 
 [source,bash]
 ----
 sudo chown -R www-data:www-data /var/www/owncloud/config
 sudo chown -R www-data:www-data /var/www/owncloud/data
+sudo chown -R www-data:www-data /var/www/owncloud/apps
 ----
 
 .Set correct permissions

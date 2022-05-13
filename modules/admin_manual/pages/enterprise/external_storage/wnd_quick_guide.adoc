@@ -8,7 +8,7 @@ This is a quick guide for installing and configuring the Windows Network Drive (
 
 == Prerequisites
 
-To successfully use the Windows Network Drive app, you must meet the prerequisits which can be found in the xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc[Server Preparation for Ubuntu 20.04]. In particular, these are the sections required which address `smbclient` (
+To successfully use the Windows Network Drive app, you must meet the prerequisites which can be found in the xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc[Server Preparation for Ubuntu 20.04]. In particular, these are the sections required which address `smbclient` (
 xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc#clean-ubuntu-20-04-installation[Clean Ubuntu 20.04 Installation]) and `libsmbclient-php` (
 xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc#libsmbclient-php-library[libsmbclient-php Library]).
 

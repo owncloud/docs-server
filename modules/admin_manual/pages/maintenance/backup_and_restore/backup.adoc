@@ -77,18 +77,24 @@ Depending on the database version and the setup, username and password may not b
 
 [source,bash]
 ----
-sudo mysqldump --single-transaction -h [server] \
- -u [username] -p [password] \
- [db_name] > owncloud-dbbackup_`date +"%Y%m%d"`.bak
+sudo mysqldump \
+  --single-transaction \
+  -h [server] \
+  -u [username] \
+  -p [password] \
+  [db_name] > owncloud-dbbackup_`date +"%Y%m%d"`.bak
 ----
 
 Example, replace username and password according your setup:
 
 [source,bash]
 ----
-sudo mysqldump --single-transaction -h localhost \
- -u username -p password \
- owncloud > owncloud-dbbackup_`date +"%Y%m%d"`.bak
+sudo mysqldump \
+  --single-transaction \
+  -h localhost \
+  -u username \
+  -p password \
+  owncloud > owncloud-dbbackup_`date +"%Y%m%d"`.bak
 ----
 
 === SQLite
@@ -102,9 +108,11 @@ sqlite3 data/owncloud.db .dump > owncloud-dbbackup_`date +"%Y%m%d"`.bak
 
 [source,postgresql]
 ----
-PGPASSWORD="password" pg_dump [db_name] \
- -h [server] -U [username] \
- -f owncloud-dbbackup_`date +"%Y%m%d"`.bak
+PGPASSWORD="password" \
+  pg_dump [db_name] \
+  -h [server] \
+  -U [username] \
+  -f owncloud-dbbackup_`date +"%Y%m%d"`.bak
 ----
 
 == Backup Cron Jobs

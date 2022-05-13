@@ -19,6 +19,7 @@ xref:mount-options[external mountpoints]. Sharing on such mountpoints is disable
 
 == Enabling External Storage Support
 
+Prerequisite: menu:Settings[Apps > External storage support] is enabled.
 Tick the checkbox under `Settings > Storage > "Enable External Storage"`.
 
 image:configuration/files/external_storage/enable-app.png[Enabling External Storage Support in ownCloud]

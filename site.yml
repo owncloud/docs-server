@@ -38,6 +38,7 @@ asciidoc:
     page-component-build-list: 'docs, server, ocis, user, desktop, ios-app, android'
 #   common
     docs-base-url: 'https://doc.owncloud.com'
+    oc-complete-base-url: 'https://download.owncloud.com/server/stable'
     oc-contact-url: 'https://owncloud.com/contact/'
     oc-help-url: 'https://owncloud.com/docs-guides/'
     oc-marketplace-url: 'https://marketplace.owncloud.com'
@@ -47,12 +48,12 @@ asciidoc:
     latest-docs-version: 'next'
     previous-docs-version: 'next'
 #   server
-    latest-server-version: '10.9'
-    latest-server-download-version: '10.9.1'
-    previous-server-version: '10.8'
-    current-server-version: '10.9'
+    latest-server-version: '10.10'
+    latest-server-download-version: '10.10.0'
+    previous-server-version: '10.9'
+    current-server-version: '10.10'
     oc-changelog-url: 'https://owncloud.com/changelog/server/'
-    oc-install-package-url: 'https://software.opensuse.org//download.html?project=isv%3AownCloud%3Aserver%3A10&package=owncloud-complete-files'
+    oc-install-package-url: 'https://software.opensuse.org/download.html?project=isv%3AownCloud%3Aserver%3A10&package=owncloud-complete-files'
     oc-examples-server-url: 'https://owncloud.install.com/owncloud'
     oc-examples-server-ip: '127.0.0.1'
     oc-examples-username: 'username'
@@ -73,6 +74,9 @@ asciidoc:
 #   ocis
     latest-ocis-version: 'next'
     previous-ocis-version: 'next'
+    ocis-version: '2.0.0-beta1'
+    ocis-downloadpage-url: 'https://download.owncloud.com/ocis/ocis/testing/'
+    ocis-ext-includes: 'https://raw.githubusercontent.com/owncloud/ocis/docs/extensions/_includes/'
 #   desktop
     latest-desktop-version: 'next'
     previous-desktop-version: 'next'

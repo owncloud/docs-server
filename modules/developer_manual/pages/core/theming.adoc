@@ -127,7 +127,7 @@ Now in more detail for those who want to understand the procedures presented abo
 
 All themes, whether copied or new, must meet two key criteria:
 
-1.  They must be stored in an app directory of your ownCloud installation, preferrably in `apps-external` or a
+1.  They must be stored in an app directory of your ownCloud installation, preferably in `apps-external` or a
 xref:admin_manual:installation/apps_management_installation.adoc#using-custom-app-directories[custom app directory]
 +
 NOTE: To ensure that custom themes aren’t lost during upgrades, we strongly encourage you to store them in a custom app directory.

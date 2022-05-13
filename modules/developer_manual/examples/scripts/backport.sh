@@ -169,7 +169,7 @@ echo "${commitList}" | while IFS= read -r line; do
   is_cherry_picked=$(git log --grep "${line}" 2>/dev/null)
   if [[ ! -z "${is_cherry_picked}" ]]; then
     echo
-    echo "Commit ${line} has aready been cherry picked, abort backporting."
+    echo "Commit ${line} has already been cherry picked, abort backporting."
     # go back to the base branch and delete the new branch with all its contents.
     git checkout --quiet "${sourceBranch}"
     git branch -D --quiet "${newBranch}"
