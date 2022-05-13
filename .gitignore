@@ -4,3 +4,6 @@ node_modules/
 public/
 pdf_web/
 tmp/
+.DS_Store
+modules/.DS_Store
+modules/admin_manual/.DS_Store
