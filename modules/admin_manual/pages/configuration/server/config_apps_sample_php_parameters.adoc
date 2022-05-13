@@ -188,7 +188,7 @@ without defining a secret. You can use any secret you like. In case you want to 
 a random secret, use the following example command:
 `echo $(tr -dc 'a-z0-9' < /dev/urandom | head -c 20)`
 It is also possible to set this secret via an occ command which writes key and data to the
-config.php file. Please see the occ command documentation for more information.
+config.php file. See the occ command documentation for more information.
 
 ==== Code Sample
 
@@ -239,7 +239,7 @@ ownCloud documentation.
 ....
 
 === Define the group name for users allowed to use Microsoft Office Online
-Restrict access to Microsoft Office Online to a defined group. Please note, only one group can be defined. Default = empty = no restriction.
+Restrict access to Microsoft Office Online to a defined group. Note that only one group can be defined. Default = empty = no restriction.
 
 ==== Code Sample
 
@@ -249,7 +249,7 @@ Restrict access to Microsoft Office Online to a defined group. Please note, only
 ....
 
 === Define the Proxy URL
-This _global_ option defines the proxy URL if you are a Microsoft Business user. Note that you will get a working URL from {oc-support-url}[ownCloud Support] post a written declaration that your company has an eligable Microsoft Business contract.
+This _global_ option defines the proxy URL if you are a Microsoft Business user. Note that you will get a working URL from {oc-support-url}[ownCloud Support] after you provide a written declaration that your company has an eligable Microsoft Business contract.
 
 ==== Code Sample
 
@@ -259,7 +259,7 @@ This _global_ option defines the proxy URL if you are a Microsoft Business user.
 ....
 
 === Define if Business Flow Is Enabled
-This _global_ option defines if Office users are business users. In that case, Office Online will check if the user logged in has an Office 365 business account. If not, the user must sign in and Office Online will check if the subscription is valid. Use `yes` to enable it and `no` to disable it or remove the key completely. To use this option, you need at least ownClouds {oc-marketplace-url}/apps/wopi[Microsoft Office Online] app version 1.6.0.
+This _global_ option defines if Office users are business users. In that case, Office Online will check if the user logged in has an Office 365 business account. If not, the user must sign in and Office Online will check if the subscription is valid. Use `yes` to enable it and `no` to disable it or remove the key completely. To use this option, you need at least ownCloud's {oc-marketplace-url}/apps/wopi[Microsoft Office Online] app version 1.6.0.
 
 ==== Code Sample
 
@@ -310,11 +310,11 @@ If `true`, the ownCloud login page will redirect directly to the Identity Provid
 login without requiring the user to click a button. The default is `false`.
 
 auto-provision::
-If auto-provision is setup, an ownCloud user will be created if not exists, after successful
+If auto-provision is set up, an ownCloud user will be created if none exists, after successful
 login using openid connect. The config parameters `mode` and `search-attribute` will be used
 to create a unique user so that the lookup mechanism can find the user again. This is where
 an LDAP setup is usually required.
-If auto-provision is not setup or required, it is expected that the user exists and you
+If auto-provision is not set up or required, it is expected that the user exists and you
 MUST declare this with `['enabled' => false]` like shown in the Easy Setup example.
 `auto-provision` holds several sub keys, see the example setup with the explanations below.
 
@@ -428,7 +428,7 @@ https://datatracker.ietf.org/doc/html/rfc7662 for more information on token intr
 ],
 ....
 
-=== Manual setup
+=== Manual Setup
 
 ==== Code Sample
 
@@ -459,7 +459,7 @@ https://datatracker.ietf.org/doc/html/rfc7662 for more information on token intr
 ],
 ....
 
-=== Test setup
+=== Test Setup
 
 ==== Code Sample
 
