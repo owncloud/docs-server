@@ -249,7 +249,7 @@ Restrict access to Microsoft Office Online to a defined group. Note that only on
 ....
 
 === Define the Proxy URL
-This _global_ option defines the proxy URL if you are a Microsoft Business user. Note that you will get a working URL from {oc-support-url}[ownCloud Support] after you provide a written declaration that your company has an eligable Microsoft Business contract.
+This _global_ option defines the proxy URL if you are a Microsoft Business user. Note that you will get a working URL from {oc-support-url}[ownCloud Support] after you provide a written declaration that your company has an eligible Microsoft Business contract.
 
 ==== Code Sample
 
