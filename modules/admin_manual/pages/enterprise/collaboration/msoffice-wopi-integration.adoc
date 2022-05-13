@@ -11,11 +11,14 @@
 :shared-locked-url: https://answers.microsoft.com/en-us/msoffice/forum/all/errorthe-file-is-locked-for-shared-use/8b852d6a-c1d5-4765-8734-9b4a4ebdd3aa
 :sharepoint-locked-url: https://techcommunity.microsoft.com/t5/sharepoint/quot-error-the-file-is-locked-quot-when-using-office-online/m-p/227866
 
-== About
+== Introduction
 
-The WOPI (Web Application Open Platform Interface) app, which is bundled with ownCloud Enterprise Edition, is the connector between ownCloud server and {msoffice-online-server-url}[Microsoft Office Online Server].
+The WOPI (Web Application Open Platform Interface) app, which is bundled with ownCloud Enterprise Edition, is the connector between ownCloud server and {msoffice-online-server-url}[Microsoft Office Online Server] or {office365-url}[Office 365 (cloud)].
 
-It allows Microsoft Office Online users to collaboratively work with Office documents in ownCloud in the browser, by connecting ownCloud with your Microsoft Office Online Server via {wopi-protocol-url}[the WOPI protocol]. To use it, you need to have a running Microsoft Office Online Server in your data center.
+It allows Microsoft Office users to collaboratively work with Office documents in ownCloud in the browser, by connecting ownCloud with your Microsoft Office Online Server or Office 365 (cloud) via {wopi-protocol-url}[the WOPI protocol].
+
+ - *Microsoft Office Online Server:* To use it, you need to have a running Microsoft Office Online Server in your data center.
+ - *Office 365 (cloud):* To use it, you need an active Microsoft 365 subscription. 
 
 [NOTE]
 ====
@@ -23,24 +26,61 @@ Please bear in mind:
 
 * WOPI is only available for ownCloud enterprise. It _is not available_ in the community version.
 * Out-of-the box only the on-premise version of Microsoft Office Online Server is supported.
-* This app requires at minimum ownCloud Version 10.1 and php 7.1.
+* If you want to integrate the {office365-url}[Office 365 (cloud)] version of Microsoft Office Online, you need to {oc-support-url}[get in touch with us].
+* This app requires at minimum ownCloud Version 10.5 and php 7.1.
 ====
 
-TIP: If you want to integrate the {office365-url}[Office 365 (cloud)] version of Microsoft Office Online, you need to {oc-contact-url}[get in touch with us].
-
 == Preparing the Environment
-You need an {office-online-server-url}[Office Online Server] installed.
+You need an
 
-All involved servers (OfficeOnline Server and the ownCloud server) need to be accessible by HTTPS with valid certificates.
+- {office-online-server-url}[Office Online Server] installed, or an 
+- active Microsoft 365 subscription.
+
+All involved servers (Office Online Server and the ownCloud server) need to be accessible by HTTPS with valid certificates.
 
 == Configuring the WOPI App in ownCloud
 
 To configure the WOPI app in your ownCloud installation, add the following configuration to `config/config.php`, and adjust it based on the details of your setup:
 
-[source,php]
+[source,php,subs="post_replacements,attributes+"]
 ----
-'wopi.token.key' => 'replace-with-your-own-random-string',
-'wopi.office-online.server' => 'https://your.office.online.server.tld',
+# ownCloud Support URL: {oc-support-url}
+
+# WOPI token:
+# For Office Online Server: Replace the token with your own random string
+# For Office 365 (cloud): Request the string from us
+# (this has to match the `O365_PROXY_SHARED_KEY`
+# configuration of the O365 proxy)
+'wopi.token.key' => 'REPLACE_WITH_WOPI_TOKEN_KEY'
+
+# Office server URL
+# For Office Online Server: Enter your https://your.office.online.server.tld
+# For Office 365 (cloud): Upstream url to Microsoft O365.
+# Microsoft will only accept connections from registered ownCloud domains.
+# For Office 365 quality assurance upstream URL:
+#   https://ffc-onenote.officeapps.live.com/hosting/discovery
+# For Office 365 production upstream URL:
+#   https://onenote.officeapps.live.com/hosting/discovery
+'wopi.office-online.server' => 'https://THE_OFFICE_SERVER_URL',
+
+# Proxy URL
+# Only for Office 365 (cloud), not needed for Office Online Server
+# URL of the O365 proxy instance.
+# Note that you will get a working URL from ownCloud Support
+# post a written declaration that your company has an eligable
+# Microsoft Business contract.
+'wopi.proxy.url' => 'https://o365.example.com',
+
+# Enable Business Flow
+# Only for Office 365 (cloud), not needed for Office Online Server
+# Necessary for the O365 proxy key above.
+`wopi.business-flow.enabled` => 'yes',
+
+# Samesite Cookie
+# Only for Office 365 (cloud), not needed for Office Online Server
+# Necessary to allow e.g. opening ownCloud sharing from O365.
+# Use `None` if you are using OpenID Connect.
+'http.cookie.samesite' => 'Lax',
 ----
 
 == Restrict Usage to Users in a Specific Group
