@@ -74,7 +74,7 @@ To configure the WOPI app in your ownCloud installation, add the following confi
 # Enable Business Flow
 # Only for Office 365 (cloud), not needed for Office Online Server
 # Necessary for the O365 proxy key above.
-`wopi.business-flow.enabled` => 'yes',
+'wopi.business-flow.enabled' => 'yes',
 
 # Samesite Cookie
 # Only for Office 365 (cloud), not needed for Office Online Server
