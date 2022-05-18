@@ -703,7 +703,7 @@ Things to remember about public link shares
 
 *Mandatory Fields*
 
-`shareType`, `path` and `shareWith` are mandatory if `shareType` is set to 0 or 1
+`shareType` is mandatory; `path` and `shareWith` are mandatory if `shareType` is set to 0 or 1
 ====
 
 ==== Returns
