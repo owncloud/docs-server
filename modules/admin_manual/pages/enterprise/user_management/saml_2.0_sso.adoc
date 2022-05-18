@@ -144,7 +144,7 @@ In the "User Authentication" settings for Shibboleth the `upn` environment varia
 
 Use `upn` as `uid` and set the app mode to 'SSO Only' by running:
 
-[[source,bash,subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} shibboleth:mode ssoonly
 {occ-command-example-prefix} shibboleth:mapping -u upn
