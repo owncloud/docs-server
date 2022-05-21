@@ -1,0 +1,328 @@
+= Install ownCloud on Ubuntu 22.04
+:toc: right
+
+== Introduction
+
+This is a short guide to installing ownCloud on a fresh installation of Ubuntu 22.04. Run the following commands in your terminal to complete the installation.
+
+This guide can not go into details and has its limits by nature. If you experience issues like with dependencies of PHP or other relevant things like the operating system, web server or database, look at the xref:installation/manual_installation/manual_installation.adoc#ubuntu-22-04-lts-server[Detailed Installation Guide] for more information.
+
+== Prerequisites and Notes
+
+* A fresh installation of https://www.ubuntu.com/download/server[Ubuntu 22.04] with SSH enabled.
+* This guide assumes that you are working as the root user.
+* Your ownCloud directory will be located in `/var/www/owncloud/`.
+* php 7.4 from the ondrej/php PPA is going to be installed on Ubuntu 22.04.
+* Use the correct xref:installation/manual_installation/manual_installation_apache.adoc#multi-processing-module-mpm[Multi-Processing Module (MPM)].
+
+== Preparation
+
+=== Set Your Domain Name
+
+[source,bash]
+----
+my_domain="Your.Domain.tld"
+echo $my_domain
+
+hostnamectl set-hostname $my_domain
+hostname -f
+----
+
+=== Generate Strong Passwords
+
+----
+sec_admin_pwd=$(openssl rand -base64 18)
+echo $sec_admin_pwd > /etc/.sec_admin_pwd.txt
+
+sec_db_pwd=$(openssl rand -base64 18)
+echo $sec_db_pwd > /etc/.sec_db_pwd.txt
+----
+
+=== Update Your System
+
+First, ensure that all the installed packages are entirely up to date and that PHP is available in the APT repository.
+To do so, follow the instructions below:
+
+[source,bash]
+----
+apt update && \
+  apt upgrade -y
+----
+
+=== Create the occ Helper Script
+
+Create a helper script to simplify running xref:configuration/server/occ_command.adoc[occ commands]:
+
+[source,bash]
+----
+FILE="/usr/local/bin/occ"
+cat <<EOM >$FILE
+#! /bin/bash
+cd /var/www/owncloud
+sudo -E -u www-data /usr/bin/php /var/www/owncloud/occ "\$@"
+EOM
+----
+
+Make the helper script executable:
+
+[source,bash]
+----
+chmod +x $FILE
+----
+
+=== Install the Required Packages
+
+[source,bash]
+----
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt update && sudo apt upgrade
+
+apt install -y \
+  apache2 \
+  libapache2-mod-php7.4 \
+  mariadb-server \
+  openssl redis-server wget \
+  php7.4 php7.4-imagick php7.4-common \ 
+  php7.4-curl php7.4-gd php7.4-imap \
+  php7.4-intl php7.4-json php7.4-mbstring \
+  php7.4-mysql php7.4-ssh2 php7.4-xml \
+  php7.4-zip php7.4-apcu php7.4-redis \
+  php7.4-ldap php-opcache \
+----
+
+=== Install smbclient php Module
+
+If you want to connect to external storage via SMB you need to install the smbclient php module.
+
+[source,bash]
+----
+apt-get install -y php7.4-smbclient
+echo "extension=smbclient.so" > /etc/php/7.4/mods-available/smbclient.ini
+phpenmod smbclient
+systemctl restart apache2
+----
+
+Check if it was successfully activated: 
+
+[source,bash]
+----
+php -m | grep smbclient
+----
+
+This should show the following output:
+
+[source,bash]
+----
+libsmbclient
+smbclient
+----
+
+=== Install the Recommended Packages
+
+Additional useful tools helpful for debugging:
+
+[source,bash]
+----
+apt install -y \
+  unzip bzip2 rsync curl jq \
+  inetutils-ping  ldap-utils\
+  smbclient
+----
+
+=== Configure Apache
+
+==== Create a Virtual Host Configuration
+
+[source,apache]
+----
+FILE="/etc/apache2/sites-available/owncloud.conf"
+cat <<EOM >$FILE
+<VirtualHost *:80>
+# uncommment the line below if variable was set
+#ServerName $my_domain 
+DirectoryIndex index.php index.html
+DocumentRoot /var/www/owncloud
+<Directory /var/www/owncloud>
+  Options +FollowSymlinks -Indexes
+  AllowOverride All
+  Require all granted
+
+ <IfModule mod_dav.c>
+  Dav off
+ </IfModule>
+
+ SetEnv HOME /var/www/owncloud
+ SetEnv HTTP_HOME /var/www/owncloud
+</Directory>
+</VirtualHost>
+EOM
+----
+
+==== Enable the Virtual Host Configuration
+
+[source,bash]
+----
+a2dissite 000-default
+a2ensite owncloud.conf
+----
+
+=== Configure the Database
+
+IMPORTANT: It's recommended to execute `mysql_secure_installation` to secure the mariadb installation and set a strong password for the database user.
+
+Ensure transaction-isolation level is set and performance_schema on.
+
+[source,bash]
+----
+sed -i "/\[mysqld\]/atransaction-isolation = READ-COMMITTED\nperformance_schema = on" /etc/mysql/mariadb.conf.d/50-server.cnf
+systemctl start mariadb
+mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; \
+GRANT ALL PRIVILEGES ON owncloud.* \
+  TO owncloud@localhost \
+  IDENTIFIED BY '${sec_db_pwd}'";
+----
+
+It is recommended to run mysqltuner script to analyse database configuration after running with load for several days.
+
+==== Enable the Recommended Apache Modules
+
+[source,bash]
+----
+a2enmod dir env headers mime rewrite setenvif
+systemctl restart apache2
+----
+
+== Installation
+
+=== Download ownCloud
+
+[source,bash,subs="attributes+"]
+----
+cd /var/www/
+wget {oc-complete-base-url}/{oc-complete-name}.tar.bz2 && \
+tar -xjf {oc-complete-name}.tar.bz2 && \
+chown -R www-data. owncloud
+----
+
+=== Install ownCloud
+
+IMPORTANT: Remember to set a strong password for your owncloud admin user and provide the previously set password for the database user as the `--database-pass` argument.
+
+[source,bash]
+----
+occ maintenance:install \
+    --database "mysql" \
+    --database-name "owncloud" \
+    --database-user "owncloud" \
+    --database-pass ${sec_db_pwd} \
+    --data-dir "/var/www/owncloud/data" \
+    --admin-user "admin" \
+    --admin-pass ${sec_admin_pwd}
+----
+
+=== Configure ownCloud's Trusted Domains
+
+[source,bash]
+----
+my_ip=$(hostname -I|cut -f1 -d ' ')
+occ config:system:set trusted_domains 1 --value="$my_ip"
+occ config:system:set trusted_domains 2 --value="$my_domain"
+----
+
+=== Configure the cron Jobs
+
+Set your background job mode to cron:
+
+[source,bash]
+----
+occ background:cron
+----
+
+Configure the execution of the cron job to every 15 min and the cleanup of chunks every night at 2 am:
+
+[source,bash]
+----
+echo "*/15  *  *  *  * /var/www/owncloud/occ system:cron" \
+  | sudo -u www-data -g crontab tee -a \
+  /var/spool/cron/crontabs/www-data
+echo "0  2  *  *  * /var/www/owncloud/occ dav:cleanup-chunks" \
+  | sudo -u www-data -g crontab tee -a \
+  /var/spool/cron/crontabs/www-data
+----
+
+[NOTE]
+====
+If you need to sync your users from an LDAP or Active Directory Server, add this additional xref:configuration/server/background_jobs_configuration.adoc[Cron job]. Every 4 hours this cron job will sync LDAP users in ownCloud and disable the ones who are not available for ownCloud. Additionally, you get a log file in `/var/log/ldap-sync/user-sync.log` for debugging.
+====
+
+[source,bash]
+----
+echo "1 */6 * * * /var/www/owncloud/occ user:sync \
+  'OCA\User_LDAP\User_Proxy' -m disable -vvv >> \
+  /var/log/ldap-sync/user-sync.log 2>&1" \
+  | sudo -u www-data -g crontab tee -a \
+  /var/spool/cron/crontabs/www-data
+mkdir -p /var/log/ldap-sync
+touch /var/log/ldap-sync/user-sync.log
+chown www-data. /var/log/ldap-sync/user-sync.log
+----
+
+=== Configure Caching and File Locking
+
+[source,bash,subs="attributes+"]
+----
+occ config:system:set \
+   memcache.local \
+   --value '\OC\Memcache\APCu'
+occ config:system:set \
+   memcache.locking \
+   --value '\OC\Memcache\Redis'
+occ config:system:set \
+   redis \
+   --value '{"host": "{oc-examples-server-ip}", "port": "{std-port-redis}"}' \
+   --type json
+----
+
+=== Configure Log Rotation
+
+[source,bash]
+----
+FILE="/etc/logrotate.d/owncloud"
+sudo cat <<EOM >$FILE
+/var/www/owncloud/data/owncloud.log {
+  size 10M
+  rotate 12
+  copytruncate
+  missingok
+  compress
+  compresscmd /bin/gzip
+}
+EOM
+----
+
+==== Finalize the Installation
+
+Make sure the permissions are correct:
+
+[source,bash]
+----
+cd /var/www/
+chown -R www-data. owncloud
+----
+
+**ownCloud is now installed. You can confirm that it is ready to enable HTTPS xref:installation/letsencrypt/using_letsencrypt.adoc[(for example using Let's Encrypt)] by pointing your web browser to your ownCloud installation.**
+
+To check if you have installed the correct version of ownCloud and that the occ command is working, execute the following:
+
+[source,bash]
+----
+occ -V
+echo "Your Admin password is: "$sec_admin_pwd
+echo "It's documented at /etc/.sec_admin_pwd.txt"
+echo "Your Database Password is: "$sec_db_pwd
+echo "It's documented at /etc/.sec_db_pwd.txt and in your config.php"
+echo "Your ownCloud is accessable under: "$my_domain
+echo "The Installation is complete."
+----
+
+IMPORTANT: We recommend you check out the section xref:configuration/server/harden_server.adoc[Hardening and Security Guidance] next.
