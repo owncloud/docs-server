@@ -81,7 +81,13 @@ The performance of Redis when used with a socket connection is close to the perf
 
 NOTE: The Redis PHP module must be at least version 2.2.6 or higher.
 
-NOTE: The default shipped Redis version and the php-redis extension for Ubuntu 20.04 is 5.x. With Redis version 6, a new authentication mechanism has been introduced named ACL (Access Control Lists). ownCloud does not currently support Redis ACL´s, but does support the password protection available with current Redis versions.
+[NOTE]
+====
+* For Ubuntu 20.04, the default shipped Redis Server version and the php-redis extension is 5.x.
+* For Ubuntu 22.04, the default shipped Redis Server version is 6.0.16.
+* For Ubuntu 22.04, the php7.4-redis extension has version 5.3.x.
+* With Redis version 6, a new authentication mechanism has been introduced named ACL (Access Control Lists). ownCloud does currently not support Redis ACL´s, but does support the password protection, available with current Redis versions.
+====
 
 ==== Installing Redis
 
