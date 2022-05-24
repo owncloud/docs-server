@@ -6,7 +6,7 @@
 :ios-system-requirements-url: https://doc.owncloud.com/ios-app/ios_faq.html
 :android-system-requirements-url: https://doc.owncloud.com/android/faq.html
 
-:description: Read this documentation for a recommended or supported environment for your  ownCloud Server. This documentation is not dependent if you plan a new installation or upgrade an existing one.
+:description: Read this documentation for a recommended or supported environment for your ownCloud Server. This documentation applies to both a new installation or upgrade of an existing installation.
 
 == Introduction
 
@@ -14,7 +14,7 @@
 
 == General Note
 
-There is an important note about a xref:installation/manual_installation/manual_installation_prerequisites.adoc#openssl-version[prerequisite of openSSL]. We highly recommend checking this prerequisite as it is not dependent on one Operating System.
+There is an important note about a xref:installation/manual_installation/manual_installation_prerequisites.adoc#openssl-version[prerequisite of openSSL]. We highly recommend checking this prerequisite as it needs to be checked regardless of the Operating System chosen.
 
 == Officially Recommended Environment
 
