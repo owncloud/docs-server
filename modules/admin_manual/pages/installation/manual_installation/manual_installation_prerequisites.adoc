@@ -7,6 +7,7 @@
 :pecl-package-url: https://pecl.php.net/package
 :sabre-url: http://sabre.io/
 :gnu-make-url: https://www.gnu.org/software/make/
+:wiki-openssl-3-url: https://wiki.openssl.org/index.php/OpenSSL_3.0
 
 == Introduction
 
@@ -23,14 +24,33 @@ If you get a result, the module is present.
 
 == Required Prerequisites
 
+=== openSSL Version
+
+ownCloud requires that you have openSSL version 1.1.x installed. With the release change of openSSL v1.x to openSSL version 3.x in December 2021, some ciphers which were valid in version 1.x, have been retired with immediate effect. This impacts the ownCloud encryption app.
+
+[IMPORTANT]
+====
+If you plan to:
+
+* upgrade the openSSL version of your server to v3 **or**
+* install or upgrade your server where the server upgrade delivers the new openSSL v3 version **and**
+* you have enabled and use encryption
+
+your encryption environment will break due to openSSL v3 retired (legacy) ciphers. As a result, encrypted files cant be accessed. As a _temporary solution_, you have to manually reenable in the openSSL v3 config the legacy ciphers. To do so, see the example in the {wiki-openssl-3-url}[OpenSSL 3.0 Wiki] at section **6.2 Providers**.
+====
+
 === PHP Version
 
 ownCloud can run with following PHP versions: {supported-php-versions}
 
 [IMPORTANT]
 ====
-ownCloud recommends PHP 7.3 or 7.4 for new installations.
-Sites using a version earlier than PHP 7.2 are *strongly encouraged* to migrate at least to PHP 7.2.
+ownCloud recommends PHP 7.4 for new installations. Sites using a version earlier than PHP 7.3 are *strongly encouraged* to migrate at least to PHP 7.3.
+====
+
+[IMPORTANT]
+====
+Note that PHP 8.x is currently not supported.
 ====
 
 ==== PHP Extensions
