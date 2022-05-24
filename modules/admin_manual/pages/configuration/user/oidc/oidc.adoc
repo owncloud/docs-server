@@ -223,6 +223,11 @@ All IdPs can use ownCloud's default implemented _Client IDs, Secrets and Redirec
 | `oc://ios.owncloud.com`
 |===
 
+===== Azure AD configuration specials
+
+Getting `127.0.0.1` as Redirect URI into Azure AD isn't straightforward. Microsoft has an own documentation for this describing the workaround: https://docs.microsoft.com/en-us/azure/active-directory/develop/reply-url#prefer-127001-over-localhost. In summary you have to select the Manifest of you app below Manage, then search for `replyUrlsWithType` and either add a new entry with `127.0.0.1` or modify an existing one.
+
+
 === Migrate Clients from Basic Authentication to OIDC
 
 If your users are logged in to their desktop and mobile clients via basic authentication (username/password) against ownCloud Server and you are not using OAuth2 to authorize the ownCloud clients, a migration to OIDC can be conducted as follows:
