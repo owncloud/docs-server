@@ -5,6 +5,7 @@
 :login-azure-url: https://portal.azure.com/#home
 :openid-connect-frontchannel-logout-url: https://openid.net/specs/openid-connect-frontchannel-1_0.html
 :ms-configure-openid-settings-url: https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-openid-settings
+:ms-ad-redir-url: https://docs.microsoft.com/en-us/azure/active-directory/develop/reply-url#prefer-127001-over-localhost
 
 == Introduction
 
@@ -20,56 +21,61 @@ Follow these steps to configure Microsoft Azure AD for use with OpenID Connect (
 
 . Login to {login-azure-url}[Azure].
 +
-image:configuration/user/oidc/ms-azure-ad/login-with-ms-azure.png[,width=40%]
+image:configuration/user/oidc/ms-azure-ad/login-with-ms-azure.png[width=200]
 
 . Go to menu:Manage Azure Active Directory[].
 +
-image:configuration/user/oidc/ms-azure-ad/select-manag-azure-ad.png[,width=80%]
+image:configuration/user/oidc/ms-azure-ad/select-manag-azure-ad.png[width=500]
 
-. Then go to menu:Properties[Tenant ID] and note your [#tenant-id]#tenant ID# for later use.
+. Then go to menu:Properties[Tenant ID] and note your [#tenant-id]#`tenant ID`# for later use.
 +
-image:configuration/user/oidc/ms-azure-ad/portal-tenant-id-ms-azure-ad.png[,width=80%]
+image:configuration/user/oidc/ms-azure-ad/portal-tenant-id-ms-azure-ad.png[width=400]
 
 . Then go to menu:App registrations[New registration].
 +
-image:configuration/user/oidc/ms-azure-ad/new-registration-ms-azure-ad.png[,width=80%]
+image:configuration/user/oidc/ms-azure-ad/new-registration-ms-azure-ad.png[width=500]
 
 . Provide all required information.
 +
-image:configuration/user/oidc/ms-azure-ad/provide-required-information-ms-azure-ad.png[,width=80%]
+image:configuration/user/oidc/ms-azure-ad/provide-required-information-ms-azure-ad.png[width=400]
 
 . Go to menu:Authentication[Configure Web > Redirect URI] and setup your Redirect URI.
 +
-image:configuration/user/oidc/ms-azure-ad/setup-redirect-url-ms-azure-ad.png[,width=90%]
+image:configuration/user/oidc/ms-azure-ad/setup-redirect-url-ms-azure-ad.png[width=600]
 
-. Go to menu:Certificates & secrets[Add a client secret] and setup the [#client-secret]#client secret# for your app.
+. Go to menu:Certificates & secrets[Add a client secret] and setup the [#client-secret]#`client secret`# for your app.
 +
-image:configuration/user/oidc/ms-azure-ad/setup-client-secret-ms-azure-ad.png[,width=90%]
+image:configuration/user/oidc/ms-azure-ad/setup-client-secret-ms-azure-ad.png[width=500]
 
 . Go to menu:Token configuration[Add optional claim] and setup the claims.
 +
-image:configuration/user/oidc/ms-azure-ad/setup-claims-ms-azure-ad.png[,width=90%]
+image:configuration/user/oidc/ms-azure-ad/setup-claims-ms-azure-ad.png[width=500]
 
 . Go to menu:API permissions[Configured permissions > Add a permission] and add delegated permissions.
 +
-image:configuration/user/oidc/ms-azure-ad/graph-permission-ms-azure-ad.png[,width=90%]
+image:configuration/user/oidc/ms-azure-ad/graph-permission-ms-azure-ad.png[width=600]
 
 . On the same page, do not forget to set menu:Grant admin consent[] to all permissions.
 +
-image:configuration/user/oidc/ms-azure-ad/admin-consent-ms-azure-ad.png[,width=90%]
+image:configuration/user/oidc/ms-azure-ad/admin-consent-ms-azure-ad.png[width=600]
 
 . Go to menu:Expose an API[Set the App ID URI] and set the *Application ID URI*.
 +
-image:configuration/user/oidc/ms-azure-ad/app-id-uri-ms-azure-ad.png[,width=90%]
+image:configuration/user/oidc/ms-azure-ad/app-id-uri-ms-azure-ad.png[width=600]
 
-. Then on the same page menu:Add a scope[Scope name] give the scope a meaningful name like *owncloud* and menu:Add a scope[Who can consent] allow *Admins and users* to consent. You will see the full api  [#api-scope]#scope name# below your entered scope name.
+. Then on the same page menu:Add a scope[Scope name] give the scope a meaningful name like *owncloud* and menu:Add a scope[Who can consent] allow *Admins and users* to consent. You will see the full api  [#api-scope]#`scope name`# below your entered scope name.
 +
-image:configuration/user/oidc/ms-azure-ad/scope-consent-ms-azure-ad.png[,width=90%]
+image:configuration/user/oidc/ms-azure-ad/scope-consent-ms-azure-ad.png[width=600]
 
-. You get the [#client-id]#CLIENT-ID# after you have completed the Microsoft Azure setup process. On the following screen, you find an overview of most settings made. You can get there by clicking on menu:Overview[].
+. You get the [#client-id]#`CLIENT-ID`# after you have completed the Microsoft Azure setup process. On the following screen, you find an overview of most settings made. You can get there by clicking on menu:Overview[].
 +
-image:configuration/user/oidc/ms-azure-ad/overview-screen-ms-azure.png[,width=90%]
+image:configuration/user/oidc/ms-azure-ad/overview-screen-ms-azure.png[width=500]
 
+=== Microsoft Azure AD and RedirctURI
+
+When it comes to use `127.0.0.1` instead of `localhost` as Redirect URI, the task is not straight forward. Microsoft has an own documentation for this describing a workaround, see {ms-ad-redir-url}[Prefer 127.0.0.1 over localhost]. In summary, you have to select in your app menu:Manifest[Manage], then search for `replyUrlsWithType` and either add a new entry with `127.0.0.1` or modify an existing one.
+
+image:configuration/user/oidc/ms-azure-ad/ms-azure-manifest.png[width=500]
 
 === Configure ownCloud Server
 
