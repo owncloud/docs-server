@@ -151,12 +151,19 @@ NOTE: The desktop and mobile apps (clients) have a default client ID and secret 
 
 [caption=]
 .Following owncloud clients support OIDC 
-[width="50%",cols="40%,50%",options="header"]
+[width="60%",cols="40%,60%",options="header"]
 |===
-| ownCloud Client  | Release with OIDC support
-| Desktop | >= 2.7.0
-| Android | >= 2.15
-| iOS     | >= 1.2
+| ownCloud Client
+| Release with OIDC support
+
+| Desktop
+| >= 2.7.0
+
+| Android
+| >= 2.15
+
+| iOS
+| >= 1.2
 |===
 
 === Client IDs, Secrets and Redirect URIs
@@ -165,7 +172,7 @@ All IdPs can use ownCloud's default implemented _Client IDs, Secrets and Redirec
 
 ==== Client ID
 
-[width="100%",cols="15%,85%",options="header"]
+[width="80%",cols="35%,90%",options="header"]
 |===
 | Source
 | Key
@@ -185,7 +192,7 @@ All IdPs can use ownCloud's default implemented _Client IDs, Secrets and Redirec
 
 ==== Client Secret
 
-[width="100%",cols="15%,85%",options="header"]
+[width="80%",cols="35%,90%",options="header"]
 |===
 | Source
 | Key
@@ -205,10 +212,10 @@ All IdPs can use ownCloud's default implemented _Client IDs, Secrets and Redirec
 
 ==== Redirect URIs
 
-[width="100%",cols="15%,85%",options="header"]
+[width="60%",cols="50%,85%",options="header"]
 |===
 | Source
-| Redirect URI
+| Redirect URI ^1^
 
 | Desktop ≤ 2.8
 | `\http://localhost`
@@ -222,6 +229,8 @@ All IdPs can use ownCloud's default implemented _Client IDs, Secrets and Redirec
 | iOS
 | `oc://ios.owncloud.com`
 |===
+
+(1) See the xref:configuration/user/oidc/ms-azure-setup.adoc#microsoft-azure-ad-and-redircturi[following note] when using Microsoft Azure and 127.0.0.1 as redirect URI.
 
 === Migrate Clients from Basic Authentication to OIDC
 
