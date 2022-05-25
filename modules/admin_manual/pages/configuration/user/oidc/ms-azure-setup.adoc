@@ -71,7 +71,7 @@ image:configuration/user/oidc/ms-azure-ad/scope-consent-ms-azure-ad.png[width=60
 +
 image:configuration/user/oidc/ms-azure-ad/overview-screen-ms-azure.png[width=500]
 
-=== Microsoft Azure AD and RedirctURI
+=== Microsoft Azure AD and RedirectURI
 
 When it comes to use `127.0.0.1` instead of `localhost` as Redirect URI, the task is not straight forward. Microsoft has an own documentation for this describing a workaround, see {ms-ad-redir-url}[Prefer 127.0.0.1 over localhost]. In summary, you have to select in your app menu:Manifest[Manage], then search for `replyUrlsWithType` and either add a new entry with `127.0.0.1` or modify an existing one.
 
