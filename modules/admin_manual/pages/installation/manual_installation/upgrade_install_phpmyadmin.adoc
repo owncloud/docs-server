@@ -1,24 +1,24 @@
-= Upgrade `phpmyadmin`
+= Upgrade phpmyadmin
 :toc: right
 :toclevels: 2
 :phpmyadmin_home_url: https://www.phpmyadmin.net
 :phpmyadmin_dl_url: https://www.phpmyadmin.net/downloads/
 
+:description: This guide helps you to upgrade an existing and configured installation of {phpmyadmin_home_url}[phpmyadmin] from source.
+
 == Introduction
 
-This guide helps you to upgrade an existing installation of {phpmyadmin_home_url}[phpmyadmin]
-from source. This may be necessary if the provided version of your OS lags behind the available
-version and/or you see php errors when using it and you need an updated version.
+{description} This may be necessary if the provided version of your OS lags behind the available version and/or you see PHP errors when using it and you need an updated version.
 
-NOTE: `phpmyadmin` gets rarely upgraded as Ubuntu installation. Usually only on Ubuntu LTS upgrades.
-In case Ubuntu upgrades in between, just redo the procedure described below.
+NOTE: `phpmyadmin` gets rarely updated as an Ubuntu package - usually only with Ubuntu LTS upgrades. If you have manually upgraded the installation but Ubuntu _downgrades_ your local version because of updating the package, just redo the procedure described below.
 
-NOTE: The guide has been tested, is at it is and comes without any warranty.
+NOTE: The guide has been tested but comes as it is without any warranty.
 
 == Prerequisites
 
-Please note, you must already have an existing, configured and working `phpmyadmin` installation.
-Check your existing version with following command:
+NOTE: You must already have an _existing_, _configured_ and _working_ `phpmyadmin` installation.
+
+If you have installed `phpmyadmin` with the packagemanager, check your existing version with the following command:
 
 [source,bash]
 ----
@@ -27,77 +27,159 @@ sudo apt-cache policy phpmyadmin
 
 When using `phpmyadmin`, post login, look at the bottom right side to see the actual version running.
 
-image:installation/manual_installation/phpmyadmin_v4.9.5deb2.png[]
+image::installation/manual_installation/phpmyadmin_v4.9.5deb2.png[width=300]
 
-You will find the existing installation in directory: `/usr/share/phpmyadmin`
+You will find the binaries of your installation in the directory: `/usr/share/phpmyadmin`.
 
-== Upgrade `phpmyadmin`
+== Upgrade Methods
 
-To download `phpmyadmin`, see the {phpmyadmin_dl_url}[phpmyadmin download page] and select a
-version that fits your needs. Then start downloading, extracting and putting the files to the
-correct location.
+=== PPA Upgrade
 
-=== Download and Move
+// see: https://github.com/phpmyadmin/phpmyadmin/wiki/DebianUbuntu
 
-The following example uses `phpMyAdmin-5.0.4-all-languages` as basis for upgrading. It renames the
-old installation because we need to keep some basic configuration settings.
+You can upgrade `phpmyadmin` most easily to a later, but also most likely not to the latest, version when adding a PPA provided by the phpmyadmin team. To do so, type the following commands:
+
+[source,bash]
+----
+sudo add-apt-repository ppa:phpmyadmin/ppa
+----
+ 
+[source,bash]
+----
+sudo apt update
+----
+
+[source,bash]
+----
+sudo apt install phpmyadmin
+----
+
+Note: if you do not want to continue with the PPA solution, just remove it by invoking the following command. This will keep your existing phpmyadmin installation, but will not update it anymore:
+
+[source,bash]
+----
+sudo add-apt-repository --remove ppa:phpmyadmin/ppa
+----
+
+=== Manual Upgrade
+
+To download `phpmyadmin`, see the {phpmyadmin_dl_url}[phpmyadmin download page] and select the latest stable version or a version that fits your needs. Then start downloading, extracting and putting the files to the correct location.
+
+==== Download and Move
+
+The following example uses `phpMyAdmin-5.2.0-all-languages` as the example for upgrading. The old installation location will be renamed, because we need to keep some basic configuration settings.
 
 [source,bash]
 ----
 cd /tmp
-sudo wget https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz
-sudo tar -xvf phpMyAdmin-5.0.4-all-languages.tar.gz
-sudo mv /usr/share/phpmyadmin /usr/share/phpmyadmin.old
-sudo mkdir -p /usr/share/phpmyadmin
-sudo cp -r phpMyAdmin-5.0.4-all-languages/. /usr/share/phpmyadmin
-sudo rm -r phpMyAdmin-5.0.4-all-languages*
 ----
-
-=== Recreate Basic Configuration Settings
-
-Because the upgrade has default basic configuration settings, it is necessary to recreate them
-based on the former settings coming from the Ubuntu installation. The file to change can be found
-in `/usr/share/phpmyadmin/libraries/vendor_config.php`. To keep a copy of the original file from
-the update, create a backup with:
 
 [source,bash]
 ----
-cd /usr/share/
-sudo cp phpmyadmin/libraries/vendor_config.php phpmyadmin/libraries/vendor_config.php.orig
+sudo wget https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.tar.gz
 ----
 
-Then, open two editors of your choice in parallel with following files:
+[source,bash]
+----
+sudo tar -xvf phpMyAdmin-5.2.0-all-languages.tar.gz
+----
 
-(1) - `phpmyadmin/libraries/vendor_config.php` +
-(2) - `phpmyadmin.old/libraries/vendor_config.php`
+[source,bash]
+----
+sudo mv /usr/share/phpmyadmin /usr/share/phpmyadmin.old
+----
 
-**Step One**
+[source,bash]
+----
+sudo mkdir -p /usr/share/phpmyadmin
+----
 
-Search in (1) for `define('TEMP_DIR', ROOT_PATH . 'tmp/');` +
-Search in (2) for `define('TEMP_DIR',` +
+[source,bash]
+----
+sudo cp -r phpMyAdmin-5.2.0-all-languages/. \
+      /usr/share/phpmyadmin
+----
 
-Replace in (1) `ROOT_PATH . 'tmp/'` with the value of (2).
-This can be e.g.: `'/var/lib/phpmyadmin/tmp/'`
+[source,bash]
+----
+sudo rm -r phpMyAdmin-5.2.0-all-languages*
+----
 
-**Step Two**
+==== Recreate Basic Configuration Settings
 
-Search in (1) for `define('CONFIG_DIR', ROOT_PATH);` +
-Search in (2) for `define('CONFIG_DIR',` +
+Because the upgrade has some default basic configuration settings, it is necessary to recreate them based on the former settings coming from the Ubuntu installation. The file to change can be found in `/usr/share/phpmyadmin/libraries/vendor_config.php`. +
+To keep a copy of the original file from the download, create a backup with:
 
-Replace in (1) `ROOT_PATH` with the value of (2).
-This can be e.g.: `'/etc/phpmyadmin/'`
+[source,bash]
+----
+sudo cp /usr/share/phpmyadmin/libraries/vendor_config.php \
+        /usr/share/phpmyadmin/libraries/vendor_config.php.orig
+----
+
+NOTE: The transformation of values may differ depending on the phpmyadmin version compared. Especially starting with version 5.2.0, the definitions have changed from constants to array. In addition, keys have the same name but different casing and the definition of `CONFIG_DIR`, which defines the path to the configuration files, has been removed completely and needs to be set manually.
+
+As rule of thumb, create a copy of the line that will be changed and make it a remark by adding `#` in front to keep a safe copy.
+
+Open two editors of your choice in parallel with the following files:
+
+(1) - `/usr/share/phpmyadmin/libraries/vendor_config.php` +
+(2) - `/usr/share/phpmyadmin.old/libraries/vendor_config.php`
+
+and transfer the values coming from (2) to (1) as described below, check the path values and make sure they fit your environment:
+
+TEMP_DIR or tempDir::
++
+[source,plaintext]
+----
+'tempDir' => '/var/lib/phpmyadmin/tmp/',
+----
++
+or
++
+[source,plaintext]
+----
+define('TEMP_DIR', '/var/lib/phpmyadmin/tmp/');
+----
+
+CONFIG_DIR::
+Only if `define('CONFIG_DIR'...` exists,
++
+[source,plaintext]
+----
+define('CONFIG_DIR', '/etc/phpmyadmin/');
+----
+
+configFile::
++
+[source,plaintext]
+----
+'configFile' => '/etc/phpmyadmin/' . 'config.inc.php',
+----
+
+customHeaderFile::
++
+[source,plaintext]
+----
+'customHeaderFile' => '/etc/phpmyadmin/' . 'config.header.inc.php',
+----
+
+customFooterFile::
++
+[source,plaintext]
+----
+'customFooterFile' => '/etc/phpmyadmin/' . 'config.footer.inc.php',
+----
 
 == Testing
 
-When the upgrade has finished, test it by logging in. When succeeded, check the actual version
-running at the bottom right of the screen.
+When the upgrade has finished, test it by logging in and checking the actual version
+displayed at the bottom right of the screen.
 
-image:installation/manual_installation/phpmyadmin_v5.0.4.png[]
+image::installation/manual_installation/phpmyadmin_v5.2.0.png[width=300]
 
-When you are fine with your upgrade, you can safely delete the old installation files.
+When you are fine with your upgrade, you can safely delete the old installation files with:
 
 [source,bash]
 ----
-cd /usr/share/
 sudo rm -r /usr/share/phpmyadmin.old
 ----
