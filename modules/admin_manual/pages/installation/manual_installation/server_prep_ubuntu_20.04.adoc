@@ -12,7 +12,6 @@
 :pecl_url: https://pecl.php.net/package/smbclient
 :phpmyadmin_latest_url: https://www.phpmyadmin.net/downloads/
 :pear-package_url: https://pear.php.net/package/PEAR/
-:page-aliases: installation/manual_installation/server_prep_ubuntu_18.04.adoc
 :phpseclib-url: https://phpseclib.com/docs/why
 
 :description: This guide gives you detailed information on preparing your Ubuntu 20.04 server for the use with ownCloud.
