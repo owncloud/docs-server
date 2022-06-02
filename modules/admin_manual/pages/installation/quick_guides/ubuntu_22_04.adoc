@@ -14,6 +14,7 @@ This guide can not go into details and has its limits by nature. If you experien
 * Your ownCloud directory will be located in `/var/www/owncloud/`.
 * php 7.4 from the ondrej/php PPA is going to be installed on Ubuntu 22.04.
 * Use the correct xref:installation/manual_installation/manual_installation_apache.adoc#multi-processing-module-mpm[Multi-Processing Module (MPM)].
+* Read the xref:installation/manual_installation/manual_installation_prerequisites.adoc#openssl-version[openSSL Version] notes which are important when planning to use encryption.
 
 == Preparation
 
