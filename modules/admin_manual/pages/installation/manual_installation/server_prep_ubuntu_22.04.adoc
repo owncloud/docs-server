@@ -21,6 +21,8 @@ The target audience for this document are experienced admins with additional nee
 
 IMPORTANT: PHP 8.x is currently **not** supported by ownCloud server.
 
+IMPORTANT: Read the xref:installation/manual_installation/manual_installation_prerequisites.adoc#openssl-version[openSSL Version] notes which are important when planning to use encryption.
+
 NOTE: The commands and links provided in this description should give you proper hints but we cannot take any responsibility.
 
 == Upgrading from Ubuntu 20.04 to 22.04
