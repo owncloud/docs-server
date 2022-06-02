@@ -22,6 +22,10 @@ As an example:
 
 Is the same as using the *Cron* section on your ownCloud Admin page.
 
+=== Docker note
+
+If you are using the official docker images you don't need to take care about the configuration for background jobs, the docker image is already configured to use cron internally. If required this can also be adjusted by the environment variables OWNCLOUD_CROND_ENABLED and OWNCLOUD_CROND_SCHEDULE, see https://github.com/owncloud-docker/base#environment-variables.
+
 == Cron Jobs
 
 You can schedule Cron jobs in three ways: xref:cron[Cron], xref:webcron[Webcron], or xref:ajax[AJAX]. These can all be configured in the admin settings menu. However, the recommended method is to use Cron. The following sections describe the differences between each method.
