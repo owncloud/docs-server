@@ -9,6 +9,8 @@ This document describes how to manually upgrade your ownCloud installation. Beca
 
 NOTE: This guide assumes that you have basic knowledge about Unix terminology, commands and concepts. In case you do not feel familiar with this, ownCloud highly recommends that you create a playground first to try the steps and/or get, if you are entitled to, in touch with ownCloud Support to avoid breaking your system or data loss.
 
+NOTE: This guide covers the upgrade of the ownCloud instance only. When planning to update/upgrade your server environment or server packages, read the xref:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide] first to match the prerequisites.
+ 
 After preparing the upgrade, you can decide between two ways of upgrading your instance:
 
 .Script-Guided Upgrade
