@@ -30,6 +30,13 @@ To prepare your Ubuntu 20.04 server for the use with ownCloud, follow the
 xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc[Ubuntu 20.04 preparation guide].
 This guide installs PHP 7.4
 
+=== Ubuntu 22.04 LTS Server
+
+To prepare your Ubuntu 22.04 server for the use with ownCloud, follow the
+xref:installation/manual_installation/server_prep_ubuntu_22.04.adoc[Ubuntu 22.04 preparation guide].
+
+NOTE: Ubuntu 22.04 only provides PHP 8.x which is currently not supported by ownCloud. Therefore PHP 7.4 is installed via PPA.
+
 === Install a Database
 
 If you do not already have a supported database installed, follow the
@@ -103,7 +110,7 @@ options automatically.
 
 Use the following commands if you want to do the basic setup without any changes and physical installation options.
 Consider using the xref:installation/manual_installation/script_guided_install.adoc[Script-Guided Installation]
-if you plan on improving your setup from step one.
+if you plan to improve your setup from step one.
 
 * Extract the archive contents and run the unpacking command for your tar archive:
 +
@@ -122,9 +129,8 @@ tar -xjf {oc-complete-name}.tar.bz2
 cp -r owncloud /var/www
 ----
 
-After the installation, set the correct ownership and permissions.
-To do so, we suggest using the scripts from the
-xref:installation/manual_installation/script_guided_install.adoc[Script-Guided Installation].
+After the installation, set the correct ownership and permissions according to the needs of your environment. While you can do that manually, we suggest using the scripts from the
+xref:installation/manual_installation/script_guided_install.adoc[Script-Guided Installation] which ease the process a lot.
 
 == Complete the Installation
 
