@@ -1,34 +1,31 @@
-= Server Preparation for Ubuntu 20.04
+= Server Preparation for Ubuntu 22.04
 :toc: right
 :toclevels: 1
 :page-partial:
-:ubuntu_upgrade_url: https://www.cyberciti.biz/faq/upgrade-ubuntu-18-04-to-20-04-lts-using-command-line/
-:remove_ppa_url: https://itsfoss.com/how-to-remove-or-delete-ppas-quick-tip/
+:ubuntu_upgrade_url: https://linuxconfig.org/how-to-upgrade-ubuntu-to-22-04-lts-jammy-jellyfish
 :php-common: https://tecadmin.net/enable-disable-php-modules-ubuntu/
 :ondrej-php-url: https://launchpad.net/~ondrej/+archive/ubuntu/php
 :libsmbclient-php_url: https://github.com/eduardok/libsmbclient-php
 :update-alternatives_url: https://manpages.ubuntu.com/manpages/focal/en/man1/update-alternatives.1.html
-:smbclient_url: https://packages.ubuntu.com/search?keywords=smbclient
-:pecl_url: https://pecl.php.net/package/smbclient
 :phpmyadmin_latest_url: https://www.phpmyadmin.net/downloads/
 :pear-package_url: https://pear.php.net/package/PEAR/
 :phpseclib-url: https://phpseclib.com/docs/why
 
-:description: This guide gives you detailed information on preparing your Ubuntu 20.04 server for the use with ownCloud.
+:description: This guide gives you detailed information on preparing your Ubuntu 22.04 server for the use with ownCloud.
 
 == Introduction
 
 {description}
 
-The target audience for this document are experienced admins with additional needs and setup scenarios. Ubuntu 20.04 by default only provides PHP 7.4. In case you are running a PHP version lower than 7.4, your PHP version is already EOL. Consider upgrading to PHP 7.4. For more information see {php-supported-versions-url}[Currently Supported PHP Versions]. This document considers two basic scenarios. You have/plan to upgrade from 18.04 LTS to 20.04 LTS or you have a fresh Ubuntu 20.04 LTS installation.
+The target audience for this document are experienced admins with additional needs and setup scenarios. Ubuntu 22.04 by default only provides PHP 8.1. However, PHP versions 8.0 and 8.1 are currently not supported, therefore this guide describes how to install PHP version 7.4 on Ubuntu 22.04 by the means of the {ondrej-php-url}[ondrej/php] PPA. For more information, see {php-supported-versions-url}[Currently Supported PHP Versions]. This document considers two basic scenarios. You plan to upgrade from 20.04 LTS to 22.04 LTS or you have a fresh Ubuntu 22.04 LTS installation.
 
-IMPORTANT: PHP 8.0 is not currently supported by the ownCloud server.
+IMPORTANT: PHP 8.x is currently **not** supported by ownCloud server.
 
 NOTE: The commands and links provided in this description should give you proper hints but we cannot take any responsibility.
 
-== Upgrading from Ubuntu 18.04 to 20.04
+== Upgrading from Ubuntu 20.04 to 22.04
 
-Without going into the upgrade details, you can now upgrade directly from Ubuntu 18.04 LTS to 20.04 LTS without using the _development_ (`-d`) option when using the `do-release-upgrade` command. For more details see an example description at {ubuntu_upgrade_url}[Upgrade Ubuntu 18.04 to 20.04 LTS using command line]
+Without going into the upgrade details, you can now upgrade directly from Ubuntu 20.04 LTS to 22.04 LTS when using the do-release-upgrade command. For more details see an example description at {ubuntu_upgrade_url}[Upgrade Ubuntu 20.04 to 22.04 LTS using command line]
 
 [source,bash]
 ----
@@ -48,8 +45,8 @@ sudo apt dist-upgrade
 [source,bash]
 ----
 sudo apt autoremove
-----
 
+----
 [source,bash]
 ----
 sudo apt install update-manager-core
@@ -60,7 +57,7 @@ sudo apt install update-manager-core
 sudo do-release-upgrade
 ----
 
-If you have upgraded successfully and had previously installed any versions of PHP, better uninstall all PHP versions and ALL extensions and perform a fresh PHP 7.4 native installation. This is especially true when using the `ondrej php` PPA as it installs all available PHP versions, which are either no longer needed or supported. To do so, stop any services which depend on or use PHP like your Web Server. Then get a list of all PHP related programs and extensions by typing:
+If you have upgraded successfully and had previously installed any versions of PHP, better uninstall all PHP versions and ALL extensions and perform a fresh PHP 7.4 native installation. To do so, stop any services which depend on or use PHP like your Web Server. Then get a list of all PHP related programs and extensions by typing:
 
 [source,bash]
 ----
@@ -68,9 +65,9 @@ dpkg -l | grep php | awk '{print $2}' | tr "\n" " "
 ----
 
 Disable all extensions listed (see the section
-xref:useful-commands-for-managing-php-extensions[Useful Commands For Managing PHP Extensions])
+xref:useful-commands-for-managing-php-extensions[Useful Commands For Managing PHP Extensions]).
 
-Then purge them step by step
+Then purge them step by step:
 
 [source,bash]
 ----
@@ -86,56 +83,30 @@ sudo apt purge `dpkg -l | grep php | awk '{print $2}' | tr "\n" " "`
 
 NOTE: Keep a copy of your relevant `php.ini` and other configuration files as reference _before_ you start purging, to quickly reconfigure your PHP 7.4 installation afterwards.
 
-If you had installed the `ondrej php` PPA, remove it, else it will reinstall PHP from this source again. To do so run:
+After deinstallation of all versions and extensions of PHP and cleaning up all remnants, you should have an empty `/etc/php` directory. You can proceed like on a fresh installation of Ubuntu 22.04 LTS.
+
+== Clean Ubuntu 22.04 Installation
+
+After you have installed your Ubuntu 22.04 LTS server from scratch, use the following commands to first add the {ondrej-php-url}[ondrej/php] PPA and then install PHP 7.4 and all necessary extensions:
 
 [source,bash]
 ----
-sudo apt install ppa-purge
-----
-
-[source,bash]
-----
-sudo ppa-purge ppa:ondrej/php
-----
-
-[source,bash]
-----
-sudo rm -i /etc/apt/sources.list.d/ondrej-ubuntu-php-*
+sudo add-apt-repository ppa:ondrej/php -y
 ----
 
 [source,bash]
 ----
-sudo apt update
-----
-
-You can also follow this guide to remove PPAs: {remove_ppa_url}[How to Remove or Delete PPA in Ubuntu].
-
-WARNING: If you have not cleanly removed that ppa you may get conflicts when installing PHP.
-
-After deinstallation of all versions and extensions of PHP and cleaning up all remnants, you should have an empty `/etc/php` directory. You can proceed like on a fresh installation of Ubuntu 20.04 LTS.
-
-== Clean Ubuntu 20.04 Installation
-
-After you have installed your Ubuntu 20.04 LTS server from scratch, use the following commands to
-install PHP 7.4 and necessary extensions:
-
-[source,bash]
-----
-sudo apt install php-fpm php-cgi
+sudo apt update && sudo apt upgrade
 ----
 
 [source,bash]
 ----
-sudo apt install php
-----
-
-[source,bash]
-----
-sudo apt install php-mysql php-mbstring php-intl php-imagick \
-       php-redis php-apcu php-igbinary php-gmp php-bcmath \
-       php-curl php-gd php-zip php-imap php-ldap php-bz2 \
-       php-ssh2 php-phpseclib php-common php-json php-xml \
-       php-dev libsmbclient-dev php-pear
+sudo apt install php7.4 php7.4-intl php7.4-mysql php7.4-mbstring \
+       php7.4-imagick php7.4-igbinary php7.4-gmp php7.4-bcmath \
+       php7.4-curl php7.4-gd php7.4-zip php7.4-imap php7.4-ldap \
+       php7.4-bz2 php7.4-ssh2 php7.4-common php7.4-json \
+       php7.4-xml php7.4-dev php7.4-apcu php7.4-redis \
+       libsmbclient-dev php-pear php-phpseclib
 ----
 
 Note that the `php-phpseclib` package is a {phpseclib-url}[pure PHP implementation] for handling various ciphers and not dependent to the php source.
@@ -219,40 +190,7 @@ If you get any notices containing `You should add "extension=...`, check if the 
 
 Post upgrading pear, you can safely remove the directory `/tmp/pear/cache`.
 
-Please see the xref:php-imagick-library[php-imagick Library] section for reason to install an updated version of ImageMagick.
-
-== Important Note on `smbclient`
-
-On Ubuntu 18.04, the default `smbclient` version was 4.7.6. With Ubuntu 20.04 the version provided is 4.11.6, the actual compilable version is 4.15.x. If you have successfully configured and connected `smbclient` under Ubuntu 18.04 to a Windows Server, you may now get issues connecting to older NAS systems. Some requirements are now stricter than before or have changed.
-
-If you needed to set `client max protocol = NT1` before in `smb.conf` to connect, with Samba 4.11+ you may get a response like `Max protocol NT1 is less than min protocol SMB2_02` which highlights a disabled former connectivity. Starting with Samba version 4.11, the NT1 protocol has been removed completely.
-
-To check if you are affected connecting to a particular file server, do tests with the Ubuntu provided version like:
-
-[source,bash]
-----
-host -t SRV _ldap._tcp.<full_domain_name>
-----
-
-If you do not get SRV records printed, your dns settings may need a change. The first DNS server must be able to resolve your LDAP Active Directory request properly. If not, `smbclient` can not find a KDC to check credentials.
-
-[source,bash]
-----
-sudo smbclient -L <file_server_name> -U <full_domain_name>/<user_name>
-----
-
-Any other output than a list of shares, like the error message
-
-[source,bash]
-----
-tree connect failed: NT_STATUS_INVALID_PARAMETER
-----
-
-shows, that this target server is affected. This may impact your onwCloud installation when using SMB shares with that file server.
-
-The only solution is to compile a working Samba version yourself.
-This xref:installation/manual_installation/compile_samba.adoc[Compact Samba Compiling Guide]
-helps how to do that.
+See the xref:php-imagick-library[php-imagick Library] section if you are interested why an updated version of ImageMagick is necessary.
 
 == Apache Web Server
 
@@ -260,7 +198,7 @@ The following command installs the Apache Web Server.
 
 [source,bash]
 ----
-sudo apt install libapache2-mod-php apache2
+sudo apt install libapache2-mod-php7.4 apache2
 ----
 
 See the important note on using the correct xref:installation/manual_installation/manual_installation_apache.adoc#multi-processing-module-mpm[Multi-Processing Module (MPM)].
@@ -269,7 +207,7 @@ Although it's not supported by ownCloud, you can configure Apache to use `php-fp
 
 == Multiple Concurrent PHP Versions
 
-If you have multiple concurrent PHP versions installed, which will happen when using the {ondrej-php-url}[ondrej/php] PPA, you must tell your Web Server and your CLI environment which one to use. Using the `ondrej/php` PPA may be needed if you want to test or prepare for the latest PHP version like PHP 8. Please note that `ondrej/php` installs _ALL_ versions of PHP. To list all available versions installed and choose one from them, use the following command:
+If you have multiple concurrent PHP versions installed, which will happen when using the {ondrej-php-url}[ondrej/php] PPA, you must tell your Web Server and your CLI environment which one to use. Please note that `ondrej/php` installs _ALL_ versions of PHP. To list all available versions installed and choose one of them, use the following command:
 
 [source,bash]
 ----
@@ -322,9 +260,9 @@ sudo update-alternatives --set php-config /usr/bin/php-config7.4
 
 When using Apache PHP-FPM, you have to configure your PHP version in an Apache config file manually. In any case, the PHP version used must always be the same.
 
-You can read more about `update-alternatives` command on the {update-alternatives_url}[man page].
+You can read more about the `update-alternatives` command in the {update-alternatives_url}[man page].
 
-WARNING: Please be advised, when switching a php version, you **MUST** also configure the corresponding php.ini files and extensions used accordingly! Extension binaries are **not** shared!
+WARNING: When switching a PHP version, you **MUST** also configure the corresponding php.ini files and extensions accordingly! Extension binaries are **not** shared!
 
 WARNING: You may get completely unexpected behaviour or a broken environment if the PHP version for the Web Server and for CLI are different!
 
@@ -370,21 +308,16 @@ As you see above, the API modules do not match and have been compiled with diffe
 
 `libsmbclient-php` is a PHP extension that uses Samba's libsmbclient library to provide Samba-related functions to PHP programs. You need to install it if you have installed `smbclient` as described above. `smbclient` is e.g. necessary if you are using the 
 xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drives app]
-from ownCloud's Enterprise Edition. To install it, run the commands described below. You can find more information about `smbclient` and the latest version on {pecl_url}[PECL].
+from ownCloud's Enterprise Edition. To install it, run the following command:
 
 [source,bash]
 ----
-sudo pecl channel-update pecl.php.net
+sudo apt install php7.4-smbclient
 ----
 
-[source,bash]
-----
-sudo pecl install smbclient
-----
+When the command completes, perform the following tasks:
 
-When the commands complete, you then have to (assuming you use PHP 7.4):
-
-- Create `/etc/php/7.4/mods-available/smbclient.ini` with following content `extension=smbclient.so`.
+- Create `/etc/php/7.4/mods-available/smbclient.ini` with the following content: `extension=smbclient.so`.
 - Enable the module by running `phpenmod smbclient`.
 - Restart PHP and your web server by running the following command:
 +
@@ -393,19 +326,17 @@ When the commands complete, you then have to (assuming you use PHP 7.4):
 sudo service apache2 restart
 ----
 
-NOTE: Do not get confused by the name `smbclient`. It is on the one hand a {smbclient_url}[command-line SMB/CIFS client for Unix], and on the other hand the package name for the {pecl_url}[PECL smbclient] PHP extension
-
 NOTE: Alternatively you can install `smbclient` from {libsmbclient-php_url}[source].
 
 == php-imagick Library
 
-When using new or extended formats for previews like HEIC or SVG, the standard installation of ImageMagick 6 and its php-imagick wrapper version 3.4 lacks this functionality. You have to manually install ImageMagick 7 and an updated php wrapper. To do so, follow the xref:installation/manual_installation/manual_imagick7.adoc[Install an Updated ImageMagick Version] guide. See the xref:configuration/files/previews_configuration.adoc[Previews Configuration] guide how to enable preview providers for various file types.
+When using new or extended formats for previews like HEIC or SVG, the standard installation of ImageMagick 6 lacks this functionality. You have to manually install ImageMagick 7 (while the php wrapper version should be 3.7.0, which is fine, when following the install instructions above). To do so, follow the xref:installation/manual_installation/manual_imagick7.adoc[Install an Updated ImageMagick Version] guide. See the xref:configuration/files/previews_configuration.adoc[Previews Configuration] guide how to enable preview providers for various file types.
 
 == Useful Commands For Managing PHP Extensions
 
 === List Enabled PHP Extensions
 
-If you want to retrieve a list of enabled PHP extensions run following command:
+If you want to retrieve a list of enabled PHP extensions run the following command:
 
 [source,bash]
 ----
@@ -438,9 +369,9 @@ phpseclib's BigInteger uses the php-gmp (GNU Multiple Precision Arithmetic Libra
 == Database Installation
 
 To install a database, see the
-xref:installation/manual_installation/manual_installation_db.adoc[Manual Installation Databases guide].
+xref:installation/manual_installation/manual_installation_db.adoc[Manual Installation Databases] guide.
 
-NOTE: Follow the procedure described in xref:useful-tips[Useful Tips], if you want to `Disable Transparent Huge Pages (THP),Transparent Huge Pages`
+NOTE: Follow the procedure described in xref:useful-tips[Useful Tips] if you want to `Disable Transparent Huge Pages (THP),Transparent Huge Pages`.
 
 You may want to use the latest version of phpmyadmin as the OS default versions lags behind the {phpmyadmin_latest_url}[latest available stable] version a lot and may report PHP errors with PHP 7.3 onwards. Follow this
 xref:installation/manual_installation/upgrade_install_phpmyadmin.adoc[quick upgrade guide] to install it.
