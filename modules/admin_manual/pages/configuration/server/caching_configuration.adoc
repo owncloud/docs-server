@@ -60,7 +60,7 @@ php -r 'phpinfo();' | grep opcache.enable
 
 === APCu
 
-The easiest cache to use is APCu, because it is a pure data cache, very fast as it is memory based only and _nothing needs to be configured_. APCu can not be used, when needed to run on an external server like in a distributed environment.
+The easiest cache to use is APCu, because it is a pure data cache, very fast as it is memory-based only and _nothing needs to be configured_. APCu can not be used when running on an external server like in a distributed environment.
 
 ==== Installing APCu
 
@@ -86,7 +86,7 @@ NOTE: The Redis PHP module must be at least version 2.2.6 or higher.
 * For Ubuntu 20.04, the default shipped Redis Server version and the php-redis extension is 5.x.
 * For Ubuntu 22.04, the default shipped Redis Server version is 6.0.16.
 * For Ubuntu 22.04, the php7.4-redis extension has version 5.3.x.
-* With Redis version 6, a new authentication mechanism has been introduced named ACL (Access Control Lists). ownCloud does currently not support Redis ACL´s, but does support the password protection, available with current Redis versions.
+* With Redis version 6, a new authentication mechanism has been introduced named ACL (Access Control Lists). ownCloud does currently not support Redis ACLs, but does support the password protection available with current Redis versions.
 ====
 
 ==== Installing Redis
@@ -105,11 +105,11 @@ After that, assuming that you don’t encounter any errors, restart Apache and t
 ==== Redis Performance Consideration
 
 * Because Redis writes data to disk, it is recommended to use a high performance backend like SSD.
-* If you do not have a distributed environment where the Redis server is installed at a different server, you can configure Redis to be xref:redis-configuration-using-unix-sockets[socket based] instead TCP based to xref:redis-performance-comparison-tcp-vs-socket[increase performance].
+* If you do not have a distributed environment where the Redis server is installed at a different machine, you can configure Redis to be xref:redis-configuration-using-unix-sockets[socket-based] instead of TCP-based to xref:redis-performance-comparison-tcp-vs-socket[increase performance].
 
 ==== Additional notes for Redis vs. APCu on Memory Caching
 
-* APCu is faster at local caching than Redis when using TCP, as APCu is memory based only.
+* APCu is faster at local caching than Redis when using TCP since APCu is memory-based only.
 * If you have enough memory, use APCu for in memory caching and Redis for file locking.
 * If you are limited in memory or only want to have one caching backend, use Redis for both.
 * Consider using sockets instead of TCP when you decide on Redis but do not have a distributed caching environment.
@@ -212,7 +212,7 @@ With that done, refresh your ownCloud admin page, and the cache warning should d
 
 Redis is very configurable; consult the {redis_doc_url}[Redis documentation] to learn more.
 
-Regardless of whether you have setup Redis to use TCP or a Unix socket, we recommend adding the following for best performance. This enables xref:configure-transactional-file-locking[External Transactional File Locking] based on Redis:
+Regardless of whether you have set up Redis to use TCP or a Unix socket, we recommend adding the following for best performance. This enables xref:configure-transactional-file-locking[External Transactional File Locking] based on Redis:
 
 [source,php]
 ----
@@ -249,7 +249,7 @@ If Redis is running on the same server as ownCloud, it is recommended to configu
 sudo usermod -g www-data redis
 ----
 
-. Create your redis folder that the unix socket will be in:
+. Create your Redis folder that the Unix socket will be in:
 +
 [source,bash]
 ----
@@ -263,7 +263,7 @@ sudo mkdir -p /var/run/redis/
 sudo chown -R redis:www-data /var/run/redis
 ----
 
-. Open an editor of your choice and change/add the following parameters to the redis config. Note that in the example, `vi` is used as editor:
+. Open an editor of your choice and change/add the following parameters to the Redis configuration file. Note that in the example `vi` is used as editor:
 +
 [source,bash]
 ----
@@ -286,7 +286,7 @@ unixsocketperm 770
 sudo service redis-server restart
 ----
 
-. Check if the Redis unix socket was created:
+. Check if the Redis Unix socket was created:
 +
 [source,plaintext]
 ----
@@ -300,7 +300,7 @@ The output should be like the following:
 srwxrwx--- 1 redis redis 0 May 12 12:26 redis.sock
 ----
 
-Then, configure ownCloud to communicate with Redis socket as in the following example. 
+Then, configure ownCloud to communicate with the Redis socket as in the following example. 
 
 [source,php]
 ----
