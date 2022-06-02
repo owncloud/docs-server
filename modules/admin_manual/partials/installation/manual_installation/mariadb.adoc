@@ -6,7 +6,13 @@
 
 Use these commands to install MariaDB provided by Ubuntu and secure its installation.
 
-NOTE: At the time of writing, with Ubuntu 20.04, `mariadb-server` version `10.4.21` will be installed:
+[NOTE]
+====
+At the time of writing, the following MariaDB Server versions will be installed, which may change when the corresponding package gets updated:
+
+* With Ubuntu 20.04: `mariadb-server` version `10.4.21` 
+* With Ubuntu 22.04, `mariadb-server` version `10.6.7`
+====
 
 [source,bash]
 ----
