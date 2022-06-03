@@ -118,7 +118,7 @@ To make the endpoint available under the static service discovery path, it is re
 +
 [source,apache]
 ----
-RewriteRule ^\.well-known/openid-configuration /index.php/apps/openidconnect/config [P]
+RewriteRule ^\.well-known/openid-configuration /index.php/apps/openidconnect/config [R=301,L]
 ----
 +
 TIP: Depending on the respective infrastructure setup there can be other ways to solve this. In any case, please make sure _not to use redirect rules_ as this will violate the OpenID Connect specification.
@@ -140,6 +140,11 @@ xref:configuration/user/oidc/kopano-setup.adoc[Example Setup Using Kopano Konnec
 
 Follow this link to see 
 xref:configuration/user/oidc/ms-azure-setup.adoc[Example Setup Using Microsoft Azure].
+
+== Example Setup Using OneLogin
+
+Follow this link to see 
+xref:configuration/user/oidc/onelogin-setup.adoc[Example Setup Using OneLogin].
 
 == ownCloud Desktop and Mobile Clients
 
