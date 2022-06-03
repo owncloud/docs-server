@@ -1,0 +1,108 @@
+= Example Setup Using OneLogin
+:toc: right
+:toclevels: 2
+:openid-connect-frontchannel-logout-url: https://openid.net/specs/openid-connect-frontchannel-1_0.html
+:onelogin-url: https://www.onelogin.com
+:description: OneLogin is a cloud-based identity and access management provider. This document describes how to integrate OneLogin as an identity provider (IdP) by configuring OpenID Connect (OIDC).
+
+== Introduction
+
+{description} See {onelogin-url}[OneLogin] for details about the service.
+
+IMPORTANT: At the moment, ownCloud clients don't work with OneLogin as IdP which is a known issue.
+
+== Setup and Configuration
+
+The sections below will explain these areas and provide configuration examples using OneLogin as the external Identity Provider.
+
+=== Configure OneLogin
+
+Follow these steps to configure OneLogin for use with OpenID Connect (OIDC):
+
+. Login to OneLogin via your domain login `\https://<yourdomain>.onelogin.com/admin2`.
+
+. Go to menu:Applications[Applications] to manage the registered applications.
++
+image:configuration/user/oidc/onelogin/onelogin-select-application.png[width=80%]
+
+. Click on btn:[Add App] in the upper right corner.
+
+. Search for `openid` and select the `OpenId Connect (OIDC)` app
++
+image:configuration/user/oidc/onelogin/onelogin-select-openid-app.png[width=80%]
+
+. Provide a name and configure images if needed.
+
+. Hit btn:[Save]
+
+. Go to menu:Configuration[] and enter values for `Login Url` which points to you system and the `Redirect URI's`, which is the url of you system followed by `/index.php/apps/openidconnect/redirect` 
++
+image:configuration/user/oidc/onelogin/onelogin-oidc-configuration.png[width=90%]
+
+. Go to menu:SSO[] and note the values for [#client-id]#Client ID#, [#client-secret]#Client Secret# and [#issuer-url]#Issuer URL# for later use.
++
+image:configuration/user/oidc/onelogin/onelogin-oidc-sso.png[width=90%]
+
+=== Configure ownCloud Server
+
+These are the generic steps to set up ownCloud Server to work with OpenID Connect, for details see the sections below:
+
+1. Install the {oc-marketplace-url}/apps/openidconnect[OpenID Connect App].
+2. Configure `config.php`.
+3. Set up service discovery.
+
+TIP: It is recommended to first figure out all configurations on a test system and to bring it to the production system once it's proven to work. Enabling the OpenID Connect App on the production system should be the last step in this process as it will then advertise OpenID Connect to all clients.
+
+==== List of OpenID Connect config.php Parameters
+
+Follow this link to read more about the
+xref:configuration/server/config_apps_sample_php_parameters.adoc#app-openid-connect-oidc[OIDC config.php parameters] available to configure OpenID Connect on ownCloud Server.
+
+==== Example config.php Setup
+
+An example snippet that can be added to `config.php` is shown below. You need to add both config values as listed below. The example expects that login users have already been created in ownCloud.
+
+Use these links to see the corresponding configuration section for: 
+
+* xref:client-secret[YOUR-CLIENT-SECRET]
+* xref:client-id[YOUR-CLIENT-ID]
+* xref:issuer-url[YOUR-ISSUER-URL]
+
+[source,php]
+----
+'http.cookie.samesite' => 'None',
+
+'openid-connect' => [
+    'auto-provision' => ['enabled' => false],
+    'provider-url' => 'YOUR-ISSUER-URL',
+    'client-id' => 'YOUR-CLIENT-ID',
+    'client-secret' => 'YOUR-CLIENT-SECRET',
+    'loginButtonName' => 'OneLogin',
+    'autoRedirectOnLoginPage' => false,
+    'mode' => 'email',
+    'scopes' => [],
+    'use-access-token-payload-for-user-info' => false,
+],
+----
+
+If you want to let ownCloud create users which are not present during a OIDC authentication, replace +
+`'auto-provision' => ['enabled' => false],` with:
+
+[source,php]
+----
+    'auto-provision' => [
+        'enabled' => true,
+        'email-claim' => 'email',
+        'display-name-claim' => 'name',
+    ],
+----
+
+==== Service Discovery Setup
+
+For details see xref:configuration/user/oidc/oidc.adoc#set-up-service-discovery[Set Up Service Discovery].
+
+////
+=== Register ownCloud Clients
+
+To allow the ownCloud clients (Web/desktop/Android/iOS) to interact with the identity provider, you have to register them as clients.
+////
