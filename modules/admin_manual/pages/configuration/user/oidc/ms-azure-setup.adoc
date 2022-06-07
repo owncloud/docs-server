@@ -94,7 +94,7 @@ TIP: It is recommended to first figure out all configurations on a test system a
 Follow this link to read more about the
 xref:configuration/server/config_apps_sample_php_parameters.adoc#app-openid-connect-oidc[OIDC config.php parameters] available to configure OpenID Connect on ownCloud Server.
 
-==== Example config.php setup
+==== Example config.php Setup
 
 An example snippet that can be added to `config.php` is shown below. You need to add both config values as listed below. The example expects that login users have already been created in ownCloud.
 
