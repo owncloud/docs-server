@@ -2,6 +2,13 @@
 
 The `config` commands are used to configure the ownCloud server.
 
+[NOTE]
+====
+* In general, key names are not checked for validity, they are used as written.
+* Whenever you use the *app* parameter, a config is read or written from or to the database. 
+* Whenever you use the *system* parameter, a config is read or written from or to the config.php file.
+====
+
 ----
 config
  config:app:delete      Delete an app config value
@@ -13,6 +20,53 @@ config
  config:system:get      Get a system config value
  config:system:set      Set a system config value
 ----
+
+== config:app References
+
+The following apps, core functions or documents use/refer to `config:app` settings:
+
+.Standard
+* xref:configuration/files/federated_cloud_sharing_configuration.adoc[Configuring Federation Sharing]
+* xref:configuration/user/user_management.adoc#enabling-custom-groups[Custom Groups]
+* xref:configuration/files/file_sharing_configuration.adoc[File Sharing]
+* xref:configuration/server/security/hsmdaemon/index.adoc[The HSM (Hardware Security Module) Daemon (hsmdaemon)]
+* xref:configuration/server/legal_settings_configuration.adoc[Legal Settings Configuration]
+* xref:configuration/user/user_auth_ldap.adoc[LDAP Integration]
+* xref:configuration/files/manual_file_locking.adoc[Manual File Locking]
+* xref:maintenance/manually-moving-data-folders.adoc[Manually Move a Data Directory]
+* xref:configuration/server/virus-scanner-support.adoc[Virus Scanner Support]
+* xref:configuration/user/oidc/oidc.adoc[OpenID Connect (OIDC)]
+* xref:configuration/server/ui-configuration.adoc[UI Configuration]
+
+.Enterprise
+* xref:enterprise/user_management/user_auth_shibboleth.adoc[Shibboleth Integration]
+* xref:enterprise/logging/admin_audit.adoc[Auditing]
+* xref:enterprise/file_management/files_lifecycle.adoc[File Lifecycle Management]
+
+.occ Commands
+* xref:configuration/server/occ_command.adoc#anti-virus[occ Anti-Virus]
+* xref:configuration/server/occ_command.adoc#auditing[occ Auditing]
+* xref:configuration/server/occ_command.adoc#brute-force-protection[occ Brute Force Protection]
+* xref:configuration/server/occ_command.adoc#custom-groups[occ Custom Groups]
+* xref:configuration/server/occ_command.adoc#collabora-online-secure-view[occ Collabora Online / Secure View]
+* xref:configuration/server/occ_command.adoc#encryption[occ Encryption]
+* xref:configuration/server/occ_command.adoc#file-lifecycle-management[occ File Lifecycle Management]
+* xref:configuration/server/occ_command.adoc#full-text-search[occ Full Text Search]
+* xref:configuration/server/occ_command.adoc#ldap-integration[occ LDAP Integration]
+
+== config:system References
+
+The following apps, core functions or documents use/refer to `config:system` settings:
+
+.Standard
+* xref:installation/quick_guides/ubuntu_20_04.adoc[Quick Install on Ubuntu 20.04]
+* xref:installation/quick_guides/ubuntu_22_04.adoc[Quick Install on Ubuntu 22.04]
+
+.occ Commands
+* xref:configuration/server/occ_command.adoc#metrics[occ Metrics]
+
+.Enterprise
+* xref:enterprise/reporting/metrics.adoc[Metrics]
 
 == Config App Commands
 

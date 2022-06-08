@@ -130,10 +130,8 @@ them to share content in a more flexible way.
 
 To enable Custom Groups:
 
-1.  From the ownCloud Market, which you can find in version 10.0 under 
-the Apps menu, click btn:[Market].
-2.  Click btn:[Collaboration] (1), to filter the list of available
-options and click the btn:[Custom groups] application (2).
+1.  From the ownCloud Market, which you can find starting from version 10.0 under the Apps menu, click btn:[Market].
+2.  Click btn:[Collaboration] (1), to filter the list of available options and click the btn:[Custom groups] application (2).
 +
 image:custom-groups/owncloud-market-custom-groups.png[The Custom Groups application in the ownCloud Market]
 3.  Click btn:[INSTALL] in the bottom right-hand corner of the Custom Groups application.
@@ -144,14 +142,20 @@ With this done, Custom Group functionality will be available in your ownCloud in
 
 === Overriding Default Behavior
 
+Depending on your Custom Groups and ownCloud's global settings, configured by the ownCloud admin, Custom Groups may behave differently depending on settings made via occ commands. See the details in xref:configuration/server/occ_command.adoc#custom-groups[occ for Custom Groups]. Note that some settings shown in the examples below can also be set via `config/config.php`. For best practice use the occ command where possible.
+
 ==== Disabling Administrators from Administering Custom Groups
 
-Depending on your Custom Groups and ownCloud's global settings, configured by the ownCloud admin, Custom Groups may behave differently:
-
 * Creating or renaming a Custom Group using an existing name of another Custom Group can be allowed or not depending on administrative settings.
+
 * Custom Group creation can be limited to ownCloud **group admins**.
-* Disable administration of Custom Groups by ownCloud administrators. 
-This is enabled by setting `customgroups.disallow-admin-access-all` to `true` in `config/config.php`.
+
+* Disable administration of Custom Groups by ownCloud administrators:
++
+[source.php]
+----
+'customgroups.disallow-admin-access-all' => true,
+----
 
 ==== Hide Custom Groups App Based On Group Membership
 
@@ -160,9 +164,14 @@ To specify the disallowed groups, list them against the `customgroups.disallowed
 
 [source,php]
 ----
-// Hide the Custom Groups app for users in the "guest_app" group.
-'customgroups.disallowed-groups' => ['guest_app'],
+// Hide the Custom Groups app for users in the
+// 'no_guest_app_users' and 'project5' group.
+'customgroups.disallowed-groups' => ['no_guest_app_users', 'project5'],
 ----
+
+==== Set Custom Group Admins 
+
+Setting Custom Group admins can only be done via the browser. In case the group admin has left the company and you need to set a different one, you temporarily must allow the xref:disabling-administrators-from-administering-custom-groups[ownCloud instance admins] access to groups if disallowed before, set one or more new group admins, and change the instance admin setting back.
 
 == Setting Storage Quotas
 
