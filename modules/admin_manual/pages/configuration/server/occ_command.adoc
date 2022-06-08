@@ -39,6 +39,7 @@ configuration/server/occ_commands/app_commands/admin_audit_commands.adoc, \
 configuration/server/occ_commands/app_commands/brute_force_protection_commands.adoc, \
 configuration/server/occ_commands/app_commands/calendar_commands.adoc, \
 configuration/server/occ_commands/app_commands/contacts_commands.adoc, \
+configuration/server/occ_commands/app_commands/custom_groups.adoc, \
 configuration/server/occ_commands/app_commands/data_explorer_commands.adoc, \
 configuration/server/occ_commands/app_commands/files_lifecycle.adoc, \
 configuration/server/occ_commands/app_commands/ldap_integration_commands.adoc, \
@@ -320,6 +321,8 @@ include::./occ_commands/app_commands/_brute_force_protection_commands.adoc[level
 include::./occ_commands/app_commands/_calendar_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/app_commands/_contacts_commands.adoc[leveloffset=+2]
+
+include::./occ_commands/app_commands/_custom_groups.adoc[leveloffset=+2]
 
 include::./occ_commands/app_commands/_data_explorer_commands.adoc[leveloffset=+2]
 
