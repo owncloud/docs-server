@@ -4,7 +4,7 @@ Marketplace URL: {oc-marketplace-url}/apps/customgroups[Custom Groups]
 
 Use these commands to configure the Custom Groups app.
 
-Parametrisation should be done with the `occ config` command set, though some but not all settings result in an entry in config.php which also can be set manually.
+Parameterization should be done with the `occ config` command set, though some but not all settings result in an entry in config.php which also can be set manually.
 
 // note that the behaviour of the config:app settings was derived from the code of the app, see https://github.com/owncloud/customgroups and an issue https://github.com/owncloud/docs-webui/pull/41
 
@@ -14,7 +14,7 @@ You can get the value of a current setting. For details how to do so see the xre
   
 == Disallow Admin Access
 
-By default, administrators can administrate custom groups of an instance. When changed, only group admins can administrate custom groups. You can change this behaviour with following command:
+By default, administrators can administrate custom groups of an instance. When changed, only group admins can administrate custom groups. You can change this behaviour with the following command:
 
 [source,bash,subs="attributes+"]
 ----
@@ -23,7 +23,7 @@ By default, administrators can administrate custom groups of an instance. When c
   --type boolean --value true
 ----
 
-This occ command will create a key value pair in your config.php which must be writeable for the webserver user to be set. You can also manually set this setting directly. To do so, add the following key in config.php:
+This occ command will create a key-value pair in your config.php which must be writable for the webserver user. You can also do this manually by adding the following key in config.php:
 
 [source.plaintext]
 ----
@@ -32,7 +32,7 @@ This occ command will create a key value pair in your config.php which must be w
 
 == Disallow Members of Defined Groups
 
-You can hide custom groups from a users personal settings page based on a users group membership. This makes it easier to collect users you want to exclude into defined groups which will be further used for this setting:
+You can hide custom groups from a user's personal settings page based on a user's group membership. This makes it easier to collect users you want to exclude into defined groups which will be further used for this setting:
 
 [source,bash,subs="attributes+"]
 ----
@@ -42,7 +42,7 @@ You can hide custom groups from a users personal settings page based on a users 
   --value '["no_guest_app_users", "project5"]'
 ----
 
-This occ command will create a key value pair in your config.php which must be writeable for the webserver user to be set. You can also manually set this setting directly. To do so, add the following key in config.php:
+This occ command will create a key-value pair in your config.php which must be writable for the webserver user to be set. You can also set this manually by adding the following key in config.php:
 
 [source.plaintext]
 ----
@@ -67,7 +67,7 @@ This setting defines if ordinary users are allowed to create custom groups. By d
 
 == Restrict Add or Remove Group Members
 
-This setting defines if an existing ordinary group member is allowed to add or remove other users into the target group. By default, all users can add members to groups, but this can be restricted to admins (if allowed as above) and group-admins. Values to be set can be 'yes' and 'no', defaults to 'no'.
+This setting defines if an existing ordinary group member is allowed to add other users to the target group or remove them. By default, all users can add members to groups, but this can be restricted to admins (if allowed as above) and group-admins. Values to be set can be 'yes' and 'no', defaults to 'no'.
 
 [source,bash,subs="attributes+"]
 ----
