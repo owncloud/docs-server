@@ -83,7 +83,7 @@ If you have made changes in `.user.ini` located at the webroot of ownCloud, you 
 
 === Download the Latest Release
 
-Download the latest {download-oc-url}[ownCloud server release] to the same location where your previous instance is located, in this example the default directory `/var/www/`.
+Download the latest {oc-complete-base-url}[ownCloud server release] to the same location where your previous instance is located, in this example the default directory `/var/www/`.
 
 [source,bash,subs="attributes+"]
 ----
