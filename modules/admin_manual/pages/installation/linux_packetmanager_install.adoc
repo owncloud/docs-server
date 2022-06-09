@@ -14,7 +14,7 @@ You can use the packetmanager installation, but it is not recommended to do so. 
 
 Before you can install `owncloud-files`, you need to add {oc-install-package-url}[ownCloud's package repository] to your distribution's package manager.
 
-NOTE: Package managers should only be used for single-server setups. For production environments, we recommend installing from the {download-oc-url}[tar archive].
+NOTE: Package managers should only be used for single-server setups. For production environments, we recommend installing from the {oc-complete-base-url}[tar archive].
 
 == Available Packages
 
