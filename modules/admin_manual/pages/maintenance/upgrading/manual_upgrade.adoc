@@ -10,13 +10,13 @@ This document describes how to manually upgrade your ownCloud installation. Beca
 NOTE: This guide assumes that you have basic knowledge about Unix terminology, commands and concepts. In case you do not feel familiar with this, ownCloud highly recommends that you create a playground first to try the steps and/or get, if you are entitled to, in touch with ownCloud Support to avoid breaking your system or data loss.
 
 NOTE: This guide covers the upgrade of the ownCloud instance only. When planning to update/upgrade your server environment or server packages, read the xref:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide] first to match the prerequisites.
- 
+
 After preparing the upgrade, you can decide between two ways of upgrading your instance:
 
 .Script-Guided Upgrade
 This upgrade automates most of the tasks to be done including setting the correct ownership and permissions.
 
-.Manual Step-by-Step Upgrade 
+.Manual Step-by-Step Upgrade
 Using this type of upgrade, you have to do all the steps manually but you can also handle special setups.
 
 NOTE: In this description we assume that your ownCloud installation was located in the default directory: `/var/www/owncloud` and the new release will reside there as well. The path might differ, depending on your installation.
@@ -82,12 +82,12 @@ If you have made changes in `.user.ini` located at the webroot of ownCloud, you 
 
 === Download the Latest Release
 
-Download the latest https://owncloud.org/download/[ownCloud server release] to the same location where your previous instance is located, in this example the default directory `/var/www/`.
+Download the latest {oc-complete-base-url}[ownCloud server release] to the same location where your previous instance is located, in this example the default directory `/var/www/`.
 
 [source,bash,subs="attributes+"]
 ----
 cd /var/www/
-sudo wget https://download.owncloud.org/community/{oc-complete-name}.tar.bz2
+sudo wget {oc-complete-base-url}/{oc-complete-name}.tar.bz2
 ----
 
 == Script-Guided Upgrade
@@ -102,7 +102,7 @@ NOTE: The script is most convenient if you use links for your `apps-external` an
 
 When the script has finished, continue with the xref:finalize-the-upgrade[Finalize the Upgrade] step described below.
 
-NOTE: When using the script, any manual changes in `.htaccess` or `.user.ini` must be manually transferred from the backup directory the script created to the actual instance directory. 
+NOTE: When using the script, any manual changes in `.htaccess` or `.user.ini` must be manually transferred from the backup directory the script created to the actual instance directory.
 
 After the upgrade is finished, you can re-run this script to secure the `.htaccess` files.
 
@@ -165,7 +165,7 @@ NOTE: Make sure that all app directories that are defined in the `apps_paths` se
 ----
 sudo mkdir /var/www/owncloud/apps-external
 ----
- 
+
 === Permissions
 
 To finalize the preparation of the upgrade, you need to set the correct ownership and permissions of the new ownCloud files and folders.
@@ -219,7 +219,7 @@ With the apps disabled and ownCloud in maintenance mode, start the xref:configur
 
 [source,bash,subs="attributes+"]
 ----
-# Here is an example on Ubuntu Linux. 
+# Here is an example on Ubuntu Linux.
 # Execute this within the ownCloud root folder.
 {occ-command-example-prefix} upgrade
 ----
@@ -228,7 +228,7 @@ The upgrade operation can take anywhere from a few minutes to a few hours, depen
 
 == Reapply Manual Changes
 
-Reapply any manual changes made to `.htaccess` files and the `.user.ini` file located in the owncloud webroot. 
+Reapply any manual changes made to `.htaccess` files and the `.user.ini` file located in the owncloud webroot.
 
 The following example command eases to find the differences of two files, which is helpful for reapplying manually added changes to `.htaccess` and `.user.ini`. Replace that paths, directories and files accordingly.
 
