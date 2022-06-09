@@ -2,7 +2,6 @@
 :toc: right
 :toclevels: 1
 :page-aliases: maintenance/manual_upgrade.adoc
-:download-oc-url: https://owncloud.com/download-server/
 
 == Introduction
 
