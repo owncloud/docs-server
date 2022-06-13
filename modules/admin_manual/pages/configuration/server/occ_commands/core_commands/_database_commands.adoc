@@ -1,0 +1,46 @@
+= Database Commands
+
+== Database Conversion Commands
+
+=== Convert the Database Type
+
+The SQLite database is good for testing, and for ownCloud servers with small single-user workloads that do not use sync clients, but production servers with multiple users should use MariaDB, MySQL, or PostgreSQL. You can use `occ` to convert from SQLite to one of these other databases.
+
+[source,plaintext]
+----
+db
+ db:convert-type     Convert the ownCloud database to the newly configured one
+----
+
+You need:
+
+* Your desired database and its PHP connector installed.
+* The login and password of a database admin user.
+* The database port number, if it is a non-standard port.
+
+This is example converts SQLite to MySQL/MariaDB:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} db:convert-type mysql oc_dbuser 127.0.0.1 oc_database
+----
+
+TIP: For a more detailed explanation see xref:configuration/database/db_conversion.adoc[converting database types].
+
+=== Convert the MySQL Charset
+
+Convert charset of MySQL/MariaDB to use utf8mb4. If you are using an older ownCloud installation, the database may not be setup to use the 4-byte unicode charset. This command changes the database charset to use `utf8mb4`. Check your database charset before your are using this command.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} db:convert-mysql-charset
+----
+
+== Restore the Table Format
+
+This command sets the default row format of MySQL/MariaDB tables. This is only necessary once before you are going to e.g. install MariaDB 10.6 or higher because the COMPRESSED row format is now read-only by default. As a prerequisite, ownCloud 10.9 needs to be installed first. See the xref:maintenance/upgrading/database_upgrade.adoc[Database Upgrade] guide for details. 
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} db:restore-default-row-format
+----
