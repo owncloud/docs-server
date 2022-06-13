@@ -262,7 +262,7 @@ include::./occ_commands/core_commands/_command_line_upgrade_commands.adoc[levelo
 
 include::./occ_commands/core_commands/_dav_commands.adoc[leveloffset=+2]
 
-include::./occ_commands/core_commands/_database_conversion_commands.adoc[leveloffset=+2]
+include::./occ_commands/core_commands/_database_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_encryption_commands.adoc[leveloffset=+2]
 
