@@ -19,24 +19,21 @@ This is mostly due to the fact that, unlike before, in MariaDB 10.6 _tables of t
 
 NOTE: This process only needs to be carried out once.
 
-=== Prerequisites
+=== Overview
 
 . You must have upgraded your ownCloud installation to version 10.9 or above. To do so, follow the
 xref:maintenance/upgrading/manual_upgrade.adoc[Manual ownCloud Upgrade] guide.
 
-. Backup your ownCloud installation, especially the database. To do so, follow the
+. Backup your ownCloud installation, especially the database to rollback in case of issues. To do so, follow the
 xref:maintenance/backup_and_restore/backup.adoc[Backing up ownCloud] guide.
 
-. When running a MariaDB release lower than 10.5, you have to upgrade step-by-step for each minor release up to 10.5.x. Follow the respective {upgrade-mariadb-url}[Upgrading MariaDB] guide.
-+
-[WARNING]
-====
-You must not skip minor releases of MariaDB when upgrading like from 10.3 -> 10.5, you have to upgrade to each minor version in between step by step.
-====
-+
-Have a backup of your database to rollback in case of issues.
+. Prepare the database for the upgrade with an xref:configuration/server/occ_command.adoc#restore-the-table-format[occ command].
 
-=== Upgrade Steps
+. Follow the respective {upgrade-mariadb-url}[Upgrading MariaDB] guide to upgrade MariaDB.
+
+=== Detailed Upgrade Steps
+
+. If not already done, upgrade the xref:maintenance/upgrading/manual_upgrade.adoc[ownCloud installation] to version 10.9 or above.
 
 . Set ownCloud in maintenance mode
 +
@@ -65,7 +62,7 @@ sudo service apache2 stop
 
 . Upgrade MariaDB to version 10.6.x
 +
-Follow the instructions in the {upgrade-mariadb-url}[Upgrading MariaDB] guide.
+Follow the instructions in the respective {upgrade-mariadb-url}[Upgrading MariaDB] guide to upgrade MariaDB.
 
 . Set ownCloud back to normal operation mode:
 +
