@@ -29,7 +29,7 @@ TIP: For a more detailed explanation see xref:configuration/database/db_conversi
 
 === Convert the MySQL Charset
 
-Convert charset of MySQL/MariaDB to use utf8mb4. If you are using an older ownCloud installation, the database may not be setup to use the 4-byte unicode charset. This command changes the database charset to use `utf8mb4`. Check your database charset before your are using this command.
+Convert charset of MySQL/MariaDB to use utf8mb4. If you are using an older ownCloud installation, the database may not be setup to use the 4-byte unicode charset. This command changes the database charset to use `utf8mb4`. Check your database charset before you use this command.
 
 [source,bash,subs="attributes+"]
 ----
