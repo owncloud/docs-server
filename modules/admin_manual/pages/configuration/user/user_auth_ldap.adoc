@@ -169,6 +169,11 @@ include::example$configuration/user/user_auth_ldap/group_filter.ldif[]
 This is an indicator that tells you approximately how many users will be listed in ownCloud. 
 The number updates automatically after any changes.
 
+[IMPORTANT]
+====
+No matter what search filter is given, the app always adds the value of the `User Display Name Field` (default `(displayName=*)` ) to the filter to ensure that your users have this field, otherwise the count will be 0.
+====
+
 Active Directory offers "_Recursive retrieval of all AD group memberships of a user_".
 This means that you would be able to search the group you enter and all the other child groups from this group for users.
 Enter this filter to access this feature for a single group:
