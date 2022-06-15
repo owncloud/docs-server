@@ -119,17 +119,17 @@ Because remembering all the possible options for certbot is difficult, the follo
 [source,bash]
 ----
 cd /etc/letsencrypt
-touch cli.ini list.sh renew.sh renew-cron.sh delete.sh <your-domain-name>.sh
+sudo touch cli.ini list.sh renew.sh renew-cron.sh delete.sh <your-domain-name>.sh
 ----
 
 * Make all files created executable _except_ `cli.ini` by running
 +
 [source,bash]
 ----
-sudo chmod +x <script-name>
+sudo chmod +x *.sh
 ----
 
-* Use `sudo` when running the scripts
+* Use `sudo` when running the scripts (unless you are already logged in as the root user)
 +
 [NOTE]
 ====
