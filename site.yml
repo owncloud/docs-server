@@ -74,9 +74,8 @@ asciidoc:
 #   ocis
     latest-ocis-version: 'next'
     previous-ocis-version: 'next'
-    ocis-version: '2.0.0-beta1'
+    ocis-version: '2.0.0-beta3'
     ocis-downloadpage-url: 'https://download.owncloud.com/ocis/ocis/testing/'
-    ocis-ext-includes: 'https://raw.githubusercontent.com/owncloud/ocis/docs/extensions/_includes/'
 #   desktop
     latest-desktop-version: 'next'
     previous-desktop-version: 'next'
