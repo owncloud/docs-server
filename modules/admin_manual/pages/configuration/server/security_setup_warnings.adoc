@@ -78,16 +78,6 @@ The HSTS header needs to be configured within your Web server by following the
 xref:configuration/server/harden_server.adoc#enable-http-strict-transport-security[Enable HTTP Strict Transport Security]
 documentation.
 
-== /dev/urandom is not readable by PHP
-
-----
-/dev/urandom is not readable by PHP which is highly discouraged for security reasons.
-Further information can be found in our documentation.
-----
-
-This message is another one which needs to be taken seriously. 
-Please have a look at the xref:configuration/server/harden_server.adoc#give-php-read-access-to-devurandom[Give PHP read access to `/dev/urandom`] documentation.
-
 == Your Web server is not yet set up properly to allow file synchronization
 
 ----
