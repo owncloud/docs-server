@@ -58,8 +58,7 @@ should always have your own current backups (See xref:maintenance/backup_and_res
 3.  Verify that the HTTP user on your system can write to your whole
 ownCloud directory; see the xref:setting-permissions-for-updating[Setting Permissions for Updating] section
 below.
-4.  Navigate to your Admin page and click the btn:[Open updater] button
-under General. This takes you to the Updater control panel.
+4.  Navigate to menu:Settings[Admin > General] and click the btn:[Open updater] button. This takes you to the Updater control panel.
 5.  Click btn:[Start], and carefully read the messages. If there are any
 problems it will tell you. The most common issue is directory
 permissions; your HTTP user needs write permissions to your whole
