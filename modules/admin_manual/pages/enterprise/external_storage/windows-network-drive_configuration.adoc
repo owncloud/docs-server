@@ -342,7 +342,7 @@ Requires=apache2.service
 User=www-data
 Group=www-data
 WorkingDirectory=/var/www/owncloud
-ExecStart=/usr/bin/php ./occ wnd:listen -vvv SERVER SHARE USER --password-file=/tmp/mypass --password-trim
+ExecStart=./occ wnd:listen -vvv SERVER SHARE USER --password-file=/tmp/mypass --password-trim
 Type=simple
 StandardOutput=journal
 StandardError=journal
@@ -390,7 +390,7 @@ NOTE: The commands must be **strictly sequential**. This can be done by using `f
 +
 [source,bash]
 ----
-* * * * *  sudo -u www-data /usr/bin/php /var/www/owncloud/occ wnd:process-queue <HOST> <SHARE>
+* * * * *  sudo -u www-data /var/www/owncloud/occ wnd:process-queue <HOST> <SHARE>
 ----
 
 ===== Execution Serialization
@@ -421,7 +421,7 @@ You can use flock also in cron, see the example below:
 
 [source,bash,subs="attributes+"]
 ----
-* * * * *  flock -n /opt/my-lock-file -c 'sudo -u www-data /usr/bin/php /var/www/owncloud/occ wnd:process-queue <HOST> <SHARE>'
+* * * * *  flock -n /opt/my-lock-file -c 'sudo -u www-data /var/www/owncloud/occ wnd:process-queue <HOST> <SHARE>'
 ----
 
 Check {flock-docs-url}[flock's documentation] for details and more options.
