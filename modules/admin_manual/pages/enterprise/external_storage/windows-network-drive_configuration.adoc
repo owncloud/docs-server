@@ -675,14 +675,15 @@ www-data user and inaccessible from the web. This prevents tampering or leaking 
 The password won't be leaked to any other user using `ps`.
 . Using 3rd party software to store and fetch the password. When using this option, the 3rd party app
 needs to show the password as plaintext on standard output.
-. Using the service account password, which is already stored in the database if you setup WND in collaborative mode. In this mode you have to enter a username and password in the setup of the share, so the `occ` command is able to reuse this password stored in the database. The command would look like:
+. Using the service account password, which is already stored in the database if you setup WND in collaborative mode. In this mode, you set the username and the option for the `occ` command to reuse the password stored in the database. The example command looks like:
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> --password-from-service-account
+{occ-command-example-prefix} wnd:listen <host> <share> <username>
+     --password-from-service-account
 ----
 +
-IMPORTANT: You need to ensure that the triple of `<host>`, `<share>` and `<username>` (including any kind of workgroup) matches the configuration made for the WND collaborative share, otherwise the command will fail.
+IMPORTANT: You need to ensure that the triple of `<host>`, `<share>` and `<username>` (including any kind of workgroup if used) matches the configuration made for the WND collaborative share. The command will fail otherwise.
 
 === Reduce WND Notifier Memory Usage
 
