@@ -400,19 +400,19 @@ In the two examples above, here is a sample JSON file, showing all of the availa
 | Description
 
 | download
-| Download/read/get a file or display a folder contents
+| Download/read/get a file or display a folder's contents.
 
 | upload
-| A new file can be uploaded/created (file target does not exist)
+| A new file can be uploaded/created (file target does not exist).
 
 | upload_overwrite
-| A file can overwrite an existing one
+| A file can overwrite an existing one.
 
 | rename
-| Rename file to new name, all within the shared folder
+| Rename file to new name, all within the shared folder.
 
 | move_in
-| Move a file from outside the shared folder into the shared folder
+| Move a file from outside the shared folder into the shared folder.
 
 | move_in_overwrite
 a| Move a file from outside the shared folder and overwrite a file inside the shared folder.
@@ -420,30 +420,30 @@ a| Move a file from outside the shared folder and overwrite a file inside the sh
 NOTE: SabreDAV automatically deletes the target file first before moving, so requires DELETE permission too.
 
 | move_in_subdir
-| move a file already in the shared folder into a subdir within the shared folder
+| Move a file already in the shared folder into a subdirectory within the shared folder.
 
 | move_in_subdir_overwrite
-| Move a file already in the shared folder into a subdir within the shared folder and overwrite an existing file there
+| Move a file already in the shared folder into a subdirectory within the shared folder and overwrite an existing file there.
 
 | move_out
-| Move a file to outside of the shared folder
+| Move a file to outside of the shared folder.
 
 | move_out_subdir
-| Move a file out of a subdir of the shared folder into the shared folder
+| Move a file out of a subdirectory of the shared folder into the shared folder.
 
 | copy_in
-| Copy a file from outside the shared folder into the shared folder
+| Copy a file from outside the shared folder into the shared folder.
 
 | copy_in_overwrite
-a| Copy a file from outside the shared folder and overwrite a file inside the shared folder
+a| Copy a file from outside the shared folder and overwrite a file inside the shared folder.
 
 NOTE: SabreDAV automatically deletes the target file first before copying, so requires DELETE permission too.
 
 | delete
-| Delete a file inside the shared folder
+| Delete a file inside the shared folder.
 
 | mkdir
-| Create folder inside the shared folder
+| Create a folder inside the shared folder.
 
 | rmdir
 | Delete folder inside the shared folder
