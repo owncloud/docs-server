@@ -262,7 +262,7 @@ The simplest way, useful for initial testing is, to start the `wnd:listen` proce
 {occ-command-example-prefix} wnd:listen <host> <share> <username>
 ----
 
-The password is an optional parameter and you will be asked for it if you didn't provide it as in the example above. If necessary the workgroup can be set in the username as well. Use the syntax `'<workgroup>\<username>'` for this. It's important to use the quotes so the backslash is kept, so the whole command looks like:
+The password is an optional parameter and you will be asked for it if you didn't provide it as in the example above. If necessary, the workgroup can be set in the username as well. Use the syntax `'<workgroup>\<username>'` for this. It is important to use quotes to keep the backslash. The whole example command looks like:
 
 [source,bash,subs="attributes+"]
 ----
