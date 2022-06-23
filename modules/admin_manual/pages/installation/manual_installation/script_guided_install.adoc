@@ -2,18 +2,41 @@
 :toc: right
 :toclevels: 1
 :apache_docs: https://httpd.apache.org/docs/2.4/
+:description: The purpose of the scripts provided are to ease any installation or upgrades of ownCloud instances. Using these scripts, you can also reapply ownership and access rights on linked directories if needed.
 
 == Introduction
 
-There are two scripts you can copy and paste for easy **installation** and **upgrades** of ownCloud instances. Using these scripts, you can also reapply **ownership and access rights**. If you administrate more than one ownCloud instance, you still only need the one `owncloud_prep.sh` script. This script is doing the main job. Have as many instance scripts as you have instances to maintain. Only the instance scripts need configuration, e.g. the respective target directory and other predefined information. The `instance.sh` script (or however you will name it) calls `owncloud_prep.sh` with the configuration you defined for the respective instance.
+{description}
 
-The scripts are written for the `bash` shell. After you copy and paste them, save both in a location where you can easily reuse them.
+== General Info
+
+It is important to understand how these scripts work and why things are done to process all the steps for a successful and smooth installation or upgrade.
+
+Installation::
+When you do a fresh installation using this set of scripts, consider using links for the `data/` and `apps-external/` directories. Any copying or moving big directories can cause issues which can be avoided by using links. When doing an upgrade post of an installation, the scripts can relink those directories but will not "migrate" standard ones. If standard directories are used, the admin has to select a method to migrate those directories as part of the upgrade process which fits best to his environment. You will get notified about this task in case.
+
+Migrating from standard to linked directories::
+You can at any time relocate your `data/` and `apps-external/` directories and link them to the old location. This does not impact the functionality but eases upgrade steps a lot. In case, reparametrize the instance script with proper values to be prepared for the next upgrade. See some details at the xref:configuration[configuration section] below.
+
+Upgrading::
+When upgrading, the scripts rename the current ownCloud directory from the former name, usually `owncloud`, to `owncloud-timestamp`. A new and fresh owncloud directory will be created where the files from the tar archive get extracted to. By doing so, nothing gets deleted, overwritten or moved and the existing instance is secured to go back in case it is needed. Note that the script does not take care on the database. You have to manage a xref:maintenance/backup_and_restore/backup.adoc#backup-the-database[database backup] by yourself. When you have decided to use links for `data/` and `apps-external/`, the script will relink these directories. Nothing gets moved. You can also (re)run the scrips on linked directories to set correct ownership and permissions. When using standard directories, you have to manually migrate them according your environment and also manually check for correct ownership and permissions.
++
+The scripts takes care on your configuration. The relevant files are _copied_ from the backup.
++
+If the upgrade was successful, you can delete the backup or keep it based on your requirements.
+
+Scripts::
+There are two scripts available. The instance script defines the environment for your ownCloud while the preparation script called by the instance script does the main tasks. Note that the preparation script asks a couple of questions to decide what you want to achieve.
++
+If you administrate more than one ownCloud instance, you still only need the one `owncloud_prep.sh` script. This script is doing the main job. Have as many instance scripts as you have instances to maintain. Only the instance scripts need configuration, like the respective target directory and other predefined information. The `instance.sh` script (or however you will name it) calls `owncloud_prep.sh` with the configuration you defined for the respective instance.
+
+The scripts are written for the `bash` shell. After you copy and pasted them, save both in a location for easy access.
 
 WARNING: Use the following scripts at your own risk. They may not work as expected if not properly configured.
 
 NOTE: The scripts are only working with tar archives as sources for installations and upgrades.
 
-TIP: You can also use these scripts if you want to set or reapply strong permissions.
+TIP: You can also use these scripts if you want to set or reapply strong permissions on linked drectories.
 
 == Configuration
 
@@ -43,7 +66,7 @@ TIP: You can also use these scripts if you want to set or reapply strong permiss
   ..
 ----
 
-As you can see, and while this makes no difference on installing, upgrading is much easier as you do not need to take care on copying/moving directories as they just get relinked.
+As you can see, and while this makes no difference on installing, upgrading is much easier as you do not need to take care on migrating directories as they just get relinked.
 
 NOTE: You only need to edit the `instance.sh` script (or however you name it), if you want to change the default settings.
 
@@ -57,7 +80,7 @@ The following table illustrates the variables to be configured and what they mea
 |linkroot | The path to your source directory for linking **data** and **apps-external** (default /mnt/owncloud_data). You have to prepare this directory in advance and give it proper ownership and r/w permissions for the webserver user. Note that the **apps** directory is always part of the tar archive and therefore be extracted at its default location without being linked.
 |htuser   | The webserver user (default www-data)
 |htgroup  | The webserver group (default www-data)
-|rootuser | The root user (default root)
+|rootuser | The root user (default root). Necessary to run some commands in the script. Note that the script is not intended to run as superuser for security reasons.
 |===
 
 . `ocname` +
@@ -101,11 +124,11 @@ the script extracts the files with tar and automatically extracts them to the ta
 .In case of an upgrade
 the old instance path is backed up by _renaming and adding a time stamp_. A new target folder with the old name is created. This ensures that in case of extracting and preparation issues, you can easily go back to the previous version. After a successful upgrade, you must manually remove the backup folder.
 
-TIP: If you do not install or upgrade, the script sets ownership and permissions only.
+TIP: If you do not install or upgrade, the script sets ownership and permissions on linked directories only.
 
 NOTE: In case of upgrading, if you have customized the `.htaccess` or `.user.ini` file in the ownCloud webroot, you have to manually restore any changes made after the script has finished from the backup folder. Take care to only restore the changes made but not the complete file as this file will be recreated on upgrades by the tar source and may contain different settings provided by ownCloud. Customizing `.htaccess` can be necessary when you e.g. xref:configuration/integration/ms-teams.adoc[Integrate ownCloud into Microsoft Teams].
 
-NOTE: In case of upgrading, if you have used links for the apps-external and data directory, the script will relink these directories. If you have used normal directories, you manually have to copy any content of these directories back after the script has run. Note you have take care not to overwrite new app versions with older ones.
+NOTE: In case of upgrading, if you have used links for the apps-external/ and data/ directory, the script will relink these directories. If you have used standard directories, you manually have to migrate any content of these directories back after the script has run. Check that ownership and permissions are correct after migration and in doubt, let the scrips set the correct ones when using linked directories or ste them manually - which can take a while in any case depending on the size of the data/ directory. Note you have take care not to overwrite new app versions with older ones.
 
 === Script Questions
 
@@ -125,13 +148,35 @@ NOTE: In case of upgrading, if you have used links for the apps-external and dat
 
 * **Do you want to chmod/chown these links (y/N)?** +
   This question is only asked when you use links. If you are not installing or upgrading, 
-  answering with yes, you can e.g. re-apply ownership and permissions to the `data` and
+  answering with yes, you can e.g. re-apply ownership and permissions to the linked `data` and
   `apps-external` directories. As written above, the data directory can be very large
   and may take long to complete. Note, by design, there is no progressbar... 
 
 * **Please specify the tar file to extract with full path:** +
   Used when installing or upgrading only. Enter the full path/filename to the tar source
-  file, downloaded from owncloud.
+  file, downloaded from ownCloud.
+
+== Final Steps
+
+When running the script, you will see success messages when finished.
+
+.When installing
+Enter the URL of your ownCloud instance in a browser and continue the setup via the graphical installation wizard. For more information, see xref:installation/installation_wizard.adoc[The Installation Wizard].
+The URL you need to enter in the browser depends on the webserver setup taken and either is an external URL or if you installed locally, you should be able to access your ownCloud instance via a browser at `\http://127.0.0.1/owncloud/` or `\http://localhost/owncloud/`.
+
+.When upgrading
+Follow the steps printed on the screen, especially when using standard directories where you have to migrate the `data/` and `apps-external/` directories manually befor finalizing the upgrade. Do not forget to reapply manually made changes made to `.htaccess` and `.user.ini` in your owncloud root directory.
+
+.How to get the difference of two files quickly
+The following example command eases to find the differences of two files, which is helpful for reapplying manually added changes to `.htaccess` and `.user.ini`. Replace that paths, directories and files accordingly.
+[source,bash]
+----
+diff -y -W 70 --suppress-common-lines owncloud/.user.ini owncloud_2022-02-15-09.18.48/.user.ini
+----
+[source,plaintext]
+----
+post_max_size=513M                |     post_max_size=1G
+----
 
 == Creating the scripts
 
@@ -158,23 +203,4 @@ include::example$installation/manual_installation/instance.sh[]
 [source,bash]
 ----
 include::example$installation/manual_installation/owncloud_prep.sh[]
-----
-
-== Final Steps
-
-When running the script, you will see success messages when finished.
-
-.When installing
-Enter the URL of your ownCloud instance in a browser and continue the setup via the graphical installation wizard. For more information, see xref:installation/installation_wizard.adoc[The Installation Wizard].
-The URL you need to enter in the browser depends on the webserver setup taken and either is an external URL or if you installed locally, you should be able to access your ownCloud instance via a browser at `\http://127.0.0.1/owncloud/` or `\http://localhost/owncloud/`.
-
-.When upgrading
-Follow the steps printed on the screen. Do not forget to reapply manually made changes made to `.htaccess` and `.user.ini` in your owncloud root directory.
-
-.How to get the difference of two files quickly
-The following example command eases to find the differences of two files, which is helpful for reapplying manually added changes to `.htaccess` and `.user.ini`. Replace that paths, directories and files accordingly.
-[source,bash]
-----
-diff -y -W 70 --suppress-common-lines owncloud/.user.ini owncloud_2022-02-15-09.18.48/.user.ini
-post_max_size=513M                |     post_max_size=1G
 ----
