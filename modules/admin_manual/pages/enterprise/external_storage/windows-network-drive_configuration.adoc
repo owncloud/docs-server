@@ -262,7 +262,14 @@ The simplest way, useful for initial testing is, to start the `wnd:listen` proce
 {occ-command-example-prefix} wnd:listen <host> <share> <username>
 ----
 
-The password is an optional parameter and you will be asked for it if you didn't provide it as in the example above. In order to start `wnd:listen` without any user interaction like as service, provide the password from a password file.
+The password is an optional parameter and you will be asked for it if you didn't provide it as in the example above. If necessary, the workgroup can be set together with the username as well. Use following syntax and set quotes, which is important to keep the backslash `'<workgroup>\<username>'`. The whole example command looks like:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} wnd:listen <host> <share> '<workgroup>\<username>'
+----
+
+In order to start `wnd:listen` without any user interaction like as service, provide the password from a password file.
 
 [source,bash,subs="attributes+"]
 ----
