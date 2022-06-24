@@ -49,7 +49,7 @@ chown -R www-data:www-data "$apps/$app_name"
 # Enable the theme (app)
 echo 
 echo "Enabling theme"
-sudo -u www-data php "$owncloud_directory/occ" app:enable "$app_name"
+sudo -u www-data "$owncloud_directory/occ" app:enable "$app_name"
 
 echo
 echo "Finished bootstrapping the new theme."
