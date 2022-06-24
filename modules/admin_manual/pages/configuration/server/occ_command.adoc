@@ -122,7 +122,8 @@ If your ownCloud instance is set up in a docker container, you need a user in th
 
 [source,docker]
 ----
-docker exec --user www-data <owncloud-container-name> php occ <your-command>
+docker exec --user www-data <owncloud-container-name> occ <your-command>
+
 ----
 
 For more information on docker, refer to section xref:installation/docker/index.adoc[Installing with Docker].
@@ -131,7 +132,7 @@ For more information on docker, refer to section xref:installation/docker/index.
 
 The ownCloud Appliance offers two possibilities to perform `occ` commands:
 
-. Log in to the ownCloud instance as root user with the command `univention-app shell owncloud`. Then use `occ` commands without a preceding `sudo -u www-data php`.
+. Log in to the ownCloud instance as root user with the command `univention-app shell owncloud`. Then use `occ` commands without a preceding `sudo -u www-data`.
 
 . Alternatively, you can use `occ` on the host system with the command `univention-app shell owncloud occ` followed by the desired options, commands and arguments.
 

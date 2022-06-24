@@ -598,7 +598,7 @@ Add a new user, called Fred Jones:
 [source,plaintext]
 ----
 export OC_PASS=newpassword
-su -s /bin/sh www-data -c 'php occ user:add --password-from-env
+su -s /bin/sh www-data -c 'occ user:add --password-from-env
   --display-name="Fred Jones" --group="users" fred'
 The user "fred" was created successfully
 Display name set to "Fred Jones"
@@ -620,7 +620,7 @@ You may also use `password-from-env` to reset passwords:
 [source,plaintext]
 ----
 export OC_PASS=newpassword
-su -s /bin/sh www-data -c 'php occ user:resetpassword \
+su -s /bin/sh www-data -c 'occ user:resetpassword \
   --password-from-env \
   layla'
 Successfully reset password for layla
