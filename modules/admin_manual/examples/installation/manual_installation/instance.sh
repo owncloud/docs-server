@@ -1,4 +1,5 @@
 #!/bin/bash
+# Script Version 2022.06.23
 
 # This script prepares the parameters for owncloud_prep.sh
 # Handy if you have more instances to maintain where the process stays the same with different parameters
@@ -25,6 +26,8 @@ rootuser='root'
 if [ "$(id -u)" != 0 ]; then
   printf "\nThis script should be run as root user to allow filesystem modifications\nExiting\n\n"
 fi
+
+printf "\nConsider backing up the database before you continue when upgrading!\n\n"
 
 # Resolve the absolute path this script is located and expects the called script to be there too
 DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
