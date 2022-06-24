@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script Version 2022.06.23
 
-# To setup this script for your environment, hand over the following variables according your needs:
+# To set up this script for your environment, hand over the following variables according your needs:
 #
 # ocname        the name of your directory containing the owncloud files
 # ocroot        the path to ocname, usually /var/www (no trailing slash)
@@ -281,11 +281,11 @@ if [ -f ${ocpath}/occ ]; then
 fi
 
 
-# tell to remove the old instance, do upgrade and end maintenance mode ect.
+# tell to remove the old instance, do upgrade and end maintenance mode etc.
 printf "\nSUCCESS\n\n"
 if [ "$do_upgrade" = "y" ]; then
   if [ "$uselinks" = "n" ]; then
-    echo "Please migrate (move/copy) your data/ and apps-external/ directory manually back to the original location BEFORE running the upgrade command !"
+    echo "Please migrate (move/copy) your data/ and apps-external/ directory manually back to the original location BEFORE running the upgrade command!"
     echo
   fi
   echo "Please change to your upgraded ownCloud directory: cd $ocroot/$ocname"
