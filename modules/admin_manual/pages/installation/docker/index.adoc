@@ -28,7 +28,7 @@ An example `occ` command looks like this:
 
 [source,docker]
 ----
-docker exec --user www-data <owncloud-container-name> php occ <your-command>
+docker exec --user www-data <owncloud-container-name> occ <your-command>
 ----
 
 == Quick Evaluation
