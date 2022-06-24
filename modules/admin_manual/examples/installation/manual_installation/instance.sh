@@ -27,7 +27,7 @@ if [ "$(id -u)" != 0 ]; then
   printf "\nThis script should be run as root user to allow filesystem modifications\nExiting\n\n"
 fi
 
-printf "\nConsider having a database backup before you continue when upgrading!\n\n"
+printf "\nConsider backing up the database before you continue when upgrading!\n\n"
 
 # Resolve the absolute path this script is located and expects the called script to be there too
 DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
