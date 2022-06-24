@@ -1,7 +1,7 @@
 #!/bin/bash
-# Script Version 2022.02.15
+# Script Version 2022.06.23
 
-# To setup this script for your environment, hand over the following variables according your needs:
+# To set up this script for your environment, hand over the following variables according your needs:
 #
 # ocname        the name of your directory containing the owncloud files
 # ocroot        the path to ocname, usually /var/www (no trailing slash)
@@ -189,11 +189,15 @@ else
   fi
 fi
 
-# copy an existing config.php
+# copy existing *config.php and all .json files which are required for the new webUI
 if [ "$do_upgrade" = "y" ]; then
+  # check if at minimum a config.php file is present
+  # note that you can have more than one config.php representing different settings
   if [ -f ${oldocpath}/config/config.php ]; then
-    printf "\nCopy existing config.php file \n"
-    cp ${oldocpath}/config/config.php ${ocpath}/config/config.php
+    printf "\nCopy existing *config.php and *.json files \n"
+    # using find to omit messages if no files found
+    find ${oldocpath}/config/ -name \*config.php -exec cp {} ${ocpath}/config/ \;
+    find ${oldocpath}/config/ -name \*.json -exec cp {} ${ocpath}/config/ \;
   else
     printf "Skip to copy old config.php, file not found: ${oldocpath}/config/config.php \n"
   fi
@@ -277,20 +281,20 @@ if [ -f ${ocpath}/occ ]; then
 fi
 
 
-# tell to remove the old instance, do upgrade and end maintenance mode ect.
+# tell to remove the old instance, do upgrade and end maintenance mode etc.
 printf "\nSUCCESS\n\n"
 if [ "$do_upgrade" = "y" ]; then
-  echo "Please manually run: cd $ocroot/$ocname"
+  if [ "$uselinks" = "n" ]; then
+    echo "Please migrate (move/copy) your data/ and apps-external/ directory manually back to the original location BEFORE running the upgrade command!"
+    echo
+  fi
+  echo "Please change to your upgraded ownCloud directory: cd $ocroot/$ocname"
   echo "Please manually run: sudo -u$htuser ./occ upgrade"
-  echo "Copy any changes manually added in .user.ini and .htaccess from the backup"
+  echo "Copy any changes manually added in .user.ini and .htaccess from the backup directory"
   echo "Please manually run: sudo -u$htuser ./occ maintenance:mode --off"
   echo "Please manually remove the directory of the old instance: $oldocpath"
   echo "When successfully done, re-run this script to secure your .htaccess files"
   echo
-  if [ "$uselinks" = "n" ]; then
-    echo "Please move/copy your data and apps-external directory manually back to the original location BEFORE running the upgrade command !"
-    echo
-  fi
 fi
 
 if [ "$do_new" = "y" ]; then
