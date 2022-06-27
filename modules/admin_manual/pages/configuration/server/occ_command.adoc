@@ -65,6 +65,31 @@ toc::[]
 
 == Running occ
 
+=== Check if occ Is Set to Executable
+
+Note that this step is not necessary when using a docker installation.
+
+Check if the `occ` command is set to executable, change to your ownCloud directory first:
+
+[source,bash]
+----
+ls -lhF occ
+----
+
+This should give a similar output like:
+
+[source,plaintext]
+----
+-rwxr-x--x 1 root www-data 283 May 18 17:44 occ* 
+----
+
+In case it does not, set the occ command to executable with:
+
+[source,bash]
+----
+sudo chmod +x occ
+----
+
 === As Your HTTP User
 
 On a regular ownCloud installation, `occ` is in the `owncloud/` directory, this is on Ubuntu Linux for example `/var/www/owncloud` . `occ` itself is a PHP script.

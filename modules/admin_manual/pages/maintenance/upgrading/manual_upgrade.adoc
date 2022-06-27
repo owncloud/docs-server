@@ -1,11 +1,12 @@
 = Manual ownCloud Upgrade
 :toc: right
 :toclevels: 1
+:description: This document describes how to manually upgrade your ownCloud installation. Because installations can vary, this guide can only give an overview of methods and examples.
 :page-aliases: maintenance/manual_upgrade.adoc
 
 == Introduction
 
-This document describes how to manually upgrade your ownCloud installation. Because installations can vary, this guide can only give an overview of methods and examples. These examples need to be adapted according your needs and your environment.
+{description} These examples need to be adapted according your needs and your environment.
 
 NOTE: This guide assumes that you have basic knowledge about Unix terminology, commands and concepts. In case you do not feel familiar with this, ownCloud highly recommends that you create a playground first to try the steps and/or get, if you are entitled to, in touch with ownCloud Support to avoid breaking your system or data loss.
 
@@ -108,9 +109,11 @@ After the upgrade is finished, you can re-run this script to secure the `.htacce
 
 == Manual Step-by-Step Upgrade
 
+Note that this procedure is not an in-place upgrade but an upgrade to a new directory identical named as it was originally set. This ensures that no code or settings can orphan or get overwritten.
+
 === Move Current ownCloud Directory
 
-Although you have already made a backup, move your current ownCloud directory to a different location for easy access later:
+Although you have already made a backup, move your current ownCloud directory to a different location for easy later access:
 
 This example assumes Ubuntu Linux and MariaDB, rename the ownCloud directory:
 [source,bash]
@@ -129,7 +132,7 @@ sudo tar -xf {oc-complete-name}.tar.bz2
 
 === Copy the data/ Directory
 
-If you keep your `data/` directory _inside_ your `owncloud/` directory, move it from your old version of ownCloud to your new version:
+If you keep your `data/` directory _inside_ your `owncloud/` directory and you have not linked it, move it from your old version of ownCloud to your new version:
 
 [source,bash]
 ----
@@ -142,11 +145,18 @@ If you keep your `data` **outside** of your `owncloud` directory, then you donâ€
 
 === Copy Relevant config.php Content
 
-With the new source files now in place of where the old ones used to be, copy the `config.php` file from your old ownCloud directory to your new ownCloud directory:
+With the new source files now in place of where the old ones used to be, copy all `\*config.php` and `*.json` files (if one exist) from your old ownCloud directory to your new ownCloud directory:
 
 [source,bash]
 ----
-sudo cp /var/www/backup_owncloud/config/config.php /var/www/owncloud/config/config.php
+sudo cp /var/www/backup_owncloud/config/*config.php \
+        /var/www/owncloud/config/
+----
+
+[source,bash]
+----
+sudo cp /var/www/backup_owncloud/config/*.json \
+        /var/www/owncloud/config/
 ----
 
 === Market and Marketplace App Upgrades
@@ -175,12 +185,16 @@ Set the ownership for all files and folders to `root:www-data` **except** the `c
 
 [source,bash]
 ----
-sudo find -L /var/www/owncloud \( -path ./data -o -path ./config \) -prune -o -type d -exec chown root:www-data {} \+
+sudo find -L /var/www/owncloud \
+    \( -path ./data -o -path ./config \) -prune -o \
+    -type d -print0 | xargs -0 chown root:www-data
 ----
 
 [source,bash]
 ----
-sudo find -L /var/www/owncloud \( -path ./data -o -path ./config \) -prune -o -type f -exec chown root:www-data {} \+
+sudo find -L /var/www/owncloud \
+    \( -path ./data -o -path ./config \) -prune -o \
+    -type f -print0 | xargs -0 chown root:www-data
 ----
 
 Set the ownership for all files and folders to `www-data:www-data` for the `config`, `data` and `apps` directories. Note that it is not mandatory to set the ownership of the `data/` directory as it should already have the correct ownership and it can take a while to finish, depending on the size:
@@ -199,14 +213,21 @@ Use `chmod` on files and directories with different permissions:
 +
 [source,bash]
 ----
-sudo find /var/www/owncloud -type f -exec chmod 640 {} \;
+sudo find -L /var/www/owncloud -type f -print0 | xargs -0 chmod 640
 ----
 
 * For all directories use `0750`
 +
 [source,bash]
 ----
-sudo find /var/www/owncloud -type d -exec chmod 750 {} \;
+sudo find -L /var/www/owncloud -type d -print0 | xargs -0 chmod 750
+----
+
+* Set the occ command to executable
++
+[source,bash]
+----
+sudo chmod +x /var/www/owncloud/occ
 ----
 
 If you have configured a script for xref:installation/manual_installation/script_guided_install.adoc[guided installations], you can use it for this step as well as it automates it.
@@ -215,12 +236,10 @@ If you have configured a script for xref:installation/manual_installation/script
 
 === Start the Upgrade
 
-With the apps disabled and ownCloud in maintenance mode, start the xref:configuration/server/occ_command.adoc#command-line-upgrade[upgrade process] from the command line:
+With the apps disabled and ownCloud in maintenance mode, start the xref:configuration/server/occ_command.adoc#command-line-upgrade[upgrade process] from the command line, note the example is based on Ubuntu Linux, execute this within the ownCloud root folder.
 
 [source,bash,subs="attributes+"]
 ----
-# Here is an example on Ubuntu Linux.
-# Execute this within the ownCloud root folder.
 {occ-command-example-prefix} upgrade
 ----
 
