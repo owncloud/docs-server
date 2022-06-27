@@ -65,7 +65,7 @@ After that, add an Alias directive for the `/.well-known/acme-challenge` locatio
 
 [source,apache]
 ----
-<virtualHost *.80>
+<VirtualHost *.80>
   ServerName mydom.tld
 
   Alias /.well-known/acme-challenge/ /var/www/letsencrypt/.well-known/acme-challenge/
@@ -77,7 +77,7 @@ After that, add an Alias directive for the `/.well-known/acme-challenge` locatio
   </Directory>
 
   # ... remaining configuration
-</virtualHost>
+</VirtualHost>
 ----
 
 == Create an SSL VirtualHost Configuration
@@ -118,14 +118,14 @@ With the files created and filled-out, update your HTTPS VirtualHost configurati
 
 [source,apache]
 ----
-<virtualHost *:443>
+<VirtualHost *:443>
   ServerName mydom.tld
 
   # ssl letsencrypt
   # Include /etc/apache2/ssl_rules/ssl_mydom.tld
 
   #...
-</virtualHost>
+</VirtualHost>
 ----
 
 IMPORTANT: For the moment, comment out the `Include` directive, as the certificate files do not, currently, exist.
@@ -159,14 +159,14 @@ As the certificate files exist, you can uncomment the `Include` directive in you
 
 [source,apache]
 ----
-<virtualHost *:443>
+<VirtualHost *:443>
   ServerName mydom.tld
 
   # ssl letsencrypt
   Include /etc/apache2/ssl_rules/ssl_mydom.tld
 
   #...
-</virtualHost>
+</VirtualHost>
 ----
 
 == Reload the Apache Configuration
