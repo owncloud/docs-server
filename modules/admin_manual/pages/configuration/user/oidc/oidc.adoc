@@ -114,11 +114,13 @@ https://cloud.example.com/index.php/apps/openidconnect/config
 
 . Webserver Rewrite Rule
 +
-To make the endpoint available under the static service discovery path, it is recommended to put a `RewriteRule` in place using `.htaccess` (the Apache modules `proxy` and `proxy_http` have to be enabled):
+To make the endpoint available under the static service discovery path, it is recommended to put a `RewriteRule` in place using in the `VirtualHost` section, the Apache modules `proxy` and `proxy_http` and `proxy_connect` (if SSL is used) have to be enabled:
 +
 [source,apache]
 ----
-RewriteRule ^\.well-known/openid-configuration /index.php/apps/openidconnect/config [R=301,L]
+RewriteEngine on
+RewriteRule "^/\.well-known/openid-configuration" "/index.php/apps/openidconnect/config" [P]
+SSLProxyEngine On #This can be omitted if no SSL is used
 ----
 +
 TIP: Depending on the respective infrastructure setup there can be other ways to solve this. In any case, please make sure _not to use redirect rules_ as this will violate the OpenID Connect specification.
