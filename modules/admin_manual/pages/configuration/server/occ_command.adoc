@@ -69,14 +69,14 @@ toc::[]
 
 Note that this step is not necessary when using a docker installation.
 
-Check if the `occ` command is set to executable, change to your ownCloud directory first:
+To check if the `occ` command is set to executable, change to your ownCloud directory first, then enter the command:
 
 [source,bash]
 ----
 ls -lhF occ
 ----
 
-This should give a similar output like:
+This should give an output similar to this:
 
 [source,plaintext]
 ----
