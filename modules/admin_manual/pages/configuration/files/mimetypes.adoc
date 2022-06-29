@@ -19,7 +19,7 @@ ownCloud’s default mimetype configuration is defined in
 owncloud/resources/config/mimetypealiases.dist.json
 ----
 
-which you can see a snippet of below. The mimetype’s on the left, and the icon used to represent that mimetype is on the right.
+Below you can see a snippet of the file where the mimetype’s on the left and the icon used to represent that mimetype is on the right.
 
 [source,json]
 ----
@@ -33,10 +33,10 @@ which you can see a snippet of below. The mimetype’s on the left, and the icon
 }
 ----
 
-Stepping through that file, you can see that:
+You can see that:
 
-* the image icon is used to represent Corel Draw, SFNT and WOFF font files, and Adobe Illustrator files.
-* ePub files are represented by the text file icon.
+* the image icon is used to represent Corel Draw, SFNT and WOFF font files, and Adobe Illustrator files,
+* ePub files are represented by the text file icon,
 * JavaScript files are represented by the text/code icon.
 
 === Changing Existing Icons and Using Custom Icons
@@ -62,7 +62,7 @@ This is required for two reasons:
 1.  It will take precedence over the default file.
 2.  The original file will get replaced on each ownCloud upgrade.
 
-Then, either override one or more existing definitions or add new, custom aliases as required.
+Then, either override one or more existing definitions or add new custom aliases as required.
 
 NOTE: Please refer to the xref:developer_manual:core/theming.adoc[ownCloud theming documentation] for where to put the new image files.
 
@@ -116,7 +116,7 @@ use the xref:configuration/server/occ_command.adoc[occ command] to propagate the
 
 image:configuration/mimetypes/json-alias-before.png[The default icon for JSON files]
 
-Let’s step through an example, from start to finish, of changing the icon that ownCloud uses to represent JSON files, which you can see above.
+Let’s go through an example of to change the icon that ownCloud uses to represent JSON files, which you can see above.
 
 1. From the root directory of your ownCloud installation, copy
 +
