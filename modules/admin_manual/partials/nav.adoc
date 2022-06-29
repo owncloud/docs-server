@@ -61,6 +61,7 @@
 **** xref:admin_manual:configuration/files/file_versioning.adoc[File Versioning]
 **** xref:admin_manual:configuration/files/files_locking_transactional.adoc[Transactional File Locking]
 **** xref:admin_manual:configuration/files/previews_configuration.adoc[Preview Configuration]
+**** xref:admin_manual:configuration/files/mimetypes.adoc[Mimetypes]
 **** xref:admin_manual:configuration/files/trashbin_options.adoc[Managing the Trashbin]
 
 *** xref:admin_manual:configuration/integration/index.adoc[Integration]
@@ -69,12 +70,8 @@
 
 *** xref:admin_manual:configuration/general_topics/index.adoc[General Topics]
 **** xref:admin_manual:configuration/general_topics/code_signing.adoc[Code Signing]
-**** xref:admin_manual:configuration/general_topics/general_troubleshooting.adoc[General Troubleshooting]
 **** xref:admin_manual:configuration/general_topics/impersonate_users.adoc[Impersonate Users]
-
-*** xref:admin_manual:configuration/search/index.adoc[Full Text Search]
-
-*** xref:admin_manual:configuration/mimetypes/index.adoc[Mimetypes]
+**** xref:admin_manual:configuration/general_topics/search.adoc[Full Text Search]
 
 *** xref:admin_manual:configuration/server/index.adoc[Server]
 **** xref:admin_manual:configuration/server/activity_configuration.adoc[Activity Configuration]
@@ -197,6 +194,7 @@
 **** xref:admin_manual:enterprise/user_management/saml_2.0_sso.adoc[SAML 2.0 Based SSO]
 
 ** xref:admin_manual:troubleshooting/index.adoc[Troubleshooting]
+*** xref:admin_manual:troubleshooting/general_troubleshooting.adoc[General Troubleshooting]
 *** xref:admin_manual:troubleshooting/path_filename_length.adoc[Path and Filename Length Limitations]
 *** xref:admin_manual:troubleshooting/providing_logs_and_config_files.adoc[Retrieve Log Files and Configuration Settings]
 *** xref:admin_manual:troubleshooting/remove_non_existent_bg_jobs.adoc[Remove Non-Existent Background Jobs]
