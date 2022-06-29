@@ -5,17 +5,29 @@
 :clamav-url: http://www.clamav.net/index.html
 :icap-url: https://tools.ietf.org/html/rfc3507
 :c-icap-url: https://sourceforge.net/p/c-icap/wiki/configcicap/
-:kasperski-scanengine-url: https://support.kaspersky.com/ScanEngine/1.0/en-US/199729.htm
+:kasperski-scanengine-url: https://support.kaspersky.com/ScanEngine/1.0/en-US/179682.htm
+:kaspersky-icap-url: https://support.kaspersky.com/ScanEngine/1.0/en-US/179708.htm
+:mcaffee-demo-url: https://www.skyhighsecurity.com/en-us/products/secure-web-gateway.html
+:fortinetsandbox-url: https://www.fortinet.com/de/products/sandbox/fortisandbox
+
+:description: When sharing files, security is a key aspect. The ownCloud Anti-Virus extension helps by protecting against malicious software like trojans or viruses. 
 
 == Introduction
 
-When sharing files, security is a key aspect. The ownCloud {oc-marketplace-url}/apps/files_antivirus[Anti-Virus] extension helps by protecting against malicious software like trojans or viruses. It forwards files that are being uploaded to the ownCloud server to a  malware scanning engine before they are written to the storage. When a file is recognized as malicious, it can be logged and prevented from being uploaded to the server to ensure that files in ownCloud are free of malware. More sophisticated rules may be specified as admin in the ownCloud Webinterface menu:Admin[Settings > Security].
+{description}
+
+You can get the {oc-marketplace-url}/apps/files_antivirus[Anti-Virus] extension from the marketplace. It helps by protecting against malicious software like trojans or viruses. It forwards files that are being uploaded to the ownCloud server to a  malware scanning engine before they are written to the storage. When a file is recognized as malicious, it can be logged and prevented from being uploaded to the server to ensure that files in ownCloud are free of malware. More sophisticated rules may be specified as admin in the ownCloud Webinterface menu:Admin[Settings > Security].
+
+
+== General Info
 
 Out of the box, the ownCloud Anti-Virus extension works with {clamav-url}[Clam AntiVirus (ClamAV)] as the directly supported virus scanner. It detects all forms of malware including trojans, viruses and worms and scans compressed files, executables, image files, PDF, as well as many other file types. The ownCloud Anti-Virus application relies on the underlying ClamAV virus scanning engine, to which the admin points ownCloud when configuring the application. The ClamAV virus definitions need to be kept up to date in order to provide effective protection.
 
 Starting with Anti-Virus version 1.0.0, the app also offers an ICAP integration for Enterprise installations. Admins can integrate their favorite enterprise-grade antivirus scanners through the open standard {icap-url}[Internet Content Adaptation Protocol (ICAP)]. With this set up, ownCloud can delegate the scanning of uploaded files to another machine, the ICAP server. The ICAP server then checks them and either greenlights them or, if malicious code is found, treats the offending file(s) as specified in the settings and notifies the ownCloud server. ownCloud can then act accordingly and based on the settings made reject the upload. Offloading the anti-virus scans to another dedicated server can greatly improve performance compared to running the ClamAV virus scanner on the same machine as ownCloud.
 
-== ClamAV
+Starting with Anti-Virus version 1.1.0, additional scanners like the FortiSandbox and McAfee Web Gateway have been added as selectable ICAP scanners.
+
+== ClamAV In Native Mode
 
 === ClamAV Feature List
 
@@ -351,27 +363,85 @@ Here are some points to bear in mind about rules:
 .The default rule set for ClamAV is populated automatically with the following rules:
 [cols="20%,45%,15%",options="header",]
 |===
-| Exit Status or Signature | Description | Marks File As
-| 0 | | Clean
-| 1 | | Infected
-| 40 | Unknown option passed | Unchecked
-| 50 | Database initialization error | Unchecked
-| 52 | Not supported file type | Unchecked
-| 53 | Can't open directory | Unchecked
-| 54 | Can't open file | Unchecked
-| 55 | Error reading file | Unchecked
-| 56 | Can't stat input file | Unchecked
-| 57 | Can't get absolute path name of current working directory
+| Exit Status or Signature
+| Description
+| Marks File As
+
+| 0
+|
+| Clean
+
+| 1
+|
+| Infected
+
+| 40
+| Unknown option passed
 | Unchecked
-| 58 | I/O error | Unchecked
-| 62 | Can't initialize logger | Unchecked
-| 63 | Can't create temporary files/directories | Unchecked
-| 64 | Can't write to temporary directory | Unchecked
-| 70 | Can't allocate memory (calloc) | Unchecked
-| 71 | Can't allocate memory (malloc) | Unchecked
-| /.*: OK$/ | | Clean
-| /.\*: (.*) FOUND$/ | | Infected
-| /.\*: (.*) ERROR$/ | | Unchecked
+
+| 50
+| Database initialization error
+| Unchecked
+
+| 52
+| Not supported file type
+| Unchecked
+
+| 53
+| Can't open directory
+| Unchecked
+
+| 54
+| Can't open file
+| Unchecked
+
+| 55
+| Error reading file
+| Unchecked
+
+| 56
+| Can't stat input file
+| Unchecked
+
+| 57
+| Can't get absolute path name of current working directory
+| Unchecked
+
+| 58
+| I/O error
+| Unchecked
+
+| 62
+| Can't initialize logger
+| Unchecked
+
+| 63
+| Can't create temporary files/directories
+| Unchecked
+
+| 64
+| Can't write to temporary directory
+| Unchecked
+
+| 70
+| Can't allocate memory (calloc)
+| Unchecked
+
+| 71
+| Can't allocate memory (malloc)
+| Unchecked
+
+| /.*: OK$/
+|
+| Clean
+
+| /.\*: (.*) FOUND$/
+|
+| Infected
+
+| /.\*: (.*) ERROR$/
+|
+| Unchecked
 |===
 
 The rules are always checked in the following order:
@@ -386,25 +456,32 @@ In case there are no matching rules, the status would be `Unknown` and a warning
 
 . You can change the rules to either match an exit status or the scanner's output.
 ** To match on an exit status, change the
-* "**Match by**" dropdown list to "**Scanner exit status**" and
+* btn:[Match by] dropdown list to btn:[Scanner exit status] and
 * in the "**Scanner exit status or signature to search**" field, add the status code to match on.
 ** To match on the scanner's output, change the
-* "**Match by**" dropdown list to "**Scanner output**" and
-* in the "**Scanner exit status or signature to search**" field, add the regular expression to match against the scanner's output.
+* btn:[Match by] dropdown list to btn:[Scanner output] and
+* in the btn:[Scanner exit status or signature to search] field, add the regular expression to match against the scanner's output.
 
-. Then, while not mandatory, add a description of what the status or scan output means. After that, set what ownCloud should do when the exit status or regular expression you set matches the value returned by ClamAV. To do so, change the value of the dropdown in the "**Mark as**" column.
+. Then, while not mandatory, add a description of what the status or scan output means. After that, set what ownCloud should do when the exit status or regular expression you set matches the value returned by ClamAV. To do so, change the value of the dropdown in the btn:[Mark as] column.
 +
 [caption=]
 .The dropdown supports the following three options:
 [width="50%",cols="20%,60%",options="header",]
 |===
-| Option    | Description
-| Clean     | The file is clean and contains no viruses
-| Infected  | The file contains a virus
-| Unchecked | No action should be taken
+| Option
+| Description
+
+| Clean
+| The file is clean and contains no viruses
+
+| Infected
+| The file contains a virus
+
+| Unchecked
+| No action should be taken
 |===
 
-With all these changes made, click the btn:[check mark] on the left-hand side of the "**Match by**" column, to confirm the change to the rule.
+With all these changes made, click the [pass:[&#10003;]] on the left-hand side of the btn:[Match by] column, to confirm the change to the rule.
 
 ===== Add A New Rule
 
@@ -417,7 +494,9 @@ To delete an existing rule, click the btn:[rubbish bin] icon on the far right-ha
 
 == ICAP
 
-{icap-url}[ICAP] is an open standard supported by many antivirus products. With the release of the _Anti-Virus_ app 1.0.0, other virus scanners beside ClamAV can be used via ICAP if you are running it on an ownCloud Enterprise Edition. Currently the only tested and supported virus scanners, besides ClamAV, are _Kaspersky ScanEngine_ and _McAfee Antivirus_ although far more products might simply work. The use of ICAP requires an enterprise license. The functionality can be tested without a license with a grace period of 24 hours.
+{icap-url}[ICAP] is an open standard supported by many antivirus products. With the release of the _Anti-Virus_ app 1.0.0, other virus scanners beside ClamAV can be used via ICAP if you are running it on an ownCloud Enterprise Edition.
+
+Currently the only tested and supported virus scanners, besides ClamAV, are _Kaspersky ScanEngine_, _McAfee Web Gateway_ and _FortiSandbox_ although far more products might simply work. The use of ICAP requires an enterprise license. The functionality can be tested without a license with a grace period of 24 hours.
 
 === Installation
 
@@ -516,13 +595,13 @@ Possible values are `delete` and `only_log`.
 +
 Depending on your ICAP server, select one of the following example configurations.
 
-=== Run with c-icap/ClamAV
+=== Run ClamAV in ICAP Mode
 
 `c-icap` can be configured to use ClamAV. For more information see: {c-icap-url}[c-icap on sourceforge] (for selecting ClamAV see their section: Selecting virus scan engine to use).
 
 . Install ClamAV based on the instructions at the beginning of this document and `c-icap` as referenced above.
 
-. To use ClamAV, set the mode to `c-icap with ClamAV` either from the Web interface or via command line:
+. Select btn:[c-icap with ClamAV] from the dropdown in the Anti Virus app or use the command line:
 +
 [source,bash,subs="attributes+"]
 ----
@@ -538,13 +617,11 @@ Depending on your ICAP server, select one of the following example configuration
     av_response_header --value="X-Infection-Found"
 ----
 
-### Run with Kaspersky Anti-Virus (KAV)
+=== Run with Kaspersky Anti-Virus in ICAP Mode
 
-. Install Kaspersky ScanEngine based on their {kasperski-scanengine-url}[instructions] and prepare KAV for running in ICAP mode.
+. Install the Kaspersky ScanEngine (KAV) based on their {kasperski-scanengine-url}[instructions] and prepare KAV for running in ICAP mode.
 
-. Follow this procedure to configure ownCloud for the Kaspersky ScanEngine.
-
-. To use KAV, set the mode to `req` either from the Web interface or via command line:
+. Select btn:[req] from the dropdown in the Anti Virus app or use the command line or via command line:
 +
 [source,bash,subs="attributes+"]
 ----
@@ -560,20 +637,56 @@ Depending on your ICAP server, select one of the following example configuration
     av_response_header --value="X-Virus-ID"
 ----
 +
-NOTE: Older versions of KAV did not send back the virus/infection name in an ICAP header. Starting with version 2.0.0 of KAV, you can configure the header to transport the virus. By default no header is sent.
+NOTE: The older versions of Kaspersky’s KAV did not send back the virus/infection name in an ICAP header. Starting with KAV v2.0.0, the header to transport the virus can be configured. Default: No header is sent. For more configuration details see {kaspersky-icap-url}[Using Kaspersky Scan Engine in ICAP mode].
 
-=== Run with McAfee
+// note that the original document regarding "VirusNameICAPHeader" https://support.kaspersky.com/ScanEngine/1.0/en-US/201214.htm is not available anymore (404, no cache entry) and no appropriate replacement has been found. the link above is the best possible alternative.
 
-Note, McAfee version 7.8.2 and up provide ICAP support. Follow this procedure to configure ownCloud for the McAfee virus scanner.
+=== Run with McAfee Web Gateway in ICAP Mode
 
-. Install McAfee based on their instructions.
+Follow this procedure to configure ownCloud for the McAfee Web Gateway 10.x and higher in ICAP Mode.
 
-. To use McAfee, set the mode to `wwreqmod` either from the Web interface or via command line:
+. Install McAfee Web Gateway based on their instructions.
+
+. Select btn:[McAfee Web Gateway 10.x and higher] from the dropdown in the Anti Virus app.
+
+. To use McAfee Web Gateway, set the mode to `respmod` either from the Web interface or via command line:
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_antivirus \
-    av_request_service --value="wwreqmod"
+    av_request_service --value="respmod"
 ----
+
+. Set the response header to `X-Virus-Name`
 +
-NOTE: McAfee does not offer predefined response headers.
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set files_antivirus \
+    av_response_header --value="X-Virus-Name"
+----
+
+NOTE: McAfee provides demoversions with limited runtime for evaluation purposes. Have a look at the {mcaffee-demo-url}[McAfee Webpage] for the Web Gateway.
+
+=== Run with FortiSandbox in ICAP Mode
+
+. Install FortiSandbox based on their instructions.
+
+. Select btn:[Fortinet] from the dropdown in the Anti Virus app.
+
+. To use FortiSandbox, set the mode to `respmod` either from the Web interface or via command line:
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set files_antivirus \
+    av_request_service --value="respmod"
+----
+
+. Set the response header to `X-Virus-Name`
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set files_antivirus \
+    av_response_header --value="X-Virus-Name"
+----
+
+NOTE: Fortinet privides some demoversions of the FortiSandbox, please have a look at their {fortinetsandbox-url}[productpage] for more information.
