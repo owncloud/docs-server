@@ -1,9 +1,15 @@
 = Full Text Search 
 :toc: right
+:page_aliases: configuration/search/index.adoc
 :elastic-search-url: https://www.elastic.co/elasticsearch/
 :search_elastic-app-url: {oc-marketplace-url}/apps/search_elastic 
 :simple-query-string-query-url: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html
+
+:description: This page describes how to setup a full text search functionality using a Search Elastic Server. 
+
 == Introduction
+
+{description}
 
 The {search_elastic-app-url}[Full Text Search app] integrates full text search into ownCloud, powered by Elasticsearch. This allows users to search not only for file names but also within files stored in ownCloud.
 
@@ -11,10 +17,13 @@ The {search_elastic-app-url}[Full Text Search app] integrates full text search i
 
 A fully functioning {elastic-search-url}[Elasticsearch server] with the ingest-attachment processor must be present.
 
-NOTE: Version 1.0.0 of the Full Text Search app only works with Elasticsearch version 5.6. With version 2.0.0 of the app, Elasticsearch version 7 is supported and required.
+[NOTE]
+====
+* Version 1.0.0 of the Full Text Search app only works with Elasticsearch version 5.6.
+* With version 2.0.0 of the app, Elasticsearch version 7 is supported and required.
+====
 
-The ingest-attachment processor lets Elasticsearch extract file attachments in common formats. 
-To install the processor, run the following command from your Elasticsearch installation directory:
+The ingest-attachment processor lets Elasticsearch extract file attachments in common formats. To install the processor, run the following command from your Elasticsearch installation directory:
 
 [source=bash]
 ----
@@ -46,4 +55,4 @@ Currently, the app has the following known limitations:
 * If a shared file is renamed by the sharee (share receiver), the sharee cannot find the file using the new filename.
 * Search results are not updated when a text file is rolled back to an earlier version.
 * The app does not return results for federated share files.
-* The app only works with the default encryption module "_Master Key_".
+* The app only works with the default encryption module `Master Key`.
