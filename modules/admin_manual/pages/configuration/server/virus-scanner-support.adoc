@@ -16,7 +16,7 @@
 
 {description}
 
-You can get the {oc-marketplace-url}/apps/files_antivirus[Anti-Virus] extension from the marketplace. It helps by protecting against malicious software like trojans or viruses. It forwards files that are being uploaded to the ownCloud server to a  malware scanning engine before they are written to the storage. When a file is recognized as malicious, it can be logged and prevented from being uploaded to the server to ensure that files in ownCloud are free of malware. More sophisticated rules may be specified as admin in the ownCloud Webinterface menu:Admin[Settings > Security].
+You can get the {oc-marketplace-url}/apps/files_antivirus[Anti-Virus] extension from the marketplace. It forwards files that are being uploaded to the ownCloud server to a  malware scanning engine before they are written to the storage. When a file is recognized as malicious, it can be logged and prevented from being uploaded to the server to ensure that files in ownCloud are free of malware. More sophisticated rules may be specified as admin in the ownCloud Web interface menu:Admin[Settings > Security].
 
 
 == General Info
@@ -621,7 +621,7 @@ Depending on your ICAP server, select one of the following example configuration
 
 . Install the Kaspersky ScanEngine (KAV) based on their {kasperski-scanengine-url}[instructions] and prepare KAV for running in ICAP mode.
 
-. Select btn:[req] from the dropdown in the Anti Virus app or use the command line or via command line:
+. Select btn:[req] from the dropdown in the Anti Virus app or use the command line:
 +
 [source,bash,subs="attributes+"]
 ----
@@ -665,13 +665,13 @@ Follow this procedure to configure ownCloud for the McAfee Web Gateway 10.x and 
     av_response_header --value="X-Virus-Name"
 ----
 
-NOTE: McAfee provides demoversions with limited runtime for evaluation purposes. Have a look at the {mcaffee-demo-url}[McAfee Webpage] for the Web Gateway.
+NOTE: McAfee provides demo versions with limited runtime for evaluation purposes. Have a look at the {mcaffee-demo-url}[McAfee Web page] for the Web Gateway.
 
 === Run with FortiSandbox in ICAP Mode
 
 . Install FortiSandbox based on their instructions.
 
-. Select btn:[Fortinet] from the dropdown in the Anti Virus app.
+. Select btn:[Fortinet] from the dropdown in the Anti-Virus app.
 
 . To use FortiSandbox, set the mode to `respmod` either from the Web interface or via command line:
 +
@@ -689,4 +689,4 @@ NOTE: McAfee provides demoversions with limited runtime for evaluation purposes.
     av_response_header --value="X-Virus-Name"
 ----
 
-NOTE: Fortinet privides some demoversions of the FortiSandbox, please have a look at their {fortinetsandbox-url}[productpage] for more information.
+NOTE: Fortinet provides some demo versions of the FortiSandbox. Have a look at their {fortinetsandbox-url}[product page] for more information.
