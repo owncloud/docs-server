@@ -1,13 +1,17 @@
 = General Troubleshooting
 :toc: right
 :page-aliases: issues/general_troubleshooting.adoc, \
+configuration/general_topics/general_troubleshooting.adoc, \
 go/admin-setup-well-known-URL.adoc, \
 go/admin-logfiles.adoc
 
+:description: This page gives an overview about general troubleshooting topics and can help to sort out paths  addressing your topics. 
+
 == Introduction
 
-If you have trouble installing, configuring or maintaining ownCloud,
-please refer to our community support channel:
+{description}
+
+If you have trouble installing, configuring or maintaining ownCloud, please refer to our community support channel:
 
 * The {oc-central-url}[ownCloud Forum]
 
