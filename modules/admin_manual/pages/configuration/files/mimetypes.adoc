@@ -8,7 +8,7 @@
 
 {description}
 
-This is handy in a variety of situations, such as when you might want a custom audio icon for audio mimetypes, instead of the default file icon.
+This is handy in a variety of situations, e.g. if you want a custom audio icon for audio mimetypes instead of the default file icon.
 
 == Mimetype Aliases
 
