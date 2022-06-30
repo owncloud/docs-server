@@ -9,7 +9,7 @@
 
 NOTE: *The jQuery version shipped inside ownCloud is secure.*
 
-Note that automatic scanners may still report false positive, even the CVE's have been addressed as the scanners just look on the jQuery version shipped.
+Note that automatic scanners may still report false positives even if the CVE's have been addressed as the scanners just look on the jQuery version shipped.
  
 == Fixed Issues
 
