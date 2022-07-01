@@ -1,0 +1,7 @@
+= Generate a Config Report
+:toc: right
+:description: Generating a config report when using an Enterprise version does not differ from the Community Edition.
+
+== Introduction
+
+{description} For more details see the documentation how to xref:troubleshooting/providing_logs_and_config_files.adoc#generate-a-config-report[Generate a Config Report].
