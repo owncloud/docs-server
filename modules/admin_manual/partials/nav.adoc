@@ -185,6 +185,7 @@
 **** xref:admin_manual:enterprise/logging/admin_audit.adoc[Auditing]
 *** xref:admin_manual:enterprise/reporting/index.adoc[Reporting]
 **** xref:admin_manual:enterprise/reporting/metrics.adoc[Metrics]
+**** xref:admin_manual:enterprise/reporting/config_report.adoc[Generate a Config Report]
 *** xref:admin_manual:enterprise/security/index.adoc[Security]
 **** xref:admin_manual:enterprise/security/ransomware-protection/index.adoc[Ransomware Protection]
 *** xref:admin_manual:enterprise/server_branding/index.adoc[Server Branding]
