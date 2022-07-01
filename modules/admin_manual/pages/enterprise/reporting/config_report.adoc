@@ -1,6 +1,6 @@
 = Generate a Config Report
 :toc: right
-:description: Generating a config report when using an Enterprise version does not differ compared when using the Community Edition. Therefore you can reuse that description.
+:description: Generating a config report when using an Enterprise version does not differ from the Community Edition.
 
 == Introduction
 
