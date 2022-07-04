@@ -18,7 +18,6 @@ If you're expecting big file uploads, some considerations have to be taken into 
 
 * Make sure that a version of PHP xref:installation/system_requirements.adoc[supported by ownCloud] is installed.
 * Consider that user quotas may prevent big file uploads due to a user reaching the space limitation.
-* PHP *Output Buffering* must be turned off in either the `.htaccess` or `.user.ini` or `php.ini`, or `VirtualHosts` to prevent PHP memory-related errors.
 * The directory used for `upload_tmp_dir` must be fully accessible by PHP / the webserver user, usually `www-data`.
 * Your temp directory or partition has to be big enough to hold multiple parallel uploads from multiple users. The formula for this is `temp_space = concurrent_uploads * chunk size` +
 For example, if the chunk size is *10MB* (which is the default but might vary between different clients) and the average number of users uploading at the same time is *25*, then you’ll need 250MB of temp space, as the formula below shows.
