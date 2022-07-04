@@ -30,10 +30,10 @@ _Password_::
   The admin sets the new user’s first password. Both the user and the
   admin can change the user’s password at anytime.
 _E-Mail_::
-  The admin sets the new user’s E-Mail. The user then gets an E-Mail to set his Password.
+  The admin sets the new user’s E-Mail. The user then gets an E-Mail to set the password.
   Both the user and the admin can change the user’s E-Mail at anytime.
 _Groups_::
-  You may create system (non-LDAP) groups, and assign system group memberships to users. By
+  You may create system (non-LDAP) groups and assign system group memberships to users. By
   default new users are not assigned to any groups.
 _Group Admin_::
   Group admins are granted administrative privileges on system groups,
