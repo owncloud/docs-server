@@ -399,7 +399,7 @@ For more information see: {linux-server-doc-url}[Linux Server Docs]
 
 === Terminating containers
 
-If your container is terminating for whatever reason you will not be able to run `docker(-compose) exec` to make investigations inside the container as there will be no running container. Instead you need to use `docker(-compose) run`. It's important that you prefix any command to be run by `/usr/bin/owncloud` otherwise the container will not be initialized correctly. So the whole command will look like
+If your container is terminating for whatever reason, you will not be able to run `docker(-compose) exec` to make investigations inside the container as there will be no running container. Instead you need to use `docker(-compose) run`. It's important that you prefix any command to be run by `/usr/bin/owncloud`, otherwise the container will not be initialized correctly. See the example command below:
 
 [source,bash]
 ----
