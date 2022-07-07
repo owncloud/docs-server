@@ -20,12 +20,23 @@ If you're expecting big file uploads, some considerations have to be taken into 
 * Consider that user quotas may prevent big file uploads due to a user reaching the space limitation.
 * PHP *Output Buffering* must be turned off in either the `.htaccess` or `.user.ini` or `php.ini`, or `VirtualHosts` to prevent PHP memory-related errors.
 * The directory used for `upload_tmp_dir` must be fully accessible by PHP / the webserver user, usually `www-data`.
-* Your temp file or partition has to be big enough to hold multiple parallel uploads from multiple users. The formula for this is `temp_space = concurrent_uploads * chunk size` +
+* Your temp directory or partition has to be big enough to hold multiple parallel uploads from multiple users. The formula for this is `temp_space = concurrent_uploads * chunk size` +
 For example, if the chunk size is *10MB* (which is the default but might vary between different clients) and the average number of users uploading at the same time is *25*, then you’ll need 250MB of temp space, as the formula below shows.
 +
 ----
-10 MB x 25 users = 250MB required temp space
+10MB x 25 users = 250MB required temp space
 ----
+* The user's upload directy (usually in `<owncloud directory>/data/<username>/uploads`) also has to be big enough, here the formula is a bit different as this directory collects all chunks of a file until the upload is completed. So during the upload this 
+directory needs to store the complete filesize of the file the user wants to upload. E.g. if a user wants to upload a 4GB file, 4GB of space needs to be temporarily available in the upload directory. This is the peak level of space consumption before 
+all chunks collected in the upload directory are written to the final destination. Please keep in mind that this space consumption is needed additionally if the final destination is on the same mount point as the upload directory itself. In this case 
+the mount point needs to offer space for 2 * file upload size in total at peak. This is due to fact that the upload directory will contain the total file size in chunks and during the rewrite of the chunks to the final destination the space consumption 
+will be doubled as the file will be written to the files directory in the same mountpoint (usually in `<owncloud directory>/data/<username>/files`).
+So in a nutshell: The upload directory's temp space formula for all users is `temp_space = concurrent_uploads * average_upload_size_per_user`
+[NOTE]
+====
+The space temorarily consumed in the upload directory will not count against the user quota. So if a user has no quota left in his peronal storage but uploads a file to a windows network drive share he will still be able to upload to the windows share even
+though the file will be temporarily created in the upload directory of the personal storage.
+====
 * In Centos and RHEL, Apache has a few more default configurations within systemd.
 +
 [NOTE]
