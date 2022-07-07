@@ -20,13 +20,12 @@ If you're expecting big file uploads, some considerations have to be taken into 
 * Consider that user quotas may prevent big file uploads due to a user reaching the space limitation.
 * PHP *Output Buffering* must be turned off in either the `.htaccess` or `.user.ini` or `php.ini`, or `VirtualHosts` to prevent PHP memory-related errors.
 * The directory used for `upload_tmp_dir` must be fully accessible by PHP / the webserver user, usually `www-data`.
-* Your temp file or partition has to be big enough to hold multiple parallel uploads from multiple users. The formula for this is `temp_space = 2 * concurrent_uploads * average_upload_size` +
-For example, if the average upload file size is *4GB* and the average number of users uploading at the same time is *25*, then you’ll need 200GB of temp space, as the formula below shows.
+* Your temp file or partition has to be big enough to hold multiple parallel uploads from multiple users. The formula for this is `temp_space = concurrent_uploads * chunk size` +
+For example, if the chunk size is *10MB* (which is the default but might vary between different clients) and the average number of users uploading at the same time is *25*, then you’ll need 250MB of temp space, as the formula below shows.
 +
 ----
-2 x 4 GB x 25 users = 200 GB required temp space
+10 MB x 25 users = 250MB required temp space
 ----
-A factor two is required because large files will be split up and the pieces put together in new files before they are moved into the user's folder.
 * In Centos and RHEL, Apache has a few more default configurations within systemd.
 +
 [NOTE]
