@@ -26,16 +26,10 @@ For example, if the chunk size is *10MB* (which is the default but might vary be
 ----
 10MB x 25 users = 250MB required temp space
 ----
-* The user's upload directy (usually in `<owncloud directory>/data/<username>/uploads`) also has to be big enough, here the formula is a bit different as this directory collects all chunks of a file until the upload is completed. So during the upload this 
-directory needs to store the complete filesize of the file the user wants to upload. E.g. if a user wants to upload a 4GB file, 4GB of space needs to be temporarily available in the upload directory. This is the peak level of space consumption before 
-all chunks collected in the upload directory are written to the final destination. Please keep in mind that this space consumption is needed additionally if the final destination is on the same mount point as the upload directory itself. In this case 
-the mount point needs to offer space for 2 * file upload size in total at peak. This is due to fact that the upload directory will contain the total file size in chunks and during the rewrite of the chunks to the final destination the space consumption 
-will be doubled as the file will be written to the files directory in the same mountpoint (usually in `<owncloud directory>/data/<username>/files`).
-So in a nutshell: The upload directory's temp space formula for all users is `temp_space = concurrent_uploads * average_upload_size_per_user`
+* The user's upload directy, usually in `<owncloud directory>/data/<username>/uploads` also has to be big enough. The formula is a bit different, as this directory collects all chunks of a file for that upload for that user until the upload is completed. The space needed for this directory is temporarily the same size as for the final file size. As an example, if a user wants to upload a 4GB file, temporarily 4GB of space needs to be available in the upload directory to hold the chunks. When the upload has finished, all chunks are written to the final destination and the chunks are deleted afterwards freeing that temp space. In a nutshell: The upload directory's temp space formula for all users is `temp_space = concurrent_uploads * average_upload_size_per_user`
 [NOTE]
 ====
-The space temorarily consumed in the upload directory will not count against the user quota. So if a user has no quota left in his peronal storage but uploads a file to a windows network drive share he will still be able to upload to the windows share even
-though the file will be temporarily created in the upload directory of the personal storage.
+The space temporarily consumed in the upload directory will not count against the user quota. If a user has no quota left in his peronal storage and the quota excludes external mounts, uploads to a windows network drive share as example will succeed. The file temporarily created in the upload directory will not count against his personal storage.
 ====
 * In Centos and RHEL, Apache has a few more default configurations within systemd.
 +
