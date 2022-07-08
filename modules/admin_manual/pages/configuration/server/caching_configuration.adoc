@@ -242,11 +242,11 @@ The following example `config.php` configuration connects to a Redis cache via T
 
 If Redis is running on the same server as ownCloud, it is recommended to configure it to use Unix sockets for increased performance. Follow these steps to do so:
 
-. Make the `redis` user a member of the `www-data` group:
+. Add the `www-data` user to the `redis` group:
 +
 [source,bash]
 ----
-sudo usermod -g www-data redis
+sudo usermod -G redis -a www-data
 ----
 
 . Create your Redis folder that the Unix socket will be in:
