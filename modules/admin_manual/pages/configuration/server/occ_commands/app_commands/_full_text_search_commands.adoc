@@ -17,7 +17,7 @@ search
   search:index:update    Update the search index by running all pending background jobs.
 ----
 
-In addition to the settings provided by the Full Text Search app, you can set/read additional options via the `occ config:app` commands. These are xref:set-app-modes[Set App Modes], xref:index-metadata-only[Index Metadata Only] and xref:limit-metadata-search-for-groups[Limit Metadata Search for Groups]
+In addition to the settings provided by the Full Text Search app, you can set/read additional options via the `occ config:app` commands. These are xref:set-app-modes[Set App Modes], xref:index-metadata-only[Index Metadata Only] and xref:limit-metadata-search-for-groups[Limit Metadata Search for Groups].
 
 == Create the Full Text Search Index
 
@@ -33,7 +33,7 @@ The command `search:index:create` creates the initial full text search index for
 [width="100%",cols="20%,100%"]
 |===
 | `<user_id>` 
-| The id of the user (or space-separated list of user ids) to create a full text search index for.
+| The ID of the user (or space-separated list of user IDs) to create a full text search index for.
 A full text search index is created for all users, if this value is omitted.
 |===
 
@@ -70,8 +70,8 @@ Indexing user testuser
 
 == Rebuild the Full Text Search Index
 
-Rebuild the search index for a given User. +
-If you want to rebuild the whole index, run `search:index:reset` and then `search:index:create --all`
+Rebuild the search index for a given user. +
+If you want to rebuild the whole index, run `search:index:reset` and then `search:index:create --all`.
 
 [source,bash,subs="attributes+"]
 ----
@@ -83,7 +83,7 @@ If you want to rebuild the whole index, run `search:index:reset` and then `searc
 [width="100%",cols="20%,100%"]
 |===
 | `<user_id>` 
-| Provide a userId. This argument is required.
+| Provide a user ID. This argument is required.
 |===
 
 === Options
@@ -98,7 +98,7 @@ If you want to rebuild the whole index, run `search:index:reset` and then `searc
 
 === Example 1
 
-This example rebuilds the full text search index for the user with user id `testuser`.
+This example rebuilds the full text search index for the user with user ID `testuser`.
 
 .Rebuild the index for a single user
 [source,bash,subs="attributes+"]
@@ -116,7 +116,7 @@ Rebuilding full text search Index for testuser
 
 === Example 2
 
-This example rebuilds the full text search index for the users with user ids `admin` and `testuser`.
+This example rebuilds the full text search index for the users with user IDs `admin` and `testuser`.
 
 .Rebuild the index for multiple users
 [source,bash,subs="attributes+"]
@@ -228,7 +228,7 @@ Search results can be restricted in different ways, see the xref:configuration/g
     search_elastic nocontent --value true
 ----
 
-Switching back to provide all content can be done by running the following command:
+Switching back to provide all content search results can be done by running the following command:
 
 [source,bash,subs="attributes+"]
 ----
