@@ -9,7 +9,7 @@
 :ingest-url: https://www.elastic.co/guide/en/elasticsearch/plugins/current/ingest-attachment.html
 :create-api-key-url: https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html#security-api-create-api-key
 
-:description: ownCloud offers the ability to use full text search via the Full Text Search app connecting to an Elasticsearch  Server. This allows users to search not only for file names but also for content within files stored in ownCloud.
+:description: ownCloud offers the ability to use full text search via the Full Text Search app connecting to an Elasticsearch Server. This allows users to search not only for file names but also for content within files stored in ownCloud.
 
 == Introduction
 
@@ -65,7 +65,7 @@ Independent of the authentication method selected below, you need to provide the
 
 For the URL, both `HTTP` and `HTTPS` incuding the address and port can be used. 
 
-The app provides several authentication methods, select one of your choice, see the details for an authentication method below:
+The app provides several authentication methods. Select the one of your choice and check out the details for the respective authentication method below:
 
 image:apps/search_elastic/search_elastic_auth_items.png[Auth Items,width=450]
 
@@ -77,35 +77,35 @@ image:apps/search_elastic/search_elastic_no_auth.png[No Auth,width=350]
 
 ==== User / Password Authentication
 
-When using `User / Password Authentication`, enter the credentials the ES server was setup. Note that the password will be stored encrypted in the ownCloud database.
+When using `User / Password Authentication`, enter the credentials set up on the ES server. Note that the password will be stored encrypted in the ownCloud database.
 
 image:apps/search_elastic/search_elastic_u_p_auth.png[User / Password Auth,width=350]
 
 ==== API Key Authentication
 
-When using `API Key Authentication`, enter the API Key the ES server was setup.
+When using `API Key Authentication`, enter the API Key with which the ES server was set up.
 
 image:apps/search_elastic/search_elastic_api_key_auth.png[API Key Auth,width=350]
 
-IMPORTANT: The API Key used needs to be the _encoded_, *not* the _api_key_ string. For details see the {create-api-key-url}[Create API key API] at the ES documentation.
+IMPORTANT: The API Key needs to be the _encoded_ one, *not* the _api_key_ string. For details see the {create-api-key-url}[Create API key API] at the ES documentation.
 
 === Search External Storage
 
-Define if external storage should be included in ES indexing by setting the checkmark accordingly with btn:[Scan external Storages]
+Define if external storage should be included in ES indexing by setting the checkmark accordingly with btn:[Scan external Storages].
 
 === Save the Configuration
 
 Save the configuration with the btn:[Save configuration] button.
 
-=== Setup the ES Index
+=== Set up the ES Index
 
-When everything is setup, you can click the button btn:[Setup index] which will tell the ES server to create the plain empty index and other related internal settings.
+When everything is set up, you can click the button btn:[Setup index] which will tell the ES server to create the plain empty index and other related internal settings.
 
-NOTE: This step is important, because the red dot will turn green showing that everything has been setup correctly.
+NOTE: This step is important, because the red dot will turn green showing that everything has been set up correctly.
 
 === Resetting the ES Index
 
-You can at any time reset the index if required by clicking on btn:[Reset index] or with an occ command, the index will be recreated afterwards.
+You can at any time reset the index if required by clicking on btn:[Reset index] or with an occ command. The index will be recreated afterwards.
 
 [source,bash,subs="attributes+"]
 ----
@@ -116,7 +116,7 @@ You can at any time reset the index if required by clicking on btn:[Reset index]
 
 You can use the:
 
-* xref:configuration/server/occ_command.adoc#full-text-search[occ Full Text Search command set] to manage the app. These commands let administrators _create_, _rebuild_, _reset_, and _update_ the search index like with the following command which resets and recreates the index for all users:
+* xref:configuration/server/occ_command.adoc#full-text-search[occ Full Text Search command set] to manage the app. These commands let administrators _create_, _rebuild_, _reset_, and _update_ the search index. For example, the following command resets and recreates the index for all users:
 +
 [source,bash,subs="attributes+"]
 ----
@@ -173,18 +173,18 @@ The Full Text Search app provides two modes, which are *active* and *passive*.
 
 === Active Mode
 
-After enabling the app, it will be default in _active mode_::
+After enabling the app, it will be by default in _active mode_::
 +
 * File changes will be indexed in background jobs. +
 System cron is recommended, otherwise a lot of jobs might queue up.
 * Search results will be based on Elasticsearch.
 * Search functionality based on ownCloud core database queries will no longer be used.
 +
-NOTE: Active mode can cause a downtime for search when start indexing in an already heavily used instance, because it takes a while until all files have been indexed.
+NOTE: Active mode can cause a downtime for search when indexing starts on an already heavily used instance, because it takes a while until all files have been indexed.
 
 === Passive Mode
 
-To do an initial full indexing without the app interfering it, it can be put in _passive_ mode::
+To do an initial full indexing without the app interfering, it can be put in _passive_ mode::
 +
 * The administrator can run occ commands changing the search configuration without notice to the users.
 * The app will not index any changes by itself.
@@ -221,7 +221,7 @@ If you only want to use the Full Text Search app as a more scalable search on fi
 [NOTE]
 ====
 * You have to reindex all files if you change this back to `false`. Setting it to `true` does not require reindexing.
-* It may be a maybe a more flexible way to go with limiting full text search to certain groups by setting the option `group.nocontent`, see xref:limit-metadata-search-for-groups[below] for details.
+* It may be a more flexible way to go with limiting full text search to certain groups by setting the option `group.nocontent`, see xref:limit-metadata-search-for-groups[below] for details.
 ====
 
 === Limit Metadata Search for Groups 
@@ -248,7 +248,7 @@ This allows a scalable search in shared files without clouding the results with 
 
 == Create the Index
 
-When everything has been setup and configured, you can initiate creating the index. This must be done with an occ command. Depending on using _active_ or _passive_ mode, you either have to:
+When everything has been set up and configured, you can initiate creating the index. This must be done with an occ command. Depending on using _active_ or _passive_ mode, you either have to:
 
 * *active mode*: wait until the job has finished and search is available to users, or
 * *passive mode*: users continue to search with ownCloud embedded search and you switch over to active mode when the occ command has finished indexing.
@@ -260,7 +260,7 @@ When everything has been setup and configured, you can initiate creating the ind
 
 == Issues
 
-When the Elasticsearch server is down or the index has not been setup, you may get following info. Check if the ES server is reachable or if the index was setup properly as one solution to fix the issue.
+When the Elasticsearch server is down or the index has not been set up, you may get the following info. Check if the ES server is reachable or if the index was set up properly as one solution to fix the issue.
 
 image:apps/search_elastic/warning_could_not_setup_indexes_connection_failure.png[Warning no Index,width=350]
 
