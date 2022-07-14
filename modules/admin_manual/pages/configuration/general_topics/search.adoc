@@ -57,7 +57,7 @@ or enable it via the GUI menu:Settings[Admin > Apps > Full Text Search > Enable]
 
 == Configuration
 
-To configure the Full Text Search, go to menu:Settings[Admin > Search]
+To configure the Full Text Search, go to menu:Settings[Admin > Search].
 
 === Authentication Methods
 
