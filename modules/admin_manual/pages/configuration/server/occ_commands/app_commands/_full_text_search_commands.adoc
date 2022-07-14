@@ -11,28 +11,38 @@ search
                          This command could not update the search index correctly 
                          after the initial indexing.
   search:index:rebuild   Rebuild the search index for a given User. 
-                         If you want to rebuild the whole index, run "search:index:reset" 
-                         and then "search:index:build --all"
+                         If you want to rebuild the whole index, run
+                         `search:index:reset` and then `search:index:create --all`
   search:index:reset     Reset the index
   search:index:update    Update the search index by running all pending background jobs.
 ----
 
+In addition to the settings provided by the Full Text Search app, you can set/read additional options via the `occ config:app` commands. These are xref:set-app-modes[Set App Modes], xref:index-metadata-only[Index Metadata Only] and xref:limit-metadata-search-for-groups[Limit Metadata Search for Groups]
+
 == Create the Full Text Search Index
 
-The command `search:index:create` creates the initial full text search index for one, or all, users. 
+The command `search:index:create` creates the initial full text search index for one or all users. 
 
-[source="console",subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:create <user_id> (<user_id>)...
 ----
 
 === Arguments
 
-[width="100%",cols="20%,70%"]
+[width="100%",cols="20%,100%"]
 |===
 | `<user_id>` 
-| The id of the user (or space-separated list of user ids) to create a full text search index for. 
+| The id of the user (or space-separated list of user ids) to create a full text search index for.
 A full text search index is created for all users, if this value is omitted.
+|===
+
+=== Options
+
+[width="100%",cols="20%,100%"]
+|===
+| `--all` 
+| Will create index for all files of all known users.
 |===
 
 === Example 1
@@ -60,21 +70,28 @@ Indexing user testuser
 
 == Rebuild the Full Text Search Index
 
-The command `search:index:rebuild` rebuilds the full text search index for one, multiple, or all users. 
+Rebuild the search index for a given User. +
+If you want to rebuild the whole index, run `search:index:reset` and then `search:index:create --all`
 
-[source="console",subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:rebuild <user_id> (<user_id>)...
 ----
 
 === Arguments
 
-[width="100%",cols="20%,90%"]
+[width="100%",cols="20%,100%"]
 |===
 | `<user_id>` 
-| The id of the user (or space-separated list of user ids) to rebuild a full text search index for.
-| `--all` 
-| Rebuild the index for _all_ users.
+| Provide a userId. This argument is required.
+|===
+
+=== Options
+
+[width="100%",cols="20%,100%"]
+|===
+| `-q` `--quiet` 
+| Do not output any message.
 | `-f` `--force` 
 | Use this option to reset the index without further questions.
 |===
@@ -84,7 +101,7 @@ The command `search:index:rebuild` rebuilds the full text search index for one, 
 This example rebuilds the full text search index for the user with user id `testuser`.
 
 .Rebuild the index for a single user
-[source="console",subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:rebuild testuser
 
@@ -102,7 +119,7 @@ Rebuilding full text search Index for testuser
 This example rebuilds the full text search index for the users with user ids `admin` and `testuser`.
 
 .Rebuild the index for multiple users
-[source="console",subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:rebuild admin testuser
 
@@ -121,21 +138,21 @@ The entire index can be rebuilt by running the following two commands:
 [source="console",subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:reset
-{occ-command-example-prefix} search:index:build --all
+{occ-command-example-prefix} search:index:create --all
 ----
 
 == Reset the Full Text Search Index
 
 The command `search:index:reset` resets (recreates and clears) the full text search index for all users.
 
-[source="console",subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:reset
 ----
 
 === Arguments
 
-[width="100%",cols="20%,90%"]
+[width="100%",cols="20%,100%"]
 |===
 | `-f` `--force` 
 | Use this option to reset the index without further questions.
@@ -155,16 +172,16 @@ Search index has been reset.
 
 == Update the Full Text Search Index
 
-The command `search:index:update` updates the full text search index by running all pending background jobs.
+Updates to the search index due to changed content or changed metadata are happening via background jobs that are added to a queue. These background jobs are normally run by the ownCloud cronjob. The command `search:index:update` updates the full text search index by running all pending background jobs.
 
-[source="console",subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} search:index:update
 ----
 
 === Arguments
 
-[width="100%",cols="20%,90%"]
+[width="100%",cols="20%,100%"]
 |===
 | `-q` `--quiet` 
 | Suppress all output from the command.
@@ -181,38 +198,49 @@ Start Updating the Elastic search index:
 No pending jobs found.
 ----
 
-== Enable and Disable App Mode
+== Set App Modes
 
-To do an initial full indexing without the full text search_elastic app interfering, it can be put in
-passive mode.
+To do an initial full indexing without the Full Text Search app interfering, it can be put in passive mode. See the xref:configuration/general_topics/search.html#app-modes[App Modes] section in the Full Text Search description for details.
 
-[source="console",subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set search_elastic mode --value passive
+{occ-command-example-prefix} config:app:set \
+    search_elastic mode --value passive
 ----
-
-When the search_elastic app is in passive mode:
-
-* The administrator will be able to run occ commands.
-* The search_elastic app will not index any changes by itself.
-* Search results will still be based on the core search. 
 
 Switching back to active mode can be done by running the following command:
 
-[source="console",subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set search_elastic mode --value active
-----
-
-== Configure Full Text Search to Only Index Metadata
-
-If you only want to use the search_elastic app as a more scalable filenames search, you can disable content
-indexing by setting `nocontent` to `true` (default is `false`), as in the example below.
-
-[source="console",subs="attributes+"]
-----
-{occ-command-example-prefix} config:app:set search_elastic nocontent --value true
+{occ-command-example-prefix} config:app:set \
+    search_elastic mode --value active
 ----
 
-NOTE: if this setting is reverted to false after being set to true, all files must be reindexed. 
-Setting it to `true` does _not_ require reindexing.
+== Restrict Search Results
+
+Search results can be restricted in different ways, see the xref:configuration/general_topics/search.adoc#restrict-search-results[Restrict Search Results] section in the Full Text Search description for details.
+
+=== Index Metadata Only
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic nocontent --value true
+----
+
+Switching back to provide all content can be done by running the following command:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic nocontent --value false
+----
+
+=== Limit Metadata Search for Groups 
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic group.nocontent \
+    --value group1,group2,"group with blank"
+----

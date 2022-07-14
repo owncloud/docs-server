@@ -1,53 +1,274 @@
 = Full Text Search 
 :toc: right
+:toclevels: 4
 :page_aliases: configuration/search/index.adoc
 :elastic-search-url: https://www.elastic.co/elasticsearch/
+:elastic-search-install-url: https://www.elastic.co/guide/en/elastic-stack/7.17/index.html
 :search_elastic-app-url: {oc-marketplace-url}/apps/search_elastic 
 :simple-query-string-query-url: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html
+:ingest-url: https://www.elastic.co/guide/en/elasticsearch/plugins/current/ingest-attachment.html
+:create-api-key-url: https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html#security-api-create-api-key
 
-:description: This page describes how to setup a full text search functionality using a Search Elastic Server. 
+:description: ownCloud offers the ability to use full text search via the Full Text Search app and a Search Elastic Server. This allows users to search not only for file names but also for content within files stored in ownCloud.
 
 == Introduction
 
 {description}
 
-The {search_elastic-app-url}[Full Text Search app] integrates full text search into ownCloud, powered by Elasticsearch. This allows users to search not only for file names but also within files stored in ownCloud.
+The {search_elastic-app-url}[Full Text Search] app integrates full text search into ownCloud, powered by Elasticsearch. This document describes the how to setup the ownCloud part of the Full Text Search app.
 
 == Prerequisites
 
-A fully functioning {elastic-search-url}[Elasticsearch server] with the ingest-attachment processor must be present.
-
+. A fully functioning {elastic-search-url}[Elasticsearch Server 7], follow the {elastic-search-install-url}[Installation and Upgrade Guide] for your environment.
++
 [NOTE]
 ====
 * Version 1.0.0 of the Full Text Search app only works with Elasticsearch version 5.6.
-* With version 2.0.0 of the app, Elasticsearch version 7 is supported and required.
+* With version +2.0.0 of the app, Elasticsearch version 7 is supported and required.
 ====
 
-The ingest-attachment processor lets Elasticsearch extract file attachments in common formats. To install the processor, run the following command from your Elasticsearch installation directory:
-
-[source=bash]
+. The {ingest-url}[Ingest Attachment Processor Plugin] lets Elasticsearch extract metadata and text from over a thousand different file types such as PPT, XLS, PDF and more. To install the processor, run the following command from your Elasticsearch installation directory:
++
+[source,bash]
 ----
-bin/elasticsearch-plugin install ingest-attachment
-service elasticsearch restart
+sudo bin/elasticsearch-plugin install ingest-attachment
+----
++
+Post installing the Plugin, you need to restart the Elasticsearch server:
++
+[source,bash]
+----
+sudo service elasticsearch restart
 ----
 
-== Install and Configure the Full Text Search App
+== Installation
 
 To install the app, use the Marketplace app on your ownCloud server or proceed manually:
 
-. Download and extract the tarball of {search_elastic-app-url}[the Full Text Search app] to the apps directory (or xref:installation/apps_management_installation.adoc#using-custom-app-directories[custom apps directory]) of your ownCloud instance.
-. Use the xref:configuration/server/occ_command.adoc#apps-commands[occ app:enable] to enable the `search_elastic` application.
+. Download and extract the tarball of the {search_elastic-app-url}[Full Text Search app] to the apps directory (or xref:installation/apps_management_installation.adoc#using-custom-app-directories[custom apps directory, prefered]) of your ownCloud instance.
+. Use the xref:configuration/server/occ_command.adoc#apps-commands[App Commands] to enable the `search_elastic` application with:
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} app:enable search_elastic
+----
++
+or enable it via the GUI menu:Settings[Admin > Apps > Full Text Search > Enable].
 
-To configure the Full Text Search, go to menu:admin[Settings > Search] and set the hostname (or IP address) and port of the Elasticsearch server and click btn:["Setup index"].
+== Configuration
 
-.Configuring Elasticsearch in ownCloud
-image:apps/search_elastic/configuration_successful.png[Configuring Elasticsearch in ownCloud]
+To configure the Full Text Search, go to menu:Settings[Admin > Search]
 
-TIP: The index can also be managed from the command line, via the xref:configuration/server/occ_commands/core_commands/full_text_search_commands.adoc[occ search:index commands].
+=== Authentication Methods
 
-These commands let administrators _create_, _rebuild_, _reset_, and _update_ the search index.
+Independent of the authentication method selected below, you need to provide the URL of the Elasticsearch server. For any of the authentication methods selected, your Elasticsearch server must be prepared upfront.
 
-To find out more about usage, check out the section in the User Manual: xref:{latest-webui-version}@webui:classic_ui:files/webgui/search.adoc[Search & Full Text Search].
+For the URL, both `HTTP` and `HTTPS` incuding the address and port can be used. 
+
+The app provides several authentication methods, select one of your choice, see the details for an authentication method below:
+
+image:apps/search_elastic/search_elastic_auth_items.png[Auth Items,width=450]
+
+==== No Authentication
+
+When using `No Authentication`, just fill in the URL of the ES server.
+
+image:apps/search_elastic/search_elastic_no_auth.png[No Auth,width=350]
+
+==== User / Password Authentication
+
+When using `User / Password Authentication`, enter the credentials the ES server was setup. Note that the password will be stored encrypted in the ownCloud database.
+
+image:apps/search_elastic/search_elastic_u_p_auth.png[User / Password Auth,width=350]
+
+==== API Key Authentication
+
+When using `API Key Authentication`, enter the API Key the ES server was setup.
+
+image:apps/search_elastic/search_elastic_api_key_auth.png[API Key Auth,width=350]
+
+IMPORTANT: The API Key used needs to be the _encoded_, *not* the _api_key_ string. For details see the {create-api-key-url}[Create API key API] at the ES documentation.
+
+=== Search External Storage
+
+Define if external storage should be included in ES indexing by setting the checkmark accordingly with btn:[Scan external Storages]
+
+=== Save the Configuration
+
+Save the configuration with the btn:[Save configuration] button.
+
+=== Setup the ES Index
+
+When everything is setup, you can click the button btn:[Setup index] which will tell the ES server to create the plain empty index and other related internal settings.
+
+NOTE: This step is important, because the red dot will turn green showing that everything has been setup correctly.
+
+=== Resetting the ES Index
+
+You can at any time reset the index if required by clicking on btn:[Reset index] or with an occ command, the index will be recreated afterwards.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} search:index:reset
+----
+
+== Using occ Commands
+
+You can use the:
+
+* xref:configuration/server/occ_command.adoc#full-text-search[occ Full Text Search command set] to manage the app. These commands let administrators _create_, _rebuild_, _reset_, and _update_ the search index like with the following command which resets and recreates the index for all users:
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} search:index:reset
+----
+
+* xref:configuration/server/occ_command.adoc#onfig-commands[occ Config Commands command set] to configure the app.
++
+Examples:
++
+List app settings::
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:list search_elastic
+----
++
+[source,plaintext]
+----
+{
+    "apps": {
+        "search_elastic": {
+            "enabled": "yes",
+            "group": "content_searchers",
+            "installed_version": "2.1.0",
+            "nocontent": "false",
+            "scanExternalStorages": "1",
+            "servers": "elastic:xxxxxxx@172.17.0.3:9200",
+            "types": "filesystem"
+        }
+    }
+}
+----
+
+Set app options::
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic scanExternalStorages --value 0
+----
++
+or
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic scanExternalStorages --value 1
+----
+
+== App Modes
+
+The Full Text Search app provides two modes, which are *active* and *passive*.
+
+=== Active Mode
+
+After enabling the app, it will be default in _active mode_::
++
+* File changes will be indexed in background jobs. +
+System cron is recommended, otherwise a lot of jobs might queue up.
+* Search results will be based on Elasticsearch.
+* Search functionality based on ownCloud core database queries will no longer be used.
++
+NOTE: Active mode can cause a downtime for search when start indexing in an already heavily used instance, because it takes a while until all files have been indexed.
+
+=== Passive Mode
+
+To do an initial full indexing without the app interfering it, it can be put in _passive_ mode::
++
+* The administrator can run occ commands changing the search configuration without notice to the users.
+* The app will not index any changes by itself.
+* Search results will still be based on ownCloud core database queries.
+
+=== Changing the App Mode
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic mode --value passive
+----
+
+or
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic mode --value active
+----
+
+== Restrict Search Results
+
+=== Index Metadata Only
+
+If you only want to use the Full Text Search app as a more scalable search on filenames, you can disable content indexing by setting the option `nocontent` to `true`, which defaults to `false`:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic nocontent --value true
+----
+
+[NOTE]
+====
+* You have to reindex all files if you change this back to `false`. Setting it to `true` does not require reindexing.
+* It may be a maybe a more flexible way to go with limiting full text search to certain groups by setting the option `group.nocontent`, see xref:limit-metadata-search-for-groups[below] for details.
+====
+
+=== Limit Metadata Search for Groups 
+
+If you only want to use search for shared filenames, you can disable full text search for specific groups by setting the option `group.nocontent` to the groups whose users should _only_ receive results based on filenames (not the full path), like users in the group `nofulltext` as in the example below:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic group.nocontent \
+    --value nofulltext
+----
+
+You can also configure multiple groups by separating them with comma:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    search_elastic group.nocontent \
+    --value nofulltext,anothergroup,"group with blanks"
+----
+
+This allows a scalable search in shared files without clouding the results with content based hits.
+
+== Create the Index
+
+When everything has been setup and configured, you can initiate creating the index. This must be done with an occ command. Depending on using _active_ or _passive_ mode, you either have to:
+
+* *active mode*: wait until the job has finished and search is available to users, or
+* *passive mode*: users continue to search with ownCloud embedded search and you switch over to active mode when the occ command has finished indexing.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} search:index:create
+----
+
+== Issues
+
+When the Elasticsearch server is down or the index has not been setup, you may get following info. Check if the ES server is reachable or if the index was setup properly as one solution to fix the issue.
+
+image:apps/search_elastic/warning_could_not_setup_indexes_connection_failure.png[Warning no Index,width=350]
+
+image:apps/search_elastic/warning_could_not_setup_indexes_unknown_key.png[Warning unknown Key,width=350]
+
+== User Manual
+
+To find out more about the usage, check out the section in the User Manual: xref:{latest-webui-version}@webui:classic_ui:files/webgui/search.adoc[Search & Full Text Search].
 
 == Known Limitations
 
@@ -55,5 +276,5 @@ Currently, the app has the following known limitations:
 
 * If a shared file is renamed by the sharee (share receiver), the sharee cannot find the file using the new filename.
 * Search results are not updated when a text file is rolled back to an earlier version.
-* The app does not return results for federated share files.
-* The app only works with the default encryption module `Master Key`.
+* The app does not return results for recieved federated share files.
+* When using encryption, the app only works with the default `Master Key` encryption module.
