@@ -9,7 +9,7 @@
 :ingest-url: https://www.elastic.co/guide/en/elasticsearch/plugins/current/ingest-attachment.html
 :create-api-key-url: https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html#security-api-create-api-key
 
-:description: ownCloud offers the ability to use full text search via the Full Text Search app connecting to a Search Elastic Server. This allows users to search not only for file names but also for content within files stored in ownCloud.
+:description: ownCloud offers the ability to use full text search via the Full Text Search app connecting to an Elasticsearch  Server. This allows users to search not only for file names but also for content within files stored in ownCloud.
 
 == Introduction
 
