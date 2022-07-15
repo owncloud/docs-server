@@ -15,16 +15,16 @@
 
 {description}
 
-The {search_elastic-app-url}[Full Text Search] app integrates full text search into ownCloud, powered by Elasticsearch. This document describes the how to setup the ownCloud part of the Full Text Search app.
+The {search_elastic-app-url}[Full Text Search] app integrates full text search into ownCloud, powered by Elasticsearch. This document describes how to setup the ownCloud part of the Full Text Search app.
 
 == Prerequisites
 
-. A fully functioning {elastic-search-url}[Elasticsearch Server 7], follow the {elastic-search-install-url}[Installation and Upgrade Guide] for your environment.
+. A fully functioning {elastic-search-url}[Elasticsearch Server 7]. Follow the {elastic-search-install-url}[Installation and Upgrade Guide] for your environment.
 +
 [NOTE]
 ====
 * Version 1.0.0 of the Full Text Search app only works with Elasticsearch version 5.6.
-* With version +2.0.0 of the app, Elasticsearch version 7 is supported and required.
+* With version >=2.0.0 of the app, Elasticsearch version 7 is supported and required.
 ====
 
 . The {ingest-url}[Ingest Attachment Processor Plugin] lets Elasticsearch extract metadata and text from over a thousand different file types such as PPT, XLS, PDF and more. To install the processor, run the following command from your Elasticsearch installation directory:
@@ -260,7 +260,7 @@ When everything has been set up and configured, you can initiate creating the in
 
 == Issues
 
-When the Elasticsearch server is down or the index has not been set up, you may get the following info. Check if the ES server is reachable or if the index was set up properly as one solution to fix the issue.
+When the Elasticsearch server is down or the index has not been set up, you may get the following message. Check if the ES server is reachable or if the index was set up properly as one solution to fix the issue.
 
 image:apps/search_elastic/warning_could_not_setup_indexes_connection_failure.png[Warning no Index,width=350]
 
