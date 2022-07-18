@@ -40,6 +40,8 @@ image:configuration/user/oidc/ms-azure-ad/new-registration-ms-azure-ad.png[width
 image:configuration/user/oidc/ms-azure-ad/provide-required-information-ms-azure-ad.png[width=400]
 
 . Go to menu:Authentication[Add a platform] and select Web in Web application.
++
+image:configuration/user/oidc/ms-azure-ad/setup-web-application-ms-azure-ad.png[width=600]
 
 . Go to menu:Authentication[Configure Web > Redirect URI] and setup your Redirect URI.
 +
