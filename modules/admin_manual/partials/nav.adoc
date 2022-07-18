@@ -104,7 +104,7 @@
 **** xref:admin_manual:configuration/server/virus-scanner-support.adoc[Virus Scanner Support]
 **** xref:admin_manual:configuration/server/ui-configuration.adoc[UI Configuration]
 
-*** xref:admin_manual:configuration/user/index.adoc[User]
+*** User
 **** xref:admin_manual:configuration/user/user_management.adoc[User Management]
 **** xref:admin_manual:configuration/user/user_roles.adoc[User Roles]
 **** xref:admin_manual:configuration/user/reset_admin_password.adoc[Reset Admin Password]
