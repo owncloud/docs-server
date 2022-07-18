@@ -39,11 +39,11 @@ image:configuration/user/oidc/ms-azure-ad/new-registration-ms-azure-ad.png[width
 +
 image:configuration/user/oidc/ms-azure-ad/provide-required-information-ms-azure-ad.png[width=400]
 
-. Go to menu:Authentication[Add a platform] and select Web in Web application.
+. Go to menu:Authentication[Add a platform] and select btn:[Web] in Configure Platforms.
 +
 image:configuration/user/oidc/ms-azure-ad/setup-web-application-ms-azure-ad.png[width=600]
 
-. Go to menu:Authentication[Configure Web > Redirect URI] and setup your Redirect URI.
+. Go to menu:Authentication[Configure Web > Redirect URI] and setup your btn:[Redirect URI].
 +
 image:configuration/user/oidc/ms-azure-ad/setup-redirect-url-ms-azure-ad.png[width=600]
 
@@ -63,11 +63,13 @@ image:configuration/user/oidc/ms-azure-ad/graph-permission-ms-azure-ad.png[width
 +
 image:configuration/user/oidc/ms-azure-ad/admin-consent-ms-azure-ad.png[width=600]
 
-. Go to menu:Expose an API[Set the App ID URI] and set the *Application ID URI*.
+. Go to menu:Expose an API[Set the App ID URI] and set the btn:[Application ID URI].
 +
 image:configuration/user/oidc/ms-azure-ad/app-id-uri-ms-azure-ad.png[width=600]
 
-. Then on the same page menu:Add a scope[Scope name] give the scope a meaningful name like *owncloud* and menu:Add a scope[Who can consent] allow *Admins and users* to consent. You will see the full api  [#api-scope]#`scope name`# below your entered scope name.
+. Then on the same page:
+.. menu:Add a scope[Scope name] give the scope a meaningful name like *owncloud* and
+.. menu:Add a scope[Who can consent] allow *Admins and users* to consent. You will see the full api  [#api-scope]#`scope name`# below your entered scope name.
 +
 image:configuration/user/oidc/ms-azure-ad/scope-consent-ms-azure-ad.png[width=600]
 
