@@ -39,7 +39,7 @@ services:
       - files:/mnt/data
 
   mariadb:
-    image: mariadb:10.5
+    image: mariadb:10.6 # minimum required ownCloud version is 10.9
     container_name: owncloud_mariadb
     restart: always
     environment:
