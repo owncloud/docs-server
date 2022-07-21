@@ -282,6 +282,8 @@ You need to add the following rule set to your main web server or
 virtual host configuration, or the `.htaccess` file in your document
 root.
 
+NOTE: Please keep in mind that the `.htaccess` file in the ownCloud directory will be overwritten on update. Post upgrading ownCloud, you need to manually restore these changes. See the section xref:maintenance/upgrading/manual_upgrade.adoc#backup-manual-changes-in-htaccess[Backup Manual Changes in .htaccess] for details.
+
 [source,apache]
 ----
 # Fixes Windows WebDav client error 0x80070043 "The network name cannot be found."
