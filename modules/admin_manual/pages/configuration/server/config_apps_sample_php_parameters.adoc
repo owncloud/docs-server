@@ -326,6 +326,10 @@ If auto-provision is not setup or required, it is expected that the user exists 
 MUST declare this with `['enabled' => false]` like shown in the Easy Setup example.
 `auto-provision` holds several sub keys, see the example setup with the explanations below.
 
+auto-update::
+When using the provisioning mode `auto-update`, user account info will update with the current
+information provided by the OpenID Connect provider upon each user log in.
+
 insecure::
 Boolean value (`true`/`false`), no SSL verification will take place when talking to the
 IdP - **DO NOT use in production!**
@@ -372,19 +376,6 @@ Client ID to be used with the token introspection endpoint.
 token-introspection-endpoint-client-secret::
 Client secret to be used with the token introspection endpoint.
 
-use-access-token-payload-for-user-info::
-If set to `true` any user information will be read from the access token.
-If set to `false` the userinfo endpoint is used (starting app version 1.1.0).
-
-use-token-introspection-endpoint::
-If set to `true`, the token introspection endpoint is used to verify a given access
-token - only needed if the access token is not a JWT. If set to `false`, the userinfo
-endpoint is used (requires version >= 1.1.0)
-Tokens which are not JSON WebToken (JWT) may not have information like the
-expiry. In these cases, the OpenID Connect Provider needs to call on the token
-introspection endpoint to get this information. The default value is `false`. See
-https://datatracker.ietf.org/doc/html/rfc7662 for more information on token introspection.
-
 === Easy setup
 
 ==== Code Sample
@@ -422,13 +413,23 @@ https://datatracker.ietf.org/doc/html/rfc7662 for more information on token intr
 		'picture-claim' => 'picture',
 		  // defines a list of groups to which the newly created user will be added automatically
 		'groups' => ['admin', 'guests', 'employees'],
-		  // sets a claim which is defined at the IDP. the IDP will return a single value or an array like:
+		  // sets a claim which is defined at the IDP.
+		  // the IDP will return a single value or an array like:
 		  // "allowed_applications": ["erp", "owncloud"],
 		'provisioning-claim' => 'allowed_applications',
-		  // defines the matching case for the provisioning. the attribute can only be a single value
-		  // in case no match is found against the IDP response, no provisioning will be made,
-		  // "User not found" will be returned
-		'provisioning-attribute' => 'owncloud'
+		  // defines the matching case for the provisioning. the attribute can only be a
+		  // single value in case no match is found against the IDP response,
+		  // no provisioning will be made, "User not found" will be returned
+		'provisioning-attribute' => 'owncloud',
+		  // auto-update user account info with current information provided by the
+		  // OpenID Connect provider account attributes, that will be updated,
+		  // can be specified in `attributes` config option
+		'auto-provision' => [
+			'update' => [
+				  // enable the user info auto-update mode
+				'enabled' => true,
+			],
+		],
 	],
 	  // `mode` and `search-attribute` will be used to create a unique user in ownCloud
 	'mode' => 'email',
@@ -462,8 +463,7 @@ https://datatracker.ietf.org/doc/html/rfc7662 for more information on token intr
 		'token_endpoint_auth_methods_supported' => '...',
 		'userinfo_endpoint' => '...'
 	],
-	'provider-url' => '...',
-	'use-token-introspection-endpoint' => true
+	'provider-url' => '...'
 ],
 ....
 
@@ -482,7 +482,6 @@ https://datatracker.ietf.org/doc/html/rfc7662 for more information on token intr
 	'loginButtonName' => 'node-oidc-provider',
 	'mode' => 'userid',
 	'search-attribute' => 'sub',
-	'use-token-introspection-endpoint' => true,
 	  // do not verify tls host or peer
 	'insecure' => true
 ],
