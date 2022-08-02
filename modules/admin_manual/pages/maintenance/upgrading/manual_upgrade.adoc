@@ -1,6 +1,6 @@
 = Manual ownCloud Upgrade
 :toc: right
-:toclevels: 1
+:toclevels: 2
 :description: This document describes how to manually upgrade your ownCloud installation. Because installations can vary, this guide can only give an overview of methods and examples.
 :page-aliases: maintenance/manual_upgrade.adoc
 
@@ -75,7 +75,7 @@ Go to menu:Settings[Admin > Apps] and disable all third-party apps.
 
 === Backup Manual Changes in `.htaccess`
 
-If you have made changes in `.htaccess` located at the webroot of ownCloud, you must backup these changes. Only backup the changes made but not the complete file as this file will be recreated on upgrades and may contain different settings provided by ownCloud. Manual changes in `.htaccess` can be necessary when you e.g. xref:configuration/integration/ms-teams.adoc[Integrate ownCloud into Microsoft Teams].
+If you have made changes in `.htaccess` located at the webroot of ownCloud, you must backup these changes. Only backup the changes made but not the complete file as this file will be recreated on upgrades and may contain different settings provided by ownCloud. Manual changes in `.htaccess` can be necessary when you e.g. xref:configuration/integration/ms-teams.adoc[Integrate ownCloud into Microsoft Teams] or fixing WebDav connection errors as xref:troubleshooting/general_troubleshooting.adoc#error-0x80070043-the-network-name-cannot-be-found-while-adding-a-network-drive[The network name cannot be found] on Windows.
 
 === Backup Manual Changes in `.user.ini`
 

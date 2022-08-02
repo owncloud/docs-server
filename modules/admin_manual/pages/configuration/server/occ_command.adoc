@@ -298,8 +298,6 @@ include::./occ_commands/core_commands/_file_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_files_external_commands.adoc[leveloffset=+2]
 
-include::./occ_commands/core_commands/_full_text_search_commands.adoc[leveloffset=+2]
-
 include::./occ_commands/core_commands/_group_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_integrity_check_commands.adoc[leveloffset=+2]
@@ -353,6 +351,8 @@ include::./occ_commands/app_commands/_custom_groups.adoc[leveloffset=+2]
 include::./occ_commands/app_commands/_data_explorer_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/app_commands/_files_lifecycle.adoc[leveloffset=+2]
+
+include::./occ_commands/app_commands/_full_text_search_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/app_commands/_ldap_integration_commands.adoc[leveloffset=+2]
 
