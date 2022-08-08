@@ -192,10 +192,7 @@ To inspect the volumes run:
 docker volume ls
 ----
 
-The volume name depends on the project name which builds the first part of the volume and the name of the volume in the docker file. 
-It can be configured using the variable `COMPOSE_PROJECT_NAME` which can also be defined in a `.env` file. 
-If not specified, the directory in which docker-compose is executed will be used as a name.
-The naming pattern of the volume is `<COMPOSE_PROJECT_NAME>_<VOLUME_NAME>`.
+The volume name depends on the project name which builds the first part of the volume and the name of the volume in the docker file. The naming pattern of the volume is `<COMPOSE_PROJECT_NAME>_<VOLUME_NAME>`. An environment variable for `COMPOSE_PROJECT_NAME` can be set and also be defined in a `.env` file. If not specified, the directory in which docker-compose is executed will be used as a name.
 
 To export the files of the project "owncloud-docker-server" as a tar archive run:
 [source,docker]
