@@ -6,7 +6,7 @@
 
 == Introduction
 
-The {oc-marketplace-url}/apps/admin_audit[Auditing] app is an Enterprise only app and available on the marketplace. It traces user and admin actions. In particular the events:
+The {oc-marketplace-url}/apps/admin_audit[Auditing] app is an Enterprise only app and available on the marketplace. It traces user and admin actions. In particular the events: 
 
 * Login and logout events of users
 * File system operations (create / delete / move; including actions on the trash bin and versioning)
@@ -31,7 +31,7 @@ image:enterprise/logging/admin_auditing.png[Auditing]
 
 == Configuration
 
-It is advised to redirect messages into a separate file. To do so, add these lines to `config.php` and adjust the target path accordingly. Note that the target path must be writeable for the web server user:
+It is advised to redirect messages into a separate file. To do so, add these lines to `config.php` and adjust the target path accordingly. Otherwise please make sure to adjust the server log level to 1 (or 0), otherwise the Auditing app won't log anything. Configuring a seperate file circumvents the global log level. Note that the target path must be writeable for the web server user:
 
 [source,php]
 ----
