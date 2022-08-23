@@ -2,7 +2,7 @@
 :toc: right
 :page-aliases: configuration/server/logging/providing_logs_and_config_files.adoc
 
-:description: Generating configreports and prepare log files are essential to support identifying the cause of a problem. Here are instructions for how to collect them.
+:description: Generating configreports and preparing log files are essential to support identifying the cause of a problem. Here are instructions for how to collect them.
 
 == Introduction
 
@@ -12,7 +12,7 @@ When you report a problem to {oc-support-url}[ownCloud Support] or our {oc-centr
 
 == Generate a Config Report
 
-You can use the webUI or the command line to generate a config report. The webUI includes the web server environment, while the command line generated one doesn't as it can't access it. Therefore, if possible, always generate it through the webUI. The configreport app is always part of bundled apps, but it may needs to be enabled before it can be used.
+You can use the webUI or the command line to generate a config report. The webUI includes the web server environment, while the command line generated one doesn't as it can't access it. Therefore, if possible, always generate it through the webUI. The configreport app is always part of bundled apps, but it may need to be enabled before it can be used.
 
 Check if it is disabled:
 [source,bash,subs="attributes+"]
@@ -65,7 +65,7 @@ When not using the default location for the logfile, it can be specified via:
 
 == LDAP Config
 
-Assuming that LDAP is used, viewing the LDAP configuration is important when checking for errors between your ownCloud instance and your LDAP server. To get the output file, execute this command:
+If LDAP is used, viewing the LDAP configuration is important when checking for errors between your ownCloud instance and your LDAP server. To get the output file, execute this command:
 
 [source,bash,subs="attributes+"]
 ----
