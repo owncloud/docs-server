@@ -2,32 +2,28 @@
 :toc: right
 :page-aliases: configuration/server/logging/providing_logs_and_config_files.adoc
 
+:description: Generating configreports and prepare log files are essential to support identifying the cause of a problem. Here are instructions for how to collect them.
+
 == Introduction
 
-When you report a problem to {oc-support-url}[ownCloud Support] or our {oc-central-url}/latest[Forum (ownCloud Central)] you will be asked to provide certain log files or configurations for our engineers (or other users). 
-These are essential in better understanding your issue, your specific configuration, and the cause of the problem.
+{description}
 
-Here are instructions for how to collect them.
+When you report a problem to {oc-support-url}[ownCloud Support] or our {oc-central-url}/latest[Forum (ownCloud Central)] you will be asked to provide certain log files or configurations for our engineers or other supporting staff. This information is necessary in better understanding your issue, your specific configuration, and for further support.
 
 == Generate a Config Report
 
-You can use the webUI or the command line to generate a config report. 
-The webUI includes the web server environment, while the command line generated one doesn't as it can't access it.
-Therefore, if possible, always generate it through the webUI.
-Please note that you have to have the configreport app enabled. 
-Check if it's already enabled by going to the apps section of the admin settings.
-You can enable this app using the following commands:
+You can use the webUI or the command line to generate a config report. The webUI includes the web server environment, while the command line generated one doesn't as it can't access it. Therefore, if possible, always generate it through the webUI. The configreport app is always part of bundled apps, but it may needs to be enabled before it can be used.
 
-Install it, if it’s not already installed:
+Check if it is disabled:
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} market:install configreport
+{occ-command-example-prefix} app:list --disabled configreport
 ----
 
-Or enable it, if it’s already installed:
+Enable it if it was formerly disabled:
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix}:app enable configreport
+{occ-command-example-prefix} app:enable configreport
 ----
 
 === Generate via webUI
@@ -53,27 +49,23 @@ menu:Settings[Admin > General > Log > "Download logfile"].
 
 === Generate via Command Line
 
-If the log file is too big, you will need to transfer it from the command line. 
-The location of the log file can be found in your config.php. It's in your data directory. 
+If the log file is too big, you will need to transfer it from the command line. The location of the log file can be found in your config.php. By default it is in your data directory. Note that you may need to compress the logfile before uploading:
 
 [source,php]
 ----
- 'datadirectory' => '/var/www/owncloud/data',
+'datadirectory' => '/var/www/owncloud/data',
 ----
 
-You also can specify a different location of the log file.
+When not using the default location for the logfile, it can be specified via:
 
 [source,php]
 ----
-'logfile' => '/home/www-data/owncloud.log',
+'logfile' => '<your-path>/owncloud.log',
 ----
-
-Note that the web server user has to have rights to write in that directory.
 
 == LDAP Config
 
-Assuming that LDAP is used, viewing the LDAP configuration is important when checking for errors between your ownCloud instance and your LDAP server.
-To get the output file, execute this command:
+Assuming that LDAP is used, viewing the LDAP configuration is important when checking for errors between your ownCloud instance and your LDAP server. To get the output file, execute this command:
 
 [source,bash,subs="attributes+"]
 ----
