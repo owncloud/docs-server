@@ -1721,7 +1721,7 @@ quick action will not be displayed!
 'sharing.showPublicLinkQuickAction' => false,
 ....
 
-=== Save and display version of uploaded and edited files.
+=== Save and display acting username for versions of uploaded and edited files.
 
 ==== Code Sample
 
@@ -1729,6 +1729,7 @@ quick action will not be displayed!
 ....
 'file_storage.save_version_author' => false,
 ....
+WARNING: THIS WORKS NOT FOR S3 Storage Backends
 
 == All other configuration options
 
