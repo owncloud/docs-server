@@ -78,7 +78,7 @@ sudo chown -R www-data: mynewtheme
 {occ-command-example-prefix} app:enable mynewtheme
 ----
 
-. Exclude your new theme from integrity checking
+. Exclude your new theme from integrity checking. Add the following setting to `config/config.php`:
 +
 [source,php]
 ----
@@ -89,7 +89,7 @@ sudo chown -R www-data: mynewtheme
 
 The last step is necessary since you're not likely to provide a signature.json file. The theme is treated like an app. The ID is usually the name of the subfolder for the theme, in this case mynewtheme.
 
-Throughout this section of the documentation, for sakes of simplicity, it will be assumed that your ownCloud installation directory is `/owncloud`. If you’re following this guide to create or customize a theme, make sure you change any references to match the location of your ownCloud installation.
+Throughout this section of the documentation, for the sake of simplicity, it will be assumed that your ownCloud installation directory is `/owncloud`. If you’re following this guide to create or customize a theme, make sure you change any references to match the location of your ownCloud installation.
 
 To save time and effort, you can use the shell script below to create the basis of a new theme from https://github.com/owncloud/theme-example[ownCloud's example theme].
 
