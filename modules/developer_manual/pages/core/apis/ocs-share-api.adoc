@@ -696,10 +696,12 @@ The list of available permissions can be obtained from a request to xref:core/ap
 ====
 Things to remember about public link shares
 
-* Files will only ever have the *read* permission set
-* Folders will have *read*, *update*, *create*, and *delete* set
+* Files can only ever have the *read* and *update* permission set
+* Folders can have *read*, *update*, *create*, and *delete* set
 * Public link shares *cannot* be shared with users and groups
 * Public link shares are not available if public link sharing is disabled by the administrator
+* When creating a public link share of a folder, specify permissions 15 to give download/view/edit access
+* When creating a public link share of a single file, also specify permissions 15 in the API request to give download/view/edit access. The public link share will actually be given permissions 3 (read and update) because create and delete permissions are not relevant for single file shares
 
 *Mandatory Fields*
 
