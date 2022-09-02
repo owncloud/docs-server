@@ -11,8 +11,8 @@ your virtual machine or via ssh connection to your appliance.
 
 [source,bash]
 ----
-ucr set apache2/ssl/certificate="/etc/myssl/cert.pem"
-ucr set apache2/ssl/key="/etc/myssl/private.key"
+ucfr set apache2/ssl/certificate="/etc/myssl/cert.pem"
+ucfr set apache2/ssl/key="/etc/myssl/private.key"
 ----
 
 Remember to adjust the path and filename to match your certificate.
