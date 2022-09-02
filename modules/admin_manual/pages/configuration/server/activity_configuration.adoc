@@ -7,7 +7,7 @@
 
 {description}
 
-These events can be like:
+These events include:
 
 * A file or folder has been shared
 * A file or folder has been changed
@@ -31,5 +31,5 @@ Email notifications for shared files can be enabled/disabled by administrators w
 
 == Time Base
 
-* Whenever a default date is enabled and set for expiring shares (e.g. after 7 days), the time base for default dates is the time of the ownCloud server, not the time of the client accessing ownCloud Server.
-* When a client recieves an expiry notifications for a share, the notification is by the end of the day based on the time of the ownCloud server and not the time of the client accessing ownCloud Server.
+* Whenever a default date is enabled and set for expiring shares (e.g. after 7 days), the time base for default dates is the time of the ownCloud server, not the time of the client accessing the ownCloud Server.
+* When a client receives an expiry notification for a share, the expiry is effective at the end of the day based on the time of the ownCloud server and not the time of the client accessing the ownCloud Server.
