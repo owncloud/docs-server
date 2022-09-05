@@ -9,9 +9,11 @@
 
 == GDPR in ownCloud
 
-There are several location in this documentation referencing GDPR. 
+Without claim of completeness, here are several locations in this documentation referencing GDPR.
 
 * xref:configuration/server/legal_settings_configuration.adoc[Legal Settings Configuration]
-* xref:configuration/user/user_management.adoc[User GDPR Requests]
+* xref:configuration/user/user_management.adoc[User Management]
+* xref:maintenance/export_import_instance_data.adoc[Data Exporter]
 * xref:enterprise/document_classification/classification_and_policy_enforcement.adoc[Document Classification and Policy Enforcement]
+* xref:enterprise/file_management/files_lifecycle.adoc[File Lifecycle Management]
 
