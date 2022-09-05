@@ -24,7 +24,7 @@ NOTE: File versioning only gets triggered if the change is made via the ownCloud
 
 Versions are displayed in the WebUI in the details view in the right sidebar if you click on the file row in the file listing. You can restore the current file to one of the earlier backup copies in the list, by clicking on the btn:[restore] icon of the specific version.
 
-image:configuration/files/files-versions.png[File Versions in the WebUI]
+image::configuration/files/files_versions/files-versions.png[File Versions in the WebUI]
 
 == How Versions are Deleted
 
@@ -72,11 +72,11 @@ The versions are adjusted along this pattern every time a new version is created
 
 WARNING: The versions app never uses more that 50% of the user’s storage quota. If the stored versions exceed this limit, ownCloud deletes the oldest file versions until it meets the disk space limit again.
 
-TIP: Adjust the `'versions_retention_obligation'` setting in `config.php` to avoid filling up the user's quota.
+TIP: Adjust the `'versions_retention_obligation'` setting in `config.php` to avoid filling up the user's quota. For details see the chapter below.
 
 == Change the Expiration Settings
 
-You may alter the default pattern in `config.php`. The default setting is `auto`, which sets the default pattern:
+You may alter the xref:configuration/server/config_sample_php_parameters.adoc#define-the-files-versions-retention-obligation[default pattern] in `config.php`. The default setting is `auto`, which sets the default pattern:
 
 [source,php]
 ----
@@ -129,6 +129,18 @@ Do not apply any expiration rules. Delete all versions after 30 days.
 ----
 'versions_retention_obligation' => '30, 30',
 ----
+
+== Show the Author of a Version
+
+You can enable and disable to show the author of a version in the versions history via an entry in config.php. For details see: xref:configuration/server/config_sample_php_parameters.adoc#save-and-display-the-author-of-each-version-of-uploaded-and-edited-files[Save and display the author of each version of uploaded and edited files]. This is helpful to keep track on who did the changes on a version saved. 
+
+Adding the author the version screen changes the following:
+
+image::configuration/files/files_versions/concious-persistent-major-versions.png[Author of a changed saved file,width=250]
+
+=== Concious Persistent Major Versions
+
+ownCloud is capable to automatically generate version numbers for versions. To enable this feature, the config setting to show the versions author must be enabled, see above. Based on this feature, one can define the actual version to be a major version which gets a major version number and all new upcoming versions start counting from this major number. To do so, the user has to click on the check mark on the left of the actual version to publish this version as major version.
 
 == Enterprise File Retention
 
