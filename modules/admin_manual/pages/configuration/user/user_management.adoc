@@ -3,6 +3,12 @@
 :toclevels: 1
 :page-aliases: configuration/user/user_configuration.adoc
 
+:description: This page shows common tasks for administrators when managing users.
+
+== Introduction
+
+{description}
+
 == Default View
 
 The **default view** displays basic information about your users.
@@ -252,6 +258,15 @@ against quotas.
 
 When a user creates a public link share via URL, and allows uploads, any
 uploaded files count against that user’s quota.
+
+== User GDPR Requests
+
+To comply with chapter 15 of the GDPR framework, ownCloud provides buttons in the users personal settings view which can be accessed via menu:User Name[Personal > General] to:
+
+* Request data export
+* Request account deletion
+
+When a user clicks on one of these buttons, the admin group will recieve an email with the users request for further processing.
 
 == Moving the User Home
 
