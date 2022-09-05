@@ -16,8 +16,10 @@
 
 {description}
 
-You can get the {oc-marketplace-url}/apps/files_antivirus[Anti-Virus] extension from the marketplace. It forwards files that are being uploaded to the ownCloud server to a  malware scanning engine before they are written to the storage. When a file is recognized as malicious, it can be logged and prevented from being uploaded to the server to ensure that files in ownCloud are free of malware. More sophisticated rules may be specified as admin in the ownCloud Web interface menu:Admin[Settings > Security].
+You can get the {oc-marketplace-url}/apps/files_antivirus[Anti-Virus] extension from the marketplace.
 
+* When uploading, files are forwarded from the ownCloud server to a  malware scanning engine before they are written to the storage. When a file is recognized as malicious, it can be logged and prevented from being uploaded to the server to ensure that files in ownCloud are free of malware. More sophisticated rules may be specified as admin in the ownCloud Web interface menu:Admin[Settings > Security].
+* When downloading, the files are rescanned to prevent missing infections not known to the scanner at the time of the upload.
 
 == General Info
 
