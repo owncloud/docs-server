@@ -2,6 +2,7 @@
 * Admin Manual
 ** xref:admin_manual:index.adoc[Introduction]
 ** xref:admin_manual:faq/index.adoc[FAQ]
+** xref:admin_manual:gdpr.adoc[GDPR]
 ** xref:admin_manual:installation/index.adoc[Installation]
 *** xref:admin_manual:installation/deployment_considerations.adoc[Deployment Considerations]
 *** xref:admin_manual:installation/deployment_recommendations.adoc[Deployment Recommendations]

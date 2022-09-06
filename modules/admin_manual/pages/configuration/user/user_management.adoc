@@ -3,6 +3,12 @@
 :toclevels: 1
 :page-aliases: configuration/user/user_configuration.adoc
 
+:description: This page shows common tasks for administrators when managing users.
+
+== Introduction
+
+{description}
+
 == Default View
 
 The **default view** displays basic information about your users.
@@ -250,12 +256,21 @@ against quotas.
 '''
 === Public Links
 
-When a user creates a public link share via URL, and allows uploads, any
+When a user creates a public link share via URL and allows uploads, all
 uploaded files count against that user’s quota.
+
+== User GDPR Requests
+
+To comply with article 15 of the GDPR framework, ownCloud provides buttons in all users' personal settings view which can be accessed via menu:User Name[Settings > Personal > General > Account] to:
+
+* Request data export
+* Request account deletion
+
+When a user clicks on one of these buttons, the admin group will receive an email with the user's request for further processing.
 
 == Moving the User Home
 
-Usually, a user's home folder is located in the `data/` directory, the location of which is defined in `config.php` and defaults to `/var/www/owncloud/data`. Usually in smaller installations, the data directory mounts to a physical drive of the server and in bigger installations the data directory is mounted via NFS. This can be less than optimal for very big installations with thousands of users and/or users with very big space consumption. This can result in a high load on a single mount point.
+Usually, a user's home folder is located in the `data/` directory, the location of which is defined in `config.php` and defaults to `/var/www/owncloud/data`. In smaller installations, the data directory is often mounted on a physical drive of the server. On larger installations, the data directory is usually mounted via NFS. This can be less than ideal for very big installations with thousands of users and/or users with very big space consumption. This can result in a high load on a single mount point.
 
 ownCloud offers moving the home folder location of single users from the default location to another path outside the data directory to distribute the load to different mount points. You can also move back a user's home to the location defined in config.php.
 

@@ -4,7 +4,15 @@
 :files_pdfviewer-url: {oc-marketplace-url}/apps/files_pdfviewer
 :collabora-online-app-url: {oc-marketplace-url}/apps/richdocuments
 
-The following information is not an in-depth guide, but more of a high-level overview of each type.
+:description: ownCloud provides several roles a user can have. This description gives an overview of these roles.
+
+== Introduction
+
+{description}
+
+== User Request for Changing a Role
+
+Users can request a change of their current role under menu:User Name[Settings > Personal > General > Account]. When clicking the button btn:[Request new role], the new role can be entered and an email will be sent to the admin group for further processing.
 
 == Anonymous
 
