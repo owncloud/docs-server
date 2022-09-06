@@ -89,7 +89,8 @@
 **** xref:admin_manual:configuration/server/occ_command.adoc[OCC Command]
 **** xref:admin_manual:configuration/server/language_configuration.adoc[Language Configuration]
 **** xref:admin_manual:configuration/server/legal_settings_configuration.adoc[Legal Settings Configuration]
-**** xref:admin_manual:configuration/server/logging/logging_configuration.adoc[Logging Configuration]
+**** Logging
+***** xref:admin_manual:configuration/server/logging/logging_configuration.adoc[Logging Configuration]
 ***** xref:admin_manual:configuration/server/logging/request_tracing.adoc[Request Tracing]
 **** xref:admin_manual:configuration/server/reverse_proxy_configuration.adoc[Reverse Proxy Configuration]
 **** xref:admin_manual:configuration/server/security/index.adoc[Security]

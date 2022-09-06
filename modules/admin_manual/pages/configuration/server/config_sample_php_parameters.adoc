@@ -1687,10 +1687,11 @@ completed within one day.
 ....
 
 === Define the DAV chunk base directory
-Location of the chunk folder, defaults to `data/$user/uploads` where
-`$user` is the current user. When specified, the format will change to
-`$dav.chunk_base_dir/$user` where `$dav.chunk_base_dir` is the configured
-cache directory and `$user` is the user.
+Location of the chunk folder, defaults to `<datadirectory>/$user/uploads` where
+`$user` is the current user and `datadirectory` is the datadirectory described here.
+
+When specified, the format will change to `$dav.chunk_base_dir/$user` where
+`$dav.chunk_base_dir` is the configured cache directory here and `$user` is the user.
 
 ==== Code Sample
 
@@ -1740,7 +1741,9 @@ quick action will not be displayed!
 'sharing.showPublicLinkQuickAction' => false,
 ....
 
-=== Save and display version of uploaded and edited files.
+=== Save and display the author of each version of uploaded and edited files.
+
+WARNING: This does not work for S3 storage backends.
 
 ==== Code Sample
 
@@ -2258,6 +2261,8 @@ This will disable the minifier and outputs some additional debug information
 WARNING:
 Be warned that, if you set this to `true`, exceptions display
 stack traces on the web interface, *including passwords*, — **in plain text!**.
+Furthermore the content-disposition header will be lost and thus files will be
+displayed in the browser rather than downloaded.
 We strongly encourage you never to use it in production.
 
 ==== Code Sample
