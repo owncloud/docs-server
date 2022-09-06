@@ -1,7 +1,7 @@
-= GDPR
+= General Data Protection Regulation (GDPR)
 :toc: right
 
-:description: When using ownCloud, privacy is the main focus when it comes to data protection. As european company, ownCloud follows the GDPR framework to provide data protection for its customers.
+:description: For ownCloud, privacy is the main focus when it comes to data protection. As a European company, ownCloud follows the GDPR framework to provide data protection for its customers.
 
 == Introduction
 
@@ -9,7 +9,7 @@
 
 == GDPR in ownCloud
 
-Without claim of completeness, here are several locations in this documentation referencing GDPR.
+GDPR is referenced in several locations throughout this documentation. Some of the more prominent sections are listed below for your convenience:
 
 * xref:configuration/server/legal_settings_configuration.adoc[Legal Settings Configuration]
 * xref:configuration/user/user_management.adoc[User Management]

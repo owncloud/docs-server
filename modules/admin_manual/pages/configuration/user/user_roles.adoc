@@ -12,7 +12,7 @@
 
 == User Request for Changing a Role
 
-A user can request changing is current role. To do so, the user goes into his personal settings view which can be accessed via menu:User Name[Personal > General > Account]. When clicking the button btn:[Request new role], the new role can be entered and an email will be sent to the admin group for further processing. 
+Users can request a change of their current role under menu:User Name[Personal > General > Account]. When clicking the button btn:[Request new role], the new role can be entered and an email will be sent to the admin group for further processing. 
 
 == Anonymous
 
