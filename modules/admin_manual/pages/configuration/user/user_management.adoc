@@ -261,7 +261,7 @@ uploaded files count against that user’s quota.
 
 == User GDPR Requests
 
-To comply with article 15 of the GDPR framework, ownCloud provides buttons in all users' personal settings view which can be accessed via menu:User Name[Personal > General > Account] to:
+To comply with article 15 of the GDPR framework, ownCloud provides buttons in all users' personal settings view which can be accessed via menu:User Name[Settings > Personal > General > Account] to:
 
 * Request data export
 * Request account deletion
