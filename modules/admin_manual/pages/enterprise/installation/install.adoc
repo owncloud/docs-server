@@ -59,6 +59,7 @@ TIP: if you want to remove the current license, open ownCloud and navigate to me
 
 Your ownCloud Enterprise License Key is valid for the purchased amount of users, as per the ownCloud EULA - ownCloud Commercial License.
 When you generate a config.report, you will get:
+
 * a counting of the enabled users, 
 * the ownCloud guest users -- if the guest app is enabled and
 * the number of user directories created.
