@@ -67,7 +67,7 @@ NOTE: Admins can specify that all shares are "_secure view_" by default and that
 
 == View Only for Public Links
 
-When Secure View is enabled and configured, users can share office documents with a view only permissions, named _Preview_. Using this functionality, the document opens in Collabora Online but only viewing is possible. For details see the xref:next@webui:classic_ui:files/public_link_shares.adoc[Public Link Shares] documentation of the user guide. Compared to Secure View preview mode, no watermarking is used.
+When secure view is enabled and configured, users can share office documents with  view-only permissions, named _Preview_. Using this functionality, the document opens in Collabora Online but only viewing is possible. For details see the xref:next@webui:classic_ui:files/public_link_shares.adoc[Public Link Shares] documentation of the user guide. Unlike in secure view preview mode, no watermarking is used.
 
 == Secure View Restrictions
 
