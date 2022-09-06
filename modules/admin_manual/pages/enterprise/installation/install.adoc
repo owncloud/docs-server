@@ -55,10 +55,15 @@ upgrade your ownCloud Enterprise to a new version.
 
 TIP: if you want to remove the current license, open ownCloud and navigate to menu:Settings[Admin > General] and click btn:[Remove current license key].
 
-=== User counting
+=== User Counting
 
 Your ownCloud Enterprise License Key is valid for the purchased amount of users, as per the ownCloud EULA - ownCloud Commercial License.
-When you generate a config.report you, will get a counting of the enabled users, the ownCloud guest users -- if the guest app is enabled and the number of user directories created. The latter is the user number you will need licenses for. Guest users are currently counted with a fair use policy -- which means, that you can't have more guest users than you have licensed users. If you exceed the number of licensed users, please contact your account manager or ownCloud Partner and true-up as per your contract or EULA with us.
+When you generate a config.report, you will get:
+* a counting of the enabled users, 
+* the ownCloud guest users -- if the guest app is enabled and
+* the number of user directories created.
+
+The latter is the user number you will need licenses for. Guest users are currently counted with a fair use policy -- which means, that you can't have more guest users than you have licensed users. If you exceed the number of licensed users, please contact your account manager or ownCloud Partner and true-up as per your contract or EULA with us.
 The user directories are created on first login. When a user is deleted, the user directories are deleted as well. Users which are disabled count. The last login is not relevant.
 
 == Supported ownCloud Enterprise Edition Apps
