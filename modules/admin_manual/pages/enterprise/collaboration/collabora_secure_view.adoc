@@ -65,6 +65,10 @@ When enabled, this mode allows documents to be printed or exported to PDF format
 
 NOTE: Admins can specify that all shares are "_secure view_" by default and that the user has to intentionally change this setting.
 
+== View Only for Public Links
+
+When Secure View is enabled and configured, users can share office documents with a view only permissions, named _Preview_. Using this functionality, the document opens in Collabora Online but only viewing is possible. For details see the xref:next@webui:classic_ui:files/public_link_shares.adoc[Public Link Shares] documentation of the user guide. Compared to Secure View preview mode, no watermarking is used.
+
 == Secure View Restrictions
 
 When "_{secure-view-label}_" is enabled, any attempts to download the file will be blocked as shown in the screenshot below. In addition, copy & paste is disabled.
