@@ -2,7 +2,7 @@
 :toc: right
 :page-aliases: issues/impersonate_users.adoc
 
-:description: To help users debug an issue or to get a better understanding of what they see when they use their ownCloud account, you can impersonate their ownCloud account.
+:description: To help users debug an issue or to get a better understanding of what they see when they use their ownCloud account, you can impersonate their ownCloud user.
 
 == Introduction
 
@@ -15,9 +15,9 @@
 
 == Impersonating a User
 
-When installed, you can then impersonate users; in effect, you will be logged in as said user. To do so, go to the Users list, where you will now see a new column available called "**Impersonate**", as in the screenshot below.
+When installed, you can then impersonate users; in effect, you will be logged in as a specific user. To do so, go to the Users list, where you will now see a new column available called "**Impersonate**", as in the screenshot below.
 
-image::apps/impersonate/picking-a-user-to-impersonate.png[Picking a user to Impersonate, width=450]
+image::apps/impersonate/picking-a-user-to-impersonate.png[Picking a User to Impersonate, width=450]
 
 Click the gray head icon next to the user that you want to impersonate. Doing so will log you in as that user, temporarily pausing your current session. You will see a notification at the top of the page that confirms you're now logged in as (or impersonating) that user.
 
@@ -29,7 +29,7 @@ Anything that you see until you log out will be what that user would see.
 
 When you're ready to stop impersonating the user, log out and you will return to your normal user session.
 
-== Allow Some or All Group Administrators To Impersonate Users
+== Allow Some or All Group Administrators to Impersonate Users
 
 As a security measure, the application lets ownCloud administrators restrict the ability to impersonate users to:
 
@@ -45,11 +45,11 @@ When enabled and configured, only a group's administrator can impersonate member
 
 To configure it, in the administrator settings panel, which you can find under menu:administrator[Settings > Admin > User Authentication], you'll see a section titled: "**Impersonate Settings**" (which you can see below).
 
-image::apps/impersonate/impersonate-settings.png[Impersonate App settings]
+image::apps/impersonate/impersonate-settings.png[Impersonate App Settings]
 
-If you want to allow group admins to impersonate users within groups which they administer, click btn:[Allow all group admins to impersonate users within the groups they are admins of].
+If you want to allow group admins to impersonate users within groups which they administer, click btn:[Allow all group admins to impersonate users within the groups they administrate].
 
-If you want to limit impersonation to specific group admins, first click btn:[Allow group admins of specific groups to impersonate the users within those groups]. With the option checked, click into the textbox underneath it. You will see a list of the matching groups on your ownCloud installation appear, which will change, based on what you type in the textbox.
+If you want to limit impersonation to specific group admins, first click btn:[Allow group admins of specific groups to impersonate the users within those groups]. With the option checked, click into the textbox underneath it. You will see a list of all groups on your ownCloud installation, which will change, based on what you type in the textbox to search for specific groups.
 
 image::apps/impersonate/limit-impersonation-to-specific-groups.png[Restricting the ability to impersonate users to specific groups]
 
