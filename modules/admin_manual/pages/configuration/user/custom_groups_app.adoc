@@ -48,7 +48,7 @@ To specify the disallowed groups, list them against the `customgroups.disallowed
 
 ==== Set Custom Group Admins 
 
-Assigning custom group admins can only be done via the browser. In case the group admin has left the company and you need to set a different one, you temporarily must allow the xref:disabling-administrators-from-administering-custom-groups[ownCloud instance admins] access to groups if disallowed before. Then set one or more new group admins and change the instance admin setting back.
+Assigning custom group admins can only be done via the browser. In case the group admin has left the company and you need to set a different one, you temporarily must allow the xref:preventing-administrators-from-administering-custom-groups[ownCloud instance admins] access to groups if disallowed before. Then set one or more new group admins and change the instance admin setting back.
 
 
 == User Settings
