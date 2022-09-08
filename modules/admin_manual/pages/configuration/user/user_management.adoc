@@ -128,7 +128,7 @@ new groups.
 
 == Enabling Custom Groups
 
-As next step in managing groups, you can enable custom groups which provides group managing to users. For details see the xref:configuration/user/custom_groups_app.adoc[Custom Groups App].
+As the next step in managing groups, you can enable the Custom Groups app which provides group management to users. For details see the xref:configuration/user/custom_groups_app.adoc[Custom Groups App].
 
 == Setting Storage Quotas
 

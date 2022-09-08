@@ -19,25 +19,25 @@ image::configuration/user/custom_groups/custom_groups.png[]
 
 === Overriding Default Behavior
 
-Depending on your Custom Groups and ownCloud's global settings, configured by the ownCloud admin, Custom Groups may behave differently depending on settings made via occ commands. See the details in xref:configuration/server/occ_command.adoc#custom-groups[occ for Custom Groups]. Note that some settings shown in the examples below can also be set via `config/config.php`. For best practice use the occ command where possible.
+Depending on your custom groups and ownCloud's global settings, configured by the ownCloud admin, the Custom Groups app may behave differently depending on settings made via occ commands. For details see xref:configuration/server/occ_command.adoc#custom-groups[occ for Custom Groups]. Note that some settings shown in the examples below can also be set via `config/config.php`. For best practice, use the occ command where possible.
 
-==== Disabling Administrators from Administering Custom Groups
+==== Preventing Administrators from Administering Custom Groups
 
-* Creating or renaming a Custom Group using an existing name of another Custom Group can be allowed or not depending on administrative settings.
+* Creating or renaming a custom group, using an existing name of another custom group can be allowed or not depending on administrative settings.
 
-* Custom Group creation can be limited to ownCloud **group admins**.
+* Custom group creation can be limited to ownCloud **group admins**.
 
-* Disable administration of Custom Groups by ownCloud administrators:
+* Disable administration of custom groups by ownCloud administrators:
 +
 [source,php]
 ----
 'customgroups.disallow-admin-access-all' => true,
 ----
 
-==== Hide Custom Groups App Based On Group Membership
+==== Hide Custom Groups App Based on Group Membership
 
-The app can be hidden from the user's personal settings page if the user belongs to one or more disallowed groups, 
-To specify the disallowed groups, list them against the `customgroups.disallowed-groups` key in `config/config.php`, as in the following example.
+The app can be hidden from a user's personal settings page if the user belongs to one or more disallowed groups.
+To specify the disallowed groups, list them against the `customgroups.disallowed-groups` key in `config/config.php` as in the following example.
 
 [source,php]
 ----
@@ -48,7 +48,7 @@ To specify the disallowed groups, list them against the `customgroups.disallowed
 
 ==== Set Custom Group Admins 
 
-Setting Custom Group admins can only be done via the browser. In case the group admin has left the company and you need to set a different one, you temporarily must allow the xref:disabling-administrators-from-administering-custom-groups[ownCloud instance admins] access to groups if disallowed before, set one or more new group admins, and change the instance admin setting back.
+Assigning custom group admins can only be done via the browser. In case the group admin has left the company and you need to set a different one, you temporarily must allow the xref:disabling-administrators-from-administering-custom-groups[ownCloud instance admins] access to groups if disallowed before. Then set one or more new group admins and change the instance admin setting back.
 
 
 == User Settings
