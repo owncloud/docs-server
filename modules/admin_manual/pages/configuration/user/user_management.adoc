@@ -13,16 +13,16 @@
 
 The **default view** displays basic information about your users.
 
-image:configuration/user/users-page.png[image]
+image::configuration/user/users-page.png[image]
 
 The **Group filter** on the left sidebar lets you quickly filter users by
 their group memberships, and create new groups.
 
-image:configuration/user/users-page-group-tab.png[image]
+image::configuration/user/users-page-group-tab.png[image]
 
 Click the btn:[gear] icon on the lower left sidebar to view the available settings.
 
-image:configuration/user/users-page-gear.png[image]
+image::configuration/user/users-page-gear.png[image]
 
 **User accounts** have the following **properties**:
 
@@ -73,7 +73,7 @@ You cannot recover a user’s password, but you can set a new one:
 * Enter the user’s new password in the password field, and remember to
 provide the user with their password
 
-image:configuration/user/users-page-new-password.png[image]
+image::configuration/user/users-page-new-password.png[image]
 
 If you have encryption enabled, there are special considerations for user password resets.
 
@@ -94,7 +94,7 @@ To set or change a user’s display name:
 
 == Deleting Users
 
-image:configuration/user/delete-user-confirmation.png[The ownCloud delete user confirmation dialog.]
+image::configuration/user/delete-user-confirmation.png[The ownCloud delete user confirmation dialog.]
 
 To delete a user, hover your cursor over their name on the *Users* page, and click the trashcan icon that appears at the far right. 
 You’ll then see a confirmation dialog appear, asking if you’re sure that you want to delete the user. 
@@ -139,10 +139,10 @@ To enable Custom Groups:
 1.  From the ownCloud Market, which you can find starting from version 10.0 under the Apps menu, click btn:[Market].
 2.  Click btn:[Collaboration] (1), to filter the list of available options and click the btn:[Custom groups] application (2).
 +
-image:custom-groups/owncloud-market-custom-groups.png[The Custom Groups application in the ownCloud Market]
+image::custom-groups/owncloud-market-custom-groups.png[The Custom Groups application in the ownCloud Market]
 3.  Click btn:[INSTALL] in the bottom right-hand corner of the Custom Groups application.
 +
-image:custom-groups/owncloud-market-custom-groups-install.png[Install the Custom Groups application from the ownCloud Market]
+image::custom-groups/owncloud-market-custom-groups-install.png[Install the Custom Groups application from the ownCloud Market]
 
 With this done, Custom Group functionality will be available in your ownCloud installation.
 
