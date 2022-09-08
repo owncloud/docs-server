@@ -1,0 +1,24 @@
+= Custom Groups App
+:toc: right
+
+:description: With Custom Groups, users are able to define their own groups and manage contributing users themselves.
+
+== Introduction
+
+{description} When the xref:configuration/user/guest_app.adoc[Guest App] has been enabled, you can also add external guests to custom groups.
+
+== Installation
+
+Install and enable the {oc-marketplace-url}/apps/customgroups[Custom Groups] app if not already installed with your bundle. The Custom Groups app requires the email settings to be configured in your ownCloud setup, because you need to be able to invite the group members by email.
+
+== Configuration
+
+Check your Custom Groups app's configuration in menu:Settings[Admin > Sharing > Custom Groups]. There you can set following items:
+
+image::configuration/user/custom_groups/custom_groups.png[]
+
+== User Settings
+
+See the following image as example of user relevant setting and the xref:next@webui:classic_ui:files/webgui/custom_groups.adoc[Custom Groups] section in the user manual for details:
+
+image::configuration/user/custom_groups/user_settings_custom_groups.png[]
