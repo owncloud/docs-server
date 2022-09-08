@@ -1,0 +1,58 @@
+= Custom Groups App
+:toc: right
+
+:description: With Custom Groups, users are able to define their own groups and manage contributing users themselves.
+
+== Introduction
+
+{description} When the xref:configuration/user/guest_app.adoc[Guest App] has been enabled, you can also add external guests to custom groups.
+
+== Installation
+
+Install and enable the {oc-marketplace-url}/apps/customgroups[Custom Groups] app if not already installed with your bundle. The Custom Groups app requires the email settings to be configured in your ownCloud setup, because you need to be able to invite the group members by email.
+
+== Configuration
+
+Check your Custom Groups app's configuration in menu:Settings[Admin > Sharing > Custom Groups]. There you can set the following items:
+
+image::configuration/user/custom_groups/custom_groups.png[]
+
+=== Overriding Default Behavior
+
+Depending on your custom groups and ownCloud's global settings, configured by the ownCloud admin, the Custom Groups app may behave differently depending on settings made via occ commands. For details see xref:configuration/server/occ_command.adoc#custom-groups[occ for Custom Groups]. Note that some settings shown in the examples below can also be set via `config/config.php`. For best practice, use the occ command where possible.
+
+==== Preventing Administrators from Administering Custom Groups
+
+* Creating or renaming a custom group, using an existing name of another custom group can be allowed or not depending on administrative settings.
+
+* Custom group creation can be limited to ownCloud **group admins**.
+
+* Disable administration of custom groups by ownCloud administrators:
++
+[source,php]
+----
+'customgroups.disallow-admin-access-all' => true,
+----
+
+==== Hide Custom Groups App Based on Group Membership
+
+The app can be hidden from a user's personal settings page if the user belongs to one or more disallowed groups.
+To specify the disallowed groups, list them against the `customgroups.disallowed-groups` key in `config/config.php` as in the following example.
+
+[source,php]
+----
+// Hide the Custom Groups app for users in the
+// 'no_guest_app_users' and 'project5' group.
+'customgroups.disallowed-groups' => ['no_guest_app_users', 'project5'],
+----
+
+==== Set Custom Group Admins 
+
+Assigning custom group admins can only be done via the browser. In case the group admin has left the company and you need to set a different one, you temporarily must allow the xref:disabling-administrators-from-administering-custom-groups[ownCloud instance admins] access to groups if disallowed before. Then set one or more new group admins and change the instance admin setting back.
+
+
+== User Settings
+
+See the following image as example of user related settings and the xref:next@webui:classic_ui:files/webgui/custom_groups.adoc[Custom Groups] section in the user manual for details:
+
+image::configuration/user/custom_groups/user_settings_custom_groups.png[]

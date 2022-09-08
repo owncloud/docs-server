@@ -13,16 +13,16 @@
 
 The **default view** displays basic information about your users.
 
-image:configuration/user/users-page.png[image]
+image::configuration/user/users-page.png[image]
 
 The **Group filter** on the left sidebar lets you quickly filter users by
 their group memberships, and create new groups.
 
-image:configuration/user/users-page-group-tab.png[image]
+image::configuration/user/users-page-group-tab.png[image]
 
 Click the btn:[gear] icon on the lower left sidebar to view the available settings.
 
-image:configuration/user/users-page-gear.png[image]
+image::configuration/user/users-page-gear.png[image]
 
 **User accounts** have the following **properties**:
 
@@ -73,7 +73,7 @@ You cannot recover a user’s password, but you can set a new one:
 * Enter the user’s new password in the password field, and remember to
 provide the user with their password
 
-image:configuration/user/users-page-new-password.png[image]
+image::configuration/user/users-page-new-password.png[image]
 
 If you have encryption enabled, there are special considerations for user password resets.
 
@@ -94,7 +94,7 @@ To set or change a user’s display name:
 
 == Deleting Users
 
-image:configuration/user/delete-user-confirmation.png[The ownCloud delete user confirmation dialog.]
+image::configuration/user/delete-user-confirmation.png[The ownCloud delete user confirmation dialog]
 
 To delete a user, hover your cursor over their name on the *Users* page, and click the trashcan icon that appears at the far right. 
 You’ll then see a confirmation dialog appear, asking if you’re sure that you want to delete the user. 
@@ -128,56 +128,7 @@ new groups.
 
 == Enabling Custom Groups
 
-In previous versions of ownCloud, files and folders could only be shared
-with individual users or groups created by administrators. This wasn’t
-the most efficient way to work. From ownCloud 10.0, users can create
-groups on-the-fly, through a feature called "Custom Groups", enabling
-them to share content in a more flexible way.
-
-To enable Custom Groups:
-
-1.  From the ownCloud Market, which you can find starting from version 10.0 under the Apps menu, click btn:[Market].
-2.  Click btn:[Collaboration] (1), to filter the list of available options and click the btn:[Custom groups] application (2).
-+
-image:custom-groups/owncloud-market-custom-groups.png[The Custom Groups application in the ownCloud Market]
-3.  Click btn:[INSTALL] in the bottom right-hand corner of the Custom Groups application.
-+
-image:custom-groups/owncloud-market-custom-groups-install.png[Install the Custom Groups application from the ownCloud Market]
-
-With this done, Custom Group functionality will be available in your ownCloud installation.
-
-=== Overriding Default Behavior
-
-Depending on your Custom Groups and ownCloud's global settings, configured by the ownCloud admin, Custom Groups may behave differently depending on settings made via occ commands. See the details in xref:configuration/server/occ_command.adoc#custom-groups[occ for Custom Groups]. Note that some settings shown in the examples below can also be set via `config/config.php`. For best practice use the occ command where possible.
-
-==== Disabling Administrators from Administering Custom Groups
-
-* Creating or renaming a Custom Group using an existing name of another Custom Group can be allowed or not depending on administrative settings.
-
-* Custom Group creation can be limited to ownCloud **group admins**.
-
-* Disable administration of Custom Groups by ownCloud administrators:
-+
-[source.php]
-----
-'customgroups.disallow-admin-access-all' => true,
-----
-
-==== Hide Custom Groups App Based On Group Membership
-
-The app can be hidden from the user's personal settings page if the user belongs to one or more disallowed groups, 
-To specify the disallowed groups, list them against the `customgroups.disallowed-groups` key in `config/config.php`, as in the following example.
-
-[source,php]
-----
-// Hide the Custom Groups app for users in the
-// 'no_guest_app_users' and 'project5' group.
-'customgroups.disallowed-groups' => ['no_guest_app_users', 'project5'],
-----
-
-==== Set Custom Group Admins 
-
-Setting Custom Group admins can only be done via the browser. In case the group admin has left the company and you need to set a different one, you temporarily must allow the xref:disabling-administrators-from-administering-custom-groups[ownCloud instance admins] access to groups if disallowed before, set one or more new group admins, and change the instance admin setting back.
+As the next step in managing groups, you can enable the Custom Groups app which provides group management to users. For details see the xref:configuration/user/custom_groups_app.adoc[Custom Groups App].
 
 == Setting Storage Quotas
 
