@@ -13,12 +13,12 @@ Install and enable the {oc-marketplace-url}/apps/customgroups[Custom Groups] app
 
 == Configuration
 
-Check your Custom Groups app's configuration in menu:Settings[Admin > Sharing > Custom Groups]. There you can set following items:
+Check your Custom Groups app's configuration in menu:Settings[Admin > Sharing > Custom Groups]. There you can set the following items:
 
 image::configuration/user/custom_groups/custom_groups.png[]
 
 == User Settings
 
-See the following image as example of user relevant setting and the xref:next@webui:classic_ui:files/webgui/custom_groups.adoc[Custom Groups] section in the user manual for details:
+See the following image as example of user related settings and the xref:next@webui:classic_ui:files/webgui/custom_groups.adoc[Custom Groups] section in the user manual for details:
 
 image::configuration/user/custom_groups/user_settings_custom_groups.png[]
