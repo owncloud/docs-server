@@ -19,6 +19,8 @@ Install and enable the {oc-marketplace-url}/apps/guests[Guests] app if not alrea
 
 Check your Guests app's configuration in menu:Settings[Admin > Sharing]. There you can change the Guest's **group name** and add to or exclude apps from the app **whitelist** of the Guests app. Guests cannot access apps that are not on that list.
 
+image::configuration/user/guest_app/guest_app_settings.png[width=470]
+
 == Troubleshooting
 
 If for some reason you don't see all the buttons, try a different browser to exclude a possible script or adblocking add-on as a cause. If for example you as a guest user cannot open a PDF document via your ownCloud but you can download it - check the **whitelist** in the configuration settings described above. You have to explicitly specify that the guest users can access the required app.
