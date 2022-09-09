@@ -1,6 +1,6 @@
 name: server
 title: ownCloud Classic Server
-version: next
+version: '10.11'
 start_page: ROOT:index.adoc
 nav:
 - modules/ROOT/partials/nav.adoc
