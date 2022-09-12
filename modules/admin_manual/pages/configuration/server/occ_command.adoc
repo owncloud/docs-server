@@ -148,7 +148,6 @@ If your ownCloud instance is set up in a docker container, you need a user in th
 [source,docker]
 ----
 docker exec --user www-data <owncloud-container-name> occ <your-command>
-
 ----
 
 For more information on docker, refer to section xref:installation/docker/index.adoc[Installing with Docker].
@@ -175,7 +174,7 @@ ownCloud version 10.8.0
 Usage:
  command [options] [arguments]
 
-==== Options
+Options:
  -h, --help            Display this help message
  -q, --quiet           Do not output any message
  -V, --version         Display this application version
@@ -193,6 +192,7 @@ Available commands:
  status                Show some status information
  upgrade               Run upgrade routines after installation of
                        a new release. The release has to be installed before
+...
 ----
 
 This is the same as `{occ-command-example-prefix} list`. 
