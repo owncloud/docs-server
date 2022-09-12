@@ -1,4 +1,4 @@
-= System
+= System Commands
 
 [source,console]
 ----
