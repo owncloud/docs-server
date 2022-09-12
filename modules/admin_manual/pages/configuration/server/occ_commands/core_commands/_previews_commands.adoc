@@ -29,7 +29,7 @@ Removing not referenced previews can be necessary, e.g., when the image has been
 
 [width="100%",cols="25%,70%",]
 |====
-| `-all`
+| `--all`
 | Run as many loops until no chunks remain
 |====
 
