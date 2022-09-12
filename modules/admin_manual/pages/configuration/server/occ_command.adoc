@@ -316,6 +316,8 @@ include::./occ_commands/core_commands/_mimetype_update_commands.adoc[leveloffset
 
 include::./occ_commands/core_commands/_notifications_commands.adoc[leveloffset=+2]
 
+include::./occ_commands/core_commands/_previews_commands.adoc[leveloffset=+2]
+
 include::./occ_commands/core_commands/_incoming_shares_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_security_commands.adoc[leveloffset=+2]

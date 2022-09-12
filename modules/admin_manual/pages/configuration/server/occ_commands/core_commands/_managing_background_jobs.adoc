@@ -95,19 +95,26 @@ This example lists the queue status:
 ----
 {occ-command-example-prefix} background:queue:status
 
-+----+---------------------------------------------------+---------------------------+---------------+
-| Id | Job                                               | Last run                  | Job Arguments |
-+----+---------------------------------------------------+---------------------------+---------------+
-| 1  | OCA\Files\BackgroundJob\ScanFiles                 | 2018-06-13T15:15:04+00:00 |               |
-| 2  | OCA\Files\BackgroundJob\DeleteOrphanedItems       | 2018-06-13T15:15:04+00:00 |               |
-| 3  | OCA\Files\BackgroundJob\CleanupFileLocks          | 2018-06-13T15:15:04+00:00 |               |
-| 4  | OCA\DAV\CardDAV\SyncJob                           | 2018-06-12T19:15:02+00:00 |               |
-| 5  | OCA\Federation\SyncJob                            | 2018-06-12T19:15:02+00:00 |               |
-| 6  | OCA\Files_Sharing\DeleteOrphanedSharesJob         | 2018-06-13T15:15:04+00:00 |               |
-| 7  | OCA\Files_Sharing\ExpireSharesJob                 | 2018-06-12T19:15:02+00:00 |               |
-| 8  | OCA\Files_Trashbin\BackgroundJob\ExpireTrash      | 2018-06-13T15:15:04+00:00 |               |
-| 9  | OCA\Files_Versions\BackgroundJob\ExpireVersions   | 2018-06-13T15:15:04+00:00 |               |
-| 10 | OCA\UpdateNotification\Notification\BackgroundJob | 2018-06-12T19:15:03+00:00 |               |
-| 11 | OC\Authentication\Token\DefaultTokenCleanupJob    | 2018-06-13T15:15:04+00:00 |               |
-+----+---------------------------------------------------+---------------------------+---------------+
++--------+----------------------------------------------------+---------------+----------+---------------------------+-------------+------------------------+
+| Job ID | Job                                                | Job Arguments | Last Run | Last Checked              | Reserved At | Execution Duration (s) |
++--------+----------------------------------------------------+---------------+----------+---------------------------+-------------+------------------------+
+| 1      | OCA\Files\BackgroundJob\ScanFiles                  |               | N/A      | 2022-09-08T16:42:47+00:00 | N/A         | N/A                    |
+| 2      | OCA\Files\BackgroundJob\DeleteOrphanedItems        |               | N/A      | 2022-09-08T16:42:47+00:00 | N/A         | N/A                    |
+| 3      | OCA\Files\BackgroundJob\CleanupFileLocks           |               | N/A      | 2022-09-08T16:42:47+00:00 | N/A         | N/A                    |
+| 4      | OCA\Files\BackgroundJob\CleanupPersistentFileLocks |               | N/A      | 2022-09-08T16:42:47+00:00 | N/A         | N/A                    |
+| 5      | OCA\Files\BackgroundJob\PreviewCleanupJob          |               | N/A      | 2022-09-08T16:42:47+00:00 | N/A         | N/A                    |
+| 6      | OCA\DAV\CardDAV\SyncJob                            |               | N/A      | 2022-09-08T16:42:49+00:00 | N/A         | N/A                    |
+| 7      | OCA\DAV\BackgroundJob\CleanProperties              |               | N/A      | 2022-09-08T16:42:49+00:00 | N/A         | N/A                    |
+| 8      | OCA\Activity\BackgroundJob\EmailNotification       |               | N/A      | 2022-09-08T16:42:49+00:00 | N/A         | N/A                    |
+| 9      | OCA\Activity\BackgroundJob\ExpireActivities        |               | N/A      | 2022-09-08T16:42:49+00:00 | N/A         | N/A                    |
+| 10     | OCA\Federation\SyncJob                             |               | N/A      | 2022-09-08T16:42:50+00:00 | N/A         | N/A                    |
+| 11     | OCA\Files_Sharing\DeleteOrphanedSharesJob          |               | N/A      | 2022-09-08T16:42:51+00:00 | N/A         | N/A                    |
+| 12     | OCA\Files_Sharing\ExpireSharesJob                  |               | N/A      | 2022-09-08T16:42:51+00:00 | N/A         | N/A                    |
+| 13     | OCA\Files_Sharing\External\ScanExternalSharesJob   |               | N/A      | 2022-09-08T16:42:51+00:00 | N/A         | N/A                    |
+| 14     | OCA\Files_Trashbin\BackgroundJob\ExpireTrash       |               | N/A      | 2022-09-08T16:42:51+00:00 | N/A         | N/A                    |
+| 15     | OCA\Files_Versions\BackgroundJob\ExpireVersions    |               | N/A      | 2022-09-08T16:42:51+00:00 | N/A         | N/A                    |
+| 16     | OCA\Market\CheckUpdateBackgroundJob                |               | N/A      | 2022-09-08T16:42:51+00:00 | N/A         | N/A                    |
+| 17     | OCA\UpdateNotification\Notification\BackgroundJob  |               | N/A      | 2022-09-08T16:42:52+00:00 | N/A         | N/A                    |
+| 18     | OC\Authentication\Token\DefaultTokenCleanupJob     |               | N/A      | 2022-09-08T16:42:52+00:00 | N/A         | N/A                    |
++--------+----------------------------------------------------+---------------+----------+---------------------------+-------------+------------------------+
 ----
