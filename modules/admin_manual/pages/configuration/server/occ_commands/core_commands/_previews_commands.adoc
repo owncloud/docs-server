@@ -35,7 +35,7 @@ Removing not referenced previews can be necessary, e.g., when the image has been
 
 Description:
 
-* `chunk size` defines the number of files being processed in one loop and also how often a database commit will be made. The lower the number, the more commits are generated.
+* The value of `chunk size` defines the number of files being processed in one loop and also how often a database commit will be made. The lower the number, the more commits are generated.
 * if `--all` is set, the loop will loop until all are processed
 * if `--all` is not set, the loop will run once
 
@@ -50,8 +50,8 @@ In the example below, you run one loop with max (default) 1000 files processed.
 
 Other combinations could be:
 
-* `chunk_size=50`: run once and process 50 files
-* `--all chunk_size=50`: process all files in blocks of 50 files
+* `previews:cleanup -- 50`: run once and process 50 files
+* `previews:cleanup --all 50`: process all files in blocks of 50 files
 
 === Background Job
 
