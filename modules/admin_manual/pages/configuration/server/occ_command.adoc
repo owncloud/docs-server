@@ -324,6 +324,8 @@ include::./occ_commands/core_commands/_security_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_sharing_commands.adoc[leveloffset=+2]
 
+include::./occ_commands/core_commands/_system_command.adoc[leveloffset=+2]
+
 include::./occ_commands/core_commands/_trashbin_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_2fa_core_commands.adoc[leveloffset=+2]
