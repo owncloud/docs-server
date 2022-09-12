@@ -1,0 +1,58 @@
+= Previews Commands
+
+A set of commands to remove unreferenced preview images:
+
+[source,plaintext]
+----
+previews
+ previews:cleanup            Remove unreferenced previews
+----
+
+== Cleanup
+
+Removing unreferenced previews can be necessary, like when the image has been deleted or the ID of the moint point changes which happens when renaming it. Previews will be regenerated when reaccessing the image, but unreferenced previews are orphanes. To circumvent orphans, a occ command has been added to manually remove those unreferenced previews as they are eating up storage unneccessarily. In addition, a backgroundjob has been created which automatically removes them on a regulary basis. For more info see the xref:background-job[Background Job] section and the example listing xref:configuration/server/occ_command.adoc#list-queued-backgroundjobs[OCA\Files\BackgroundJob\PreviewCleanupJob].
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} previews:cleanup [options] [--] [<chunk_size>]
+----
+
+=== Arguments
+
+[width="100%",cols="25%,70%",]
+|====
+| `chunk_size`
+| Define the number of files being processed in one loop [default: 1000]
+|====
+
+=== Options
+
+[width="100%",cols="25%,70%",]
+|====
+| `-all`
+| Run as many loops until no chunks remain
+|====
+
+Description:
+
+* `chunk size` defines the number of files being processed in one loop and also how often a database commit will be made. As lower the number, as more commits are generated.
+* if `--all` is set, the loop will loop until all are processed
+* if `--all` is not set, the loop will run once
+
+=== Example
+
+In the example below, run one loop with max (default) 1000 files processed.
+ 
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} previews:cleanup
+----
+
+Other combinations could be like:
+
+* `chunk_size=50`: run once and process 50 files
+* `--all chunk_size=50`: process all files in blocks of 50 files
+
+=== Background Job
+
+The background job to cleanup previews is added by default and suits perfect for smaller installations like when you use the community edition. The occ command is to be used in regular system cron on bigger installations like when using the enterprise edition. In this case, the background job can stay enabled in such a setup - there is no harm, but with the combination admins have better control. Note that you also can remove a background job if it does not fit to your environment.
