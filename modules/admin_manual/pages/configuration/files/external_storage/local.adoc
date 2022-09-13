@@ -1,11 +1,14 @@
-= Local
+= Local - Security Risk, only use if you know what you do
 
 Local storage provides the ability to mount any directory on your ownCloud server that is:
 
 * Outside of your ownCloud `data/` directory
 * Both readable and writable by your HTTP server user
 
-Since this is a significant security risk, Local storage is only configurable via the ownCloud admin settings. 
+As this dilutes the difference between ownCloud Admin and sysadmin this is a significant security risk and therefor default off.
+Please only enable local local if ownCloud Admin and sysadmin are by purpose the same person.
+
+In any case Local storage is only configurable via the ownCloud admin settings. 
 Non-admin users cannot create Local storage mounts.
 
 See
