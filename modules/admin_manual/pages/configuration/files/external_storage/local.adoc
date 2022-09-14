@@ -1,12 +1,27 @@
-= Local
+= Local Storage
+:toc: right
+:description: Local storage provides the ability to mount any directory on your ownCloud server
 
-Local storage provides the ability to mount any directory on your ownCloud server that is:
+== Introduction
+
+IMPORTANT: *Using local storage is a security risk, only use it if you know what you are doing.*
+
+{description} that is:
 
 * Outside of your ownCloud `data/` directory
-* Both readable and writable by your HTTP server user
+* Both readable and writable by your web server user
 
-Since this is a significant security risk, Local storage is only configurable via the ownCloud admin settings. 
-Non-admin users cannot create Local storage mounts.
+== Details
+
+As this setup diffuses the difference between ownCloud Admin and sysadmin, this is a significant security risk and therefore off by default.
+
+[WARNING]
+====
+* *Only enable local storage if ownCloud Admin and sysadmin are the same person on purpose.*
+* A local ownCloud mount does not work well with external storages like SMB or FTP mounted in the Linux filesystem. If such a Linux mounted storage goes away, ownCloud is likely to see the underlying empty mountpoint as a perfectly valid folder and will _silently_ propagate content deletion, instead of forwarding error messages to the end users.
+====
+
+In any case, local storage is only configurable via the ownCloud admin settings. Non-admin users cannot create local storage mounts.
 
 See
 xref:installation/manual_installation/manual_installation.adoc#script-guided-installation[Set Correct Permissions]
@@ -20,14 +35,13 @@ To enable Local storage, you must first enable it by editing your ownCloud insta
 'files_external_allow_create_new_local' => 'true',
 ----
 
-To manage Local storage, navigate to menu:Settings[Admin > Storage].
-You can see an example in the screenshot below.
+To manage local storage, navigate to menu:Settings[Admin > Storage]. You can see an example in the screenshot below.
 
 image:configuration/files/external_storage/local.png[Manage local storage in ownCloud]
 
-In the *Folder name* field enter the folder name that you want to appear on your ownCloud Files page. 
-In the *Configuration* field enter the full file path of the directory you want to mount. 
-In the *Available for* field enter the users or groups who have permission to access the mount; by default all users have access.
+. In the *Folder name* field enter the folder name that you want to appear on your ownCloud Files page. 
+. In the *Configuration* field enter the full file path of the directory you want to mount. 
+. In the *Available for* field enter the users or groups who have permission to access the mount; by default all users have access.
 
 See
 xref:configuration/files/external_storage/configuration.adoc[External Storage Configuration]
