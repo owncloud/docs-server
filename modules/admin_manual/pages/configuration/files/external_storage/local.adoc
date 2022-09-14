@@ -4,7 +4,7 @@
 
 == Introduction
 
-IMPORTANT: *Using local storage is a security risk, only use if you know what you are doing.*
+IMPORTANT: *Using local storage is a security risk, only use it if you know what you are doing.*
 
 {description} that is:
 
@@ -13,15 +13,15 @@ IMPORTANT: *Using local storage is a security risk, only use if you know what yo
 
 == Details
 
-As this setup dilutes the difference between ownCloud Admin and sysadmin, this is a significant security risk and therefore off by default.
+As this setup diffuses the difference between ownCloud Admin and sysadmin, this is a significant security risk and therefore off by default.
 
 [WARNING]
 ====
-* *Only enable Local storage if ownCloud Admin and sysadmin are purposely the same person.*
+* *Only enable local storage if ownCloud Admin and sysadmin are the same person on purpose.*
 * A local ownCloud mount does not work well with external storages like SMB or FTP mounted in the Linux filesystem. If such a Linux mounted storage goes away, ownCloud is likely to see the underlying empty mountpoint as a perfectly valid folder and will _silently_ propagate content deletion, instead of forwarding error messages to the end users.
 ====
 
-In any case, Local Storage is only configurable via the ownCloud admin settings. Non-admin users cannot create Local Storage mounts.
+In any case, local storage is only configurable via the ownCloud admin settings. Non-admin users cannot create local storage mounts.
 
 See
 xref:installation/manual_installation/manual_installation.adoc#script-guided-installation[Set Correct Permissions]
@@ -35,7 +35,7 @@ To enable Local storage, you must first enable it by editing your ownCloud insta
 'files_external_allow_create_new_local' => 'true',
 ----
 
-To manage Local storage, navigate to menu:Settings[Admin > Storage]. You can see an example in the screenshot below.
+To manage local storage, navigate to menu:Settings[Admin > Storage]. You can see an example in the screenshot below.
 
 image:configuration/files/external_storage/local.png[Manage local storage in ownCloud]
 
