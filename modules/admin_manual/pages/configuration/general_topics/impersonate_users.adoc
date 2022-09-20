@@ -15,7 +15,7 @@
 
 == Impersonating a User
 
-When installed, you can then impersonate users; in effect, you will be logged in as a specific user. To do so, go to the Users list, where you will now see a new column available called "**Impersonate**", as in the screenshot below.
+When installed, you can then impersonate users; in effect, you will be logged in as a specific user. To do so, go to the Users list, where you will now see a new column available called btn:Impersonate[], as in the screenshot below.
 
 image::apps/impersonate/picking-a-user-to-impersonate.png[Picking a User to Impersonate, width=450]
 
@@ -29,28 +29,26 @@ Anything that you see until you log out will be what that user would see.
 
 When you're ready to stop impersonating the user, log out and you will return to your normal user session.
 
-== Allow Some or All Group Administrators to Impersonate Users
+== Define Who is Granted to Impersonate
 
 As a security measure, the application lets ownCloud administrators restrict the ability to impersonate users to:
 
+- ownCloud administrators only.
 - All group administrators.
-- Specific group administrators.
+- Administrators for specific groups.
 
-[NOTE] 
-====
-By default, when the Impersonate app is installed, only the ownCloud administrator will be allowed to impersonate users. When the app is installed and configured, ownCloud administrators retain the ability to impersonate all users of an ownCloud instance.
-====
+NOTE: By default, when the Impersonate app is installed and no further configuration is taken, only the ownCloud administrator will be allowed to impersonate users.
 
-When enabled and configured, only a group's administrator can impersonate members of their group. For example, if an ownCloud administrator restricts user impersonation only to the group: `group1`, then only `group1`'s administrators can impersonate users belonging to `group1`. No other users can impersonate other users.
+To configure impersonation, go to the administrator settings panel, which you can find under menu:User Name[Settings > Admin > User Authentication], at section titled: btn:[Impersonate Settings].
 
-To configure it, go to the administrator settings panel, which you can find under menu:User Name[Settings > Admin > User Authentication]. You'll see a section titled: btn:[Impersonate Settings].
-
-* If you want to allow group admins to impersonate users within groups which they administer, click btn:[Allow all group admins to impersonate users within the groups they are admins of].
+* Use the following to allow impersonation for ownCloud admins only:
 +
-image::apps/impersonate/limit-impersonation-to-specific-groups.png[Restricting the ability to impersonate users to specific groups]
+image::apps/impersonate/impersonate_oc_admins_only.png[Impersonate for ownCloud admins only,width=500]
 
-* If you want to limit impersonation to specific group admins, first click btn:[Allow group admins of specific groups to impersonate the users within those groups]. With the option checked, click into the textbox underneath it. You will see a list of all groups on your ownCloud installation, which will change, based on what you type in the textbox to search for specific groups.
+* If you want to allow all group admins to impersonate users within groups which they administer:
 +
-image::apps/impersonate/impersonate-settings.png[Impersonate App Settings]
+image::apps/impersonate/impersonate_group_admins_only.png[Impersonate for all group admins,width=500]
 
-Choose one or more groups from the list, and they will be added to the textbox, restricting this functionality to only those groups.
+* If you want to limit impersonation to admins of specific groups, first click btn:[Allow group admins of specific groups...]. With the option checked, click into the textbox underneath it. You will see a list of all groups on your ownCloud installation, which will change, based on what you type in the textbox to search for specific groups. Choose one or more groups from the list, and they will be added to the textbox, restricting this functionality to admins of those groups only.
++
+image::apps/impersonate/impersonate_groups_only.png[Impersonate for specific group admins,width=500]
