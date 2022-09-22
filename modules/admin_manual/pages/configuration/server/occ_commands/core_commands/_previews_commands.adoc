@@ -39,6 +39,13 @@ Description:
 * if `--all` is set, the loop will loop until all are processed
 * if `--all` is not set, the loop will run once
 
+[NOTE]
+====
+* Cleaning up previews is a database-intense operation. The command can take a considerable amount of time when the database and filesystem are on NFS. Note that the command execution time depends on the total quantity of items in the database and not on the number of items likely to be cleaned up.
+* Once started, the command cannot be stopped, e.g. with kbd:[CTRL+C], you need to end the process manually.
+* If you have upgraded your system but the backgroundjob does not appear in the job list, you can manually add it.
+====
+
 === Example
 
 In the example below, you run one loop with max (default) 1000 files processed.
@@ -56,3 +63,4 @@ Other combinations could be:
 === Background Job
 
 The background job to cleanup previews is added by default and suits smaller installations of the community edition. The occ command should be used in regular system cron jobs on bigger installations using the enterprise edition. In this case, the background job can stay enabled, but in combination with a cron job admins have better control. Note that you also can remove a background job if it does not fit your environment.
+
