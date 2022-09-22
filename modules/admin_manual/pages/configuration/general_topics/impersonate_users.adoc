@@ -31,19 +31,19 @@ When you're ready to stop impersonating the user, log out and you will return to
 
 == Group Concept for Impersonation
 
-Impersonate has two layers defining groups for impersonation. It is important to understand, that both, the impersonator and the impersonee must be granted for the impersonation app. This means, if any groups are defined at the two layers, they must have an overlapping member area.
+Impersonate has two layers defining groups for impersonation. It is important to understand, that both, the impersonator and the user to be impersonated must have the impersonation app enabled. This means, if any groups are defined at the two layers, they must have an overlapping member area.
 
-. The first layer is defined at the level of the app, see xref:define-who-can-use-impersonate[Define Who can Use Impersonate]. This layer can be seen as a general area. If you do not want to have any restrictions, uncheck the checkmark which means all users are eligable.
+. The first layer is defined at the level of the app, see xref:define-who-can-use-impersonate[Define Who can Use Impersonate]. This layer can be seen as a general area. If you do not want to have any restrictions, uncheck the check box, which means all users are eligible.
 
-. The second layer is defined at the level where the one who can impersonate and the possible impersonees are configured, see xref:define-who-is-granted-to-impersonate[Define Who is Granted to Impersonate]. This layer can be seen as the detailed area.
+. The second layer is defined at the level where the one who can impersonate and who can be impersonated are configured. See xref:define-who-is-granted-to-impersonate[Define Who is Granted to Impersonate]. This layer can be regarded as the detailed area.
 
-As a rule of thumb, first enable (1) as widely as wanted, then add on option (2) as needed.
+As a rule of thumb, first enable (1) as widely as wanted, then add option (2) as needed.
 
-NOTE: If an impersonator is granted to impersonate but he cannot impersonate all or particular users, then the usual case for this situation is a lack of an overlapping area of groups defined.
+NOTE: If an impersonator is granted the right to impersonate but cannot impersonate all or particular users, then the reason is usually that the impersonator is not a member of the respective groups.
 
 == Define Who can Use Impersonate
 
-* When you have installed and enabled the Impersonate App, you can define if and which groups are granted to _configure_ impersonation. To do so, go to menu:Your Username[Settings > Admin > Apps]. Members of the groups specified can configure impersonation, see xref:define-who-is-granted-to-impersonate[Define Who is Granted to Impersonate]
+* If you have installed and enabled the Impersonate App, you can define if any groups are granted the right to _configure_ impersonation. To do so, go to menu:Your Username[Settings > Admin > Apps]. Members of the groups specified can configure impersonation, see xref:define-who-is-granted-to-impersonate[Define Who is Granted to Impersonate]
 +
 image::apps/impersonate/impersonate_enable.png[Define who can configure Impersonate,width=300]
 
