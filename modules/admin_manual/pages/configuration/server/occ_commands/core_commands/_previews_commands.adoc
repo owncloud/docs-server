@@ -41,7 +41,7 @@ Description:
 
 [NOTE]
 ====
-* Cleanup previews is a database intense operation. The command can take a considerable amount of time when having the database and filesystem on NFS.
+* Cleanup previews is a database intense operation. The command can take a considerable amount of time when having the database and filesystem on NFS. Note that the command execution time is highly dependent on the total quantity of items in the database and not on possible items to be cleaned up.
 * Once started, the command cant be stopped regulary like with kbd:[CTRL+C], you need to end the process manually.
 * If you have upgraded your system but the backgroundjob does not appear in the job list, you can manually add it.
 ====
