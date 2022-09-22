@@ -15,7 +15,7 @@
 
 == Impersonating a User
 
-When installed, you can then impersonate users; in effect, you will be logged in as a specific user. To do so, go to the Users list, where you will now see a new column available called btn:Impersonate[], as in the screenshot below.
+When installed, you can then impersonate users; in effect, you will be logged in as a specific user. To do so, go to the Users list, where you will now see a new column available called btn:[Impersonate], as in the screenshot below.
 
 image::apps/impersonate/picking-a-user-to-impersonate.png[Picking a User to Impersonate, width=450]
 
@@ -28,6 +28,40 @@ Anything that you see until you log out will be what that user would see.
 == Ending an Impersonation
 
 When you're ready to stop impersonating the user, log out and you will return to your normal user session.
+
+== Group Concept for Impersonation
+
+Impersonate has two layers defining groups for impersonation. It is important to understand, that both, the impersonator and the impersonee must be granted for the impersonation app. This means, if any groups are defined at the two layers, they must have an overlapping member area.
+
+. The first layer is defined at the level of the app, see xref:define-who-can-use-impersonate[Define Who can Use Impersonate]. This layer can be seen as a general area. If you do not want to have any restrictions, uncheck the checkmark which means all users are eligable.
+
+. The second layer is defined at the level where the one who can impersonate and the possible impersonees are configured, see xref:define-who-is-granted-to-impersonate[Define Who is Granted to Impersonate]. This layer can be seen as the detailed area.
+
+As a rule of thumb, first enable (1) as widely as wanted, then add on option (2) as needed.
+
+NOTE: If an impersonator is granted to impersonate but he cannot impersonate all or particular users, then the usual case for this situation is a lack of an overlapping area of groups defined.
+
+== Define Who can Use Impersonate
+
+* When you have installed and enabled the Impersonate App, you can define if and which groups are granted to _configure_ impersonation. To do so, go to menu:Your Username[Settings > Admin > Apps]. Members of the groups specified can configure impersonation, see xref:define-who-is-granted-to-impersonate[Define Who is Granted to Impersonate]
++
+image::apps/impersonate/impersonate_enable.png[Define who can configure Impersonate,width=300]
+
+** You can also use an occ command to disable groups:
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate enabled --value 'yes'
+----
+
+** You can also use an occ command to define groups:
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate enabled --value '["admin","einstein-g"]'
+----
 
 == Define Who is Granted to Impersonate
 
@@ -45,10 +79,71 @@ To configure impersonation, go to the administrator settings panel, which you ca
 +
 image::apps/impersonate/impersonate_oc_admins_only.png[Impersonate for ownCloud admins only,width=500]
 
+** You can also use occ commands to do so:
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate impersonate_all_groupadmins --value false
+----
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate impersonate_include_groups --value false
+----
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate impersonate_include_groups_list --value '[]'
+----
+
 * If you want to allow all group admins to impersonate users within groups which they administer:
 +
 image::apps/impersonate/impersonate_group_admins_only.png[Impersonate for all group admins,width=500]
 
+** You can also use occ commands to do so:
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate impersonate_include_groups --value true
+----
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate impersonate_all_groupadmins --value false
+----
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate impersonate_include_groups_list --value '[]'
+----
+
 * If you want to limit impersonation to admins of specific groups, first click btn:[Allow group admins of specific groups...]. With the option checked, click into the textbox underneath it. You will see a list of all groups on your ownCloud installation, which will change, based on what you type in the textbox to search for specific groups. Choose one or more groups from the list, and they will be added to the textbox, restricting this functionality to admins of those groups only.
 +
 image::apps/impersonate/impersonate_groups_only.png[Impersonate for specific group admins,width=500]
+
+** You can also use occ commands to do so:
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate impersonate_all_groupadmins --value true
+----
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate impersonate_include_groups_list --value '["group1", "group2"]'
+----
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set \
+    impersonate impersonate_include_groups --value false
+----
+
