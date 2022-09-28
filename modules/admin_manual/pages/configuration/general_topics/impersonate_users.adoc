@@ -138,12 +138,11 @@ image::apps/impersonate/impersonate_groups_only.png[Impersonate for specific gro
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set \
-    impersonate impersonate_include_groups_list --value '["group1", "group2"]'
+    impersonate impersonate_include_groups --value true
 ----
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set \
-    impersonate impersonate_include_groups --value true
+    impersonate impersonate_include_groups_list --value '["group1", "group2"]'
 ----
-
