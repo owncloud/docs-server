@@ -17,7 +17,7 @@ With the image provided, ownCloud has added database connectors for the followin
 * Postgres
 * SQLite
 
-If you need a different connector or a different version of a connector provided, you have to manually create your own docker compose file.
+If you need a different connector or a different version of a connector, you have to manually create your own docker compose file.
 
 == Getting Started
 
