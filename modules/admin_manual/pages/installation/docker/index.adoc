@@ -3,12 +3,23 @@
 :dockerhub-url: https://hub.docker.com/r/owncloud/server
 :docker-compose-url: https://docs.docker.com/compose/
 :linux-server-doc-url: https://docs.linuxserver.io/faq
+:description: ownCloud can be installed using the official ownCloud Docker image.
 
 == Introduction
 
-ownCloud can be installed using the {dockerhub-url}[official ownCloud Docker image].
-This official image works standalone for a quick evaluation but is designed to be used in a
-docker-compose setup.
+{description} This {dockerhub-url}[official image] works standalone for a quick evaluation but is designed to be used in a docker-compose setup.
+
+== Database Notes
+
+With the image provided, ownCloud has added database connectors for the following databases:
+
+* MySQL / MariaDB
+* Postgres
+* SQLite
+
+If you need a different connector or a different version of a connector, you have to manually create your own docker compose file.
+
+== Getting Started
 
 Grant docker command privileges to certain users by adding them to the group `docker`:
 
