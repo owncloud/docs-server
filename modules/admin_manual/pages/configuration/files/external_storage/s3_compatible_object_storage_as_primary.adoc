@@ -82,10 +82,18 @@ $CONFIG = [
     'objectstore' => [
         'class' => 'OCA\Files_Primary_S3\S3Storage',
         'arguments' => [
+            //
             // replace with your bucket
             'bucket' => 'owncloud',
+            //
+            // uncomment to indicate available storage size in the objectstore, in bytes (in this example 1TB),
+            // without this setting app relying on available storage might be limited in funcionality e.g. metrics app
+            //'availableStorage' => 1099511627776,
+            //
             // uncomment to enable server side encryption
             //'serversideencryption' => 'AES256',
+            //
+            // storage specific options
             'options' => [
                 // version and region are required
                 'version' => '2006-03-01',
@@ -114,10 +122,18 @@ $CONFIG = [
     'objectstore' => [
         'class' => 'OCA\Files_Primary_S3\S3Storage',
         'arguments' => [
+            //
             // replace with your bucket
             'bucket' => 'owncloud',
+            //
+            // uncomment to indicate available storage size in the objectstore, in bytes (in this example 1TB),
+            // without this setting app relying on available storage might be limited in funcionality e.g. metrics app
+            //'availableStorage' => 1099511627776,
+            //
             // uncomment to enable server side encryption
             //'serversideencryption' => 'AES256',
+            //
+            // storage specific options
             'options' => [
                 // version and region are required
                 'version' => '2006-03-01',
@@ -150,10 +166,18 @@ $CONFIG = [
     'objectstore' => [
         'class' => 'OCA\Files_Primary_S3\S3Storage',
         'arguments' => [
+            //
             // replace with your bucket
             'bucket' => 'owncloud',
+            //
+            // uncomment to indicate available storage size in the objectstore, in bytes (in this example 1TB),
+            // without this setting app relying on available storage might be limited in funcionality e.g. metrics app
+            //'availableStorage' => 1099511627776,
+            //
             // uncomment to enable server side encryption
             //'serversideencryption' => 'AES256',
+            //
+            // storage specific options
             'options' => [
                 // version and region are required
                 'version' => '2006-03-01',
