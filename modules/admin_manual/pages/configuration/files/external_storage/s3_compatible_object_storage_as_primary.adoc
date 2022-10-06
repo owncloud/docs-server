@@ -16,7 +16,7 @@ NOTE: Even if the ownCloud log file is stored in an alternate location (by chang
 
 That said, {oc-marketplace-url}/apps/objectstore[Object Storage Support] (`objectstore`) is still available, but the {oc-marketplace-url}/apps/files_primary_s3[S3 Primary Object Storage] app is the preferred and only supported way to provide S3 storage support as primary storage. ownCloud provides consulting for migrations from `objectstore` -> `files_primary_s3`.
 
-[NOTE] 
+[NOTE]
 ====
 Consider the following differentiation:
 
@@ -47,6 +47,11 @@ Read the following implications carefully **BEFORE** you start using `files_prim
 . When using S3 primary storage with multiple buckets, it is _not recommended_ to use the command to transfer file ownership between users
 (xref:configuration/server/occ_command.adoc#the-filestransfer-ownership-command[occ files:transfer-ownership])
 as shares on the files can get lost. The reason for this is that file IDs are changed during such cross-storage move operations.
+
+[IMPORTANT]
+====
+As ownCloud only stores the binary data in S3, while the metadata of the files is still stored on the DB, a regular database backup is highly recommended, as this is also needed for recovery in addition to the S3 backup!
+====
 
 == Configuration
 
