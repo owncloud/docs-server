@@ -132,9 +132,12 @@ If you want to use SSL certificates with MyQnapCloud as a DDNS service, add a re
 
 [source,php]
 ----
-  'overwriteprotocol' => 'https',
-  'overwritehost' => 'domain.myqnapcloud.com:4490',
-  'overwrite.cli.url' => 'https://domain.myqnapcloud.com:4490',
+<?php
+CONFIG = array(
+    'overwriteprotocol' => 'https',
+    'overwritehost' => 'domain.myqnapcloud.com:4490',
+    'overwrite.cli.url' => 'https://domain.myqnapcloud.com:4490',
+);
 ----
 
 For more information on command-line access, see below.
