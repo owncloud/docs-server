@@ -6,17 +6,23 @@
 :vda_url: https://www.vda.de/de/themen/digitalisierung/daten/informationssicherheit
 :novapath_url: https://www.m-und-h.de/en-novapath/
 :msft_azure_info_protection_url: https://azure.microsoft.com/en-us/services/information-protection/
+:ocis_youtube_long_url: https://www.youtube.com/watch?v=ke2QuznI_9g
+:ocis_youtube_short_url: ke2QuznI_9g
+
+:description: When dealing with large amounts of data in an enterprise, it is essential to have mechanisms in place that allow you to stay in control of data flows.
 
 == Introduction
 
-When dealing with large amounts of data in an enterprise, it is essential to have mechanisms in place that allow you to stay in control of data flows.
-To implement such mechanisms the first step to take is to define guidelines that describe how the content of different security levels have to be treated.
+{description} To implement such mechanisms the first step to take is to define guidelines that describe how the content of different security levels have to be treated.
+
+See the following in-line YouTube video for more details or use the link:{ocis_youtube_long_url}[link, window=_blank] to view it in a separate browser tab.
+
+.Document Classification and Policy Enforcement with ownCloud - ownCloud Conference 2018
+video::{ocis_youtube_short_url}[youtube]
 
 Depending on the industry, such information security guidelines can originate from regulatory requirements, from recommendations of industry associations, or they can be self-imposed if there's no external factor but internal risk management requirements that demand special treatment for specific information.
 
-The leading information security standard {iso_27001_url}[ISO 27001] 
-defines guidelines for managing information security which can be certified.
-More specifically:
+The leading information security standard {iso_27001_url}[ISO 27001] defines guidelines for managing information security which can be certified. More specifically:
 
 . Information should enter an asset inventory (A.8.1.1)
 . Information should be classified (A.8.2.1)
