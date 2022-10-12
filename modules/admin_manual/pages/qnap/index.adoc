@@ -117,18 +117,28 @@ Create an entry like in the following example with the correct IP address:
 <?php
 CONFIG = array(
     'overwriteprotocol' => 'https',
-    'overwritehost' => '203.0.113.0',
-    'overwrite.cli.url' => 'https://203.0.113.0/owncloud/',
+    'overwritehost' => '203.0.113.0:4490',
+    'overwrite.cli.url' => 'https://203.0.113.0:4490/',
 );
 ----
 
-ownCloud on QNAP is set up as a subdirectory by default.
-
 You may also want to check out the QNAP FAQ:
-https://www.qnap.com/en-us/how-to/faq/article/how-do-i-access-the-files-stored-on-my-nas-at-home-when-im-outside
+https://www.qnap.com/en-us/how-to/faq/article/how-do-i-access-the-files-stored-on-my-nas-at-home-when-im-outside[QNAP: How do I access the files stored on my NAS at home when I’m outside?]
 
-If you want to use SSL certificates for increased security, check out the respective QNAP article:
-https://www.qnap.com/en/how-to/tutorial/article/how-to-use-ssl-certificates-to-increase-the-connection-security-to-your-qnap-nas
+If you want to use SSL certificates for increased security, check out the respective article:
+https://www.qnap.com/en/how-to/tutorial/article/how-to-use-ssl-certificates-to-increase-the-connection-security-to-your-qnap-nas[QNAP: How to Use SSL Certificates to Increase the Connection Security to your QNAP NAS]
+
+If you want to use SSL certificates with MyQnapCloud as a DDNS service, add a reverse proxy setup as described in this article: https://www.qnap.com/en/how-to/tutorial/article/how-to-use-reverse-proxy-to-improve-secure-remote-connections[QNAP: How to use Reverse Proxy to improve secure remote connections?]. To do so, add a reverse proxy from your `myqnapcloud` domain as your source and `http://localhost:4490` as destination. Make sure to change the ownCloud config (`custom/user.config.php`) to use your `myqnapcloud` domain with following data:
+
+[source,php]
+----
+<?php
+CONFIG = array(
+    'overwriteprotocol' => 'https',
+    'overwritehost' => 'domain.myqnapcloud.com:4490',
+    'overwrite.cli.url' => 'https://domain.myqnapcloud.com:4490',
+);
+----
 
 For more information on command-line access, see below.
 
