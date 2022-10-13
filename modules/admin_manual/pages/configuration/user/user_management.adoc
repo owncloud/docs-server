@@ -31,25 +31,17 @@ image:configuration/user/users-page-gear.png[image]
 _Login Name (Username)_::
   The unique ID of an ownCloud user. Note that it **cannot** be changed post creating the user. The user can login either using the login name or the E-mail address. 
 _Full Name_::
-  The user’s display name that appears on file shares, the ownCloud Web
-  interface, and E-mails. Admins and users may change the Full Name
-  anytime. If the Full Name is not set, it defaults to the login name.
+  The user’s display name that appears on file shares, the ownCloud Web interface, and E-mails. Admins and users may change the Full Name anytime. If the Full Name is not set, it defaults to the login name.
 _Password_::
-  The admin sets the new user’s first password. Both, the user and the
-  admin can change the user’s password at anytime.
+  The admin sets the new user’s first password. Both, the user and the admin can change the user’s password at anytime.
 _E-Mail_::
-  The admin sets the new user’s E-Mail. The user then gets an E-Mail to set the password.
-  Both, the user and the admin can change the user’s E-Mail at anytime.
+  The admin sets the new user’s E-Mail. The user then gets an E-Mail to set the password. Both, the user and the admin can change the user’s E-Mail at anytime.
 _Groups_::
-  You may create system (non-LDAP) groups and assign system group memberships to users. By
-  default, new users are not assigned to any groups.
+  You may create system (non-LDAP) groups and assign system group memberships to users. By default, new users are not assigned to any groups.
 _Group Admin_::
-  Group admins are granted administrative privileges on system groups,
-  and can add new users and remove existing users from those groups.
+  Group admins are granted administrative privileges on system groups, and can add new users and remove existing users from those groups.
 _Quota_::
-  The maximum disk space assigned to each user. Any user that exceeds
-  the quota cannot upload or sync data. You have the option to include
-  external storage in user quotas.
+  The maximum disk space assigned to each user. Any user that exceeds the quota cannot upload or sync data. You have the option to include external storage in user quotas.
 
 == Creating a New User
 
