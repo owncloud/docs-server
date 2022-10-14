@@ -192,7 +192,7 @@ You now have a configurable option in `config.php` that controls whether externa
 
 === Storage Space Considerations
 
-Metadata (such as thumbnails, temporary files, and encryption keys) takes up about 10% of disk space but is not counted against user quotas. Users can check their used and available space on their Personal pages. Only files that originate from a user count against that user's quota, not files shared by other users. For example, if you upload files to a different user’s share, those files count against your quota. If you re-share a file that another user shared with you, that file does not count against your quota, but the originating user’s.
+Metadata (such as thumbnails, temporary files, and encryption keys) takes up about 10% of disk space but is not counted against user quotas. Users can check their used and available space on their Personal pages. Only files that originate from a user, or are in a share owned by the user, count against that user's quota, not file shares received from other users. For example, if you upload files to a different user’s share, those files count against that user's quota. If you share a folder with other user's and they add files to the folder then those files count against your quota. If you re-share a file that another user shared with you, that file does not count against your quota, but the originating user’s.
 
 Encrypted files are a little larger than unencrypted files; the unencrypted size is calculated against the user’s quota.
 
