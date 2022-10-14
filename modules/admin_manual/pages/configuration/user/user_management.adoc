@@ -9,6 +9,8 @@
 
 {description}
 
+Note that most user-related tasks can also be managed via xref:configuration/server/occ_command.adoc#user-commands[occ commands for managing users].
+
 == Default View
 
 The **default view** displays basic information about your users.
@@ -27,27 +29,19 @@ image::configuration/user/users-page-gear.png[image]
 **User accounts** have the following **properties**:
 
 _Login Name (Username)_::
-  The unique ID of an ownCloud user, and it cannot be changed.
+  The unique ID of an ownCloud user. Note that it **cannot** be changed after creating the user. The user can log in either using the login name or the e-mail address. 
 _Full Name_::
-  The user’s display name that appears on file shares, the ownCloud Web
-  interface, and emails. Admins and users may change the Full Name
-  anytime. If the Full Name is not set it defaults to the login name.
+  The user’s display name that appears on file shares, the ownCloud Web interface and emails. Admins and users may change the full name anytime. If the full name is not set, it defaults to the login name.
 _Password_::
-  The admin sets the new user’s first password. Both the user and the
-  admin can change the user’s password at anytime.
+  The admin sets the new user’s first password. Both, the user and the admin can change the user’s password at anytime.
 _E-Mail_::
-  The admin sets the new user’s E-Mail. The user then gets an E-Mail to set the password.
-  Both the user and the admin can change the user’s E-Mail at anytime.
+  The admin sets the new user’s e-mail. The user then gets an e-mail to set the password. Both, the user and the admin can change the user’s e-mail at anytime.
 _Groups_::
-  You may create system (non-LDAP) groups and assign system group memberships to users. By
-  default new users are not assigned to any groups.
+  You may create system (non-LDAP) groups and assign system group memberships to users. By default, new users are not assigned to any groups.
 _Group Admin_::
-  Group admins are granted administrative privileges on system groups,
-  and can add new users and remove existing users from those groups.
+  Group admins are granted administrative privileges on system groups and can add new users and remove existing users from those groups.
 _Quota_::
-  The maximum disk space assigned to each user. Any user that exceeds
-  the quota cannot upload or sync data. You have the option to include
-  external storage in user quotas.
+  The maximum disk space assigned to each user. Any user that exceeds the quota cannot upload or sync data. You have the option to include external storage in user quotas.
 
 == Creating a New User
 
@@ -59,10 +53,7 @@ To create a user account:
 
 image:configuration/user/users-page-new-user.png[image]
 
-Login names may contain letters (a-z, A-Z), numbers (0-9), dashes (-),
-underscores (_), periods (.) and at signs (@). After creating the user,
-you may fill in their *Full Name* if it is different than the login
-name, or leave it for the user to complete.
+Login names may contain letters (a-z, A-Z), numbers (0-9), dashes (-), underscores (_), periods (.) and at signs (@). After creating the user, you may fill in their *Full Name* if it is different than the login name, or leave it for the user to complete.
 
 == Password Reset
 
@@ -81,10 +72,7 @@ TIP: See xref:configuration/files/encryption/encryption_configuration.adoc[Encry
 
 === Renaming a User
 
-Each ownCloud user has two names: a unique *Login Name* used for
-authentication, and a *Full Name*, which is their display name. You can
-edit the display name of a user, but you cannot change the login name of
-any user.
+Each ownCloud user has two names: a unique *Login Name* used for authentication, and a *Full Name*, which is their display name. You can edit the display name of a user, but you cannot change the login name of any user.
 
 To set or change a user’s display name:
 
@@ -96,14 +84,11 @@ To set or change a user’s display name:
 
 image::configuration/user/delete-user-confirmation.png[The ownCloud delete user confirmation dialog]
 
-To delete a user, hover your cursor over their name on the *Users* page, and click the trashcan icon that appears at the far right. 
-You’ll then see a confirmation dialog appear, asking if you’re sure that you want to delete the user. 
+To delete a user, hover your cursor over their name on the *Users* page and click the trashcan icon that appears at the far right. You’ll then see a confirmation dialog appear, asking if you’re sure that you want to delete the user. 
 
-If you click btn:[Yes], the user is permanently deleted, including all of the files owned by the user, including all files they have shared. 
-If you need to preserve the user’s files and shares, you must first download them from your ownCloud Files page, (which compresses them into a zip file). 
+If you click btn:[Yes], the user is permanently deleted, including all of the files owned by the user, including all files they have shared. If you need to preserve the user’s files and shares, you must first download them from your ownCloud Files page, (which compresses them into a zip file). 
 
-Alternatively, you can use a sync client to copy them to your local computer.
-If you click btn:[No], the confirmation dialog will disappear and the user is not deleted.
+Alternatively, you can use a sync client to copy them to your local computer. If you click btn:[No], the confirmation dialog will disappear and the user is not deleted.
 
 TIP: See xref:configuration/files/file_sharing_configuration.adoc[File Sharing Configuration] to learn how to create persistent file shares that survive user deletions.
 
@@ -111,20 +96,13 @@ TIP: See xref:configuration/files/file_sharing_configuration.adoc[File Sharing C
 
 ownCloud has two types of administrators: 
 
-* *ownCloud Administrators* have full rights on your ownCloud server, and can
-access and modify all settings. To assign the ownCloud Administrators
-role to a user, simply add them to the `admin` group.
+* *ownCloud Administrators* have full rights on your ownCloud server and can access and modify all settings. To assign the ownCloud administrator role to a user, simply add them to the `admin` group.
 
-* *Group Administrators*. Group administrators have the rights to create,
-edit and delete users in their assigned system (non-LDAP) groups. Use the dropdown menus in the Group Admin column to assign group admin privileges.
+* *Group Administrators*. Group administrators have the rights to create, edit and delete users in their assigned system (non-LDAP) groups. Use the dropdown menus in the Group Admin column to assign group admin privileges.
 
 == Managing Groups
 
-You can assign new users to groups when you create them, and create new
-groups when you create new users. You may also use the *Add Group*
-button at the top of the left pane to create new groups. New group
-members will immediately have access to file shares that belong to their
-new groups.
+You can assign new users to groups when you create them, and create new groups when you create new users. You may also use the btn:[Add Group] button at the top of the left pane to create new groups. New group members will immediately have access to file shares that belong to their new groups.
 
 == Enabling Custom Groups
 
@@ -136,13 +114,11 @@ There are 4 types of quota settings in ownCloud when dealing with LDAP users.
 
 === Quota Field
 
-Found in menu:User Authentication[the Advanced Tab > Special Attributes],
-this setting overwrites the rest. If set, this is what will be set for an LDAP user’s quota in ownCloud.
+Found in menu:User Authentication[the Advanced Tab > Special Attributes], this setting overwrites the rest. If set, this is what will be set for an LDAP user’s quota in ownCloud.
 
 === Quota Default
 
-Found in menu:User Authentication[the Advanced Tab > Special Attributes], this is the fallback option
-if no quota field is defined.
+Found in menu:User Authentication[the Advanced Tab > Special Attributes], this is the fallback option if no quota field is defined.
 
 === User Quota
 
@@ -150,65 +126,34 @@ This is what you set in the web UI drop down menu, and is how you set user quota
 
 === Default Quota
 
-This will be set if no quota is set, and is found in menu:Users Tab[Gear Wheel > Default Quota].
-If *Quota Field* is not set, but *Quota Default* is, and a systems administrator tries to set
-a quota for an LDAP user with *User Quota*, it will not work, since it is overridden by
-*Quota Default*.
+This will be used if no quota is set and is found in menu:Users Tab[Gear Wheel > Default Quota]. If the *Quota* is not set, but *Default Quota* is, and a systems administrator tries to set a quota for an LDAP user with *User Quota*, it will not work since it is overridden by *Default Quota*.
 
-Click the btn:[gear] icon on the lower left pane to set a default storage quota.
-This is automatically applied to new users. You may assign a different
-quota to any user by selecting from the *Quota* dropdown, selecting
-either a preset value or entering a custom value. When you create custom
-quotas, use the normal abbreviations for your storage values such as 500
-MB, 5 GB, 5 TB, and so on.
-
-'''
+Click the btn:[gear] icon on the lower left pane to set a default storage quota. This is automatically applied to new users. You may assign a different quota to any user by selecting a preset value from the *Quota* dropdown or by entering a custom value. When you create custom quotas, use the usual abbreviations for your storage values such as 500 MB, 5 GB, 5 TB, and so on.
 
 === External Storage Quota
 
-You now have a configurable option in `config.php` that controls whether
-external storage is counted against user’s quotas. This is still
-experimental, and may not work as expected. The default is to not count
-external storage as part of user storage quotas. If you prefer to
-include it, then change the default `false` to `true`.:
+You now have a configurable option in `config.php` that controls whether external storage is counted against user’s quotas. This is still experimental and may not work as expected. The default is to not counting external storage as part of user storage quotas. If you prefer to include it, then change the default `false` to `true`.:
 
 [source,php]
 ----
 'quota_include_external_storage' => false,
 ----
 
-'''
 === Storage Space Considerations
 
-Metadata (such as thumbnails, temporary files, and encryption keys)
-takes up about 10% of disk space, but is not counted against user
-quotas. Users can check their used and available space on their Personal
-pages. Only files that originate with users count against their quotas,
-and not files shared with them that originate from other users. For
-example, if you upload files to a different user’s share, those files
-count against your quota. If you re-share a file that another user
-shared with you, that file does not count against your quota, but the
-originating user’s.
+Metadata (such as thumbnails, temporary files, and encryption keys) takes up about 10% of disk space but is not counted against user quotas. Users can check their used and available space on their Personal pages. Only files that originate from a user count against that user's quota, not files shared by other users. For example, if you upload files to a different user’s share, those files count against your quota. If you re-share a file that another user shared with you, that file does not count against your quota, but the originating user’s.
 
-Encrypted files are a little larger than unencrypted files; the
-unencrypted size is calculated against the user’s quota.
+Encrypted files are a little larger than unencrypted files; the unencrypted size is calculated against the user’s quota.
 
-Deleted files that are still in the trash bin do not count against
-quotas. The trash bin is set at 50% of quota. Deleted file aging is set
-at 30 days. When deleted files exceed 50% of quota then the oldest files
-are removed until the total is below 50%.
+Deleted files that are still in the trash bin do not count against quotas. The trash bin is set to 50% of quota. Deleted file aging is set to 30 days. When deleted files exceed 50% of quota, then the oldest files are removed until the total is below 50%.
 
-'''
 === Versions
 
-When version control is enabled, the older file versions are not counted
-against quotas.
+If version control is enabled, the older file versions are not counted against quotas.
 
-'''
 === Public Links
 
-When a user creates a public link share via URL and allows uploads, all
-uploaded files count against that user’s quota.
+When a user creates a public link share via URL and allows uploads, all uploaded files count against that user’s quota.
 
 == User GDPR Requests
 
@@ -296,6 +241,7 @@ The following command lists all available user homes. Note a home only gets list
 . To list all users from a users home root directory, use the following command:
 +
 The following command lists all users from a given home.
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} user:home:list-users /var/www/owncloud/data
