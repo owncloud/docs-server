@@ -334,7 +334,7 @@ During an upload these actions are taken:
 * The upload is blocked.
 * The event is logged in the owncloud server log.
 * The event is reported and/or logged by the client / Web UI.
-* The affected file will be deleted on the desktop by the desktop client and therefor be lost completely, as the desktop client does not support a local trashbin.
+* The affected file will be deleted on the desktop by the desktop client and therefore be lost completely, as the desktop client does not support a local trash bin.
 
 During a background scan the app can take one of two actions:
 
