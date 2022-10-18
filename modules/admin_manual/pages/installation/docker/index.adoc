@@ -50,7 +50,7 @@ If you only want to take a peek and are content with SQLite as database, which i
 
 [source,docker,subs="attributes+"]
 ----
-docker run --rm --name oc-eval -d -e OWNCLOUD_DOMAIN=localhost:{std-port-http} -p{std-port-http}:{std-port-http} owncloud/server
+docker run --rm --name oc-eval -d -p{std-port-http}:{std-port-http} owncloud/server
 ----
 
 This starts a docker container with the name "oc-eval" in the background (option `-d`). `owncloud/server` is the docker image downloaded from Docker Hub. If you don't start the container with option `-d`, the logs will be displayed in the shell. If you are running it in the background as in the example above, you can display the logs with the command:
@@ -90,7 +90,7 @@ The configuration:
 * Uses separate _MariaDB_ and _Redis_ containers.
 * Mounts the data and MySQL data directories on the host for persistent storage.
 
-The following instructions assume you install locally. For remote access, the value of OWNCLOUD_DOMAIN must be adapted.
+The following instructions assume you install locally. For remote access, the value of `OWNCLOUD_DOMAIN` and `OWNCLOUD_TRUSTED_DOMAINS` must be adapted.
 
 . Create a new project directory. Then copy and paste the sample `docker-compose.yml` from this page
 into that new directory.
@@ -111,6 +111,10 @@ Only a few settings are required, these are:
 | `OWNCLOUD_DOMAIN`
 | The ownCloud domain
 | `localhost:{std-port-http}`
+
+| `OWNCLOUD_TRUSTED_DOMAINS`
+| The ownCloud trusted domans
+| `localhost`
 
 | `ADMIN_USERNAME`
 | The admin username
@@ -151,6 +155,7 @@ Create the environment configuration file
 cat << EOF > .env
 OWNCLOUD_VERSION={latest-server-version}
 OWNCLOUD_DOMAIN=localhost:{std-port-http}
+OWNCLOUD_TRUSTED_DOMAINS=localhost
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=admin
 HTTP_PORT={std-port-http}
