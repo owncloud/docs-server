@@ -90,7 +90,7 @@ The configuration:
 * Uses separate _MariaDB_ and _Redis_ containers.
 * Mounts the data and MySQL data directories on the host for persistent storage.
 
-The following instructions assume you install locally. For remote access, the value of `OWNCLOUD_DOMAIN` and `OWNCLOUD_TRUSTED_DOMAINS` must be adapted.
+The following instructions assume you install locally. For remote access, the value of xref:configuration/server/config_sample_php_parameters.adoc#override-cli-url[OWNCLOUD_DOMAIN] and xref:configuration/server/config_sample_php_parameters.adoc#define-list-of-trusted-domains-that-users-can-log-into[OWNCLOUD_TRUSTED_DOMAINS] must be adapted.
 
 . Create a new project directory. Then copy and paste the sample `docker-compose.yml` from this page
 into that new directory.
