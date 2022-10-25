@@ -1110,3 +1110,45 @@ Usage:
 }
 ...
 ----
+
+=== Organizing feature files
+It may become difficult to maintain or even understand feature files as they grow larger. Now that we have a general background about the scenarios and steps in a feature file, the following things should be kept in mind while writing a feature file:
+
+==== Adding comments
+Feature files are itself a documentation of the feature being tested. It is a good practice to add comments in the code but for feature files, mostly feature & scenario descriptions should be prioritized. However, there are some cases where comments are necessary. An example might be to add a comment to a scenario explaining the step that shows the bug, as well as specifying the replacement after the bug is fixed.
+
+==== Adding tags
+A scenario can have multiple tags. Tags not only help to run a subset of scenarios, but also provides the documentation of the scenario. For example, a scenario tagged with `@notToImplementOnOcis` can be used to track the scenarios that are not to be implemented for the oCIS server. A scenario can also be tagged with related issue if it describes or refers to a bug. This makes it easier to track bugs and their fixes. For example, a scenario tagged with `@issue-123` can be used to track the scenario that is related to the issue with id `123` in the respective repository.
+
+The following two factors might complicate the process of assigning/removing tags:
+
+- *Should we leave closed issue tags in the scenarios?* - Yes, we should. Thi is purely for the purpose of documentation. The same issue may reappear in the future or something similar to it may happen. So, it is better to keep the tags in the scenarios.
+
+- *Which issue to tag in case of multiple issues?* - In cases where a scenario pertains to multiple issues, it should be tagged with the most relevant issue. A tagged issue should have a clearer description or more relevant discussion.
+
+==== Inter-scenario spacings
+Since we follow the line numbers of the scenarios in the expected failure files, the scenarios in the feature files should be maintained in a more stable way. This means that the scenarios should not be moved around more often or gaps should be made consistent. For this, the following things should be kept in mind:
+
+- Between two scenarios, one blank line should be left.
+- One line below the gap is reserved for the tags.
+
+There will be two lines of gaps if a scenario has no assigned tags.
+
+Usage:
+[source,gherkin]
+----
+...
+                                    # inter-scenario gap
+@issue-123                          # reserved tag line
+Scenario: Scenario 1
+  Given ...
+  When ...
+  Then ...
+                                    # inter-scenario gap
+                                    # reserved tag line
+Scenario: Scenario 2
+  Given ...
+  When ...
+  Then ...
+...
+----
