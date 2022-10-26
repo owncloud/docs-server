@@ -94,7 +94,7 @@ sudo sha256sum -c {oc-complete-name}tar.bz2.sha256 < {oc-complete-name}.tar.bz2
 ----
 wget {oc-complete-base-url}/{oc-complete-name}.tar.bz2.asc
 
-gpg --verify {oc-complete-name}.tar.bz2.asc o{oc-complete-name}.tar.bz2
+gpg --verify {oc-complete-name}.tar.bz2.asc {oc-complete-name}.tar.bz2
 ----
 
 === Script-Guided Installation
