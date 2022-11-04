@@ -30,7 +30,7 @@ There are three ways to upgrade your ownCloud server:
 
 1. *(Recommended)* Perform a xref:maintenance/manual_upgrade.adoc[manual upgrade], using the
 https://owncloud.com/download-server/[latest ownCloud release].
-2. *(Alternative for simple installations)* Click the [Open Updater] button in the Admin General page. This button is available, when the online updater has detected a new version available. 
+2. *(Alternative for simple installations)* Click the [Open Updater] button in the Admin General page. This button is available, when the online updater has detected a new version available. This is not the recommended upgrade procedure, as builtin core upgrade scripts are error prone. If you see e.g. 'Internal Server Error' during the process, then the command `occ upgrade` is most likely able run the proper repair steps to fix that.
 3. *(Discouraged)* Use xref:maintenance/package_upgrade.adoc[your distribution’s package manager], in conjunction with our official ownCloud repositories. *Note:* This approach should not be used unattended nor in clustered setups. We discourage upgrades with Linux Package Manager because you might encounter unwanted side effects.
 
 
