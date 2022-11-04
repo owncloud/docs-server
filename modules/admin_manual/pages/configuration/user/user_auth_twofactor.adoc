@@ -16,6 +16,25 @@ If a two-factor provider app is enabled, it is enabled for all users by default 
 
 TIP: For the opt-in function to work, ImageMagick and php-imagick are required to create the QR code. Depending on your operating system, these packages may need to be installed manually.
 
+== Using 2FA with ownCloud Desktop and Mobile Apps
+
+ownCloud Desktop and Mobile Apps support 2FA login with browser-based login flows.
+
+=== Enable OAuth 2.0 App (recommended)
+
+ownCloud Desktop client will open the login page in the system web browser, and ownCloud Mobile Apps will open the login page in an embedded web view. After entering the regular credentials, users will see a second page, where they need to enter the second factor.
+
+Here you can find more information:
+
+- https://doc.owncloud.com/server/next/admin_manual/configuration/user/user_oauth2.html
+
+=== App Passwords / Tokens
+
+Without the OAuth 2.0 App, users need to log in to their ownCloud account in a regular web browser first, then create an app password or tokens, which can be used in the ownCloud Desktop and Mobile apps.
+
+Here you can find more information:
+
+- https://doc.owncloud.com/webui/next/classic_ui/personal_settings/security.html#app-passwords-tokens
 
 == Troubleshooting
 
