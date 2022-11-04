@@ -59,14 +59,14 @@ Copy the following relevant example part to your `config.php` file.
 
 [NOTE]
 ====
-Any object store needs to implement `\\OCP\\Files\\ObjectStore\\IObjectStore` and can be passed parameters in the constructor with the `arguments` key, as in the following example:
+Any object store needs to implement `\OCP\Files\ObjectStore\IObjectStore` and can be passed parameters in the constructor with the `arguments` key, as in the following example:
 
 [source,php]
 ----
 <?php
 $CONFIG = [
     'objectstore' => [
-        'class' => 'Implementation\\Of\\OCP\\Files\\ObjectStore\\IObjectStore',
+        'class' => 'Implementation\Of\OCP\Files\ObjectStore\IObjectStore',
         'arguments' => [
             ...
         ],
@@ -87,17 +87,29 @@ $CONFIG = [
     'objectstore' => [
         'class' => 'OCA\Files_Primary_S3\S3Storage',
         'arguments' => [
-            // replace with your bucket
+              //
+              // replace with your bucket
             'bucket' => 'owncloud',
-            // uncomment to enable server side encryption
-            //'serversideencryption' => 'AES256',
+              //
+              // uncomment to indicate available storage size in the objectstore, in bytes (in this example 1TB),
+              // without this setting app relying on available storage might be limited in funcionality e.g. metrics app
+              //'availableStorage' => 1099511627776,
+              //
+              // uncomment to enable server side encryption
+              //'serversideencryption' => 'AES256',
+              //
+              // part size, in bytes, to use when doing a multipart upload. this must between 5 MB and 5 GB, inclusive.
+            'part_size' => 5242880,
+              // maximum number of concurrent UploadPart operations allowed during the multipart upload.
+            'concurrency' => 5,
+              // storage specific options
             'options' => [
-                // version and region are required
+                  // version and region are required
                 'version' => '2006-03-01',
-                // change to your region
+                  // change to your region
                 'region'  => 'eu-central-1',
                 'credentials' => [
-                    // replace key and secret with your credentials
+                      // replace key and secret with your credentials
                     'key' => 'owncloud123456',
                     'secret' => 'secret123456',
                 ],
@@ -119,23 +131,35 @@ $CONFIG = [
     'objectstore' => [
         'class' => 'OCA\Files_Primary_S3\S3Storage',
         'arguments' => [
-            // replace with your bucket
+              //
+              // replace with your bucket
             'bucket' => 'owncloud',
-            // uncomment to enable server side encryption
-            //'serversideencryption' => 'AES256',
+              //
+              // uncomment to indicate available storage size in the objectstore, in bytes (in this example 1TB),
+              // without this setting app relying on available storage might be limited in funcionality e.g. metrics app
+              //'availableStorage' => 1099511627776,
+              //
+              // uncomment to enable server side encryption
+              //'serversideencryption' => 'AES256',
+              //
+              // part size, in bytes, to use when doing a multipart upload. this must between 5 MB and 5 GB, inclusive.
+            'part_size' => 5242880,
+              // maximum number of concurrent UploadPart operations allowed during the multipart upload.
+            'concurrency' => 5,
+              // storage specific options
             'options' => [
-                // version and region are required
+                  // version and region are required
                 'version' => '2006-03-01',
                 'region'  => '',
-                // replace key, secret and bucket with your credentials
+                  // replace key, secret and bucket with your credentials
                 'credentials' => [
-                    // replace key and secret with your credentials
+                      // replace key and secret with your credentials
                     'key'    => 'owncloud123456',
                     'secret' => 'secret123456',
                 ],
-                // replace the ceph endpoint with your rgw url
+                  // replace the ceph endpoint with your rgw url
                 'endpoint' => 'http://ceph:80/',
-                // Use path style when talking to ceph
+                  // Use path style when talking to ceph
                 'use_path_style_endpoint' => true,
             ],
         ],
@@ -155,16 +179,28 @@ $CONFIG = [
     'objectstore' => [
         'class' => 'OCA\Files_Primary_S3\S3Storage',
         'arguments' => [
-            // replace with your bucket
+              //
+              // replace with your bucket
             'bucket' => 'owncloud',
-            // uncomment to enable server side encryption
-            //'serversideencryption' => 'AES256',
+              //
+              // uncomment to indicate available storage size in the objectstore, in bytes (in this example 1TB),
+              // without this setting app relying on available storage might be limited in funcionality e.g. metrics app
+              //'availableStorage' => 1099511627776,
+              //
+              // uncomment to enable server side encryption
+              //'serversideencryption' => 'AES256',
+              //
+              // part size, in bytes, to use when doing a multipart upload. this must between 5 MB and 5 GB, inclusive.
+            'part_size' => 5242880,
+              // maximum number of concurrent UploadPart operations allowed during the multipart upload.
+            'concurrency' => 5,
+              // storage specific options
             'options' => [
-                // version and region are required
+                  // version and region are required
                 'version' => '2006-03-01',
                 'region'  => 'us-east-1',
                 'credentials' => [
-                    // replace key and secret with your credentials
+                      // replace key and secret with your credentials
                     'key' => 'owncloud123456',
                     'secret' => 'secret123456',
                 ],
@@ -187,22 +223,28 @@ $CONFIG = [
     'objectstore' => [
         'class' => 'OCA\Files_Primary_S3\S3Storage',
         'arguments' => [
-            // replace with your bucket
+              // replace with your bucket
             'bucket' => 'owncloud',
-            // uncomment to enable server side encryption
-            //'serversideencryption' => 'AES256',
+              // uncomment to enable server side encryption
+              //'serversideencryption' => 'AES256',
+              //
+              // part size, in bytes, to use when doing a multipart upload. this must between 5 MB and 5 GB, inclusive.
+            'part_size' => 5242880,
+              // maximum number of concurrent UploadPart operations allowed during the multipart upload.
+            'concurrency' => 5,
+              //
             'options' => [
-                // version and region are required
+                  // version and region are required
                 'version' => 'latest',
-                // replace with your region
+                  // replace with your region
                 'region'  => 'us-west-004',
                 'credentials' => [
-                    // replace key and secret with your credentials
+                      // replace key and secret with your credentials
                     'key' => 'owncloud123456',
                     'secret' => 'secret123456',
                 ],
                 'use_path_style_endpoint' => true,
-                // replace with your endpoint
+                  // replace with your endpoint
                 'endpoint' => 'https://s3.us-west-004.backblazeb2.com',
             ],
         ],
