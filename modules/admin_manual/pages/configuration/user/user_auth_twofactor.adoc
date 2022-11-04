@@ -30,7 +30,7 @@ Here you can find more information:
 
 === App Passwords / Tokens
 
-Without OAuth 2.0 App, users need to login to their ownCloud account in regular web browser first, then create an app password / tokens, which then can be used in the ownCloud Desktop and Mobile apps.
+Without the OAuth 2.0 App, users need to log in to their ownCloud account in a regular web browser first, then create an app password or tokens, which can be used in the ownCloud Desktop and Mobile apps.
 
 Here you can find more information:
 
