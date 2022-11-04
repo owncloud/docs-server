@@ -18,7 +18,7 @@ TIP: For the opt-in function to work, ImageMagick and php-imagick are required t
 
 == Using 2FA with ownCloud Desktop and Mobile Apps
 
-ownCloud Desktop and Mobile Apps support 2FA login with browser based login flows.
+ownCloud Desktop and Mobile Apps support 2FA login with browser-based login flows.
 
 === Enable OAuth 2.0 App (recommended)
 
