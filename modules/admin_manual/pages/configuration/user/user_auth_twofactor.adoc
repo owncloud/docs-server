@@ -20,7 +20,7 @@ TIP: For the opt-in function to work, ImageMagick and php-imagick are required t
 
 ownCloud Desktop and Mobile Apps support 2FA login with browser based login flows.
 
-=== Enable OAuth 2.0 App
+=== Enable OAuth 2.0 App (recommended)
 
 ownCloud Desktop client will open the login page in the system web browser, and ownCloud Mobile Apps will open the login page in an embedded web view. After entering the regular credentials, users will see a second page, where they need to enter the second factor.
 
