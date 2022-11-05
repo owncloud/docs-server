@@ -23,6 +23,7 @@ The OAuth 2.0 authorization framework enables a third-party application to obtai
 Here is an overview of how the process works:
 
 // Based on the kroki extension. Marked for ease of finding. Be aware that this renders by default to svg which has issues when building pdf. ATM, this is not an issue as this document is not part of the pdf (too deep in the level limit) and because the extension is not added to the pdf build call. This would need an adjustment of the script. Be aware that tabs.js MUST be excluded in case (html only)! https://github.com/Mogztter/asciidoctor-kroki
+
 [ditaa, "OAuth2 workflow diagram"]
 ----
      +----------+
@@ -170,7 +171,7 @@ for further information about client registration.
 With the authorization code, the client can request an access token using the access token URL.
 {client-authentication-url}[Client authentication] is done using basic authentication with the client identifier as username and the client secret as a password. The following URL parameters have to be specified:
 
-[width="100%",cols="15%,50%,50%",options="header",]
+[width="100%",cols="15%,60%,50%",options="header",]
 |==========================
 | Parameter
 | Required
@@ -178,7 +179,7 @@ With the authorization code, the client can request an access token using the ac
 
 | `grant_type`
 |
-| Either `authorization_code` or `refresh_token`.
+| Use either `authorization_code` or `refresh_token`.
 
 | `code`
 | If the grant type `authorization_code` is used.
