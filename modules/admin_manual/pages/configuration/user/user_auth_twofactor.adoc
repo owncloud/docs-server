@@ -20,7 +20,7 @@ TIP: For the opt-in function to work, ImageMagick and php-imagick are required t
 
 ownCloud Desktop and Mobile Apps support 2FA login with browser-based login flows.
 
-NOTE: OAuth 2.0 ist the recommended authentication method for clients. 
+NOTE: OAuth 2.0 is the recommended authentication method for clients. 
 
 === Enable OAuth 2.0 App
 
