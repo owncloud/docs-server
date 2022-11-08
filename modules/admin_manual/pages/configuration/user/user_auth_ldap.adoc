@@ -95,7 +95,8 @@ We recommend that you have a special LDAP system user for this.
 
 Example:
 
-* `uid=owncloudsystemuser,cn=sysusers,dc=my-company,dc=com`
+* `uid=owncloudsystemuser,cn=sysusers,dc=my-company,dc=com`   (OpenLDAP)
+* `Administrator@my-company.com`    (MicroSoft AD-Server)
 --
 
 Password::
