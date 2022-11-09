@@ -65,7 +65,7 @@ After that, add an Alias directive for the `/.well-known/acme-challenge` locatio
 
 [source,apache]
 ----
-<VirtualHost *.80>
+<VirtualHost *:80>
   ServerName mydom.tld
 
   Alias /.well-known/acme-challenge/ /var/www/letsencrypt/.well-known/acme-challenge/
