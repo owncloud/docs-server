@@ -89,13 +89,21 @@ Example:
 User DN::
 +
 --
-The name as DN of a user who has permissions to do searches in the LDAP directory. 
-Leave it empty for anonymous access. 
-We recommend that you have a special LDAP system user for this.
+The name as DN of a user who has permissions to do searches in the LDAP directory. Leave it empty for anonymous access. We recommend that you have a special LDAP system user for this.
 
 Example:
 
-* `uid=owncloudsystemuser,cn=sysusers,dc=my-company,dc=com`
+[width=100,cols="80%,30%",options=header]
+|===
+| User DN
+| LDAP Directory
+
+| `uid=owncloudsystemuser,cn=sysusers,dc=my-company,dc=com`
+| OpenLDAP
+
+| `Administrator@my-company.com`
+| MicroSoft AD-Server
+|===
 --
 
 Password::
