@@ -498,7 +498,7 @@ To delete an existing rule, click the btn:[rubbish bin] icon on the far right-ha
 
 {icap-url}[ICAP] is an open standard supported by many antivirus products. With the release of the _Anti-Virus_ app 1.0.0, other virus scanners beside ClamAV can be used via ICAP if you are running it on an ownCloud Enterprise Edition.
 
-Currently the only tested and supported virus scanners, besides ClamAV, are _Kaspersky ScanEngine_, _McAfee Web Gateway_ and _FortiSandbox_ although far more products might simply work. The use of ICAP requires an enterprise license. The functionality can be tested without a license with a grace period of 24 hours.
+Currently the only tested and supported virus scanners, besides ClamAV, are _Kaspersky ScanEngine_, _McAfee Web Gateway_ and _FortiSandbox_. Due to the wide distribution of the ICAP standard, more products can be implemented on request. The use of ICAP requires an enterprise license. The functionality can be tested without a license with a grace period of 24 hours.
 
 === Installation
 
