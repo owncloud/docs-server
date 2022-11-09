@@ -510,7 +510,7 @@ https://datatracker.ietf.org/doc/html/rfc7662 for more information on token intr
 ....
 
 === Authenticate guests only with basic auth
-Allows guests only to be able to log in using basic auth. Other users will need to use
+Only guests are able to log in using basic auth. Other users will need to use
 another auth mechanisms (such as OIDC).
 
 ==== Code Sample
