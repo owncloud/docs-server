@@ -25,26 +25,26 @@ Native Mode::
 Out of the box, the ownCloud Anti-Virus extension works with {clamav-url}[Clam AntiVirus (ClamAV)] as the directly supported virus scanner. It detects all forms of malware including trojans, viruses and worms and scans compressed files, executables, image files, PDF, as well as many other file types. The ownCloud Anti-Virus application relies on the underlying ClamAV virus scanning engine, to which the admin points ownCloud when configuring the application. The ClamAV virus definitions need to be kept up to date in order to provide effective protection.
 
 ICAP::
-Starting with Anti-Virus version 1.0.0, the app also offers an ICAP integration *only available with Enterprise installations*. Admins can integrate their favorite enterprise-grade antivirus scanners through the open standard {icap-url}[Internet Content Adaptation Protocol (ICAP)]. With this set up, ownCloud can delegate the scanning of uploaded files to another machine, the ICAP server. The ICAP server then checks them and either greenlights them or, if malicious code is found, treats the offending file(s) as specified in the settings and notifies the ownCloud server. ownCloud can then act accordingly and based on the settings made reject the upload. Offloading the anti-virus scans to another dedicated server can greatly improve performance compared to running the ClamAV virus scanner on the same machine as ownCloud.
+Starting with Anti-Virus version 1.0.0, the app also offers an ICAP integration *only available with Enterprise installations*. Admins can integrate their favorite enterprise-grade antivirus scanners through the open standard {icap-url}[Internet Content Adaptation Protocol (ICAP)]. With this setup, ownCloud can delegate the scanning of uploaded files to another machine, the ICAP server. The ICAP server then checks them and either greenlights them or, if malicious code is found, treats the offending file(s) as specified in the settings and notifies the ownCloud server. ownCloud can then act accordingly and based on the settings made reject the upload. Offloading the anti-virus scans to another dedicated server can greatly improve performance compared to running the ClamAV virus scanner on the same machine as ownCloud.
 +
 Starting with Anti-Virus version 1.1.0, additional scanners like the FortiSandbox and McAfee Web Gateway have been added as selectable ICAP scanners.
 
 Antivirus scanner modes::
-Following image shows the current supported scanners including how they are connected.
+The following image shows the currently supported scanners including how they are connected.
 +
 image::configuration/server/virus-scanner-support/av_modes.png[Antivirus Configuration Modes,width=500]
 
 Common notes::
 A file is parsed and an exit code returned, or an exit code is evaluated if no result is available to determine the response from the scan. In case of an infected file, the appropriate action is _always_ to delete the file. Though the setting can be made, the choice `delete` or `log` for the infected condition only applies to the special case of background scans.
 +
-NOTE: Individual chunks are *not* scanned. The whole file is scanned when it is moved or saved to the final location.
+NOTE: The whole file is scanned when it is moved or saved to the final location. Individual chunks are *not* scanned.
 
 == When Infected Files are Found
 
 During an upload these actions are taken:
 
 * The upload is blocked.
-* The event is logged in the owncloud server log.
+* The event is logged in the ownCloud server log.
 * The event is reported and/or logged by the client / Web UI.
 
 During a _background_ scan, the app can take one of two actions:
@@ -58,9 +58,9 @@ Set btn:[When infected files were found during a background scan] to the value t
 
 . The Anti-Virus app needs to be installed from the ownCloud Market (it's available in the  _"Security"_ category) and then as admin enabled in ownCloud under menu:Settings[Admin > Apps].
 +
-image::configuration/server/virus-scanner-support/antivirus-app.png[Antivirus App,width=500]
+image::configuration/server/virus-scanner-support/antivirus-app.png[Anti-Virus App,width=500]
 
-. To install the App directly via the occ command, execute:
+. To install the app via the occ command, execute:
 +
 [source,bash,subs="attributes+"]
 ----
@@ -76,13 +76,13 @@ and enable it with the following occ command:
 
 == Ways of Configuration
 
-=== Configure the Antivirus App Using GUI
+=== Configure the Anti-Virus App Using GUI
 
-Navigate to menu:Settings[Admin > Security], where you'll find the "**Antivirus Configuration**" panel to configure teh antivirus app via the GUI.
+Navigate to menu:Settings[Admin > Security], where you'll find the "**Antivirus Configuration**" panel to configure the Anti-Virus app via the GUI.
 
-=== Configure the Antivirus App Using occ
+=== Configure the Anti-Virus App Using occ
 
-All of the configuration settings for the Antivirus app are configurable by passing the relevant key and value to the `occ config:app:set files_antivirus` command. For example:
+All of the configuration settings for the Anti-Virus app are configurable by passing the relevant key and value to the `occ config:app:set files_antivirus` command. For example:
 
 [source,bash,subs="attributes+"]
 ----
@@ -90,7 +90,7 @@ All of the configuration settings for the Antivirus app are configurable by pass
     av_socket --value="/var/run/clamav/clamd.ctl"
 ----
 
-To get a current option run for example:
+To get a current option, run for example:
 
 [source,bash,subs="attributes+"]
 ----
@@ -107,7 +107,7 @@ To get a current option run for example:
 | Default
 
 | `av_cmd_options`
-| Extra command line options (comma-separated) to pass to ClamAV.
+| Extra command-line options (comma-separated) to pass to ClamAV.
 |
 
 | `av_host`
@@ -116,7 +116,7 @@ To get a current option run for example:
 
 | `av_infected_action`
 | The action to take when infected files were found during a background scan. +
-It can be set to one of `only_log` and `delete`.
+It can be set to  `only_log` or `delete`.
 | `only_log`
 
 | `av_max_file_size`
@@ -125,8 +125,8 @@ It can be set to one of `only_log` and `delete`.
 | `-1`
 
 | `av_mode`
-a| The Anti Virus binary operating mode. +
-It can be set to one of
+a| The Anti-Virus binary operating mode. +
+It can be set to one of the following options:
 
 * Native Mode
 ** `daemon`, ClamAV Daemon (TCP Socket)
@@ -384,14 +384,14 @@ image::configuration/server/virus-scanner-support/anti-virus-message-socket-conn
 
 == ICAP
 
-{icap-url}[ICAP] is an open standard supported by many antivirus products. With the release of the _Anti-Virus_ app 1.0.0, other virus scanners beside ClamAV can be used via ICAP if, you are running it on an ownCloud Enterprise Edition.
+{icap-url}[ICAP] is an open standard supported by many antivirus products. With the release of the _Anti-Virus_ app 1.0.0, other virus scanners beside ClamAV can be used via ICAP if you are running it on an ownCloud Enterprise Edition.
 
 Currently the only tested and supported virus scanners are:
 
 * ClamAV,
 * Kaspersky ScanEngine,
 * FortiSandbox and
-* McAfee Web Gateway / Skihigh Secure Webgateway.
+* McAfee Web Gateway / Skyhigh Secure Web Gateway.
 
 Due to the wide distribution of the ICAP standard, more products can be implemented on request. The use of ICAP requires an enterprise license. The functionality can be tested without a license with a grace period of 24 hours.
 
@@ -401,7 +401,7 @@ Depending on your ICAP server, select one of the following example configuration
 
 * xref:clamav-kaspersky-icap[ClamAV & Kaspersky (ICAP)]
 * xref:fortinet-icap[Fortinet (ICAP)]
-* xref:mcafee-webgateway-skyhigh-secure-webgateway-icap[McAfee Webgateway / Skyhigh Secure Webgateway (ICAP)]
+* xref:mcafee-webgateway-skyhigh-secure-webgateway-icap[McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)]
 
 === General ICAP Settings Using occ
 
@@ -425,7 +425,7 @@ Use the following occ commands to set configurations based on your environment:
     av_port --value="1344"
 ----
 
-. Specify using background scan:
+. Enable background scans:
 +
 [source,bash,subs="attributes+"]
 ----
@@ -447,7 +447,7 @@ Note that this setting is only used when `av_scan_background` is set to `true`.
 
 ==== Mode Dependent Settings
 
-Following settings are just an example and must be set according the scanner used. For possible values see xref:configure-the-antivirus-app-using-occ[Configure the Antivirus App Using occ]
+The following settings are just examples and must be adjusted for the scanner you use. For possible values see xref:configure-the-antivirus-app-using-occ[Configure the Anti-Virus App Using occ]
 
 . Set the ICAP mode:
 +
@@ -457,7 +457,7 @@ Following settings are just an example and must be set according the scanner use
     av_mode --value="icap"
 ----
 
-. Set the respective request service:
+. Set the request service:
 +
 [source,bash,subs="attributes+"]
 ----
@@ -465,7 +465,7 @@ Following settings are just an example and must be set according the scanner use
     av_request_service --value="avscan"
 ----
 
-. Set the respective response header:
+. Set the response header:
 +
 [source,bash,subs="attributes+"]
 ----
@@ -475,11 +475,11 @@ Following settings are just an example and must be set according the scanner use
 
 === ClamAV & Kaspersky (ICAP)
 
-Specific for ClamAV, you first must install and configure {c-icap-url}[c-icap on sourceforge]. For selecting ClamAV in their configuration see the section: https://sourceforge.net/p/c-icap/wiki/ModulesConfiguration/[ModulesConfiguration].
+If you decide to use ClamAV, you must first install and configure {c-icap-url}[c-icap on sourceforge]. With regard to selecting ClamAV in their configuration, see the section: https://sourceforge.net/p/c-icap/wiki/ModulesConfiguration/[ModulesConfiguration].
 
 . Install ClamAV based on the instructions at the beginning of this document and `c-icap` as referenced above.
 
-. Select btn:[ClamAV & Kaspersky (ICAP)] from the dropdown in the Anti Virus app:
+. Select btn:[ClamAV & Kaspersky (ICAP)] from the drop-down menu in the Anti-Virus app:
 +
 image::configuration/server/virus-scanner-support/icap_clamav.png[ClamAV & Kasperski (ICAP)],width=500]
 
@@ -487,15 +487,15 @@ NOTE: The older versions of Kaspersky’s KAV did not send back the virus/infect
 
 // note that the original document regarding "VirusNameICAPHeader" https://support.kaspersky.com/ScanEngine/1.0/en-US/201214.htm is not available anymore (404, no cache entry) and no appropriate replacement has been found. the link above is the best possible alternative.
 
-=== McAfee Webgateway / Skyhigh Secure Webgateway (ICAP)
+=== McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)
 
-Follow this procedure to configure ownCloud for the McAfee Web Gateway 10.x and higher in ICAP Mode.
+Follow the procedure below to configure ownCloud for the McAfee Web Gateway 10.x and higher in ICAP Mode.
 
 . Install McAfee Web Gateway based on their instructions.
 
-. Select btn:[McAfee Webgateway / Skyhigh Secure Webgateway (ICAP)] from the dropdown in the Anti Virus app.
+. Select btn:[McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)] from the drop-down menu in the Anti-Virus app.
 +
-image::configuration/server/virus-scanner-support/icap_mcafee.png[McAfee Webgateway / Skyhigh Secure Webgateway (ICAP)],width=500]
+image::configuration/server/virus-scanner-support/icap_mcafee.png[McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)],width=500]
 
 NOTE: McAfee provides demo versions with limited runtime for evaluation purposes. Have a look at the {mcaffee-demo-url}[McAfee Web page] for the Web Gateway.
 
@@ -503,9 +503,9 @@ NOTE: McAfee provides demo versions with limited runtime for evaluation purposes
 
 . Install FortiSandbox based on their instructions.
 
-. Select btn:[Fortinet] from the dropdown in the Anti-Virus app.
+. Select btn:[Fortinet] from the drop-down menu in the Anti-Virus app.
 +
-image::configuration/server/virus-scanner-support/icap_mcafee.png[McAfee Webgateway / Skyhigh Secure Webgateway (ICAP)],width=500]
+image::configuration/server/virus-scanner-support/icap_mcafee.png[McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)],width=500]
 
 NOTE: Fortinet provides some demo versions of the FortiSandbox. Have a look at their {fortinetsandbox-url}[product page] for more information.
 
