@@ -202,7 +202,7 @@ ownCloud integrates with ClamAV natively in several ways, see xref:configuration
 
 === Scanning Notes for ClamAV
 
-. Files are checked when they are uploaded or updated but _not_ when they are downloaded.
+. Files are checked when they are uploaded or updated and before they are downloaded.
 . ownCloud does not maintain a cache of previously scanned files.
 . If the app is either not configured or is misconfigured, then it rejects file uploads.
 . If ClamAV is unavailable, then the app rejects file uploads.
