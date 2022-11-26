@@ -1,5 +1,5 @@
 name: server
-title: ownCloud Classic Server
+title: ownCloud Server
 version: next
 start_page: ROOT:index.adoc
 nav:
