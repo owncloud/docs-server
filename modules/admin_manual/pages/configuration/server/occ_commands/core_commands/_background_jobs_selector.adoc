@@ -25,5 +25,5 @@ background
 {occ-command-example-prefix} background:webcron
 ----
 
-TIP: See xref:configuration/server/background_jobs_configuration.adoc[background jobs configuration] to learn more.
+TIP: See the xref:configuration/server/occ_command.adoc#managing-background-jobs[Managing Background Jobs] and the xref:configuration/server/background_jobs_configuration.adoc[Background Jobs configuration] to learn more.
 
