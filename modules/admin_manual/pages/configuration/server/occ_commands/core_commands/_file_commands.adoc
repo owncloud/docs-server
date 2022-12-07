@@ -131,7 +131,7 @@ The `files:scan` command
 
 File scans can be performed per-user, for a space-delimited list of users, for groups of users, and for all users.
 
-NOTE: Scanning is only possible when using POSIX filesystems but not for object storages like S3. This is because the object storage implementation uses the database as primary data source and the S3 storage for only holding the data blobs but no metadata. A sync from S3 storage to database is therefore not reasonable.
+IMPORTANT: Scanning is only possible when using POSIX filesystems but not for object storages like S3. This is because the object storage implementation uses the database as primary data source and the S3 storage for only holding the data blobs but no metadata. A sync from S3 storage to database is therefore not reasonable.
 
 [source,bash,subs="attributes+"]
 ----
