@@ -117,7 +117,7 @@ connections to other services on your network!
 
 * Rescanning S3 for manually added files is not possible
 +
-NOTE: The command `occ files:scan` is only possible with POSIX but not with S3 and compatible filesystems. See the xref:configuration/server/occ_command.adoc#the-filesscan-command[occ’s file operations] for more information.
+NOTE: The command xref:configuration/server/occ_command.adoc#the-filesscan-command[occ files:scan] or a xref:configuration/server/occ_command.adoc#managing-background-jobs[background job] containing _files scan_ is only available for POSIX but not for S3 and compatible filesystems.
 
 * We recommend xref:configuration/server/background_jobs_configuration.adoc[configuring the background job Webcron or Cron] to enable ownCloud to automatically detect files added to your external storages.
 +
