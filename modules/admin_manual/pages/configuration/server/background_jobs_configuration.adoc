@@ -12,7 +12,7 @@ A system like ownCloud sometimes requires tasks to be done on a regular basis wi
 
 These jobs are typically referred to as {cron_url}[Cron Jobs]. Cron jobs are commands or shell-based scripts that are scheduled to periodically run at fixed times, dates, or intervals. To run Cron jobs with ownCloud, we recommend that you use the occ `system:cron` command.
 
-Use the xref:configuration/server/occ_command.adoc#background-jobs-selector[occ background command set] to select which scheduler you want to use for controlling, see   xref:configuration/server/occ_command.adoc#managing-background-jobs[Managing Background Jobs] to manage background jobs in detail.
+Use the xref:configuration/server/occ_command.adoc#background-jobs-selector[occ background command set] to select which scheduler you want to use for controlling. For more details on how to manage background jobs, refer to xref:configuration/server/occ_command.adoc#managing-background-jobs[Managing Background Jobs].
 
 As an example:
 
