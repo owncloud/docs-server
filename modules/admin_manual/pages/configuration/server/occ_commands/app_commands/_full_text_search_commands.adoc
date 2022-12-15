@@ -200,7 +200,7 @@ No pending jobs found.
 
 == Set App Modes
 
-To do an initial full indexing without the Full Text Search app interfering, it can be put in passive mode. See the xref:configuration/general_topics/search.html#app-modes[App Modes] section in the Full Text Search description for details.
+To do an initial full indexing without the Full Text Search app interfering, it can be put in passive mode. See the xref:configuration/general_topics/search.adoc#app-modes[App Modes] section in the Full Text Search description for details.
 
 [source,bash,subs="attributes+"]
 ----
