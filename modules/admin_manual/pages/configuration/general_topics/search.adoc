@@ -123,7 +123,7 @@ You can use the:
 {occ-command-example-prefix} search:index:reset
 ----
 
-* xref:configuration/server/occ_command.adoc#onfig-commands[occ Config Commands command set] to configure the app.
+* xref:configuration/server/occ_command.adoc#config-commands[occ Config Commands command set] to configure the app.
 +
 Examples:
 +

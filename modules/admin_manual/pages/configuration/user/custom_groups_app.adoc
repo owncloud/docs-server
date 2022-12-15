@@ -5,7 +5,7 @@
 
 == Introduction
 
-{description} When the xref:configuration/user/guest_app.adoc[Guest App] has been enabled, you can also add external guests to custom groups.
+{description} When the xref:configuration/user/guests_app.adoc[Guest App] has been enabled, you can also add external guests to custom groups.
 
 == Installation
 
