@@ -187,14 +187,14 @@ Set the ownership for all files and folders to `root:www-data` **except** the `c
 ----
 sudo find -L /var/www/owncloud \
     \( -path ./data -o -path ./config \) -prune -o \
-    -type d -print0 | xargs -0 chown root:www-data
+    -type d -print0 | sudo xargs -0 chown root:www-data
 ----
 
 [source,bash]
 ----
 sudo find -L /var/www/owncloud \
     \( -path ./data -o -path ./config \) -prune -o \
-    -type f -print0 | xargs -0 chown root:www-data
+    -type f -print0 | sudo xargs -0 chown root:www-data
 ----
 
 Set the ownership for all files and folders to `www-data:www-data` for the `config`, `data` and `apps` directories. Note that it is not mandatory to set the ownership of the `data/` directory as it should already have the correct ownership and it can take a while to finish, depending on the size:
@@ -213,14 +213,14 @@ Use `chmod` on files and directories with different permissions:
 +
 [source,bash]
 ----
-sudo find -L /var/www/owncloud -type f -print0 | xargs -0 chmod 640
+sudo find -L /var/www/owncloud -type f -print0 | sudo xargs -0 chmod 640
 ----
 
 * For all directories use `0750`
 +
 [source,bash]
 ----
-sudo find -L /var/www/owncloud -type d -print0 | xargs -0 chmod 750
+sudo find -L /var/www/owncloud -type d -print0 | sudo xargs -0 chmod 750
 ----
 
 * Set the occ command to executable:
@@ -254,6 +254,10 @@ The following example command eases to find the differences of two files, which 
 [source,bash]
 ----
 diff -y -W 70 --suppress-common-lines owncloud/.user.ini owncloud_2022-02-15-09.18.48/.user.ini
+----
+
+[source,plaintext]
+----
 post_max_size=513M                |     post_max_size=1G
 ----
 
