@@ -119,7 +119,7 @@ To make the endpoint available under the static service discovery path, it is re
 [source,apache]
 ----
 RewriteEngine on
-RewriteRule "^/\.well-known/openid-configuration" "/index.php/apps/openidconnect/config" [P]
+RewriteRule "^\.well-known/openid-configuration" "/index.php/apps/openidconnect/config" [P]
 SSLProxyEngine On #This can be omitted if no SSL is used
 ----
 +
