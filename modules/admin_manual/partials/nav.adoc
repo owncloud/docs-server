@@ -1,6 +1,7 @@
 // note that the module reference post xref is now a mandatory element
 * Admin Manual
 ** xref:admin_manual:index.adoc[Introduction]
+** xref:admin_manual:useful_pages.adoc[Useful Pages]
 ** xref:admin_manual:faq/index.adoc[FAQ]
 ** xref:admin_manual:installation/index.adoc[Installation]
 *** xref:admin_manual:installation/deployment_considerations.adoc[Deployment Considerations]
