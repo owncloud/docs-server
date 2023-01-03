@@ -1,7 +1,7 @@
 = Useful Pages
 :toc: right
 
-:description: When new to ownCloud Server, the following list of useful pages help getting up and running quickly.
+:description: When new to ownCloud Server, the following list of useful pages may help getting up and running quickly.
 
 == Introduction
 
@@ -9,7 +9,7 @@
 
 == Page List
 
-Note that this section always points to the latest server version available. In case you need a different version, select your topic and manually switch to one of the available.
+Note that this section always points to the latest server version available. In case you need a different version, select your topic and manually switch to one of the available ones.
 
 * xref:{latest-server-version}@server:admin_manual:installation/index.adoc[Manual Installation]
 * xref:{latest-server-version}@server:admin_manual:installation/docker/index.adoc[Installation with Docker]
