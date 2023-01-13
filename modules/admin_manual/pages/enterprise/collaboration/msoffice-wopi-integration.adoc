@@ -32,21 +32,21 @@ Please bear in mind:
 
 == Business Flow for Microsoft 365
 
-Apart licensing, when using Microsoft 365, the following business flow applies, contact {oc-support-url}[ownCloud Support] for more details:
+Apart from licensing, when using Microsoft 365, the following business flow applies, contact {oc-support-url}[ownCloud Support] for more details:
 
-* The customer provides ownCloud:
-** a written statement about his Microsoft 365 entitlement.
-** his ownCloud Instance URL. Only users coming from this URL will be able to use Microsoft 365.
-* ownCloud provides the customer a required proxy URL to be used in the settings, see below.
-** Beside other tasks, the proxy checks if users originate from the given ownCloud Instance URL.
-* When the users opens an Office document via the ownCloud Instance and Office 365 for the web is loaded, users are checked by Microsoft if already signed in with a Microsoft 365 business account. If users are not signed in, they will be prompted to sign in.
+* Customers provide ownCloud with:
+** a written statement about their Microsoft 365 entitlement.
+** the URL of their ownCloud instance. Only users coming from this URL will be able to use Microsoft 365.
+* ownCloud provides customers with a required proxy URL to be used in the settings, see below.
+** Among other things, the proxy checks if users originate from the given ownCloud Instance URL.
+* When users open an office document via the ownCloud instance and Office 365 for the web is loaded, Microsoft checks if these users are already signed in via a Microsoft 365 business account. If users are not yet signed in, they will be prompted to sign in.
 
 == Preparing the Environment
 
-To use Microsoft Office for the web, you need an:
+To use Microsoft Office for the web, you need:
 
-- {office-online-server-url}[Office Online Server] locally installed, or an 
-- active Microsoft 365 subscription including the data provided by ownCloud, see xref:business-flow-for-microsoft-365[Business Flow for Microsoft 365].
+- an {office-online-server-url}[Office Online Server] locally installed, or 
+- an active Microsoft 365 subscription including the data provided by ownCloud, see xref:business-flow-for-microsoft-365[Business Flow for Microsoft 365].
 
 All involved servers (Office Online Server and the ownCloud server) need to be accessible by HTTPS with valid certificates.
 
