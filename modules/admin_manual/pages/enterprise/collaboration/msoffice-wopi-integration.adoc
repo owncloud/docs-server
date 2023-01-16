@@ -30,9 +30,9 @@ Please bear in mind:
 * This app requires at minimum ownCloud Version 10.5 and php 7.1.
 ====
 
-== Business Flow for Microsoft 365
+== Procedure using Microsoft 365
 
-Apart from licensing, when using Microsoft 365, the following business flow applies, contact {oc-support-url}[ownCloud Support] for more details:
+Apart from licensing, when using Microsoft 365, the following procedure applies, contact {oc-support-url}[ownCloud Support] for more details:
 
 * Customers provide ownCloud with:
 ** a written statement about their Microsoft 365 entitlement.
@@ -46,7 +46,7 @@ Apart from licensing, when using Microsoft 365, the following business flow appl
 To use Microsoft Office for the web, you need:
 
 - an {office-online-server-url}[Office Online Server] locally installed, or 
-- an active Microsoft 365 subscription including the data provided by ownCloud, see xref:business-flow-for-microsoft-365[Business Flow for Microsoft 365].
+- an active Microsoft 365 subscription including the data provided by ownCloud, see xref:procedure-using-microsoft-365[Procedure using Microsoft 365].
 
 All involved servers (Office Online Server and the ownCloud server) need to be accessible by HTTPS with valid certificates.
 
