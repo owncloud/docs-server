@@ -40,6 +40,7 @@ NOTE: Before Files Media Viewer 1.0.4, the _Gallery_ and _Files VideoPlayer_ app
 * {oc-marketplace-url}/apps/objectstore[Object Storage Support]
 * {oc-marketplace-url}/apps/openidconnect[OpenID Connect]
 * {oc-marketplace-url}/apps/password_policy[Password Policy]
+* {oc-marketplace-url}/apps/ransomware_protection[Ransomware Protection]
 * {oc-marketplace-url}/apps/sharepoint[External Storage: SharePoint]
 * {oc-marketplace-url}/apps/systemtags_management[Collaborative Tags Management]
 * {oc-marketplace-url}/apps/user_shibboleth[SAML/Shibboleth User Backend]
