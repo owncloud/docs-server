@@ -289,9 +289,9 @@ if [ "$do_upgrade" = "y" ]; then
     echo
   fi
   echo "Please change to your upgraded ownCloud directory: cd $ocroot/$ocname"
-  echo "Please manually run: sudo -u$htuser ./occ upgrade"
+  echo "Please manually run: sudo -u $htuser ./occ upgrade"
   echo "Copy any changes manually added in .user.ini and .htaccess from the backup directory"
-  echo "Please manually run: sudo -u$htuser ./occ maintenance:mode --off"
+  echo "Please manually run: sudo -u $htuser ./occ maintenance:mode --off"
   echo "Please manually remove the directory of the old instance: $oldocpath"
   echo "When successfully done, re-run this script to secure your .htaccess files"
   echo
