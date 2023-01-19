@@ -11,8 +11,6 @@
 * xref:configuration/files/encryption/encryption_configuration.adoc[Encryption]
 * xref:ration/server/external_sites.adoc[External Sites]
 * xref:configuration/files/external_storage/index.adoc[External Storage]
-* {oc-marketplace-url}/apps/openidconnect[OpenID Connect]
-* xref:configuration/files/external_storage/webdav.adoc[ownCloud WebDAV Endpoint] (handles old and new webdav endpoints)
 * xref:configuration/files/federated_cloud_sharing_configuration.adoc[Federated File Sharing] (allows file sharing across ownCloud instances)
 * Federation (allows username auto-complete across ownCloud instances)
 * Files (cannot be disabled)
@@ -29,6 +27,8 @@ NOTE: Before Files Media Viewer 1.0.4, the _Gallery_ and _Files VideoPlayer_ app
 * xref:configuration/user/guests_app.adoc[Guests]
 * {oc-marketplace-url}/apps/impersonate[Impersonate]
 * Notifications
+* {oc-marketplace-url}/apps/openidconnect[OpenID Connect]
+* xref:configuration/files/external_storage/webdav.adoc[ownCloud WebDAV Endpoint] (handles old and new webdav endpoints)
 * xref:configuration/user/user_provisioning_api.adoc[Provisioning API]
 * {oc-marketplace-url}/apps/templateeditor[Template Editor] (for notification emails)
 * Update Notifications
