@@ -8,28 +8,32 @@
 * {oc-marketplace-url}/apps/files_antivirus[Anti-Virus]
 * Collaborative Tags
 * Comments
-* Encryption
-* External Sites
-* External Storage
-* ownCloud WebDAV Endpoint (handles old and new webdav endpoints)
-* Federated File Sharing (allows file sharing across ownCloud instances)
+* xref:configuration/files/encryption/encryption_configuration.adoc[Encryption]
+* xref:ration/server/external_sites.adoc[External Sites]
+* xref:configuration/files/external_storage/index.adoc[External Storage]
+* xref:configuration/files/federated_cloud_sharing_configuration.adoc[Federated File Sharing] (allows file sharing across ownCloud instances)
 * Federation (allows username auto-complete across ownCloud instances)
 * Files (cannot be disabled)
 * xref:installation/apps/mediaviewer/index.adoc[Files Media Viewer]
 +
 NOTE: Before Files Media Viewer 1.0.4, the _Gallery_ and _Files VideoPlayer_ apps need to be **uninstalled before installing** the Media Viewer app. Starting with Files Media Viewer 1.0.4, the _Gallery_ and _Files VideoPlayer_ apps need to be **disabled before using** the Files Media Viewer app.
-* Files PDF Viewer
-* Files Sharing
-* Files TextEditor
-* Files Trashbin
-* Files Versions
+* {oc-marketplace-url}/apps/pdf[Files PDF Viewer]
+* xref:configuration/files/file_sharing_configuration.adoc[Files Sharing]
+* {oc-marketplace-url}/apps/files_texteditor[Files TextEditor]
+* xref:configuration/files/trashbin_options.adoc[Files Trashbin]
+* xref:configuration/files/file_versioning.adoc[Files Versions]
 * First Run Wizard
+* {oc-marketplace-url}/apps/search_elastic[Full Text Search]
+* xref:configuration/user/guests_app.adoc[Guests]
+* {oc-marketplace-url}/apps/impersonate[Impersonate]
 * Notifications
-* Provisioning API
-* Template Editor (for notification emails)
+* {oc-marketplace-url}/apps/openidconnect[OpenID Connect]
+* xref:configuration/files/external_storage/webdav.adoc[ownCloud WebDAV Endpoint] (handles old and new webdav endpoints)
+* xref:configuration/user/user_provisioning_api.adoc[Provisioning API]
+* {oc-marketplace-url}/apps/templateeditor[Template Editor] (for notification emails)
 * Update Notifications
-* User External
-* User LDAP
+* xref:configuration/user/user_auth_ftp_smb_imap.adoc[User External]
+* {oc-marketplace-url}/apps/user_ldap[User LDAP]
 
 == Enterprise-Only Apps
 
@@ -38,7 +42,6 @@ NOTE: Before Files Media Viewer 1.0.4, the _Gallery_ and _Files VideoPlayer_ app
 * {oc-marketplace-url}/apps/files_ldap_home[LDAP Home Connector]
 * {oc-marketplace-url}/apps/firewall[File Firewall]
 * {oc-marketplace-url}/apps/objectstore[Object Storage Support]
-* {oc-marketplace-url}/apps/openidconnect[OpenID Connect]
 * {oc-marketplace-url}/apps/password_policy[Password Policy]
 * {oc-marketplace-url}/apps/ransomware_protection[Ransomware Protection]
 * {oc-marketplace-url}/apps/sharepoint[External Storage: SharePoint]
