@@ -147,4 +147,4 @@ If you want to let ownCloud create users which are not present during a OIDC aut
 
 To allow the ownCloud clients (Web/desktop/Android/iOS) to interact with the identity provider, you have to register them as clients.
 
-Only branded ownCloud desktop and mobile clients can be registered with Azure AD, because they need to be build with customized `scope` and `prompt` parameters. ownCloud full branding subscription is needed. Please get in touch with ownCloud Consulting for more help.
+Only branded ownCloud desktop and mobile clients can be registered with Azure AD, because they need to be built with customized `scope` and `prompt` parameters. ownCloud full branding subscription is needed. Please get in touch with ownCloud Consulting for more help.
