@@ -131,17 +131,17 @@ IMPORTANT: If you use the `.htaccess` file in the ownCloud web root, you have to
 
 == General Example Setup
 
-All IdPs have their own setup, but often share common ways of configuring things. Although not identical, the xref:example-setup-using-kopano-konnect[Kopano Konnect] example may be a good starting point for the specific configuration of your setup. As Microsoft with Azure is different, it has its own example section.
+All IdPs have their own setup, but often share common ways of configuring things. Although not identical, the xref:example-setup-using-kopano-konnect[Kopano Konnect] example may be a good starting point for the specific configuration of your setup. As Microsoft with Azure AD is different, it has its own example section.
 
 == Example Setup Using Kopano Konnect
 
 Follow this link to see 
 xref:configuration/user/oidc/kopano-setup.adoc[Example Setup Using Kopano Konnect].
 
-== Example Setup Using Microsoft Azure
+== Example Setup Using Microsoft Azure AD
 
 Follow this link to see 
-xref:configuration/user/oidc/ms-azure-setup.adoc[Example Setup Using Microsoft Azure].
+xref:configuration/user/oidc/ms-azure-setup.adoc[Example Setup Using Microsoft Azure AD].
 
 == Example Setup Using OneLogin
 
@@ -175,7 +175,7 @@ NOTE: The desktop and mobile apps (clients) have a default client ID and secret 
 
 === Client IDs, Secrets and Redirect URIs
 
-All IdPs can use ownCloud's default implemented _Client IDs, Secrets and Redirect URIs_ with the exception of Microsoft, which uses a different approach. Here is the data necessary for the configuration.
+All IdPs can use ownCloud's default _client IDs, secrets and redirect URIs_ with the exception of Microsoft Azure AD, which uses a different approach. Here is the data necessary for the configuration.
 
 ==== Client ID
 
@@ -237,7 +237,7 @@ All IdPs can use ownCloud's default implemented _Client IDs, Secrets and Redirec
 | `oc://ios.owncloud.com`
 |===
 
-(1) See the xref:configuration/user/oidc/ms-azure-setup.adoc#microsoft-azure-ad-and-redirecturi[following note] when using Microsoft Azure and 127.0.0.1 as redirect URI.
+(1) See the xref:configuration/user/oidc/ms-azure-setup.adoc#microsoft-azure-ad-and-redirecturi[following note] when using Microsoft Azure AD and 127.0.0.1 as redirect URI.
 
 === Migrate Clients from Basic Authentication to OIDC
 
