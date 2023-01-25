@@ -1,12 +1,11 @@
 = Upgrading ownCloud with the Updater App
 :toc: right
 
+:description: The Updater app automates many of the steps of upgrading an ownCloud installation.
+
 == Introduction
 
-The Updater app automates many of the steps of upgrading an ownCloud
-installation. It is useful for installations that do not have root
-access, such as shared hosting, for installations with a smaller number
-of users and data, and it automates xref:installation/manual_installation/manual_installation.adoc[manual installations].
+{description} It is useful for installations that do not have root access, such as shared hosting, for installations with a smaller number of users and data, and it automates xref:installation/manual_installation/manual_installation.adoc[manual installations].
 
 IMPORTANT: When upgrading from oC 9.0 to 9.1 with existing Calendars or Addressbooks please have a look at the
 xref:{latest-docs-version}@docs:ROOT:server_release_notes.adoc[release notes] of oC 9.0 for important info about this migration.
@@ -18,6 +17,7 @@ xref:{latest-docs-version}@docs:ROOT:server_release_notes.adoc[release notes] of
 https://owncloud.com/download-server/[Linux packages on our Open Build Service],
 but only in the https://owncloud.com/download-server[tar and zip archives].
 * When you install ownCloud from packages you should keep it updated with your package manager.
+* Do not use the Updater app in conjunction with xref:installation/manual_installation/manual_installation.adoc#script-guided-installation[Scripts for the Script-Guided Installation]. See the link for more details.
 ====
 
 *Downgrading* is not supported and risks corrupting your data! If you
