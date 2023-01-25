@@ -10,13 +10,17 @@
 
 == General Info
 
-It is important to understand how these scripts work and why things are done to process all the steps for a successful and smooth installation or upgrade.
+It is important to understand how these scripts work and why things are done to process all the steps for a successful, smooth and secure installation or upgrade.
+
+IMPORTANT: *Do not use* this script in conjunction with xref:maintenance/upgrading/update.adoc[Upgrading ownCloud with the Updater App]. When using the Updater App, your web server must have write access to core files to overwrite them. Therefore it is necessary to set much weaker permissions when using the Updater app which can be in some circumstances a security issue. *The scripts used with the _Script-Guided Installation_ use strong permissions to prevent the web server overwriting core files.* The web server can only write to defined locations handled by the script. This greatly increases security and hardens the environment of the ownCloud server.
 
 Installation::
 When you do a fresh installation using this set of scripts, consider using links for the `data/` and `apps-external/` directories. Any copying or moving big directories can cause issues which can be avoided by using links. When doing an upgrade after an installation, the scripts can re-link those directories but will not "migrate" standard ones. If standard directories are used, the admin has to select a suitable method to migrate those directories as part of the upgrade process. You will get notified about this task if necessary.
 
 Migrating from standard to linked directories::
-You can at any time relocate your `data/` and `apps-external/` directories and link them to the old location. This does not impact the functionality but eases upgrade steps a lot. In such a case, parametrize the instance script with the proper values to be prepared for the next upgrade. See some details at the xref:configuration[configuration section] below.
+You can at any time relocate your `data/` and `apps-external/` directories and link them to the old location using symlinks. This does not impact the functionality but eases upgrade steps a lot. In such a case, parametrize the instance script with the proper values to be prepared for the next upgrade. See some details at the xref:configuration[configuration section] below.
++
+Do not try to use the script to migrate between directory types. Your environment will break and data loss can occur. Any migration from one type to another must be done manually and before using the script.
 
 Upgrading::
 When upgrading, the scripts rename the current ownCloud directory (usually `owncloud`) to `owncloud-timestamp`. A new and fresh owncloud directory will be created where the files from the tar archive get extracted to. By doing so, nothing gets deleted, overwritten or moved and the existing instance is secured to go back to in case it is needed. Note that the script does not take care of the database. You have to manage a xref:maintenance/backup_and_restore/backup.adoc#backup-the-database[database backup] yourself. When you have decided to use links for `data/` and `apps-external/`, the script will re-link these directories. Nothing gets moved. You can also (re)run the scrips on linked directories to set correct ownership and permissions. When using standard directories, you have to manually migrate them according to your environment and also manually check for correct ownership and permissions.
