@@ -116,20 +116,41 @@ Ransomware prevention and protection reduces risks to a minimum acceptable level
 
 [cols=",,",options="header",]
 |===
-| Name | Command (if applicable) | Description
-| Ransomware Prevention (Blocker) | | First line of defense against ransomware attacks.
-Ransomware Protection uses a file name pattern blacklist
-to prevent uploading files that have file extensions
-associated with ransomware (e.g. `.crypt`) thereby
-preserving the original files on the ownCloud Server.
-| Ransomguard Scanner | `occ ransomguard:scan <timestamp> <user>` | A command to scan the ownCloud database for
-changes in order to discover anomalies in a user’s account and their origin. It enables an
-administrator to determine the point in time when undesired actions happened as a prerequisite for restoration.
-| Ransomguard Restorer | `occ ransomguard:restore <timestamp> <user>` | A command for administrators to revert all
-operations in a user account that occurred after a certain point in time.
-| Ransomguard Lock | `occ ransomguard:lock <user>` | Set a user account as read-only for ownCloud and other
-WebDAV clients. This prevents any further changes to the account.
-| Ransomguard Unlock | `occ ransomguard:unlock <user>` | Unlock a user account which was set to read-only.
+| Name
+| Command (if applicable)
+| Description
+
+| Ransomware Prevention (Blocker)
+|
+| First line of defense against ransomware attacks. Ransomware Protection uses a file name pattern blacklist to prevent uploading files that have file extensions associated with ransomware (e.g. `.crypt`) thereby preserving the original files on the ownCloud Server.
+
+| Ransomguard Scanner
+| `occ ransomguard:scan <timestamp> <user>`
+| A command to scan the ownCloud database for changes in order to discover anomalies in a user’s account and their origin. It enables an administrator to determine the point in time when undesired actions happened as a prerequisite for restoration.
+
+| Ransomguard Restorer
+| `occ ransomguard:restore <timestamp> <user>`
+| A command for administrators to revert all operations in a user account that occurred after a certain point in time.
+
+| Ransomguard Lock
+| `occ ransomguard:lock <user>`
+| Set a user account as read-only for ownCloud and other WebDAV clients. This prevents any further changes to the account.
+
+| Ransomguard Unlock
+| `occ ransomguard:unlock <user>`
+| Unlock a user account which was set to read-only.
+
+| Ransomguard Blacklist Set-File
+| `occ ransomguard:blacklist:set-file <filePath>`
+| Define the location of the required blacklist file.
+
+| Ransomguard Blacklist From-File
+| `occ ransomguard:blacklist:update:from-file <filePath>`
+| Update the blacklist file with content from another file.
+
+| Ransomguard Blacklist From-Site
+| `occ ransomguard:blacklist:update:from-site <siteUrl>`
+| Update the blacklist file with content from a URL.
 |===
 
 `<timestamp>` must be in the Linux timestamp format.
