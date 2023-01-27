@@ -123,7 +123,7 @@ Usage:
 {occ-command-example-prefix} maintenance:mode [options]
 ----
 
-The `maintenance:repair` command supports the following options:
+The `maintenance:mode` command supports the following options:
 
 [cols="25%,75%",options="header"]
 |===
