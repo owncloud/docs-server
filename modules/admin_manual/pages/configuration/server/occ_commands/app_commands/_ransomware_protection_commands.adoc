@@ -9,6 +9,25 @@ You can find more information about the application in the xref:enterprise/secur
 
 [source,bash,subs="attributes+"]
 ----
+ransomguard
+  ransomguard:scan                        Scan the ownCloud database for changes in order
+                                          to discover anomalies in a user’s account and their origin.
+  ransomguard:restore                     Revert all operations in a user account after a point in time.
+  ransomguard:lock                        Set a user account as read-only for ownCloud and other WebDAV
+                                          clients when malicious activity is suspected.
+  ransomguard:unlock                      Unlock a user account after ransomware issues have been resolved
+  ransomguard:blacklist:set-file          Set the file that will contain the blacklist.
+                                          A new file will be created if it does not exist.
+  ransomguard:blacklist:update:from-file  Update the blacklist with the contents from the file.
+  ransomguard:blacklist:update:from-site  Update the blacklist with the contents from the site
+----
+
+== Scan Command Description
+
+Scan the ownCloud database for changes in order to discover anomalies in a user’s account and their origin. Add a `<timestamp>` and a `<user>` for the search to start with. Note that `<timestamp>` must be in the Linux timestamp format.
+                                          
+[source,bash,subs="attributes+"]
+----
 {occ-command-example-prefix} ransomguard:scan <timestamp> <user>
 ----
 
@@ -17,8 +36,13 @@ You can find more information about the application in the xref:enterprise/secur
 [width="100%",cols="20%,70%",]
 |===
 | `<timestamp>` +
-`<user>`          | Report all changes in a user's account, starting from timestamp.
+`<user>`
+| Report all changes in a user's account, starting from timestamp.
 |===
+
+== Restore Command Description
+
+Revert all operations in a user account after a given point in time. Note that `<timestamp>` must be in the Linux timestamp format.
 
 [source,bash,subs="attributes+"]
 ----
@@ -30,8 +54,13 @@ You can find more information about the application in the xref:enterprise/secur
 [width="100%",cols="20%,70%",]
 |===
 | `<timestamp>` +
-`<user>`          | Revert all operations in a user account after a point in time.
+`<user>`
+| Revert all operations in a user account after a point in time.
 |===
+
+== Lock Command Description
+
+When necessary, set a user account as `read-only` for ownCloud and other WebDAV clients when malicious activity is suspected.
 
 [source,bash,subs="attributes+"]
 ----
@@ -42,9 +71,13 @@ You can find more information about the application in the xref:enterprise/secur
 
 [width="100%",cols="20%,70%",]
 |===
-| `<user>` | Set a user account as read-only for ownCloud and other WebDAV clients when
-malicious activity is suspected.
+| `<user>`
+| Set a user account as read-only for ownCloud and other WebDAV clients when malicious activity is suspected.
 |===
+
+== Unlock Command Description
+
+When ransomware issues have been resolved, the user account can be unlocked.
 
 [source,bash,subs="attributes+"]
 ----
@@ -55,5 +88,62 @@ malicious activity is suspected.
 
 [width="100%",cols="20%,70%",]
 |===
-| `<user>` | Unlock a user account after ransomware issues have been resolved.
+| `<user>`
+| Unlock a user account after ransomware issues have been resolved.
+|===
+
+== Blacklist Handling
+
+The information which files to blacklist can be dynamically maintained either via a file or a URL where the data can be retrieved from. Independent of where updates come from, the file the app uses for identifying blacklist patterns is defined via `set-file`.
+
+=== Blacklist Set-File Command Description
+
+This command will set the location of the blacklist file the app will use. The location needs to be shared in all ownCloud servers in case of a multi-server setup. If you try to update the blacklist using the command `blacklist:update:from-file` without having run the `blacklist:set-file` command first, the blacklist file will be generated using the bundled `blacklist.txt.dist` file and saved in the ownCloud's data directory as `ransomware_blacklist.txt`. That file will then be used as default. Running the command again using a different `<filePath>` as argument will copy the contents from the old location to the new location without deleting the old one. It is highly recommended to use a different filename than the bundled one.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} ransomguard:blacklist:set-file <filePath>
+----
+
+==== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| `<filePath>`
+| The location of the file
+|===
+
+=== Blacklist From-File Command Description
+
+This command will update the contents of the blacklist file using another file as source. The format of the file is the same as the `blacklist.txt.dist` file bundled in the app. The command will only add the new items, which are displayed in the terminal.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} ransomguard:blacklist:update:from-file <filePath>
+----
+
+==== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| `<filePath>`
+| The location of the file updated data gets loaded from
+|===
+
+=== Blacklist From-Site Command Description
+
+This command will update the contents by getting the blacklist from a website. The default site is https://fsrm.experiant.ca/api/v1/get. Other sites can be used as long as the response follows the same format as the default site. The behavior is the same as with the `from-file` variant.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} ransomguard:blacklist:update:from-site <siteUrl>
+----
+
+==== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| `<siteUrl>`
+a| The URL to get the data from, defaults to: +
+https://fsrm.experiant.ca/api/v1/get
 |===
