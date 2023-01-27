@@ -94,11 +94,11 @@ When ransomware issues have been resolved, the user account can be unlocked.
 
 == Blacklist Handling
 
-The information which files to blacklist can be dynamically maintained. This can be either done via a file or a URL where the data can be retrieved from. Independent from where updates come from, the file the app uses for identifying blacklist patterns is defined via `set-file`.
+The information which files to blacklist can be dynamically maintained either via a file or a URL where the data can be retrieved from. Independent of where updates come from, the file the app uses for identifying blacklist patterns is defined via `set-file`.
 
 === Blacklist Set-File Command Description
 
-This command will set the location of the blacklist file the app will use. The location needs to be shared in all ownCloud servers in case of a multi-server setup. If trying to update the blacklist using the command `blacklist:update:from-file` without having run the `blacklist:set-file` command first, the blacklist file will be generated using the bundled `blacklist.txt.dist` file and save it in the ownCloud's data directory, as `ransomware_blacklist.txt`. That file will then be used as default. Running the command again using a different `<filePath>` as argument will copy the contents from the old location, to the new location without deleting the old one. It is highly recommended to use a different filename than the bundled one.
+This command will set the location of the blacklist file the app will use. The location needs to be shared in all ownCloud servers in case of a multi-server setup. If you try to update the blacklist using the command `blacklist:update:from-file` without having run the `blacklist:set-file` command first, the blacklist file will be generated using the bundled `blacklist.txt.dist` file and saved in the ownCloud's data directory as `ransomware_blacklist.txt`. That file will then be used as default. Running the command again using a different `<filePath>` as argument will copy the contents from the old location to the new location without deleting the old one. It is highly recommended to use a different filename than the bundled one.
 
 [source,bash,subs="attributes+"]
 ----
