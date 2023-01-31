@@ -45,11 +45,11 @@ The following example gives an idea of how to configure the `Group Login Policy`
 * Users belonging to the admin group won't be able to access via token (app password), while the rest of the users can.
 * Only users from group1 and group2 are allowed to access through username + password, and users from group3 will be rejected.
 * If a user is a member of both an allowOnly group and a reject group, rejection will take priority. This means that even if user1 is a member of group1 he won't be able to access if he's also a member of group3.
-* Members of group4 can only login using OIDC.
+* Only members of group4 can login using OIDC.
 
 [source,php]
 ----
-loginChecker.groupLoginChecker.forbidMap => [
+loginPolicy.groupLoginPolicy.forbidMap => [
   'password' => [
     'allowOnly' => ['group1, group2'],
     'reject' => ['group3'],
