@@ -1,7 +1,7 @@
 = Login Policies
 :toc: right
 
-:description: ownCloud provides login policies so admins can allow or reject groups to access ownCloud via specific login mechanism.
+:description: ownCloud provides login policies so admins can allow or reject groups of users to access ownCloud via specific login mechanisms.
 
 == Introduction
 
@@ -11,13 +11,13 @@ Login policies will emit a `failed login` event if the user isn't allowed to log
 
 == Usecases
 
-Login policies can be beneficial to restrict memers of particular groups to use, respectively to deny particular login types. This is especially true for guest users as they do not have an ownCloud account and cant be validated via openidconnect but can login using their email and password.
+Login policies can be used to restrict members of particular groups to use only particular login types. This is especially true for guest users as they do not have an ownCloud account and cannot be validated via openidconnect but can login using their email and password.
 
-For example, only the groups `guests` and `admin` can login the instance via username + password, while the rest of users must login through other mechanisms such as openidconnect.
+For example, a desired rule could be that only the groups `guests` and `admin` can login to the instance via username + password, while the rest of the users must login through other mechanisms such as openidconnect.
 
 == Configuration
 
-Login policies are handled via groups users are member of and maintained via the config.php file. See the xref:configuration/server/config_sample_php_parameters.adoc#order-of-login-policies[Order of login policies] for details.
+Login policies are handled via groups that users are members of and maintained via the config.php file. See the xref:configuration/server/config_sample_php_parameters.adoc#order-of-login-policies[Order of login policies] for details.
 
 If no login policy is activated in the `loginPolicy.order` list, ownCloud will work normally. Only registered policies can be activated.
 
@@ -40,11 +40,11 @@ After enabling the `loginPolicy.order`, the configuration of the `groupLoginPoli
 ],
 ----
 
-The following example gives an idea how to configure the `Group Login Policy`:
+The following example gives an idea of how to configure the `Group Login Policy`:
 
 * Users belonging to the admin group won't be able to access via token (app password), while the rest of the users can.
 * Only users from group1 and group2 are allowed to access through username + password, and users from group3 will be rejected.
-* In case a users is both member of an allowOnly group and a reject group, rejection will take priority. This means that even if user1 is member of group1 he won't be able to access if he's also member of group3.
+* If a user is a member of both an allowOnly group and a reject group, rejection will take priority. This means that even if user1 is a member of group1 he won't be able to access if he's also a member of group3.
 * Members of group4 can only login using OIDC.
 
 [source,php]
