@@ -5,6 +5,8 @@
 
 To use the ownCloud OneDrive app, you mandatory need consulting first. Contact sales@owncloud.com to get access to. When granted, follow this guide to use Microsoft OneDrive as an external storage option in ownCloud.
 
+Note that Microsoft has updated and renamed the link to its portal and `Application Registration Portal` as shown in the screenshots below has been renamed to `Azure Portal`.
+
 == Create an Application Configuration
 
 image:enterprise/external_storage/onedrive/register-an-application.png[Register a new OneDrive application.]
