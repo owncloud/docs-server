@@ -444,11 +444,9 @@ https://datatracker.ietf.org/doc/html/rfc7662 for more information on token intr
 		  // auto-update user account info with current information provided by the
 		  // OpenID Connect provider account attributes, that will be updated,
 		  // can be specified in `attributes` config option
-		'auto-provision' => [
-			'update' => [
-				  // enable the user info auto-update mode
-				'enabled' => true,
-			],
+		'update' => [
+			  // enable the user info auto-update mode
+			'enabled' => true,
 		],
 	],
 	  // `mode` and `search-attribute` will be used to create a unique user in ownCloud
