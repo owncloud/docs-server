@@ -1,0 +1,64 @@
+= Login Policies
+:toc: right
+
+:description: ownCloud provides login policies that will allow or reject users from login. With the group login policy, admins can allow or reject groups of users to access ownCloud via specific login mechanisms.
+
+== Introduction
+
+{description}
+
+Login policies will emit a `failed login` event if the user isn't allowed to log in.
+
+== Use Cases
+
+Login policies can be used to restrict members of particular groups to use only particular login types. This is especially true for guest users as they do not have an ownCloud account and cannot be validated via OpenID Connect but can log in using their email and password.
+
+For example, a desired rule could be that only the groups `guests` and `admin` can log in to the instance via username + password, while the rest of the users must login through other mechanisms such as OpenID Connect.
+
+== Configuration
+
+Login policies are handled via groups that users are members of and maintained via the config.php file. See the xref:configuration/server/config_sample_php_parameters.adoc#order-of-login-policies[Order of login policies] for details.
+
+If no login policy is activated in the `loginPolicy.order` list, ownCloud will work normally. Only the policies in the `loginPolicy.order` list are used.
+
+To enable login policies, use the following example:
+
+[source,php]
+----
+'loginPolicy.order' => ['OC\Authentication\LoginPolicies\GroupLoginPolicy'],
+----
+
+After enabling the `loginPolicy.order`, the configuration of the `groupLoginPolicy` can be made. The key definition below must be set according to the needs and the description in xref:configuration/server/config_sample_php_parameters.adoc#configuration-of-the-group-login-policy[Configuration of the Group Login Policy]:
+
+[source,php]
+----
+'loginPolicy.groupLoginPolicy.forbidMap' => [
+  '<loginType>' => [
+    'allowOnly' => ['<group1>', ......, '<groupN>'],
+    'reject' => ['<group1>', ........, '<groupN>'],
+  ],
+],
+----
+
+The following example gives an idea of how to configure the `Group Login Policy`:
+
+* Users belonging to the admin group won't be able to access via token (app password), while the rest of the users can.
+* Only users from group1 and group2 are allowed to access through username + password, and users from group3 will be rejected.
+* If a user is a member of both an allowOnly group and a reject group, rejection will take priority. This means that even if user1 is a member of group1 he won't be able to access if he's also a member of group3.
+* Only members of group4 can log in using OIDC.
+
+[source,php]
+----
+loginPolicy.groupLoginPolicy.forbidMap => [
+  'password' => [
+    'allowOnly' => ['group1, group2'],
+    'reject' => ['group3'],
+  ],
+  'token' => [
+    'reject' => ['admin'],
+  ],
+  'OCA\OpenIdConnect\OpenIdConnectAuthModule' => [
+    'allowOnly' => ['group4'],
+  ],
+]
+----

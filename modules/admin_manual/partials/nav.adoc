@@ -120,6 +120,7 @@
 **** xref:admin_manual:configuration/user/custom_groups_app.adoc[Custom Groups App]
 **** xref:admin_manual:configuration/user/guests_app.adoc[Guests App]
 **** xref:admin_manual:configuration/user/oidc/oidc.adoc[OpenID Connect (OIDC)]
+**** xref:admin_manual:configuration/user/login_policies.adoc[Login Policies]
 
 ** Maintenance
 *** xref:admin_manual:maintenance/upgrading/upgrade.adoc[Upgrading]
