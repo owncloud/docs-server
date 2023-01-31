@@ -7,7 +7,7 @@
 
 {description}
 
-Login policies will emit a `failed login` event if the user isn't allowed to login due to a reject rule.
+Login policies will emit a `failed login` event if the user isn't allowed to log in.
 
 == Use Cases
 
