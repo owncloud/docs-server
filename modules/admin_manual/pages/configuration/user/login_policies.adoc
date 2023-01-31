@@ -1,7 +1,7 @@
 = Login Policies
 :toc: right
 
-:description: ownCloud provides login policies so admins can allow or reject groups of users to access ownCloud via specific login mechanisms.
+:description: ownCloud provides login policies that will allow or reject users from login. With the group login policy, admins can allow or reject groups of users to access ownCloud via specific login mechanisms.
 
 == Introduction
 
@@ -19,7 +19,7 @@ For example, a desired rule could be that only the groups `guests` and `admin` c
 
 Login policies are handled via groups that users are members of and maintained via the config.php file. See the xref:configuration/server/config_sample_php_parameters.adoc#order-of-login-policies[Order of login policies] for details.
 
-If no login policy is activated in the `loginPolicy.order` list, ownCloud will work normally. Only registered policies can be activated.
+If no login policy is activated in the `loginPolicy.order` list, ownCloud will work normally. Only the policies in the `loginPolicy.order` list are used.
 
 To enable login policies, use the following example:
 
