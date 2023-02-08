@@ -1,6 +1,8 @@
 = Sharing
 
-This is an occ command to cleanup orphaned remote storages. 
+== Cleanup Remote Storages
+
+This is an occ command to clean up orphaned remote storages. 
 To explain why this is necessary, a little background is required. 
 While shares are able to be deleted as a normal matter of course, remote storages with `shared::` are not included in this process.
 
@@ -21,3 +23,19 @@ So, to cleanup all orphaned remote storages, run it as follows:
 You can also set it up to run as xref:background-jobs-selector[a background job].
 
 NOTE: These commands are not available in xref:maintenance-commands[single-user (maintenance) mode].
+
+== Allow to Temporarily Ignore Invalid Federated Shares
+
+Currently, if a federated share is invalid or the API endpoint returns a "not found", the availability check tests whether this is a problem with a server. If checks complete, that given share is removed. However, in some cases these checks might not be enough like in complex migrations of tightly federated setups. In that case, invalidation behavior can be disabled using the below app setting. When set, instead of removing the share, a warning is displayed in the browser.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:set files_sharing enable_cleanup_invalid_external_shares --value no
+----
+
+To revert that setting to its default behavior, run:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:app:delete files_sharing enable_cleanup_invalid_external_shares
+----
