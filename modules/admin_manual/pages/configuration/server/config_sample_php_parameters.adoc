@@ -999,18 +999,15 @@ Available values:
 'versions_retention_obligation' => 'auto',
 ....
 
-=== Save extended version metadata of uploaded and edited files.
+=== Save and display the author of each version of uploaded and edited files.
 
-Such extended version metadata is e.g. versioning tags or version author.
-
-WARNING: This feature cannot be re-enabled once disabled. It could cause out of sync metadata.
 WARNING: This does not work for S3 storage backends.
 
 ==== Code Sample
 
 [source,php]
 ....
-'file_storage.save_version_metadata' => true,
+'file_storage.save_version_author' => false,
 ....
 
 == ownCloud Verifications
