@@ -138,9 +138,9 @@ WARNING: Note that retention policy can be applied after restore operation, whic
 
 == Extended Version Metadata
 
- You can enable and disable below features via an entry in config.php. For details see: xref:configuration/server/config_sample_php_parameters.adoc#FIXME[Save extended version metadata of uploaded and edited files]. 
+You can enable the feature via an entry in config.php. For details see: xref:configuration/server/config_sample_php_parameters.adoc#save-additional-metadata-for-versions[Save additional metadata for versions]. 
 
-image::configuration/files/files_versions/version-metadata.png[Extended Version Metadata,width=250]
+image::configuration/files/files_versions/version-metadata.png[Extended Version Metadata,width=300]
 
 === Show the Author of a Version
 
