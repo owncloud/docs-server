@@ -130,15 +130,15 @@ Do not apply any expiration rules. Delete all versions after 30 days.
 'versions_retention_obligation' => '30, 30',
 ----
 
-== Restoring of a Version
+== Restoring a Version
 
 In the WebUI in the details view, there is a restore button next to the versions. It can be used to restore the file to a past version. Restore does not delete the old version, instead a new current version is created. 
 
-WARNING: Note that retention policy can be applied after the restore operation, which could result in the old version being removed because of the retention policy. This behaviour can be changed with the persistent major version feature discussed in the section below.
+WARNING: Note that retention policy can be applied after the restore operation, which could result in the old version being removed because of the retention policy. This behavior can be changed with the persistent major version feature discussed in the section below.
 
 == Extended Version Metadata
 
-You can enable the feature via an entry in config.php. For details see: xref:configuration/server/config_sample_php_parameters.adoc#save-additional-metadata-for-versions[Save additional metadata for versions]. 
+You can enable the feature via an entry in config.php. For details see: xref:configuration/server/config_sample_php_parameters.adoc#save-additional-metadata-for-versions[Save Additional Metadata for Versions]. 
 
 image::configuration/files/files_versions/version-metadata.png[Extended Version Metadata,width=300]
 
