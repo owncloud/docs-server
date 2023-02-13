@@ -7,6 +7,11 @@ Manual file locking allows users, if enabled, to lock files in shared areas whil
 
 The feature builds on the WebDAV Locks backend which has been introduced with Server 10.1 and is now available in the ownCloud Web Interface. All storages are supported as locking takes place on the WebDAV level. The locks will only be available via ownCloud, not when a user works directly on the storage. Using the context menu of files, every user who has access can lock them. Users can recognize locked files by the means of a new lock indicator. While a file is locked, other users can still access it but they can not make any changes. Locked files can manually be unlocked by the lock owner (the user who locked the file; exclusive locking) using the "Locks" tab in the file details view (right sidebar).
 
+== Example use case
+
+In a shared folder, one user wants to signal to others that nobody should change a certain file. 
+To do so, the user locks the file. While locked, he can download a copy and edit locally (check-out). When done editing, he first removes the lock and then uploads his changes (check-in).
+
 == Enable or Disable the UI Component
 
 NOTE: The _user-facing_ components in the web interface are disabled by default because this feature allows users to lock other users' files *exclusively*. Even the owner of the file can't unlock them. Lock releasing can only be done by the locking user, a user who is a member of a lock breaking group (if defined), or until the lock expires.
