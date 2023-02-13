@@ -1,3 +1,4 @@
 = Introduction to ownCloud Server
 
 Welcome to the ownCloud Server documentation. These documents provide an xref:admin_manual:index.adoc[admin guide] with information for installation, configuration and administrative tasks as well as documentation for xref:developer_manual:index.adoc[developers].
+A [web UI](https://doc.owncloud.com/webui/next/) guide describes activities for end users.
