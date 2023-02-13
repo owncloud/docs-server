@@ -9,7 +9,7 @@ The feature builds on the WebDAV Locks backend which has been introduced with Se
 
 == Example use case
 
-In a shared folder, one user wants to signal to others that nobody should change a certain file. 
+In a shared folder, one user wants to signal to others that nobody should change a certain file. To do so, the user locks the file. While locked, a copy can be download and locally edited (check-out). When done editing, the user first removes the lock and then uploads the changes (check-in).
 To do so, the user locks the file. While locked, he can download a copy and edit locally (check-out). When done editing, he first removes the lock and then uploads his changes (check-in).
 
 == Enable or Disable the UI Component
