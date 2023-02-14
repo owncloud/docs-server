@@ -197,7 +197,7 @@ convert identify -list format
 
 If you have changed configuration settings, you can reuse them for ImageMagick 7. Copy either the changed contend of the files in question or the complete files from `/etc/ImageMagick-6.backup` to `/etc/ImageMagick-7`. You may want to keep a backup of the original configuration files.
 
-=== Secure ImageMagic
+=== Secure ImageMagick
 
 [IMPORTANT]
 ====
@@ -209,7 +209,7 @@ by adding or uncommenting this policy:
 <policy domain="coder" rights="none" pattern="MSL" />
 ----
 
-See: https://imagetragick.com[ImageTragick] for more information and context.
+See https://imagetragick.com[ImageTragick] for more information and context.
 ====
 
 === Install the New ImageMagick PHP Wrapper
