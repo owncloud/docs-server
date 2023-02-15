@@ -197,6 +197,21 @@ convert identify -list format
 
 If you have changed configuration settings, you can reuse them for ImageMagick 7. Copy either the changed contend of the files in question or the complete files from `/etc/ImageMagick-6.backup` to `/etc/ImageMagick-7`. You may want to keep a backup of the original configuration files.
 
+=== Secure ImageMagick
+
+[IMPORTANT]
+====
+Make sure to disable ImageMagick's scripting language in +
+`/etc/ImageMagick-7/policy.xml` +
+by adding or uncommenting this policy:
+[source,plaintext]
+----
+<policy domain="coder" rights="none" pattern="MSL" />
+----
+
+See https://imagetragick.com[ImageTragick] for more information and context.
+====
+
 === Install the New ImageMagick PHP Wrapper
 
 The new `php-imagick` wrapper is installed via PECL and uses the recently installed ImageMagick-7 version as base.
