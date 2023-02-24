@@ -843,7 +843,7 @@ Synchronize users from a given backend to the accounts table.
 | `shibboleth`
 |===
 
-The argument for the backend-class can be the quoted PHP class name but also the short form can be used.
+The argument for the backend class can be the quoted PHP class name but also the short form can be used.
 
 === Options
 
