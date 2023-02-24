@@ -22,7 +22,7 @@ When doing a new release of ownCloud Server like `10.x`, a new version branch mu
 12. In `site.yml` in section `asciidoc.attributes`, adjust all `-version` keys related to this repo according the new and former releases. Note if those attributes exist in other content sources, they must be set to the identical value to create consistent test builds.
 13. In `antora.yml`, check if the version is set to `next` and adjust all version dependent keys if any exist.
 14. Run a build by entering `yarn antora`. No build errors or warnings should occur.
-15. Commit changes and push them.
+15. Commit changes and push them. (Check the branch protection rules upfront so that the push passes.)
 16. Create a Pull Request and see the text suggestion at the bottom. When CI is green, all is done correctly. Merge the PR to master when the 10.x branch is close to be released.
 
 **Step 3: Protection and Renaming**
@@ -38,7 +38,7 @@ When doing a new release of ownCloud Server like `10.x`, a new version branch mu
 
 **Step 4: Set `latest` to 10.x**
 
-21. Nothing needs to be done there. The moment when the new server release gets tagged - which is part of the release process - `latest` will be automatically set to the tagged release number. This works automatically up to version 10.20. After that, backend admins need to be informed to updated the underlying process.
+21. Nothing needs to be done there. The moment when the new server release gets tagged - which is part of the release process - `latest` will be automatically set to the tagged release number. This works automatically up to version `10.20`. After that, backend admins need to be informed to updated the underlying process.
 
 **Text Suggestion for Step 2**
 
@@ -61,7 +61,7 @@ Note, this PR must be merged before the 10.x tag in core is set to avoid a 404 f
 Before merging this PR, we should take care that 10.x-2 has all changes necessary merged as post
 merging the 10.x-2 pdf is fixed.
 
-@pmaier1 @jnweiger fyi
+@pako81 @jnweiger fyi
 
 @mmattel @EParzefall @phil-davis
 post merging this, we need to backport all relevant changes to 10.x
