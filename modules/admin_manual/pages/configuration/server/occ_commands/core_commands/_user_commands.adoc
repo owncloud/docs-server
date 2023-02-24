@@ -824,14 +824,26 @@ Synchronize users from a given backend to the accounts table.
 
 === Arguments:
 
-[width="90%",cols="50%,80%",]
+[width="100%",cols="40%,90%,30%",options="header"]
 |===
-| `backend-class`
-| The quoted PHP class name for the backend, e.g., +
-- LDAP:        `"OCA\User_LDAP\User_Proxy"` +
-- Samba:       `"OCA\User\SMB"` +
-- Shibboleth:  `"OCA\User_Shibboleth\UserBackend"` +
+| backend-class Type
+| The quoted PHP class name for the backend
+| Short Form
+
+| LDAP:
+| `"OCA\User_LDAP\User_Proxy"`
+| `ldap`
+
+| Samba:
+| `"OCA\User\SMB"`
+| `samba`
+
+| Shibboleth:
+| `"OCA\User_Shibboleth\UserBackend"`
+| `shibboleth`
 |===
+
+The argument for the backend-class can be the quoted PHP class name but also the short form can be used.
 
 === Options
 
