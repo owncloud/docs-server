@@ -98,7 +98,7 @@ $CONFIG = [
               // uncomment to enable server side encryption
               //'serversideencryption' => 'AES256',
               //
-              // part size in bytes, applies to uploads between ownCloud and S3. This must between 5MB and 5GB, inclusive.
+              // part size in bytes, applies to uploads between ownCloud and S3. This value must be between 5MB and 5GB, inclusive.
             'part_size' => 5242880,
               // maximum number of concurrent UploadPart operations allowed during the multipart upload.
             'concurrency' => 3,
