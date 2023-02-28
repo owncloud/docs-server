@@ -91,17 +91,17 @@ $CONFIG = [
               // replace with your bucket
             'bucket' => 'owncloud',
               //
-              // uncomment to indicate available storage size in the objectstore, in bytes (in this example 1TB),
-              // without this setting app relying on available storage might be limited in funcionality e.g. metrics app
+              // uncomment to indicate available storage size in the objectstore in bytes (in this example 1TB),
+              // without this setting, the app relying on available storage might be limited in funcionality e.g. metrics app
               //'availableStorage' => 1099511627776,
               //
               // uncomment to enable server side encryption
               //'serversideencryption' => 'AES256',
               //
-              // part size, in bytes, to use when doing a multipart upload. this must between 5 MB and 5 GB, inclusive.
+              // part size in bytes, applies to uploads between ownCloud and S3. This must between 5MB and 5GB, inclusive.
             'part_size' => 5242880,
               // maximum number of concurrent UploadPart operations allowed during the multipart upload.
-            'concurrency' => 5,
+            'concurrency' => 3,
               // storage specific options
             'options' => [
                   // version and region are required
