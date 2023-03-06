@@ -24,7 +24,7 @@ The {search_elastic-app-url}[Full Text Search] app integrates full text search i
 [NOTE]
 ====
 * Version 1.0.0 of the Full Text Search app only works with Elasticsearch version 5.6.
-* With version >=2.0.0 of the app, Elasticsearch version > 7 is required and has been tested respectively is supported up to version 8.6.2 though newer version may work without any issues.
+* With version >=2.0.0 of the app, Elasticsearch version > 7 is required and has been tested and is supported up to version 8.6.2 though newer versions may work without any issues.
 ====
 
 . The {ingest-url}[Ingest Attachment Processor Plugin] lets Elasticsearch extract metadata and text from over a thousand different file types such as PPT, XLS, PDF and more. To install the processor, run the following command from your Elasticsearch installation directory:
