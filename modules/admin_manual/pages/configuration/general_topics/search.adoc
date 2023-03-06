@@ -2,14 +2,14 @@
 :toc: right
 :toclevels: 4
 :page_aliases: configuration/search/index.adoc
+:description: ownCloud offers the ability to use full text search via the Full Text Search app connecting to an Elasticsearch Server. This allows users to search not only for file names but also for content within files stored in ownCloud.
+
 :elastic-search-url: https://www.elastic.co/elasticsearch/
 :elastic-search-install-url: https://www.elastic.co/guide/en/elastic-stack/7.17/index.html
 :search_elastic-app-url: {oc-marketplace-url}/apps/search_elastic 
 :simple-query-string-query-url: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html
 :ingest-url: https://www.elastic.co/guide/en/elasticsearch/plugins/current/ingest-attachment.html
 :create-api-key-url: https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html#security-api-create-api-key
-
-:description: ownCloud offers the ability to use full text search via the Full Text Search app connecting to an Elasticsearch Server. This allows users to search not only for file names but also for content within files stored in ownCloud.
 
 == Introduction
 
@@ -24,7 +24,7 @@ The {search_elastic-app-url}[Full Text Search] app integrates full text search i
 [NOTE]
 ====
 * Version 1.0.0 of the Full Text Search app only works with Elasticsearch version 5.6.
-* With version >=2.0.0 of the app, Elasticsearch version 7 is supported and required.
+* With version >=2.0.0 of the app, Elasticsearch version > 7 is required and has been tested and is supported up to version 8.6.2 though newer versions may work without any issues.
 ====
 
 . The {ingest-url}[Ingest Attachment Processor Plugin] lets Elasticsearch extract metadata and text from over a thousand different file types such as PPT, XLS, PDF and more. To install the processor, run the following command from your Elasticsearch installation directory:
@@ -91,7 +91,7 @@ IMPORTANT: The API Key needs to be the _encoded_ one, *not* the _api_key_ string
 
 === Search External Storage
 
-Define if external storage should be included in ES indexing by setting the checkmark accordingly with btn:[Scan external Storages].
+Define if external storage should be included in ES indexing by setting the checkmark accordingly with btn:[Scan external Storages]. Setting this checkmark not only enables search in external storages, but also search in federated shares. Note that this setting requires to rebuild the index.
 
 === Save the Configuration
 
@@ -277,4 +277,4 @@ Currently, the app has the following known limitations:
 * If a shared file is renamed by the sharee (share receiver), the sharee cannot find the file using the new filename.
 * Search results are not updated when a text file is rolled back to an earlier version.
 * The app does not return results for recieved federated share files.
-* When using encryption, the app only works with the default `Master Key` encryption module.
+* Search does currently not work when encrypting files via the encryption app.
