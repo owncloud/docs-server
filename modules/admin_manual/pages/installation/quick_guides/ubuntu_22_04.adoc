@@ -158,14 +158,14 @@ EOM
 ----
 
 
-==== Test the configuration
+==== Test the Configuration
 
 [source,bash]
 ----
 apachectl -t
 ----
 
-At this point you would expect the following output
+At this point, the following output is expected:
 
 [source,bash]
 ----
@@ -175,7 +175,7 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 Syntax OK
 ----
 
-First warning will be resolved after we install ownCloud. Second message we can resolve with:
+The first warning will be resolved after ownCloud is installed. The second message can be resolved with following command. Check that the entry is only present once in the `apache2.conf` file:
 
 [source,bash]
 ----
