@@ -86,7 +86,7 @@ apt install -y \
   php7.4-gd php7.4-imap php7.4-intl php7.4-json \
   php7.4-mbstring php7.4-gmp php7.4-bcmath php7.4-mysql \
   php7.4-ssh2 php7.4-xml php7.4-zip php7.4-apcu \
-  php7.4-redis php7.4-ldap php-phpseclib\
+  php7.4-redis php7.4-ldap php-phpseclib
 ----
 
 === Install smbclient php Module
@@ -138,7 +138,7 @@ FILE="/etc/apache2/sites-available/owncloud.conf"
 cat <<EOM >$FILE
 <VirtualHost *:80>
 # uncommment the line below if variable was set
-#ServerName $my_domain 
+#ServerName \$my_domain 
 DirectoryIndex index.php index.html
 DocumentRoot /var/www/owncloud
 <Directory /var/www/owncloud>
