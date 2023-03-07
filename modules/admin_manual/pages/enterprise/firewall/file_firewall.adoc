@@ -1,6 +1,6 @@
 = File Firewall
 :toc: right
-:description: The File Firewall lets you control access and sharing in fine detail by creating rules for allowing or denying access.
+:description: The File Firewall app lets you control access and sharing in fine detail by creating rules for allowing or denying access to files.
 :regex-info-url: http://www.regular-expressions.info/
 :supported-mimetype-list-url: https://github.com/owncloud/core/blob/master/resources/config/mimetypemapping.dist.json
 
@@ -12,7 +12,7 @@ In addition to these restriction options, the File Firewall app also supports ru
 
 == How the File Firewall Works
 
-Each firewall rule set consists of one or more conditions. If a request matches all of the conditions, in at least one rule set, then the request is blocked by the firewall. Otherwise, the request is allowed by the firewall.
+Each firewall rule set consists of one or more conditions. If a request matches all of the conditions in at least one rule set, then the request is blocked by the firewall. Otherwise, the request is allowed by the firewall.
 
 NOTE: The File Firewall app cannot lock out administrators from the web interface when rules are misconfigured.
 
@@ -22,7 +22,7 @@ Figure 1 shows an empty firewall configuration panel. Set your logging level to 
 
 image:enterprise/firewall/firewall-1.png[Figure 1: Empty File Firewall configuration panel]
 
-Figure 2 shows two rules. The first rule, *No Support outside office hours*, prevents members of the support group from logging into the ownCloud Web interface from 5pm-9am, and also blocks client syncing. The second rule prevents members of the "qa-team" group from accessing the Web UI from IP addresses that are outside of the local network.
+Figure 2 shows two rules. The first rule, *No Support outside office hours*, prevents members of the support group from logging into the ownCloud Web interface from 5pm-9am and also blocks client syncing. The second rule prevents members of the "qa-team" group from accessing the Web UI from IP addresses that are outside of the local network.
 
 image:enterprise/firewall/firewall-2.png[Figure 2: Two example rules that restrict logins per user group]
 
