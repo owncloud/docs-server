@@ -682,6 +682,18 @@ Depends on `mail_smtpauth`. Specify the password for authenticating to the SMTP 
 'mail_smtppassword' => '',
 ....
 
+=== Remove the sender display name in sharing emails
+Mail notifications about shares include the display name of the sharer in the email
+"from" address. This can cause some email filters to block these as impersonation
+attempts. Set remove_sender_display_name to true to not include this information.
+
+==== Code Sample
+
+[source,php]
+....
+'remove_sender_display_name' => false,
+....
+
 == Proxy Configurations
 
 === Override automatic proxy detection
