@@ -157,6 +157,31 @@ DocumentRoot /var/www/owncloud
 EOM
 ----
 
+
+==== Test the Configuration
+
+[source,bash]
+----
+apachectl -t
+----
+
+At this point, the following output is expected:
+
+[source,bash]
+----
+apachectl -t
+AH00112: Warning: DocumentRoot [/var/www/owncloud] does not exist
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
+Syntax OK
+----
+
+The first warning will be resolved after ownCloud is installed. The second message can be resolved with following command. Check that the entry is only present once in the `apache2.conf` file:
+
+[source,bash]
+----
+echo "ServerName $my_domain" >> /etc/apache2/apache2.conf
+----
+
 ==== Enable the Virtual Host Configuration
 
 [source,bash]
