@@ -1,6 +1,6 @@
 = File Firewall
 :toc: right
-:description: The File Firewall lets you control access and sharing in fine detail by creating rules for allowing or denying access restrictions.
+:description: The File Firewall lets you control access and sharing in fine detail by creating rules for allowing or denying access.
 :regex-info-url: http://www.regular-expressions.info/
 :supported-mimetype-list-url: https://github.com/owncloud/core/blob/master/resources/config/mimetypemapping.dist.json
 
