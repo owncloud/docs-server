@@ -682,6 +682,16 @@ Depends on `mail_smtpauth`. Specify the password for authenticating to the SMTP 
 'mail_smtppassword' => '',
 ....
 
+=== Remove the sender display name from the "From" address
+Setting this parameter to `true` will remove the sender display name from the "From" address. This may be needed in such cases where mail notifications related to sharing activities are blocked by mail filters as being flagged as email impersonation.
+
+==== Code Sample
+
+[source,php]
+....
+'remove_sender_display_name' => true,
+....
+
 == Proxy Configurations
 
 === Override automatic proxy detection
