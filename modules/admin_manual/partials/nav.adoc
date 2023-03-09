@@ -172,7 +172,6 @@
 *** xref:admin_manual:enterprise/external_storage/index.adoc[External Storage]
 **** xref:admin_manual:enterprise/external_storage/enterprise_only_auth.adoc[Enterprise Only Authentication]
 **** xref:admin_manual:enterprise/external_storage/ldap_home_connector_configuration.adoc[LDAP Home Connector Configuration]
-**** xref:admin_manual:enterprise/external_storage/onedrive.adoc[OneDrive]
 **** xref:admin_manual:enterprise/external_storage/sharepoint-integration_configuration.adoc[Sharepoint integration Configuration]
 **** xref:admin_manual:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive Configuration]
 **** xref:admin_manual:enterprise/external_storage/wnd_quick_guide.adoc[WND Configuration Quick Guide]
