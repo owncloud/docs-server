@@ -362,6 +362,7 @@ Available keys, along with default values for configValue, are listed in the tab
 | ldapLoginFilterMode           | 0
 | ldapLoginFilterUsername       | 1
 | ldapNestedGroups              | 0
+| ldapNetworkTimeout            | 15
 | ldapOverrideMainServer        |
 | ldapPagingSize                | 500
 | ldapPort                      | 389
