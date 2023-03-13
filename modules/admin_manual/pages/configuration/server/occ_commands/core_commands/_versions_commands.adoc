@@ -5,8 +5,7 @@ These commands are not available in xref:maintenance-commands[single-user (maint
 
 == versions:cleanup
 
-`versions:cleanup` can delete all versioned files, as well as the
-`files_versions` folder, for either specific users, or for all users.
+`versions:cleanup` can delete all versioned files, as well as the `files_versions` folder, for either specific users, or for all users. A Published version persists until the original file is deleted by somebody with such permission or via the `occ versions:cleanup` command.
 
 [source,bash,subs="attributes+"]
 ----
