@@ -100,8 +100,8 @@ You may alter the xref:configuration/server/config_sample_php_parameters.adoc#de
 |Keep versions for at least `D1` days and delete when they exceed `D2` days.
 
 |`disabled`
-|Disable Versions; no files will be deleted.
-|===
+|Disable version retention; no files will be deleted.
+|==
 
 ==== Example 1:
 
