@@ -101,7 +101,7 @@ You may alter the xref:configuration/server/config_sample_php_parameters.adoc#de
 
 |`disabled`
 |Disable version retention; no files will be deleted.
-|==
+|===
 
 ==== Example 1:
 
