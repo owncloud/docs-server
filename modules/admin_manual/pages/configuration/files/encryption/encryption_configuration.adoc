@@ -138,6 +138,10 @@ To enable the encryption app, run the following command:
 {occ-command-example-prefix} encryption:enable
 ----
 
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} encryption:select-encryption-type masterkey -y
+----
 
 If the encryption app is successfully enabled, you should see the following confirmations:
 
@@ -147,6 +151,7 @@ encryption enabled
 Encryption enabled
 
 Default module: OC_DEFAULT_MODULE
+Master key successfully enabled.
 ----
 
 === Enable Encryption in the Web-UI
@@ -188,6 +193,15 @@ Then enable encryption, using the following command:
 ----
 {occ-command-example-prefix} encryption:enable
 ----
+
+After that, enable the master key, using the following command:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} encryption:select-encryption-type masterkey
+----
+
+NOTE: The master key mode has to be set up in a newly created instance.
 
 Finally, encrypt all data, using the following command:
 
@@ -278,9 +292,7 @@ You may only disable encryption by using the xref:configuration/server/occ_comma
 * Users getting access to an external storage which already contains encrypted files cannot get access to said files for reasons such as the group case above.
 * When having data shared with a group and group membership changes after the share is established, subsequently added users will not be able to open the shared data unless the owner will share it again.
 
-The command line interface and web UI to enable user-key-based encryption is no longer available in ownCloud core 10.12.1 + encryption app 1.6.0 or later.
-
-=== Enabling User-Key-Based Encryption From the Command-line (Deprecated)
+=== Enabling User-Key-Based Encryption From the Command-line
 
 To avoid any issues on a running instance, put your server in single user mode with the following command:
 
@@ -303,7 +315,7 @@ After that, enable encryption, using the following command:
 {occ-command-example-prefix} encryption:enable
 ----
 
-Then, enable the user-key, using the following command. This command is only available in encryption app version 1.5.3 and earler:
+Then, enable the user-key, using the following command:
 
 [source,bash,subs="attributes+"]
 ----
