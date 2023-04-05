@@ -167,7 +167,7 @@ These recommendations apply if you meet the following criteria:
 | Value
 
 | Number of users
-| 150 to 1,000 users.
+| 150 to 5,000 users.
 
 | Storage size
 | Up to 200TB.
@@ -179,7 +179,7 @@ a| * Every component is fully redundant and can fail without service interruptio
 
 === Recommended System Requirements
 
-* 2 to 4 application servers.
+* 2 to 5 application servers.
 * A cluster of two database servers.
 * Storage on an NFS server.
 * Authentication via an existing LDAP or Active Directory server.
