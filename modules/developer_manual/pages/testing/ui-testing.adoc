@@ -24,7 +24,7 @@ xref:admin_manual:installation/index.adoc[setup completely].
 * Docker containers pulled. It is recommended to use `standalone-chrome-debug` which allows seeing the browser live.
 The latest `standalone-chrome-*` containers have an https://github.com/owncloud/core/issues/35444[issue].
 So make sure to pull the specific chrome container versions listed below.
-You will also need https://github.com/mailhog/MailHog[MailHog].
+You will also need https://github.com/inbucket/inbucket[InBucket].
 Pull any or all of these Docker containers:
 
 [source]
@@ -33,7 +33,7 @@ docker pull selenium/standalone-chrome:3.141.59-oxygen
 docker pull selenium/standalone-chrome-debug:3.141.59-oxygen
 docker pull selenium/standalone-firefox
 docker pull selenium/standalone-firefox-debug
-docker pull mailhog/mailhog
+docker pull inbucket/inbucket
 ----
 
 * A `vnc` viewer installed (in order to view the browser action as the UI tests run). For example:
@@ -67,18 +67,19 @@ docker run -p 4445:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-ch
 
 Ports on the Selenium Docker IP address are mapped to `localhost` so they can be accessed by the tests and the `vnc` viewer.
 
-* Start the MailHog Docker container in another terminal:
+* Start the InBucket Docker container in another terminal:
 
 [source]
 ----
-docker run -p 1025:1025 -p 8025:8025 mailhog/mailhog
+docker run -p 2500:2500 -p 9000:9000 inbucket/inbucket
 ----
 
-Ports on the MailHog docker IP address are mapped to `localhost` so they can be accessed by the tests.
+Ports on the InBucket docker IP address are mapped to `localhost` so they can be accessed by the tests.
 By running these in terminal windows, it is simple to press `ctrl-C` to stop them when you are finished.
 
 * Set the following environment variables:
 
+** `EMAIL_HOST=localhost` (so that the tests know how to deliver mails)
 ** `TEST_SERVER_URL` (The URL of your webserver)
 ** `TEST_SERVER_FED_URL` (The alternative URL of your webserver for federation share tests.)
 ** `BROWSER` (Any one of `chrome`, `firefox`, `internet explorer` or `MicrosoftEdge`. Defaults to `chrome`)
@@ -88,6 +89,7 @@ e.g., to test an instance running on the Docker subnet with Chrome do:
 
 [source,console,subs="attributes+"]
 ----
+export EMAIL_HOST=localhost
 export TEST_SERVER_URL=http://172.17.0.1:{std-port-http}/owncloud-core
 export TEST_SERVER_FED_URL=http://172.17.0.1:8180/owncloud-core
 export BROWSER=chrome
@@ -259,8 +261,7 @@ java -jar selenium-server-standalone-3.12.0.jar \
 ----
 
 - In this configuration, the tests will continually open the browser-under-test on your local system.
-- If you run any test scenarios that need MailHog (to test password reset etc.), then you need to run the MailHog Docker container. That is much simpler than trying to configure MailHog on your local system.
-
+- If you run any test scenarios that need an email service (to test password reset etc.), then you need to run the InBucket Docker container.
 
 
 == Known Issues
