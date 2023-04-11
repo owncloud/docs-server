@@ -7,7 +7,7 @@
 :pecl-package-url: https://pecl.php.net/package
 :sabre-url: http://sabre.io/
 :gnu-make-url: https://www.gnu.org/software/make/
-:wiki-openssl-3-url: https://wiki.openssl.org/index.php/OpenSSL_3.0
+:wiki-openssl-3-url: https://wiki.openssl.org/index.php/OpenSSL_3.0#Providers
 
 == Introduction
 
@@ -38,6 +38,39 @@ If you plan to:
 
 your encryption environment will break due to openSSL v3 retired (legacy) ciphers. As a result, encrypted files cant be accessed. As a _temporary solution_, you have to manually reenable in the openSSL v3 config the legacy ciphers. To do so, see the example in the {wiki-openssl-3-url}[OpenSSL 3.0 Wiki] at section **6.2 Providers**.
 ====
+
+How to implement the fix for the above mentioned issue:
+
+1. Find the openssl config directory with 
+
+"openssl version -d"
+
+Output:
+
+OPENSSLDIR: "/usr/lib/ssl"
+
+2. Go in to that directory and open the config file "openssl.cnf"
+
+Look for:
+
+[openssl_init]
+providers = provider_sect
+
+and add this line below
+
+legacy = legacy_sect
+
+then look for 
+
+[default_sect]
+# activate = 1
+
+remove the "#" before "activate" and add the following lines below:
+
+[legacy_sect]
+activate = 1
+
+3. Save the file. Now you have enabled the legacy support.
 
 === PHP Version
 
