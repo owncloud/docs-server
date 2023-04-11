@@ -15,7 +15,7 @@ xref:admin_manual:installation/index.adoc[setup completely].
 * Testing utils (running `make` in your terminal from the `webroot` directory will install them).
 * https://docs.docker.com/install/linux/docker-ce/ubuntu/[Docker CE Installed]
 * https://docs.docker.com/install/linux/linux-postinstall/[Docker Post-install] done to put your developer account in the docker group so you can run Docker without `sudo`
-* Docker subnet enabled for any firewall that may be active such as, https://help.ubuntu.com/community/UFW[ufw]. The example below shows how to update ufw's firewall rules to allow the `172.17.0.0/16` Docker subnet:
+* Docker subnet enabled for any firewall that may be active such as, https://help.ubuntu.com/community/UFW[ufw]. The example below shows how to update UFW's firewall rules to allow the `172.17.0.0/16` Docker subnet:
 
   sudo ufw status
   sudo ufw allow from 172.17.0.0/16
@@ -47,7 +47,7 @@ sudo apt install tigervnc-viewer
 
 == Overview
 
-Tests are divided into suites, enabling each suite to test some logical portion of the functionality and for the total elapsed run-time of a single suite to be reasonable (up to about 40 minutes on Travis-CI, about 10 minutes on drone).
+Tests are divided into suites, enabling each suite to test some logical portion of the functionality and for the total elapsed run-time of a single suite to be reasonable (up to about 30 minutes on drone).
 Elapsed run-time on a local developer system is very dependent on the IO as well as CPU performance.
 Smaller apps may have all tests in a single suite.
 
@@ -80,7 +80,7 @@ By running these in terminal windows, it is simple to press `ctrl-C` to stop the
 * Set the following environment variables:
 
 ** `TEST_SERVER_URL` (The URL of your webserver)
-** `TEST_SERVER_FED_URL` (The alternative URL of your webserver for federation share tests.)
+** `TEST_SERVER_FED_URL` (The alternative URL of your webserver for federation share tests - _optional_)
 ** `BROWSER` (Any one of `chrome`, `firefox`, `internet explorer` or `MicrosoftEdge`. Defaults to `chrome`)
 ** `BROWSER_VERSION` (version of the browser you want to use - _optional_)
 
@@ -96,9 +96,10 @@ export BROWSER=chrome
 * If your ownCloud install is running locally on Apache, then it should already be available on the Docker subnet at `172.17.0.1`
 
 * To run the federation Sharing tests:
-1.  Make sure you have configured HTTPS with valid certificates on both
-servers URLs
-2.  xref:admin_manual:configuration/server/import_ssl_cert.adoc[Import SSL certificates] (or do not offer HTTPS).
+1.  Install another instance of ownCloud with its own separate database, code, data directory and URL
+2.  Install and enable the testing app
+3.  Make sure you have configured HTTPS with valid certificates on both servers URLs
+4.  xref:admin_manual:configuration/server/import_ssl_cert.adoc[Import SSL certificates] (or do not offer HTTPS).
 * Run a suite of tests:
 +
 [source,console]
@@ -121,30 +122,6 @@ The test system must have (at least locally) functioning IPv6:
 
 If you have a server set up that listens on both IPv4 and IPv6 (e.g. localhost on 127.0.0.1 and ::1) then the UI tests will access the server via whichever protocol your operating system prefers.
 If there are tests that specifically specify IPv4 or IPv6, then those will choose a suitable local address to come from so that they access the server using the required IP version.
-
-If you are using the PHP dev server, then before starting it, in addition to the exports in the Set Up Test section, specify where the IPv6 server should listen:
-
-[source,console]
-----
-export IPV6_HOST_NAME=ip6-localhost
-----
-
-Then both IPv4 and IPv6 PHP dev servers will be started by the script:
-
-[source,console]
-----
-bash tests/travis/start_php_dev_server.sh
-----
-
-If you want the tests to drive the UI over IPv6, then export an IPv6
-name or address for `SRV_HOST_NAME` and an IPv4 name or address for
-`IPV4_HOST_NAME`:
-
-[source,console]
-----
-export SRV_HOST_NAME=ip6-localhost
-export IPV4_HOST_NAME=localhost
-----
 
 Because not everyone will have functional IPv6 on their test system yet, tests that specifically require IPv6 are tagged `@skip @ipv6`.
 To run those tests, follow the section below on running skipped tests and specify `--tags @ipv6`.
@@ -221,7 +198,7 @@ fix code.
 === Additional Command Options
 
 Running all test suites in a single run is not recommended.
-It will take more than 1 hour on a typical development system.
+It will take many hours on a typical development system.
 However, you may run all UI tests with:
 
 [source]
