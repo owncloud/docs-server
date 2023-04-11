@@ -1,8 +1,6 @@
 Guzzle, PHP HTTP client
 =======================
 
-[![Build Status](https://travis-ci.org/guzzle/guzzle.svg?branch=master)](https://travis-ci.org/guzzle/guzzle)
-
 Guzzle is a PHP HTTP client that makes it easy to send HTTP requests and
 trivial to integrate with web services.
 
@@ -81,10 +79,13 @@ composer.phar update
 | 4.x     | EOL         | `guzzlehttp/guzzle` | `GuzzleHttp` | N/A                 | N/A                 | No    |
 | 5.x     | Maintained  | `guzzlehttp/guzzle` | `GuzzleHttp` | [v5][guzzle-5-repo] | [v5][guzzle-5-docs] | No    |
 | 6.x     | Latest      | `guzzlehttp/guzzle` | `GuzzleHttp` | [v6][guzzle-6-repo] | [v6][guzzle-6-docs] | Yes   |
+| 7.x     | Latest      | `guzzlehttp/guzzle` | `GuzzleHttp` | [v7][guzzle-7-repo] | [v7][guzzle-7-docs] | Yes   |
 
 [guzzle-3-repo]: https://github.com/guzzle/guzzle3
 [guzzle-5-repo]: https://github.com/guzzle/guzzle/tree/5.3
-[guzzle-6-repo]: https://github.com/guzzle/guzzle
+[guzzle-6-repo]: https://github.com/guzzle/guzzle/tree/6.5
+[guzzle-7-repo]: https://github.com/guzzle/guzzle
 [guzzle-3-docs]: http://guzzle3.readthedocs.org/en/latest/
 [guzzle-5-docs]: http://guzzle.readthedocs.org/en/5.3/
-[guzzle-6-docs]: http://guzzle.readthedocs.org/en/latest/
+[guzzle-6-docs]: http://guzzle.readthedocs.org/en/6.5/
+[guzzle-7-docs]: http://guzzle.readthedocs.org/en/latest/
