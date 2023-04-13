@@ -239,6 +239,23 @@ All IdPs can use ownCloud's default _client IDs, secrets and redirect URIs_ with
 
 (1) See the xref:configuration/user/oidc/ms-azure-setup.adoc#microsoft-azure-ad-and-redirecturi[following note] when using Microsoft Azure AD and 127.0.0.1 as redirect URI.
 
+=== Desktop, Android and iOS app default `scope` and `prompt` parameters
+
+ownCloud desktop and mobile apps come with default `scope` and `prompt` parameters. Parameters can be modified in custom branded builds.
+
+[width="60%",cols="50%,85%",options="header"]
+|===
+| Parameter
+| Default value
+
+| `scope`
+| `openid offline_access email profil`
+
+| `prompt`
+| `select_account consent` (Android 4.0+)
+|===
+
+
 === Migrate Clients from Basic Authentication to OIDC
 
 If your users are logged in to their desktop and mobile clients via basic authentication (username/password) against ownCloud Server and you are not using OAuth2 to authorize the ownCloud clients, a migration to OIDC can be conducted as follows:
