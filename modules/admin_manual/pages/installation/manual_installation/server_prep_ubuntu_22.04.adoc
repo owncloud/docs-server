@@ -145,68 +145,6 @@ sudo apt install rsync
 sudo apt install imagemagick
 ----
 
-The following step is necessary to upgrade PEAR because of a change in PHP 7.4.1+ Note that you should always use the {pear-package_url}[latest stable PEAR release].
-
-[source,bash]
-----
-pear version
-----
-
-[source,bash]
-----
-sudo mkdir -p /tmp/pear/cache
-----
-
-[source,bash]
-----
-sudo pear upgrade --force \
-      --alldeps http://pear.php.net/get/PEAR-1.10.13
-----
-
-[source,bash]
-----
-sudo pear clear-cache
-----
-
-[source,bash]
-----
-sudo pear update-channels
-----
-
-[source,bash]
-----
-sudo pear upgrade --force
-----
-
-[source,bash]
-----
-sudo pear upgrade-all
-----
-
-[source,bash]
-----
-pear version
-----
-
-If you get any notices containing `You should add "extension=...`, check if the extension is listed in `/etc/php/7.4/mods-available`. If it is not present, add the `.ini` file manually and xref:useful-commands-for-managing-php-extensions[enable it].
-
-Post upgrading pear, you can safely remove the directory `/tmp/pear/cache`.
-
-See the xref:php-imagick-library[php-imagick Library] section if you are interested why an updated version of ImageMagick is necessary.
-
-== Apache Web Server
-
-The following command installs the Apache Web Server.
-
-[source,bash]
-----
-sudo apt install libapache2-mod-php7.4 apache2
-----
-
-See the important note on using the correct xref:installation/manual_installation/manual_installation_apache.adoc#multi-processing-module-mpm[Multi-Processing Module (MPM)].
-
-Although it's not supported by ownCloud, you can configure Apache to use `php-fpm`, the FastCGI Process Manager, which is a non-standard setup and not covered by this document.
-
 == Multiple Concurrent PHP Versions
 
 If you have multiple concurrent PHP versions installed, which will happen when using the {ondrej-php-url}[ondrej/php] PPA, you must tell your Web Server and your CLI environment which one to use. Please note that `ondrej/php` installs _ALL_ versions of PHP. To list all available versions installed and choose one of them, use the following command:
@@ -305,6 +243,70 @@ These options need to match
 ----
 
 As you see above, the API modules do not match and have been compiled with different versions and therefore will not work. To fix this, uninstall the PECL module with `pecl uninstall <extension_name>`, set the correct `update-alternatives` as described above and reinstall it.
+
+== Updating pear
+
+The following step is necessary to upgrade PEAR because of a change in PHP 7.4.1+ Note that you should always use the {pear-package_url}[latest stable PEAR release].
+
+[source,bash]
+----
+pear version
+----
+
+[source,bash]
+----
+sudo mkdir -p /tmp/pear/cache
+----
+
+[source,bash]
+----
+sudo pear upgrade --force \
+      --alldeps http://pear.php.net/get/PEAR-1.10.13
+----
+
+[source,bash]
+----
+sudo pear clear-cache
+----
+
+[source,bash]
+----
+sudo pear update-channels
+----
+
+[source,bash]
+----
+sudo pear upgrade --force
+----
+
+[source,bash]
+----
+sudo pear upgrade-all
+----
+
+[source,bash]
+----
+pear version
+----
+
+If you get any notices containing `You should add "extension=...`, check if the extension is listed in `/etc/php/7.4/mods-available`. If it is not present, add the `.ini` file manually and xref:useful-commands-for-managing-php-extensions[enable it].
+
+Post upgrading pear, you can safely remove the directory `/tmp/pear/cache`.
+
+See the xref:php-imagick-library[php-imagick Library] section if you are interested why an updated version of ImageMagick is necessary.
+
+== Apache Web Server
+
+The following command installs the Apache Web Server.
+
+[source,bash]
+----
+sudo apt install libapache2-mod-php7.4 apache2
+----
+
+See the important note on using the correct xref:installation/manual_installation/manual_installation_apache.adoc#multi-processing-module-mpm[Multi-Processing Module (MPM)].
+
+Although it's not supported by ownCloud, you can configure Apache to use `php-fpm`, the FastCGI Process Manager, which is a non-standard setup and not covered by this document.
 
 == libsmbclient-php Library
 
