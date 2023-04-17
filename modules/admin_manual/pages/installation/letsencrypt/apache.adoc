@@ -132,6 +132,13 @@ IMPORTANT: For the moment, comment out the `Include` directive, as the certifica
 
 == Test and Enable the Apache Configuration
 
+If not already done, enable the Apache2 ssl module necessary for the ssl configuration. Use the following command to enable it:
+
+[source,bash]
+----
+sudo a2enmod ssl
+----
+
 With the configuration created, test it by running one of the following two commands:
 
 [source,bash]
