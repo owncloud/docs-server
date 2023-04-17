@@ -75,7 +75,7 @@ sudo chown -R www-data: mynewtheme
 +
 [source,console,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable mynewtheme
+occ app:enable mynewtheme
 ----
 
 . Exclude your new theme from integrity checking. Add the following setting to `config/config.php`:
