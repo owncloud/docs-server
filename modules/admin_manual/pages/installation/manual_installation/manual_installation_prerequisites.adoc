@@ -93,7 +93,7 @@ ownCloud can run with following PHP versions: {supported-php-versions}
 
 [IMPORTANT]
 ====
-ownCloud recommends PHP 7.4 for new installations. Sites using a version earlier than PHP 7.3 are *strongly encouraged* to migrate at least to PHP 7.3.
+PHP 7.4 *must* be used for all installations. Sites currently using a different PHP version *must* migrate to PHP 7.4.
 ====
 
 [IMPORTANT]
