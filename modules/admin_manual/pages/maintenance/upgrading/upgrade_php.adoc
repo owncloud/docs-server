@@ -11,8 +11,8 @@ And if you're on a version of PHP older than {minimum-php-printed} you *must* up
 This guide takes you through upgrading your installation of PHP to one of the supported PHP versions ({supported-php-versions}) on Red Hat or CentOS 7.
 
 :from-version: 5.6
-:to-version: 7.3
-:to-pkg-version: 73
+:to-version: 7.4
+:to-pkg-version: 74
 
 include::partial$/maintenance/upgrading/upgrade_steps.adoc[leveloffset=+1]
 
