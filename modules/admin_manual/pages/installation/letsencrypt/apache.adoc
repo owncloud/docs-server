@@ -186,3 +186,24 @@ It is now ready to serve HTTPS request for the given domain using the issued cer
 ----
 sudo service apache2 reload
 ----
+
+== Add a redirect directive
+
+Now that we have SSL configured and enabled, we need to configure that all traffic to our server is redirected to use the encrypted ssl site.
+
+[source,apache]
+----
+<VirtualHost *:80>
+  ServerName mydom.tld
+  Redirect permanent / https://<Your-Server-FQDN>/
+  Alias /.well-known/acme-challenge/ /var/www/letsencrypt/.well-known/acme-challenge/
+  <Directory "/var/www/letsencrypt/.well-known/acme-challenge/">
+      Options None
+      AllowOverride None
+      ForceType text/plain
+      RedirectMatch 404 "^(?!/\.well-known/acme-challenge/[\w-]{43}$)"
+  </Directory>
+
+  # ... remaining configuration
+</VirtualHost>
+----
