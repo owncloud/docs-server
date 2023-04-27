@@ -239,22 +239,22 @@ All IdPs can use ownCloud's default _client IDs, secrets and redirect URIs_ with
 
 (1) See the xref:configuration/user/oidc/ms-azure-setup.adoc#microsoft-azure-ad-and-redirecturi[following note] when using Microsoft Azure AD and 127.0.0.1 as redirect URI.
 
-=== Desktop, Android and iOS app default `scope` and `prompt` parameters
+=== Default Scope and Prompt Parameters
 
-ownCloud desktop and mobile apps come with default `scope` and `prompt` parameters. Parameters can be modified in custom branded builds.
+ownCloud desktop and mobile apps come with default `scope` and `prompt` parameters. These parameters can be modified in custom branded builds. See the https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest[OIDC Authentication Request specs] for more details about the parameters.
 
-[width="60%",cols="50%,85%",options="header"]
+[width="60%",cols="50%,100%",options="header"]
 |===
 | Parameter
 | Default value
 
 | `scope`
-| `openid offline_access email profil`
+| `openid offline_access email profile`
 
 | `prompt`
-| `select_account consent` (Android 4.0+)
+| `select_account consent` +
+(for Android you need app version 4.0+)
 |===
-
 
 === Migrate Clients from Basic Authentication to OIDC
 
