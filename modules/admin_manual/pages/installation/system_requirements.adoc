@@ -60,7 +60,7 @@ including all 100% compatible derivatives
 * openSUSE Leap 15.2
 
 | Database
-| * xref:#database-requirements[MySQL] 8+ or xref:#database-requirements[MariaDB] 10.2 through 10.8 ^1^ (*Recommended*)
+| * xref:#database-requirements[MySQL] 8+ or xref:#database-requirements[MariaDB] 10.2 through 10.11 ^1^ (*Recommended*)
 * Oracle 11 and 12 (*Enterprise only*)
 * PostgreSQL 9, 10, 11, 12, 13 or 14
 * SQLite (*Not for production*)
