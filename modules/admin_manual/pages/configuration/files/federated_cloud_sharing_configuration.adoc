@@ -53,6 +53,9 @@ mysql -u root -e "update oc_jobs set last_checked=0 where class='OCA\\Federation
 {occ-command-example-prefix} federation:sync-addressbook
 ----
 . Configure automatic acceptance of new federated shares.
+
+NOTE: Automatic acceptance of new federated shares will not work if the option `Add server automatically once a federated share was created successfully` is also set. This is done because of security concerns.
+
 +
 [source,bash,subs="attributes+"]
 ----
