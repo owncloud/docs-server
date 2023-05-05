@@ -31,6 +31,9 @@ For _best performance_, _stability_, _support_ and _full functionality_, we offi
 | Database
 | xref:#database-requirements[MariaDB] 10.5 ^1^
 
+| Redis
+| >= 6
+
 | Web server
 | Apache 2.4 with xref:installation/manual_installation/manual_installation.adoc#configure-the-web-server[`prefork and mod_php`]
 
@@ -64,6 +67,9 @@ including all 100% compatible derivatives
 * Oracle 11 and 12 (*Enterprise only*)
 * PostgreSQL 9, 10, 11, 12, 13 or 14
 * SQLite (*Not for production*)
+
+| Redis
+| * >= 6
 
 |Web server
 |* Apache 2.4 with xref:installation/manual_installation/manual_installation.adoc#configure-the-web-server[`prefork` and `mod_php`]
