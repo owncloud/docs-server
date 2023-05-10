@@ -9,6 +9,8 @@ files
  files:checksums:verify     Get all checksums in filecache and compares them by
                             recalculating the checksum of the file.
  files:cleanup              Deletes orphaned file cache entries.
+ files:remove-storage       Remove a storage from the storages table and related files
+                            from the filecache table.
  files:scan                 Rescans the filesystem.
  files:transfer-ownership   All files and folders are moved to another user
                             - outgoing shares are moved as well (incoming shares are
@@ -119,6 +121,32 @@ For example, if the user's id was "john" and the `--path` value was "tree/apple"
 == The files:cleanup command
 
 `files:cleanup` tidies up the server's file cache by deleting all file entries that have no matching entries in the storage table.
+
+== The files:remove-storage command
+
+When a mount point gets removed, the storage ID and file cache related info stay in the database. This can over time consume considerable amount of database space respectively can slow down database queries. Withe the `files:remove-storage` command, these orphans can be removed. As a rule of thumb though not necessary in any case, using this command should be considered to run in single user mode to avoid any conflicting access.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} files:remove-storage --help
+ Usage:
+   files:remove-storage [options] [--] [<storage-id>]...
+----
+
+=== Arguments
+
+[width="100%",cols="23%,70%",]
+|===
+| `storage-id` | Remove a storage from the storages table and related files from the filecache table.
+|===
+
+=== Options
+
+[width="100%",cols="25%,70%",]
+|===
+| `--chunk-size=[value]`   | The number of rows that will be deleted at the same time.
+| `--show-candidates`      | Show possible candidates for obsolete storages. This query can take a while.
+|===
 
 == The files:scan command
 
