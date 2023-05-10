@@ -137,7 +137,7 @@ When a mount point gets removed, the storage ID and file cache related info stay
 
 [width="100%",cols="23%,70%",]
 |===
-| `storage-id` | Remove a storage from the storages table and related files from the filecache table.
+| `storage-id` | The numeric ID of the storage.
 |===
 
 === Options
