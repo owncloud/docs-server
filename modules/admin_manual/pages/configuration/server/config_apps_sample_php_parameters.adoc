@@ -566,9 +566,12 @@ Possible keys: `wnd.groupmembership.checkUserFirst` BOOL
 
 Possible keys: `wnd.connector.opts.timeout` INTEGER
 
+Possible keys: `wnd2.cachewrapper.normalize` BOOL
+
 *Note* With WND 2.1.0, key `wnd.storage.testForHiddenMount` is obsolete and has been removed completely.
 
 === Mandatory Listener Reconnect to the Database
+
 The listener will reconnect to the DB after given seconds. This will
 prevent the listener to crash if the connection to the DB is closed after
 being idle for a long time.
@@ -590,6 +593,7 @@ being idle for a long time.
 ....
 
 === The Way File Attributes for Folders and Files will be Handled
+
 There are 3 possible values: "none", "stat" and "getxattr":
 
 - "stat". This is the default if the option is missing or has an invalid value.
@@ -615,6 +619,7 @@ Note that the ACLs (if active) will be evaluated and applied on top of this mech
 ....
 
 === Enable or Disable the WND In-Memory Notifier for Password Changes
+
 Having this feature enabled implies that whenever a WND process detects a
 wrong password in the storage - maybe the password has changed in the
 backend - all WND storages that are in-memory will be notified in order to reset
@@ -634,6 +639,7 @@ Alternatively, you can disable this feature completely.
 ....
 
 === Maximum Number of Items for the Cache Used by the WND Permission Managers
+
 A higher number implies that more items are allowed, increasing the memory usage.
 
 Real memory usage per item varies because it depends on the path being cached.
@@ -649,6 +655,7 @@ cache, limiting the maximum memory that will be used.
 ....
 
 === TTL for the WND2 Caching Wrapper
+
 Time to Live (TTL) in seconds to be used to cache information for the WND2 (collaborative)
 cache wrapper implementation. The value will be used by all WND2 storages. Although the
 cache isn't exactly per user but per storage id, consider the cache to be per user, because
@@ -665,6 +672,7 @@ isn't considered a valid TTL value and will also disable caching.
 ....
 
 === Enable to Push WND Events to the Activity App
+
 Register WND as extension into the Activity app in order to send information about what
 the `wnd:process-queue` command is doing. The activity sent will be based on what
 the `wnd:process-queue` detects, and the activity will be sent to each affected user. There
@@ -681,6 +689,7 @@ that this can have a performance impact when changes are sent to many users.
 ....
 
 === Enable to Send WND Activity Notifications to Sharees
+
 The `wnd:process-queue` command will also send activity notifications to the sharees
 if a WND file or folder is shared (or accessible via a share). It's REQUIRED that the
 `wnd.activity.registerExtension` flag is set to true (see above), otherwise this flag will
@@ -694,6 +703,7 @@ be ignored. This flag depends on the `wnd.activity.registerExtension` and has th
 ....
 
 === Make the Group Membership Component Assume that the ACL Contains a User
+
 The WND app doesn't know about the users or groups associated with ACLs. This
 means that an ACL containing "admin" might refer to a user called "admin" or a
 group called "admin". By default, the group membership component considers the ACLs to
@@ -726,6 +736,19 @@ encryption is selected and smbclient is overwhelming the server with requests.
 [source,php]
 ....
 'wnd.connector.opts.timeout' => 20000,  // 20 seconds
+....
+
+=== Manage UTF-8 Glyph Normalization on macOS
+
+A glyph is a character like `&#xF1;` as used in the spanish word `se&#xF1;orita` which can be composed by two different byte sequences. With https://www.utf8-chartable.de/unicode-utf8-table.pl?number=1024&unicodeinhtml=hex[UTF-8], glyphs can have two valid representations of these sequences in filesystems. https://unicode.org/reports/tr15/#Norm_Forms[Normalization] makes it possible to determine whether any two Unicode strings are equivalent. The most used normalization forms are NFC and NFD. By default, ownCloud usually normalizes names to NFC. With macOS and HFS+ as filesystem, NFD is required. When using WND collaborative mount points connecting to macOS with HFS+, or any other filesystem using NFD, probing both forms can be enforced by setting the config variable `wnd2.cachewrapper.normalize` to true. This is necessary because if a file accessed via collaborative WND contains NFD characters, WND will not find the file and the WND app will assume user doesn't have access to it. As a result, the file will not be shown.
+
+As a mandatory prerequisite, the mount point setting `Compatibility with Mac NFD encoding` must be checked.
+
+==== Code Sample
+
+[source,php]
+....
+'wnd2.cachewrapper.normalize' => false,
 ....
 
 == App: Workflow / Tagging
