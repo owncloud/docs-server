@@ -124,7 +124,7 @@ For example, if the user's id was "john" and the `--path` value was "tree/apple"
 
 == The files:remove-storage command
 
-When a mount point gets removed, the storage ID and file cache related info stay in the database. This can over time consume considerable amount of database space respectively can slow down database queries. Withe the `files:remove-storage` command, these orphans can be removed. As a rule of thumb though not necessary in any case, using this command should be considered to run in single user mode to avoid any conflicting access.
+When a mount point gets removed, the storage ID and file cache related info stay in the database. Over time, this can consume a considerable amount of database space and can slow down database queries. With the `files:remove-storage` command, these orphans can be removed. As a rule of thumb, though not essential, this command should be run in single user mode to avoid any conflicting access.
 
 [source,bash,subs="attributes+"]
 ----
