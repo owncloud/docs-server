@@ -144,9 +144,18 @@ When a mount point gets removed, the storage ID and file cache related info stay
 
 [width="100%",cols="25%,70%",]
 |===
-| `--chunk-size=[value]`   | The number of rows that will be deleted at the same time.
+| `--chunk-size=[value]`   | The number of rows that will be deleted at the same time. Defaults to 1000.
 | `--show-candidates`      | Show possible candidates for obsolete storages. This query can take a while.
 |===
+
+[IMPORTANT]
+====
+This command should be handled with absolute care because *any* storage ID and the correlated file cache can be removed. For security reasons, the following advices are given:
+
+* Switch to single user mode.
+* Make a backup of the database first.
+* To identify removal candidates, run this command with option `--show-candidates` first.
+====
 
 == The files:scan command
 
