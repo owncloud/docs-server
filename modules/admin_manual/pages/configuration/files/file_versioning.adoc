@@ -154,7 +154,7 @@ Each update to the file that generates a new file version will additionally show
 
 ownCloud can automatically generate and increment version numbers for new file versions. Based on this feature, one can define the actual version to be a major version which gets a major version number and all new upcoming versions start counting from this major number. Major versions are persistent versions that are not subject to any retention policies set by ownCloud.
 
-TIP: Publishing the version persists it until the original file is deleted by somebody with such permission or by the system administrator via occ versions:cleanup command. For more information check the xref:configuration/server/files/file_versioning.adoc#how-versions-are-deleted[versions retention] section.
+TIP: Publishing the version persists it until the original file is deleted by somebody with such permission or by the system administrator via occ versions:cleanup command. For more information check the xref:configuration/files/file_versioning.adoc#how-versions-are-deleted[versions retention] section.
 
 TIP: To create a new persistent major version, the user has to click on the check mark next to the version info tab. Check the image above.
 
