@@ -46,7 +46,7 @@ The following data is available for analysis:
 .**System data**
 * Date/Time stamp - Server time of the request
 * Storage
-  ** Used storage (this also includes storage for avatars and thumbnails)
+  ** Used storage (this includes both, data that count against user Quotas `usedQuota`, and `usedOther` like avatars, thumbnails and file versions)
   ** Free storage
   ** Total storage (used + free)
   ** Number of files
