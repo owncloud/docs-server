@@ -166,13 +166,13 @@ This command should be handled with absolute care because *any* storage ID and t
 
 [source,plaintext]
 ----
-+---------+-------------------------------------------------+------------+
-| storage | id                                              | file_count |
-+---------+-------------------------------------------------+------------+
-| 3       | local::/mnt/project/files/                      | 3          |
-| 12      | wnd::MOUNTAIN\mountainUser1@10.0.2.203/foobar// | 9          |
-| 15      | NULL                                            | 8          |
-+---------+-------------------------------------------------+------------+
++------------+-------------------------------------------------+------------+
+| storage-id | name                                            | file_count |
++------------+-------------------------------------------------+------------+
+| 3          | local::/mnt/project/files/                      | 3          |
+| 12         | wnd::MOUNTAIN\mountainUser1@10.0.2.203/foobar// | 9          |
+| 15         | NULL                                            | 8          |
++------------+-------------------------------------------------+------------+
 ----
 
 Note that the ID can be NULL as shown at storage 15 if there is no info about it in the `oc_storages` table. It can also be hashed if it's too long (as it is in the DB).
