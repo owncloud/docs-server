@@ -29,7 +29,7 @@ Below you can see a snippet of the file where the mimetype’s on the left and t
  "application/font-woff": "image",
  "application/illustrator": "image",
  "application/epub+zip": "text",
- "application/javascript": "text/code",
+ "application/javascript": "text/code"
 }
 ----
 
@@ -192,7 +192,7 @@ and also returns a basic JSON array.
  "arw": ["image/x-dcraw"],
  "avi": ["video/x-msvideo"],
  "bash": ["text/x-shellscript"],
- "json": ["application/json", "text/plain"],
+ "json": ["application/json", "text/plain"]
 }
 ----
 
