@@ -150,7 +150,7 @@ When a mount point gets removed, the storage ID and file cache related info stay
 
 [IMPORTANT]
 ====
-This command should be handled with absolute care because *any* storage ID and the correlated file cache can be removed. For security reasons, the following advices are given:
+This command should be handled with absolute care because *any* storage ID and the correlated file cache can be removed. For safety reasons, the following advices are given:
 
 * Switch to single user mode.
 * Make a backup of the database first.
@@ -175,7 +175,7 @@ This command should be handled with absolute care because *any* storage ID and t
 +------------+-------------------------------------------------+------------+
 ----
 
-Note that the ID can be NULL as shown at storage 15 if there is no info about it in the `oc_storages` table. It can also be hashed if it's too long (as it is in the DB).
+Note that the name can be NULL as shown at storage 15 if there is no info about it in the `oc_storages` table. It can also be hashed if it's too long (as it is in the DB).
 
 == The files:scan command
 
