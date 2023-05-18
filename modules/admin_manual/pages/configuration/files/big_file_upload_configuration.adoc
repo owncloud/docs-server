@@ -200,6 +200,10 @@ WARNING: If you are using Apache 2.4 with mod_fcgid, as of February/March 2016, 
 
 Setting `FcgidMaxRequestInMem` significantly higher than usual may no longer be necessary, once bug #51747 is fixed.
 
+== Important Changes in Apache 2.4.54
+
+In Apache HTTP Server 2.4.53 and earlier, the default value of the `LimitRequestBody` directive was 0 (unlimited). This has changed starting with Apache HTTP Server 2.4.54 where the default value is set to 1073741824 bytes (1 GB). This means, that uploads to public folders when chunking is not in effect will be limited to this file size. Change this value according to your needs in order to allow large file uploads. Please refer to the official Apache documentation {limitrequestbody-url}[LimitRequestBody] for more information.
+
 == Long-Running Uploads
 
 For very long-running uploads *those lasting longer than 1h* to public folders, _when chunking is not in effect_, `filelocking.ttl` should be set to a significantly large value in `config.php`. If not, large file uploads will fail with a file locking error, because the Redis garbage collection will delete the initially acquired file lock after 1 hour by default.
