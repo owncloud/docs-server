@@ -9,6 +9,8 @@ files
  files:checksums:verify     Get all checksums in filecache and compares them by
                             recalculating the checksum of the file.
  files:cleanup              Deletes orphaned file cache entries.
+ files:remove-storage       Remove a storage from the storages table and related files
+                            from the filecache table.
  files:scan                 Rescans the filesystem.
  files:transfer-ownership   All files and folders are moved to another user
                             - outgoing shares are moved as well (incoming shares are
@@ -119,6 +121,61 @@ For example, if the user's id was "john" and the `--path` value was "tree/apple"
 == The files:cleanup command
 
 `files:cleanup` tidies up the server's file cache by deleting all file entries that have no matching entries in the storage table.
+
+== The files:remove-storage command
+
+When a mount point gets removed, the storage ID and file cache related info stay in the database. Over time, this can consume a considerable amount of database space and can slow down database queries. With the `files:remove-storage` command, these orphans can be removed. As a rule of thumb, though not essential, this command should be run in single user mode to avoid any conflicting access.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} files:remove-storage --help
+ Usage:
+   files:remove-storage [options] [--] [<storage-id>]...
+----
+
+=== Arguments
+
+[width="100%",cols="23%,70%",]
+|===
+| `storage-id` | The numeric ID of the storage.
+|===
+
+=== Options
+
+[width="100%",cols="25%,70%",]
+|===
+| `--chunk-size=[value]`   | The number of rows that will be deleted at the same time. Defaults to 1000.
+| `--show-candidates`      | Show possible candidates for obsolete storages. This query can take a while.
+|===
+
+[IMPORTANT]
+====
+This command should be handled with absolute care because *any* storage ID and the correlated file cache can be removed. For safety reasons, the following advices are given:
+
+* Switch to single user mode.
+* Make a backup of the database first.
+* To identify removal candidates, run this command with option `--show-candidates` first.
+====
+
+=== Example Output
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} files:remove-storage --show-candidates
+----
+
+[source,plaintext]
+----
++------------+-------------------------------------------------+------------+
+| storage-id | name                                            | file_count |
++------------+-------------------------------------------------+------------+
+| 3          | local::/mnt/project/files/                      | 3          |
+| 12         | wnd::MOUNTAIN\mountainUser1@10.0.2.203/foobar// | 9          |
+| 15         | NULL                                            | 8          |
++------------+-------------------------------------------------+------------+
+----
+
+Note that the name can be NULL as shown at storage 15 if there is no info about it in the `oc_storages` table. It can also be hashed if it's too long (as it is in the DB).
 
 == The files:scan command
 
