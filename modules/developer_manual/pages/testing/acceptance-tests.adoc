@@ -600,7 +600,6 @@ For example:
 [source,gherkin]
 ----
   Scenario: admin creates a user
-    Given user "brand-new-user" has been deleted
     When the administrator sends a user creation request for user "brand-new-user" password "%alt1%" using the provisioning API
     Then the OCS status code should be "100"
     And the HTTP status code should be "200"
@@ -731,7 +730,7 @@ then put them into a `Background:` section. For example:
   Scenario: share a file with a group
     Given group "grp1" has been created
     And "Brian" has been added to group "grp1"
-    When user "Alice" shares file "abc.txt" with user "Brian" using the sharing API
+    When user "Alice" shares file "abc.txt" with group "grp1" using the sharing API
     Then the HTTP status code should be "200"
     And user "Brian" should be able to download file "abc.txt"
 ----
