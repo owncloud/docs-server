@@ -3,7 +3,7 @@
 :coppa-url: https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/childrens-online-privacy-protection-rule
 :caloppa-url: https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/
 :pipeda-url: https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/
-:release-notes-imprint-and-privacy-url: https://doc.owncloud.com/server/next/server_release_notes.html#new-options-to-display-imprint-and-privacy-policy
+:release-notes-imprint-and-privacy-url: https://doc.owncloud.com/docs/next/server_release_notes.html#new-options-to-display-imprint-and-privacy-policy
 
 == Introduction
 
