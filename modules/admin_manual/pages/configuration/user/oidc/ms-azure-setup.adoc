@@ -143,8 +143,12 @@ If you want to let ownCloud create users which are not present during a OIDC aut
     ],
 ----
 
-=== Register ownCloud Desktop and Mobile Clients
+=== Use oAuth2 authentication for ownCloud Desktop and Mobile Clients
 
-To allow the ownCloud clients (Web/desktop/Android/iOS) to interact with the identity provider, you have to register them as clients.
+To allow the ownCloud clients (ownCloud Web, Desktop, Android and iOS) to interact with the ownCloud Server, you have to install and enable the oAuth2 app. Please see the xref:configuration/server/security/oauth2.adoc[Open Authentication (OAuth2)] for more details. In this setup, your ownCloud Clients will work without extra hassles, but please be advised that the ownCloud Server is acting as identity provider for the clients and you will not be able to delete those clients directly from your identity management solution.
+
+=== Register ownCloud Desktop and Mobile Clients with Azure AD
+
+To allow the ownCloud clients (ownCloud Web, Desktop, Android and iOS) to interact directly with the identity provider, you have to register them as clients.
 
 Only branded ownCloud desktop and mobile clients can be registered with Azure AD, because they need to be built with customized `scope` and `prompt` parameters. As prerequisite, an ownCloud full branding subscription is needed. For more details get in touch with {oc-support-url}[ownCloud Support].
