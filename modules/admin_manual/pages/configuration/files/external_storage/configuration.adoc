@@ -144,4 +144,4 @@ TIP: See xref:configuration/server/occ_command.adoc#the-filesscan-command[occ’
 
 == Known limitations
 
-- Removal of the external storage or change of its configuration does not remove metadata entries belonging to the previous storage configuration. This may impact performance of the installation as previous configuration metadata entries get orphaned. Removal of orphaned entries requires manual deletion of orphaned storage cache by its storage id. 
+- Removal of the external storage or change of its configuration does not remove metadata entries belonging to the previous storage configuration. This may impact performance of the installation as previous configuration metadata entries get orphaned. Removal of orphaned storage entries can be done manually by using the xref:configuration/server/occ_command.adoc#the-filesremove-storage-command[occ files:remove-storage] command. 
