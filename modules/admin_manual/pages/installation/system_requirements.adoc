@@ -29,7 +29,7 @@ For _best performance_, _stability_, _support_ and _full functionality_, we offi
 | Ubuntu 20.04 LTS
 
 | Database
-| xref:#database-requirements[MariaDB] 10.5 ^1^
+| xref:#database-requirements[MariaDB] 10.11 ^1^
 
 | Redis
 | >= 6
