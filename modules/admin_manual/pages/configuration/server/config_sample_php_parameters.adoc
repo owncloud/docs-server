@@ -2031,7 +2031,7 @@ The following example allows app-1 and theme-2 to have no signature.json file.
 ....
 
 === Define a default folder for shared files and folders other than root
-Please note that this setting is skipped for guest users and the root folder will be used for such users.
+Please note that this setting is skipped for guests and the root folder will be used for such users.
 
 ==== Code Sample
 
