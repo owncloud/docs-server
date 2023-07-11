@@ -189,7 +189,7 @@ If you are unable to send email, try turning on debugging. Do this by enabling t
 
 [source,php]
 ----
-'mail_smtpdebug' => true;
+'mail_smtpdebug' => true,
 ----
 
 NOTE: Immediately after pressing the *Send email* button, as described before, several *SMTP -> get_lines(): …* messages appear on the screen. This is expected behavior and can be ignored.
