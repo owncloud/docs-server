@@ -92,9 +92,9 @@ long as you have access to the physical server you can always log in. In
 the event that a load-balancer is in place, there will be no issues as
 long as it sends the correct `X-Forwarded-Host` header.
 
-In case of a docker based setup, the trusted_domains setting is controlled by the environment variables `OWNCLOUD_TRUSTED_DOMAINS` or `OWNCLOUD_DOMAIN`. The latter takes only effect, if `OWNCLOUD_TRUSTED_DOMAINS` is undefined and can provide one IP-addres or hostname. `OWNCLOUD_TRUSTED_DOMAINS` can specify multiple values as a comma-separated list. 
+In case of a docker based setup, the trusted_domains setting is controlled by the environment variables `OWNCLOUD_TRUSTED_DOMAINS` or `OWNCLOUD_DOMAIN`. The latter only takes effect, if `OWNCLOUD_TRUSTED_DOMAINS` is undefined and can provide one IP-address or hostname. `OWNCLOUD_TRUSTED_DOMAINS` can specify multiple values as a comma-separated list. 
 
-Here is an example, how this can be used from within a docker-compose.yml file to allow access to ownCloud under two differnet names, and one IP-address, in addition to localhost and 127.0.0.1:
+Here is an example of how this can be used from within a docker-compose.yml file to allow access to ownCloud under two different names, and one IP-address, in addition to localhost and 127.0.0.1:
 
 [source,yaml,subs="attributes+"]
 ----
