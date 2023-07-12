@@ -19,6 +19,8 @@ Install and enable the {oc-marketplace-url}/apps/guests[Guests] app if not alrea
 
 Check your Guests app's configuration in menu:Settings[Admin > Sharing]. There you can change the Guest's **group name** and add to or exclude apps from the app **whitelist** of the Guests app. Guests cannot access apps that are not on that list.
 
+Note: Per default guests see external storages that are available to all users (i.e. empty user/group list)
+
 With a blocklist, an admin can block domains for guest invitations:
 
 * Up to Guests 0.12.1, the blocklist entries were a suffix match. An entry like `example.com` would also block `user@otherexample.com` -- this was considered an error and admins relying on this feature must review their blocklists when upgrading to Guests 0.12.2.
