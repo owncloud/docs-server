@@ -12,6 +12,7 @@
 
 * This functionality is available to administrators only.
 * Impersonating is not possible when using Shibboleth or OpenID.
+* Impersonating is not possible when the specific user has never logged in before.
 
 == Impersonating a User
 
