@@ -9,7 +9,7 @@ Usually, when upgrading a database, follow the guides the vendor provides. You m
 
 This document supports an upgrade in case there are prerequisites and/or special steps to be taken to upgrade to a particular database version.
 
-== Upgrading to MariaDB 10.6
+== Upgrading to MariaDB 10.6+
 
 ownCloud runs fine when using a MariaDB version lower than 10.6. You can upgrade ownCloud as usual without special considerations regarding the database.
 
@@ -60,9 +60,19 @@ sudo service apache2 stop
 {occ-command-example-prefix} db:restore-default-row-format
 ----
 
-. Upgrade MariaDB to version 10.6.x
+. Upgrade MariaDB to version 10.6+
 +
-Follow the instructions in the respective {upgrade-mariadb-url}[Upgrading MariaDB] guide to upgrade MariaDB.
+--
+Follow the instructions in the respective {upgrade-mariadb-url}[Upgrading MariaDB] guide to upgrade MariaDB. +
+If required, run the `mysql_upgrade` command when using a binary installation or as example
+
+[source,bash]
+----
+docker-compose exec owncloud mysql_upgrade -uroot -p
+----
+
+when using a dockerized environment as part of the upgrade procedure.
+--
 
 . Set ownCloud back to normal operation mode:
 +

@@ -48,6 +48,7 @@ services:
       - MYSQL_USER=owncloud
       - MYSQL_PASSWORD=owncloud
       - MYSQL_DATABASE=owncloud
+      - MARIADB_AUTO_UPGRADE=1
     command: ["--max-allowed-packet=128M", "--innodb-log-file-size=64M"]
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=owncloud"]
