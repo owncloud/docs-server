@@ -11,7 +11,7 @@
 == Limitations
 
 * This functionality is available to administrators only.
-* Impersonating is not possible when using Shibboleth.
+* Impersonating may not work when using Shibboleth.
 
 == Impersonating a User
 
