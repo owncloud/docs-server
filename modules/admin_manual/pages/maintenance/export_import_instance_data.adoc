@@ -112,7 +112,7 @@ on the target instance. See xref:known-limitations[Known Limitations] for furthe
 - Federated shares from other servers are not migrated.
 - Password protected link-shares are not imported correctly, user needs to reset the password.
 - Group shares require the group to be present on the target-system or else the share will be ignored silently.
-- If link-shares require a password on the new server but do not on the old the import process will crash.
+- If link-shares require a password on the new server but do not on the old, the import process will crash.
 
 As this is an early version, some limitations might be fixed in the future while others
 cannot be circumvented.
