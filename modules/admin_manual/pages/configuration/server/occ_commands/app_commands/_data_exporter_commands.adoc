@@ -1,9 +1,9 @@
 = Data Exporter
 
 This app is only available as a https://github.com/owncloud/data_exporter.git[git clone].
-See the xref:maintenance/export_import_instance_data.adoc[Data Exporter] description for more information how to install this app.
+See the xref:maintenance/export_import_instance_data.adoc[Data Exporter] description for more information on how to install this app.
 Import and export users from one ownCloud instance in to another.
-The export contains all user-settings, files and shares.
+The export contains all user settings, files and shares.
 
 == Export User Data
 
