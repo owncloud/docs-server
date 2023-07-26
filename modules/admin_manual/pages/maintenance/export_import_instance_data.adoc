@@ -12,14 +12,14 @@ To use this app, you must https://github.com/owncloud/data_exporter.git[git clon
 
 == Introduction
 
-A set of `occ command line` tools to export and import users with their shares 
+A set of `occ command line` tools to export and import users with their shares
 from one ownCloud instance in to another. Please see
-xref:what-is-exported[What is Exported] for export details and 
+xref:what-is-exported[What is Exported] for export details and
 xref:known-limitations[Known Limitations] for limitation details.
-Please see the xref:configuration/server/occ_command.adoc#data-exporter[Data Exporter Commands] 
+Please see the xref:configuration/server/occ_command.adoc#data-exporter[Data Exporter Commands]
 description for details using the occ commands.
 
-NOTE: To use data exporter, you must install and enable the `data exporter` app on both,
+NOTE: To use data exporter, you must install and enable the `data_exporter` app on both,
 the source and the target instance first.
 
 == Use Cases
@@ -31,11 +31,11 @@ the source and the target instance first.
 
 == Usage Example
 
-Export `user1` from a `source instance` to a `target instance` while preserving all shares 
+Export `user1` from a `source instance` to a `target instance` while preserving all shares
 with users on the source instance. For this example, both instances must be able to reach each
 other via federation.
 
-NOTE: Test if you can create remote-shares before starting this process.
+NOTE: Test if you can create remote shares before starting this process.
 
 === Export the User on the Source Instance
 
@@ -48,7 +48,7 @@ This will create a folder `/tmp/export/user1` which contains all the files and m
 
 === Copy the Export to the Target Instance
 
-Copy the created export to the target instance, for example using `scp`:
+Copy the created export to the target instance, for example, using `scp`:
 
 [source,bash]
 ----
@@ -57,7 +57,7 @@ scp -rp /tmp/export root@newinstance.com:/tmp/export
 
 === Import the User on the Target Instance
 
-This imports the user in to the target instance while converting all his outgoing-shares
+This imports the user in to the target instance while converting all their outgoing-shares
 to federated shares pointing to the source instance:
 
 [source,bash,subs="attributes+"]
@@ -67,8 +67,8 @@ to federated shares pointing to the source instance:
 
 === Recreate all Shares to Point to the Target Instance
 
-`user1` now lives on a target instance, therefore it is necessary to recreate all shares so that
-they point to the target instance. To do so run this command on the source instance:
+`user1` now lives on a target instance, therefore, it is necessary to recreate all shares so that
+they point to the target instance. To do so, run this command on the source instance:
 
 [source,bash,subs="attributes+"]
 ----
@@ -81,7 +81,7 @@ Finally delete `user1` on the source instance:
 
 NOTE: This can not be undone!
 
-NOTE: If the user is stored in the ownCloud database, you need to manually reset his password
+NOTE: If the user is stored in the ownCloud database, you need to manually reset their password
 on the target instance. See xref:known-limitations[Known Limitations] for further information.
 
 [source,bash,subs="attributes+"]
@@ -95,12 +95,13 @@ on the target instance. See xref:known-limitations[Known Limitations] for furthe
 - Meta-data (Username, Email, Personal Settings)
 - Shares (Local, Link-shares, Group-Shares)
 - Versions
+- Trashbin
 
 == Known Limitations
 
 - External storages, comments and tags are not exported
 - If a user is stored in the ownCloud database (not-LDAP etc.) the password
-  must be manually reset by the admin as passwords can not be migrated.
+ must be manually reset by the admin as passwords cannot be migrated.
 - Versions import in to S3 does not preserve the version timestamp.
 - Import alias (import using another username) currently does not work and breaks share-import.
 - Shares import requires federation to be correctly setup between both servers and share-api to be enabled.
@@ -109,7 +110,7 @@ on the target instance. See xref:known-limitations[Known Limitations] for furthe
 - Federated shares from other servers are not migrated.
 - Password protected link-shares are not imported correctly, user needs to reset the password.
 - Group shares require the group to be present on the target-system or else the share will be ignored silently.
-- If link-shares require a password on the new server but do so on the old the import process will crash.
+- If link-shares require a password on the new server but do not on the old the import process will crash.
 
-As this is an early version some limitations might be fixed in the future while others
-can not be circumvented.
+As this is an early version, some limitations might be fixed in the future while others
+cannot be circumvented.
