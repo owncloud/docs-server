@@ -65,6 +65,8 @@ to federated shares pointing to the source instance:
 {occ-command-example-prefix} instance:import:user /tmp/export/user1
 ----
 
+NOTE: A new user's last login timestamp on the target instance will be set to the current time. The import command sets up the user's file system and the system does not need to do any further "first login" processing when the user first logs in to the target instance.
+
 === Recreate all Shares to Point to the Target Instance
 
 `user1` now lives on a target instance, therefore, it is necessary to recreate all shares so that
