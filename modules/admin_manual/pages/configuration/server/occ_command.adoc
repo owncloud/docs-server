@@ -352,7 +352,7 @@ include::./occ_commands/app_commands/_contacts_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/app_commands/_custom_groups.adoc[leveloffset=+2]
 
-include::./occ_commands/app_commands/_data_explorer_commands.adoc[leveloffset=+2]
+include::./occ_commands/app_commands/_data_exporter_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/app_commands/_files_lifecycle.adoc[leveloffset=+2]
 
