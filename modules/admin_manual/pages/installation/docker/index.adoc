@@ -92,9 +92,37 @@ The configuration:
 
 The following instructions assume you install locally. For remote access, the value of xref:configuration/server/config_sample_php_parameters.adoc#override-cli-url[OWNCLOUD_DOMAIN] and xref:configuration/server/config_sample_php_parameters.adoc#define-list-of-trusted-domains-that-users-can-log-into[OWNCLOUD_TRUSTED_DOMAINS] must be adapted.
 
-. Create a new project directory. Then copy and paste the sample `docker-compose.yml` from this page
-into that new directory.
+. Create a new project directory.
++
+--
+[source,bash]
+----
+mkdir owncloud-docker-server
+cd owncloud-docker-server
+----
+
+Then copy and paste the sample `docker-compose.yml` as base to derive from:
+
+[source,yml]
+----
+include::example$installation/docker/docker-compose.yml[]
+----
+--
+
 . Create a `.env` configuration file, which contains the required configuration settings.
++
+--
+[source,bash,subs="attributes+"]
+----
+cat << EOF > .env
+OWNCLOUD_VERSION={latest-server-version}
+OWNCLOUD_DOMAIN=localhost:{std-port-http}
+OWNCLOUD_TRUSTED_DOMAINS=localhost
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=admin
+HTTP_PORT={std-port-http}
+EOF
+----
 
 Only a few settings are required, these are:
 
@@ -132,45 +160,23 @@ Only a few settings are required, these are:
 NOTE: `ADMIN_USERNAME` and `ADMIN_PASSWORD` will not change between deploys even if you change the
 values in the .env file. To change them, you'll need to do `docker volume prune`, which
 *will delete all your data*.
+--
 
-Then, you can start the container, using your preferred Docker _command-line tool_.
+. Then, you can build and start the container, using your preferred Docker _command-line tool_.
++
+--
 The example below shows how to use {docker-compose-url}[Docker Compose].
 
-Create a new project directory
-[source,bash]
-----
-mkdir owncloud-docker-server
-cd owncloud-docker-server
-----
-
-Copy docker-compose.yml from the GitHub repository
-[source,bash]
-----
-wget https://raw.githubusercontent.com/owncloud/docs-server/master/modules/admin_manual/examples/installation/docker/docker-compose.yml
-----
-
-Create the environment configuration file
-[source,bash,subs="attributes+"]
-----
-cat << EOF > .env
-OWNCLOUD_VERSION={latest-server-version}
-OWNCLOUD_DOMAIN=localhost:{std-port-http}
-OWNCLOUD_TRUSTED_DOMAINS=localhost
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=admin
-HTTP_PORT={std-port-http}
-EOF
-----
-
-Build and start the container
 [source,docker]
 ----
 docker-compose up -d
 ----
+--
 
-When the process completes, check that all the containers have successfully started, by running
-`docker-compose ps`. If they are all working correctly, you should see output
-similar to the one below:
+. When the process completes:
++
+--
+Check that all the containers have successfully started, by running `docker-compose ps`. If they are all working correctly, you should see output similar to the one below:
 
 [width="100%",cols="30%,50%,30%,50%",options="header"]
 |===
@@ -240,6 +246,7 @@ docker-compose down; docker-compose up -d
 ----
 there are certain details that get lost, e.g., default apps may re-appear after they were uninstalled.
 ====
+--
 
 === Logging In
 
