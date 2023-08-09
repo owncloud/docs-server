@@ -35,22 +35,23 @@ Use the following command to list all active background jobs triggered by ownClo
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:status
+{occ-command-example-prefix} background:queue:status --display-invalid-jobs
 ----
 
 The output may look like the following:
 
 [source,plaintext]
 ----
-+----+---------------------------------------------------+---------------------------+---------------+
-| Id | Job                                               | Last run                  | Job Arguments |
-+----+---------------------------------------------------+---------------------------+---------------+
-| 1  | OCA\Files\BackgroundJob\ScanFiles                 | 2022-01-23T14:00:02+00:00 |               |
-| 2  | OCA\Files\BackgroundJob\DeleteOrphanedItems       | 2022-01-23T14:00:02+00:00 |               |
-| 3  | OCA\Files\BackgroundJob\CleanupFileLocks          | 2022-01-23T14:00:02+00:00 |               |
-| 4  | OCA\DAV\CardDAV\SyncJob                           | 2022-01-23T14:00:02+00:00 |               |
++----+---------------------------------------------------+---------------------------+---------------+---------+
+| Id | Job                                               | Last run                  | Job Arguments | Status  |
++----+---------------------------------------------------+---------------------------+---------------+---------+
+| 1  | OCA\Files\BackgroundJob\ScanFiles                 | 2022-01-23T14:00:02+00:00 |               |         |
+| 2  | OCA\Files\BackgroundJob\DeleteOrphanedItems       | 2022-01-23T14:00:02+00:00 |               |         |
+| 3  | OCA\Files\BackgroundJob\CleanupFileLocks          | 2022-01-23T14:00:02+00:00 |               |         |
+| 4  | OCA\DAV\CardDAV\SyncJob                           | 2022-01-23T14:00:02+00:00 |               |         |
+| 23 | OCA\Files_Antivirus\Cron\Task                     | 2022-01-23T14:00:02+00:00 |               | invalid |
 ...
-+----+---------------------------------------------------+---------------------------+---------------+
++----+---------------------------------------------------+---------------------------+---------------+---------+
 ----
 
 === Remove the Background Job
