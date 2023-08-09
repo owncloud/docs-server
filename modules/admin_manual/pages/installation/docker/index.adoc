@@ -100,9 +100,11 @@ The following instructions assume you install locally. For remote access, the va
 mkdir owncloud-docker-server
 cd owncloud-docker-server
 ----
+--
 
-Then copy and paste the sample `docker-compose.yml` as base to derive from:
-
+. Then copy and paste the sample `docker-compose.yml` as base to derive from:
++
+--
 [source,yml]
 ----
 include::example$installation/docker/docker-compose.yml[]
