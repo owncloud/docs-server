@@ -89,6 +89,13 @@ The command `background:queue:status` will list queued background jobs, includin
 background:queue:status
 ----
 
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `--display-invalid-jobs` | Also display jobs that are no longer valid
+|===
+
 This example lists the queue status:
 
 [source,bash,subs="attributes+"]
@@ -117,4 +124,32 @@ This example lists the queue status:
 | 17     | OCA\UpdateNotification\Notification\BackgroundJob  |               | N/A      | 2022-09-08T16:42:52+00:00 | N/A         | N/A                    |
 | 18     | OC\Authentication\Token\DefaultTokenCleanupJob     |               | N/A      | 2022-09-08T16:42:52+00:00 | N/A         | N/A                    |
 +--------+----------------------------------------------------+---------------+----------+---------------------------+-------------+------------------------+
+----
+
+There may be background jobs that are no longer valid. This can be because they are for an app that is now disabled or deleted, or jobs from an older version of an app that are no longer relevant. These jobs can be displayed with the `--display-invalid-jobs` option. Invalid jobs are listed with status "invalid". You can then delete invalid jobs with the `background:queue:delete` command using the job id.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} background:queue:status --display-invalid-jobs
+
++--------+----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+---------------------------+-------------+------------------------+---------+
+| Job ID | Job                                                | Job Arguments                                                                                                                                                                        | Last Run                  | Last Checked              | Reserved At | Execution Duration (s) | Status  |
++--------+----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+---------------------------+-------------+------------------------+---------+
+| 1      | OCA\Files\BackgroundJob\ScanFiles                  |                                                                                                                                                                                      | 2023-07-21T08:25:49+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 2      | OCA\Files\BackgroundJob\DeleteOrphanedItems        |                                                                                                                                                                                      | 2023-07-21T08:25:48+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 3      | OCA\Files\BackgroundJob\CleanupFileLocks           |                                                                                                                                                                                      | 2023-07-21T08:25:48+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 4      | OCA\Files\BackgroundJob\CleanupPersistentFileLocks |                                                                                                                                                                                      | 2023-07-21T08:25:48+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 5      | OCA\DAV\CardDAV\SyncJob                            |                                                                                                                                                                                      | 2023-07-21T07:10:30+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 6      | OCA\DAV\BackgroundJob\CleanProperties              |                                                                                                                                                                                      | 2023-07-21T07:10:30+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 7      | OCA\Federation\SyncJob                             |                                                                                                                                                                                      | 2023-07-21T07:10:31+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 8      | OCA\Files_Sharing\DeleteOrphanedSharesJob          |                                                                                                                                                                                      | 2023-07-21T08:25:49+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 9      | OCA\Files_Sharing\ExpireSharesJob                  |                                                                                                                                                                                      | 2023-07-21T07:10:31+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 10     | OCA\Files_Trashbin\BackgroundJob\ExpireTrash       |                                                                                                                                                                                      | 2023-07-21T08:25:49+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 11     | OCA\Files_Versions\BackgroundJob\ExpireVersions    |                                                                                                                                                                                      | 2023-07-21T08:25:49+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 12     | OCA\UpdateNotification\Notification\BackgroundJob  |                                                                                                                                                                                      | 2023-07-21T07:10:31+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 23     | OCA\Files_Antivirus\Cron\Task                      | null                                                                                                                                                                                 | 1687247852                | 1689923430                | 1689923430  | 0                      | invalid |
+| 66     | OCA\Files_Sharing\External\ScanExternalSharesJob   |                                                                                                                                                                                      | 2023-07-21T08:25:49+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
+| 227    | OCA\Search_Elastic\Jobs\DeleteJob                  | null                                                                                                                                                                                 | 0                         | 1689923433                | 1689923433  | -1                     | invalid |
+| 228    | OCA\Files\BackgroundJob\PreviewCleanupJob          |                                                                                                                                                                                      | 2023-07-21T08:25:49+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
++--------+----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+---------------------------+-------------+------------------------+---------+
 ----
