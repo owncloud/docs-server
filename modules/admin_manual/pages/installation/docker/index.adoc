@@ -334,7 +334,7 @@ Make sure that you adjust the example to match your installation.
 +
 [source,bash]
 ----
-sed -i 's/^OWNCLOUD_VERSION=.*$/OWNCLOUD_VERSION=<newVersion>/' /compose/*/.env
+sed -i 's/^OWNCLOUD_VERSION=.*$/OWNCLOUD_VERSION=<newVersion>/' .env
 ----
 
 . View the file to ensure the change has been implemented.
