@@ -40,7 +40,7 @@ image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google 
 . Navigate to **admin settings -> sharing -> Federation**
 . Add **server 1** to the trusted servers on **server 2**.
 . Add **server 2** to the trusted servers on **server 1**.
-. Now add both serves as trusted domains of each other into config.php and then run cron jobs again on both machines.
+. Now add both servers as trusted domains of each other into config.php and then run cron jobs again on both machines.
 +
 [source,bash,subs="attributes+"]
 ----
