@@ -32,17 +32,22 @@ image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google 
 +
 [source,bash]
 ----
-mysql -u root -e "update oc_jobs set last_run=0 where class='OCA\\Federation\\SyncJob';" owncloud;
-mysql -u root -e "update oc_jobs set last_checked=0 where class='OCA\\Federation\\SyncJob';" owncloud;
+{occ-command-example-prefix} occ system:cron
+{occ-command-example-prefix} occ background:queue:execute --force --accept-warning 10
+{occ-command-example-prefix} occ system:cron
 ----
 . Navigate to **admin settings -> sharing -> Federation**
 . Add **server 1** to the trusted servers on **server 2**.
 . Add **server 2** to the trusted servers on **server 1**.
-. Now run the cron job in your ownCloud directory (for example `/var/www/owncloud/`).
+. Now add both servers as trusted domains of each other into config.php and then run cron jobs again on both machines.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} system:cron
+{occ-command-example-prefix} occ config:system:get trusted_domains | wc -l # use this number in the next command
+{occ-command-example-prefix} occ config:system:set trusted_domains 3 --value "**server other**"
+{occ-command-example-prefix} occ system:cron
+{occ-command-example-prefix} occ background:queue:execute --force --accept-warning 10
+{occ-command-example-prefix} occ system:cron
 ----
 . Now the check should be green
 . Sync now your users with
