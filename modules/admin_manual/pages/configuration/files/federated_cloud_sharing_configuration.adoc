@@ -47,7 +47,7 @@ image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google 
 {occ-command-example-prefix} occ config:system:set trusted_domains 3 --value "**server other**"
 {occ-command-example-prefix} occ system:cron
 {occ-command-example-prefix} occ background:queue:execute --force --accept-warning 10
-{occ-command-example-prefix} system:cron
+{occ-command-example-prefix} occ system:cron
 ----
 . Now the check should be green
 . Sync now your users with
