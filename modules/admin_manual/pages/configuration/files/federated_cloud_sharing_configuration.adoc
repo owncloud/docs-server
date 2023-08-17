@@ -29,20 +29,20 @@ image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google 
 . Navigate to **admin settings -> Sharing -> Federation**
 . Add **server 1** to the trusted servers on **server 2**
 . Add **server 2** to the trusted servers on **server 1**
-. Run `system:cron` in the ownCloud directory of both servers (for example `/var/www/owncloud/`)
+. Run `system:cron` from the ownCloud directory of both servers (for example `/var/www/owncloud/`)
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} system:cron
 ----
-. Run the `OCA\Federation\SyncJob` job with the `force` option (you can get the correspondent job ID by using the `background:queue:status` occ command)
+. Run the `OCA\Federation\SyncJob` job with the `force` option on both servers (you can get the correspondent job ID by using the `background:queue:status` occ command)
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} background:queue:execute --force 10
 ----
 . Now the check should be green
-. Sync now your users with
+. Sync now your users by running on both servers
 +
 [source,bash,subs="attributes+"]
 ----
