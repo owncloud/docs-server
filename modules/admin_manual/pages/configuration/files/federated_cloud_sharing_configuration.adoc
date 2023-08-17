@@ -20,29 +20,26 @@ However, to do so, you have to set `'sharing.federation.allowHttpFallback' => tr
 
 Follow these steps to establish a trusted connection between two servers.
 
-. Verify that both servers have SSL certificates.
-  If you open the server URL in your browser and see a lock icon on the left-hand side of the address bar, the certificate is valid.
+. Verify that both servers have SSL certificates
+  If you open the server URL in your browser and see a lock icon on the left-hand side of the address bar, the certificate is valid
 +
 .Lock icon in the address bars in Firefox, Google Chrome, and Safari.
 image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google Chrome, and Safari]
-. Verify that the `'overwrite.cli.url' => 'https://<SERVER_URL>' setting is configured to the correct URL, instead of `localhost`, in **config.php**.
-. Reset the federation job in your `oc_jobs` table. 
-  This job is required to get the verification token from the other server to establish a federation connection between two servers. 
-  The resetting ensures that it will be executed when we run xref:configuration/server/background_jobs_configuration.adoc#cron[system:cron] later.
-+
-[source,bash]
-----
-mysql -u root -e "update oc_jobs set last_run=0 where class='OCA\\Federation\\SyncJob';" owncloud;
-mysql -u root -e "update oc_jobs set last_checked=0 where class='OCA\\Federation\\SyncJob';" owncloud;
-----
-. Navigate to **admin settings -> sharing -> Federation**
-. Add **server 1** to the trusted servers on **server 2**.
-. Add **server 2** to the trusted servers on **server 1**.
-. Now run the cron job in your ownCloud directory (for example `/var/www/owncloud/`).
+. Verify that the `'overwrite.cli.url' => 'https://<SERVER_URL>'` setting is configured to the correct URL instead of `localhost` in **config.php**
+. Navigate to **admin settings -> Sharing -> Federation**
+. Add **server 1** to the trusted servers on **server 2**
+. Add **server 2** to the trusted servers on **server 1**
+. Run `system:cron` in the ownCloud directory of both servers (for example `/var/www/owncloud/`)
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} system:cron
+----
+. Run the `OCA\Federation\SyncJob` job with the `force` option (you can get the correspondent job ID by using the `background:queue:status` occ command)
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} background:queue:execute --force 10
 ----
 . Now the check should be green
 . Sync now your users with
@@ -52,7 +49,7 @@ mysql -u root -e "update oc_jobs set last_checked=0 where class='OCA\\Federation
 {occ-command-example-prefix} dav:sync-system-addressbook
 {occ-command-example-prefix} federation:sync-addressbook
 ----
-. Configure automatic acceptance of new federated shares.
+. Configure automatic acceptance of new federated shares
 +
 NOTE: Automatic acceptance of new federated shares will not work if the option `Add server automatically once a federated share was created successfully` is also set. This is done because of security concerns.
 +
