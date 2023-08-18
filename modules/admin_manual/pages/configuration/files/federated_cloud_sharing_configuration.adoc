@@ -35,7 +35,7 @@ image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google 
 ----
 {occ-command-example-prefix} system:cron
 ----
-. Run the `OCA\Federation\SyncJob` job with the `force` option on both servers (you can get the correspondent job ID by using the `background:queue:status` occ command)
+. Run the `OCA\Federation\SyncJob` job with the `force` option on both servers (you can get the corresponding job ID by using the `background:queue:status` occ command)
 +
 [source,bash,subs="attributes+"]
 ----
