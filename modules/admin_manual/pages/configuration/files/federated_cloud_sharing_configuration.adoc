@@ -39,7 +39,7 @@ image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google 
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:execute --force 10
+{occ-command-example-prefix} background:queue:execute --force <jobId>
 ----
 . Now the check should be green
 . Sync now your users by running on both servers
