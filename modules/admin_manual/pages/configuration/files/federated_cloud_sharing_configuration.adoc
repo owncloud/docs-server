@@ -2,112 +2,113 @@
 :toc: right
 :toclevels: 1
 :page-aliases: go/admin-sharing-federated.adoc
+:description: With Federated Cloud Sharing, you can easily and securely link file shares between ownCloud servers, in effect creating a "cloud" of ownCloud installations.
 
 == Introduction
 
-Federated Cloud Sharing is managed by the Federation app. 
-When you enable the Federation app you can easily and securely link file shares between ownCloud servers, in effect creating a "cloud" of ownCloud installations.
+{description}
 
-[IMPORTANT]
-====
-For security reasons federated sharing **strictly requires HTTPS (SSL/TLS)**.
-====
+IMPORTANT: For security reasons federated sharing **strictly requires HTTPS (SSL/TLS)**.
 
-IMPORTANT: We strongly recommend using HTTP for development and testing purposes. 
-However, to do so, you have to set `'sharing.federation.allowHttpFallback' => true,` in **config/config.php**.
+IMPORTANT: If you want to use HTTP for development and testing purposes, you have to set `'sharing.federation.allowHttpFallback' => true,` in **config/config.php**.
 
 == Configuration
 
 Follow these steps to establish a trusted connection between two servers.
 
-. Verify that both servers have SSL certificates.
-  If you open the server URL in your browser and see a lock icon on the left-hand side of the address bar, the certificate is valid.
+. Verify that both servers have SSL certificates. +
+If you open the server URL in your browser and see a lock icon on the left-hand side of the address bar, the certificate is valid:
 +
-.Lock icon in the address bars in Firefox, Google Chrome, and Safari.
-image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google Chrome, and Safari]
-. Verify that the `'overwrite.cli.url' => 'https://<SERVER_URL>' setting is configured to the correct URL, instead of `localhost`, in **config.php**.
-. Reset the federation job in your `oc_jobs` table. 
-  This job is required to get the verification token from the other server to establish a federation connection between two servers. 
-  The resetting ensures that it will be executed when we run xref:configuration/server/background_jobs_configuration.adoc#cron[system:cron] later.
-+
-[source,bash]
-----
-mysql -u root -e "update oc_jobs set last_run=0 where class='OCA\\Federation\\SyncJob';" owncloud;
-mysql -u root -e "update oc_jobs set last_checked=0 where class='OCA\\Federation\\SyncJob';" owncloud;
-----
-. Navigate to **admin settings -> sharing -> Federation**
-. Add **server 1** to the trusted servers on **server 2**.
-. Add **server 2** to the trusted servers on **server 1**.
-. Now run the cron job in your ownCloud directory (for example `/var/www/owncloud/`).
+.Lock icon in the address bars in Firefox, Google Chrome, and Safari
+image::configuration/files/browser-address-bars.png[Lock icon in Firefox, Google Chrome, and Safari]
+
+. Verify that the `'overwrite.cli.url' => 'https://<SERVER_URL>'` setting is configured to the correct URL instead of `localhost` in *config.php*:
+
+. Navigate to menu:Admin settings[Sharing > Federation]
+
+. Add **server 1** to the trusted servers on **server 2**
+
+. Add **server 2** to the trusted servers on **server 1**
+
+. Run on both servers:
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} system:cron
 ----
-. Now the check should be green
-. Sync now your users with
+
+. Run the `OCA\Federation\SyncJob` job with the `force` option on both servers. +
+You can get the corresponding job ID by using the `background:queue:status` occ command:
++
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} background:queue:execute --force <jobId>
+----
+
+. The check should now be green
+
+. Now sync your users by running on both servers
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} dav:sync-system-addressbook
 {occ-command-example-prefix} federation:sync-addressbook
 ----
-. Configure automatic acceptance of new federated shares.
+
+. Configure automatic acceptance of new federated shares
 +
+--
 NOTE: Automatic acceptance of new federated shares will not work if the option `Add server automatically once a federated share was created successfully` is also set. This is done because of security concerns.
-+
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set federation auto_accept_trusted --value '0'
 {occ-command-example-prefix} config:app:set federatedfilesharing auto_accept_trusted --value 'yes'
 ----
+--
 
 == Working With Proxies
 
-There are ownCloud instances that are not connected to the internet. 
-They have no possibility to reach the public network. 
-Therefore Federation will not work without a proxy. 
+There are ownCloud instances that are not connected to the internet. They have no possibility to reach the public network. Therefore Federation will not work without a proxy.
 
-To set the `proxy` and `proxyuserpwd` configuration variables, in `config/config.php`.
-`proxy` sets the proxy’s hostname, and `proxyuserpwd` sets the username and password credentials, in `username:password` format.
+Set the `proxy` and `proxyuserpwd` configuration variables, in `config/config.php`. `proxy` sets the proxy’s hostname, and `proxyuserpwd` sets the username and password credentials, in `username:password` format.
 
 == Creating a New Federation Share
 
-Follow these steps to create a new Federation share between two ownCloud servers. 
-This requires no action by the user on the remote server; all it takes is a few steps on the originating server.
+Follow these steps to create a new Federation share between two ownCloud servers. This requires no action by the user on the remote server; all it takes is a few steps on the originating server.
 
 . Enable the Federation app.
 
-. Then, create a federated share by entering username@serveraddress in the sharing dialog (for example `freda@https://example.com/owncloud`). When ownCloud verifies the link,
+. Create a federated share by entering username@serveraddress in the sharing dialog (for example `freda@https://example.com/owncloud`). When ownCloud verifies the link,
 it displays it with the *(federated)* label. Click on this label to establish the link.
 +
-image:configuration/files/federation-2.png[image]
-. When the link is successfully completed, you have a single share
-option, and that is *can edit*.
+image::configuration/files/federation-2.png[image, width=550]
+
+. When the link is successfully completed, you have a single share option, and that is *can edit*.
 +
-image:configuration/files/federation-3.png[image]
+image::configuration/files/federation-3.png[image, width=350]
 +
 You may disconnect the share at any time by clicking the btn:[trash can] icon.
 
 == Federated Sharing Scanner CronJob Configuration
 
-[IMPORTANT]
-====
-As part of the migration step to 10.5, before enabling the cronjob described below, make sure to remove the system cron job from your crontab that executes legacy **occ incoming-shares:poll**
-====
+IMPORTANT: As part of the migration step to 10.5, before enabling the cronjob described below, make sure to remove the system cron job from your crontab that executes legacy *occ incoming-shares:poll*
 
 The Federated Sharing Scanner is a background job used to scan the federated shares to ensure the integrity of the file cache.
 
 On each run the scanner will select federated shares that satisfy these requirements:
 
-. ensure that within a single cron run, at max [cronjob_scan_external_batch] scans will be performed out of all accepted external shares (default 100)
+. ensure that within a single cron run, at max [cronjob_scan_external_batch] scans will be performed out of all accepted external shares (default 100) 
+
 . a scan of that external share has not been performed within the last [cronjob_scan_external_min_scan] seconds (default 3 hours)
+
 . the user still exists, and has been active recently, meaning logged in within the last [cronjob_scan_external_min_login] seconds (default 24 hours)
+
 . there has been a change in the federated remote share root etag or mtime, signaling a mandatory rescan
 
-To enable the cronjob, go to menu:Settings[Admin Settings > Federated Cloud Sharing] and enable the checkbox
+To enable the cronjob, go to menu:Settings[Admin Settings > Federated Cloud Sharing] and enable the checkbox:
 
-image:configuration/files/sharing/federated-cloud-sharing/scan-cronjob.png[Checkbox]
+image::configuration/files/sharing/federated-cloud-sharing/scan-cronjob.png[Checkbox, width=500]
 
 Alternatively you can use the command line:
 
@@ -119,28 +120,28 @@ Alternatively you can use the command line:
 You can also configure these settings of the cronjob:
 
 . the minimum amount of time since last login of a user so that a scan is triggered (ensures only active users get fed shares synced)
-
++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_min_login --value <integer-seconds>
 ----
 
 . the minimum amount of time since last scanned so that the next scan is triggered (avoid frequent scan when active collaboration)
-
++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_min_scan --value <integer-seconds>
 ----
 
 . the maximum number of federated share scans per 10 minutes (scan performed only if fed share files got updated)
-
++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_batch --value <integer-number>
 ----
 
-Use the following command to force a run of the scanner cronjob:
-
+. Use the following command to force a run of the scanner cronjob:
++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} background:queue:execute --force --accept-warning <id-of-fed-scanner-job>
@@ -150,11 +151,9 @@ Use the following command to force a run of the scanner cronjob:
 
 === Persistent Locks Are Not Guaranteed
 
-There is a known bug propagated persistent locks to federated instances.
-If a user creates an exclusive lock on a share, no other users should be able to modify it, nor its contents, and all users should see a lock icon on the share.
+There is a known bug in propagation of persistent locks to federated instances. If a user creates an exclusive lock on a share, no other users should be able to modify it, nor its contents, and all users should see a lock icon on the share.
 
-However, this isn't the case.
-The following functionality has been recorded:
+However, this isn't the case. The following functionality has been recorded:
 
 * The user who created the lock sees the lock icon throughout the share.
 * The top-level of the share for receivers shows the lock icon.
@@ -205,8 +204,7 @@ select * from oc_share where share_type=6;
 
 Each unique ID gives you an incoming federated share.
 
-Outgoing shares can be listed with the following query:
-(replace `cloud.example.com` with your instance URL)
+Outgoing shares can be listed with the following query: (replace `cloud.example.com` with your instance URL)
 
 [source,sql]
 ----
