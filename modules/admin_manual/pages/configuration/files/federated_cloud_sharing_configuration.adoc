@@ -46,7 +46,7 @@ You can get the corresponding job ID by using the `background:queue:status` occ 
 
 . The check should now be green
 
-. Sync now your users by running on both servers
+. Now sync your users by running on both servers
 +
 [source,bash,subs="attributes+"]
 ----
@@ -70,7 +70,7 @@ NOTE: Automatic acceptance of new federated shares will not work if the option `
 
 There are ownCloud instances that are not connected to the internet. They have no possibility to reach the public network. Therefore Federation will not work without a proxy.
 
-To set the `proxy` and `proxyuserpwd` configuration variables, in `config/config.php`. `proxy` sets the proxy’s hostname, and `proxyuserpwd` sets the username and password credentials, in `username:password` format.
+Set the `proxy` and `proxyuserpwd` configuration variables, in `config/config.php`. `proxy` sets the proxy’s hostname, and `proxyuserpwd` sets the username and password credentials, in `username:password` format.
 
 == Creating a New Federation Share
 
@@ -150,7 +150,7 @@ You can also configure these settings of the cronjob:
 
 === Persistent Locks Are Not Guaranteed
 
-There is a known bug propagated persistent locks to federated instances. If a user creates an exclusive lock on a share, no other users should be able to modify it, nor its contents, and all users should see a lock icon on the share.
+There is a known bug in propagation of persistent locks to federated instances. If a user creates an exclusive lock on a share, no other users should be able to modify it, nor its contents, and all users should see a lock icon on the share.
 
 However, this isn't the case. The following functionality has been recorded:
 
