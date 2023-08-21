@@ -30,7 +30,7 @@ image::configuration/files/browser-address-bars.png[Lock icon in Firefox, Google
 
 . Add **server 2** to the trusted servers on **server 1**
 
-. Run `system:cron` from the ownCloud directory of both servers, for example `/var/www/owncloud/`:
+. Run on both servers:
 +
 [source,bash,subs="attributes+"]
 ----
