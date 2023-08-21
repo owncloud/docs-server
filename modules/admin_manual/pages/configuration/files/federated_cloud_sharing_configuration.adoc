@@ -2,14 +2,15 @@
 :toc: right
 :toclevels: 1
 :page-aliases: go/admin-sharing-federated.adoc
+:description: With Federated Cloud Sharing, you can easily and securely link file shares between ownCloud servers, in effect creating a "cloud" of ownCloud installations.
 
 == Introduction
 
-Federated Cloud Sharing is managed by the Federation app. When you enable the Federation app you can easily and securely link file shares between ownCloud servers, in effect creating a "cloud" of ownCloud installations.
+{description}
 
 IMPORTANT: For security reasons federated sharing **strictly requires HTTPS (SSL/TLS)**.
 
-IMPORTANT: We strongly recommend using HTTP for development and testing purposes. However, to do so, you have to set `'sharing.federation.allowHttpFallback' => true,` in **config/config.php**.
+IMPORTANT: If you want to use HTTP for development and testing purposes, you have to set `'sharing.federation.allowHttpFallback' => true,` in **config/config.php**.
 
 == Configuration
 
