@@ -87,7 +87,7 @@ This command removes a trusted federated server.
 
 === Example
 
-In the example below, the trusted servers with ID=2 gets removed.
+In the example below, the trusted server with ID=2 gets removed.
  
 [source,bash,subs="attributes+"]
 ----
