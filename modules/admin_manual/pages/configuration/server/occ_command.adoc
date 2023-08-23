@@ -294,6 +294,8 @@ include::./occ_commands/core_commands/_encryption_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_federation_sync_commands.adoc[leveloffset=+2]
 
+include::./occ_commands/core_commands/_federation_trusted_servers.adoc[leveloffset=+2]
+
 include::./occ_commands/core_commands/_file_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_files_external_commands.adoc[leveloffset=+2]
