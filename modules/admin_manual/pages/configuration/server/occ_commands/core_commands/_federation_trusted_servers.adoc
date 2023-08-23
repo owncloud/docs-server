@@ -1,0 +1,102 @@
+= Federation Trusted Servers
+
+A set of commands to manage trusted federated servers from the command line.
+
+[source,plaintext]
+----
+federation:trusted-servers
+      federation:trusted-servers:add                    
+      federation:trusted-servers:list                   
+      federation:trusted-servers:remove
+----
+
+== Add a Trusted Server
+
+This command adds a trusted federated server.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} federation:trusted-servers:add <url>
+----
+
+=== Arguments
+
+[width="100%",cols="25%,70%",]
+|====
+| `url`
+| The url pointing to the server, such as \https://myserver:8888/server/owncloud
+|====
+
+=== Example
+
+In the example below, the named trusted server is added.
+ 
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} federation:trusted-servers:add /
+    https://myserver:8888/server/owncloud
+----
+
+== List Trusted Servers
+
+This command lists all trusted federated servers that have been added.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} federation:trusted-servers:list
+----
+
+=== Example
+
+In the example below, all trusted servers that have been added are listed.
+ 
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} configured 
+
+----
+
+*Output:*
+
+[source,plaintext]
+----
++----+--------------------------------------------+--------+
+| id | server                                     | status |
++----+--------------------------------------------+--------+
+| 1  | https://oc10130b1.qa.owncloud.test         | OK     |
+| 2  | https://oc10122-20230818.qa.owncloud.test  | OK     |
++----+--------------------------------------------+--------+
+----
+
+== Remove a Trusted Server
+
+This command removes a trusted federated server.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} federation:trusted-servers:remove <id>
+----
+
+=== Arguments
+
+[width="100%",cols="25%,70%",]
+|====
+| `id`
+| The id of the server. Check with occ federation:trusted-servers:list
+|====
+
+=== Example
+
+In the example below, the trusted servers with ID=2 gets removed.
+ 
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} federation:trusted-servers:remove 2
+----
+
+*Output:*
+
+[source,plaintext]
+----
+Removed server with id 2
+----
