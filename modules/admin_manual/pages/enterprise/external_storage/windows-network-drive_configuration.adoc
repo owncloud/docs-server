@@ -1,6 +1,8 @@
 = Windows Network Drive (WND)
 :toc: right
 :toclevels: 3
+:description: The Windows Network Drives app seamlessly integrates Windows and Samba/CIFS shared network drives as external storages. WND has great advantages compared to standard SMB access.
+
 :anacron-examples: http://www.thegeekstuff.com/2011/05/anacron-examples
 :flock-docs-url: https://linux.die.net/man/2/flock
 :shell-flock-intro: https://linuxaria.com/howto/linux-shell-introduction-to-flock
@@ -21,9 +23,9 @@
 
 == Introduction
 
-The {oc-marketplace-url}/apps/windows_network_drive[Windows Network Drives app] creates a control panel in your Admin page for seamlessly integrating Windows and Samba/CIFS shared network drives as external storages.
+{description}
 
-Any Windows file share and Samba servers on Linux and other Unix-type operating systems use the SMB/CIFS file-sharing protocol. The files and directories on the SMB/CIFS server will be visible on your Files page just like your other ownCloud files and folders.
+The {oc-marketplace-url}/apps/windows_network_drive[Windows Network Drives app] creates a control panel in your Admin page. Any Windows file share and Samba servers on Linux and other Unix-type operating systems use the SMB/CIFS file-sharing protocol. The files and directories on the SMB/CIFS server will be visible on your Files page just like your other ownCloud files and folders.
 
 Compared to standard SMB access, WND has advanced features like:
 
