@@ -1,6 +1,8 @@
 = Windows Network Drive (WND)
 :toc: right
 :toclevels: 3
+:description: The Windows Network Drives app seamlessly integrates Windows and Samba/CIFS shared network drives as external storages. WND has great advantages compared to standard SMB access.
+
 :anacron-examples: http://www.thegeekstuff.com/2011/05/anacron-examples
 :flock-docs-url: https://linux.die.net/man/2/flock
 :shell-flock-intro: https://linuxaria.com/howto/linux-shell-introduction-to-flock
@@ -21,9 +23,9 @@
 
 == Introduction
 
-The {oc-marketplace-url}/apps/windows_network_drive[Windows Network Drives app] creates a control panel in your Admin page for seamlessly integrating Windows and Samba/CIFS shared network drives as external storages.
+{description}
 
-Any Windows file share and Samba servers on Linux and other Unix-type operating systems use the SMB/CIFS file-sharing protocol. The files and directories on the SMB/CIFS server will be visible on your Files page just like your other ownCloud files and folders.
+The {oc-marketplace-url}/apps/windows_network_drive[Windows Network Drives app] creates a control panel in your Admin page. Any Windows file share and Samba servers on Linux and other Unix-type operating systems use the SMB/CIFS file-sharing protocol. The files and directories on the SMB/CIFS server will be visible on your Files page just like your other ownCloud files and folders.
 
 Compared to standard SMB access, WND has advanced features like:
 
@@ -39,7 +41,7 @@ User lockout prevention and password reset::
 Depending on the Windows or Samba policy, users could get locked out of their account if they enter a wrong password a number of times. The lockout prevention tries to avoid this from happening by resetting the password if it is wrong. This is also true for Collaborative WND when using `login credentials saved in database` and a repeatedly running files-scan job which may use outdated credentials. In the case of ownCloud's standard SMB connector, the password won't be reset. It could happen that users get locked out of the file server.
 
 More authentication mechanisms against the backend::
-Please see the details about the xref:enterprise/external_storage/enterprise_only_auth.adoc[Enterprise-Only Authentication Options]
+Please see the details about the xref:enterprise/external_storage/enterprise_only_auth.adoc[Enterprise-Only Authentication Options].
 
 Listen to change information triggered by the backend::
 Native Windows File Servers provide the ability to send change notifications regarding modified files and folders somewhere in a share. Samba can send file notifications as well, as long as all the file actions are performed through the SMB protocol. However, it won't work if the action is performed directly inside the filesystem used by Samba. This mechanism then updates the ownCloud database and provides the changes made to accessing users. Users do not need to manually check for changes in all possible locations of their mount. Changes processed are also propagated to sync clients automatically.
@@ -50,6 +52,9 @@ With enhanced ACL support, both SMB and WND evaluate the file attributes (whethe
 Collaborative WND (CWND)::
 Compared to a standard WND mountpoint, a collaborative WND mount offers enhanced features. In a CWND, each user shares the same ownCloud internal information for files and folders based on its internal identification (file_id). This means that _comments_ and _tags_ can be shared with all users accessing files and folders of this mount without the need that users must be members of the mount from an ownCloud point of view. A CWND can only be set by an admin in menu:Settings[Admin > Storage] but not in the users section. With CWND, all accessing users have their own access to the mount with their own credentials but share additional information with other users accessing the same data. See the table below to compare the differences.
 +
+--
+{empty}
+
 .Collaborative WND Differences Based on the Mount Type
 [cols=".^15%,.^35%,.^35%",options="header",caption=]
 |===
@@ -81,6 +86,7 @@ a| * No shared access +
 ** Comments and tags are shared, access based on the sharer
 | Comments and tags are shared, access based on the user
 |===
+--
 
 .More WND Properties
 Mounts to a Windows or Samba file server are labeled with a little four-pane Windows-style icon, and the left pane of your Files page includes a Windows Network Drive filter. Figure 1 shows a new Windows Network Drive share marked with a red warning which indicates that ownCloud cannot connect to the share. The reason is that it may require the user to login, or it is not available, or there is an error in the configuration.
@@ -93,53 +99,38 @@ Depending on the authentication method, passwords for each mount are encrypted a
 database, using a long random secret key stored in `config.php`. This allows ownCloud to access the shares
 when the users who own the mounts are not logged in. This access will not work if the mount is session based, where passwords are not stored and are available only for the current active session.
 
-.Figure 1. Windows Network Drive share on your Files page
-image:enterprise/external_storage/windows_network_drive/wnd-1.png[Windows Network Drive share on your Files page, width=50%]
+.Windows Network Drive share on your Files page
+image::enterprise/external_storage/windows_network_drive/wnd-1.png[Windows Network Drive share on your Files page, width=450]
 
 == Installation
 
 Install the {oc-marketplace-url}/apps/windows_network_drive[External Storage: Windows Network Drives app]
 from the ownCloud Market App or ownCloud Marketplace. To make it work, a few  dependencies have to be installed.
 
-* A Samba client. This is included in all Linux distributions.
-On Debian, Ubuntu, and other Debian derivatives it is called `smbclient`.
-On SUSE, Red Hat, CentOS, and other Red Hat derivatives it is `samba-client`.
-* `php-smbclient` (version 0.8.0+). It should be included in most Linux distributions.
-You can use https://github.com/eduardok/libsmbclient-php[eduardok/libsmbclient-php],
-if your distribution does not provide it.
+* A Samba client. This is included in all Linux distributions. On Debian, Ubuntu, and other Debian derivatives it is called `smbclient`. On SUSE, Red Hat, CentOS, and other Red Hat derivatives it is `samba-client`.
+* `php-smbclient` (version 0.8.0+). It should be included in most Linux distributions. You can use https://github.com/eduardok/libsmbclient-php[eduardok/libsmbclient-php], if your distribution does not provide it.
 * `which` and `stdbuf`. These should be included in most Linux distributions.
 
-To install and configure the necessary packages, see the
-xref:installation/manual_installation/manual_installation.adoc#prepare-your-server[Prepare Your Server]
-section of the manual installation documentation.
+To install and configure the necessary packages, see the xref:installation/manual_installation/manual_installation.adoc#prepare-your-server[Prepare Your Server] section of the manual installation documentation.
 
-TIP: For more information on SMB/CIFS in ownCloud, refer to the
-xref:configuration/files/external_storage/smb.adoc[Samba file server configuration documentation].
+TIP: For more information on SMB/CIFS in ownCloud, refer to the xref:configuration/files/external_storage/smb.adoc[Samba file server configuration documentation].
 
 TIP: If you encounter errors when using the WND app like `NT_STATUS_REVISION_MISMATCH`, please get in touch with support@owncloud.com.
 
 [IMPORTANT]
 ====
-ownCloud requires at least {samba-478-url}[Samba 4.7.8] or {samba-481-url}[Samba 4.8.1] on the
-ownCloud server, when:
+ownCloud requires at least {samba-478-url}[Samba 4.7.8] or {samba-481-url}[Samba 4.8.1] on the ownCloud server, when:
 
 . The Windows Network Drive Listener is used; *and*
 . The remote Windows/Samba file server requires at least {smb2-url}[version 2.0 of the SMB protocol].
 
-The
-xref:wnd-listener-setup[Windows Network Drive Listener] only supports version 1 of the SMB protocol (SMB1) with _earlier_ Samba versions.
+The xref:wnd-listener-setup[Windows Network Drive Listener] only supports version 1 of the SMB protocol (SMB1) with _earlier_ Samba versions.
 
 *Background*
 
-A {samba-url}[Samba] server, often a Microsoft Windows Server, can enforce the minimum and maximum protocol
-versions used by connecting clients. However, in light of the
-{wannacry-ransomware-attack-url}[WannaCry ransomware attack],
-{msft-security-bulletin-ms17-010-url}[Microsoft patched Windows Server] to only allow SMB2 as minimum protocol by default, as SMB1 is insecure.
+A {samba-url}[Samba] server, often a Microsoft Windows Server, can enforce the minimum and maximum protocol versions used by connecting clients. However, in light of the {wannacry-ransomware-attack-url}[WannaCry ransomware attack], {msft-security-bulletin-ms17-010-url}[Microsoft patched Windows Server] to only allow SMB2 as minimum protocol by default, as SMB1 is insecure.
 
-The ownCloud windows network drive listener utilizes the SMB notification feature which works well with
-SMB1 in conjunction with most Samba versions. However, when the minimum protocol a server accepts is SMB2,
-ownCloud requires Samba 4.7.8+ (4.8+ etc.) to be able to properly work, as prior versions of Samba had a
-bug that broke this feature.
+The ownCloud windows network drive listener utilizes the SMB notification feature which works well with SMB1 in conjunction with most Samba versions. However, when the minimum protocol a server accepts is SMB2, ownCloud requires Samba 4.7.8+ (4.8+ etc.) to be able to properly work, as prior versions of Samba had a bug that broke this feature.
 ====
 
 == Configuration
@@ -160,17 +151,15 @@ To enable external storage, as the ownCloud administrator go to menu:Settings[St
 [CAUTION]
 .Treat all the parameters as being case-sensitive.
 ====
-Although some parts of the app might work properly regardless of casing, other parts might have problems
-if the case is not respected.
+Although some parts of the app might work properly regardless of casing, other parts might have problems if the case is not respected.
 ====
 
 .Follow this procedure to create a new mount point based on WND
-
 . Enter the ownCloud mount point for your new WND share. This _must not_ be an existing folder.
 . Select your authentication method. See xref:enterprise/external_storage/enterprise_only_auth.adoc[Enterprise-Only Authentication Options] for complete information on the available authentication methods.
 +
-.Figure 2. WND mountpoint and authorization credentials
-image:enterprise/external_storage/windows_network_drive/wnd-2.png[WND mountpoint and authorization credentials, width=60%]
+.WND mountpoint and authorization credentials
+image::enterprise/external_storage/windows_network_drive/wnd-2.png[WND mountpoint and authorization credentials, width=500]
 . Enter the address of the server that contains the WND share.
 . The share name provided by Windows or Samba.
 . The root folder of the share. This is can be a subfolder name, or the `$user` variable for the user's home directory. Note that the LDAP `Internal Username Attribute` must be set to the `samaccountname` for either the share or the root to work, and the user's home directory needs to match the `samaccountname`.
@@ -181,8 +170,8 @@ image:enterprise/external_storage/windows_network_drive/wnd-2.png[WND mountpoint
 sharing is not (see Figure 3). Sharing is not available for all authorization methods. For details please see the
 xref:enterprise/external_storage/enterprise_only_auth.adoc#authentication-option-details[Enterprise-Only Authentication Options]. When using large storages with many files, you may want to disable previews, because this can significantly increase performance.
 +
-.Figure 3. WND server, credentials, and additional mount options
-image:enterprise/external_storage/windows_network_drive/wnd-3.png[WND server, credentials, and additional mount options, width=50%]
+.WND server, credentials, and additional mount options
+image::enterprise/external_storage/windows_network_drive/wnd-3.png[WND server, credentials, and additional mount options, width=450]
 
 Your changes are saved automatically.
 
@@ -192,10 +181,10 @@ NOTE: When you create a new mountpoint using login credentials (session based), 
 
 Starting with version 1.0.1 of the Windows Network Drives App {acl-url}[Access Control Lists (ACLs)] are supported. To obtain the ACL information, two ACL providers can be selected:
 
-- xref:the-null-permission-manager[The Null Permission Manager]
-- xref:the-owncloud-ldap-permission-manager[The ownCloud LDAP Permission Manager]
+* xref:the-null-permission-manager[The Null Permission Manager]
+* xref:the-owncloud-ldap-permission-manager[The ownCloud LDAP Permission Manager]
 
-image::enterprise/external_storage/windows_network_drive/acl-permissions-manager.png[Configuring ACL retrieval in the ownCloud Windows Network Drive app.]
+image::enterprise/external_storage/windows_network_drive/acl-permissions-manager.png[Configuring ACL retrieval in the ownCloud Windows Network Drive app, width=500]
 
 On standard deployments, you don't need to change anything. Just leave the field empty and the default `nullPermissionManager` permission manager will be used.
 
@@ -206,11 +195,7 @@ NOTE: Permissions are only auto-updated if there has been a change in the files.
 
 ==== The Null Permission Manager
 
-The `Null Permission Manager` is the default permission manager for ACLs and is used, if no other ACL
-manager is specified. This is also the case, when no permission is explicitly set. If you want to retain
-ownCloud's current behaviour, then use this permission manager. When in effect, the Windows Network Drive
-app uses the file's attributes (e.g., read-only, and hidden), to determine how the user can interact with
-the file. There are no usage restrictions.
+The `Null Permission Manager` is the default permission manager for ACLs and is used, if no other ACL manager is specified. This is also the case, when no permission is explicitly set. If you want to retain ownCloud's current behaviour, then use this permission manager. When in effect, the Windows Network Drive app uses the file's attributes (e.g., read-only, and hidden), to determine how the user can interact with the file. There are no usage restrictions.
 
 The value to select for this provider is: `nullPermissionManager`.
 
@@ -222,16 +207,14 @@ IMPORTANT: Both the Windows (or Samba) server and ownCloud's LDAP Integration ap
 
 The use of this provider requires two key things:
 
-- An Active Directory server which contains the standard user and group information that can be used by the {oc-marketplace-url}/apps/user_ldap[LDAP Integration app].
-- ownCloud's LDAP Integration app to be xref:configuration/user/user_auth_ldap.adoc[correctly configured] to retrieve user and group information from the same Active Directory / LDAP server as the one that the Windows or Samba server uses.
+* An Active Directory server which contains the standard user and group information that can be used by the {oc-marketplace-url}/apps/user_ldap[LDAP Integration app].
+* ownCloud's LDAP Integration app to be xref:configuration/user/user_auth_ldap.adoc[correctly configured] to retrieve user and group information from the same Active Directory / LDAP server as the one that the Windows or Samba server uses.
 
 IMPORTANT: The ownCloud LDAP Integration app must configure the `sAMAccountName` to be the ownCloud server's username.
 
 [TIP]
 ====
-Some groups, such as `everyone` might not be handled properly.
-This is because such groups don't exist in the LDAP server, or might not be found if the domain is
-different, such as `nt authority\system` or `builtin\domain-users`.
+Some groups, such as `everyone` might not be handled properly. This is because such groups don't exist in the LDAP server, or might not be found if the domain is different, such as `nt authority\system` or `builtin\domain-users`.
 ====
 
 The value to select for this provider is: `ocLdapPermissionManager`.
@@ -278,19 +261,15 @@ In order to start `wnd:listen` without any user interaction like as service, pro
      --password-trim
 ----
 
-For additional options to provide the password, check xref:password-options[Password Options]
+For additional options to provide the password, check xref:password-options[Password Options].
 
 Note that the password must be in plain text inside the file. Neither spaces nor newline characters will be removed from the contents of the file by default, unless the `--password-trim` option is added. The password file must be readable by the apache user (or www-data). Also make sure that the password file is outside of any directory handled by apache (web-readable) for security reasons. You may use the same location when using flock in xref:execution-serialization[Execution Serialization] below.
 
-You should be able to run any of those commands, and/or wrap them into a systemd service or any other
-startup service, so that the `wnd:listen` command is automatically started post booting.
+You should be able to run any of those commands, and/or wrap them into a systemd service or any other startup service, so that the `wnd:listen` command is automatically started post booting.
 
 ===== wnd:process-queue
 
-This command processes the stored notifications for a given host and share. This process is intended to
-be run periodically as a Cron job, or via a similar mechanism. The command will process the notifications
-stored by the `wnd:listen` process, showing only errors by default. If you need more information, increase
-the verbosity by calling `wnd:process-queue -vvv`.
+This command processes the stored notifications for a given host and share. This process is intended to be run periodically as a Cron job, or via a similar mechanism. The command will process the notifications stored by the `wnd:listen` process, showing only errors by default. If you need more information, increase the verbosity by calling `wnd:process-queue -vvv`.
 
 As a simple example, you can check the following:
 
@@ -402,25 +381,19 @@ NOTE: The commands must be **strictly sequential**. This can be done by using `f
 
 ===== Execution Serialization
 
-Parallel runs of `wnd:process-queue` might lead to a user lockout. The reason for this is that several
-`wnd:process-queue` might use the same wrong password because it hasn't been updated by the time they fetch it.
+Parallel runs of `wnd:process-queue` might lead to a user lockout. The reason for this is that several `wnd:process-queue` might use the same wrong password because it hasn't been updated by the time they fetch it.
 
-It's recommended to force the execution serialization of the `wnd:process-queue` command. You might want to
-use {anacron-examples}[Anacron], which seems to have an option for this scenario, or wrap the command with
+It's recommended to force the execution serialization of the `wnd:process-queue` command. You might want to use {anacron-examples}[Anacron], which seems to have an option for this scenario, or wrap the command with
 {shell-flock-intro}[flock].
 
-If you need to serialize the execution of the `wnd:process-queue`, check the following example with
-{shell-flock-intro}[flock]
+If you need to serialize the execution of the `wnd:process-queue`, check the following example with {shell-flock-intro}[flock]
 
 [source,bash,subs="attributes+"]
 ----
 flock -n /opt/my-lock-file {occ-command-example-prefix} wnd:process-queue <host> <share>
 ----
 
-In that case, flock will try to get the lock of that file and won't run the command if it isn't possible. For
-our case, and considering that file isn't being used by any other process, it will run only one
-`wnd:process-queue` at a time. If someone tries to run the same command a second time while the previous
-one is running, the second will fail and won't be executed.
+In that case, flock will try to get the lock of that file and won't run the command if it isn't possible. For our case, and considering that file isn't being used by any other process, it will run only one `wnd:process-queue` at a time. If someone tries to run the same command a second time while the previous one is running, the second will fail and won't be executed.
 
 The lock file `/opt/my-lock-file` itself will be created as an empty file by the `flock` command if it does not yet exist, but after it has been created the lock file doesn't change. Only an flock will be applied and removed. The file won't be removed after the script completes.
 
@@ -439,8 +412,8 @@ From version 2.0.0 the Windows Network Drive app includes an extension of the Ac
 
 Please see Figure 4 how a notification can look like. In this example, one user accessing the same host/share has changed a file. Other users will now get an activity notification about this change.
 
-.Figure 4. Activity Notification for a Changed File
-image:enterprise/external_storage/windows_network_drive/activity_file_change_notification.png[Activity notification for a Changed File]
+.Activity Notification for a Changed File
+image::enterprise/external_storage/windows_network_drive/activity_file_change_notification.png[Activity notification for a Changed File, width=500]
 
 This extension requires the following components:
 
@@ -457,7 +430,7 @@ This extension is disabled by default. This means that no activity will reach th
 'wnd.activity.registerExtension' => true,
 ----
 
-NOTE: This configuration will affect all the WND mount points
+NOTE: This configuration will affect all the WND mount points.
 
 The events that will be shown to the users are based on what the `wnd:process-queue` detects and changes in the ownCloud's FS. Since the command includes some optimizations, some events might be inaccurate in some scenarios. For example, if multiple files are added in the same folder, there won't be multiple "file added" events but only one "folder modified" in the parent folder.
 
@@ -480,8 +453,8 @@ CWND can only be set by an admin in menu:Settings[Admin > Storage]. This mount t
 
 . As an admin, go to menu:Settings[Admin > Storage] and create a new CWND based mount point.
 +
-.Figure 5. Add a Collaborative Windows Network Drive Mount
-image:enterprise/external_storage/windows_network_drive/cwnd_add_storage.png[Add Collaborative Windows Network Drive Mount, width=50%]
+.Add a Collaborative Windows Network Drive Mount
+image::enterprise/external_storage/windows_network_drive/cwnd_add_storage.png[Add Collaborative Windows Network Drive Mount, width=450]
 . Chose any name for the mount point that fits your needs.
 . Select user login type.
 +
@@ -496,8 +469,8 @@ The following three are sensible and working selections for CWND:
 [1] Must be used if user authentication is made with OIDC
 ====
 +
-.Figure 6. Select How User Logs in to the Mount Point
-image:enterprise/external_storage/windows_network_drive/cwnd_login_possibilities.png[Select How User Logs Into the Mount Point]
+.Select How User Logs in to the Mount Point
+image::enterprise/external_storage/windows_network_drive/cwnd_login_possibilities.png[Select How User Logs Into the Mount Point]
 [loweralpha]
 .. `Log-in credentials, saved in session`
 +
@@ -518,17 +491,17 @@ User login to ownCloud and providing credentials to access the CWND mount are co
 * _This login type can be set to `Enable Sharing`._
 * _This login type is by design *the only one compatible with OIDC authentication*._
 +
-.Figure 7. Re-enter Mount Access Credentials
-image:enterprise/external_storage/windows_network_drive/cwnd_regain_mount_access.png[Re-enter Mount Access Credentials]
+.Re-enter Mount Access Credentials
+image::enterprise/external_storage/windows_network_drive/cwnd_regain_mount_access.png[Re-enter Mount Access Credentials]
 
 . Configure this mount point by adding required data into the corresponding fields
 +
-.Figure 8. Enter Connection Info and the Service Account
-image:enterprise/external_storage/windows_network_drive/cwnd_fields.png[Enter Connection Info and Service Account]
-+
-NOTE: Starting with ownCloud 10.8, you can properly enter the correct password without using the deprecated occ command `wnd:set-service-account`, as the security measures have been improved and all fields in the mount settings marked as _password_ are now encrypted from the beginning by default. Existing settings are automatically migrated when upgrading.
-+
+--
+.Enter Connection Info and the Service Account
+image::enterprise/external_storage/windows_network_drive/cwnd_fields.png[Enter Connection Info and Service Account]
+
 When everything has been entered correctly, the mount point gets a green button on the left.
+--
 
 == Troubleshooting
 
@@ -536,8 +509,7 @@ When everything has been entered correctly, the mount point gets a green button 
 
 If you encounter issues using Windows network drive, then try the following troubleshooting steps:
 
-First check the connection to the share by using {smbclient-manpage-url}[smbclient] on the command line
-of the ownCloud server. Here is an example:
+First check the connection to the share by using {smbclient-manpage-url}[smbclient] on the command line of the ownCloud server. Here is an example:
 
 [source,console,subs="attributes+"]
 ----
@@ -555,10 +527,7 @@ NOTE: The command is case-sensitive, and that it must match the information from
 
 === libsmbclient Issues
 
-If your Linux distribution ships with `libsmbclient 3.x`, which is included in the Samba client, you may
-need to set up the `HOME` variable in Apache to prevent a segmentation fault. If you have
-`libsmbclient 4.1.6` and higher, it doesn't seem to be an issue, so you won't have to change your `HOME`
-variable. To set up the `HOME` variable on Ubuntu, modify the `/etc/apache2/envvars` file:
+If your Linux distribution ships with `libsmbclient 3.x`, which is included in the Samba client, you may need to set up the `HOME` variable in Apache to prevent a segmentation fault. If you have `libsmbclient 4.1.6` and higher, it doesn't seem to be an issue, so you won't have to change your `HOME` variable. To set up the `HOME` variable on Ubuntu, modify the `/etc/apache2/envvars` file:
 
 [source,bash]
 ----
@@ -566,17 +535,14 @@ unset HOME
 export HOME=/var/www
 ----
 
-In Red Hat/CentOS, modify the `/etc/sysconfig/httpd` file and add the following line to set the HOME
-variable in Apache:
+In Red Hat/CentOS, modify the `/etc/sysconfig/httpd` file and add the following line to set the HOME variable in Apache:
 
 [source,bash]
 ----
 export HOME=/usr/share/httpd
 ----
 
-By default, CentOS has activated SELinux, and the `httpd` process can not make outgoing network connections.
-This will cause problems with the `curl`, `ldap` and `samba` libraries.  You'll need to get around this
-to make this work. First, check the status:
+By default, CentOS has activated SELinux, and the `httpd` process can not make outgoing network connections. This will cause problems with the `curl`, `ldap` and `samba` libraries.  You'll need to get around this to make this work. First, check the status:
 
 [source,bash]
 ----
@@ -602,36 +568,18 @@ Restart Apache, open your ownCloud Admin page and start creating SMB/CIFS mounts
 
 === Basic Setup for One ownCloud Server
 
-. Go to the admin settings and set up the required WND mounts. Be aware though, that there are some
-limitations. These are:
-.. ownCloud needs access to the Windows account password for the mounts to update the file cache properly.
-This means that "__login credentials, saved in session__" won't work with the listener.
-ownCloud suggests to use "__login credentials, saved in DB__" as the best replacement instead.
+. Go to the admin settings and set up the required WND mounts. Be aware though, that there are some limitations. These are:
+.. ownCloud needs access to the Windows account password for the mounts to update the file cache properly. This means that "__login credentials, saved in session__" won't work with the listener. ownCloud suggests to use "__login credentials, saved in DB__" as the best replacement instead.
 .. The `$user` placeholder for the share name, such as `//host/$user/path/to/root`, providing a share which is accessible per/user won't work with the listener. This is because the listener won't scale, as you'll need to setup one listener per/share equals one listener per user. As a result, you'll end up with too many listeners. An alternative is, to provide a common share for the users and use the `$user` placeholder in the root, such as `//host/share/$user/folder`.
-. Start the `wnd:listen` process if it's not already started, ideally running it as a service.
-If it isn't running, no notification are stored. The listener stores the notifications. Any change in the
-mount point configuration, such as adding or removing new mounts, and logins by new users, won't affect
-the behavior, so there is no need to restart the listener in those cases.
+. Start the `wnd:listen` process if it's not already started, ideally running it as a service. If it isn't running, no notifications are stored. The listener stores the notifications. Any change in the mount point configuration, such as adding or removing new mounts, and logins by new users, won't affect the behavior, so there is no need to restart the listener in those cases.
 +
-In case you have several mount point configurations, note that each listener attaches to one host and share.
-If there are several mount configurations targeting different shares, you'll need to spawn one listener
-for each. For example, if you have one configuration with `10.0.0.2/share1` and another with
-`10.0.0.2/share2`, you'll need to spawn 2 listeners, one for the first configuration and another for the
+If you have several mount point configurations, note that each listener attaches to one host and share. If there are several mount configurations targeting different shares, you'll need to spawn one listener for each. For example, if you have one configuration with `10.0.0.2/share1` and another with `10.0.0.2/share2`, you'll need to spawn 2 listeners, one for the first configuration and another for the
 second.
-. Run the `wnd:process-queue` periodically, usually via
-xref:configuration/server/background_jobs_configuration.adoc#cron-jobs[a Cron job].
-The command processes all the stored notifications for a specific host and share. If you have several,
-you could set up several Cron jobs, one for each host and share with different intervals, depending on the
-load or update urgency. As a simple example, you could run the command every 2 minutes for one server
-and every 5 minutes for another.
+. Run the `wnd:process-queue` periodically, usually via xref:configuration/server/background_jobs_configuration.adoc#cron-jobs[a Cron job]. The command processes all the stored notifications for a specific host and share. If you have several, you could set up several Cron jobs, one for each host and share with different intervals, depending on the load or update urgency. As a simple example, you could run the command every 2 minutes for one server and every 5 minutes for another.
 
-As said, the command processes all the stored notifications, squeeze them and scan the resulting folders.
-The process might crash if there are too many notifications, or if it has too many storages to update. The
-`--chunk-size` option will help by making the command process all the notifications in buckets of that size.
+As said, the command processes all the stored notifications, squeezes them and scans the resulting folders. The process might crash if there are too many notifications, or if it has too many storages to update. The `--chunk-size` option will help by making the command process all the notifications in buckets of that size.
 
-On the one hand the memory usage is reduced, on the other hand there is more network activity. We recommend
-using the option with a value high enough to process a large number of notifications, but not so large to
-crash the process. Between 200 and 500 should be fine, and we'll likely process all the notifications in one go.
+On the one hand the memory usage is reduced, on the other hand there is more network activity. We recommend using the option with a value high enough to process a large number of notifications, but not so large to crash the process. Between 200 and 500 should be fine, and we'll likely process all the notifications in one go.
 
 === Password Options
 
@@ -649,10 +597,7 @@ There are several ways to supply a password:
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username> <password>
 ----
-. Read from a file, using the `--password-file` switch to specify the file to read from. Note, that the
-password must be in plain text inside the file, and neither spaces nor newline characters will be removed
-from the file by default, unless the `--password-trim` option is added. The password file must be readable
-by the apache user (or www-data)
+. Read from a file, using the `--password-file` switch to specify the file to read from. Note, that the password must be in plain text inside the file, and neither spaces nor newline characters will be removed from the file by default, unless the `--password-trim` option is added. The password file must be readable by the apache user (or www-data)
 +
 [source,bash,subs="attributes+"]
 ----
@@ -667,14 +612,10 @@ by the apache user (or www-data)
      --password-trim
 ----
 +
-NOTE: If you use the `--password-file` switch, the entire contents of the file will be used for the
-password, so please be careful with newlines.
+NOTE: If you use the `--password-file` switch, the entire contents of the file will be used for the password, so please be careful with newlines.
 +
-IMPORTANT: If using `--password-file` make sure that the file is only readable by the apache /
-www-data user and inaccessible from the web. This prevents tampering or leaking of the information.
-The password won't be leaked to any other user using `ps`.
-. Using 3rd party software to store and fetch the password. When using this option, the 3rd party app
-needs to show the password as plaintext on standard output.
+IMPORTANT: If using `--password-file` make sure that the file is only readable by the apache / www-data user and inaccessible from the web. This prevents tampering or leaking of the information. The password won't be leaked to any other user using `ps`.
+. Using 3rd party software to store and fetch the password. When using this option, the 3rd party app needs to show the password as plaintext on standard output.
 . Using the service account password, which is already stored in the database if you setup WND in collaborative mode. In this mode, you set the username and the option for the `occ` command to reuse the password stored in the database. The example command looks like:
 +
 [source,bash,subs="attributes+"]
@@ -752,91 +693,64 @@ then the `--password-file` option will take precedence.
 
 === Optimizing wnd:process-queue
 
-NOTE: Do not use this option if the process-queue is fast enough. The option has some drawbacks,
-specifically regarding password changes in the backend.
+NOTE: Do not use this option if the process-queue is fast enough. The option has some drawbacks, specifically regarding password changes in the backend.
 
-`wnd:process-queue` creates all the storages that need to be updated from scratch. To do so, we need to
-fetch all the users from all the backends (currently only the ones that have logged in at least once
-because the others won't have the storages that we'll need updates).
+`wnd:process-queue` creates all the storages that need to be updated from scratch. To do so, we need to fetch all the users from all the backends (currently only the ones that have logged in at least once because the others won't have the storages that will need updates).
 
-To optimize this, `wnd:process-queue` make use of two switches: `–serializer-type` and `–serializer-param`.
-These serialize storages for later use, so that future executions don't need to fetch the users, saving
-precious time — especially for large organizations.
+To optimize this, `wnd:process-queue` make use of two switches: `–serializer-type` and `–serializer-param`. These serialize storages for later use, so that future executions don't need to fetch the users, saving precious time — especially for large organizations.
 
-[cols="30%,100%",options="header",]
+{empty}
+
+[cols="30%,100%",options="header"]
 |===
-| Switch | Allowed Values
-| `--serializer-type` | `file`. Other valid values may be added in the future, as more
-implementations are requested.
+| Switch
+| Allowed Values
+
+| `--serializer-type`
+| `file`. Other valid values may be added in the future, as more implementations are requested.
+
 | `--serializer-param`
-| Depends on `--serializer-type`, because those will be the parameters that the chosen serializer will use.
-For the `file` serializer, you need to provide a file location in the host FS where the storages will be serialized.
-You can use `--serializer-param file=/tmp/file` as an example.
+| Depends on `--serializer-type`, because those will be the parameters that the chosen serializer will use. For the `file` serializer, you need to provide a file location in the host FS where the storages will be serialized. You can use `--serializer-param file=/tmp/file` as an example.
 |===
 
-While the specific behavior will depend on the serializer implementation, the overall behavior can be
-simplified as follows:
+While the specific behavior will depend on the serializer implementation, the overall behavior can be simplified as follows:
 
-If the serializer's data source (such as _a file_, _a database table_, or some _Redis keys_) has storage
-data, it uses that data to create the storages; otherwise, it creates the storages from scratch.
+If the serializer's data source (such as _a file_, _a database table_, or some _Redis keys_) has storage data, it uses that data to create the storages; otherwise, it creates the storages from scratch.
 
-After the storages are created, notifications are processed for the storages. If the storages have been
-created from scratch, those storages are written in the data source so that they can be read on the next run.
+After the storages are created, notifications are processed for the storages. If the storages have been created from scratch, those storages are written in the data source so that they can be read on the next run.
 
-NOTE: It's imperative to periodically clean up the data source to fetch fresh data, such as for
-new storages and updated passwords. There isn't a generic command to do this from ownCloud, because it
-depends on the specific serializer type. Though this option could be provided at some point if requested.
+NOTE: It's imperative to periodically clean up the data source to fetch fresh data, such as for new storages and updated passwords. There isn't a generic command to do this from ownCloud, because it depends on the specific serializer type. Though this option could be provided at some point if requested.
 
 === The File Serializer
 
-The file serializer is a serializer implementation that can be used with the `wnd:process-queue` command.
-It requires an additional parameter where you can specify the location of the file containing the
-serialized storages.
+The file serializer is a serializer implementation that can be used with the `wnd:process-queue` command. It requires an additional parameter where you can specify the location of the file containing the serialized storages.
 
 There are several things you should know about this serializer:
 
-* The generated file contains the encrypted passwords for accessing the backend. This is necessary in order
-to avoid re-fetching the user information, when next accessing the storages.
-* The generated file is intended to be readable and writable *only* for the web server user. Other users
-shouldn't have access to this file. Do not manually edit the file. You can remove the file if it contains
-obsolete information.
+* The generated file contains the encrypted passwords for accessing the backend. This is necessary in order to avoid re-fetching the user information, when next accessing the storages.
+* The generated file is intended to be readable and writable *only* for the web server user. Other users shouldn't have access to this file. Do not manually edit the file. You can remove the file if it contains obsolete information.
 
 === Usage Recommendations
 
 ==== Number of Serializers
 
-Only one file serializer should be used per server and share, as the serialized file has to be per server
-and share. Consider the following usage scenario:
+Only one file serializer should be used per server and share, as the serialized file has to be per server and share. Consider the following usage scenario:
 
-* If you have three shares: `10.0.2.2/share1`, `10.0.2.2/share2`, and
-`10.0.10.20/share2`, then you should use three different calls to
-`wnd:process-queue`, changing the target file for the serializer for each one.
+* If you have three shares: `10.0.2.2/share1`, `10.0.2.2/share2`, and `10.0.10.20/share2`, then you should use three different calls to `wnd:process-queue`, changing the target file for the serializer for each one.
 
-Since the serialized file has to be per server and share, the serialized file has some checks to prevent
-misuse. Specifically, if we detect you're trying to read the storages for another server and share from the
-file, the contents of the file won't be read and will fallback to creating the storage from scratch. At
-this point, we'll then update the contents of that file with the new storage.
+Since the serialized file has to be per server and share, the serialized file has some checks to prevent misuse. Specifically, if we detect you're trying to read the storages for another server and share from the file, the contents of the file won't be read and will fallback to creating the storage from scratch. At this point, we'll then update the contents of that file with the new storage.
 
-Doing so, though, creates unneeded competition, where several process-queue will compete for the serializer
-file. For example, let's say that you have two process-queues targeting the same serializer file. After the
-first process creates the file the second process will notice that the file is no longer available. As a
-result, it will recreate the file with new content.
+Doing so, though, creates unneeded competition, where several process-queue will compete for the serializer file. For example, let's say that you have two process-queues targeting the same serializer file. After the first process creates the file the second process will notice that the file is no longer available. As a result, it will recreate the file with new content.
 
-At this point the first process runs again and notices that the file isn't available and recreate the file
-again. When this happens, the serializer file's purpose isn't fulfilled As a result, we recommend the use
-of a different file per server and share.
+At this point the first process runs again and notices that the file isn't available and recreates the file again. When this happens, the serializer file's purpose isn't fulfilled. As a result, we recommend the use of a different file per server and share.
 
 ==== File Clean Up
 
-The file will need to cleaned up from time to time. The easiest way to do this is to remove the file when
-it is no longer needed. The file will be regenerated with fresh data the next execution if the serializer
-option is set.
+The file will need to cleaned up from time to time. The easiest way to do this is to remove the file when it is no longer needed. The file will be regenerated with fresh data the next execution if the serializer option is set.
 
 === Interaction Between Listener and Windows Password Lockout
 
-Windows supports {password-lockout-policies-url}[password lockout policies].
-If one is enabled on the server where an ownCloud share is located, and a user fails to enter their
-password correctly several times, they may be locked out and unable to access the share.
+Windows supports {password-lockout-policies-url}[password lockout policies]. If one is enabled on the server where an ownCloud share is located, and a user fails to enter their password correctly several times, they may be locked out and unable to access the share.
 
 //https://github.com/owncloud/Windows_network_drive/issues/94 [known issue]
 
@@ -846,17 +760,9 @@ This is a known issue that prevents these two inter-operating correctly. Current
 
 Setups with several servers might have some difficulties in some scenarios:
 
-* The `wnd:listen` component _might_ be duplicated among several servers. This shouldn't cause a problem,
-depending on the limitations of the underlying database engine. The supported database engines should be
-able to handle concurrent access and de-duplication.
-* The `wnd:process-queue` _should_ also be able to run from any server, however limitations for concurrent
-executions still apply. As a result, you might need to serialized command execution of the
-`wnd:process-queue` among the servers (to avoid for the password lockout), which might not be possible or
-difficult to achieve. You might want to execute the command from just one specific server in this case.
-* `wnd:process-queue` + serializer. First, check the above section to know the interactions with the
-password lockout. Right now, the only option you have to set it up is to store the target file in a common
-location for all the server. We might need to provide a specific serializer for this scenario
-(based on Redis or DB)
+* The `wnd:listen` component _might_ be duplicated among several servers. This shouldn't cause a problem, depending on the limitations of the underlying database engine. The supported database engines should be able to handle concurrent access and de-duplication.
+* The `wnd:process-queue` _should_ also be able to run from any server, however limitations for concurrent executions still apply. As a result, you might need to serialize command execution of the `wnd:process-queue` among the servers (to avoid password lockout), which might not be possible or difficult to achieve. You might want to execute the command from just one specific server in this case.
+* `wnd:process-queue` + serializer. First, check the above section to know the interactions with the password lockout. Right now, the only option you have to set up is to store the target file in a common location for all the servers. We might need to provide a specific serializer for this scenario (based on Redis or DB)
 
 === Basic Command Execution Examples
 
