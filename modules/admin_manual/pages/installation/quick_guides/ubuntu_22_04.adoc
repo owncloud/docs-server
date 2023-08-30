@@ -157,7 +157,6 @@ DocumentRoot /var/www/owncloud
 EOM
 ----
 
-
 ==== Test the Configuration
 
 [source,bash]
@@ -200,10 +199,11 @@ Ensure transaction-isolation level is set and performance_schema on.
 ----
 sed -i "/\[mysqld\]/atransaction-isolation = READ-COMMITTED\nperformance_schema = on" /etc/mysql/mariadb.conf.d/50-server.cnf
 systemctl start mariadb
-mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; \
-GRANT ALL PRIVILEGES ON owncloud.* \
-  TO owncloud@localhost \
-  IDENTIFIED BY '${sec_db_pwd}'";
+mysql -u root -e \
+  "CREATE DATABASE IF NOT EXISTS owncloud; \
+  CREATE USER IF NOT EXISTS 'owncloud'@'localhost' IDENTIFIED BY '${sec_db_pwd}'; \
+  GRANT ALL PRIVILEGES ON *.* TO 'owncloud'@'localhost' WITH GRANT OPTION; \
+  FLUSH PRIVILEGES;"
 ----
 
 It is recommended to run the mysqltuner script to analyze the database configuration after running with load for several days.
