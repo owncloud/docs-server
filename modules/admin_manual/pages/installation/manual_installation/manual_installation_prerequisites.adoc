@@ -10,22 +10,17 @@
 
 == Introduction
 
-The ownCloud tar archive contains all of the required third-party PHP libraries.
-As a result, no extra ones are, strictly, necessary.
-However, ownCloud does require that PHP has a set of extensions installed, enabled, and configured.
+The ownCloud tar archive contains all of the required third-party PHP libraries. As a result, no extra ones are, strictly, necessary. However, ownCloud does require that PHP has a set of extensions installed, enabled, and configured.
 
-This section lists both the required and optional PHP extensions.
-If you need further information about a particular extension, please consult the relevant section of the {php-net-url}/manual/en/extensions.php[extensions section of the PHP manual].
+This section lists both the required and optional PHP extensions. If you need further information about a particular extension, please consult the relevant section of the {php-net-url}/manual/en/extensions.php[extensions section of the PHP manual].
 
-If you are using a Linux distribution, it should have packages for all the required extensions.
-You can check the presence of a module by typing `php -m | grep -i <module_name>`.
-If you get a result, the module is present.
+If you are using a Linux distribution, it should have packages for all the required extensions. You can check the presence of a module by typing `php -m | grep -i <module_name>`. If you get a result, the module is present.
 
 == Required Prerequisites
 
 === openSSL Version
 
-ownCloud requires that you have openSSL version 1.1.x installed. With the release change of openSSL v1.x to openSSL version 3.x in December 2021, some ciphers which were valid in version 1.x, have been retired with immediate effect. This impacts the ownCloud encryption app.
+ownCloud requires that you have openSSL version 1.1.x installed. With the release change of openSSL v1.x to openSSL version 3.x in December 2021, some ciphers which were valid in version 1.x, have been retired with immediate effect. This impacts the ownCloud xref:configuration/files/encryption/encryption_configuration.adoc[encryption app].
 
 [IMPORTANT]
 ====
@@ -40,7 +35,7 @@ your encryption environment will break due to openSSL v3 retired (legacy) cipher
 
 How to implement the fix for the above mentioned issue:
 
-1. Find the openssl config directory with 
+. Find the openssl config directory with 
 +
 --
 [source,bash]
@@ -53,7 +48,7 @@ Output example:
 `OPENSSLDIR: "/usr/lib/ssl"`
 --
 
-2. Go in to that directory and open the config file `openssl.cnf`
+. Go in to that directory and open the config file `openssl.cnf`
 +
 --
 Look for:
@@ -85,7 +80,27 @@ activate = 1
 ----
 --
 
-3. Save the file. Now you have enabled the legacy support.
+. The file should now look like this:
++
+[source,plaintext]
+----
+openssl_conf = openssl_init
+
+[openssl_init]
+providers = provider_sect
+
+[provider_sect]
+default = default_sect
+legacy = legacy_sect
+
+[default_sect]
+activate = 1
+
+[legacy_sect]
+activate = 1
+----
+   
+. Save the file, you now have enabled OpenSSL legacy support.
 
 === PHP Version
 
@@ -210,8 +225,7 @@ NOTE: The _Phar_, _OpenSSL_, and _cUrl_ extensions are mandatory if you want to 
 | For SMB/CIFS integration
 |====
 
-NOTE: SMB/Windows Network Drive mounts require the PHP module smbclient version 0.8.0+.
-See xref:configuration/files/external_storage/smb.adoc[SMB/CIFS].
+NOTE: SMB/Windows Network Drive mounts require the PHP module smbclient version 0.8.0+. See xref:configuration/files/external_storage/smb.adoc[SMB/CIFS].
 
 === Optional
 
@@ -278,9 +292,7 @@ See xref:configuration/server/caching_configuration.adoc[Caching Configuration] 
 | Enables command interruption by pressing `ctrl-c`
 |====
 
-NOTE: You don’t need the WebDAV module for your Web server (i.e., Apache’s `mod_webdav`), as ownCloud has a built-in WebDAV server of its own, {sabre-url}[SabreDAV].
-If `mod_webdav` is enabled you must disable it for ownCloud.
-See the xref:installation/manual_installation/manual_installation_apache.adoc[Apache preparation guide] for more details.
+NOTE: You don’t need the WebDAV module for your Web server (i.e., Apache’s `mod_webdav`), as ownCloud has a built-in WebDAV server of its own, {sabre-url}[SabreDAV]. If `mod_webdav` is enabled you must disable it for ownCloud. See the xref:installation/manual_installation/manual_installation_apache.adoc[Apache preparation guide] for more details.
 
 === For MySQL/MariaDB
 
