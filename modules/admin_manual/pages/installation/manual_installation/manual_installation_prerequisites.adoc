@@ -1,5 +1,7 @@
 = Prerequisites for Manual Installation on Linux
 :toc: right
+:description: This document guides you thru the prerequisites for a manual ownCloud Server installation on Linux.
+
 :avconv-url: https://libav.org/
 :ffmpeg-url: https://ffmpeg.org/
 :openoffice-url: https://www.openoffice.org/
@@ -9,6 +11,8 @@
 :gnu-make-url: https://www.gnu.org/software/make/
 
 == Introduction
+
+{description}
 
 The ownCloud tar archive contains all of the required third-party PHP libraries. As a result, no extra ones are, strictly, necessary. However, ownCloud does require that PHP has a set of extensions installed, enabled, and configured.
 
