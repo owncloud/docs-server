@@ -1,6 +1,6 @@
 = Prerequisites for Manual Installation on Linux
 :toc: right
-:description: This document guides you thru the prerequisites for a manual ownCloud Server installation on Linux.
+:description: This document guides you through the prerequisites for a manual ownCloud Server installation on Linux.
 
 :avconv-url: https://libav.org/
 :ffmpeg-url: https://ffmpeg.org/
@@ -14,7 +14,7 @@
 
 {description}
 
-The ownCloud tar archive contains all of the required third-party PHP libraries. As a result, no extra ones are, strictly, necessary. However, ownCloud does require that PHP has a set of extensions installed, enabled, and configured.
+The ownCloud tar archive contains all of the required third-party PHP libraries. As a result, no extra ones are strictly necessary. However, ownCloud does require that PHP has a set of extensions installed, enabled and configured.
 
 This section lists both the required and optional PHP extensions. If you need further information about a particular extension, please consult the relevant section of the {php-net-url}/manual/en/extensions.php[extensions section of the PHP manual].
 
@@ -104,7 +104,7 @@ activate = 1
 activate = 1
 ----
    
-. Save the file, you now have enabled OpenSSL legacy support.
+. Save the file and you have enabled OpenSSL legacy support.
 
 === PHP Version
 
@@ -296,7 +296,7 @@ See xref:configuration/server/caching_configuration.adoc[Caching Configuration] 
 | Enables command interruption by pressing `ctrl-c`
 |====
 
-NOTE: You don’t need the WebDAV module for your Web server (i.e., Apache’s `mod_webdav`), as ownCloud has a built-in WebDAV server of its own, {sabre-url}[SabreDAV]. If `mod_webdav` is enabled you must disable it for ownCloud. See the xref:installation/manual_installation/manual_installation_apache.adoc[Apache preparation guide] for more details.
+NOTE: You don’t need the WebDAV module for your Web server (i.e., Apache’s `mod_webdav`), as ownCloud has a built-in WebDAV server of its own, {sabre-url}[SabreDAV]. If `mod_webdav` is enabled, you must disable it for ownCloud. See the xref:installation/manual_installation/manual_installation_apache.adoc[Apache preparation guide] for more details.
 
 === For MySQL/MariaDB
 
