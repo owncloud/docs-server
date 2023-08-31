@@ -11,7 +11,7 @@ Use these commands to install MariaDB provided by Ubuntu and secure its installa
 At the time of writing, the following MariaDB Server versions will be installed, which may change when the corresponding package gets updated:
 
 * With Ubuntu 20.04: `mariadb-server` version `10.4.21` 
-* With Ubuntu 22.04, `mariadb-server` version `10.6.7`
+* With Ubuntu 22.04, `mariadb-server` version `10.6.12`
 ====
 
 [source,bash]
@@ -80,9 +80,9 @@ To install an ownCloud database, you need an administrative user who can log in,
 ----
 sudo mysql --user=root -p
 
-CREATE USER 'dbadmin'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON *.* TO 'dbadmin'@'localhost' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
+ CREATE USER 'dbadmin'@'localhost' IDENTIFIED BY 'password';
+ GRANT ALL PRIVILEGES ON *.* TO 'dbadmin'@'localhost' WITH GRANT OPTION;
+ FLUSH PRIVILEGES;
 exit
 ----
 
@@ -98,11 +98,12 @@ _Don't forget to change the username and password according to your needs_.
 [source,bash]
 ----
 sudo mysql
-MariaDB [(none)]>
+
  CREATE USER IF NOT EXISTS 'dbadmin'@'localhost' IDENTIFIED BY 'password';
  GRANT ALL PRIVILEGES ON *.* TO 'dbadmin'@'localhost' WITH GRANT OPTION;
  FLUSH PRIVILEGES;
  SHOW GRANTS FOR 'dbadmin'@'localhost';
+exit
 ----
 ====
 
