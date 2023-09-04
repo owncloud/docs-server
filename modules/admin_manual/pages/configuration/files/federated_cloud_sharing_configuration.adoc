@@ -182,7 +182,7 @@ Possible values are:
 * EMAIL
 * CLOUD
 
-The value `CLOUD` enables searching by federation ID. Note that when `EMAIL` or `CLOUD` are enabled, hostnames are included in the search. Results are then returned for sbustrings of the hostname part, even when no user related field matches.
+The value `CLOUD` enables searching by federation ID. Note that when `EMAIL` or `CLOUD` are enabled, hostnames are included in the search. Results are then returned for substrings of the hostname part, even when no user related field matches.
 
 === Listing Federated Shares
 
