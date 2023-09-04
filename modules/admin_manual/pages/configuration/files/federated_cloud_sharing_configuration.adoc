@@ -183,6 +183,8 @@ Possible options are:
 * EMAIL
 * CLOUD
 
+The value CLOUD enables searching by federation id. Note, that when EMAIL or CLOUD are enabled, hostnames are included in the search. Results are returned for sbustrings of the hostname part, even when no user related field matches.
+
 === Listing Federated Shares
 
 In case you want to see which federated shares exist on your server, you can use this command to list them.
