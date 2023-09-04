@@ -173,7 +173,7 @@ It is possible to configure the VCARD properties that are searched in order to r
 {occ-command-example-prefix} config:app:set dav remote_search_properties --value=CLOUD,FN,EMAIL
 ----
 
-Possible options are:
+Possible values are:
 
 * VERSION
 * UID
@@ -182,7 +182,7 @@ Possible options are:
 * EMAIL
 * CLOUD
 
-The value CLOUD enables searching by federation id. Note, that when EMAIL or CLOUD are enabled, hostnames are included in the search. Results are returned for sbustrings of the hostname part, even when no user related field matches.
+The value `CLOUD` enables searching by federation ID. Note that when `EMAIL` or `CLOUD` are enabled, hostnames are included in the search. Results are then returned for sbustrings of the hostname part, even when no user related field matches.
 
 === Listing Federated Shares
 
