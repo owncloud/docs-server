@@ -7,14 +7,15 @@ Use these commands when you manage full text search related tasks.
 [source,plaintext]
 ----
 search
-  search:index:create    Create initial Search Index for one or all users. 
-                         This command could not update the search index correctly 
-                         after the initial indexing.
-  search:index:rebuild   Rebuild the search index for a given User. 
-                         If you want to rebuild the whole index, run
-                         `search:index:reset` and then `search:index:create --all`
-  search:index:reset     Reset the index
-  search:index:update    Update the search index by running all pending background jobs.
+  search:index:create         Create initial Search Index for one or all users. 
+                              This command could not update the search index correctly 
+                              after the initial indexing.
+  search:index:fillSecondary  Fill a secondary index based on the indexed data we have.
+  search:index:rebuild        Rebuild the search index for a given User. 
+                              If you want to rebuild the whole index, run
+                              `search:index:reset` and then `search:index:create --all`
+  search:index:reset          Reset the index
+  search:index:update         Update the search index by running all pending background jobs.
 ----
 
 In addition to the settings provided by the Full Text Search app, you can set/read additional options via the `occ config:app` commands. These are xref:set-app-modes[Set App Modes], xref:index-metadata-only[Index Metadata Only] and xref:limit-metadata-search-for-groups[Limit Metadata Search for Groups].
@@ -68,9 +69,47 @@ Indexing user admin
 Indexing user testuser
 ----
 
+== Fill a Secondary Index
+
+Fill a secondary index based on the indexed data we have. Files not matching the "indexed" status will be ignored. This is intended to be used in index data migrations, so the connector for this secondary index should have been configured as "write connector". See the xref:configuration/general_topics/search.adoc[Full Text Search] documentation for more details. Note that the values of the `connector_name` are hardcoded and have to be written as described.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} search:index:fillSecondary [options] [--] <connector_name> <user_id>...
+----
+
+=== Arguments
+
+[width="100%",cols="20%,100%"]
+|===
+| connector_name
+| The name of the connector. `Legacy` (default) or `RelevanceV2`.
+
+| `<user_id>` 
+| Provide a userId. This argument is required.
+|===
+
+=== Options
+
+[width="100%",cols="20%,100%"]
+|===
+| `-q` `--quiet` 
+| Do not output any message.
+
+| `-f` `--force` 
+| Use this option to fill the secondary index without further questions.
+
+| `--startOver`
+| Start indexing from the beginning, not from a previous savepoint.
+
+| `--chunkSize=CHUNKSIZE`
+| The savepoint will be updated after processing this number of files. [default: "100"]
+|===
+
 == Rebuild the Full Text Search Index
 
-Rebuild the search index for a given user. +
+Rebuild the indexes for a given User. All the indexes associated with the configured connectors will be rebuilt. This won't apply any change to the configuration of the index if it's already setup but it will setup any index that hasn't been setup yet. Check "search:index:reset" to reset all the indexes associated to the configured connectors
+
 If you want to rebuild the whole index, run `search:index:reset` and then `search:index:create --all`.
 
 [source,bash,subs="attributes+"]
@@ -143,7 +182,7 @@ The entire index can be rebuilt by running the following two commands:
 
 == Reset the Full Text Search Index
 
-The command `search:index:reset` resets (recreates and clears) the full text search index for all users.
+Reset all the configured indexes. Changes in the configuration of the indexes associated to the configured connectors will take place. All the data in those indexes will be removed, so you'll need to rebuild the indexes, usually with "search:index:rebuild"
 
 [source,bash,subs="attributes+"]
 ----
