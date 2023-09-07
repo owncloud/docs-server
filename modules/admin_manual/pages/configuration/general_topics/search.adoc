@@ -95,9 +95,9 @@ Define if external storage should be included in ES indexing by setting the chec
 
 === Connector Setup
 
-There are 2 different indexes. The `Legacy` is the old / current one while the `RelevanceV2` is the new one. The difference between the two is how index data is stored because both provide different capabilities and index in different ways. This results in different search capabilities. The Legacy doesn't have any difference with the current search while the RelevanceV2 has new capabilities.
+There are 2 different indexes. The `Legacy` is the old / current one while the `RelevanceV2` is the new one. The difference between the two is how index data is stored because both provide different capabilities and index in different ways. This results in different search capabilities. The Legacy doesn't differ from the current search while the RelevanceV2 has new capabilities.
 
-To populate the new connector with enhanced capabilities, an occ command needs to be run for each user creating index data accordingly. See the occ command section xref:configuration/server/occ_command.adoc#fill-a-secondary-index[Fill a Secondary Index] for more details.
+To populate the new connector with enhanced capabilities, an occ command needs to be run for each user, creating index data accordingly. See the occ command section xref:configuration/server/occ_command.adoc#fill-a-secondary-index[Fill a Secondary Index] for more details.
 
 When index data for all users has been transferred to the new index, the read index can be changed to `RelevanceV2` and the old index can be removed via Elastic Search. In the worst case, you can go back to use the old index but having the data still stored in the RelevanceV2 index. In this case, you can use the occ command referenced above with the `Legacy` index.
 
@@ -108,7 +108,7 @@ image::apps/search_elastic/connector_setup.png[Connector Setup,width=600]
 Additional searches you can do with the "RelevanceV2" connector:
 
 * Search by extension +
-`ext:pdf`, `ext:docx`, `ext:gif`, `ext:mp4`, `ext:tar.gz`, `ext:gz`, etc, any extension is possible
+`ext:pdf`, `ext:docx`, `ext:gif`, `ext:mp4`, `ext:tar.gz`, `ext:gz`, etc., any extension is possible
 * Search by size, only in bytes or megabytes
 ** Search by byte size: +
 `size.b:<8092` , `size.b:>102400`, `size.b:[8092 TO 16184]`
@@ -123,7 +123,7 @@ Additional searches you can do with the "RelevanceV2" connector:
 `mtime:<2021-08-25`, `mtime:>2023-01-18`, `mtime:[2022-01-01 TO 2022-12-31]`
 * Search by mimetype: +
 `mime:image`, `mime:gif`, `mime:text` +
-NOTE: To search for the whole mimetype such as "image/gif" use `mime.key:image\/gif`
+NOTE: To search for the whole mimetype such as "image/gif" use `mime.key:image\/gif`.
 
 Each search term will narrow the search. For example `brown ext:pdf` will be interpreted as "name or content containing brown AND extension = pdf", so "brown.pdf" and "a brown paper.pdf" will appear, but not "brown.txt" or "blue.pdf"
 
