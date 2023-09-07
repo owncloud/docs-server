@@ -7,14 +7,14 @@ Use these commands when you manage full text search related tasks.
 [source,plaintext]
 ----
 search
-  search:index:create         Create initial Search Index for one or all users. 
+  search:index:create         Create initial search index for one or all users. 
                               This command could not update the search index correctly 
                               after the initial indexing.
   search:index:fillSecondary  Fill a secondary index based on the indexed data we have.
   search:index:rebuild        Rebuild the search index for a given User. 
                               If you want to rebuild the whole index, run
-                              `search:index:reset` and then `search:index:create --all`
-  search:index:reset          Reset the index
+                              `search:index:reset` and then `search:index:create --all`.
+  search:index:reset          Reset the index.
   search:index:update         Update the search index by running all pending background jobs.
 ----
 
@@ -108,7 +108,7 @@ Fill a secondary index based on the indexed data we have. Files not matching the
 
 == Rebuild the Full Text Search Index
 
-Rebuild the indexes for a given User. All the indexes associated with the configured connectors will be rebuilt. This won't apply any change to the configuration of the index if it's already setup but it will setup any index that hasn't been setup yet. Check "search:index:reset" to reset all the indexes associated to the configured connectors
+Rebuild the indexes for a given user. All the indexes associated with the configured connectors will be rebuilt. This won't apply any change to the configuration of the index if it's already set up but it will set up any index that hasn't been set up yet. Check "search:index:reset" to reset all the indexes associated to the configured connectors.
 
 If you want to rebuild the whole index, run `search:index:reset` and then `search:index:create --all`.
 
@@ -182,7 +182,7 @@ The entire index can be rebuilt by running the following two commands:
 
 == Reset the Full Text Search Index
 
-Reset all the configured indexes. Changes in the configuration of the indexes associated with the configured connectors will take place. All the data in those indexes will be removed, so you'll need to rebuild the indexes, usually with "search:index:rebuild"
+Reset all the configured indexes. Changes in the configuration of the indexes associated with the configured connectors will take place. All the data in those indexes will be removed, so you'll need to rebuild the indexes, usually with "search:index:rebuild".
 
 [source,bash,subs="attributes+"]
 ----
