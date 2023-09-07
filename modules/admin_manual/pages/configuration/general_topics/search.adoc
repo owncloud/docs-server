@@ -99,9 +99,33 @@ There are 2 different indexes. The `Legacy` is the old / current one while the `
 
 To populate the new connector with enhanced capabilities, an occ command needs to be run for each user, creating index data accordingly. See the occ command section xref:configuration/server/occ_command.adoc#fill-a-secondary-index[Fill a Secondary Index] for more details.
 
-When index data for all users has been transferred to the new index, the read index can be changed to `RelevanceV2` and the old index can be removed via Elastic Search. In the worst case, you can go back to use the old index but having the data still stored in the RelevanceV2 index. In this case, you can use the occ command referenced above with the `Legacy` index.
-
 image::apps/search_elastic/connector_setup.png[Connector Setup,width=600]
+
+==== Migrating to the RelevanceV2 Connector:
+
+* If you haven't indexed anything yet, you are encouraged to setup the connectors you want to use as part of the app configuration. The recommended one is `RelevanceV2` for `write` and `search`.
+
+* If you have indexed data already, use the following steps to migrate to the new index scheme:
+
+. Assuming you have the `Legacy` connector setup for `write` and `search`.
+
+. Add the `RelevanceV2` connector to the list of `write` connectors. The list should have both `Legacy` and `RelevanceV2`.
+
+. Run the `occ search:index:fillSecondary RelevanceV2 <user>` xref:configuration/server/occ_command.adoc#fill-a-secondary-index[command]. The command needs to be run for all  users, or at least the ones using the search app. Note that this step is expected to take a lot of time.
+
+. Once indexed data has been migrated for all users, you can switch the search connector to use the new `RelevanceV2` search capabilities.
+
+. After checking everything is good, you can remove the old `Legacy` connector from the list of write connectors.
+
+. Finally you can completely remove the old index from Elasticsearch.
+
+With step 2, you will be writing into both indexes at the same time. This is expected to be slower. Note that step 2 just takes care of new files. Files indexed previously won't be present in the new index. This is why step 3 is there.
+
+Step 4 is important and you should stop at that point for a while. If something goes wrong, you can still revert things, in particular, you can switch back to the `Legacy` connector. In this case, use the occ command referenced above with the `Legacy` index.
+
+From step 5 the actions are irreversible. If you want to go back, you'll have to start a new migration.
+
+It's important to notice there isn't any expected downtime while the migration happens. Until step 4, the `Legacy` connector will keep updating the index normally. When the switch happens in the search connector, the new `RelevanceV2` connector will access to the new index, which should have been fully updated.
 
 ==== Enhanced Search Capabilities with RelevanceV2
 
