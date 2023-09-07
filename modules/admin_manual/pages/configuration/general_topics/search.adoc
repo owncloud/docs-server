@@ -105,6 +105,8 @@ image::apps/search_elastic/connector_setup.png[Connector Setup,width=600]
 
 ==== Enhanced Search Capabilities with RelevanceV2
 
+The RelevanceV2 can boost scores of recently modified files. New files should appear first though this is not a guarantee because the score of a file could be too low. Even with the boost, files could score less than older but more relevant files.
+
 Additional searches you can do with the "RelevanceV2" connector:
 
 * Search by extension +
