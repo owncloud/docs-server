@@ -182,7 +182,7 @@ The entire index can be rebuilt by running the following two commands:
 
 == Reset the Full Text Search Index
 
-Reset all the configured indexes. Changes in the configuration of the indexes associated to the configured connectors will take place. All the data in those indexes will be removed, so you'll need to rebuild the indexes, usually with "search:index:rebuild"
+Reset all the configured indexes. Changes in the configuration of the indexes associated with the configured connectors will take place. All the data in those indexes will be removed, so you'll need to rebuild the indexes, usually with "search:index:rebuild"
 
 [source,bash,subs="attributes+"]
 ----
