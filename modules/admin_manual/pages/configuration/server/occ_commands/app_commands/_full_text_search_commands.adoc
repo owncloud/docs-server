@@ -108,7 +108,7 @@ Fill a secondary index based on the indexed data we have. Files not matching the
 
 == Rebuild the Full Text Search Index
 
-Rebuild the indexes for a given user. All the indexes associated with the configured connectors will be rebuilt. This won't apply any change to the configuration of the index if it's already set up but it will set up any index that hasn't been set up yet. Check "search:index:reset" to reset all the indexes associated to the configured connectors.
+Rebuild the index for a given user. All the indexes associated with the configured connectors will be rebuilt. This won't apply any change to the configuration of the index if it's already set up but it will set up any index that hasn't been set up yet. Check "search:index:reset" to reset all the indexes associated to the configured connectors.
 
 If you want to rebuild the whole index, run `search:index:reset` and then `search:index:create --all`.
 

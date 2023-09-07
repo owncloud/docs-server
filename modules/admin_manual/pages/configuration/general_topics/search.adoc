@@ -103,11 +103,11 @@ image::apps/search_elastic/connector_setup.png[Connector Setup,width=600]
 
 ==== Migrating to the RelevanceV2 Connector:
 
-* If you haven't indexed anything yet, you are encouraged to setup the connectors you want to use as part of the app configuration. The recommended one is `RelevanceV2` for `write` and `search`.
+* If you haven't indexed anything yet, you are encouraged to set up the connectors you want to use as part of the app configuration. The recommended one is `RelevanceV2` for `write` and `search`.
 
 * If you have indexed data already, use the following steps to migrate to the new index scheme:
 
-. Assuming you have the `Legacy` connector setup for `write` and `search`.
+. Assuming you have the `Legacy` connector set up for `write` and `search`.
 
 . Add the `RelevanceV2` connector to the list of `write` connectors. The list should have both `Legacy` and `RelevanceV2`.
 
@@ -125,7 +125,7 @@ Step 4 is important and you should stop at that point for a while. If something 
 
 From step 5 the actions are irreversible. If you want to go back, you'll have to start a new migration.
 
-It's important to notice there isn't any expected downtime while the migration happens. Until step 4, the `Legacy` connector will keep updating the index normally. When the switch happens in the search connector, the new `RelevanceV2` connector will access to the new index, which should have been fully updated.
+It's important to notice there isn't any expected downtime while the migration happens. Until step 4, the `Legacy` connector will keep updating the index normally. When the switch happens in the search connector, the new `RelevanceV2` connector will access the new index, which should have been fully updated.
 
 ==== Enhanced Search Capabilities with RelevanceV2
 
