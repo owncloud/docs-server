@@ -127,7 +127,7 @@ NOTE: To search for the whole mimetype such as "image/gif" use `mime.key:image\/
 
 Each search term will narrow the search. For example `brown ext:pdf` will be interpreted as "name or content containing brown AND extension = pdf", so "brown.pdf" and "a brown paper.pdf" will appear, but not "brown.txt" or "blue.pdf"
 
-Some example of complex searches:
+Some examples of complex searches:
 
 * Files containing "confidential" updated since 2023 whose size is less than 10MB: +
 `confidential mtime:>2023-01-01 size.mb:<10`
