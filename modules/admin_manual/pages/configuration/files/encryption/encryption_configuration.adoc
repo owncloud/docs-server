@@ -2,9 +2,6 @@
 :toc: right
 :toclevels: 2
 :description: The primary purpose of the ownCloud server-side encryption is to protect users’ files when they’re located on remote storage sites, such as Dropbox and Google Drive, smoothly and seamlessly from within ownCloud.
-
-:hackerone-url: https://hackerone.com/reports/108082
-:oc-uses-enc-url: https://owncloud.com/news/how-owncloud-uses-encryption-to-protect-your-data/
 :page-aliases: go/admin-encryption.adoc, \
 configuration/files/encryption/disabling-encryption.adoc, \
 configuration/files/encryption/enabling-user-key-encryption.adoc, \
@@ -15,6 +12,9 @@ configuration/files/encryption/migration-guide.adoc, \
 configuration/files/encryption/moving-key-locations.adoc, \
 configuration/files/encryption/sharing-encrypted-files.adoc, \
 configuration/files/encryption_configuration.adoc
+
+:hackerone-url: https://hackerone.com/reports/108082
+:oc-uses-enc-url: https://owncloud.com/news/how-owncloud-uses-encryption-to-protect-your-data/
 
 == Introduction
 
