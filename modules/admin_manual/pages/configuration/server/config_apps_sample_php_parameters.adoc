@@ -213,7 +213,7 @@ Possible keys: `wopi.proxy.url` URL
 
 Possible keys: `wopi.business-flow.enabled` STRING
 
-=== Random keys created by the ownCloud admin
+=== Random Keys Created by the ownCloud Admin
 
 Both, `wopi.token.key` and `wopi.proxy.key` are random keys created by the ownCloud admin. The keys are used by ownCloud
 to create encrypted JWT tokens for the communication with your Microsoft Office Online instance. The keys must be distinct.
