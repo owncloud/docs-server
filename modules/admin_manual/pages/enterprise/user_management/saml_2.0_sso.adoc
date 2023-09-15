@@ -1,6 +1,8 @@
 = SAML 2.0 Based SSO with Active Directory Federation Services (ADFS) and mod-shib
 :toc: right
 :toclevels: 1
+:page-aliases: enterprise/user_management/index.adoc
+
 :adfs-url: https://docs.microsoft.com/en-us/previous-versions/windows/server-2008/bb897402(v=msdn.10)
 :adfs-step-by-step-url: https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/gg317734(v=ws.10)
 :adfs-step-by-step-II-url: https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/gg317734(v=ws.10)

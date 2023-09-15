@@ -1,6 +1,7 @@
 = Windows Network Drive (WND)
 :toc: right
 :toclevels: 3
+:page-aliases: enterprise/external_storage/index.adoc
 :description: The Windows Network Drives app seamlessly integrates Windows and Samba/CIFS shared network drives as external storages. WND has great advantages compared to standard SMB access.
 
 :anacron-examples: http://www.thegeekstuff.com/2011/05/anacron-examples
