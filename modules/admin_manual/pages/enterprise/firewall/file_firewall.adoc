@@ -1,6 +1,8 @@
 = File Firewall
 :toc: right
+:page-aliases: enterprise/firewall/index.adoc
 :description: The File Firewall app lets you control access and sharing in fine detail by creating rules for allowing or denying access to files.
+
 :regex-info-url: http://www.regular-expressions.info/
 :supported-mimetype-list-url: https://github.com/owncloud/core/blob/master/resources/config/mimetypemapping.dist.json
 

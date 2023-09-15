@@ -1,5 +1,6 @@
 = Creating Branded Client Apps
 :toc: right
+:page-aliases: enterprise/clients/index.adoc
 
 == Overview
 
