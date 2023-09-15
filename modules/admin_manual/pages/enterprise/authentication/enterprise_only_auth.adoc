@@ -1,5 +1,6 @@
 = Enterprise-Only Authentication Options
 :toc: right
+:page-aliases: enterprise/external_storage/enterprise_only_auth.adoc
 
 == Introduction
 

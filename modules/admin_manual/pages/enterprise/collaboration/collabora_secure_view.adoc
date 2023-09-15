@@ -1,7 +1,7 @@
 = Collabora Online / Secure View
 :toc: right
 :secure-view-label: Secure View (with watermarks)
-:page-aliases: collabora_online_integration.adoc
+:page-aliases: collabora_online_integration.adoc, enterprise/collaboration/index.adoc
 
 == Introduction
 

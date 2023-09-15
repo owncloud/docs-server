@@ -1,4 +1,6 @@
 = Enterprise Server Branding
+:toc: right
+:page-aliases: enterprise/server_branding/index.adoc
 
 ownBrander is an ownCloud build service that is exclusive to Enterprise
 edition customers for creating branded ownCloud clients and servers. You
