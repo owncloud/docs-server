@@ -1,8 +1,9 @@
 = Auditing
 :toc: right
 :toclevels: 3
+:page-aliases: enterprise/logging/enterprise_logging_apps.adoc, enterprise/logging/index.adoc
+
 :splunk-url: https://splunkbase.splunk.com/app/5503/
-:page-aliases: enterprise/logging/enterprise_logging_apps.adoc
 
 == Introduction
 
