@@ -34,7 +34,7 @@
 ** xref:admin_manual:configuration/index.adoc[Configuration]
 *** xref:admin_manual:configuration/database/index.adoc[Database]
 **** xref:admin_manual:configuration/database/db_conversion.adoc[Database Conversion]
-**** xref:admin_manual:configuration/database/linux_database_configuration.adoc[Database Configuration on Linux]
+**** xref:admin_manual:configuration/database/linux_database_configuration.adoc[Database Configuration]
 
 *** xref:admin_manual:configuration/files/encryption/index.adoc[Encryption]
 **** xref:admin_manual:configuration/files/encryption/encryption_configuration.adoc[Encryption Configuration]
@@ -163,38 +163,40 @@
 
 ** xref:admin_manual:qnap/index.adoc[ownCloud on QNAP]
 
-** xref:admin_manual:enterprise/index.adoc[Enterprise]
-*** xref:admin_manual:enterprise/clients/index.adoc[Clients]
+** Enterprise
+*** Authentication
+**** xref:admin_manual:enterprise/external_storage/enterprise_only_auth.adoc[Enterprise Only Authentication]
+*** Clients
 **** xref:admin_manual:enterprise/clients/creating_branded_apps.adoc[Creating Branded Apps]
 **** xref:admin_manual:enterprise/clients/custom_client_repos.adoc[Custom Client Repos]
-*** xref:admin_manual:enterprise/collaboration/index.adoc[Collaboration]
+*** Collaboration
 **** xref:admin_manual:enterprise/collaboration/collabora_secure_view.adoc[Collabora Online / Secure View]
 **** xref:admin_manual:enterprise/collaboration/msoffice-wopi-integration.adoc[Microsoft Office Online / WOPI Integration]
-*** xref:admin_manual:enterprise/document_classification/index.adoc[Document Classification]
+*** Document Classification
 **** xref:admin_manual:enterprise/document_classification/classification_and_policy_enforcement.adoc[Classify Documents and Enforce Policies]
-*** xref:admin_manual:enterprise/external_storage/index.adoc[External Storage]
-**** xref:admin_manual:enterprise/external_storage/enterprise_only_auth.adoc[Enterprise Only Authentication]
+*** External Storage
 **** xref:admin_manual:enterprise/external_storage/ldap_home_connector_configuration.adoc[LDAP Home Connector Configuration]
 **** xref:admin_manual:enterprise/external_storage/sharepoint-integration_configuration.adoc[Sharepoint integration Configuration]
 **** xref:admin_manual:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive Configuration]
 **** xref:admin_manual:enterprise/external_storage/wnd_quick_guide.adoc[WND Configuration Quick Guide]
-*** xref:admin_manual:enterprise/file_management/index.adoc[File Management]
+*** File Management
 **** xref:admin_manual:enterprise/file_management/files_tagging.adoc[File Tagging]
 **** xref:admin_manual:enterprise/file_management/files_lifecycle.adoc[File Lifecycle Management]
-*** xref:admin_manual:enterprise/firewall/index.adoc[Firewall]
+*** Firewall
 **** xref:admin_manual:enterprise/firewall/file_firewall.adoc[File Firewall]
-*** xref:admin_manual:enterprise/installation/install.adoc[Installation]
+*** Installation
+**** xref:admin_manual:enterprise/installation/install.adoc[Installing & Upgrading ownCloud Enterprise Edition]
 **** xref:admin_manual:enterprise/installation/oracle_db_configuration.adoc[Oracle DB Setup & Configuration]
-*** xref:admin_manual:enterprise/logging/index.adoc[Logging]
+*** Logging
 **** xref:admin_manual:enterprise/logging/admin_audit.adoc[Auditing]
-*** xref:admin_manual:enterprise/reporting/index.adoc[Reporting]
+*** Reporting
 **** xref:admin_manual:enterprise/reporting/metrics.adoc[Metrics]
 **** xref:admin_manual:enterprise/reporting/config_report.adoc[Generate a Config Report]
-*** xref:admin_manual:enterprise/security/index.adoc[Security]
+*** Security
 **** xref:admin_manual:enterprise/security/ransomware-protection/index.adoc[Ransomware Protection]
-*** xref:admin_manual:enterprise/server_branding/index.adoc[Server Branding]
+*** Server Branding
 **** xref:admin_manual:enterprise/server_branding/enterprise_server_branding.adoc[Enterprise Server Branding]
-*** xref:admin_manual:enterprise/user_management/index.adoc[User Management]
+*** User Management
 **** xref:admin_manual:enterprise/user_management/user_auth_shibboleth.adoc[Shibboleth Integration]
 **** xref:admin_manual:enterprise/user_management/saml_2.0_sso.adoc[SAML 2.0 Based SSO]
 

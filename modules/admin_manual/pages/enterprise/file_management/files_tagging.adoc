@@ -1,5 +1,6 @@
 = Advanced File Tagging With the Workflow App
 :toc: right
+:page-aliases: enterprise/file_management/index.adoc
 
 == Introduction
 
