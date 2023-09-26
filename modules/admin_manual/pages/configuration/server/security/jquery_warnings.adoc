@@ -10,7 +10,7 @@
 NOTE: *The jQuery version shipped inside ownCloud is secure.*
 
 Note that automatic scanners may still report false positives even if the CVE's have been addressed as the scanners just look at the jQuery version shipped.
- 
+
 == Fixed Issues
 
 * jQuery
@@ -29,5 +29,8 @@ https://github.com/owncloud/core/pull/39545[patched in 10.9.0]
 * jQuery-ui
 ** CVE-2021-41182, CVE-2021-41183 and CVE-2021-41184 +
 https://github.com/owncloud/core/pull/39451[patched in 10.9.0]
+
+** CVE-2022-31160 +
+Component "checkboxradio" is not used by ownCloud
 
 If you know about any issues which were not patched yet or which are not included in this list please notify us at mailto:security@owncloud.com[security@owncloud.com].
