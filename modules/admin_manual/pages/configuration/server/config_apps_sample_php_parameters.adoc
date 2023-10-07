@@ -147,6 +147,70 @@ as seen in the first-run wizard and on Personal pages
 	'https://apps.apple.com/app/id1359583808',
 ....
 
+== App: Kerberos
+
+Possible keys: `kerberos.keytab` STRING
+
+Possible keys: `kerberos.suppress.timeout` INTEGER
+
+Possible keys: `kerberos.domain` STRING
+
+Possible keys: `kerberos.login.buttonName` STRING
+
+Possible keys: `kerberos.login.autoRedirect` BOOL
+
+=== Kerberos keytab File Location
+Path to the 'keytab' file to use, defaults to '/etc/krb5.keytab'.
+
+==== Code Sample
+
+[source,php]
+....
+'kerberos.keytab' => '/etc/apache2/www-data.keytab',
+....
+
+=== Kerberos SPNEGO Timeout
+Timeout before re-enabling SPNEGO based authentication after logout, defaults to 60 seconds.
+
+==== Code Sample
+
+[source,php]
+....
+'kerberos.suppress.timeout' => 60,
+....
+
+=== Kerberos Domain
+The domain name - remove from principals to match the pure user name.
+
+Example: 'alice@corp.dir' will look for the user 'alice' in LDAP if 'kerberos.domain' is set to 'corp.dir'.
+
+==== Code Sample
+
+[source,php]
+....
+'kerberos.domain' => '',
+....
+
+=== Login Name Button
+The name of the login button shown on the login page.
+
+==== Code Sample
+
+[source,php]
+....
+'kerberos.login.buttonName' => 'Windows Domain Login',
+....
+
+=== Immediate Login
+If set to true, the login page will immediately try to log in via Kerberos.
+
+==== Code Sample
+
+[source,php]
+....
+'kerberos.login.autoRedirect' => false,
+....
+
 == App: LDAP
 
 Possible keys: `ldapIgnoreNamingRules` `doSet` or `false`
@@ -214,9 +278,10 @@ Possible keys: `wopi.proxy.url` URL
 Possible keys: `wopi.business-flow.enabled` STRING
 
 === Random Keys Created by the ownCloud Admin
+Both, `wopi.token.key` and `wopi.proxy.key` are random keys created by the ownCloud admin.
 
-Both, `wopi.token.key` and `wopi.proxy.key` are random keys created by the ownCloud admin. The keys are used by ownCloud
-to create encrypted JWT tokens for the communication with your Microsoft Office Online instance. The keys must be distinct.
+The keys are used by ownCloud to create encrypted JWT tokens for the communication with your
+Microsoft Office Online instance. The keys must be distinct.
 Note that `wopi.token.key` must be at least 32 bytes long.
 
 You can use the following example command to generate a random key:
