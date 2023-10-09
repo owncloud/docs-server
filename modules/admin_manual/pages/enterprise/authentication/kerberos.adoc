@@ -532,7 +532,7 @@ sudo apachectl -k graceful
 . In the *User Authentication/Logon* section, select btn:[Automatic logon only in Intranet zone].
 . Click OK.
 . Click menu:Sites[] and select all check boxes.
-. Click *Advanced* and add, if not exists, the ownCloud website to the local zone . For example, `\https://owncloud.my-company.com`.
+. Click *Advanced* and add, if not exists, the ownCloud website to the local zone . For example, `\https://<FQDN>`.
 . Click btn:[Add].
 
 .For Google Chrome on Linux or macOS, Kerberos authentication is configured ieither via command line parameters or policy files:
