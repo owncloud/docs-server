@@ -420,7 +420,7 @@ sudo chmod 0400 <keytab-file-location>/<user-name>.keytab
 ];
 ----
 --
-This file will be read additionally to existing config files. See the xref:configuration/server/config_apps_sample_php_parameters.adoc[Apps Config.php Parameters] for more Kerberos configuration options.
+This file will be read xref:configuration/server/config_sample_php_parameters.adoc#introduction[additionally] to existing config files. See the xref:configuration/server/config_apps_sample_php_parameters.adoc[Apps Config.php Parameters] for more Kerberos configuration options.
 
 ==== Testing
 
