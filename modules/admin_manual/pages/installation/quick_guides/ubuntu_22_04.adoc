@@ -29,16 +29,6 @@ hostnamectl set-hostname $my_domain
 hostname -f
 ----
 
-=== Generate Strong Passwords
-
-----
-sec_admin_pwd=$(openssl rand -base64 18)
-echo $sec_admin_pwd > /etc/.sec_admin_pwd.txt
-
-sec_db_pwd=$(openssl rand -base64 18)
-echo $sec_db_pwd > /etc/.sec_db_pwd.txt
-----
-
 === Update Your System
 
 First, ensure that all the installed packages are entirely up to date and that PHP is available in the APT repository.
@@ -201,7 +191,7 @@ sed -i "/\[mysqld\]/atransaction-isolation = READ-COMMITTED\nperformance_schema 
 systemctl start mariadb
 mysql -u root -e \
   "CREATE DATABASE IF NOT EXISTS owncloud; \
-  CREATE USER IF NOT EXISTS 'owncloud'@'localhost' IDENTIFIED BY '${sec_db_pwd}'; \
+  CREATE USER IF NOT EXISTS 'owncloud'@'localhost' IDENTIFIED BY 'password'; \
   GRANT ALL PRIVILEGES ON *.* TO 'owncloud'@'localhost' WITH GRANT OPTION; \
   FLUSH PRIVILEGES;"
 ----
@@ -230,7 +220,7 @@ chown -R www-data. owncloud
 
 === Install ownCloud
 
-IMPORTANT: Remember to set a strong password for your ownCloud admin user and provide the previously set password for the database user as the `--database-pass` argument.
+IMPORTANT: We recommend to set a strong password for your owncloud admin user and the database user.
 
 [source,bash]
 ----
@@ -238,10 +228,10 @@ occ maintenance:install \
     --database "mysql" \
     --database-name "owncloud" \
     --database-user "owncloud" \
-    --database-pass ${sec_db_pwd} \
+    --database-pass "password" \
     --data-dir "/var/www/owncloud/data" \
     --admin-user "admin" \
-    --admin-pass ${sec_admin_pwd}
+    --admin-pass "admin"
 ----
 
 === Configure ownCloud's Trusted Domains
@@ -341,10 +331,7 @@ To check if you have installed the correct version of ownCloud and that the occ 
 [source,bash]
 ----
 occ -V
-echo "Your Admin password is: "$sec_admin_pwd
-echo "It's documented at /etc/.sec_admin_pwd.txt"
-echo "Your Database Password is: "$sec_db_pwd
-echo "It's documented at /etc/.sec_db_pwd.txt and in your config.php"
+echo "Your ownCloud is accessable under: "$my_ip
 echo "Your ownCloud is accessable under: "$my_domain
 echo "The Installation is complete."
 ----
