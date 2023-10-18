@@ -45,36 +45,36 @@ Start with the Server tab. You may configure multiple servers if you have them. 
 LDAPS encrypts the connection between your LDAP server and ownCloud via SSL/TLS.
 
 1. For LDAPS you need a LDAP server with certificates. 
-  1.For Windows server install the "Active Directory Certificate Services (AD CS)" role and configure it as a company CA.
+  1. For Windows Server, install the "Active Directory Certificate Services (AD CS)" role and configure it as a company CA.
   2. Then export the CA certificate using this method:
-    1. open certutil with admin privileges, and execute the following command. "ca_name" is just a placeholder for the certificate name, you can adjust it.
+    1. Open certutil with admin privileges and execute the following command where "ca_name" is just a placeholder for the certificate name. Adjust it accordingly.
     2. certutil -ca.cert ca_name.cer
-    This was ensures you have the right certificate for configuring LDAPS.
-    3. copy the certificate ca_name.cer to your ownCloud server, and convert it using the following command:
+    This ensures you have the right certificate for configuring LDAPS.
+    3. Copy the certificate ca_name.cer to your ownCloud server, and convert it using the following command:
     4. openssl x509 -inform der -in ca_name.cer -out certificate.pem
-    5. double check with cat certificate.pem the output is the same on you had with certutil
-  3. Now, move the certificate to /etc/ldap/certs/ (on Ubuntu) or /etc/openldap/certs/ (on centOS) (you have to create the "certs" folder inside those directories beforehand)
-  4. (only for centOS) Change permissions with chown so the ldap client can access the certificate: "chown centos:centos certificate.pem"
-  5. Edit the ldap.conf inside the ldap directory, add
+    5. Double-check with `cat certificate.pem`. The output is the same one you had with `certutil`.
+  3. Now, move the certificate to /etc/ldap/certs/ (on Ubuntu) or /etc/openldap/certs/ (on centOS). You have to create the "certs" folder inside those directories beforehand.
+  4. Only for centOS: Change permissions with `chown` so the ldap client can access the certificate: `chown centos:centos certificate.pem`
+  5. Edit the ldap.conf inside the ldap directory:
    Ubuntu 
    TLS_CACERT      /etc/ldap/certs/certificate.pem
    centOS 
    TLS_CACERT      /etc/openldap/certs/certificate.pem
-  6. restart the web server
-If you have a openLDAP server: 
-1. you need to import the ssl certificate from openLDAP to ownCloud server, 
-2. put it in the /etc/ldap/certs/ or /etc/openldap/certs/ folder, depending if you have Ubuntu or centOs
-3. include it in your ldap.conf 
+  6. Restart the web server.
+If you have a openLDAP server, perform the following steps: 
+1. Import the ssl certificate from openLDAP to ownCloud server.
+2. Put it in the /etc/ldap/certs/ or /etc/openldap/certs/ folder, depending on whether you have Ubuntu or centOS.
+3. Include it in your ldap.conf:
    Ubuntu 
    TLS_CACERT      /etc/ldap/certs/certificate.pem
    centOS 
    TLS_CACERT      /etc/openldap/certs/certificate.pem
-4. restart the web server.
+4. Restart the web server.
 Now you have to configure the ownCloud LDAP app:
-1. if you were using ldap with port 389 you have to change the port to 636 and add ldaps:// to your ldap host in the server tab.
-2. click on "Test BaseDN" and you should see a green light and a number of entries that were found in your ldap.
+1. If you were using LDAP with port 389, you have to change the port to 636 and add ldaps:// to your LDAP host in the server tab.
+2. Click on "Test BaseDN" and you should see a green light and a number of entries that were found in your LDAP.
 
-Now you have ldapS, your ldap traffic is encrypted with a SSL certificate.
+Now you have LDAPS and your LDAP traffic is encrypted with a SSL certificate.
 
 
 image::apps/user_ldap/ldap-wizard/server-tab.png[LDAP Wizard - Server Tab, width=500]
