@@ -178,11 +178,10 @@ UPDATE oc_filecache
 
 == Final Tasks
 
-=== Reactivate Your Instance
+==== Update ETag information
 
-Perform the following tasks to reactivate your ownCloud instance:
-
-==== Update the systems data-fingerprint after a backup is restored
+When a backup has been restored, the ETag information, which is necessary when accessing ownCloud with clients, has been changed. 
+Run the following command to tell desktop and mobile clients that a server backup has been restored.
 
 [source,bash,subs="attributes+"]
 ----
