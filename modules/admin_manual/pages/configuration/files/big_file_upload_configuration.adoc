@@ -64,7 +64,7 @@ Set the following parameters inside the corresponding file using your own desire
 {userini}::
 [source,php]
 ----
-post_max_size=16G
+post_max_size=10G
 output_buffering=0
 upload_max_filesize=16G
 upload_tmp_dir=/mnt/php_big_temp/
@@ -73,7 +73,7 @@ upload_tmp_dir=/mnt/php_big_temp/
 {htaccess}::
 [source,php]
 ----
-php_value	post_max_size=16G
+php_value	post_max_size=10G
 php_value	output_buffering=0
 php_value	upload_max_filesize=16G
 php_value	upload_tmp_dir=/mnt/php_big_temp/
@@ -102,7 +102,7 @@ Set the following parameters inside the corresponding php.ini file using your ow
 
 [source,php]
 ----
-post_max_size=16G
+post_max_size=10G
 output_buffering=0
 upload_max_filesize=16G
 upload_tmp_dir=/mnt/php_big_temp/
@@ -127,7 +127,7 @@ You can configure php parameters also per virtual host - if you have access to t
 	DocumentRoot /var/www/owncloud
 	ServerName myowncloud.com
 
-	php_admin_value	post_max_size 16G
+	php_admin_value	post_max_size 10G
 	php_admin_value	output_buffering 0
 	php_admin_value	upload_max_filesize 16G
 	php_admin_value	upload_tmp_dir /mnt/php_big_temp/
