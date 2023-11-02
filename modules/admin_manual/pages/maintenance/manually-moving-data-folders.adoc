@@ -39,9 +39,9 @@ To save time, here are the commands which you can copy/paste for Apache and rsyn
 ----
 sudo service apache2 stop
 
-sudo service apache2 start
-
 sudo rsync -avz /var/www/owncloud/data /mnt/owncloud
+
+sudo service apache2 start
 ----
 
 NOTE: Check your commands for how to start or stop your webserver if you are not on Ubuntu/Debian.
