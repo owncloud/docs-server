@@ -43,7 +43,7 @@ Stopping the web server makes sure there are no active connections to your serve
 sudo service apache2 stop
 ----
 
-== Enable maintenance mode
+== Enable Maintenance Mode
 
 It is necessary to enable maintenance mode to avoid running cron jobs.
 To enable maintenance mode, run the following command.
@@ -78,7 +78,7 @@ Connect to your database and enter following commands:
 use owncloud;
 ----
 
-=== Update the oc_storages table
+=== Update the oc_storages Table
 
 Run the SQL below:
 
@@ -89,7 +89,7 @@ UPDATE oc_storages
   WHERE id='local::/var/www/owncloud/data/';
 ----
 
-=== Update the oc_accounts table
+=== Update the oc_accounts Table
 
 You next need to update the `home` column in the `oc_accounts` table.
 This column contains the absolute path for user folders, e.g., `/mnt/owncloud/data/my_user/files`.
@@ -119,8 +119,7 @@ UPDATE oc_accounts
 
 For more information follow the complete MySQL {mysql-string-replace-function-url}[REPLACE] command syntax.
 
-CAUTION: Please don’t copy and paste this example verbatim — nor any of the others.
-They are examples only.
+CAUTION: Please don’t copy and paste this example verbatim — nor any of the others. They are examples only.
 
 === Update the oc_jobs table
 
@@ -150,39 +149,13 @@ UPDATE oc_jobs
 CAUTION: The old data path will be written with `\/`.
 Therefore you must add one, additional, backslash, like this: `\\/`.
 
-=== Adjust apps settings
+== Fix the config.php Settings
 
-Individual apps may reference the data directory separately from the core system configuration. 
-For those apps, you have to change the configured path.
-Run the following command to list app configs.
+To fix the config.php settings:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:list
-----
-
-Here is an example of the output which you may see:
-
-[source,json]
-----
-{
-    "apps": {
-        "fictitious": {
-            "enabled": "yes",
-            "installed_version": "2.3.2",
-            "types": "filesystem",
-            "datadir": "/var/www/owncloud/data"
-        }
-    }
-}
-----
-
-In the example above, the app "fictitious" sets the data directory to `/var/www/owncloud/data`.
-Change this value by using the following command:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} config:app:set --value /mnt/owncloud/data fictitious datadir
+{occ-command-example-prefix} config:system:set --value /mnt/owncloud/data datadirectory
 ----
 
 NOTE: You have to repeat this for all apps found defining the data directory as key.
@@ -203,11 +176,9 @@ To disable maintenance mode of your instance run the following command:
 {occ-command-example-prefix} maintenance:mode --off
 ----
 
-== Start the web server
+== Start the Web Server
 
 [source,bash]
 ----
 sudo service apache2 start
 ----
-
-
