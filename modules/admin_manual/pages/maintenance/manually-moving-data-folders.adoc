@@ -1,10 +1,15 @@
 = Manually Move the Data Directory
 :toc: right
+:description: Use this instructions if you intend to move your ownCloud's data directory from it's current location to another without using a symbolic link.
+
 :mysql-string-replace-function-url: http://www.mysqltutorial.org/mysql-string-replace-function.aspx
 
 == Introduction
 
-If you intend to move your ownCloud's data directory from it's current location to another — **without** using a symbolic link — here are the instructions.
+{description}
+
+Though using symbolic links to relocate the data directory can be beneficial, it can be necessary to hard relocate it.
+If a hard relocation is required, not only the physical location but also the database has to be updated. 
 
 This guide assumes that:
 
@@ -29,7 +34,7 @@ The following steps are necessary to move the data directory.
 
 Look at each section below for a detailed description.
 
-== Stop the web server
+== Stop the Web Server
 
 Stopping the web server makes sure there are no active connections to your server.
 
@@ -188,8 +193,6 @@ NOTE: You have to repeat this for all apps found defining the data directory as 
   To do so, start an editor of your choice and open `/var/www/owncloud/config/config.php`
 
 . Change the value of the key from `'datadirectory' => '/var/www/owncloud/data',` to `'datadirectory' => '/mnt/owncloud/data',`.
-
-
 
 == Disable Maintenance Mode
 

@@ -1,10 +1,11 @@
 = Enterprise-Only Authentication Options
 :toc: right
+:description: ownCloud provides several authentication options for mounting storages. Depending on the edition, these options can vary.
 :page-aliases: enterprise/external_storage/enterprise_only_auth.adoc
 
 == Introduction
 
-ownCloud provides several authentication options for mounting storages. Depending on the edition, these options can vary.
+{description}
 
 == Authentication Options
 
@@ -87,7 +88,7 @@ Note that this table does not cover other storage implementations like Google Dr
 
 Use the dropdown selector to choose the authentication backend when you create a new external mount.
 
-image:enterprise/external_storage/enterprise-only-auth/auth_backends-1.png[Authentication dropdown selector.]
+image:enterprise/authentication/enterprise-only-auth/auth_backends-1.png[Authentication dropdown selector.]
 
 == Authentication Option Details
 
@@ -104,7 +105,7 @@ Credentials hardcoded in config file::
 Global credentials::
   Re-usable credentials entered by the admin, files can be shared. Global credentials are entered in a separate form.
 +
-image:enterprise/external_storage/enterprise-only-auth/auth_backends-2.png[Global credentials form.]
+image:enterprise/authentication/enterprise-only-auth/auth_backends-2.png[Global credentials form.]
 
 RSA public key::
 This authentication method is limited to SFTP only. Manually enter the public key or press btn:[Generate] in the mount form to generate one. Files can be shared.
