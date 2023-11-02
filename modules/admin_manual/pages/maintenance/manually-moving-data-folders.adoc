@@ -144,48 +144,12 @@ UPDATE oc_jobs
 CAUTION: The old data path will be written with `\/`.
 Therefore you must add one, additional, backslash, like this: `\\/`.
 
-== Fix the Application Settings
-
-Individual apps may reference the data directory separately from the core system configuration. 
-For those apps, you have to change the configured path.
-Run the following command to list app configs.
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} config:list
-----
-
-Here is an example of the output which you may see:
-
-[source,json]
-----
-{
-    "apps": {
-        "fictitious": {
-            "enabled": "yes",
-            "installed_version": "2.3.2",
-            "types": "filesystem",
-            "datadir": "/var/www/owncloud/data"
-        }
-    }
-}
-----
-
-In the example above, the app "fictitious" sets the data directory to `/var/www/owncloud/data`.
-Change this value by using the following command:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} config:app:set --value /mnt/owncloud/data fictitious datadir
-----
-
-NOTE: You have to repeat this for all apps found defining the data directory as key.
 
 == Fix the config.php Settings
 
 To fix the config.php settings:
 
-. Change the `datadirectory` key in your `config.php` to the new path.
-  To do so, start an editor of your choice and open `/var/www/owncloud/config/config.php`
-
-. Change the value of the key from `'datadirectory' => '/var/www/owncloud/data',` to `'datadirectory' => '/mnt/owncloud/data',`.
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} config:system:set --value /mnt/owncloud/data datadirectory
+----
