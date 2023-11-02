@@ -1,0 +1,604 @@
+= Kerberos
+:toc: right
+:toclevels: 4
+:description: Kerberos is an authentication protocol and authenticates two hosts using the shared secret authentication technique. The main goal of Kerberos is to enable application authentication without the need to transmit user passwords.
+
+== Introduction
+
+{description} It will share a secret among the two hosts that only they and the Key Distribution Center (KDC) know. Kerberos builds a secure communication link between two trusted hosts across an untrusted network like the Internet, using tickets.
+
+With the Kerberos app, you can reuse the authentication ticket generated from a user's Windows domain login for ownCloud and access file server resources via ownCloud without re-authentication.
+
+== General Information
+
+When using the Kerberos app, the Windows login session from the user is taken to log in to ownCloud. This is very convenient, as the user does not need to re-authenticate for using ownCloud as he already has authenticated to his Domain. In addition by using the Kerberos ticket, the user can also use file resoures via the xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] app without the need to re-authenticate. This generates a seamless user experience. This is done by the configuration made, which enables the webserver to make the ticket available for PHP for further processing.
+
+=== Kerberos Benefits
+
+This is a brief list of Kerberos benefits:
+
+* *Secure* +
+Kerberos never transmits passwords over the network.
+
+* *Single-Sign-On* +
+Kerberos only requires the user to type their password once when first authenticating the client.
+
+* *Trusted Third Party* +
+Kerberos uses a centralized authentication server known as the Key Distribution Center (KDC) that all other devices in the network trust by default. This outsourcing ensures that sensitive information is not stored on a local machine.
+
+* *Mutual Authentication* +
+In Kerberos, both ends of communication must be authenticated before communication is permitted.
+
+* *Delegated Authentication* +
+Kerberos can provide delegated authentication for accessing backend systems. Delegated authentication allows to impersonate a client when accessing resources on the client’s behalf.
+
+* *Interoperability* +
+The Kerberos V5 protocol implemented in Active Directory Domain Services is based on standards set forth by the IETF. It allows Kerberos implementations in Active Directory to interoperate with other networks in which Kerberos V5 is used for authentication.
+
+* *Microsoft Azure AD Kerberos* is a new authentication capability of Azure AD that allows using the Kerberos authentication protocol to authenticate against Azure AD.
+
+=== Kerberos Core Components
+
+* *Kerberos Realm* +
+A logical network, similar to a domain, over which a Kerberos authentication server has the authority to authenticate a user, host or service.
+
+* *Key Distribution Centre (KDC)* +
+Contains the Authentication Server (AS) and the Ticket Granting Service (TGS). Its main function is to be a mediator between these two, relaying messages from the AS, grants a ticket-granting ticket (TGT), then passing that to be encrypted by the TGS. The KDC for a domain is located on a domain controller.
+
+* *Authentication Server (AS)* +
+A client authenticates themselves to the AS using a username and password login. The AS then forwards the username to the KDC that in turn grants a TGT.
+
+* *Ticket Granting Service (TGS)* +
+When a client wants to access a service, they must present their TGT to the TGS.
+
+* *Service Principal Name (SPN)* +
+An identifier given to a service instance to associate a service instance with a domain service account.
+
+=== What are Kerberos Tickets?
+
+The main structures handled by Kerberos are the tickets. These tickets are delivered to the users in order to be used by them to perform several actions in the Kerberos realm. There are 2 types:
+
+* The *TGS (Ticket Granting Service)* is the ticket which the user can use to authenticate against a service. It is encrypted with the service key.
+
+* The *TGT (Ticket Granting Ticket)* is granted by the KDC after the client is successfully authenticated. It is presented to the KDC to request for TGSs and is encrypted with the KDC key.
+
+=== Comparison Domain Authentication Versus LDAP
+
+* When users authenticate themselves to their desktop, the Windows OS sends their credentials to a Domain Controller which is also a Kerberos Distribution Center (KDC). The users get a ticket which can be used to authenticate to other network services.
+
+* When accessing an LDAP server using Kerberos authentication, the user binds to LDAP using a Kerberos ticket rather than sending a password. The LDAP server then validates the ticket and verifies that it belongs to the user trying to bind.
+
+* LDAP is not specific to Active Directory. Microsoft implemented LDAP as part of Active Directory capabilities to allow AD DS to work with LDAP-based applications. Kerberos is more secure than LDAP, but they are often used together in Active Directory. When you view objects in Active Directory Users and Computers (ADUC), you are authenticated with Kerberos, and then LDAP is used to query the Active Directory database efficiently and effectively.
+
+=== Kerberos Terms
+
+* Kerberos: +
+Kerberos is an authentication protocol that supports the concept of Single Sign-On (SSO). In the case of HTTP, support for Kerberos is usually provided using the term "SPNEGO" authentication mechanism.
+
+* Kerberos Realm: +
+An administrative domain for authentication is denoted by the term _realm_. In Windows, realms are called domains. Its goal is to define the restrictions on when an authentication server can authenticate a user, host, or service. This does not imply that a user and a service must be members of the same realm in order for authentication to occur: if the two objects are connected through a trust connection despite belonging to different realms, authentication can still occur.
+
+* Principal: +
+In a Kerberos system, a Kerberos Principal represents a distinct identity to whom Kerberos can issue tickets for access to Kerberos-aware services. The "/" separator is used to separate the various components that make up principal names. The "@" character can be used to identify a realm as the name's final element. If no realm is specified, it is presumed that the Principal belongs to the default realm set in the `krb5.conf` file.
+
+* Users: +
+A process that accesses a service on the behalf of a user. There can be multiple users within a realm.
+
+* Service: +
+Something the user wants to gain access to.
+
+* GSSAPI: +
+Programs can access security services through the Generic Security Service Application Program Interface(GSSAPI), which is an application programming interface (API). GSSAPI is an IETF standard. It doesn't offer any security on its own. Instead, GSSAPI implementations are offered by security-service providers. The exchange of opaque messages (tokens), which conceals the implementation detail from the higher-level application, is the distinguishing characteristic of GSSAPI applications.
+
+* SPNEGO: +
+Client-server software uses the Simple and Protected GSSAPI Negotiation Mechanism, frequently called "spen-go," to negotiate the selection of security technology. When a client application has to log in to a remote server but neither end is certain which authentication protocols the other supports, SPNEGO is employed. The pseudo-mechanism uses a protocol to identify the available common GSSAPI mechanisms, chooses one, and then assigns all subsequent security actions to that chosen mechanism.
+
+* KDC: +
+A Key Distribution Center is a network service that supplies tickets and temporary sessions keys; or an instance of that service or the host on which it runs. The KDC services both initial ticket and ticket-granting requests. The initial ticket portion is sometimes referred to as the Authentication Server (or service). The ticket-granting ticket portion is sometimes referred to as the ticket-granting server (or service).
+
+=== Overview Image
+
+The following image gives a brief overview about the main components and processes:
+
+image::enterprise/authentication/kerberos/kerberos-principle.drawio.svg[Kerberos Process Overview, width=450]
+
+== Server Prerequisites
+
+* Make sure the clocktime of the KDC, the client and the server the ownCloud instance is running on is in sync. 5 minutes are the highest difference you may allow for Kerberos to work properly. Without going into the details, you may use NTP for that task.
+
+* All members in the realm, which includes cients, must support `DES3, AES128 or AES256` encryption. This applies to Windows 10 and modern Linux based OS desktops. If a client does not support this encryption standard, he can not use Kerberos. Alternatively the legacy crypto `RC4-HMAC-EXP` can be added during configuration - which is _strongly discouraged_ for security reasons. See the http://web.mit.edu/kerberos/krb5-1.5/krb5-1.5/doc/krb5-admin/Supported-Encryption-Types.html#Supported%20Encryption%20Types[Kerberos supported encryption types,window=_blank] for more information.
+
+* Replace in the configuration examples where applicapable the placeholders accordingly:
+** `<user-name>` +
+The name of the user account like `owncloud_spnego_user` which is used as principal.
+** `<complex-password>` +
+A complex password for `<user-name>`. Remember this password as it helps debugging, but keep protected as you can access domain servcies with it. Also see: xref:keytab-files[Keytab Files] for additional info when this password needs to be changed.
+** `<FQDN>` +
+The fully qualified domain name the ownCloud instance is accessed, like `owncloud.example.com`.
+** `<realm>` +
+The name of the realm is taken to be the DNS domain name of the server in all *lowercase* letters like `example.com`.
+** `<REALM>` +
+The name of the REALM is taken to be the DNS domain name of the server in all *capital* letters like `EXAMPLE.COM`.
+** <keytab-file-location> +
+A path that is accessible by Apache like `/etc/apache2/`. 
+** `<domaincontroller-x>` +
+The KDC. The Active Directory server is `dc1.example.com`. In a larger organization, two or more domain controllers for redundancy reasons can be found like `dc2.example.com` and `dc3.example.com`.
+** `<administration-server>` +
+The administration server. This is typically the same as the LDAP/Active Directory server like `dc1.example.com` or in case of multiple domain controllers, this should be normally set to the master DC.
+
+// https://docs.typo3.org/p/causal/ig_ldap_sso_auth/2.1/en-us/AdministratorManual/ConfigureApacheKerberos.html
+
+=== ownCloud Server Side
+
+////
+* The host the ownCloud instance is running on must be part of the domain.
+** If this is not the case, you need to https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member[Setting up Samba as a Domain Member].
+////
+
+* Check that you have the latest xref:installation/manual_installation/server_prep_ubuntu_22.04.adoc#updating-pear[pear] version installed.
+
+* Install, if not already done the `php-dev` environment:
++
+--
+[source,bash]
+----
+sudo apt install php-dev
+----
+
+Check the existance of `phpize` with:
+[source,bash]
+----
+whereis phpize
+----
+--
+
+* Install and enable the `php-krb5` library:
++
+--
+[source,bash]
+----
+sudo apt install libkrb5-dev
+sudo pecl channel-update pecl.php.net
+sudo pecl install krb5
+----
+
+If not exists, add a file in `/etc/php/<your-php-version>/mods-available/krb5.ini` with the following content:
+
+[source,bash]
+----
+extension=krb5.so
+----
+
+Finalize with:
+
+[source,bash]
+----
+sudo phpenmod krb5
+----
+
+Check with:
+
+[source,bash]
+----
+php -i | grep Kerb   
+----
+[source,plaintext]
+----
+Kerberos 5 support => enabled
+Library version => Kerberos 5 release 1.17
+----
+--
+
+* Install `mod_auth_kerb` for Apache
++
+--
+[source,bash]
+----
+sudo apt install libapache2-mod-auth-kerb krb5-user
+sudo a2enmod auth_kerb
+----
+Note that `krb5-user` is not an actual requirement but it will provide handy command-line tools for Kerberos like to manipulate keytab files.
+--
+
+* DNS records +
+Create a DNS record for the public FQDN of the ownCloud instance (`<FQDN>`).
+** If there is only a single web site on the web server, the simplest option is to make sure that the public URL of the site is the same as the FQDN of the server configured in the `/etc/hosts` configuration file. Create an A DNS record for this FQDN pointing directly to the server’s IP address.
+
+** However, if there are two or more web sites hosted on the same web server with different host headers, the situation becomes a bit more complicated and the DNS CNAME records and keytab file have to properly be configured. One option in this case is to use the same service account identity for all web sites hosted on the web server, configure the keytab file for the server’s own FQDN configured in the `/etc/hosts` file and create CNAME DNS aliases for the web site pointing to the server’s FQDN. The browsers will perform DNS name canonization and will request Kerberos service tickets not for the CNAME addresses of the web sites, but for the server’s own FQDN.
++
+This option can also be used if you have only one web site but want to keep the servers hostname and website address distinct.
+// https://imatviyenko.github.io/blog/2018/09/11/Apache-AD-kerberos
+
+* Download the ownCloud Kerberos app from the {oc-marketplace-url}/apps/kerberos[Marketplace,window=_blank] and enabe it with:
++
+[source.bash,subs="attributes+"]
+----
+{occ-command-example-prefix} app:enable kerberos
+----
+
+=== Domain Controller Side
+
+==== Service Principal Name (SPN)
+
+* A Service Principle Name (SPN) is the unique, in the entire Domain Forest identity for a Service, mapped with a specific service account in a server. It is used for mutual authentication between a user and a service account. SPNs help with Kerberos authentication client applications to request service authentication for an account, even if the client doesn't have the account name.
+
+* Note that Kerberos depends on accurate naming, as server names are used to build the Service Principal Name (SPN) used to request tickets from a KDC. For clients, this becomes crucial when a load balancer is used, because they have, intentionally, no idea which server they are going to connect. For more details see: https://ssimo.org/blog/id_019.html[Load Balancers and Kerberos,window=_blank].
+
+* A SPN consists of: `<service_class>/<hostname_or_FQDN>:<port>/<service name>`, where `<port>` and `<service name>` are optional components. 
++
+Using `HTTP`, which is a built in service class, in the configuration example below, enables that all Web applications on the same host including applications hosted by Apache, if they are configured for the use with Kerberos, will be granted tickets based on the domain user account.
+
+* Note that SPN always include the name of the host computer on which the service instance is running, for more details see: https://learn.microsoft.com/en-us/windows/win32/ad/service-principal-names[Microsoft: Service Principal Names,window=_blank].
+
+==== Keytab Files
+
+* Keytab files contain pairs of Kerberos principals and encrypted keys. Any account with read permission on a keytab file can use all of the keys it contains. Access restrictions and monitoring permissions on any Kerberos keytab files used must be part of the Kerberos configuration.
+
+* It is recommended that a regular user account for the server in the Active Directory domain is created. It must be a user account, not a computer account. This is because, in a Microsoft Active Directory Domain, a keytab file is only generated for user accounts, not computer or service accounts. Computer and service accounts manage their own passwords.
+
+* Multiple service instances can not be mapped to the same user account.
+
+* The Keytab file entry is encrypted with the Active Directory account password. Therefore, the keytab file must be regenerated whenever the Active Directory `<user-name>` password has changed.
+
+==== User Account
+
+The user account `<user-name>` must be associated with the service principal name (SPN) and is used by the Kerberos domain controller to generate and verify service tickets. The SPN is derived from the URL of the service to be accessed.
+
+The user account should have the following properties set:
+
+* User cannot change password
+* Password never expires
+
+==== Windows
+
+If you are running a Windows native domain, you can use the Windows Server Support Tools, `setspn` and `ktpass`. These are command line utilities enable to map the `<user-name>` to the application server and its service class respectively crating a keytab file. Login as administrator to the domain controller for the next tasks.
+
+. Create a principal (user): +
+Use the Microsoft Management Console (MMC) to create a new user account with the DNS name of the server that hosts the ownCloud instance.
+.. First name: `<user-name>`
+.. Password: `complex-password`
+.. User login name: `HTTP/<FQDN>@<REALM>`
+.. Pre-windows logon name: `<user-name>`
+.. _Select_ option: `Password never expires`
+.. _Do not select_ this option: `User must change password at next logon`
+.. In menu:Delegation[], _select_ `Trust this user for delegation to any service (Kerberos only)`
+
+. Associate the new user with the Service Principal Name (SPN). To do so, open a command shell and type:
++
+--
+[source,powershell]
+----
+setspn -S HTTP/<FQDN>@<REALM> <user-name>
+----
+
+Verify `setspn` with:
+
+[source,powershell]
+----
+setspn -L <user-name>
+----
+See the https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc731241(v=ws.11)[Microsoft setspn,window=_blank] documentation for details and more parameters. 
+--
+
+. Map the account `<user-name>` to the service principal `HTTP/<FQDN>@<REALM>` and generate a keytab file. To do so, open a command shell and type:
++
+--
+[source,powershell]
+----
+ktpass
+  -princ HTTP/<FQDN>@<REALM>
+  -mapuser <user-name>@<REALM>
+  -crypto AES256-SHA1
+  -ptype KRB5_NT_PRINCIPAL
+  -pass <complex-password>
+  -out C:\temp\<user-name>.keytab
+----
+Note that the parameter https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ktpass[crypto,window=_blank] is according the Microsoft documentation recommended to be set.
+--
+
+. Move the generated keytab file `<user-name>.keytab` to the Linux server hosting the ownCloud instance to location `<keytab-file-location>`.
+
+////
+To configure an SPN account for the application server on the AD domain controller, you need to use the Windows Server Support Tools, `setspn` and `ktpass`. These are command line utilities that enable you to map the server user name to the application server and its HTTP service.
+
+The steps to follow to configure an SPN account for an application server are:
+
+. Assign the SPN to the Active Directory account using the `setspn` command.
+. Repeat this command for any number of SPN to the same account.
+. Generate a keytab file for the user account.
+
+https://learn.microsoft.com/en-us/azure-stack/hci/manage/kerberos-with-spn[Kerberos with Service Principal Name (SPN)]
+https://4sysops.com/archives/setspn-manage-service-principal-names-in-active-directory-from-the-command-line/[Manage SPNs from the Command Line]
+
+https://docs.tibco.com/pub/amx-bpm/4.3.0/doc/html/bpmhelp/GUID-6E7B3AD0-D18A-490E-ADED-2D48647CD9C7.html[Configure an SPN Account for an Active Directory Domain Controller]
+////
+
+==== Linux
+
+* Configure `/etc/krb5.conf` for the use with Kerberos:
++
+--
+[source,plaintext]
+----
+[libdefaults]
+    default_realm        = <REALM>
+    default_tkt_enctypes = aes256-cts-hmac-sha1-96
+    default_tgs_enctypes = aes256-cts-hmac-sha1-96
+    permitted_enctypes   = aes256-cts-hmac-sha1-96
+
+[realms]
+    <REALM> = {
+        kdc           = <domaincontroller-1>
+        #kdc          = <domaincontroller-2>
+        #kdc          = <domaincontroller-3>
+        #master_kdc   = <domaincontroller-1>
+        admin_server  = <domaincontroller-1>
+    }
+
+[domain_realm]
+    .<realm>          = <REALM>
+    <realm>           = <REALM>
+
+[logging]
+    kdc               = SYSLOG:NOTICE
+    admin_server      = SYSLOG:NOTICE
+    default           = SYSLOG:NOTICE
+----
+
+A description of each section and the meaning of keys is available at the http://web.mit.edu/kerberos/krb5-1.5/krb5-1.5/doc/krb5-admin/krb5.conf.html[MIT krb5.conf,window=_blank] documentation.
+--
+
+* The following section is only necessary if the domain runs via Samba. In this case the neccesary libraries have been installed which also contain the command line tool https://www.samba.org/samba/docs/current/man-html/samba-tool.8.html[samba-tool,window=_blank].
+
+** Create a user for the use with Kerberos:
++
+--
+[source,bash]
+----
+samba-tool user create    <user-name> <complex-password>
+samba-tool user setexpiry <user-name> --noexpiry
+----
+--
+
+** Set the correct cipher version to be used, see https://wiki.samba.org/index.php/Generating_Keytabs[Samba Generating Keytabs,window=_blank] and https://www.samba.org/samba/docs/current/man-html/net.8.html[Samba net tool,window=_blank]:
++
+--
+[source,bash]
+----
+net ads enctypes list <user-name>
+----
+
+Set `AES256-CTS-HMAC-SHA1-96` explicit, because if not set, unsecure ciphers are also enabled.
+
+[source,bash]
+----
+net ads enctypes set <user-name> 10
+----
+--
+
+** Configure SPN for the use with Kerberos and export the keytab file:
++
+--
+[source,bash]
+----
+samba-tool spn add HTTP/<FQDN>@<REALM> <user-name>
+----
+[source,bash]
+----
+samba-tool spn list <user-name>
+----
+[source,bash]
+----
+samba-tool domain exportkeytab --principal=HTTP/<FQDN> <keytab-file-location>/<user-name>.keytab
+----
+--
+
+* Protect the `keytab` file so only the owner (the webserver) can read it:
++
+--
+[source,bash]
+----
+sudo chown www-data:www-data <keytab-file-location>/<user-name>.keytab
+----
+[source,bash]
+----
+sudo chmod 0400 <keytab-file-location>/<user-name>.keytab
+----
+--
+
+* Create a new ownCloud config file `/path-to-owncloud/config/kerberos.config.php` with the following contents:
++
+--
+[source,php]
+----
+<?php $CONFIG = [
+
+    /**
+     * Path to the keytab file to use, defaults to '/etc/krb5.keytab'
+     */
+    'kerberos.keytab' => '<keytab-file-location>/<user-name>.keytab',
+];
+----
+--
+This file will be read xref:configuration/server/config_sample_php_parameters.adoc#introduction[additionally] to existing config files. See the xref:configuration/server/config_apps_sample_php_parameters.adoc[Apps Config.php Parameters] for more Kerberos configuration options.
+
+==== Testing
+
+. Check the validity of the `keytab` file:
++
+--
+[source,bash]
+----
+klist -e -k -t <keytab-file-location>/<user-name>.keytab
+----
+[source,plaintext]
+----
+Keytab name: FILE:<user-name>.keytab
+KVNO Timestamp        Principal
+---- ---------------- ---------------------------------------------
+   4 10/01/2023 16:23 HTTP/<FQDN>@<REALM> (aes256-cts-hmac-sha1-96)
+----
+--
+
+. Display the current key version number for a principal:
++
+--
+[source,bash]
+----
+kvno HTTP/<FQDN>@<REALM>
+----
+[source,plaintext]
+----
+HTTP/<FQDN>@<REALM>: kvno = 4
+----
+--
+
+. Attempt to use the `keytab` file to authenticate as the service principal:
++
+--
+[source,bash]
+----
+kinit -k -t <keytab-file-location>/<user-name>.keytab HTTP/<FQDN>@<REALM>
+----
+[source,bash]
+----
+klist
+----
+[source,plaintext]
+----
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: HTTP/<FQDN>@<REALM>
+
+Valid starting    Expires           Service principal
+31/10/2023 14:11  01/11/2023 00:10  <user-name>/<REALM>@<REALM>
+        renew until 01/11/2024 14:11
+----
+--
+
+. Destroy the Kerberos ticket for security reasons:
++
+--
+[source,bash]
+----
+kdestroy
+----
+[source,plaintext]
+----
+Tickets destroyed
+----
+Note that if you issue this command during regular operation, all sessions for users using ownCloud with Kerberos will end and need to re-login. 
+--
+
+=== Webserver Side
+
+* Add the following Kerberos relevant configuration to the sites definition:
++
+--
+[source,apache]
+----
+<Location />
+  AuthType Kerberos
+  AuthName "Kerberos for <FQDN>"
+  KrbAuthRealms <REALM>
+  KrbServiceName HTTP
+  Krb5Keytab <keytab-file-location>/<user-name>.keytab
+  KrbMethodNegotiate On
+  KrbMethodK5Passwd Off
+</Location>
+----
+
+See the https://modauthkerb.sourceforge.net/configure.html[mod-auth-kerb,window=_blank] documentation for more details on the settings used.
+--
+
+* Restart Apache:
++
+--
+[source,bash]
+----
+sudo apachectl -k graceful
+----
+--
+
+== Browser Prerequisites
+
+=== Configure Google Chrome and Microsoft Edge
+
+.For Google Chrome and Microsoft Edge on Windows, Kerberos authentication is configured in general settings of the operating system:
+{empty}
+
+. Open the _Control Panel_ by pressing kbd:[Win + R] and type *control*, select menu:Internet Options[Advanced].
+. On the *Advanced* tab and in the menu:Security[] section, select btn:[Enable Integrated Windows Authentication] (if it was not checked, a restart is required).
+. On the *Security* tab, select menu:Local intranet[], Click btn:[Custom Level].
+. In the *User Authentication/Logon* section, select btn:[Automatic logon only in Intranet zone].
+. Click OK.
+. Click menu:Sites[] and select all check boxes.
+. Click *Advanced* and add, if not exists, the ownCloud website to the local zone . For example, `\https://<FQDN>`.
+. Click btn:[Add].
+
+.For Google Chrome on Linux or macOS, Kerberos authentication is configured ieither via command line parameters or policy files:
+{empty}
+
+. Command line parameters
++
+--
+[source,plaintext]
+----
+--auth-server-whitelist="<FQDN>"
+--auth-negotiate-delegate-whitelist="<FQDN>"
+----
+You can see which policies are enable by typing `chrome://policy/` into Chrome’s address bar.
+--
+. Policy files
++
+--
+With Linux, Chrome will also read policy files from `/etc/opt/chrome/policies/managed` directory. Add a file like `kerberos-policies.json` with the following content:
+
+[source,json]
+----
+{
+  "AuthServerWhitelist" : "<FQDN>",
+  "AuthNegotiateDelegateWhitelist" : "<FQDN>",
+  "DisableAuthNegotiateCnameLookup" : true,
+  "EnableAuthNegotiatePort" : true
+}
+----
+--
+
+=== Configure Mozilla Firefox
+
+.For Mozilla Firefox, Kerberos authentication is configured via preferences:
+{empty}
+
+. In the browser window, enter the following URL: menu:about:config[].
+. Click Accept the Risk and Continue.
+. In the Search preference name field, enter: +
+`network.negotiate-auth.trusted-uris` +
+and double click it.
+. Specify a FQDN of the ownCloud website with a protocol, for example, `\https://<FQDN>`.
+. Click btn:[Save].
+
+=== Configure Opera
+
+.For Opera, Kerberos authentication is currently not possible.
+
+Though some research has been made, no options have been identified. This section will be updated on changes known.
+
+////
+must be enabled via a command line sitch
+
+https://support.google.com/chrome/thread/201738899/kerberos-sso-stopped-working-under-linux-after-updating-chrome-to-110?hl=en
+
+https://peter.sh/experiments/chromium-command-line-switches/
+////
+
+== Windows Domain Login
+
+When users log in to the domain, the client has received the necessary Kerberos ticket, see xref:overview-image[image above], which is also available to browsers. Now, when users open a browser and try to log in to ownCloud with the Kerberos app enabled, they will see the following screen:
+
+image::enterprise/authentication/kerberos/kerberos-login-screenshot.png[Alternative Windows Domain Login, width=300]
+
+Compared to a standard login using a user name and password, the user clicks on the btn:[Windows Domain Login] button. With this button, the browser takes the Kerberos ticket from the client and uses it for the ownCloud login process. Kerberos tickets are further used to access file resources via the xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] app without the need of a user authenticating again.
+
+Note that if you have not accessed a service like ownCloud via Kerberos before, Windows will show a popup to authenticate, which is a standard Windows security procedure. This can also happen if the Kerberos ticket has expired.
+
+Note that the text printed on the button _Windows Domain Login_ can be customized, see the xref:configuration/server/config_apps_sample_php_parameters.adoc[Apps Config.php Parameters].
