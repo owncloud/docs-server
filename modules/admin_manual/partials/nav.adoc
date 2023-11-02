@@ -166,7 +166,8 @@
 
 ** Enterprise
 *** Authentication
-**** xref:admin_manual:enterprise/external_storage/enterprise_only_auth.adoc[Enterprise Only Authentication]
+**** xref:admin_manual:enterprise/authentication/enterprise_only_auth.adoc[Enterprise Only Authentication]
+**** xref:admin_manual:enterprise/authentication/kerberos.adoc[Kerberos Authentication]
 *** Clients
 **** xref:admin_manual:enterprise/clients/creating_branded_apps.adoc[Creating Branded Apps]
 **** xref:admin_manual:enterprise/clients/custom_client_repos.adoc[Custom Client Repos]
