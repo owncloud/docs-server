@@ -1,5 +1,0 @@
-:section-title: External Storage
-:section-preamble-ender: to configure enterprise external storage in ownCloud
-:page-aliases: enterprise/external_storage/onedrive.adoc
-
-include::partial$section_page.adoc[]

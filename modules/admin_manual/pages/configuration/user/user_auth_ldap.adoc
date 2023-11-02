@@ -40,15 +40,111 @@ First, install the {oc-marketplace-url}/apps/user_ldap[LDAP Integration] app. Th
 
 Start with the Server tab. You may configure multiple servers if you have them. At a minimum, you must supply the LDAP server's hostname. If your server requires authentication, enter your credentials on this tab.
 
+image::apps/user_ldap/ldap-wizard/server-tab.png[LDAP Wizard - Server Tab, width=500]
+
 ==== LDAPS Configuration
 
 LDAPS encrypts the connection between your LDAP server and ownCloud via SSL/TLS.
 
-1. First you need the Windows Server CA certificate in the `pem` format with `.crt` suffix
-2. Import the certificate to `/usr/local/share/ca-certificates/`
-3. Execute `update-ca-certificates`
+For LDAPS you need a LDAP server with certificates::
 
-image::apps/user_ldap/ldap-wizard/server-tab.png[LDAP Wizard - Server Tab, width=500]
+{empty}
+
+. For Windows Server, install the _Active Directory Certificate Services (AD CS)_ role and configure it as a company CA.
+. Export the CA certificate using this method:
+.. Open `certutil` with admin privileges and execute the following command where `ca_name` is just a placeholder for the certificate name. Adjust it accordingly.
++
+--
+[source,plaintext]
+----
+certutil -ca.cert ca_name.cer
+----
+This ensures you have the right certificate for configuring LDAPS.
+--
+. Copy the certificate `ca_name.cer` to your ownCloud server.
+. Do the following tasks on the ownCloud server.
+.. Convert the certificate with:
++
+--
+[source,plaintext]
+----
+openssl x509 -inform der -in ca_name.cer -out certificate.pem
+----
+--
+.. Double-check with:
++
+--
+[source,bash]
+----
+cat certificate.pem
+----
+The output is the same one you had with `certutil`.
+--
+
+Move the Certificate::
+
+Move the certificate to `/etc/ldap/certs/` (on Ubuntu) or `/etc/openldap/certs/ (on centOS)`. You have to create the `certs` folder inside those directories beforehand.
+
+. Only for `centOS`: +
+Change permissions with `chown` so the ldap client can access the certificate:
++
+--
+[source,bash]
+----
+chown centos:centos certificate.pem
+----
+--
+. Edit the `ldap.conf` file inside the ldap directory:
++
+--
+.Ubuntu
+[source,plaintext]
+---- 
+   TLS_CACERT      /etc/ldap/certs/certificate.pem
+----
+.centOS 
+[source,plaintext]
+---- 
+   TLS_CACERT      /etc/openldap/certs/certificate.pem
+----
+--
+. Restart the web server.
+
+If you have a openLDAP server, perform the following steps::
+
+{empty}
+
+. Import the ssl certificate from openLDAP to ownCloud server.
+. Put it in the /etc/ldap/certs/ or /etc/openldap/certs/ folder, depending on whether you have Ubuntu or centOS.
+. Include it in your `ldap.conf`:
++
+--
+.Ubuntu
+[source,plaintext]
+---- 
+   TLS_CACERT      /etc/ldap/certs/certificate.pem
+----
+.centOS 
+[source,plaintext]
+---- 
+   TLS_CACERT      /etc/openldap/certs/certificate.pem
+----
+--
+. Restart the web server.
+
+{empty}
+
+Configure the ownCloud LDAP app::
+
+. Finalize LDAPS via section xref:server-configurations[Server Configurations] below:
+.. If you were using LDAP with port 389, you have to change the port to 636 and add `ldaps://` to your LDAP host in the server tab.
+.. Click on menu:Test BaseDN[] and you should see a green light and a number of entries that were found in your LDAP.
+
+LDAPS is prepared::
+
+Finally you have LDAPS configured and your LDAP traffic is encrypted with a SSL certificate.
+
+==== Server Configurations
 
 Server Configuration::
   Configure one or more LDAP servers.
@@ -86,7 +182,7 @@ The name as DN of a user who has permissions to do searches in the LDAP director
 
 Example:
 
-[width=100,cols="80%,30%",options=header]
+[width=100,cols="70%,30%",options=header]
 |===
 | User DN
 | LDAP Directory

@@ -1,6 +1,7 @@
 = Metrics
 :toc: right
 :toclevel: 2
+:page-aliases: enterprise/reporting/index.adoc
 
 == Introduction
 
