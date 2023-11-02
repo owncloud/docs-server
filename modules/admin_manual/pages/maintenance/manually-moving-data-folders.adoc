@@ -15,7 +15,7 @@ This guide assumes that:
 
 Please change the paths above to reflect your environment.
 
-== Summery
+== Summary
 
 The following steps are necessary to move the data directory.
 
@@ -29,7 +29,7 @@ The following steps are necessary to move the data directory.
 
 Look at each section below for a detailed description.
 
-== Stop the web server
+== Stop the Web Server
 
 Stopping the web server makes sure there are no active connections to your server.
 
@@ -38,7 +38,7 @@ Stopping the web server makes sure there are no active connections to your serve
 sudo service apache2 stop
 ----
 
-== Enable maintenance mode
+== Enable Maintenance Mode
 
 It is necessary to enable maintenance mode to avoid running cron jobs.
 To enable maintenance mode, run the following command.
@@ -117,7 +117,7 @@ For more information follow the complete MySQL {mysql-string-replace-function-ur
 CAUTION: Please don’t copy and paste this example verbatim — nor any of the others.
 They are examples only.
 
-=== Update the oc_jobs table
+=== Update the oc_jobs Table
 
 The next area to check is the `oc_jobs` table. 
 The logrotate process may have hard-coded a non-standard (or old) value for the data path. 
@@ -145,39 +145,13 @@ UPDATE oc_jobs
 CAUTION: The old data path will be written with `\/`.
 Therefore you must add one, additional, backslash, like this: `\\/`.
 
-=== Adjust apps settings
+== Fix the config.php Settings
 
-Individual apps may reference the data directory separately from the core system configuration. 
-For those apps, you have to change the configured path.
-Run the following command to list app configs.
+To fix the config.php settings:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:list
-----
-
-Here is an example of the output which you may see:
-
-[source,json]
-----
-{
-    "apps": {
-        "fictitious": {
-            "enabled": "yes",
-            "installed_version": "2.3.2",
-            "types": "filesystem",
-            "datadir": "/var/www/owncloud/data"
-        }
-    }
-}
-----
-
-In the example above, the app "fictitious" sets the data directory to `/var/www/owncloud/data`.
-Change this value by using the following command:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} config:app:set --value /mnt/owncloud/data fictitious datadir
+{occ-command-example-prefix} config:system:set --value /mnt/owncloud/data datadirectory
 ----
 
 === Adjust config.php
@@ -186,8 +160,6 @@ Change this value by using the following command:
   To do so, start an editor of your choice and open `/var/www/owncloud/config/config.php`
 
 . Change the value of the key from `'datadirectory' => '/var/www/owncloud/data',` to `'datadirectory' => '/mnt/owncloud/data',`.
-
-
 
 == Disable Maintenance Mode
 
@@ -204,5 +176,3 @@ To disable maintenance mode of your instance run the following command:
 ----
 sudo service apache2 start
 ----
-
-
