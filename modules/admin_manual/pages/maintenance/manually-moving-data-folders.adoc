@@ -48,7 +48,7 @@ To enable maintenance mode, run the following command.
 {occ-command-example-prefix} maintenance:mode --on
 ----
 
-== Sync your Data directory
+== Sync your Data Directory
 
 [source,bash]
 ----
@@ -179,8 +179,6 @@ Change this value by using the following command:
 ----
 {occ-command-example-prefix} config:app:set --value /mnt/owncloud/data fictitious datadir
 ----
-
-NOTE: You have to repeat this for all apps found defining the data directory as key.
 
 === Adjust config.php
 
