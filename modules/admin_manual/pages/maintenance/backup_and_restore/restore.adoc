@@ -1,10 +1,11 @@
 = Restoring ownCloud
 :toc: right
 :page-aliases: maintenance/restore.adoc
+:description: Depending how the ownCloud instance has been installed, you may need slightly different steps to restore it from a backup.
 
 == Introduction
 
-Depending how the ownCloud instance has been installed, you may need slightly different steps to restore it from a backup.
+{description}
 
 In any case, you need the following components from your backup:
 
@@ -178,7 +179,7 @@ UPDATE oc_filecache
 
 == Final Tasks
 
-==== Update ETag information
+=== Update ETag information
 
 When a backup has been restored, the ETag information, which is necessary when accessing ownCloud with clients, has been changed. 
 Run the following command to tell desktop and mobile clients that a server backup has been restored.
@@ -188,14 +189,14 @@ Run the following command to tell desktop and mobile clients that a server backu
 {occ-command-example-prefix} maintenance:data-fingerprint
 ----
 
-==== Bring back ownCloud into normal operation mode
+=== Bring back ownCloud into normal operation mode
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----
 
-==== Enable browser access
+=== Enable browser access
 
 Start your web server, or alternatively enable the virtual host serving ownCloud:
 [source,bash]
