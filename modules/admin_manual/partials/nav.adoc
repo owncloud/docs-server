@@ -4,7 +4,8 @@
 ** xref:admin_manual:useful_pages.adoc[Useful Pages]
 ** xref:admin_manual:faq/index.adoc[FAQ]
 ** xref:admin_manual:gdpr.adoc[GDPR]
-** xref:admin_manual:installation/index.adoc[Installation]
+
+** Installation
 *** xref:admin_manual:installation/deployment_considerations.adoc[Deployment Considerations]
 *** xref:admin_manual:installation/deployment_recommendations.adoc[Deployment Recommendations]
 **** xref:admin_manual:installation/deployment_recommendations/nfs.adoc[NFS]
@@ -31,7 +32,7 @@
 **** xref:admin_manual:installation/letsencrypt/using_letsencrypt.adoc[Using Letsencrypt]
 **** xref:admin_manual:installation/letsencrypt/apache.adoc[Apache]
 
-** xref:admin_manual:configuration/index.adoc[Configuration]
+** Configuration
 *** xref:admin_manual:configuration/database/index.adoc[Database]
 **** xref:admin_manual:configuration/database/db_conversion.adoc[Database Conversion]
 **** xref:admin_manual:configuration/database/linux_database_configuration.adoc[Database Configuration]
@@ -201,7 +202,7 @@
 **** xref:admin_manual:enterprise/user_management/user_auth_shibboleth.adoc[Shibboleth Integration]
 **** xref:admin_manual:enterprise/user_management/saml_2.0_sso.adoc[SAML 2.0 Based SSO]
 
-** xref:admin_manual:troubleshooting/index.adoc[Troubleshooting]
+** Troubleshooting
 *** xref:admin_manual:troubleshooting/general_troubleshooting.adoc[General Troubleshooting]
 *** xref:admin_manual:troubleshooting/path_filename_length.adoc[Path and Filename Length Limitations]
 *** xref:admin_manual:troubleshooting/providing_logs_and_config_files.adoc[Retrieve Log Files and Configuration Settings]
