@@ -1,12 +1,13 @@
 = Backing up ownCloud
 :toc: right
+:description: Depending on how the ownCloud instance has been installed, you may need slightly different steps to do a backup.
 :page-aliases: go/admin-backup.adoc, \
 maintenance/backup.adoc, \
 maintenance/backup_and_restore/index.adoc
 
 == Introduction
 
-Depending on how the ownCloud instance has been installed, you may need slightly different steps to do a backup. You may also use different methods as the data directory can be huge. This document is intended as a guideline, but the way you implement it depends on your setup.
+{description} You may also use different methods as the data directory can be huge. This document is intended as a guideline, but the way you implement it depends on your setup.
 
 In any case, you need the following components to be backed up:
 
