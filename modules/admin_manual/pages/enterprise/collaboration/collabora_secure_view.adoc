@@ -38,8 +38,6 @@ If a file or folder has been shared multiple times to different groups with diff
 * {oc-marketplace-url}/apps/richdocuments[ownCloud Collabora Online] app version *2.2.0* or above
 * Collabora Online Server *4.0.10* or above, set up and integrated
 
-NOTE: This functionality does not work with public links.
-
 == Configure ownCloud for Collabora Online / Secure View
 
 To configure ownCloud for use with Collabora, you need to set up a WOPI server and configure ownCloud to connect with this server. You can also configure the secure view option, the watermark pattern and the secure view default open action via the command line. To do so see the
