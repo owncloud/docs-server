@@ -104,7 +104,9 @@ image:appliance/setup/11.png[Navigate to Address]
 
 == Activate the Appliance
 
-The VM will show you this screen, showing the ip **address** you have to navigate to in order to **activate** your appliance
+The VM will show you this screen, showing the ip **address** you have to navigate to in order to **activate** your appliance.
+The freshly started appliance runs on a self-signed certificate. Your web browser most likely will warn you about this and ask for confirmation, before
+you can proceed. It is recommended to install a proper certificate later on.
 
 image:appliance/setup/12.png[Request License]
 
