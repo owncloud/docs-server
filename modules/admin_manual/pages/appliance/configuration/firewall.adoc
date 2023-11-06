@@ -7,11 +7,8 @@ If you are using Google as your DNS server (IP=8.8.8.8), you have to permit acce
 
 Firewall Rules:
 
-- 176.9.114.147
-- 5.9.68.237
 - 8.8.8.8
 - docker.software-univention.de
 - marketplace.owncloud.com
 - owncloud.com
-- owncloud.org
 - software-univention.de
