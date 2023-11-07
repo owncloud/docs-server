@@ -42,9 +42,7 @@ and launch it. The example below shows this being done using VirtualBox.
 
 image:appliance/import-the-virtual-appliance.png[Importing the ownCloud X Trial Appliance OVA file into VirtualBox and accepting the software license agreement terms and conditions.]
 
-If you try to install an ownCloud appliance in your domain after
-removing an existing one, please remember to remove the original one
-from you DNS configuration.
+The recommended network mode for the ownCloud Appliance is bridged mode.
 
 Don’t Forget the *IP Address* and the *Administrator Password*. You will need them to use the Appliance.
 
@@ -106,7 +104,8 @@ image:appliance/setup/11.png[Navigate to Address]
 
 == Activate the Appliance
 
-The VM will show you this screen, showing the ip **address** you have to navigate to in order to **activate** your appliance
+The VM will show you this screen, showing the ip **address** you have to navigate to in order to **activate** your appliance.
+The freshly started appliance runs on a self-signed certificate. Your web browser most likely will warn you about this and ask for confirmation, before you can proceed. It is recommended to install a proper certificate later on.
 
 image:appliance/setup/12.png[Request License]
 
