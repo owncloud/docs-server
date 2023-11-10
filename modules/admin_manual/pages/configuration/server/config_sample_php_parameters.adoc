@@ -58,7 +58,7 @@ passwords. This example is for documentation only, and you should never use it.
 ....
 
 === Define list of trusted domains that users can log into
-Specifying trusted domains prevents host header poisoning.
+Specifying trusted domains prevents host header poisoning. This parameter reperesents a white list of approved IP addresses and hostnames that this server is known by.
 
 Do not remove this, as it performs necessary security checks.
 Please consider that for backend processes like background jobs or occ commands,
@@ -73,6 +73,8 @@ the URL parameter in key `overwrite.cli.url` is used. For more details, please s
 	'otherdomain.example.org',
   ],
 ....
+
+NOTE: When defined via the `OWNCLOUD_TRUSTED_DOMAINS` property in docker, the values should be a comma delimited list with no white space. e.g. `OWNCLOUD_TRUSTED_DOMAINS=localhost,10.10.1.1`.  Wildcards and slash notation are not supported.
 
 === Define global list of CORS domains
 All users can use tools running CORS (Cross-Origin Resource Sharing) requests
