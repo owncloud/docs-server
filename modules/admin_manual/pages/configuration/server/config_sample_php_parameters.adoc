@@ -74,7 +74,7 @@ the URL parameter in key `overwrite.cli.url` is used. For more details, please s
   ],
 ....
 
-NOTE: When defined via the `OWNCLOUD_TRUSTED_DOMAINS` property in docker, the values should be a comma delimited list with no white space. e.g. `OWNCLOUD_TRUSTED_DOMAINS=localhost,10.10.1.1`.  Wildcards and slash notation are not supported.
+NOTE: When defined via the `OWNCLOUD_TRUSTED_DOMAINS` property in docker, the values should be a comma delimited list with no white space. e.g. `OWNCLOUD_TRUSTED_DOMAINS=localhost,10.10.1.1`.  Wildcards, slash notation and ports are not supported.
 
 === Define global list of CORS domains
 All users can use tools running CORS (Cross-Origin Resource Sharing) requests
