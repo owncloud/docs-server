@@ -44,7 +44,7 @@ docker exec --user www-data <owncloud-container-name> occ <your-command>
 
 NOTE: The commands and links provided in the following descriptions are intended to showcase basic docker usage, but we cannot take responsibility for their proper functioning.
 
-For testing purposes or a quick hands-on to get familiar with the look and feel, ownCloud provides a container using the SQLite database. Note that SQLite is not supported by ownCloud for production purposes. To setup such a testing instance, run the following command:
+For testing purposes or a quick hands-on to get familiar with the look and feel, ownCloud provides a container using the SQLite database. Note that SQLite is not supported by ownCloud for production purposes. To set up such a testing instance, run the following command:
 
 [source,docker,subs="attributes+"]
 ----
