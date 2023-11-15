@@ -106,7 +106,7 @@ On a regular ownCloud installation, `occ` is in the `owncloud/` directory, this 
 Use the following command to find your HTTP user:
 [source,bash]
 ----
-ps -ef | egrep '(apache|apache2)' | grep -v `whoami` | grep -v root | head -n1 | awk '{print $1}'
+ps -ef | egrep '(apache|httpd)' | grep -v grep | grep -v root | head -n1 | awk '{print $1}'
 ----
 ====
 
