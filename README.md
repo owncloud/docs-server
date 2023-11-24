@@ -29,7 +29,7 @@ See the the [following section](https://github.com/owncloud/docs#target-branch-a
 
 ## Branching Workflow
 
-Please refer to the [Branching Workflow for ownCloud Server](./docs/the-branching-workflow.md) or more information.
+Please refer to the [Branching Workflow for ownCloud Server](./docs/the-branching-workflow.md) for more information.
 
 ## Create a New Version Branch for ownCloud Server
 
