@@ -189,15 +189,14 @@ Library version => Kerberos 5 release 1.17
 ----
 --
 
-* Install `mod_auth_kerb` for Apache
+* Install handy command-line tools for Kerberos: +
+Note that `krb5-user` is an actual requirement, the Kerberos implementation in the WND app requires the `kvno` command which is contained in that package.
 +
 --
 [source,bash]
 ----
-sudo apt install libapache2-mod-auth-kerb krb5-user
-sudo a2enmod auth_kerb
+sudo apt install krb5-user
 ----
-Note that `krb5-user` is not an actual requirement but it will provide handy command-line tools for Kerberos like to manipulate keytab files.
 --
 
 * DNS records +
@@ -249,7 +248,7 @@ The user account should have the following properties set:
 * User cannot change password
 * Password never expires
 
-==== Windows
+==== Domain on Windows
 
 If you are running a Windows native domain, you can use the Windows Server Support Tools, `setspn` and `ktpass`. These are command line utilities enable to map the `<user-name>` to the application server and its service class respectively crating a keytab file. Login as administrator to the domain controller for the next tasks.
 
@@ -261,9 +260,20 @@ Use the Microsoft Management Console (MMC) to create a new user account with the
 .. Pre-windows logon name: `<user-name>`
 .. _Select_ option: `Password never expires`
 .. _Do not select_ this option: `User must change password at next logon`
-.. In menu:Delegation[], _select_ `Trust this user for delegation to any service (Kerberos only)`
+.. In menu:Delegation[]
++
+--
+* _Select_ `Trust this user for delegation to specified services only`
+* _Select_ `Use any authentication protocol`
+* _Add_ the service type and server(s) for delegated credentials like: +
+`cifs/<hostname_or_FQDN>` +
+(choose the server(s) where the smb service is provided and select cifs as service type)
++
+image:enterprise/authentication/kerberos/kerberos-win-principal.png[User Delegation, width=250]
+--
 
-. Associate the new user with the Service Principal Name (SPN). To do so, open a command shell and type:
+. Associate the new user with the Service Principal Name (SPN). +
+To do so, open a command shell and type:
 +
 --
 [source,powershell]
@@ -280,7 +290,8 @@ setspn -L <user-name>
 See the https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc731241(v=ws.11)[Microsoft setspn,window=_blank] documentation for details and more parameters. 
 --
 
-. Map the account `<user-name>` to the service principal `HTTP/<FQDN>@<REALM>` and generate a keytab file. To do so, open a command shell and type:
+. Map the account +
+Map the account `<user-name>` to the service principal `HTTP/<FQDN>@<REALM>` and generate a keytab file. To do so, open a command shell and type:
 +
 --
 [source,powershell]
@@ -296,7 +307,7 @@ ktpass
 Note that the parameter https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ktpass[crypto,window=_blank] is according the Microsoft documentation recommended to be set.
 --
 
-. Move the generated keytab file `<user-name>.keytab` to the Linux server hosting the ownCloud instance to location `<keytab-file-location>`.
+. Move the generated keytab file `<user-name>.keytab` to the Linux server hosting the ownCloud instance to location `<keytab-file-location>`. Note that the file must be accessible by the web server.
 
 ////
 To configure an SPN account for the application server on the AD domain controller, you need to use the Windows Server Support Tools, `setspn` and `ktpass`. These are command line utilities that enable you to map the server user name to the application server and its HTTP service.
@@ -313,9 +324,61 @@ https://4sysops.com/archives/setspn-manage-service-principal-names-in-active-dir
 https://docs.tibco.com/pub/amx-bpm/4.3.0/doc/html/bpmhelp/GUID-6E7B3AD0-D18A-490E-ADED-2D48647CD9C7.html[Configure an SPN Account for an Active Directory Domain Controller]
 ////
 
-==== Linux
+==== Domain on Linux
 
-* Configure `/etc/krb5.conf` for the use with Kerberos:
+The following section is only necessary if the domain runs via Samba. In this case the necessary libraries have been installed which also contain the command line tool https://www.samba.org/samba/docs/current/man-html/samba-tool.8.html[samba-tool,window=_blank].
+
+. Create a user for use with Kerberos:
++
+--
+[source,bash]
+----
+samba-tool user create    <user-name> <complex-password>
+samba-tool user setexpiry <user-name> --noexpiry
+----
+--
+
+. Set the correct cipher version to be used, see https://wiki.samba.org/index.php/Generating_Keytabs[Samba Generating Keytabs,window=_blank] and https://www.samba.org/samba/docs/current/man-html/net.8.html[Samba net tool,window=_blank]:
++
+--
+[source,bash]
+----
+net ads enctypes list <user-name>
+----
+
+Set `AES256-CTS-HMAC-SHA1-96` explicit, because if not set, unsecure ciphers are also enabled.
+
+[source,bash]
+----
+net ads enctypes set <user-name> 10
+----
+--
+
+. Configure SPN for use with Kerberos and export the keytab file:
++
+--
+[source,bash]
+----
+samba-tool spn add HTTP/<FQDN>@<REALM> <user-name>
+----
+[source,bash]
+----
+samba-tool spn list <user-name>
+----
+[source,bash]
+----
+samba-tool domain exportkeytab --principal=HTTP/<FQDN> <keytab-file-location>/<user-name>.keytab
+----
+--
+
+. Move the generated keytab file `<user-name>.keytab` to the Linux server hosting the ownCloud instance to location `<keytab-file-location>`. Note that the file must be accessible by the web server.
+
+== Configure ownCloud Server
+
+Follow these steps on the server running ownCloud:
+
+. Configure `/etc/krb5.conf` for use with Kerberos. +
+Note that only required/recommended or non-default settings are used:
 +
 --
 [source,plaintext]
@@ -325,6 +388,7 @@ https://docs.tibco.com/pub/amx-bpm/4.3.0/doc/html/bpmhelp/GUID-6E7B3AD0-D18A-490
     default_tkt_enctypes = aes256-cts-hmac-sha1-96
     default_tgs_enctypes = aes256-cts-hmac-sha1-96
     permitted_enctypes   = aes256-cts-hmac-sha1-96
+    forwardable          = true
 
 [realms]
     <REALM> = {
@@ -347,53 +411,7 @@ https://docs.tibco.com/pub/amx-bpm/4.3.0/doc/html/bpmhelp/GUID-6E7B3AD0-D18A-490
 
 A description of each section and the meaning of keys is available at the http://web.mit.edu/kerberos/krb5-1.5/krb5-1.5/doc/krb5-admin/krb5.conf.html[MIT krb5.conf,window=_blank] documentation.
 --
-
-* The following section is only necessary if the domain runs via Samba. In this case the neccesary libraries have been installed which also contain the command line tool https://www.samba.org/samba/docs/current/man-html/samba-tool.8.html[samba-tool,window=_blank].
-
-** Create a user for the use with Kerberos:
-+
---
-[source,bash]
-----
-samba-tool user create    <user-name> <complex-password>
-samba-tool user setexpiry <user-name> --noexpiry
-----
---
-
-** Set the correct cipher version to be used, see https://wiki.samba.org/index.php/Generating_Keytabs[Samba Generating Keytabs,window=_blank] and https://www.samba.org/samba/docs/current/man-html/net.8.html[Samba net tool,window=_blank]:
-+
---
-[source,bash]
-----
-net ads enctypes list <user-name>
-----
-
-Set `AES256-CTS-HMAC-SHA1-96` explicit, because if not set, unsecure ciphers are also enabled.
-
-[source,bash]
-----
-net ads enctypes set <user-name> 10
-----
---
-
-** Configure SPN for the use with Kerberos and export the keytab file:
-+
---
-[source,bash]
-----
-samba-tool spn add HTTP/<FQDN>@<REALM> <user-name>
-----
-[source,bash]
-----
-samba-tool spn list <user-name>
-----
-[source,bash]
-----
-samba-tool domain exportkeytab --principal=HTTP/<FQDN> <keytab-file-location>/<user-name>.keytab
-----
---
-
-* Protect the `keytab` file so only the owner (the webserver) can read it:
+. Protect the `keytab` file so only the owner (the web server) can read it:
 +
 --
 [source,bash]
@@ -405,24 +423,6 @@ sudo chown www-data:www-data <keytab-file-location>/<user-name>.keytab
 sudo chmod 0400 <keytab-file-location>/<user-name>.keytab
 ----
 --
-
-* Create a new ownCloud config file `/path-to-owncloud/config/kerberos.config.php` with the following contents:
-+
---
-[source,php]
-----
-<?php $CONFIG = [
-
-    /**
-     * Path to the keytab file to use, defaults to '/etc/krb5.keytab'
-     */
-    'kerberos.keytab' => '<keytab-file-location>/<user-name>.keytab',
-];
-----
---
-This file will be read xref:configuration/server/config_sample_php_parameters.adoc#introduction[additionally] to existing config files. See the xref:configuration/server/config_apps_sample_php_parameters.adoc[Apps Config.php Parameters] for more Kerberos configuration options.
-
-==== Testing
 
 . Check the validity of the `keytab` file:
 +
@@ -489,6 +489,23 @@ Tickets destroyed
 Note that if you issue this command during regular operation, all sessions for users using ownCloud with Kerberos will end and need to re-login. 
 --
 
+. Create a new ownCloud config file `/path-to-owncloud/config/kerberos.config.php` with the following contents or add only the comment and key to an existing `config.php` file. More Kerberos config options can be found in the xref:configuration/server/config_apps_sample_php_parameters.adoc#app-kerberos[Config Apps Sample] description:
++
+--
+[source,php]
+----
+<?php $CONFIG = [
+
+    /**
+     * Path to the keytab file to use, defaults to '/etc/krb5.keytab'
+     */
+    'kerberos.keytab' => '<keytab-file-location>/<user-name>.keytab',
+];
+----
+--
+A new file will be read xref:configuration/server/config_sample_php_parameters.adoc#introduction[additionally] to existing config files. See the xref:configuration/server/config_apps_sample_php_parameters.adoc[Apps Config.php Parameters] for more Kerberos configuration options.
+
+////
 === Webserver Side
 
 * Add the following Kerberos relevant configuration to the sites definition:
@@ -518,6 +535,7 @@ See the https://modauthkerb.sourceforge.net/configure.html[mod-auth-kerb,window=
 sudo apachectl -k graceful
 ----
 --
+////
 
 == Browser Prerequisites
 
@@ -597,7 +615,7 @@ When users log in to the domain, the client has received the necessary Kerberos 
 
 image::enterprise/authentication/kerberos/kerberos-login-screenshot.png[Alternative Windows Domain Login, width=300]
 
-Compared to a standard login using a user name and password, the user clicks on the btn:[Windows Domain Login] button. With this button, the browser takes the Kerberos ticket from the client and uses it for the ownCloud login process. Kerberos tickets are further used to access file resources via the xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] app without the need of a user authenticating again.
+Compared to a standard login using a user name and password, the user clicks on the btn:[Windows Domain Login] button. With this button, ownCloud requests a new ticket on behalf of the Windows user logged in, which is technically a constrained delegation. With this button, the browser takes the Kerberos ticket from the client and uses it for the ownCloud login process. If the WND App is installed as well, the ownCloud service user might request later on an additional Kerberos ticket on behalf of the Windows user logged in, which is technically again a constrained delegation.
 
 Note that if you have not accessed a service like ownCloud via Kerberos before, Windows will show a popup to authenticate, which is a standard Windows security procedure. This can also happen if the Kerberos ticket has expired.
 

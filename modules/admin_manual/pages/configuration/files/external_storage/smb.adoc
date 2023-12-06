@@ -1,19 +1,18 @@
 = Samba File Server Configuration (SMB/CIFS)
 :toc: right
+:description: ownCloud can connect to Windows file servers, and other SMB-compatible servers
 
 :samba-url: https://www.samba.org
 :smbcifs-url: https://docs.microsoft.com/en-us/windows/desktop/FileIO/microsoft-smb-protocol-and-cifs-protocol-overview
 
 == Introduction
 
-ownCloud can connect to Windows file servers, and other SMB-compatible servers (e.g.,
-{samba-url}[Samba]), by using the {smbcifs-url}[SMB/CIFS] backend.
+{description} (e.g., {samba-url}[Samba]), by using the {smbcifs-url}[SMB/CIFS] backend.
 
 == Dependencies
 
 To connect ownCloud to an SMB file server, you need to prepare your server. Please see the
-xref:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux] guides for more
-information, prerequisites and requirements.
+xref:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux] guides for more information, prerequisites and requirements.
 
 == Access Testing
 
@@ -35,21 +34,21 @@ When configuring ownCloud, you will need the following information:
 * The username or domain/username used to login to the Samba server.
 * The password to login to the Samba server.
 * The share name to mount on the remote Samba server.
-* The remote subfolder inside the remote Samba share to mount. This is optional, as it defaults to `/`.
+* The remote subfolder inside the remote Samba share to mount. +
+This is optional, as it defaults to `/`.
 +
 TIP: To assign the ownCloud logon username automatically to the subfolder, use `$user` instead of a
 subfolder name. The foldername=username must be present and is not created on access.
-* The ownCloud users and groups who get access to the share.
 
+* The ownCloud users and groups who get access to the share.
+* A domain name, might be required or optional depending on your setup
++
 [TIP]
 ====
-Optionally, you can specify a `Domain`. This is useful in cases where the SMB server requires a
-domain and a username, and an advanced authentication mechanism like Active Directory (AD), or
-when using session credentials where the username cannot be modified. This is concatenated with
-the username, so the backend gets `domain\username`
+You can specify a `Domain` which is useful in cases where the SMB server requires a domain and a username, and an advanced authentication mechanism like Active Directory (AD), or when using session credentials where the username cannot be modified. This is concatenated with the username, so the backend gets `domain\username`
 ====
 
-image:configuration/files/external_storage/smb.png[Samba external storage configuration.]
+image::configuration/files/external_storage/smb.png[Samba external storage configuration,width=500]
 
 == Further Information
 

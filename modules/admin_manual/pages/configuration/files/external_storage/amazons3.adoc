@@ -1,20 +1,10 @@
 = Amazon S3
 :toc: right
-:files_external_s3-url: https://github.com/owncloud/files_external_s3
+:description: Amazon S3 is used to connect ownCloud to your Amazon S3 bucket.
 
 == Introduction
 
-Amazon S3 is used to connect owncloud to your Amazon S3 bucket.
-
-ifdef::current-server-version[]
-ifeval::[{current-server-version} >= 10.3]
-[IMPORTANT]
-====
-If your installation uses S3 as an external storage in any version before ownCloud 10.3, you have to install and enable {files_external_s3-url}[files_external_s3]. 
-Otherwise, files stored on existing S3 external storages will *not* be fully accessible.
-====
-endif::[]
-endif::current-server-version[]
+{description}
 
 == Configuration
 
@@ -30,7 +20,7 @@ In the *Available for* field, enter the users or groups who have permission to a
 
 The `Enable SSL` checkbox enables HTTPS connections; using HTTPS is always highly recommended.
 
-image:configuration/files/external_storage/amazons3.png[image]
+image::configuration/files/external_storage/amazons3.png[image,width=500]
 
 Optionally, you can override the hostname, port and region of your S3 server, which is required for non-Amazon servers such as Ceph Object Gateway.
 
