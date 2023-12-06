@@ -1,9 +1,10 @@
 = WebDAV
 :web-disk-url: https://documentation.cpanel.net/display/ALD/Web+Disk
+:description: Use this backend to mount a directory from any WebDAV server, or another ownCloud server.
 
-Use this backend to mount a directory from any WebDAV server, or another ownCloud server.
+{description}
 
-image:configuration/files/external_storage/webdav.png[Webdav configuration form.]
+image::configuration/files/external_storage/webdav.png[Webdav configuration form,width=500]
 
 You need the following information:
 

@@ -74,11 +74,11 @@ Create a service for systemd following the instructions below that checks the sh
 * For each WND mount point distinguished by a SERVER - SHARE pair:
 ** Replace the all upper case words `SERVER`, `SHARE`, `USER` and `PASSWORD` in both, the **filename** and in the **contents** below with their respective values.
 ** Place one copy of a file with the content from below under `/etc/systemd/system/owncloud-wnd-listen-SERVER-SHARE.service` +
-To do so, enter the following command and replace <name> with `owncloud-wnd-listen-SERVER-SHARE`:
+To do so, enter the following command and replace <name> with `owncloud-wnd-listen-SERVER-SHARE`. For more details see https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units#editing-unit-files[Editing Unit Files].
 +
 [source,bash]
 ----
-sudo systemctl edit <name>.service
+sudo systemctl edit --force --full <name>.service
 ----
 +
 Reload the deamon to make it available:
