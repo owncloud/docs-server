@@ -1,18 +1,18 @@
 = S3 Compatible Object Storage as Primary Storage Location
 :toc: right
+:description: Administrators can configure Amazon-S3-compatible object storages as the primary ownCloud storage location
 :page-aliases: enterprise/external_storage/s3_swift_as_primary_object_store_configuration.adoc
 :files_primary_s3-url: https://github.com/owncloud/files_primary_s3
 :creating-a-bucket-url: https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
 
 == Introduction
 
-Administrators can configure Amazon S3 compatible object storages as the primary ownCloud storage location with the {oc-marketplace-url}/apps/files_primary_s3[S3 Primary Object Storage] app. The referencing name is `files_primary_s3`. Using `files_primary_s3` replaces the default ownCloud `owncloud/data` directory. However, you *need* to keep the `owncloud/data` directory for the following reasons:
+{description} with the {oc-marketplace-url}/apps/files_primary_s3[S3 Primary Object Storage] app. The referencing name is `files_primary_s3`. Using `files_primary_s3` replaces the default ownCloud `owncloud/data` directory. However, you *need* to keep the `owncloud/data` directory for the following reasons:
 
 * The ownCloud log file is saved in the data directory.
 * Legacy apps may not support using anything but the `owncloud/data` directory.
 
-NOTE: Even if the ownCloud log file is stored in an alternate location (by changing the location in `config.php`),
-`owncloud/data` may still be required for backward compatibility with some apps.
+NOTE: Even if the ownCloud log file is stored in an alternate location (by changing the location in `config.php`), `owncloud/data` may still be required for backward compatibility with some apps.
 
 That said, {oc-marketplace-url}/apps/objectstore[Object Storage Support] (`objectstore`) is still available, but the {oc-marketplace-url}/apps/files_primary_s3[S3 Primary Object Storage] app is the preferred and only supported way to provide S3 storage support as primary storage. ownCloud provides consulting for migrations from `objectstore` -> `files_primary_s3`.
 
@@ -77,8 +77,7 @@ $CONFIG = [
 
 === Amazon S3
 
-The S3 backend mounts a bucket of the Amazon S3 object store into the virtual filesystem.
-The class to be used is `OCA\Files_Primary_S3\S3Storage`, as in the following example:
+The S3 backend mounts a bucket of the Amazon S3 object store into the virtual filesystem. The class to be used is `OCA\Files_Primary_S3\S3Storage`, as in the following example:
 
 [source,php]
 ----
@@ -121,8 +120,7 @@ $CONFIG = [
 
 === Ceph S3
 
-The S3 backend can also be used to mount the bucket of a Ceph S3 object store via the Amazon S3 API into the virtual filesystem.
-The class to be used is `OCA\Files_Primary_S3\S3Storage`:
+The S3 backend can also be used to mount the bucket of a Ceph S3 object store via the Amazon S3 API into the virtual filesystem. The class to be used is `OCA\Files_Primary_S3\S3Storage`:
 
 [source,php]
 ----
@@ -169,8 +167,7 @@ $CONFIG = [
 
 === Scality S3
 
-The S3 backend can also be used to mount the bucket of a Scality S3 object store via the Amazon S3
-API into the virtual filesystem. The class to be used is `OCA\Files_Primary_S3\S3Storage`:
+The S3 backend can also be used to mount the bucket of a Scality S3 object store via the Amazon S3 API into the virtual filesystem. The class to be used is `OCA\Files_Primary_S3\S3Storage`:
 
 [source,php]
 ----
