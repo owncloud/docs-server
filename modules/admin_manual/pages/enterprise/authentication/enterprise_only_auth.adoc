@@ -11,7 +11,9 @@
 
 The following table shows which authentication option is available for which edition of ownCloud. 
 
-[width="80%",cols="35%,^20%,^20%",options="header"]
+{empty}
+
+[width="70%",cols="20%,^9%,^11%",options="header"]
 |===
 | Authentication Method
 | Free Edition
@@ -33,11 +35,15 @@ The following table shows which authentication option is available for which edi
 | 
 | x
 
+| Global credentials
+| 
+| x
+
 | Credentials hardcoded in config file *
 | 
 | x
 
-| Global credentials
+| Kerberos
 | 
 | x
 
@@ -48,14 +54,20 @@ The following table shows which authentication option is available for which edi
 
 (*) Note that `Credentials hardcoded in config file` will appear only if the Windows Network Drive (WND) app is installed and enabled. As long you have WND enabled, you can also use this authentication method for other mount types. If you use this authentication method with other mount types but disable WND, you will lose the connection to all the mounts where this authentication method was used.
 
-(**) Note that `RSA public key` is only available for SFTP.
+(**) Note that `RSA public key` is only available when selecting mount type `SFTP`.
+
+Use the dropdown selector to choose the authentication backend when you create a new external mount.
+
+image::enterprise/authentication/enterprise-only-auth/authentication-backends.png[Authentication dropdown selector,width=300]
 
 == Storage Implementations
 
 The following table shows which storage implementation can use the above authentication options.
 Note that this table does not cover other storage implementations like Google Drive or One Drive etc., as those use other authentication backends.
 
-[width="70%",cols="30%,^20%,^20%",options="header"]
+{empty}
+
+[width="60%",cols="20%,^13%,^15%",options="header"]
 |===
 | Storage implementation
 | Free Edition
@@ -86,35 +98,45 @@ Note that this table does not cover other storage implementations like Google Dr
 | x
 |===
 
-Use the dropdown selector to choose the authentication backend when you create a new external mount.
-
-image:enterprise/authentication/enterprise-only-auth/auth_backends-1.png[Authentication dropdown selector.]
-
 == Authentication Option Details
+
+Log-in credentials, save in session::
+  Credentials are only stored in the session and not captured in the database. Files cannot be shared, as credentials are not stored.
+
+Log-in credentials, save in database::
+  Credentials are stored in the database, and files can be shared.
+
+User entered, store in database::
+  Users provide their own login credentials, rather than using admin-supplied credentials. User credentials are stored in the database, and files can be shared.
+
+Credentials hardcoded in config file::
+  Used when all the users will share the same password and the password is not known to the users like for a shared space. The user ID is always taken from the session. This authentication option can also be chosen when using OAuth or OpenIDConnect, etc. For more details see  xref:notes-for-credentials-hardcoded-in-config-file[Notes for Credentials Hardcoded in Config File]. Files can be shared.
+
+Global credentials::
+  With re-usable credentials entered by the admin, files can be shared based on credentials only the admin has knowledge about. Credentials are entered in a separate form via menu:Settings[Admin > Storage] (global) or menu:Settings[Personal > Storage] (personal).
++
+image::enterprise/authentication/enterprise-only-auth/global-credentials.png[Global credentials form]
+
+Kerberos::
+  With Kerberos authentication, users get authenticated via Kerberos tickets. ownCloud needs a Kerberos service account enabled for delegation. ownCloud credentials are not required.
 
 Username and password::
   This is the default; a login entered by the admin when the external mount is created. The login is stored in the database, which allows sharing and background jobs, such as file scanning, to operate.
-Log-in credentials, save in session::
-  Credentials are only stored in the session and not captured in the database. Files cannot be shared, as credentials are not stored.
-Log-in credentials, save in database::
-  Credentials are stored in the database, and files can be shared.
-User entered, store in database::
-  Users provide their own login credentials, rather than using admin-supplied credentials. User credentials are stored in the database, and files can be shared.
-Credentials hardcoded in config file::
-  Used when all the users will share the same password and the password is not known to the users like for a shared space. The user id is always taken from the session. This authentication option can also be chosen when using oAuth or OpenIDConnect etc. For more details see  xref:notes-for-credentials-hardcoded-in-config-file[Notes for Credentials Hardcoded in Config File]. Files can be shared.
-Global credentials::
-  Re-usable credentials entered by the admin, files can be shared. Global credentials are entered in a separate form.
-+
-image:enterprise/authentication/enterprise-only-auth/auth_backends-2.png[Global credentials form.]
 
 RSA public key::
 This authentication method is limited to SFTP only. Manually enter the public key or press btn:[Generate] in the mount form to generate one. Files can be shared.
 
 === Authentication Options Allowing Sharing
 
-The following table shows which authentication option allows sharing:
- 
-[width="70%",cols="50%,^20%",",options="header"]
+If available for sharing, the following will be shown additionally when defining the mount point:
+
+image::enterprise/external_storage/windows_network_drive/wnd-available-for.png[WND Sharing Options,width=350]
+
+This table shows which authentication option allows sharing:
+
+{empty}
+
+[width="50%",cols="50%,^25%",options="header"]
 |===
 | Authentication Option
 | Sharing Allowed
@@ -137,15 +159,24 @@ The following table shows which authentication option allows sharing:
 | Global credentials
 | x
 
+| Kerberos
+|
+
 | RSA public key
 | x
 |===
 
 === Notes for Credentials Hardcoded in Config File
 
-* The username taken will be the same as the `user id` of the ownCloud session. For example, ownCloud user "Alice" with password "mysecret" (or even without password) will use "Alice" as username and the password from the config.php file to access the storage. Note that for LDAP, the `user id` is usually like _1223-cbdf-cacc-1234...,_ unless the configuration in the user_ldap app is changed.
+In general, when using this authentication method, the user and the password used are separated.
 
-* The password will be fetched from a key inside the config.php file. For details see the section below. Even if the account doesn't have a password like oAuth or OpenIDConnect etc., the connection with the storage will use the password from  config.php. *Note that the password will be the same for any user accessing the particular mount!*
+* The username is the same as the `user id` of the ownCloud session. +
+For example, ownCloud user "Alice" with password "mysecret" (or even without password) will use "Alice" as username and the password from the config.php file to access the storage. Note that for LDAP, the `user id` is usually like _1223-cbdf-cacc-1234...,_ unless the configuration in the user_ldap app is changed.
+
+* The password will be fetched from a key inside the config.php file. +
+For details see the section below. Even if the account doesn't have a password like OAuth or OpenIDConnect, etc., the connection with the storage will use the password from  config.php.
++
+NOTE: The password will be the same for any user accessing the particular mount!
 
 ==== Defining key/value pairs in config.php
 
