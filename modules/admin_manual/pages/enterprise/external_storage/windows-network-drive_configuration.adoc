@@ -220,7 +220,7 @@ Note that this authentication method can only be used by ordinary users if the a
 When the xref:enterprise/authentication/kerberos.adoc[Kerberos Authentication] has been set up, a necessary config key xref:configuration/server/config_apps_sample_php_parameters.adoc#a-map-of-servers-with-the-required-kerberos-data[wnd.kerberos.servers] needs to be provided upfront in `config.php`.
 
 * `Kerberos Server ID` +
-This ID can be chosen freely from the config paramater section `wnd.kerberos.servers` and defines required parameters for the WND Kerberos setup. Multiple ID's with different setups can be created.
+This ID can be chosen from the config paramater section `wnd.kerberos.servers` and defines required parameters for the WND Kerberos setup. Multiple ID's with different setups can be created.
 * `ockeytab` +
 This is the keytab file that has been described in xref:enterprise/authentication/kerberos.adoc#keytab-files[Keytab Files].
 * `ocservice` +
