@@ -92,16 +92,16 @@ UPDATE oc_storages
 === Update the oc_accounts Table
 
 You next need to update the `home` column in the `oc_accounts` table.
-This column contains the absolute path for user folders, e.g., `/mnt/owncloud/data/my_user/files`.
+This column contains the absolute path for user folders, e.g., `/mnt/owncloud/data/my_user`.
 
 If a user does not have the path already set, you have to identify the users `id` and set the path with the following command, user by user.
-This example assumes the user name is `my_user` and their id is `1`.
+This example assumes the user name is `my_user` and their id is `1`. Note that ids are incremental, meaning the account you created first will have id `1` and so on.
 
 Run the SQL below:
 
 [source,sql]
 ----
-UPDATE oc_accounts SET home='/mnt/owncloud/data/my_user/files'
+UPDATE oc_accounts SET home='/mnt/owncloud/data/my_user'
   WHERE id=1;
 ----
 
