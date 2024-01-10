@@ -30,7 +30,6 @@ NOTE: Before Files Media Viewer 1.0.4, the _Gallery_ and _Files VideoPlayer_ app
 * {oc-marketplace-url}/apps/openidconnect[OpenID Connect]
 * xref:configuration/files/external_storage/webdav.adoc[ownCloud WebDAV Endpoint] (handles old and new webdav endpoints)
 * xref:configuration/user/user_provisioning_api.adoc[Provisioning API]
-* {oc-marketplace-url}/apps/templateeditor[Template Editor] (for notification emails)
 * Update Notifications
 * xref:configuration/user/user_auth_ftp_smb_imap.adoc[User External]
 * {oc-marketplace-url}/apps/user_ldap[User LDAP]
