@@ -146,7 +146,7 @@ For more information on command-line access, see below.
 
 Besides logging in to ownCloud via the web interface, you can access it from iOS and Android devices by installing the respective apps, and there are desktop clients available for Windows, Mac OS X and various Linux distributions.
 
-For more information, check out the xref:next@docs:ROOT:client_releases.adoc[ownCloud Client Releases]
+For more information, check out the https://doc.owncloud.com/docs_main/next/client_releases.html[ownCloud App and Client Releases]
 
 == Using External Storage
 

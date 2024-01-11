@@ -156,7 +156,7 @@ Check this option to limit the maximum expiration date to be the default. Users 
 === Automatically accept new incoming local user shares
 
 Disabling this option activates the "Pending Shares" feature. Users will be notified and have to accept new incoming user shares before they appear in the file list and are available for access giving them more control over their account. More information about
-xref:{latest-docs-version}@docs:ROOT:server_release_notes.adoc#pending-shares[pending shares]
+https://doc.owncloud.com/docs_main/next/server_release_notes.html#pending-shares[pending shares]
 can be found in the release notes.
 
 === Allow resharing
@@ -182,7 +182,7 @@ is enabled, users can still share items with any users on any instances (_includ
 === Restrict users to only share with groups they are a member of
 
 When this option is enabled, users can only share with groups they are a member of. They can still share with all users of the instance but not with groups they are not a member of. To restrict sharing to users in groups the sharer is a member of, the option _Restrict users to only share with users in their groups_ can be used. More information about
-xref:{latest-docs-version}@docs:ROOT:server_release_notes.adoc#more-granular-sharing-restrictions[granular sharing restrictions]
+https://doc.owncloud.com/docs_main/next/server_release_notes.html#more-granular-sharing-restrictions[granular sharing restrictions]
 can be found in the release notes.
 
 === Allow users to send mail notification for shared files to other users
