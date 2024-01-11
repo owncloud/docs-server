@@ -217,6 +217,8 @@ Note that this authentication method can only be used by ordinary users if the a
 
 === Special Settings when Adding a Kerberos Mountpoint
 
+NOTE: See the linked section for important information when planning to use xref:#collaborative-wnd[Collaborative WND].
+
 When the xref:enterprise/authentication/kerberos.adoc[Kerberos Authentication] has been set up, a necessary config key xref:configuration/server/config_apps_sample_php_parameters.adoc#a-map-of-servers-with-the-required-kerberos-data[wnd.kerberos.servers] needs to be provided upfront in `config.php`.
 
 * `Kerberos Server ID` +
@@ -225,12 +227,36 @@ This ID can be chosen from the config paramater section `wnd.kerberos.servers` a
 This is the keytab file that has been described in xref:enterprise/authentication/kerberos.adoc#keytab-files[Keytab Files].
 * `ocservice` +
 This is the SPN of the service user that has been described in xref:enterprise/authentication/kerberos.adoc#service-principal-name-spn[Service Principal Name (SPN)].
+* `usermapping` +
+Define a usermapping if necessary or required.
+
+// do not remove
+
+The usermapping key::
+This key has several types where you can read more about in the xref:configuration/server/config_apps_sample_php_parameters.adoc#a-map-of-servers-with-the-required-kerberos-data[wnd.kerberos.servers] config section. The `noop` type is the one mostly used which does not map. The following type is described in more detail:
++
+--
+Type EALdapAttr::
++
+Note that `usermapping` with type `EALdapAttr` is only possible with the enabled and configured {oc-marketplace-url}/apps/user_ldap[LDAP Integration] app. WND will throw an error if not.
++
+The LDAP attribute for using the correct login information is defined during the LDAP Integration app setup. On the users first time login after the LDAP Integration app has been configured, the UID will be stored in the ownCloud database and is fixed from that time on. It can be possible, that the ownCloud UID might not be usable for Kerberos like when the `objectuid` attribute has been defined for the ownCloud UID. For this case, a mapping can be defined to use a different LDAP attribute for the UID to authenticate with Kerberos. To do so, go to the LDAP settings in ownCloud at menu:Settings[General > User Authentication > Advanced > Exposed User Attributes] and enter all possible LDAP attributes which you want to use for mapping. Usually these are `userPrincipalName` and `sAMAccountName` but any can be defined. See the Microsoft https://learn.microsoft.com/en-us/windows/win32/ad/naming-properties[User Naming Attributes] for more details.
++
+image:enterprise/external_storage/windows_network_drive/wnd-ldap-exposed-user-attributes.png[LDAP Exposed User Attributes, width=300]
++
+The following rules apply for the EALdapAttr type:::
+* In the LDAP integration app settings, you can define more than one attribute allowed to map, where each attribute must be on its own line.
+* Casing the attribute name matters.
+* Each WND Kerberos Server ID block can hold exactly one `EALdapAttr`/<attribute-name> assignment, but you can define multiple Server ID's.
+* Attributes defined at ownCloud must exist on the LDAP server and users must have that attribute assigned and configured.
+* If a WND config mapping else than `noop` was defined, it will lookup the mapping first. 
+--
 
 Enter the `Kerberos Server ID` to define the server and Kerberos credentials as shown in the image below.
 
 image::enterprise/external_storage/windows_network_drive/wnd-kerberos-1.png[WND mountpoint and Kerberos credentials, width=500]
 
-Note that this authentication method can only be used by ordinary users if the admin hands over the `Kerberos Server ID` created. Consider this as very sensitive information like a password.
+Note that this authentication method can only be used by ordinary users if the admin hands over the `Kerberos Server ID` created. Consider this as a very sensitive information like a password.
 
 When the data has been entered correctly, the moint point will show up as follows:
 
@@ -508,7 +534,11 @@ NOTE: `wnd.activity.sendToSharees` key depends on the `wnd.activity.registerExte
 
 === Collaborative WND
 
-CWND can only be set by an admin in menu:Settings[Admin > Storage]. This mount type cannot be selected by users in the user section. To prepare access for your mount point using the CWND mount type, you must provide a _Service Account_ (SA) which is an ordinary SMB user granting read access to the share you want to mount. You can use one SA for all CWND mounts or separate ones. The SA is used to gather the contents of a share used by the WND Listener and provides a common `file_id` to all accessing users, while the accessing users can only access those files and folders for which they've been granted rights.
+Collaborative WND (CWND) can only be set by an admin in menu:Settings[Admin > Storage]. This mount type cannot be selected by users in the user section. To prepare access for your mount point using the CWND mount type, you must provide a _Service Account_ (SA) which is an ordinary SMB user granting read access to the share you want to mount. You can use one SA for all CWND mounts or separate ones. The SA is used to gather the contents of a share used by the WND Listener and provides a common `file_id` to all accessing users, while the accessing users can only access those files and folders for which they've been granted rights.
+
+NOTE: For obvious reasons, do not use the `$user` placeholder for the share name. It would map to the logged in users home directoy shared collaboratively.
+
+NOTE: For the time being, no CWND is possible with Kerberos because of a necessary service user which is currently not available for Kerberos.
 
 . As an admin, go to menu:Settings[Admin > Storage] and create a new CWND based mount point.
 +
