@@ -97,6 +97,27 @@ See the documentation for more details.
 'files_antivirus.av_cmd_options' => '',
 ....
 
+== App: Files PDF Viewer
+
+Possible key: `files_pdfviewer.enableScripting` STRING
+
+PDF files may contain JavaScript which for example can be necessary to process editable fields.
+Under normal circumstances and for security reasons, scripts are not allowed to be processed. To allow
+processing these scripts, the following config key can be set. Note that enabling scripting can be
+a major security issue and should be considered as possible thread vector.
+
+=== Enable Scripting in PDF files.
+
+To enable scripting in PDF files, set the value to 'yes'. Any other value will be treated
+as disable scripting.
+
+==== Code Sample
+
+[source,php]
+....
+'files_pdfviewer.enableScripting' => '',
+....
+
 == App: Files Versions
 
 Possible key: `versions_retention_obligation` STRING
@@ -815,38 +836,46 @@ it's assumed that all users belong to the same domain, otherwise
 "user001@not.mine.eu".
 
 - `EALdapAttr`: Use ownCloud's user extended attributes to map the ownCloud
-user to the target LDAP attribute. The mapping has an "attr" parameter in order
-to select the LDAP attribute you want to use. Note that it's required that
-the user_ldap app exposes the chosen attribute which requires user_ldap 0.19.0+.
-If ownCloud can't map the user, an error will be thrown.
-The same will happen for non-LDAP users.
+user to the target LDAP attribute. The mapping has 2 parameters:
+* `attr`: in order to select the LDAP attribute you want to use. Note
+that it's required that the user_ldap app exposes the chosen attribute which
+requires user_ldap 0.19.0+.
+* `nomap` (optional): a list of uids not registered in ownCloud that
+won't be mapped and be returned without any change.
+- The following scenarios will cause errors:
+** If ownCloud can't map the user and he isn't in the `nomap` list.
+** If the user is registered in ownCloud and is in the `nomap` list.
+** If it isn't a LDAP user.
 
 ==== Code Sample
 
 [source,php]
 ....
 'wnd.kerberos.servers' => [
-  'server_ID1' => [
-	'ockeytab' => '<keytab-file-location>/<user-name>.keytab',
-	'ocservice' => 'HTTP/<hostname_or_FQDN>',
-	'usermapping' => ['type' => 'Noop'],
-	'ccachettl' => 60 * 60 * 9,
-  ],
-  'server_ID2' => [
-	'ockeytab' => '<keytab-file-location>/<user-name>.keytab',
-	'ocservice' => 'HTTP/<hostname_or_FQDN>',
-	'usermapping' => ['type' => 'RemoveDomain'],
-	'ccachettl' => 60 * 60 * 9,
-  ],
-  'server_ID3' => [
-	'ockeytab' => '<keytab-file-location>/<user-name>.keytab',
-	'ocservice' => 'HTTP/<hostname_or_FQDN>',
-	'usermapping' => [
-		'type' => 'EALdapAttr',
-		'params' => ['attr' => 'userPrincipalName']
+	'server_ID1' => [
+		'ockeytab' => '<keytab-file-location>/<user-name>.keytab',
+		'ocservice' => 'HTTP/<hostname_or_FQDN>',
+		'usermapping' => ['type' => 'Noop'],
+		'ccachettl' => 60 * 60 * 9,
+	],
+	'server_ID2' => [
+		'ockeytab' => '<keytab-file-location>/<user-name>.keytab',
+		'ocservice' => 'HTTP/<hostname_or_FQDN>',
+		'usermapping' => ['type' => 'RemoveDomain'],
+		'ccachettl' => 60 * 60 * 9,
+	],
+	'server_ID3' => [
+		'ockeytab' => '<keytab-file-location>/<user-name>.keytab',
+		'ocservice' => 'HTTP/<hostname_or_FQDN>',
+		'usermapping' => [
+			'type' => 'EALdapAttr',
+			'params' => [
+				'attr' => 'userPrincipalName',
+				'nomap' => ['ocService@example.prv', 'secondaryAccount@company.com'],
+			]
 		],
-	'cachettl' => 3600,
-  ],
+		'cachettl' => 3600,
+	],
 ],
 ....
 
