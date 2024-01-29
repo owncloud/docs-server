@@ -8,7 +8,7 @@
 
 == Introduction
 
-{description} This {dockerhub-url}[official image] works standalone for a quick evaluation but is designed to be used in a docker-compose setup.
+{description} This {dockerhub-url}[official image] works standalone for a quick evaluation but is designed to be used in a docker compose setup.
 
 == Database Notes
 
@@ -169,14 +169,14 @@ The example below shows how to use {docker-compose-url}[Docker Compose].
 
 [source,docker]
 ----
-docker-compose up -d
+docker compose up -d
 ----
 --
 
 . When the process completes:
 +
 --
-Check that all the containers have successfully started, by running `docker-compose ps`. If they are all working correctly, you should see output similar to the one below:
+Check that all the containers have successfully started, by running `docker compose ps`. If they are all working correctly, you should see output similar to the one below:
 
 [width="100%",cols="30%,50%,30%,50%",options="header"]
 |===
@@ -215,7 +215,7 @@ To inspect the volumes run:
 docker volume ls | grep files
 ----
 
-The volume name depends on the project name which builds the first part of the volume and the name of the volume in the docker file. The naming pattern of the volume is `<COMPOSE_PROJECT_NAME>_<VOLUME_NAME>`. An environment variable for `COMPOSE_PROJECT_NAME` can be set and also be defined in a `.env` file. If not specified, the directory in which docker-compose is executed will be used as a name.
+The volume name depends on the project name which builds the first part of the volume and the name of the volume in the docker file. The naming pattern of the volume is `<COMPOSE_PROJECT_NAME>_<VOLUME_NAME>`. An environment variable for `COMPOSE_PROJECT_NAME` can be set and also be defined in a `.env` file. If not specified, the directory in which docker compose is executed will be used as a name.
 
 To export the files of the project "owncloud-docker-server" as a tar archive run:
 [source,docker]
@@ -232,7 +232,7 @@ functional. +
 To inspect the log output:
 [source,docker]
 ----
-docker-compose logs --follow owncloud
+docker compose logs --follow owncloud
 ----
 Wait until the output shows **Starting apache daemon...** before you access the web UI.
 ====
@@ -242,7 +242,7 @@ Wait until the output shows **Starting apache daemon...** before you access the 
 Although all important data persists after:
 [source,docker]
 ----
-docker-compose down; docker-compose up -d
+docker compose down; docker compose up -d
 ----
 there are certain details that get lost, e.g., default apps may re-appear after they were uninstalled.
 ====
@@ -261,17 +261,17 @@ Note that these will not change between deploys even if you change the values in
 
 === Stopping the Containers
 
-Again we assume you used `docker-compose` like in the previous example. +
+Again we assume you used `docker compose` like in the previous example. +
 To stop the containers use:
 [source,docker]
 ----
-docker-compose stop
+docker compose stop
 ----
 
 To stop and remove containers along with the related networks, images and volumes:
 [source,docker]
 ----
-docker-compose down --rmi all --volumes
+docker compose down --rmi all --volumes
 ----
 
 === Running occ commands
@@ -282,7 +282,7 @@ xref:configuration/server/occ_command.adoc[Using the occ Command] by entering:
 
 [source,docker]
 ----
-docker-compose exec owncloud occ <command>
+docker compose exec owncloud occ <command>
 ----
 
 [IMPORTANT]
@@ -301,14 +301,14 @@ these simple steps:
 +
 [source,docker]
 ----
-docker-compose exec owncloud occ maintenance:mode --on
+docker compose exec owncloud occ maintenance:mode --on
 ----
 
 . Create a backup of the database in case something goes wrong during the upgrade process, using the following command:
 +
 [source,docker]
 ----
-docker-compose exec mariadb \
+docker compose exec mariadb \
     /usr/bin/mysqldump \
     -u root \
     --password=owncloud \
@@ -322,7 +322,7 @@ NOTE: You need to adjust the password and database name if you have changed it i
 +
 [source,docker]
 ----
-docker-compose down
+docker compose down
 ----
 
 . Update the version number of ownCloud in your `.env` file. You can use sed
@@ -346,23 +346,23 @@ cat .env
 +
 [source,docker]
 ----
-docker-compose up -d
+docker compose up -d
 ----
 +
-Now you should have the current ownCloud running with `docker-compose`. Note that the container will
+Now you should have the current ownCloud running with `docker compose`. Note that the container will
 automatically run `occ upgrade` when starting up. If you notice the container starting over and over again,
 you can check the update log with the following command:
 +
 [source,docker]
 ----
-docker-compose logs --timestamp owncloud
+docker compose logs --timestamp owncloud
 ----
 
 . If all went well, end maintenance mode:
 +
 [source,docker]
 ----
-docker-compose exec owncloud occ maintenance:mode --off
+docker compose exec owncloud occ maintenance:mode --off
 ----
 
 === Docker Compose YAML File
@@ -383,7 +383,7 @@ include::example$installation/docker/docker-compose.yml[Example Docker Compose Y
 
 === Admin Settings
 
-When running under docker, the admin user cannot control certain settings in the WebUI, instead they are now controlled by environment variables. Changing these variables requires stopping and restarting the container with extra `docker -e ...` parameters or with new entries in the `.env` file for docker-compose.
+When running under docker, the admin user cannot control certain settings in the WebUI, instead they are now controlled by environment variables. Changing these variables requires stopping and restarting the container with extra `docker -e ...` parameters or with new entries in the `.env` file for docker compose.
 
 ==== Logging
 
@@ -429,5 +429,5 @@ If your container is terminating for whatever reason, you will not be able to ru
 
 [source,bash]
 ----
-docker(-compose) run <containername> /usr/bin/owncloud bash
+docker( compose) run <containername> /usr/bin/owncloud bash
 ----
