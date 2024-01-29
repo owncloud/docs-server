@@ -49,7 +49,7 @@ NOTE: Only one level of files and directories is returned if this header is omit
 
 === Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -78,7 +78,7 @@ This method returns an HTTP 207 (Multi-Status) status code and an XML response t
 
 If the user that you’re connecting with is authorized, then you will see output similar to the following:
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -125,7 +125,7 @@ Permanently delete a file from the trash bin.
 
 === Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -197,7 +197,7 @@ Restore a file from the trash bin.
 
 === Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::

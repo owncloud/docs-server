@@ -107,7 +107,7 @@ include::example$core/scripts/responses/shares/list-share-details-success.json[]
 
 ==== Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -202,7 +202,7 @@ endif::[]
 
 ==== Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -304,7 +304,7 @@ NOTE: The Java and Kotlin examples use https://github.com/square/okhttp[the squa
 
 ==== Example Response Payloads
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Success::
@@ -383,7 +383,7 @@ a|
 
 ==== Example Request Response Payloads
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Success::
@@ -427,7 +427,7 @@ endif::[]
 
 ==== Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -566,7 +566,7 @@ a|
 
 ==== Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -725,7 +725,7 @@ XML containing the share ID (int) of the newly created share
 
 ==== Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -916,7 +916,7 @@ Remove the given share.
 
 ==== Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -1048,7 +1048,7 @@ NOTE: Only one of the update parameters can be specified at once.
 
 ==== Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
