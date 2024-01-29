@@ -60,7 +60,7 @@ URL:
 
 Output from the application is wrapped inside a *data* element:
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 XML::
