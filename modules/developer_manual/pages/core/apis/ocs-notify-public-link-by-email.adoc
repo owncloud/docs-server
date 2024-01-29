@@ -55,7 +55,7 @@ The allowed options are `json` and `xml` (default).
 
 == Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::

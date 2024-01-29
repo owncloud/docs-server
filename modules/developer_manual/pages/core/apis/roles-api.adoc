@@ -16,7 +16,7 @@ Three things are worth noting about this API:
 == Get Roles
 
 [cols=",,",options="header",]
-|=================================================================
+|===
 | Request Path 
 | Method 
 | Content Type
@@ -24,7 +24,7 @@ Three things are worth noting about this API:
 | `ocs/v1.php/cloud/roles` 
 | `GET` 
 | `text/xml` or `text/json`
-|=================================================================
+|===
 
 === Request Parameters
 
@@ -42,7 +42,7 @@ Accepted values are `xml` and `json`.
 
 === Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -84,7 +84,7 @@ The response body lists all the available roles, along with information about ea
 
 === Example Responses
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 JSON::
@@ -128,7 +128,7 @@ The language of the response’s content can be set with {accept-language-header
 By default, the response will be in English. 
 You can see an example of requesting the response in a specific language in the code example below.
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
