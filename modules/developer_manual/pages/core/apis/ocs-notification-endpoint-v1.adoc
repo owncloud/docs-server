@@ -30,7 +30,7 @@ On success, the request returns either an XML (the default) or a JSON response, 
 
 === Example Responses
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 JSON::
@@ -71,7 +71,7 @@ endif::[]
 
 === Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -134,7 +134,7 @@ On success, the request returns either an XML (the default) or a JSON response, 
 
 ==== Response With Notifications
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 JSON::
@@ -159,7 +159,7 @@ endif::[]
 
 ==== Response Without Notifications
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 JSON::
@@ -273,7 +273,7 @@ It can be one of `GET`, `POST`, or `DELETE`.
 
 === Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
