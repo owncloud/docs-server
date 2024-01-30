@@ -7,6 +7,10 @@ nav:
 
 asciidoc:
   attributes:
+    latest-server-version: {page-component-version}   # do not change, this is the value of the version key
+    previous-server-version: {page-component-version} # do not change, this is the value of the version key
+    latest-server-download-version: {page-component-version} # do not change, this is the value of the version key
+    current-server-version: {page-component-version}         # do not change, this is the value of the version key
     minimum-php-version: '7.4'
     minimum-php-printed: '7.4.0'
     minimum-php-version-short-code: '74'
