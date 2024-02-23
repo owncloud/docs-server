@@ -10,7 +10,7 @@ When doing a new release of ownCloud Server like `10.x`, a new version branch mu
 3.  Copy the `.drone.star` file from the _former_ `10.x-1` branch
     (it contains the correct branch specific setup rules and replaces the current one coming from master)
 4.  In `.drone.star` set `latest_version` to `10.x` (on top in section `def main(ctx)`).
-5.  Check in `site.yml` in section `content.sources`: that the following value is set: `- url: .` and in `content.sources.url` the following value is set: `- HEAD`.
+5.  Check in `site.yml` in section `content.sources`: that the following value is set: `- url: .` and in `content.sources.branches` the following value is set: `- HEAD`.
 6.  In `antora.yml`, set the `version:` key on top to the same as the branch name like `10.x`
 7.  In `antora.yml`, in section `asciidoc.attributes`, DO NOT adjust relevant `-version` keys. They are only used for local building.
 8.  In `site.yml`, in section `asciidoc.attributes`, DO NOT adjust relevant `-version` keys. They are only used for local building and will be correctly set in the docs repo when doing a full build.
