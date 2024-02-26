@@ -17,7 +17,7 @@ def main(ctx):
     # Version branches never deploy themselves, but instead trigger a deployment in deployment_branch
     # This must not be changed in version branches
     deployment_branch = default_branch
-    pdf_branch = default_branch
+    pdf_branch = base_branch
 
     # Environment variables needed to generate the search index are only provided in the docs repo in .drone.star
     # Also see the documentation for more details.
