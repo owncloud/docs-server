@@ -106,7 +106,7 @@ cat resources/config/mimetypemapping.dist.json | grep image
 
 == Preview Format Requirements
 
-The following providers require the php `imagick` extension to be enabled and (check `phpinfo();`) compiled with support for these formats:
+The following providers require the php `imagick` extension to be enabled (check `phpinfo();`) and compiled with support for these formats:
 
 [source,plaintext]
 ----
