@@ -42,7 +42,7 @@ This API requires {2fa-app-url}[the 2-Factor Authentication app] to be installed
 
 === Code Example
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 Curl::
@@ -82,7 +82,7 @@ If the user was not found, then:
 
 ==== TOTP Is Valid
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 JSON::
@@ -124,7 +124,7 @@ endif::[]
 
 ==== TOTP Is Not Valid
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 JSON::
@@ -165,7 +165,7 @@ endif::[]
 
 ==== User or Secret Not Found
 
-ifeval::["{format}" == "html"]
+ifndef::format[]
 [tabs]
 ====
 JSON::

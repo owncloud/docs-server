@@ -139,7 +139,7 @@ To get started, do the following:
 
 Then you can run the created test with `phpunit`.
 
-TIP: Alternatively, you can use link:{attachmentsdir}/core/Makefile.example[the default Makefile] to automate your unit tests.
+TIP: Alternatively, you can use xref:attachment$/core/Makefile.example[the default Makefile] to automate your unit tests.
 
 If you use ownCloud functions in your class under test (i.e:
 OC::getUser()) you’ll need to bootstrap ownCloud or use dependency
