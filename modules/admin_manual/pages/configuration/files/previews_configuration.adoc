@@ -85,7 +85,12 @@ rights="none" --> rights="read|write"
 ----
 
 After changing the policy file for ImageMagick, restart your Apache web server or your php-fpm service.
-ImageMagick uses ghostscript for converting PDF. Please also make sure, that ghostscript is installed and PDF format is listed in e.g. `convert -list format`.
+ImageMagick uses ghostscript for converting PDF. Please also make sure, that ghostscript is installed and the PDF format is listed when invoking the following command:
+
+[source,bash]
+----
+convert -list format | grep -i pdf
+----
 
 === Notes for Video Preview Generation
 
