@@ -27,7 +27,7 @@ IMPORTANT: Be careful enabling preview thumbnail generation for documents which 
 
 . Preview generation can only be set for the system and not for individual mounts. 
 
-. When enabling preview generation for SVG, the preview code checks for the existence of `xlink` or `href` and disallows creating a preview. This minimizes the risk but does not eliminate it. Such a check is not made for PDF or Office documents and enabling the creation of previews for those documents can be therefore a _serious security issue_.
+. When enabling preview generation for SVG, the preview code checks for the existence of `xlink:href` to external resources and disallows creating a preview. This minimizes the risk, but does not eliminate it. Such a check is not made for PDF or Office documents and enabling the creation of previews for those documents can be therefore a _serious security issue_.
 
 . When enabling preview generation for videos (or huge image files), consider the following points:
 .. Because the video needs to be downloaded before a preview can be created, this may impact general accessibility of files for other users if the video resides on an external mount point with limited bandwidth like Google Drive.
@@ -84,7 +84,13 @@ and change:
 rights="none" --> rights="read|write"
 ----
 
-After changing the policy file for ImageMagic, restart your Apache web server or your php-fpm service.
+After changing the policy file for ImageMagick, restart your Apache web server or your php-fpm service.
+ImageMagick uses ghostscript for converting PDF. Please also make sure, that ghostscript is installed and the PDF format is listed when invoking the following command:
+
+[source,bash]
+----
+convert -list format | grep -i pdf
+----
 
 === Notes for Video Preview Generation
 
