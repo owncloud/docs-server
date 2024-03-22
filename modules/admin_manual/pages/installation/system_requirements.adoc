@@ -64,7 +64,7 @@ including all 100% compatible derivatives (please note Red Hat Enterprise Linux 
 
 | Database
 | * xref:#database-requirements[MySQL] 8+ or xref:#database-requirements[MariaDB] 10.2 through 10.11 ^1^ (*Recommended*)
-* Oracle 11 and 12 (*Enterprise only*)
+* Oracle 11 and 12 can be run in Oracle 19c with compatibility mode (*Enterprise only*)
 * PostgreSQL 9, 10, 11, 12, 13 or 14
 * SQLite (*Not for production*)
 
