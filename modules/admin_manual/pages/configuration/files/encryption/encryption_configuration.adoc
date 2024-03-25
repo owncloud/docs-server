@@ -139,11 +139,6 @@ To enable the encryption app, run the following command:
 {occ-command-example-prefix} encryption:enable
 ----
 
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} encryption:select-encryption-type masterkey -y
-----
-
 If the encryption app is successfully enabled, you should see the following confirmations:
 
 [source,plaintext]
