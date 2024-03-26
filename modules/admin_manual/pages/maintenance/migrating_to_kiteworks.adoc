@@ -15,7 +15,7 @@ image::maintenance/kiteworks-migration.drawio.svg[Migrate to Kiteworks Overview,
 
 == Overview
 
-The migration works with an app and a small binary to be installed on the ownCloud side. The app and the binary are provided by ownCloud as part of the guided migration. Both sides need to be fully configured and running upfront, have a defined minimum release installed and are reachable for each other. If release requirements are not satisfied, you MUST ugrade first.
+The migration works with an app and a small binary to be installed on the ownCloud side. The app and the binary are provided by ownCloud as part of the guided migration. Both sides need to be fully configured and running, have a defined minimum release installed and are reachable for each other. If release requirements are not satisfied, you MUST ugrade first.
 
 NOTE: ownCloud highly recommends to have the Kiteworks PCN connected and configured to an LDAP server upfront to avoid double user entries that will natuarally exist when connecting to an LDAP server after the migration has been done.
 
@@ -29,7 +29,7 @@ The following items are NOT migrated. These items need to be migrated manually.
 
 == Limitations
 
-* While ownCloud fully respects latter casing for file and folder names, Kitworks does not distinguish casings. In case there is a casing conflict file created that a user can rename accordingly his needs.
+* While ownCloud fully respects latter casing for file and folder names, Kitworks does not distinguish casings. In case, there is a casing conflict file or directory created that a user can rename accordingly his needs.
 
 == Prerequisites
 
