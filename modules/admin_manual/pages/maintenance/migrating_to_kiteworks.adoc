@@ -1,0 +1,10 @@
+= Migrating to Kiteworks Private Content Network
+:toc: right
+// :toclevels: 1
+:description: Kiteworks offers a great software stack keeping your shared data completely fenced, secured and monitored. It offers additional features ownCloud does not provide. This guide describes how to migrate an ownCloud instance to a Kiteworks Private Content Network (PCN).
+
+== Introduction
+
+{description}
+
+image::maintenance/kiteworks-migration.drawio.svg[Migrate to Kiteworks Overview, width=450]
