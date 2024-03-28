@@ -23,8 +23,6 @@ The migration process is made in the following steps which are:
 * Verify upcoming migration steps.
 * Run the migration.
 
-NOTE: If it is planned to integrate LDAP into Kiteworks, ownCloud highly recommends to have the Kiteworks PCN connected and configured to an LDAP server upfront to avoid double user entries that will naturally exist when connecting to an LDAP server after the migration has been done.
-
 === Migrated Items
 
 The following items will get migrated. In case, special rules apply and are noted:
@@ -45,7 +43,7 @@ The following items are NOT migrated. These items need to be migrated manually:
 * External mounts like +
 `WND`, `SMB`, `Google Drive`, etc. +
 This includes admin mounts and user created mounts. See the xref:#owncloud[ownCloud prerequisites] section for a special note. 
-* S3 primary object store cannot be migrated for the time being.
+* S3 primary object store (S3 for the users home) cannot be migrated for the time being.
 +
 --
 IMPORTANT: If you have configured S3 primary as your storage locataion for the users home, get in touch with {oc-support-url}[ownCloud support].
@@ -56,11 +54,38 @@ IMPORTANT: If you have configured S3 primary as your storage locataion for the u
 
 == Limitations
 
+The limitations listed here impact the migration process.
+
 * While ownCloud fully respects letter casing for file and folder names, Kitworks does not distinguish casings. In case, there is a casing conflict file or directory created that a user can rename according his needs.
 
 * When group shares have been defined, groups will not get created in Kiteworks. Instead, each member of the group will get an individual user share to the object shared.
 
-* Users have been able on the ownCloud side to login using either the display name, the login name or the email address. Kiteworks only allows to login via the email address. The presence of the users email address in ownCloud is a mandatory requirement.
+* Users have been able on the ownCloud side to login using either the display name, the login name or the email address. Kiteworks only allows to login using the email address. The presence of the users email address in ownCloud is therefore a mandatory requirement.
+
+== Conceptual Differences
+
+There are some conceptual differences between the products. See the list below for important ones _affecting the migration_ where the difference to ownCloud, if not otherwise stated, is highlighted. This list will help to identify topics addressing files, folders and shares after the migration. Note that this section does not cover using the Kitworks instance. 
+
+* Kiteworks cannot have files in the toplevel of a user's home, only folders. +
+The migration process will therefore copy all data from the users ownCloud home directory into a hard coded folder on the Kiteworks side.
+
+* Kiteworks does not have individual expiry dates for shares created. During a migration, the expiry date of an ownCloud share is rejected. 
+
+* Shares that are created on the ownCloud side that have been rejected by the share reciever are still potential active shares. This means, that these shares are also migrated and the recieving share user will see that share on the Kiteworks side.
+
+* Kiteworks recieved shared objects are shown for the recieving user at:
+** Files: in the `Shared with me` sidebar, not in the toplevel folder.
+** Folders: in the main files view (outside of the ownCloud folder tree), but not in the `Shared with me` sidebar.
+
+* The filesystem on the Kiteworks side is _case insensitive_.
+** Filename conflicts happen during migration but a conflict file will be created to point to the issue that must be solved by the user.
+
+* Kiteworks has files and folder naming rules which are ineffective during the migration. Normally:
+** File and folder names cannot contain one of the following characters: `*:"/\|<>`.
+** Folder names can't begin or end with a period.
+
++
+This helps to complete the migration, but may result in syncing issues to Windows clients. Affected files and folders can be renamed by the user. Naming rules will then be automatically enforced.
 
 == Prerequisites
 
@@ -68,26 +93,45 @@ To be prepared for the migration, both sides need to match the prerequisites. Pl
 
 === ownCloud
 
-* As a major prerequisite, the ownCloud instance *must* be running on release 10.14 or higher. If this requirement is not matched, migration can not be started as the necessary app checks the minimum version.
+* As a major prerequisite, the ownCloud instance *must* be running on release 10.14 or higher. If this requirement is not met, migration can not be started as the necessary app checks the minimum version.
 
 * Shell access is necessary. +
 `occ` commmands need to be started and `rclone` needs to be granted executable.
 
-* Install both, from ownCloud provided migration components which are:
+* Install from ownCloud provided migration components which are:
 ** the migration app
-** the custom rclone binary 
+** the custom `rclone` binary 
 
 // install rclone from github.com/oks-maytech/rclone/tree/kiteworks-backend
-//install app from github.com/owncloud/migrate_to_kiteworks
+// install app from github.com/owncloud/migrate_to_kiteworks
 
-* All users must have email-addresses and they must be unique. +
-The migration verify step will point out missing email addresses. These must be recitified before any migration can start.
+* All users must have an email address and they must be unique. +
+The `occ migration:verify` step will point out missing email addresses. These must be recitified before any migration can start.
+
+==== Installing Required Components
+
+Before you install the migration app, you must install the custom rclone binary first. The migration app will not install if rclone is missing. If you have installed rclone before, you must remove it and install the custom rclone binary instead. Post installing the rclone binary, check the output of:
+
+[source,bash]
+----
+rclone help backends
+----
+
+If the correct binary is installed it shows a list including: `Kiteworks`.
 
 === Kiteworks
 
-* As a major prerequisite, the Kiteworks instance *must* be running on the "Vanice" release or higher. If this requirement is not matched, migration can not be started.
+* As a major prerequisite, the Kiteworks instance *must* be running on the "Venice" release or higher. If this requirement is not met, migration can not be started.
 
 * You need to login in the Kiteworks appliance as system admin.
 
-* If it is planned to use LDAP or Active Directory for user authentication and group management, ownCloud *highly* recommends to configure this *before* the migration is started. If such a integration is started after the migration has been made, you will most likely have to deal with double present user entries. 
+* You must turn off any quota settings.
 
+* The Kiteworks system must provide sufficient disk space for the data to be migrated. +
+The ownCloud `occ migrate:verify` step will report the estimated disk space needed.  
+
+* If it is planned to integrate LDAP into Kiteworks:
++
+--
+NOTE: ownCloud highly recommends to have the Kiteworks PCN connected and configured to an LDAP server _upfront_ before starting the migration. This will avoid conflicting user entries that will exist in the local database compared to the LDAP server connected.
+--
