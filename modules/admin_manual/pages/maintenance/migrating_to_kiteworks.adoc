@@ -11,7 +11,7 @@ See the image below to get an overview of the building blocks of both sides.
 
 {empty} +
 
-image::maintenance/kiteworks-migration.drawio.svg[Migrate to Kiteworks Overview, width=500]
+image::maintenance/migrate_kiteworks/kiteworks-migration.drawio.svg[Migrate to Kiteworks Overview, width=500]
 
 == Overview
 
@@ -207,7 +207,7 @@ IMPORTANT: ownCloud highly recommends to have the Kiteworks PCN configured using
 
 * In the Kiteworks Admin Console, click btn:[Create Custom Application]:
 +
-image:maintenance/kiteworks-api-settings.png[Kiteworks create a new custom application, width=300]
+image:maintenance/migrate_kiteworks/kiteworks-api-settings.png[Kiteworks create a new custom application, width=300]
 +
 For the settings, use the following:
 
@@ -271,8 +271,8 @@ As output, a file named `mft-owncloud-migration.json` is created in the ownCloud
 a| Navigate to menu:System Setup[Satellite Servers] 
 a| Add a new Satellite
 
-a| image::maintenance/kiteworks-satellite.png[Kiteworks Satellites, width=300]
-a| image::maintenance/kiteworks-new-satellite.png[Kiteworks add new Satellite, width=300]
+a| image::maintenance/migrate_kiteworks/kiteworks-satellite.png[Kiteworks Satellites, width=300]
+a| image::maintenance/migrate_kiteworks/kiteworks-new-satellite.png[Kiteworks add new Satellite, width=300]
 |===
 
 === Migration Verification
@@ -387,8 +387,8 @@ Such a setting can greatly speed up the transfer of many small files, but can al
 | Data IO System Utilisation
 | CPU System Utilisation
 
-a| image::maintenance/kiteworks-system-load-dataio.png[Kiteworks Performance Details DataIO, width=300]
-a| image::maintenance/kiteworks-system-load-cpu.png[Kiteworks Performance Details CPU, width=300]
+a| image::maintenance/migrate_kiteworks/kiteworks-system-load-dataio.png[Kiteworks Performance Details DataIO, width=300]
+a| image::maintenance/migrate_kiteworks/kiteworks-system-load-cpu.png[Kiteworks Performance Details CPU, width=300]
 |===
 
 The graphs show results from a test system.
