@@ -63,7 +63,7 @@ NOTE: If you have used the guest users feature, get in touch with {oc-support-ur
 
 The following limitations impact the migration process:
 
-* While ownCloud fully respects letter casing for file and folder names, Kitworks does not distinguish casings. If case conflicts happen during the migration process, a migration log file describing rclone responses and casing conflicts for files or directories is created. The ownCloud admin must resolve the conflicts to finalize the migration. For details see the xref:migration[Migration] description.
+* While ownCloud fully respects letter casing for file and folder names, Kiteworks does not distinguish casings. If case conflicts happen during the migration process, a migration log file describing rclone responses and casing conflicts for files or directories is created. The ownCloud admin must resolve the conflicts to finalize the migration. For details see the xref:migration[Migration] description.
 
 * When group shares have been defined, groups will not get created in Kiteworks. Instead, each member of the group will get an individual user share to the object shared.
 
@@ -73,7 +73,7 @@ The following limitations impact the migration process:
 
 == Conceptual Differences
 
-There are some conceptual differences between the products. See the list below for important ones _affecting the migration_ where the difference to ownCloud, if not otherwise stated, is highlighted. This list will help to identify topics addressing files, folders and shares after the migration. Note that this section does not cover using the Kitworks instance. 
+There are some conceptual differences between the products. See the list below for important ones _affecting the migration_ where the difference to ownCloud, if not otherwise stated, is highlighted. This list will help to identify topics addressing files, folders and shares after the migration. Note that this section does not cover using the Kiteworks instance. 
 
 * Kiteworks cannot have files in the toplevel of a user's home, only folders. +
 The migration process will therefore copy all files from the users ownCloud home directory into a folder named `ownCloud` on the Kiteworks users top level data structure.
@@ -105,7 +105,7 @@ To be prepared for the migration, both sides need to match the prerequisites. Pl
 * As a major prerequisite, the ownCloud instance *must* be running on release 10.14 or higher. If this requirement is not met, migration can not be started as the necessary app checks the minimum version.
 
 * Shell access is necessary. +
-`occ` commmands need to be started and `rclone` needs to be granted executable permissions.
+`occ` commands need to be started and `rclone` needs to be granted executable permissions.
 
 * The ownCloud-provided migration components must be installed at the ownCloud instance. They are:
 ** the `migrate-to-kiteworks` app
@@ -222,11 +222,11 @@ Note, the redirect URI is not used, entering the example is therefore ok.
 Note that you only see that once, remember it!
 
 +
-These two values are needed to initialize the xref:migration-initialisation[ownCloud migration app].
+These two values are needed to initialize the xref:migration-initialization[ownCloud migration app].
 
 Finally, you have the following Kiteworks values that are needed for the next steps. We recommend to have them saved as shell variables for ease of use. In the upcoming examples, the following names represent the corresponding values:
 
-* Hostname or IP +
+* Host name or IP address+
 `KW_HOST`
 
 * Admin users eMail address +
@@ -242,15 +242,15 @@ Finally, you have the following Kiteworks values that are needed for the next st
 
 After the above prerequisites have been met, the migration process can be started. The process has the following steps:
 
-* Initialisation
+* Initialization
 * Verification
 * Migration
 
 NOTE: Both the verification and migration command need the initialisation step upfront to properly communicate with the Kiteworks instance.
 
-=== Migration Initialisation
+=== Migration Initialization
 
-The migration initialisation is a mandatory step and will create a json file that is used to create a so called "Satellite" on the Kiteworks instance.
+The migration initialization is a mandatory step and will create a json file that is used to create a so called "Satellite" on the Kiteworks instance.
 
 [source,bash]
 ----
@@ -277,7 +277,7 @@ a| image::maintenance/migrate_kiteworks/kiteworks-new-satellite.png[Kiteworks ad
 
 === Migration Verification
 
-A potential migration *must* be verified upfront with a positive ready message as response. This command will also ouput the required space capacity used on the Kiteworks side. The verify command currently cannot report problematic file or folder names. These are reported only during the migration process. Note that any issue reported must be solved and a verification needs to be redone before the final migration can finish.
+A potential migration *must* be verified upfront with a positive ready message as response. This command will also output the required space capacity needed on the Kiteworks side. The verify command currently cannot report problematic file or folder names. These are reported only during the migration process. Note that any issue reported must be solved and a verification needs to be redone before the final migration can finish.
 
 [source,bash]
 ----
@@ -386,8 +386,8 @@ Such a setting can greatly speed up the transfer of many small files, but can al
 
 [role=center,width=80%,cols="^.^50%,^.^50%",options="header"]
 |===
-| Data IO System Utilisation
-| CPU System Utilisation
+| Data IO System Utilization
+| CPU System Utilization
 
 a| image::maintenance/migrate_kiteworks/kiteworks-system-load-dataio.png[Kiteworks Performance Details DataIO, width=300]
 a| image::maintenance/migrate_kiteworks/kiteworks-system-load-cpu.png[Kiteworks Performance Details CPU, width=300]
