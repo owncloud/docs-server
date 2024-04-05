@@ -95,20 +95,9 @@ When using a HSM, see the additional information provided at xref:configuration/
 
 == Encryption Types
 
-ownCloud provides two encryption types:
+ownCloud only provides the master key encryption type. There is only one key (or key pair) and all files are encrypted using that key pair.
 
-[width="90%",cols="20%,80%",]
-|===
-| *Master Key:*
-| There is only one key (or key pair) and all files are encrypted using that key pair.
-
-| *User-Key:*
-a| Every user has their own private/public key pairs, and the private key is protected by the user’s password.
-
-IMPORTANT: User-Key encryption has been deprecated with https://doc.owncloud.com/docs_main/next/server_release_notes.html#deprecation-note-for-user-key-storage-encryption[ownCloud release 10.7]
-|===
-
-WARNING: These encryption types are *not compatible*.
+IMPORTANT: User-Key encryption has been deprecated with https://doc.owncloud.com/docs_main/next/server_release_notes.html#deprecation-note-for-user-key-storage-encryption[ownCloud release 10.7]. Existing installations using this method must xref:maintenance/encryption/migrating-from-user-key-to-master-key.adoc[migrate] to master key encryption.
 
 == Before Enabling Encryption
 
@@ -190,15 +179,6 @@ Then enable encryption, using the following command:
 {occ-command-example-prefix} encryption:enable
 ----
 
-After that, enable the master key, using the following command:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} encryption:select-encryption-type masterkey
-----
-
-NOTE: The master key mode has to be set up in a newly created instance.
-
 Finally, encrypt all data, using the following command:
 
 [source,bash,subs="attributes+"]
@@ -274,63 +254,6 @@ Take it out of single-user mode when you are finished, by using the following co
 ====
 You may only disable encryption by using the xref:configuration/server/occ_command.adoc#encryption[occ Encryption Commands]. Make sure you have backups of all encryption keys, including those for all your users if user key encryption was selected.
 ====
-
-== User-Key-Based Encryption (Deprecated )
-
-=== Limitations of User-Key-Based Encryption 
-
-* Deprecated with https://doc.owncloud.com/docs_main/next/server_release_notes.html#deprecation-note-for-user-key-storage-encryption[ownCloud release 10.7]
-* Users added to groups cannot decrypt files on existing shares.
-* OnlyOffice will not work.
-* Impersonate will not work.
-* OAuth2 will not work.
-* Elasticsearch will not work.
-* Users getting access to an external storage which already contains encrypted files cannot get access to said files for reasons such as the group case above.
-* When having data shared with a group and group membership changes after the share is established, subsequently added users will not be able to open the shared data unless the owner will share it again.
-
-=== Enabling User-Key-Based Encryption From the Command-line
-
-To avoid any issues on a running instance, put your server in single user mode with the following command:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} maintenance:singleuser --on
-----
-
-If not already done, enable the default encryption module app, using the following command:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} app:enable encryption
-----
-
-After that, enable encryption, using the following command:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} encryption:enable
-----
-
-Then, enable the user-key, using the following command:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} encryption:select-encryption-type user-keys
-----
-
-Finally, encrypt all data, using the following command:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} encryption:encrypt-all --yes
-----
-
-Now you can turn off the single user mode:
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} maintenance:singleuser --off
-----
 
 === View Current Encryption Status
 
