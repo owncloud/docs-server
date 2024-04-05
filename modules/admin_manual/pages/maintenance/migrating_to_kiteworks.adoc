@@ -23,6 +23,8 @@ The migration process consists of these steps:
 * Verify upcoming migration steps.
 * Run the migration.
 
+For the planning, the ownCloud instance can stay productive during the migration process. Migration can be interrupted and restarted. For the final step, before shutting down the ownCloud instance, it is recommended to put it into maintenance mode to have a clean final transfer.
+
 === Migrated Items
 
 The following items will be migrated. In some cases, special rules apply as noted:
@@ -117,11 +119,11 @@ To be prepared for the migration, both sides need to match the prerequisites. Pl
 * All users must have an email address and they must be unique. +
 The `occ migration:verify` step will point out missing email addresses. These must be rectified before any migration can start.
 
-* ownCloud highly recommends installing and enabling, if not already present and enabled, the {oc-marketplace-url}/apps/impersonate[Impersonate] app. This app can be used to solve file and folder case conflicts that can be reported during the migration process.
+* We highly recommend installing and enabling, if not already present and enabled, the {oc-marketplace-url}/apps/impersonate[Impersonate] app. This app can be used to solve file and folder case conflicts that can be reported during the migration process.
 
 ==== Installing Required Components
 
-* Before you install the migration app, you should install the custom rclone binary first. The migration app can not be activated if rclone is missing. If you have installed rclone before, we recommend to uninstall and install the custom rclone binary instead. After installing the rclone binary and making it executable, check the output of:
+* Before you install the migration app, you must install the custom `rclone` binary first. The migration app can not be activated if the _correct_ rclone is missing. If you have installed rclone before, we recommend to uninstall and install the custom rclone binary instead. After installing the rclone binary and making it executable, check the output of:
 +
 --
 [source,bash]
@@ -134,7 +136,7 @@ If the correct binary is installed and executed, it shows a list including: `Kit
 [NOTE]
 ====
 * You may need to specify the path to rclone, if it is not already part of the `$PATH` variable.
-* You can define the rclone binary to be used in the *occ migration command* by specifying the path within the `sudo` command. Optionally, other rclone relevant environment variables go to the same place. If needed, adapt the example command shown in the xref:migration[migration section] as follows:
+* We always specify the path to the rclone binary to be used in the *occ migration command* within the `sudo` command. Optionally, other rclone relevant environment variables go to the same place. If needed, adapt the example command shown in the xref:migration[migration section] as follows:
 +
 [source,bash]
 ----
@@ -147,7 +149,7 @@ sudo -u www-data \
 ----
 ====
 
-rclone expects a config file and will report if it is missing which can pollute the migration log file. An empty config file is sufficient to avoid the message. If you see in the migration log the following message: `/<user-home>/.config/rclone/rclone.conf not found - using defaults`, you can create an `rclone.conf` file with the following command. Replace `<user-home>` with the user you are logged in as.
+`rclone` expects a config file and will report if it is missing which can pollute the migration log file. An empty config file is sufficient to avoid the message. If you see in the migration log the following message: `/<user-home>/.config/rclone/rclone.conf not found - using defaults`, you can create an `rclone.conf` file with the following command. Replace `<user-home>` with the user you are logged in as.
 
 [source,bash]
 ----
@@ -157,7 +159,7 @@ touch /<user-home>/.config/rclone/rclone.conf
 
 In all examples using the `occ` command we assume, that ownCloud is installed at `/var/www/owncloud`. Adapt the path according your environment.
 
-* After rclone has been installed, you must install and enable the migration app.
+* After `rclone` has been installed, you must install and enable the migration app.
 ** First, copy the app into the ownClouds `apps` or `apps-external` folder, preferably the latter, if it exists.
 ** Set the correct user and group permissions according your environment.
 ** Finally enable it with the following command:
@@ -165,6 +167,7 @@ In all examples using the `occ` command we assume, that ownCloud is installed at
 [source,bash]
 ----
 sudo -u www-data \
+  PATH=/usr/local/bin \
   php /var/www/owncloud/occ \
   app:enable migrate_to_kiteworks
 ----
@@ -196,13 +199,13 @@ For ease of migrating external mounts, the admin should:
 * If it is planned to integrate Kiteworks into LDAP:
 +
 --
-IMPORTANT: ownCloud highly recommends to have the Kiteworks PCN connected and configured to an LDAP server _before_  starting the migration. This will avoid conflicting user entries that will exist in the local database additionally to the LDAP server connected.
+IMPORTANT: We recommend to have the Kiteworks PCN connected and configured to an LDAP server _before_  starting the migration. This will avoid conflicting user entries that will exist in the local database additionally to the LDAP server connected.
 --
 
 * If it is planned to use a virus scanner in Kiteworks:
 +
 --
-IMPORTANT: ownCloud highly recommends to have the Kiteworks PCN configured using a virus scanner _before_ starting the migration. This way infected files will be put under quarantine already during migration.
+IMPORTANT: We recommend to have the Kiteworks PCN configured using a virus scanner _before_ starting the migration. This way, infected files will be put under quarantine already during migration.
 --
 
 * In the Kiteworks Admin Console, click btn:[Create Custom Application]:
@@ -213,20 +216,20 @@ For the settings, use the following:
 
 ** Use a speaking name
 ** Check btn:[Authorization Code]
-** Set the btn:[Access Token Lifetime] to a value that covers the expected migration time.
-** Add a Redirect URI based on the inline example. +
-Note, the redirect URI is not used, entering the example is therefore ok.
+** The btn:[Access Token Lifetime] can be set to the default value.
+** Set the btn:[Redirect URI] to the default example value as shown when clicking into the field. +
+Note, the redirect URI is not used, entering the default example is therefore ok.
 * You will get a:
 ** Client application ID
 ** Secret key +
-Note that you only see that once, remember it!
+Note that you only see the secret once, remember it!
 
 +
 These two values are needed to initialize the xref:migration-initialization[ownCloud migration app].
 
 Finally, you have the following Kiteworks values that are needed for the next steps. We recommend to have them saved as shell variables for ease of use. In the upcoming examples, the following names represent the corresponding values:
 
-* Host name or IP address+
+* Host name or IP address +
 `KW_HOST`
 
 * Admin users eMail address +
@@ -250,7 +253,7 @@ NOTE: Both the verification and migration command need the initialisation step u
 
 === Migration Initialization
 
-The migration initialization is a mandatory step and will create a json file that is used to create a so called "Satellite" on the Kiteworks instance.
+The migration initialization is a mandatory step and will create a json file that is used to create a so called "Satellite" - a trusted partner - on the Kiteworks instance.
 
 [source,bash]
 ----
@@ -262,7 +265,7 @@ sudo -u www-data php \
   $KW_SECRET
 ----
 
-As output, a file named `mft-owncloud-migration.json` is created in the ownCloud root folder. Upload this file when adding a new satellite. The satellite must be switched to STATUS btn:[ON].
+As output, a file named `mft-owncloud-migration.json` is created in the ownCloud root folder. Upload this file when adding a new satellite on the Kiteworks instance. The satellite must be switched to STATUS btn:[ON].
 
 {empty} +
 
@@ -277,7 +280,7 @@ a| image::maintenance/migrate_kiteworks/kiteworks-new-satellite.png[Kiteworks ad
 
 === Migration Verification
 
-A potential migration *must* be verified upfront with a positive ready message as response. This command will also output the required space capacity needed on the Kiteworks side. The verify command currently cannot report problematic file or folder names. These are reported only during the migration process. Note that any issue reported must be solved and a verification needs to be redone before the final migration can finish.
+A potential migration *must* be verified upfront with a positive ready message as response. This command will also output the required space capacity needed on the Kiteworks side. The verify command currently cannot report problematic file or folder names. These are reported only during the migration process. Note that any issue reported must be solved and a verification needs to be redone before the final migration can start.
 
 [source,bash]
 ----
@@ -287,7 +290,7 @@ sudo -u www-data \
   $KW_ADMIN_USER
 ----
 
-Here are some possible output examples:
+Here are some possible verification output examples:
 
 .Example 1 - ready to migrate
 [source,plaintext]
@@ -312,13 +315,12 @@ This instance is NOT ready to be migrated to Kiteworks!
 
 === Migration
 
-After all prerequisites, installations, configurations and the verification has passed, you can initiate the migration process. This process may take some time to copy all files to the new system.
-Note that a migration run can be interrupted harmlessly at any time. Starting a new migration run will continue where the previous one stopped. 
-For a possible improvement of transfer performance, read the xref:tuning-transfer-performance[Tuning Transfer Performance] section below. Issue the following command to start the migration:
+After all prerequisites, installations, configurations and the verification has passed, you can initiate the migration process. This process may take some time to copy all files to the new system. Note that a migration run can be interrupted harmlessly at any time. Starting a new migration run will continue where the previous one stopped. For a possible improvement of transfer performance, read the xref:tuning-transfer-performance[Tuning Transfer Performance] section below. Issue the following command to start the migration:
 
 [source,bash]
 ----
 sudo -u www-data \
+  PATH=/usr/local/bin \
   php /var/www/owncloud/occ \
   migrate:to-kiteworks \
   $KW_ADMIN_USER
@@ -326,17 +328,17 @@ sudo -u www-data \
 
 During the migration process, a log file named `migrate-kiteworks-<timestamp>.csv` is created in the ownCloud root folder. This file contains:
 
-* general rclone responses and errors,
-* rclone responses for user migration,
+* General `rclone` responses and errors,
+* `rclone` responses for user migration,
 * File name case conflicts that an ownCloud admin must solve.
 
-Any transfer that can be processed by rclone will finish.
+If `rclone` errors at one point, it tries to finish running transfers but will stop afterwards. 
 
 .Example for migration issues reported
 [source,plaintext]
 ----
-Issues did arise when migrating files and folders..
-Please review migrate-kiteworks-<timestamp>.csv and fix any issues which have been reported.
+Issues did arise when migrating files and folders.
+Please review migrate-kiteworks-1712241364.csv and fix any issues which have been reported.
 
 Once resolved please re-run the migration process again.
 
@@ -353,15 +355,13 @@ NOTICE,user2,user2@example.com,"2024/04/03 15:20:32
   NOTICE: Documents/Example.odt: Duplicate object found in source - ignoring"
 ----
 
-As you can see above, there is a case conflict for a file and another one for a directory name. The conflict takes place because a file or directory that has been migrated earlier is in conflict with the name of the reported object. The conflicts for the particular users need to be resolved within ownCloud. When this is done, the migration can be restarted. Rclone will compare both sides to identify already migrated objects and will continue with those objects that have not been migrated yet.
+As you can see above, there is a case conflict for a file and another one for a directory name. The conflict takes place because a file or directory that has been migrated earlier is in conflict with the name of the reported object. The conflicts for the particular users need to be resolved within ownCloud. When this is done, the migration can be restarted. `rclone` will compare both sides to identify already migrated objects and will continue with those objects that have not been migrated yet.
 
 ==== Solving Casing Conflicts
 
 If there are case conflicts reported in the shell and/or the migration log, the ownCloud admin must solve them to continue the migration. 
 
 For reported conflicts, the admin should impersonate the user with the conflict and solve it by renaming the file or directory according the Kiteworks naming rules. After fixing all open issues, the migration can be restarted and all formerly conflicted files or folders will get migrated.
-
-Note that a migration restart will only migrate objects that have not been migrated so far.
 
 == Tuning Transfer Performance
 
@@ -374,6 +374,7 @@ The following example command is using 32 parallel transfers:
 [source,bash]
 ----
 sudo -u www-data \
+  PATH=/usr/local/bin \
   RCLONE_TRANSFERS=32 \
   php /var/www/owncloud/occ \
   migrate:to-kiteworks \
