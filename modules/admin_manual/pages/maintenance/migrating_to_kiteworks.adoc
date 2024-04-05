@@ -262,7 +262,7 @@ sudo -u www-data php \
   migrate:to-kiteworks:init \
   $KW_HOST \
   $KW_APPLICATION_ID \
-  $KW_SECRET
+  "$KW_SECRET"
 ----
 
 As output, a file named `mft-owncloud-migration.json` is created in the ownCloud root folder. Upload this file when adding a new satellite on the Kiteworks instance. The satellite must be switched to STATUS btn:[ON].
