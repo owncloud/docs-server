@@ -515,7 +515,6 @@ Enable the HSM mode and enable encryption by running the commands in the followi
 ----
 {occ-command-example-prefix} app:enable encryption
 {occ-command-example-prefix} config:app:set encryption hsm.url --value 'http://localhost:8513'
-{occ-command-example-prefix} encryption:select-encryption-type masterkey
 {occ-command-example-prefix} encryption:enable
 ----
 
