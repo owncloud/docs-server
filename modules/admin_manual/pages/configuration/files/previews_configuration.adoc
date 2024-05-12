@@ -192,6 +192,20 @@ The example below adds the preview provider for `SGI` and `HEIC` images:
 
 NOTE: You have to add all default providers if you do not want to disable them.
 
+=== Maximum Image Dimensions
+
+Images up to a certain size feature preview generation (thumbnails and media viewer renderings). Images above that size show a default icon.
+The default value is defined in `config/config.sample.php` as `6016x4000` which is sufficient for 24MP landscape images.
+
+The following example would change the limit so that 24MP portrait images also feature preview generation:
+
+[source,php]
+----
+  'preview_max_dimensions' => '6016x6016',
+----
+
+NOTE: The dimensions here limit the size of the original image (input to the preview generator). The settings below limit the size of the generated preview images (output).
+
 === Maximum Preview Size
 
 There are two configuration options for setting the maximum size (in pixels) of a preview. These are `preview_max_x` which represents the x-axis and `preview_max_y` which represents the y-axis. The default value you can reference in `config/config.sample.php` is set to 2048.
