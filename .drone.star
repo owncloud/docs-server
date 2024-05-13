@@ -174,7 +174,7 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
                 "image": "plugins/slack",
                 "settings": {
                     "webhook": from_secret("rocketchat_talk_webhook"),
-                    "channel": "documentation",
+                    "channel": "builds",
                 },
                 "when": {
                     "event": [
