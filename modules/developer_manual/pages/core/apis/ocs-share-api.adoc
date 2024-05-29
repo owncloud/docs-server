@@ -676,8 +676,11 @@ The permissions to set on the share.
 * 2 = update;
 * 4 = create;
 * 8 = delete;
-* 15 = read/write/delete;
 * 16 = share;
+
+Common example combinations are:
+
+* 15 = read/write/delete;
 * 31 = All permissions.
 
 | expireDate
