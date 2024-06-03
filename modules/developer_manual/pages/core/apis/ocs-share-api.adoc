@@ -680,7 +680,7 @@ The permissions to set on the share.
 
 Common example combinations are:
 
-* 15 = read/write/delete;
+* 15 = read/write(update and create)/delete;
 * 31 = All permissions.
 
 | expireDate
