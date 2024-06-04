@@ -204,7 +204,7 @@ The following example would change the limit so that 24MP portrait images also f
   'preview_max_dimensions' => '6016x6016',
 ----
 
-NOTE: The dimensions here limit the size of the original image (input to the preview generator). The settings below limit the size of the generated preview images (output).
+NOTE: The dimensions here limit the size of the original image (input to the preview generator). A setting below limits the size of the generated preview images (output). For more details see the xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-dimensions-of-the-original-image-for-preview-generation[Define the maximum dimensions of the original image for preview generation].
 
 === Maximum Preview Size
 
