@@ -1,5 +1,5 @@
 #!/bin/bash
-# version 2022.01.21
+# version 2024.06.05
 
 if ! [ -x "$(command -v jq)" ]; then
   echo
@@ -178,10 +178,11 @@ echo "${commitList}" | while IFS= read -r line; do
   fi
 
   # pull this commit into the new branch
+  # --allow-empty is required if an empty commit is present like when when retriggering the CI.
   # if you do not want to use a default conflict resolution to take theirs
   # (help fix missing cherry picked commits or file renames)
-  #git cherry-pick ${line} > /dev/null 
-  git cherry-pick -Xtheirs "${line}" > /dev/null 
+  #git cherry-pick --allow-empty ${line} > /dev/null 
+  git cherry-pick --allow-empty -Xtheirs "${line}" > /dev/null 
   lC=$(( ${lC} + 1 ))
 done
 
@@ -192,7 +193,7 @@ echo
 ## rewrite the most recent commit message
 ## the first -m creates the PR headline text
 ## the second -m creates the PR message text
-git commit --quiet --amend -m "${message}" -m "Backport of PR #${pullId}"
+git commit --allow-empty --quiet --amend -m "${message}" -m "Backport of PR #${pullId}"
 
 echo "Pushing: ${message}"
 echo
