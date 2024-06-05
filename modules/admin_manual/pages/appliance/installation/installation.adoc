@@ -22,7 +22,7 @@ This license has to be imported into the appliance via the *web interface*.
 
 First off, you need to download the ownCloud X Appliance from the
 https://owncloud.com/download-server/#appliance[ownCloud Appliance download page].
-You can select various appliance types to download like _VMWare ESXi_, _ Oracle VirtualBox_, _QCOW2 (KVM)_ and _VMWare Player_.
+You can select various appliance types to download like _VMWare ESXi_, _Oracle VirtualBox_, _QCOW2 (KVM)_ and _VMWare Player_.
 
 Fill out the form to download the documentation which will be delivered directly in your inbox. Alternatively you can view it online.
 
