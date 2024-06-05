@@ -8,11 +8,11 @@ content:
   - url: .
     branches:
     - HEAD
-  # the docs git is just present for the test build to satisfy used references
+  # the docs-xxx git is just present for the test build to satisfy used references
   # the real build is made in the docs repo using correct values
-  - url: https://github.com/owncloud/docs.git
-    branches:
-    - master
+  #- url: https://github.com/owncloud/docs-main.git
+  #  branches:
+  #  - master
   - url: https://github.com/owncloud/docs-webui.git
     branches:
     - master
@@ -38,9 +38,6 @@ asciidoc:
     experimental: true
     # Antora pagination (prev page, next page)
     page-pagination: true
-    # Custom attribute page-component-build-list
-    # Only embed named opengraph images in docs-ui via partials/head-meta-opengraph.hbs
-    page-component-build-list: 'docs, server, ocis, webui, user, desktop, ios-app, android'
 #   common
     docs-base-url: 'https://doc.owncloud.com'
     oc-complete-base-url: 'https://download.owncloud.com/server/stable'
@@ -49,14 +46,13 @@ asciidoc:
     oc-marketplace-url: 'https://marketplace.owncloud.com'
     oc-central-url: 'https://central.owncloud.org'
     oc-support-url: 'https://owncloud.com/support'
-#   docs
-    latest-docs-version: 'next'
-    previous-docs-version: 'next'
 #   server
-    latest-server-version: '10.13'
-    latest-server-download-version: '10.13.0'
-    previous-server-version: '10.12'
-    current-server-version: '10.13'
+    # note that the version attributes just need to be present and have next as key
+    # as they are just here for the test build
+    latest-server-version: 'next@'   # do not change, soft set, correctly defined via antora.yml
+    previous-server-version: 'next@' # do not change, soft set, correctly defined via antora.yml
+    latest-server-download-version: 'next@' # do not change, soft set, correctly defined via antora.yml
+    current-server-version: 'next@'         # do not change, soft set, correctly defined via antora.yml
     oc-changelog-url: 'https://owncloud.com/changelog/server/'
     oc-install-package-url: 'https://download.owncloud.com/server/stable/?sort=time&order=asc'
     oc-examples-server-url: 'https://owncloud.install.com/owncloud'
@@ -76,27 +72,14 @@ asciidoc:
 #   webui
     latest-webui-version: 'next'
     previous-webui-version: 'next'
-#   ocis
-    latest-ocis-version: 'next'
-    previous-ocis-version: 'next'
-    ocis-actual-version: '4.0.4'
-    ocis-former-version: '3.0.0'
-    ocis-compiled: '2023-06-07 00:00:00 +0000 UTC'
-    ocis-downloadpage-url: 'https://download.owncloud.com/ocis/ocis/stable/'
-#   desktop
-    latest-desktop-version: 'next'
-    previous-desktop-version: 'next'
-#   ios-app
-    latest-ios-version: 'next'
-    previous-ios-version: 'next'
-#   android
-    latest-android-version: 'next'
-    previous-android-version: 'next'
-#   branded
-    latest-branded-version: 'next'
-    previous-branded-version: 'next'
   extensions:
-    - ./lib/extensions/tabs.js
-    - ./lib/extensions/remote-include-processor.js
-    - ./node_modules/asciidoctor-kroki/src/asciidoctor-kroki.js
+    - ./ext-asciidoc/tabs.js
+    - ./ext-asciidoc/remote-include-processor.js
+    - asciidoctor-kroki
 
+antora:
+  extensions:
+    - ./ext-antora/generate-index.js
+
+# note that when we do pdf generation with Antora assembler, we need to add the attribute:
+# format: 'pdf' to the build process (to be checked if needed also in the docs repo)
