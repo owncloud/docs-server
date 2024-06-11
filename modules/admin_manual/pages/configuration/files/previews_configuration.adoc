@@ -27,7 +27,7 @@ IMPORTANT: Be careful enabling preview thumbnail generation for documents which 
 
 . Preview generation can only be set for the system and not for individual mounts. 
 
-. When enabling preview generation for SVG, the preview code checks for the existence of `xlink` or `href` and disallows creating a preview. This minimizes the risk but does not eliminate it. Such a check is not made for PDF or Office documents and enabling the creation of previews for those documents can be therefore a _serious security issue_.
+. When enabling preview generation for SVG, the preview code checks for the existence of `xlink:href` to external resources and disallows creating a preview. This minimizes the risk, but does not eliminate it. Such a check is not made for PDF or Office documents and enabling the creation of previews for those documents can be therefore a _serious security issue_.
 
 . When enabling preview generation for videos (or huge image files), consider the following points:
 .. Because the video needs to be downloaded before a preview can be created, this may impact general accessibility of files for other users if the video resides on an external mount point with limited bandwidth like Google Drive.
@@ -84,7 +84,13 @@ and change:
 rights="none" --> rights="read|write"
 ----
 
-After changing the policy file for ImageMagic, restart your Apache web server or your php-fpm service.
+After changing the policy file for ImageMagick, restart your Apache web server or your php-fpm service.
+ImageMagick uses ghostscript for converting PDF. Please also make sure, that ghostscript is installed and the PDF format is listed when invoking the following command:
+
+[source,bash]
+----
+convert -list format | grep -i pdf
+----
 
 === Notes for Video Preview Generation
 
@@ -106,7 +112,7 @@ cat resources/config/mimetypemapping.dist.json | grep image
 
 == Preview Format Requirements
 
-The following providers require the php `imagick` extension:
+The following providers require the php `imagick` extension to be enabled (check `phpinfo();`) and compiled with support for these formats:
 
 [source,plaintext]
 ----
@@ -185,6 +191,20 @@ The example below adds the preview provider for `SGI` and `HEIC` images:
 ----
 
 NOTE: You have to add all default providers if you do not want to disable them.
+
+=== Maximum Image Dimensions
+
+Images up to a certain size feature preview generation (thumbnails and media viewer renderings). Images above that size show a default icon.
+The default value is defined in `config/config.sample.php` as `6016x4000` which is sufficient for 24MP landscape images.
+
+The following example would change the limit so that 24MP portrait images also feature preview generation:
+
+[source,php]
+----
+  'preview_max_dimensions' => '6016x6016',
+----
+
+NOTE: The dimensions here limit the size of the original image (input to the preview generator). A setting below limits the size of the generated preview images (output). For more details see the xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-dimensions-of-the-original-image-for-preview-generation[Define the maximum dimensions of the original image for preview generation].
 
 === Maximum Preview Size
 

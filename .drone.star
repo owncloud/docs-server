@@ -6,7 +6,7 @@ def main(ctx):
     # Version shown as latest in generated documentations
     # It's fine that this is out of date in version branches, usually just needs
     # adjustment in master/deployment_branch when a new version is added to site.yml
-    latest_version = "10.13"
+    latest_version = "10.14"
     default_branch = "master"
 
     # Current version branch (used to determine when changes are supposed to be pushed)
@@ -18,6 +18,9 @@ def main(ctx):
     # This must not be changed in version branches
     deployment_branch = default_branch
     pdf_branch = default_branch
+
+    # Environment variables needed to generate the search index are only provided in the docs repo in .drone.star
+    # Also see the documentation for more details.
 
     return [
         checkStarlark(),
@@ -86,33 +89,17 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
             {
                 "name": "docs-deps",
                 "pull": "always",
-                "image": "owncloudci/nodejs:16",
+                "image": "owncloudci/nodejs:18",
                 "commands": [
                     "yarn install",
                 ],
             },
             {
-                "name": "docs-validate",
-                "pull": "always",
-                "image": "owncloudci/nodejs:16",
-                "commands": [
-                    "yarn validate --fetch",
-                ],
-            },
-            {
                 "name": "docs-build",
                 "pull": "always",
-                "image": "owncloudci/nodejs:16",
+                "image": "owncloudci/nodejs:18",
                 "commands": [
-                    "yarn antora --fetch --attribute format=html",
-                ],
-            },
-            {
-                "name": "docs-pdf",
-                "pull": "always",
-                "image": "owncloudci/asciidoctor:latest",
-                "commands": [
-                    "bin/makepdf -m",
+                    "yarn antora --attribute format=html",
                 ],
             },
             {
@@ -157,36 +144,37 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
                     ],
                 },
             },
-            {
-                "name": "upload-pdf",
-                "pull": "always",
-                "image": "plugins/s3-sync",
-                "settings": {
-                    "bucket": "uploads",
-                    "endpoint": from_secret("docs_s3_server"),
-                    "access_key": from_secret("docs_s3_access_key"),
-                    "secret_key": from_secret("docs_s3_secret_key"),
-                    "path_style": "true",
-                    "source": "pdf_web/",
-                    "target": "/pdf/%s" % environment,
-                },
-                "when": {
-                    "event": [
-                        "push",
-                        "cron",
-                    ],
-                    "branch": [
-                        pdf_branch,
-                    ],
-                },
-            },
+            # we keep uploading pdf for future reenabling
+            #{
+            #    "name": "upload-pdf",
+            #    "pull": "always",
+            #    "image": "plugins/s3-sync",
+            #    "settings": {
+            #        "bucket": "uploads",
+            #        "endpoint": from_secret("docs_s3_server"),
+            #        "access_key": from_secret("docs_s3_access_key"),
+            #        "secret_key": from_secret("docs_s3_secret_key"),
+            #        "path_style": "true",
+            #        "source": "pdf_web/",
+            #        "target": "/pdf/%s" % environment,
+            #    },
+            #    "when": {
+            #        "event": [
+            #            "push",
+            #            "cron",
+            #        ],
+            #        "branch": [
+            #            pdf_branch,
+            #        ],
+            #    },
+            #},
             {
                 "name": "notify",
                 "pull": "if-not-exists",
                 "image": "plugins/slack",
                 "settings": {
                     "webhook": from_secret("rocketchat_talk_webhook"),
-                    "channel": "documentation",
+                    "channel": "builds",
                 },
                 "when": {
                     "event": [

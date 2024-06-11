@@ -31,7 +31,7 @@ The {oc-marketplace-url}/apps/windows_network_drive[Windows Network Drives app] 
 Compared to standard SMB access, WND has advanced features like:
 
 . User lockout prevention and password reset
-. More authentication mechanisms against the backend
+. More authentication mechanisms against the backend like xref:enterprise/authentication/kerberos.adoc[Kerberos]
 . Listen to change information triggered by the backend
 . Enhanced ACL support
 . Collaborative WND (CWND)
@@ -90,33 +90,25 @@ a| * No shared access +
 --
 
 .More WND Properties
-Mounts to a Windows or Samba file server are labeled with a little four-pane Windows-style icon, and the left pane of your Files page includes a Windows Network Drive filter. Figure 1 shows a new Windows Network Drive share marked with a red warning which indicates that ownCloud cannot connect to the share. The reason is that it may require the user to login, or it is not available, or there is an error in the configuration.
+Mounts to a Windows or Samba file server are labeled with a little four-pane Windows-style icon, and the left pane of your Files page includes a Windows Network Drive filter.
 
-Files are synchronized bidirectionally, and you can create, upload and delete files and folders.
-ownCloud server admins can create Windows Network Drive mounts and optionally allow users to set up their
-own personal Windows Network Drive mounts.
+Files are synchronized bidirectionally, and you can create, upload and delete files and folders. ownCloud server admins can create Windows Network Drive mounts and optionally allow users to set up their own personal Windows Network Drive mounts.
 
-Depending on the authentication method, passwords for each mount are encrypted and stored in the ownCloud
-database, using a long random secret key stored in `config.php`. This allows ownCloud to access the shares
-when the users who own the mounts are not logged in. This access will not work if the mount is session based, where passwords are not stored and are available only for the current active session.
-
-.Windows Network Drive share on your Files page
-image::enterprise/external_storage/windows_network_drive/wnd-1.png[Windows Network Drive share on your Files page, width=450]
+Depending on the authentication method, passwords for each mount are encrypted and stored in the ownCloud database, using a long random secret key stored in `config.php`. This allows ownCloud to access the shares when the users who own the mounts are not logged in. This access will not work if the mount is session based, where passwords are not stored and are available only for the current active session. In case other users are granted access to this mount, they will see a red triangle with an exclamation mark on the bottom right of the mount icon identifying lack of access.
 
 == Installation
 
-Install the {oc-marketplace-url}/apps/windows_network_drive[External Storage: Windows Network Drives app]
-from the ownCloud Market App or ownCloud Marketplace. To make it work, a few  dependencies have to be installed.
+Install the {oc-marketplace-url}/apps/windows_network_drive[External Storage: Windows Network Drives app] from the ownCloud Market App or ownCloud Marketplace. To make it work, a few  dependencies have to be installed.
 
 * A Samba client. This is included in all Linux distributions. On Debian, Ubuntu, and other Debian derivatives it is called `smbclient`. On SUSE, Red Hat, CentOS, and other Red Hat derivatives it is `samba-client`.
-* `php-smbclient` (version 0.8.0+). It should be included in most Linux distributions. You can use https://github.com/eduardok/libsmbclient-php[eduardok/libsmbclient-php], if your distribution does not provide it.
+* `php-smbclient` (version 0.8.0+). It should be included in most Linux distributions. You can use https://github.com/eduardok/libsmbclient-php#installation-from-pecl[Installation from PECL], if your distribution does not provide it or if you want to use a more updated version than the one provided by the OS. See xref:installation/manual_installation/server_prep_ubuntu_22.04.adoc#updating-pear[Updating pear] for a necessary prerequisite.
 * `which` and `stdbuf`. These should be included in most Linux distributions.
 
 To install and configure the necessary packages, see the xref:installation/manual_installation/manual_installation.adoc#prepare-your-server[Prepare Your Server] section of the manual installation documentation.
 
 TIP: For more information on SMB/CIFS in ownCloud, refer to the xref:configuration/files/external_storage/smb.adoc[Samba file server configuration documentation].
 
-TIP: If you encounter errors when using the WND app like `NT_STATUS_REVISION_MISMATCH`, please get in touch with support@owncloud.com.
+TIP: If you encounter errors when using the WND app like `NT_STATUS_REVISION_MISMATCH`, please get in touch by {oc-support-url}[Opening a Service Request].
 
 [IMPORTANT]
 ====
@@ -138,49 +130,141 @@ The ownCloud windows network drive listener utilizes the SMB notification featur
 
 === Enabling External Storage
 
-To enable external storage, as the ownCloud administrator go to menu:Settings[Storage (in the admin section)]. Tick the checkbox to enable external storage.
+To enable external storage, as the ownCloud administrator go to menu:Settings[Admin > Storage] and tick the checkbox `Allow users to mount external storage`.
 
 === Creating a New Share
 
-.When you create a new WND share, you need multiple things:
-
-* the login credentials for the share,
-* the server address,
+When you create a new WND share, you need multiple things::
++
+--
+* the server name or address hosting the share,
+* the login credentials for the share if required by the authentication method,
 * the share name and
-* the folder you want to connect to.
+* optionally, a sub-folder of the share you want to connect to.
 
 [CAUTION]
-.Treat all the parameters as being case-sensitive.
 ====
-Although some parts of the app might work properly regardless of casing, other parts might have problems if the case is not respected.
+_Treat all the parameters as being case-sensitive._ Although some parts of the app might work properly regardless of casing, other parts might have problems if the case is not respected.
 ====
 
-.Follow this procedure to create a new mount point based on WND
+[IMPORTANT]
+====
+. When using *Kerberos* authentication, read the following documentation first:
+
+.. xref:enterprise/authentication/kerberos.adoc[Kerberos Authentication]. +
+This documentation is a necessary prerequisite to set up Kerberos for use with ownCloud.
+
+.. xref:special-settings-when-adding-a-kerberos-mountpoint[Kerberos Mountpoint]. +
+There are additional settings required when adding a mount point using the Kerberos authentication.
+
+. When using *Credentials hardcoded in config file* authentication, read the following documentation first:
+
+.. xref:enterprise/authentication/enterprise_only_auth.adoc#notes-for-credentials-hardcoded-in-config-file[Notes for Credentials Hardcoded in Config File]. +
+This documentation is a necessary prerequisite to set up this authentication type.
+
+.. xref:special-settings-when-using-credentials-hardcoded-in-config-file[Special Settings when using 'Credentials hardcoded in config file']. +
+There are special settings required when adding a mount point using this authentication type.
+====
+--
+
+Follow this procedure to create a new mount point based on WND::
++
+--
 . Enter the ownCloud mount point for your new WND share. This _must not_ be an existing folder.
+
 . Select your authentication method. See xref:enterprise/external_storage/enterprise_only_auth.adoc[Enterprise-Only Authentication Options] for complete information on the available authentication methods.
-+
-.WND mountpoint and authorization credentials
-image::enterprise/external_storage/windows_network_drive/wnd-2.png[WND mountpoint and authorization credentials, width=500]
+
 . Enter the address of the server that contains the WND share.
-. The share name provided by Windows or Samba.
-. The root folder of the share. This is can be a subfolder name, or the `$user` variable for the user's home directory. Note that the LDAP `Internal Username Attribute` must be set to the `samaccountname` for either the share or the root to work, and the user's home directory needs to match the `samaccountname`.
+
+. Use the share name provided by Windows or Samba.
+
+. Optionally, the root folder of the share. This can be a subfolder name, or the `$user` variable when assigning the user's home directory. Note that the LDAP `Internal Username Attribute` must be set to the `samaccountname` for either the share or the root to work, and the user's home directory needs to match the `samaccountname`.
 (See xref:configuration/user/user_auth_ldap.adoc[User Authentication with LDAP].)
-. Login credentials.
-. Select users or groups with access to the share. The default is all users.
-. Click the gear icon for additional mount options. Note that previews are enabled by default, while
-sharing is not (see Figure 3). Sharing is not available for all authorization methods. For details please see the
-xref:enterprise/external_storage/enterprise_only_auth.adoc#authentication-option-details[Enterprise-Only Authentication Options]. When using large storages with many files, you may want to disable previews, because this can significantly increase performance.
+
+. Add the login credentials, if required, depending on the authentication method selected.
+
+. Sharing
+
+.. Admin only menu:Settings[Admin > Storage]: +
+Admins can define that mount points can be shared to all (default), or be restricted to individuals or groups. Note that sharing is not available for all authorization methods. For details please see the
+xref:enterprise/external_storage/enterprise_only_auth.adoc#authentication-option-details[Enterprise-Only Authentication Options]. In this case, you will also see the following on the mount point: 
 +
-.WND server, credentials, and additional mount options
-image::enterprise/external_storage/windows_network_drive/wnd-3.png[WND server, credentials, and additional mount options, width=450]
+image::enterprise/external_storage/windows_network_drive/wnd-available-for.png[WND Sharing Options,width=400]
 
-Your changes are saved automatically.
+.. All menu:Settings[General > Storage]: +
+If sharing of mounts is allowed by the admin via menu:Settings[Admin > Storage > Allow sharing on user-mounted external storages], users can share the mount via menu:Files[Mountpoint > Details > Sharing]. To avoid accidentally sharing resources, the user must allow sharing a mount in the mount points view upfront by clicking on the gear icon as shown below. btn:[Enable sharing] appears only if sharing is generally allowed by the admin, see above.
 
-NOTE: When you create a new mountpoint using login credentials (session based), you must log out of ownCloud and then log back in so you can access the share. You only have to do this the first time.
+. Click the gear icon for additional mount options. Previews are enabled by default, but when using large storages with many files, you may want to disable previews as this can significantly increase performance.
++
+image::enterprise/external_storage/windows_network_drive/wnd-gear-icon.png[WND Gear Icon,width=300]
+
+. Your changes are saved automatically.
+
+. Finally, the mount point is created and will look like this example if a user has set it up:
++
+image::enterprise/external_storage/windows_network_drive/wnd-username-pwd.png[WND mount point created,width=500]
+
+NOTE: When you create a new mountpoint using login credentials (session-based), you must log out of ownCloud and then log back in so you can access the share. You only have to do this the first time.
+--
+
+=== Special Settings when using 'Credentials hardcoded in config file'
+
+The `Config key` to be entered as shown in the screen below, must be taken as described in  xref:enterprise/authentication/enterprise_only_auth.adoc#value-to-be-entered-in-the-mount-point-config-key-field[Value to be entered in the mount point config key field].
+
+image::enterprise/external_storage/windows_network_drive/wnd-config-key.png[WND mountpoint and hardcoded credentials, width=500]
+
+Note that this authentication method can only be used by ordinary users if the admin hands over the `Config key` created. This is secure, as no password is exposed.
+
+=== Special Settings when Adding a Kerberos Mountpoint
+
+NOTE: See the linked section for important information when planning to use xref:#collaborative-wnd[Collaborative WND].
+
+When the xref:enterprise/authentication/kerberos.adoc[Kerberos Authentication] has been set up, a necessary config key xref:configuration/server/config_apps_sample_php_parameters.adoc#a-map-of-servers-with-the-required-kerberos-data[wnd.kerberos.servers] needs to be provided upfront in `config.php`.
+
+* `Kerberos Server ID` +
+This ID can be chosen from the config paramater section `wnd.kerberos.servers` and defines required parameters for the WND Kerberos setup. Multiple ID's with different setups can be created.
+* `ockeytab` +
+This is the keytab file that has been described in xref:enterprise/authentication/kerberos.adoc#keytab-files[Keytab Files].
+* `ocservice` +
+This is the SPN of the service user that has been described in xref:enterprise/authentication/kerberos.adoc#service-principal-name-spn[Service Principal Name (SPN)].
+* `usermapping` +
+Define a usermapping if necessary or required.
+
+// do not remove
+
+The usermapping key::
+This key has several types where you can read more about in the xref:configuration/server/config_apps_sample_php_parameters.adoc#a-map-of-servers-with-the-required-kerberos-data[wnd.kerberos.servers] config section. The `noop` type is the one mostly used which does not map. The following type is described in more detail:
++
+--
+Type EALdapAttr::
++
+Note that `usermapping` with type `EALdapAttr` is only possible with the enabled and configured {oc-marketplace-url}/apps/user_ldap[LDAP Integration] app. WND will throw an error if not.
++
+The LDAP attribute for using the correct login information is defined during the LDAP Integration app setup. On the users first time login after the LDAP Integration app has been configured, the UID will be stored in the ownCloud database and is fixed from that time on. It can be possible, that the ownCloud UID might not be usable for Kerberos like when the `objectuid` attribute has been defined for the ownCloud UID. For this case, a mapping can be defined to use a different LDAP attribute for the UID to authenticate with Kerberos. To do so, go to the LDAP settings in ownCloud at menu:Settings[General > User Authentication > Advanced > Exposed User Attributes] and enter all possible LDAP attributes which you want to use for mapping. Usually these are `userPrincipalName` and `sAMAccountName` but any can be defined. See the Microsoft https://learn.microsoft.com/en-us/windows/win32/ad/naming-properties[User Naming Attributes] for more details.
++
+image:enterprise/external_storage/windows_network_drive/wnd-ldap-exposed-user-attributes.png[LDAP Exposed User Attributes, width=300]
++
+The following rules apply for the EALdapAttr type:::
+* In the LDAP integration app settings, you can define more than one attribute allowed to map, where each attribute must be on its own line.
+* Casing the attribute name matters.
+* Each WND Kerberos Server ID block can hold exactly one `EALdapAttr`/<attribute-name> assignment, but you can define multiple Server ID's.
+* Attributes defined at ownCloud must exist on the LDAP server and users must have that attribute assigned and configured.
+* If a WND config mapping else than `noop` was defined, it will lookup the mapping first. 
+--
+
+Enter the `Kerberos Server ID` to define the server and Kerberos credentials as shown in the image below.
+
+image::enterprise/external_storage/windows_network_drive/wnd-kerberos-1.png[WND mountpoint and Kerberos credentials, width=500]
+
+Note that this authentication method can only be used by ordinary users if the admin hands over the `Kerberos Server ID` created. Consider this as a very sensitive information like a password.
+
+When the data has been entered correctly, the moint point will show up as follows:
+
+image::enterprise/external_storage/windows_network_drive/wnd-kerberos-2.png[WND mountpoint with Kerberos authorization,width=500]
 
 === Permission Manager
 
-Starting with version 1.0.1 of the Windows Network Drives App {acl-url}[Access Control Lists (ACLs)] are supported. To obtain the ACL information, two ACL providers can be selected:
+Starting with version 1.0.1 of the Windows Network Drives App, {acl-url}[Access Control Lists (ACLs)] are supported. To obtain the ACL information, two ACL providers can be selected:
 
 * xref:the-null-permission-manager[The Null Permission Manager]
 * xref:the-owncloud-ldap-permission-manager[The ownCloud LDAP Permission Manager]
@@ -296,11 +380,11 @@ Create a service for `systemd` following the instructions below that checks for 
 * For each WND mount point distinguished by a SERVER - SHARE pair:
 ** Replace the all upper case words `SERVER`, `SHARE`, `USER` and `PASSWORD` in both, the **filename** and in the **contents** below with their respective values.
 ** Place one copy of a file with the content from below under `/etc/systemd/system/owncloud-wnd-listen-SERVER-SHARE.service` +
-To do so, enter following command and replace <name> with `owncloud-wnd-listen-SERVER-SHARE`:
+To do so, enter following command and replace <name> with `owncloud-wnd-listen-SERVER-SHARE`. For more details see https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units#editing-unit-files[Editing Unit Files].
 +
 [source,bash]
 ----
-sudo systemctl edit <name>.service
+sudo systemctl edit --force --full <name>.service
 ----
 +
 Reload the deamon to make it available:
@@ -411,10 +495,10 @@ Check {flock-docs-url}[flock's documentation] for details and more options.
 
 From version 2.0.0 the Windows Network Drive app includes an extension of the Activity app. This extension will allow the app to send events to the Activity app so the users know what happened in the Windows Network Drive storage.
 
-Please see Figure 4 how a notification can look like. In this example, one user accessing the same host/share has changed a file. Other users will now get an activity notification about this change.
+Please see the following figure how a notification can look like. In this example, one user accessing the same host/share has changed a file. Other users will now get an activity notification about this change.
 
 .Activity Notification for a Changed File
-image::enterprise/external_storage/windows_network_drive/activity_file_change_notification.png[Activity notification for a Changed File, width=500]
+image::enterprise/external_storage/windows_network_drive/activity_file_change_notification.png[Activity notification for a Changed File,width=450]
 
 This extension requires the following components:
 
@@ -450,12 +534,16 @@ NOTE: `wnd.activity.sendToSharees` key depends on the `wnd.activity.registerExte
 
 === Collaborative WND
 
-CWND can only be set by an admin in menu:Settings[Admin > Storage]. This mount type cannot be selected by users in the user section. To prepare access for your mount point using the CWND mount type, you must provide a _Service Account_ (SA) which is an ordinary SMB user granting read access to the share you want to mount. You can use one SA for all CWND mounts or separate ones. The SA is used to gather the contents of a share used by the WND Listener and provides a common `file_id` to all accessing users, while the accessing users can only access those files and folders for which they've been granted rights.
+Collaborative WND (CWND) can only be set by an admin in menu:Settings[Admin > Storage]. This mount type cannot be selected by users in the user section. To prepare access for your mount point using the CWND mount type, you must provide a _Service Account_ (SA) which is an ordinary SMB user granting read access to the share you want to mount. You can use one SA for all CWND mounts or separate ones. The SA is used to gather the contents of a share used by the WND Listener and provides a common `file_id` to all accessing users, while the accessing users can only access those files and folders for which they've been granted rights.
+
+NOTE: For obvious reasons, do not use the `$user` placeholder for the share name. It would map to the logged in users home directoy shared collaboratively.
+
+NOTE: For the time being, no CWND is possible with Kerberos because of a necessary service user which is currently not available for Kerberos.
 
 . As an admin, go to menu:Settings[Admin > Storage] and create a new CWND based mount point.
 +
 .Add a Collaborative Windows Network Drive Mount
-image::enterprise/external_storage/windows_network_drive/cwnd_add_storage.png[Add Collaborative Windows Network Drive Mount, width=450]
+image:enterprise/external_storage/windows_network_drive/cwnd_add_storage.png[Add Collaborative Windows Network Drive Mount, width=350]
 . Chose any name for the mount point that fits your needs.
 . Select user login type.
 +
@@ -471,7 +559,7 @@ The following three are sensible and working selections for CWND:
 ====
 +
 .Select How User Logs in to the Mount Point
-image::enterprise/external_storage/windows_network_drive/cwnd_login_possibilities.png[Select How User Logs Into the Mount Point]
+image:enterprise/external_storage/windows_network_drive/cwnd_login_possibilities.png[Select How User Logs Into the Mount Point,width=450]
 [loweralpha]
 .. `Log-in credentials, saved in session`
 +
@@ -493,16 +581,14 @@ User login to ownCloud and providing credentials to access the CWND mount are co
 * _This login type is by design *the only one compatible with OIDC authentication*._
 +
 .Re-enter Mount Access Credentials
-image::enterprise/external_storage/windows_network_drive/cwnd_regain_mount_access.png[Re-enter Mount Access Credentials]
+image:enterprise/external_storage/windows_network_drive/cwnd_regain_mount_access.png[Re-enter Mount Access Credentials,width=450]
 
 . Configure this mount point by adding required data into the corresponding fields
 +
---
 .Enter Connection Info and the Service Account
-image::enterprise/external_storage/windows_network_drive/cwnd_fields.png[Enter Connection Info and Service Account]
+image:enterprise/external_storage/windows_network_drive/cwnd_fields.png[Enter Connection Info and Service Account,width=450]
 
-When everything has been entered correctly, the mount point gets a green button on the left.
---
+. When everything has been entered correctly, the mount point gets a green button on the left.
 
 == Troubleshooting
 
@@ -525,6 +611,47 @@ Take the example of attempting to connect to the host MyHost, the share named `M
 ----
 
 NOTE: The command is case-sensitive, and that it must match the information from the mount point configuration.
+
+=== Kerberos Testing
+
+To test if Kerberos has been setup properly for the use with WND, check the following on the server running ownCloud, replace xref:enterprise/authentication/kerberos.adoc#keytab-files[keytab], xref:enterprise/authentication/kerberos.adoc#service-principal-name-spn[SPN], `<an-existing-domain-user>` and `<hostname_or_FQDN>/<share-name>` accordingly. The domain user is the user on behalf the Kerberos ticket will be requested. Note that the shell user you are testing with must have access to the keytab file:
+
+. {empty}
++
+[source,bash]
+----
+kinit -k -t \
+    <keytab-file-location>/<user-name>.keytab \
+    HTTP/<hostname_or_FQDN>
+----
+
+. {empty}
++
+[source,bash]
+----
+kvno -U \
+    <an-existing-domain-user> \
+    -P -c /tmp/krb5cc_0 -k \
+    <keytab-file-location>/<user-name>.keytab \
+    cifs/<hostname_or_FQDN>
+----
+
+. {empty}
++
+[source,bash]
+----
+smbclient \
+    --use-krb5-ccache=/tmp/krb5cc_0 \
+    --use-kerberos=required \
+    //<hostname_or_FQDN>/<share-name>
+----
+
+. Destroy the Kerberos ticket for security reasons:
++
+[source,bash]
+----
+kdestroy
+----
 
 === libsmbclient Issues
 

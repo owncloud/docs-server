@@ -56,15 +56,15 @@ For _best performance_, _stability_, _support_, and _full functionality_ we offi
 
 | Operating System (64bit)
 | * Debian 10
-* Red Hat Enterprise Linux 7 and 8 +
-including all 100% compatible derivatives
+* Red Hat Enterprise Linux 7, 8 and 9 +
+including all 100% compatible derivatives (please note Red Hat Enterprise Linux 9 support is Enterprise only. Contact support@owncloud.com for more information)
 * SUSE Linux Enterprise Server 12 with SP4/5 and 15
 * Ubuntu 20.04 and 22.04
 * openSUSE Leap 15.2
 
 | Database
 | * xref:#database-requirements[MySQL] 8+ or xref:#database-requirements[MariaDB] 10.2 through 10.11 ^1^ (*Recommended*)
-* Oracle 11 and 12 (*Enterprise only*)
+* Oracle 11 and 12 can be run in Oracle 19c with compatibility mode (*Enterprise only*)
 * PostgreSQL 9, 10, 11, 12, 13 or 14
 * SQLite (*Not for production*)
 

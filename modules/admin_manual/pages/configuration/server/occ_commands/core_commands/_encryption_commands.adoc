@@ -18,9 +18,9 @@ encryption
  encryption:migrate                  Initial migration to encryption 2.0
  encryption:recreate-master-key      Replace existing master key with new one. Encrypt the
                                      file system with newly created master key
- encryption:select-encryption-type   Select the encryption type. The encryption types available
-                                     are: masterkey and user-keys. There is also no way to
-                                     disable it again.
+ encryption:select-encryption-type   Select the encryption type. Only `masterkey` is available.
+                                     Note that this setting is only necessary when migration from user
+                                     key encryption. New encryptions will autmatically use master key.
  encryption:set-default-module       Set the encryption default module
  encryption:show-key-storage-root    Show current key storage root
  encryption:status                   Lists the current status of encryption

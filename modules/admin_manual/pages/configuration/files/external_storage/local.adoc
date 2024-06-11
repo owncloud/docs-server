@@ -37,7 +37,7 @@ To enable Local storage, you must first enable it by editing your ownCloud insta
 
 To manage local storage, navigate to menu:Settings[Admin > Storage]. You can see an example in the screenshot below.
 
-image:configuration/files/external_storage/local.png[Manage local storage in ownCloud]
+image::configuration/files/external_storage/local.png[Manage local storage in ownCloud,width=500]
 
 . In the *Folder name* field enter the folder name that you want to appear on your ownCloud Files page. 
 . In the *Configuration* field enter the full file path of the directory you want to mount. 

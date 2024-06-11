@@ -10,8 +10,7 @@ This quick guide gives a brief summary of the commands needed without going into
 
 === Overview
 
-- The **recommended** type of encryption.
-- Best to activate on new instances with no data.
+- Master key is default when enabled on new instances.
 - If you have existing data, use the **occ encryption:encrypt-all** command. Depending on the amount of existing data and the location, this operation can take a long time.
 
 === Activate Master Key-Based Encryption
@@ -21,7 +20,6 @@ This quick guide gives a brief summary of the commands needed without going into
 {occ-command-example-prefix} maintenance:singleuser --on
 {occ-command-example-prefix} app:enable encryption
 {occ-command-example-prefix} encryption:enable
-{occ-command-example-prefix} encryption:select-encryption-type masterkey -y
 {occ-command-example-prefix} encryption:encrypt-all --yes
 {occ-command-example-prefix} maintenance:singleuser --off
 ----
