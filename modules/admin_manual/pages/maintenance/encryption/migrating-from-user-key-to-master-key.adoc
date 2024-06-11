@@ -5,16 +5,10 @@
 
 == Introduction
 
-Why should you move away from User Key-based encryption?
+IMPORTANT: User Key Encryption has been deprecated with ownCloud Server 10.7, see the corresponding https://doc.owncloud.com/server_release_notes.html#deprecation-note-for-user-key-storage-encryption[release notes] for details. Though you can continue to use this solution, it is no longer selectable and existing User Key Encryption must be migrated to Master Key Encryption.
 
-While it is a bit more secure than a central encryption approach, User key-based encryption has some disadvantages. 
-It blocks some additional functions such as the integration of an online editor like LibreOffice or OnlyOffice into
-ownCloud and can cause problems when sharing files with groups. 
-See xref:configuration/files/encryption/encryption_configuration.adoc#limitations-of-user-key-based-encryption[Limitations of User-Key Based Encryption] for more details.
-Therefore Master-key-based encryption is now the recommended setup for all new installations.
-
-NOTE: User key-based encryption is planned to be removed from ownCloud in the near future.
-As an existing customer, you will be able to continue to use this solution as long as ownCloud 10.x is supported.
+The reason disabling User key-based encryption is because of some disadvantages. It blocks some additional functions such as the integration of an online editor like LibreOffice or OnlyOffice into ownCloud and can cause problems when sharing files with groups. 
+See xref:configuration/files/encryption/encryption_configuration.adoc#limitations-of-user-key-based-encryption[Limitations of User-Key Based Encryption] for more details. Master-key-based encryption is therefore now the recommended and only available setup for all new installations.
 
 == Pre-Conditions
 
@@ -40,8 +34,7 @@ There are several steps you need to follow to ensure a smooth and complete trans
 
 === Disable User Key-based Encryption
 
-The first part of the migration process is to decrypt all files and to disable encryption in ownCloud,
-which requires three commands to be executed. These commands are:
+The first part of the migration process is to decrypt all files and to disable encryption in ownCloud, which requires three commands to be executed. These commands are:
 
 . xref:configuration/server/occ_command.adoc#encryption[`occ encryption:decrypt-all`],
 . xref:configuration/server/occ_command.adoc#encryption[`occ encryption:disable`] and
@@ -56,28 +49,22 @@ You can see an example of calling the commands listed below, configured to requi
   {occ-command-example-prefix} app:disable --no-interaction encryption
 ----
 
-NOTE: The decryption of the files by the ownCloud administrator requires the current passwords of all users!
-This only works when users have enabled password recovery and if an admin recovery password is available.
+NOTE: The decryption of the files by the ownCloud administrator requires the current passwords of all users! This only works when users have enabled password recovery and if an admin recovery password is available.
 
 === Remove the Encryption Records from the ownCloud Database
 
-Once your ownCloud files are unencrypted, and encryption has been disabled, you need to remove
-the encryption records from the database. There is, currently, no `occ` command to handle this,
-so it has to be done manually. Specifically, you need to remove all records from the `oc_appconfig`
-table where the `appid` column is set to `encryption`.
+Once your ownCloud files are unencrypted, and encryption has been disabled, you need to remove the encryption records from the database. There is, currently, no `occ` command to handle this, so it has to be done manually. Specifically, you need to remove all records from the `oc_appconfig` table where the `appid` column is set to `encryption`.
 
-In the examples below, you can see how to do this using MySQL.
-If you are not using MySQL, please use the commands specific to your database vendor.
+In the examples below, you can see how to do this using MySQL. If you are not using MySQL, please use the commands specific to your database vendor.
 
 [source,sql]
 ----
 SELECT * FROM `oc_appconfig` WHERE `appid` LIKE 'encryption'
 ----
 
-=== Remove the `files_encryption` Directory
+=== Remove the files_encryption Directory
 
-With the database updated, next, the `files_encryption` directory needs to be removed.
-Below is an example of how to do so, to save you time.
+With the database updated, next, the `files_encryption` directory needs to be removed. Below is an example of how to do so, to save you time.
 
 [source,bash]
 ----
@@ -87,8 +74,7 @@ find ./data* -name files_encryption -exec rm -rvf {} \;
 
 === Encrypt the Filesystem Using Master Key-based Encryption
 
-Now, your ownCloud files can be encrypted using Master Key-based encryption.
-This requires the following steps:
+Now, your ownCloud files can be encrypted using Master Key-based encryption. This requires the following steps:
 
 . The encryption app needs to be enabled
 . Encryption needs to be enabled
@@ -107,13 +93,15 @@ The following example shows how to do this on the command line.
 
 == Verify the Encrypted Files
 
-With the files encrypted using Master Key-based encryption, you should now verify that everything worked properly.
-To do so, run a `SELECT` query in your database which returns all files from the `oc_appconfig` table where
-the `appid` column is set to `encryption`. You should see a number of records, as in the output of the example below.
+With the files encrypted using Master Key-based encryption, you should now verify that everything worked properly. To do so, run a `SELECT` query in your database which returns all files from the `oc_appconfig` table where the `appid` column is set to `encryption`. You should see a number of records, as in the output of the example below.
 
 [source,sql]
 ----
 select * from `oc_appconfig` where appid='encryption';
+----
+
+[source,plaintext]
+----
 encryption|recoveryKeyId|recoveryKey_73facda6
 encryption|publicShareKeyId|pubShare_73facda6
 encryption|masterKeyId|master_73facda6

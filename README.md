@@ -21,11 +21,11 @@ To make life easier, most of the content written in [docs](https://github.com/ow
 
 ## Generating the Documentation
 
-See the [Generating the Documentation](https://github.com/owncloud/docs#generating-the-documentation) in the docs repo for more details as it applies to all documentation repositories.
+See [Generating the Documentation](https://github.com/owncloud/docs#generating-the-documentation) in the docs repo for more details as it applies to all documentation repositories.
 
 ## Target Branch and Backporting
 
-See the the [following section](https://github.com/owncloud/docs#target-branch-and-backporting) as the same rules and notes apply.
+See the [following section](https://github.com/owncloud/docs#target-branch-and-backporting) as the same rules and notes apply.
 
 ## Branching Workflow
 

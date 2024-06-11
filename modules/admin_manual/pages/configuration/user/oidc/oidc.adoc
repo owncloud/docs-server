@@ -25,7 +25,7 @@
 NOTE: ownCloud only supports one configured identity provider which is then valid for all requests.
 
 Click on the
-link:{attachmentsdir}/configuration/user/oidc/OAuth-code-flow-sequence-diagram.png[OAuth code flow sequence diagram]
+xref:attachment$/configuration/user/oidc/OAuth-code-flow-sequence-diagram.png[OAuth code flow sequence diagram]
 link to get more details on the flow sequence.
 
 == Supported Identity Providers
