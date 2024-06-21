@@ -286,7 +286,7 @@ A potential migration *must* be verified upfront with a positive ready message a
 ----
 sudo -u www-data \
   php /var/www/owncloud/occ \
-  migrate:verify \
+  migrate:to-kiteworks:verify \
   $KW_ADMIN_USER
 ----
 
