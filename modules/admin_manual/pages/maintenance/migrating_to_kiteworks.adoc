@@ -15,7 +15,7 @@ image::maintenance/migrate_kiteworks/kiteworks-migration.drawio.svg[Migrate to K
 
 == Overview
 
-The migration works with an app to be installed on the ownCloud side. The app is provided by ownCloud as part of the guided migration. Please contact {oc-support-url}[ownCloud support] to get them. Both sides need to be fully configured and running, have a defined minimum release installed and are reachable from each other. If release requirements are not satisfied, you MUST upgrade first.
+The migration works with an app to be installed on the ownCloud side. The app is provided by ownCloud as part of the guided migration. Please contact {oc-support-url}[ownCloud support] to get it. Both sides need to be fully configured and running, have a defined minimum release installed and are reachable from each other. If release requirements are not satisfied, you MUST upgrade first.
 
 The migration process consists of these steps:
 
@@ -40,7 +40,7 @@ As long they reference content from the users home.
 * Share permissions. +
 Will be translated into Kiteworks predefined roles.
 * Guest users. +
-Will be translated into Kiteworks user profile `recipient`.
+Will be translated into Kiteworks user profile `restricted`.
 
 === Items Excluded from the Migration
 
@@ -106,7 +106,7 @@ To be prepared for the migration, both sides need to match the prerequisites. Pl
 * Shell access is necessary. +
 `occ` commands need to be started .
 
-* The ownCloud-provided migration component must be installed at the ownCloud instance. They are:
+* The ownCloud-provided migration component must be installed at the ownCloud instance. It is:
 ** the `migrate-to-kiteworks` app. +
 This app comes bundled with its own copy of rclone.
 
