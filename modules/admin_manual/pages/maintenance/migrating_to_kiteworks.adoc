@@ -172,7 +172,7 @@ IMPORTANT: We recommend to have the Kiteworks PCN connected and configured to an
 IMPORTANT: We recommend having the Kiteworks PCN configured using a virus scanner _before_ starting the migration. This way, infected files will be put under quarantine already during migration.
 --
 
-* In the Kiteworks Admin Console, click btn:[Create Custom Application]:
+* In the Kiteworks Admin Console, navigate to Application Setup, Client and Plugins, API. Then click btn:[Create Custom Application]:
 +
 image:maintenance/migrate_kiteworks/kiteworks-api-settings.png[Kiteworks create a new custom application, width=300]
 +
@@ -183,6 +183,9 @@ For the settings, use the following:
 ** The btn:[Access Token Lifetime] can be set to the default value.
 ** Set the btn:[Redirect URI] to the default example value as shown when clicking into the field. +
 Note, the redirect URI is not used, entering the default example is therefore ok.
+* On the next page, API Scopes are all grayed out by default.
+** Enable CREATE, READ, UPDATE, DELETE for the entities `Files` and `Folders`.
+** Now click the btn:[Add Application]
 * You will get a:
 ** Client application ID
 ** Secret key +
