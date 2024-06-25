@@ -162,7 +162,7 @@ For ease of migrating external mounts, the admin should:
 * If it is planned to integrate Kiteworks into LDAP:
 +
 --
-IMPORTANT: We recommend to have the Kiteworks PCN connected and configured to an LDAP server _before_  starting the migration. This will avoid conflicting user entries that will exist in the local database additionally to the LDAP server connected.
+IMPORTANT: We recommend having the Kiteworks PCN connected and configured to an LDAP server _before_  starting the migration. This will avoid conflicting user entries that will exist in the local database additionally to the LDAP server connected.
 // New user accounts will be created during the migration, as needed. Existing user accounts will be used.
 --
 
