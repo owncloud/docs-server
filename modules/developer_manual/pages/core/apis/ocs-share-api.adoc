@@ -898,14 +898,23 @@ Remove the given share.
 
 [cols="20%,80%"]
 |===
-|Endpoint |`{endpoint-uri}/<share_id>`
-|Method |DELETE
+| Endpoint
+| `{endpoint-uri}/<share_id>`
+
+| Method
+| DELETE
 |===
 
 [cols=",,",options="header",]
 |===
-| Attribute | Type | Description
-| share_id | int | The share's unique id
+| Attribute
+| Type
+
+| Description
+| share_id
+
+| int
+| The share's unique id
 |===
 
 ==== Status Codes
@@ -1012,28 +1021,59 @@ include::example$core/scripts/responses/shares/delete-share-failure.xml[]
 Update a given share.
 Only one value can be updated per request.
 
-[cols=",,"]
+[cols=","]
 |===
-|Endpoint |`{endpoint-uri}/<share_id>`
-|Method |PUT
+| Endpoint
+| `{endpoint-uri}/<share_id>`
+
+| Method
+| PUT
 |===
 
 ==== Request Arguments
 
-[cols=",,",options="header",]
+[cols=",,",options="header"]
 |===
-| Argument | Type | Description
-| name | string | A (human-readable) name for the share, which can
-| | | be up to 64 characters in length
-| share_id | int | The share's unique id
-| permissions | int | Update permissions
-| | | (see xref:create-a-new-share[the create share section] above)
-| password | string | Updated password for a public link share
-| publicUpload | boolean | Enable (true) / disable (false)
-| | | public upload for public link shares.
-| expireDate | string | Set an expire date for the user, group or public link share.
-| | | This argument expects a well-formatted date string,
-| | | such as: `YYYY-MM-DD'
+| Argument
+| Type
+| Description
+
+| name
+| string
+| A (human-readable) name for the share, which can
+
+|
+|
+| be up to 64 characters in length
+
+| share_id
+| int
+| The share's unique id
+
+| permissions
+| int
+| Update permissions
+
+|
+|
+| (see xref:create-a-new-share[the create share section] above)
+
+| password
+| string
+| Updated password for a public link share
+
+| publicUpload
+| boolean
+| Enable (true) / disable (false)
+
+|
+|
+| public upload for public link shares.
+
+| expireDate
+| string
+a| Set an expire date for the user, group or public link share. +
+This argument expects a well-formatted date string such as: `YYYY-MM-DD`
 |===
 
 NOTE: Only one of the update parameters can be specified at once.
