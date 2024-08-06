@@ -288,8 +288,8 @@ After all prerequisites, installations, configurations and the verification has 
 ----
 sudo -u www-data \
   php /var/www/owncloud/occ \
-  migrate:to-kiteworks \
-  $KW_ADMIN_USER
+  migrate:to-kiteworks:users \
+  $KW_ADMIN_USER [restricted]
 ----
 
 The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job.
