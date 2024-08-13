@@ -137,12 +137,12 @@ The administration server. This is typically the same as the LDAP/Active Directo
 
 * Check that you have the latest xref:installation/manual_installation/server_prep_ubuntu_22.04.adoc#updating-pear[pear] version installed.
 
-* Install, if not already done the `php-dev` environment:
+* Install, if not already done the `php-dev-<your version>` environment:
 +
 --
 [source,bash]
 ----
-sudo apt install php-dev
+sudo apt install php-dev-<your version>
 ----
 
 Check the existance of `phpize` with:
