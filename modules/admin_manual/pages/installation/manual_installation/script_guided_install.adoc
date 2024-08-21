@@ -128,6 +128,34 @@ the script extracts the files with tar and automatically extracts them to the ta
 .In case of an upgrade
 the old instance path is backed up by _renaming and adding a time stamp_. A new target folder with the old name is created. This ensures that in case of extracting and preparation issues, you can easily go back to the previous version. After a successful upgrade, you must manually remove the backup folder.
 
+The complete script based procedure might look like this (logged in as root user):
+
+* copy paste from below both scripts, and place them both in the current folder.
+* `wget https://download.owncloud.com/server/stable/owncloud-latest.tar.bz2 -O /tmp/owncloud-latest.tar.bz2`
+* `sudo -u www-data /var/www/owncloud/occ maintenance:mode --on`
+* `bash ./instance.sh`
+  - Do you want to secure your .htaccess files post installing/upgrade (y/N)? → `n` +
+    You must choose `n` here, in order to continue.
+  - Do you want to install a new instance (y/N)? → `n` 
+  - Do you want to upgrade an existing installation (y/N)? → `y`
+  - Use links for data and apps-external directories (Y/n)? → `n` +
+    Depending on the setup, a default standard install does not use "links".
+  - Is the instance in maintenance mode? (y/N)? → `y` +
+    You must choose `y` here, in order to continue.
+  - Please specify the tar file to extract with full path: `/tmp/owncloud-latest.tar.bz2`
+
++
+[...] (many lines scroll by)
+* `ls -ld  /var/www/owncloud_*` +
+  `drwxr-xr-x 12 www-data www-data 4096 Aug 20 16:04 /var/www/owncloud_2024-08-20-15.50.56`
+* `backup=/var/www/owncloud_2024-08-20-15.50.56` +
+  Note the exact numbers as printed with the `ls` command above.
+* `rmdir /var/www/owncloud/data/ /var/www/owncloud/apps-external/`
+* `mv $backup/data /var/www/owncloud/`
+* `mv $backup/apps-external /var/www/owncloud/`
+* `sudo -u www-data /var/www/owncloud/occ maintenance:mode --off`
+* `sudo -u www-data /var/www/owncloud/occ upgrade`
+
 TIP: If you do not install or upgrade, the script sets ownership and permissions on linked directories only.
 
 NOTE: In case of upgrading, if you have customized the `.htaccess` or `.user.ini` file in the ownCloud webroot, you have to manually restore any changes made after the script has finished from the backup folder. Take care to only restore the changes made but not the complete file as this file will be recreated on upgrades by the tar source and may contain different settings provided by ownCloud. Customizing `.htaccess` can be necessary when you e.g. xref:configuration/integration/ms-teams.adoc[Integrate ownCloud into Microsoft Teams].
