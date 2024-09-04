@@ -70,27 +70,31 @@ You should see output similar to the below example.
 
 To run the tests for a specific app with the provided PHPUnit version:
 
-. Change into one of the writable directories listed in the `apps_paths` array in `config/config.php`. For example:
-[source,console]
+. Change into one of the writable directories listed in the `apps_paths` array in `config/config.php`, for example:
++
+[source,bash]
 ----
 cd apps-external
 ----
 
-. Clone the app from GitHub. For example:
-[source,console]
+. Clone the app from GitHub, for example:
++
+[source,bash]
 ----
 git clone https://github.com/owncloud/notes.git
 ----
 
-. Enable the app. For example:
-[source,console,subs="attributes+"]
+. Enable the app, for example:
++
+[source,bash,subs="attributes+"]
 ----
 cd ..
 {occ-command-example-prefix} app:enable notes
 ----
 
-. Change into the newly cloned directory. For example:
-[source,console]
+. Change into the newly cloned directory, for example:
++
+[source,bash]
 ----
 cd apps-external/notes
 ----
@@ -98,14 +102,14 @@ cd apps-external/notes
 . Run the following command:
 +
 --
-[source,console]
+[source,bash]
 ----
 make test-php-unit
 ----
 
-Here's an example of running the command in {notes-app-url}[the notes app]:
+Here's an example of running the command in the {notes-app-url}[notes app]:
 
-[source,console]
+[source,bash]
 ----
 php -d zend.enable_gc=0  "/home/phil/git/owncloud/core/apps-external/notes/../../lib/composer/bin/phpunit" --configuration ./phpunit.xml --testsuite unit
 PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
@@ -153,7 +157,7 @@ This might cause problems with your PHP settings (i.e., `open_basedir`) and requ
 
 Given the class `MyClass` in your app:
 
-./srv/http/owncloud/apps/myapp/tests/lib/MyClass.php
+.`/srv/http/owncloud/apps/myapp/tests/lib/MyClass.php`
 [source,php]
 ----
 include::example$core/unit-testing/MyClass.php[MyClass.php]
@@ -161,7 +165,7 @@ include::example$core/unit-testing/MyClass.php[MyClass.php]
 
 An example for a simple test would be:
 
-./srv/http/owncloud/apps/myapp/tests/unit/MyClassTest.php
+.`/srv/http/owncloud/apps/myapp/tests/unit/MyClassTest.php`
 [source,php]
 ----
 include::example$core/unit-testing/MyClassTest.php[MyClassTest.php]
@@ -175,7 +179,7 @@ This is {recommended-way-to-organise-tests-url}[the recommended way to organize 
 
 In `/srv/http/owncloud/apps/myapp/` you run the test with the following command:
 
-[source,console]
+[source,bash]
 ----
 phpunit tests/unit/MyClassTest.php
 ----
@@ -193,24 +197,25 @@ make them available to your test by bootstrapping ownCloud.
 To do this, you’ll need to provide the `--bootstrap` argument when
 running PHPUnit
 
-/srv/http/owncloud
-
+[source,bash]
 ----
+cd /srv/http/owncloud
 phpunit --bootstrap tests/bootstrap.php apps/myapp/tests/testsuite.php
 ----
 
 If you run the test suite as a user other than your Web server, you'll
 have to adjust your php.ini and file rights.
 
-/etc/php/php.ini
-
+[source,bash]
 ----
-open_basedir = none
+nano /etc/php/php.ini
 ----
 
-/srv/http/owncloud:
+and add `open_basedir = none`
 
+[source,bash]
 ----
+cd /srv/http/owncloud
 su -c "chmod a+r config/config.php"
 su -c "chmod a+rx data/"
 su -c "chmod a+w data/owncloud.log"
@@ -228,6 +233,7 @@ privilege to create and delete the database called `oc_autotest`.
 
 ==== MySQL Setup
 
+[source,sql]
 ----
 CREATE DATABASE oc_autotest;
 CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY 'owncloud';
@@ -237,6 +243,7 @@ GRANT ALL ON oc_autotest.* TO 'oc_autotest'@'localhost';
 For parallel executor support with EXECUTOR_NUMBER=0
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+[source,sql]
 ----
 CREATE DATABASE oc_autotest0;
 CREATE USER 'oc_autotest0'@'localhost' IDENTIFIED BY 'owncloud';
@@ -245,9 +252,13 @@ GRANT ALL ON oc_autotest0.* TO 'oc_autotest0'@'localhost';
 
 ==== PostgreSQL Setup
 
+[source,bash]
 ----
 su - postgres
+----
 
+[source,sql]
+----
 # Use password "owncloud"
 createuser -P oc_autotest
 
@@ -260,9 +271,13 @@ To enable `dropdb` add `local all all trust` to `pg_hba.conf`.
 For parallel executor support with EXECUTOR_NUMBER=0
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+[source,bash]
 ----
 su - postgres
+----
 
+[source,sql]
+----
 # Use password "owncloud"
 createuser -P oc_autotest0
 
@@ -274,18 +289,21 @@ psql -c 'ALTER USER oc_autotest0 CREATEDB;'
 
 To run all tests, run the following command:
 
+[source,bash]
 ----
 make test-php-unit
 ----
 
 To run tests only for MySQL, run the following command:
 
+[source,bash]
 ----
 make test-php-unit TEST_DATABASE=mysql
 ----
 
 To run a particular test suite, use the following command as a guide:
 
+[source,bash]
 ----
 make test-php-unit TEST_DATABASE=mysql TEST_PHP_SUITE=tests/lib/share/share.php
 ----
@@ -293,6 +311,7 @@ make test-php-unit TEST_DATABASE=mysql TEST_PHP_SUITE=tests/lib/share/share.php
 By default, a code coverage report is generated after the test run. To
 avoid the time taken for that, specify `NOCOVERAGE`:
 
+[source,bash]
 ----
 make test-php-unit NOCOVERAGE=true TEST_DATABASE=mysql TEST_PHP_SUITE=tests/lib/share/share.php
 ----
@@ -321,6 +340,7 @@ automatic test script first, see next section.
 
 To run all JavaScript tests, run the following command:
 
+[source,bash]
 ----
 make test-js
 ----
@@ -331,6 +351,7 @@ This will also automatically set up your test environment.
 
 To debug tests in the browser, this will run *Karma* in browser mode
 
+[source,bash]
 ----
 make test-js-debug
 ----
