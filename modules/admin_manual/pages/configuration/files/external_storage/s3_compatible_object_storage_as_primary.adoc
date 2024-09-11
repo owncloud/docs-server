@@ -248,3 +248,42 @@ $CONFIG = [
     ],
 ];
 ----
+=== Wasabi S3
+
+The S3 backend can also be used to mount the bucket of a Wasabi S3 object store via the Amazon S3 API into the virtual filesystem. The class to be used is `OCA\Files_Primary_S3\S3Storage`:
+
+[source,php]
+----
+<?php
+$CONFIG = [
+    'objectstore' => [
+        'class' => 'OCA\Files_Primary_S3\S3Storage',
+        'arguments' => [
+              // replace with your Wasabi bucket name
+            'bucket' => 'owncloud',
+              // uncomment to enable server side encryption.
+              //'serversideencryption' => 'AES256',
+              //
+              // part size, in bytes, to use when doing a multipart upload. this must between 5 MB and 5 GB, inclusive. Adjust for the common file sizes that are to uploaded to the ownCloud instance.
+            'part_size' => 5242880,
+              // maximum number of concurrent UploadPart operations allowed during the multipart upload. This can be adjusted higher to allow for more concurrent connections.
+            'concurrency' => 5,
+              //
+            'options' => [
+                  // version and region are required
+                'version' => 'latest',
+                  // replace with your Wasabi region. Review the Wasabi documentation for the region names.
+                'region'  => 'us-east-2',
+                'credentials' => [
+                      // replace key and secret with your Wasabi credentials that allow access to the bucket.
+                    'key' => 'wasabi-access-key-here',
+                    'secret' => 'wasabi-secret-key-here',
+                ],
+		 // path style can either be used (true) or not (false).
+                'use_path_style_endpoint' => false,
+                  // replace with the Wasabi endpoint URL for your bucket
+                'endpoint' => 'https://s3.us-east-2.wasabisys.com',
+            ],
+        ],
+    ],
+];
