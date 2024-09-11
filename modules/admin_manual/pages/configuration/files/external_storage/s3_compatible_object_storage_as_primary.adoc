@@ -264,9 +264,11 @@ $CONFIG = [
               // uncomment to enable server side encryption.
               //'serversideencryption' => 'AES256',
               //
-              // part size, in bytes, to use when doing a multipart upload. this must between 5 MB and 5 GB, inclusive. Adjust for the common file sizes that are to uploaded to the ownCloud instance.
+              // part size, in bytes, to use when doing a multipart upload. this must between 5 MB and 5 GB, inclusive.
+              // Adjust for the common file sizes that are to uploaded to the ownCloud instance.
             'part_size' => 5242880,
-              // maximum number of concurrent UploadPart operations allowed during the multipart upload. This can be adjusted higher to allow for more concurrent connections.
+              // maximum number of concurrent UploadPart operations allowed during the multipart upload.
+              // This can be adjusted higher to allow for more concurrent connections.
             'concurrency' => 5,
               //
             'options' => [
@@ -287,3 +289,4 @@ $CONFIG = [
         ],
     ],
 ];
+----
