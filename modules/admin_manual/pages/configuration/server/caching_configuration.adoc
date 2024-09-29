@@ -203,7 +203,7 @@ To use APCu, add this line to `config.php`:
 
 [source,php]
 ----
-'memcache.local' => '\OC\Memcache\APCu',
+'memcache.locking' => '\OC\Memcache\APCu',
 ----
 
 With that done, refresh your ownCloud admin page, and the cache warning should disappear.
