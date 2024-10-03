@@ -1,6 +1,6 @@
 = Manually Move the Data Directory
 :toc: right
-:description: Use this instructions if you intend to move your ownCloud's data directory from it's current location to another without using a symbolic link.
+:description: Use these instructions if you intend to move your ownCloud's data directory from its current location to another without using a symbolic link.
 
 :mysql-string-replace-function-url: http://www.mysqltutorial.org/mysql-string-replace-function.aspx
 
@@ -20,7 +20,7 @@ This guide assumes that:
 
 Please change the paths above to reflect your environment.
 
-== Summery
+== Summary
 
 The following steps are necessary to move the data directory.
 
@@ -179,4 +179,11 @@ To disable maintenance mode of your instance run the following command:
 [source,bash]
 ----
 sudo service apache2 start
+----
+
+== Scan the Files
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} files:scan --all
 ----
