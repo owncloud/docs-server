@@ -297,11 +297,11 @@ After all prerequisites, installations, configurations and the verification has 
 3. Migrate shares <2>
 4. Disable users <3>
 ----
-<1> These steps migrate all ordinary, guest and disabled users and files. You can rerun these steps to migrate any items that were not part when the respective step was called. Note that the steps must be made in that order.
+<1> These steps migrate all ordinary, guest and disabled users and files. You can rerun these steps to migrate any items that did not exist, or failed to migrate when the respective step was called. Note that the steps must be made in that order.
 <2> This step is a breaking change and migrates all shares. When this step has run, the former steps cant be run again.
 <3> This step finalizes the migration by disabling all users on Kiteworks that are disabled on ownCloud.
 
-The migration step transferring files will naturally take its time depending on the amount of data and bandwidth available. All other steps will complete relative quickly as only a few or metadata is transferred.
+The migration step transferring files will naturally take its time depending on the amount of data and bandwidth available. All other steps will complete relative quickly as only metadata is transferred.
 
 
 Note that the migration of users and especially files can be interrupted harmlessly at any time. Starting a new migration run will continue where the previous one stopped.
@@ -385,7 +385,7 @@ The command does not require user interaction. It can be run e.g. as a screen se
 
 ==== Disable Users
 
-When there are disabled users on the ownCloud side, these users will be migrated as ordinary users to Kitworks but are enabled. This is due the fact that a disabled user can provide shares. As final step, run this command to disable users at Kitworks that are diabled at ownCloud.
+When there are disabled users on the ownCloud side, these users will be migrated as ordinary users to Kiteworks but are enabled. This is due the fact that a disabled user can provide shares. As a final step, run this command to disable users at Kiteworks that are disabled at ownCloud.
 
 Issue the following command to start disable users:
 
