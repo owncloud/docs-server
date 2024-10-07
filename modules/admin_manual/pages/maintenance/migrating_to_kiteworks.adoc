@@ -196,7 +196,7 @@ Note that you only see the secret once, remember it!
 +
 These two values are needed to initialize the xref:migration-initialization[ownCloud migration app].
 
-Finally, you have the following Kiteworks values that are needed for the next steps. We recommend having them saved as shell variables for ease of use. In the upcoming examples, the following names represent the corresponding values:
+Finally, you have the following Kiteworks values that are needed for the next steps. In the upcoming examples, the following names represent the corresponding values:
 
 * Host name or IP address +
 `KW_HOST`
@@ -209,6 +209,8 @@ Finally, you have the following Kiteworks values that are needed for the next st
 
 * Secret key +
 `KW_SECRET`
+
+NOTE: We recommend having the values saved as shell variables as proposed for ease of use in the following commands. 
 
 == Migration Steps
 
@@ -223,6 +225,8 @@ After the above prerequisites have been met, the migration process can be starte
 ** Disable users
 
 NOTE: Both the verification and migration commands need the initialisation step upfront to properly communicate with the Kiteworks instance.
+
+Details for commands used can be found in the xref:configuration/server/occ_command.adoc#migrate-to-kiteworks[Migrate to Kiteworks] occ command description.
 
 === Migration Initialization
 
@@ -303,7 +307,6 @@ After all prerequisites, installations, configurations and the verification has 
 
 The migration step transferring files will naturally take its time depending on the amount of data and bandwidth available. All other steps will complete relative quickly as only metadata is transferred.
 
-
 Note that the migration of users and especially files can be interrupted harmlessly at any time. Starting a new migration run will continue where the previous one stopped.
 
 ==== Migrate Users
@@ -315,8 +318,11 @@ Issue the following command to start migrating users:
 sudo -u www-data \
   php /var/www/owncloud/occ \
   migrate:to-kiteworks:users \
-  $KW_ADMIN_USER
+  $KW_ADMIN_USER \
+  $KW_PROFILE_GUEST (optional)
 ----
+
+Note that you can optionally add a Kiteworks guest user profile that will be assigned to guest users defined in owncloud when migrating.
 
 The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job.
 

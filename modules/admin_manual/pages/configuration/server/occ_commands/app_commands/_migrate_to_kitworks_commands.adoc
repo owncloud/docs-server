@@ -1,0 +1,179 @@
+= Migrate to Kiteworks
+
+The _Migrate to Kiteworks_ app is not available on the ownCloud marketplace. If you plan a migration, get in touch with {oc-support-url}[ownCloud support] for more details.
+
+See the xref:maintenance/migrating_to_kiteworks.adoc[Migrating to Kiteworks Private Content Network] documentation for the sequence and details of the migration including the description how to get the required parameters for the commands.
+
+Note that the arguments in the description below are noted like when defining them as environment variables as proposed in the migration document.
+
+The following commands manage the migration of ownCloud to Kiteworks:
+
+[source,plaintext]
+----
+ migrate:to-kiteworks
+  migrate:to-kiteworks:init            Initialize the migration process.
+  migrate:to-kiteworks:verify          Verifies the ownCloud instance to be ready for migration.
+  migrate:to-kiteworks:users           Migrates ownCloud users to the configured Kiteworks instance.
+  migrate:to-kiteworks:files           Migrates ownCloud files and folders to the configured Kiteworks instance.
+  migrate:to-kiteworks:shares          Migrates ownCloud shares to the configured Kiteworks instance.
+  migrate:to-kiteworks:disable-users   Disables users in Kiteworks.
+----
+
+== Initialize the Migration Process
+
+To start the migration, it must be initialized first:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-kiteworks:init $KW_HOST $KW_APPLICATION_ID "$KW_SECRET"
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| $KW_HOST
+| The IP address, hostname or URL to reach the Kiteworks instance
+
+| $KW_APPLICATION_ID
+| Client application ID
+
+| $KW_SECRET
+| Secret key
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `-f --force`
+| 
+|===
+
+== Verify That the Migration can be Started
+
+After initialisation, the migration must be verified to be ready:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-kiteworks:verify $KW_ADMIN_USER
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| $KW_ADMIN_USER
+| The Kiteworks admin users eMail address
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `-k, --insecure`
+| Allow insecure (untrusted) certificates. Used for testing purposes.
+|===
+
+== Migrate Users
+
+After verification, migrating users can be started:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-kiteworks:users $KW_ADMIN_USER $KW_PROFILE_GUEST
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| $KW_ADMIN_USER
+| The Kiteworks admin users eMail address
+
+| $KW_PROFILE_GUEST
+| The Kiteworks guest user profile, defaults to "restricted"
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `-k, --insecure`
+| Allow insecure (untrusted) certificates. Used for testing purposes.
+|===
+
+== Migrate Files
+
+After migrating users, migrating files can be started:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-kiteworks:files $KW_ADMIN_USER
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| $KW_ADMIN_USER
+| The Kiteworks admin users eMail address
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `-k, --insecure`
+| Allow insecure (untrusted) certificates. Used for testing purposes.
+|===
+
+== Migrate Shares
+
+After migrating files, shares can be migrated. Note that when initiating this step, migrating files and users cant be run again:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-kiteworks:shares $KW_ADMIN_USER
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| $KW_ADMIN_USER
+| The Kiteworks admin users eMail address
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `-k, --insecure`
+| Allow insecure (untrusted) certificates. Used for testing purposes.
+|===
+
+== Disable Users in Kiteworks
+
+After migrating shares, the final step can be processed. This is to disable migrated users in Kiteworks that are disabled in ownCloud:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-kiteworks:disable-users $KW_ADMIN_USER
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| $KW_ADMIN_USER
+| The Kiteworks admin users eMail address
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `-k, --insecure`
+| Allow insecure (untrusted) certificates. Used for testing purposes.
+|===
