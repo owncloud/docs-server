@@ -47,7 +47,7 @@ To start the migration, it must be initialized first:
 [width="100%",cols="20%,70%",]
 |===
 | `-f --force`
-| 
+| Normally, init is protected against accidentially overwriting an existing kiteworks connection. Use --force to do so.
 |===
 
 == Verify That the Migration can be Started
