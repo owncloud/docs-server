@@ -64,6 +64,8 @@ Federated shares are, in terms of data migration, like special external mounts, 
 
 The following limitations impact the migration process:
 
+* The ownCloud migration app provided is only functional on `amd64` platforms.
+
 * While ownCloud fully respects letter casing for file and folder names, Kiteworks does not distinguish casings. If case conflicts happen during the migration process, a migration log file describing rclone responses and casing conflicts for files or directories is created. The ownCloud admin must resolve the conflicts to finalize the migration. For details see the xref:migration[Migration] description.
 
 * When group shares have been defined, groups will not get created in Kiteworks. Instead, each member of the group will get an individual user share to the object shared.
