@@ -275,7 +275,8 @@ sudo -u www-data \
 
 Here are some possible verification output examples:
 
-.Example 1 - ready to migrate
+Example 1 - ready to migrate::
++
 [source,plaintext]
 ----
 Activating the Kiteworks satellite ....
@@ -286,7 +287,8 @@ Total disk storage: 13.4 MB
 Congratulations - this instance is ready to be migrated to Kiteworks!
 ----
 
-.Example 2 - failure
+Example 2 - failure::
++
 [source,plaintext]
 ----
 Activating the Kiteworks satellite ....
