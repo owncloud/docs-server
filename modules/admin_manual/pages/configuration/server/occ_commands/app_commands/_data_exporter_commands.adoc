@@ -1,14 +1,27 @@
 = Data Exporter
 
 This app is only available as a https://github.com/owncloud/data_exporter.git[git clone].
-See the xref:maintenance/export_import_instance_data.adoc[Data Exporter] description for more information on how to install this app.
-Import and export users from one ownCloud instance in to another.
-The export contains all user settings, files and shares.
+See the xref:maintenance/export_import_instance_data.adoc[Data Exporter] description for more information on how to install this app. Import and export users from one ownCloud instance in to another. The export contains all user settings, files and shares.
+
+The following commands are available for the Data Exporter app:
+
+[source,plaintext]
+----
+ instance
+  instance:export                Exports global instance data
+  instance:export:user           Exports a single user
+  instance:import                Imports global instance data
+  instance:import:user           Imports a single user
+  instance:export:migrate:share  Converts the local shares pointing to the given user to federated shares
+                                 pointing at the remote instance. An important prerequisite is that the user
+                                 and his shares have already been imported on that remote instance
+----
 
 == Export User Data
 
+[source,bash,subs="attributes+"]
 ----
-instance:export:user <userId> <exportDirectory>
+{occ-command-example-prefix} instance:export:user <userId> <exportDirectory>
 ----
 
 === Arguments
@@ -21,8 +34,9 @@ instance:export:user <userId> <exportDirectory>
 
 == Import User Data
 
+[source,bash,subs="attributes+"]
 ----
-instance:import:user [options] [--] <importDirectory>
+{occ-command-example-prefix} instance:import:user [options] [--] <importDirectory>
 ----
 
 === Arguments
@@ -43,8 +57,9 @@ instance:import:user [options] [--] <importDirectory>
 
 == Migrate Shares
 
+[source,bash,subs="attributes+"]
 ----
-instance:export:migrate:share <userId> <remoteServer>
+{occ-command-example-prefix} instance:export:migrate:share <userId> <remoteServer>
 ----
 
 === Arguments
