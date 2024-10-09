@@ -51,14 +51,18 @@ The following items are NOT migrated. These items need to be migrated manually:
 * External mounts like +
 `WND`, `SMB`, `Google Drive`, etc. +
 This includes admin mounts and user created mounts. See the xref:external-mount-points[ownCloud prerequisites] section for a special note. 
+
 * S3 primary object store (S3 for the users home) cannot be migrated for the time being.
 +
 --
 IMPORTANT: If you have configured S3 primary as your storage location for the users home, get in touch with {oc-support-url}[ownCloud support].
 --
+
 * Federated shares. +
 Federated shares are, in terms of data migration, like special external mounts, see above.
-* Public links.
+
+* Public links. +
+They are not supported on Kiteworks and skipped during the migration process.
 
 == Limitations
 
@@ -71,8 +75,6 @@ The following limitations impact the migration process:
 * When group shares have been defined, groups will not get created in Kiteworks. Instead, each member of the group will get an individual user share to the object shared.
 
 * In ownCloud, users can login either using their display name, login name or email address. Kiteworks only allows login using the email address. The presence of the users email address in ownCloud, which must be unique, is therefore a mandatory requirement.
-
-* Expiry dates for shares are not migrated.
 
 == Conceptual Differences
 
@@ -158,7 +160,7 @@ For ease of migrating external mounts, the admin should:
 
 === Kiteworks
 
-* As a major prerequisite, the Kiteworks instance *must* be running on the "Venice" release or higher.
+* As a major prerequisite, the Kiteworks instance *must* be running on the "Zion" release or higher.
 
 * You need to login into the Kiteworks appliance as role *System Admin*.
 // The kiteworks satellite service must be activated and available to the system admin user account.
@@ -207,7 +209,7 @@ Finally, you have the following Kiteworks values that are needed for the next st
 * Host name or IP address +
 `KW_HOST`
 
-* Admin users eMail address +
+* Admin users email address +
 `KW_ADMIN_USER`
 
 * Client application ID +
@@ -216,7 +218,7 @@ Finally, you have the following Kiteworks values that are needed for the next st
 * Secret key +
 `KW_SECRET`
 
-NOTE: We recommend having the values saved as shell variables as proposed for ease of use in the following commands. 
+NOTE: Consider saving `KW_ADMIN_USER` as shell variable for ease of use in the following commands. 
 
 == Migration Steps
 
@@ -243,9 +245,9 @@ The migration initialization is a mandatory step and will create a json file tha
 sudo -u www-data php \
   /var/www/owncloud/occ \
   migrate:to-kiteworks:init \
-  $KW_HOST \
-  $KW_APPLICATION_ID \
-  "$KW_SECRET"
+  KW_HOST \
+  KW_APPLICATION_ID \
+  "KW_SECRET"
 ----
 
 As output, a file named `mft-owncloud-migration.json` is created in the ownCloud root folder. Use this file now to create a new satellite on the Kiteworks instance. The satellite must be switched to STATUS btn:[ON].
@@ -293,7 +295,7 @@ Example 2 - failure::
 ----
 Activating the Kiteworks satellite ....
 Verifying users ...
-No Email for user alex - it cannot be migrated to Kiteworks!
+No email for user alex - it cannot be migrated to Kiteworks!
 Please make sure all users meet the requirements.
 This instance is NOT ready to be migrated to Kiteworks!
 ----
@@ -327,10 +329,10 @@ sudo -u www-data \
   php /var/www/owncloud/occ \
   migrate:to-kiteworks:users \
   $KW_ADMIN_USER \
-  $KW_PROFILE_GUEST (optional)
+  KW_PROFILE_GUEST (optional)
 ----
 
-Note that you can optionally add a Kiteworks guest user profile that will be assigned to guest users defined in owncloud when migrating.
+Note that you can optionally add a Kiteworks guest user profile that will be assigned to guest users defined in ownCloud when migrating. If this is not assigned, the default `restricted` will be used.
 
 The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job.
 
@@ -346,9 +348,9 @@ sudo -u www-data \
   $KW_ADMIN_USER
 ----
 
-For a possible improvement of transfer performance when migrating files, read the xref:tuning-transfer-performance[Tuning Transfer Performance] section below.
+// For a possible improvement of transfer performance when migrating files, read the xref:tuning-transfer-performance[Tuning Transfer Performance] section below.
 
-The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job. During the migration process, a log file named `migrate-kiteworks-<timestamp>.csv` is created in the ownCloud root folder. This file contains:
+The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job. During the migration process, a log file named `migrate-kiteworks-files.csv` is created in the ownCloud root folder. This file contains:
 
 * General `rclone` responses and errors,
 * `rclone` responses for user migration,
@@ -395,7 +397,7 @@ sudo -u www-data \
   $KW_ADMIN_USER
 ----
 
-The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job.
+The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job. During the migration process, a log file named `migrate-kiteworks-shares.csv` is created in the ownCloud root folder.
 
 ==== Disable Users
 
@@ -419,6 +421,7 @@ If there are case conflicts reported in the shell and/or the migration log, the 
 
 For reported conflicts, the admin should impersonate the user with the conflict and solve it by renaming the file or directory according to the Kiteworks naming rules. After fixing all open issues, the migration can be restarted and all formerly conflicted files or folders will get migrated.
 
+////
 == Tuning Transfer Performance
 
 By default, rclone transfers 4 files in parallel. This creates little load on the target system, but may take a longer time to complete. This is especially true when anticipating mostly small files with sizes of about 10KB instead of large files with sizes of 10 MB or above.
@@ -454,3 +457,4 @@ The graphs show results from a test system.
 * The left half of the graphs show the default setting with 4 parallel transfers.
 * The right half of the graphs first show `RCLONE_TRANSFERS=10`, then close to the end using `RCLONE_TRANSFERS=16` with peaking CPU usage at near 100%.
 * During the last section, as shown in the graphs, 100 files (total of 8 MB) were uploaded per minute. The default setting would achieve only about 20 files per minute.
+////

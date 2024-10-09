@@ -4,7 +4,7 @@ The _Migrate to Kiteworks_ app is not available on the ownCloud marketplace. If 
 
 See the xref:maintenance/migrating_to_kiteworks.adoc[Migrating to Kiteworks Private Content Network] documentation for the sequence and details of the migration including the description how to get the required parameters for the commands.
 
-Note that the arguments in the description below are noted like when defining them as environment variables as proposed in the migration document.
+Note that the argument `$KW_ADMIN_USER` in the description below is noted like when defining it as environment variable as proposed in the migration document.
 
 The following commands manage the migration of ownCloud to Kiteworks:
 
@@ -25,20 +25,20 @@ To start the migration, it must be initialized first:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-kiteworks:init $KW_HOST $KW_APPLICATION_ID "$KW_SECRET"
+{occ-command-example-prefix} migrate:to-kiteworks:init KW_HOST KW_APPLICATION_ID "KW_SECRET"
 ----
 
 === Arguments
 
 [width="100%",cols="20%,70%",]
 |===
-| $KW_HOST
+| KW_HOST
 | The IP address, hostname or URL to reach the Kiteworks instance
 
-| $KW_APPLICATION_ID
+| KW_APPLICATION_ID
 | Client application ID
 
-| $KW_SECRET
+| KW_SECRET
 | Secret key
 |===
 
@@ -64,7 +64,7 @@ After initialisation, the migration must be verified to be ready:
 [width="100%",cols="20%,70%",]
 |===
 | $KW_ADMIN_USER
-| The Kiteworks admin users eMail address
+| The Kiteworks admin users email address
 |===
 
 === Options
@@ -89,9 +89,9 @@ After verification, migrating users can be started:
 [width="100%",cols="20%,70%",]
 |===
 | $KW_ADMIN_USER
-| The Kiteworks admin users eMail address
+| The Kiteworks admin users email address
 
-| $KW_PROFILE_GUEST
+| KW_PROFILE_GUEST
 | The Kiteworks guest user profile, defaults to "restricted"
 |===
 
@@ -117,7 +117,7 @@ After migrating users, migrating files can be started:
 [width="100%",cols="20%,70%",]
 |===
 | $KW_ADMIN_USER
-| The Kiteworks admin users eMail address
+| The Kiteworks admin users email address
 |===
 
 === Options
@@ -142,7 +142,7 @@ After migrating files, shares can be migrated. Note that when initiating this st
 [width="100%",cols="20%,70%",]
 |===
 | $KW_ADMIN_USER
-| The Kiteworks admin users eMail address
+| The Kiteworks admin users email address
 |===
 
 === Options
@@ -167,7 +167,7 @@ After migrating shares, the final step can be processed. This is to disable migr
 [width="100%",cols="20%,70%",]
 |===
 | $KW_ADMIN_USER
-| The Kiteworks admin users eMail address
+| The Kiteworks admin users email address
 |===
 
 === Options
