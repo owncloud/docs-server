@@ -23,7 +23,7 @@ The migration process consists of these steps:
 * Verify upcoming migration steps.
 * Run the migration.
 
-For the planning, the ownCloud instance can stay productive during the migration process. Migration can be interrupted and restarted. For the final step, before shutting down the ownCloud instance, it is recommended to put it into maintenance mode to have a clean final transfer.
+For the planning, the ownCloud instance can stay productive during the migration process. Migration can be interrupted and restarted. For the last step, which is migrating shares, you must put the instance into maintenance mode to have a clean final transfer. Afterwards you can finally shut down the ownCloud instance.
 
 === Migrated Items
 
@@ -31,16 +31,18 @@ The following items will be migrated. In some cases, special rules apply as note
 
 * Ordinary users. +
 At Kiteworks, the email address will be used as the user name.
+* Guest users. +
+Will be translated into Kiteworks user profile `restricted`.
+* Disabled users. +
+Disabled users cant login, but may contain shares to be migrated.
 * The content of the users home directory. +
 The data of the home directory can be encrypted. In that case, data will be gathered, decrypted and transferred via a secured channel to the Kiteworks instance.
 * User shares received. +
 As long as they reference content from another user's home.
 * User shares granted. +
-As long as they reference content from the user's home.
+As long as they reference content from the user's home. A share where all permissions are already granted thru a parent folder are considered redundant and are not created.
 * Share permissions. +
 Will be translated into Kiteworks predefined roles.
-* Guest users. +
-Will be translated into Kiteworks user profile `restricted`.
 
 === Items Excluded from the Migration
 
@@ -49,51 +51,57 @@ The following items are NOT migrated. These items need to be migrated manually:
 * External mounts like +
 `WND`, `SMB`, `Google Drive`, etc. +
 This includes admin mounts and user created mounts. See the xref:external-mount-points[ownCloud prerequisites] section for a special note. 
+
 * S3 primary object store (S3 for the users home) cannot be migrated for the time being.
 +
 --
 IMPORTANT: If you have configured S3 primary as your storage location for the users home, get in touch with {oc-support-url}[ownCloud support].
 --
+
 * Federated shares. +
 Federated shares are, in terms of data migration, like special external mounts, see above.
-* Public links.
+
+* Public links. +
+They are not supported on Kiteworks and skipped during the migration process.
 
 == Limitations
 
 The following limitations impact the migration process:
 
-* While ownCloud fully respects letter casing for file and folder names, Kiteworks does not distinguish casings. If case conflicts happen during the migration process, a migration log file describing rclone responses and casing conflicts for files or directories is created. The ownCloud admin must resolve the conflicts to finalize the migration. For details see the xref:migration[Migration] description.
+* The ownCloud migration app is only functional on `amd64` platforms.
+
+* While ownCloud fully respects letter casing for file and folder names, Kiteworks does not distinguish casing. If case conflicts happen during the migration process, a migration log file describing rclone responses and casing conflicts for files or directories is created. The ownCloud admin must resolve the conflicts to finalize the migration. For details see the xref:migration[Migration] description.
 
 * When group shares have been defined, groups will not get created in Kiteworks. Instead, each member of the group will get an individual user share to the object shared.
 
-* Users have been able to login to ownCloud using either their display name, login name or email address. Kiteworks only allows login using the email address. The presence of the users email address in ownCloud is therefore a mandatory requirement.
-
-* Expiry dates for shares are not supported.
+* In ownCloud, users can login either using their display name, login name or email address. Kiteworks only allows login using the email address. The presence of the users email address in ownCloud, which must be unique, is therefore a mandatory requirement.
 
 == Conceptual Differences
 
 There are some conceptual differences between the products. See the list below for important ones _affecting the migration_ where the difference to ownCloud, if not otherwise stated, is highlighted. This list will help to identify topics addressing files, folders and shares after the migration. Note that this section does not cover using the Kiteworks instance. 
 
 * Kiteworks cannot have files in the top level of a user's home, only folders. +
-The migration process will therefore copy all files from the users ownCloud home directory into a folder named `ownCloud` on the Kiteworks users top level data structure.
+The migration process will therefore copy the entire hierarchy of the ownClouds user home into a folder named `ownCloud` on the Kiteworks users top level data structure.
 
 * Kiteworks handles expiry dates for shares created differently. During a migration, expiry dates for ownCloud shares are ignored.
 
 * Shares on the ownCloud side that have been rejected by the share receiver are still potential active shares as they can be accepted at any time. This means that these shares are also migrated and the receiving share user will see them on the Kiteworks side.
 
 * In Kiteworks, received shares are shown at:
-** Individually shared files: in the `Shared with me` sidebar, not in the main file view.
-** Folders: in the main files view (outside of the ownCloud folder tree), but not in the `Shared with me` sidebar.
+** *Individually shared files*: +
+in the `Shared with me` sidebar, not in the main file view.
+** *Folders*: +
+in the main files view (outside of the ownCloud folder tree), but not in the `Shared with me` sidebar.
 
 * The filesystem on the Kiteworks side is _case-insensitive_.
-** Filename conflicts can happen during migration, and a migration log (csv file) will list issues that must be solved by the user.
+** Filename conflicts can happen during migration, and a migration log will list issues that must be solved by the admin.
 
 * Kiteworks has the following files and folder naming rules:
-** File and folder names cannot contain one of the following characters: `*:"/\|<>`.
+** File and folder names cannot contain the following characters: `*?:"/\|<>`.
 ** Folder names can't begin or end with a period.
 
 +
-These rules are ineffective during the migration and this helps to complete it. But it may result in syncing issues to Windows clients. Affected files and folders can be renamed by the user. Naming rules will then be automatically enforced.
+These rules are ineffective during the migration and this helps to complete it. But it may result in syncing issues to Windows clients. Affected files and folders can be renamed by the user. Naming rules will then be  enforced.
 
 == Prerequisites
 
@@ -105,6 +113,8 @@ To be prepared for the migration, both sides need to match the prerequisites. Pl
 ====
 * As a major prerequisite, the ownCloud instance *must* be running on release 10.14 or higher. If this requirement is not met, migration cannot be started as the necessary app checks the minimum version.
 
+* For all migration steps, the ownCloud instance must run in normal operation mode. Migration is not possible if ownCloud is in maintenance mode.
+
 * *Shell/SSH access to your server running ownCloud* is required. +
 `occ` commands need to be issued.
 
@@ -115,7 +125,7 @@ To be prepared for the migration, both sides need to match the prerequisites. Pl
 * All users must have an email address and they must be unique. +
 The `occ migrate:to-kiteworks:verify` step will point out missing email addresses. These must be rectified before any migration can start.
 
-* We recommend installing and enabling, if not already present and enabled, the {oc-marketplace-url}/apps/impersonate[Impersonate] app. This app can be used to solve file and folder case conflicts that can be reported during the migration process.
+* We recommend installing and enabling, if not already present and enabled, the {oc-marketplace-url}/apps/impersonate[Impersonate] app. This app can be used for example to solve file and folder case conflicts that can be reported during the migration process.
 ====
 
 ==== Installing Required Components
@@ -150,7 +160,7 @@ For ease of migrating external mounts, the admin should:
 
 === Kiteworks
 
-* As a major prerequisite, the Kiteworks instance *must* be running on the "Venice" release or higher. If this requirement is not met, migration cannot be started.
+* As a major prerequisite, the Kiteworks instance *must* be running on the "Zion" release or higher.
 
 * You need to login into the Kiteworks appliance as role *System Admin*.
 // The kiteworks satellite service must be activated and available to the system admin user account.
@@ -169,7 +179,7 @@ IMPORTANT: We recommend having the Kiteworks PCN connected and configured to an 
 * If it is planned to use a virus scanner in Kiteworks:
 +
 --
-IMPORTANT: We recommend having the Kiteworks PCN configured using a virus scanner _before_ starting the migration. This way, infected files will be put under quarantine already during migration.
+IMPORTANT: We recommend having the Kiteworks PCN configured using a virus scanner _before_ starting the migration. This way, infected files that have not been covered by ownCloud will be put under quarantine already during migration.
 --
 
 * In the Kiteworks Admin Console, navigate to menu:Application Setup[Client and Plugins > API]. Then click btn:[Create Custom Application]:
@@ -194,12 +204,12 @@ Note that you only see the secret once, remember it!
 +
 These two values are needed to initialize the xref:migration-initialization[ownCloud migration app].
 
-Finally, you have the following Kiteworks values that are needed for the next steps. We recommend having them saved as shell variables for ease of use. In the upcoming examples, the following names represent the corresponding values:
+Finally, you have the following Kiteworks values that are needed for the next steps. In the upcoming examples, the following names represent the corresponding values:
 
 * Host name or IP address +
 `KW_HOST`
 
-* Admin users eMail address +
+* Admin users email address +
 `KW_ADMIN_USER`
 
 * Client application ID +
@@ -208,6 +218,8 @@ Finally, you have the following Kiteworks values that are needed for the next st
 * Secret key +
 `KW_SECRET`
 
+NOTE: Consider saving `KW_ADMIN_USER` as shell variable for ease of use in the following commands. 
+
 == Migration Steps
 
 After the above prerequisites have been met, the migration process can be started. The process has the following steps:
@@ -215,8 +227,14 @@ After the above prerequisites have been met, the migration process can be starte
 * Initialization
 * Verification
 * Migration
+** Migrate users
+** Migrate files
+** Migrate shares
+** Disable users
 
-NOTE: Both the verification and migration command need the initialisation step upfront to properly communicate with the Kiteworks instance.
+NOTE: Both the verification and migration commands need the initialisation step upfront to properly communicate with the Kiteworks instance.
+
+Details for commands used can be found in the xref:configuration/server/occ_command.adoc#migrate-to-kiteworks[Migrate to Kiteworks] occ command description.
 
 === Migration Initialization
 
@@ -227,16 +245,16 @@ The migration initialization is a mandatory step and will create a json file tha
 sudo -u www-data php \
   /var/www/owncloud/occ \
   migrate:to-kiteworks:init \
-  $KW_HOST \
-  $KW_APPLICATION_ID \
-  "$KW_SECRET"
+  KW_HOST \
+  KW_APPLICATION_ID \
+  "KW_SECRET"
 ----
 
-As output, a file named `mft-owncloud-migration.json` is created in the ownCloud root folder. Upload this file when adding a new satellite on the Kiteworks instance. The satellite must be switched to STATUS btn:[ON].
+As output, a file named `mft-owncloud-migration.json` is created in the ownCloud root folder. Use this file now to create a new satellite on the Kiteworks instance. The satellite must be switched to STATUS btn:[ON].
 
 {empty} +
 
-[role=center,width=80%,cols="^.^50%,^.^50%",options="header"]
+[.center,width=80%,cols="^.^50%,^.^50%",options="header"]
 |===
 a| Navigate to menu:System Setup[Satellite Servers] 
 a| Add a new Satellite
@@ -247,7 +265,7 @@ a| image::maintenance/migrate_kiteworks/kiteworks-new-satellite.png[Kiteworks ad
 
 === Migration Verification
 
-A potential migration *must* be verified upfront with a positive ready message as response. This command will also output the required space capacity needed on the Kiteworks side. The verify command currently cannot report problematic file or folder names. These are reported only during the migration process. Note that any issue reported must be solved and a verification needs to be redone before the final migration can start.
+A migration *must* be verified upfront with a positive ready message as response. This command will also output a rough estimate of the required space capacity needed on the Kiteworks side. The verify command currently cannot report problematic file or folder names. These are reported only during the migration process. Note that any issue reported must be solved and a verification needs to be redone before the migration can start.
 
 [source,bash]
 ----
@@ -259,7 +277,8 @@ sudo -u www-data \
 
 Here are some possible verification output examples:
 
-.Example 1 - ready to migrate
+Example 1 - ready to migrate::
++
 [source,plaintext]
 ----
 Activating the Kiteworks satellite ....
@@ -270,30 +289,68 @@ Total disk storage: 13.4 MB
 Congratulations - this instance is ready to be migrated to Kiteworks!
 ----
 
-.Example 2 - failure
+Example 2 - failure::
++
 [source,plaintext]
 ----
 Activating the Kiteworks satellite ....
 Verifying users ...
-No Email for user alex - it cannot be migrated to Kiteworks!
+No email for user alex - it cannot be migrated to Kiteworks!
 Please make sure all users meet the requirements.
 This instance is NOT ready to be migrated to Kiteworks!
 ----
 
 === Migration
 
-After all prerequisites, installations, configurations and the verification has passed, you can initiate the migration process. This process may take some time to copy all files to the new system. Note that a migration run can be interrupted harmlessly at any time. Starting a new migration run will continue where the previous one stopped. For a possible improvement of transfer performance, read the xref:tuning-transfer-performance[Tuning Transfer Performance] section below. Issue the following command to start the migration:
+After all prerequisites, installations, configurations and the verification has passed, you can initiate the migration process. The migration is split into four parts which are:
+
+[,subs="+callouts,macros,attributes+"]
+----
+1. Migrate users <1>
+2. Migrate files <1>
+3. Migrate shares <2>
+4. Disable users <3>
+----
+<1> These steps migrate all ordinary, guest and disabled users and files. You can rerun these steps to migrate any items that did not exist, or failed to migrate when the respective step was called. Note that the steps must be made in that order.
+<2> This step is a *breaking change* and migrates all shares. When this step has run, the former steps cant be run again.
+<3> This step finalizes the migration by disabling all users on Kiteworks that are disabled on ownCloud.
+
+The migration step transferring files will naturally take its time depending on the amount of data and bandwidth available. All other steps will complete relative quickly as only metadata is transferred.
+
+NOTE: All migration steps, especially files, can be interrupted harmlessly at any time. Starting a new migration run will continue where the previous one stopped.
+
+==== Migrate Users
+
+Issue the following command to start migrating users:
 
 [source,bash]
 ----
 sudo -u www-data \
   php /var/www/owncloud/occ \
-  migrate:to-kiteworks \
+  migrate:to-kiteworks:users \
+  $KW_ADMIN_USER \
+  KW_PROFILE_GUEST (optional)
+----
+
+Note that you can optionally add a Kiteworks guest user profile that will be assigned to guest users defined in ownCloud when migrating. If this is not assigned, the default `restricted` will be used.
+
+The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job.
+
+==== Migrate Files
+
+Issue the following command to start migrating files:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-kiteworks:files \
   $KW_ADMIN_USER
 ----
 
-The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job.
-During the migration process, a log file named `migrate-kiteworks-<timestamp>.csv` is created in the ownCloud root folder. This file contains:
+// For a possible improvement of transfer performance when migrating files, read the xref:tuning-transfer-performance[Tuning Transfer Performance] section below.
+
+The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job. During the migration process, a log file named `migrate-kiteworks-files.csv` is created in the ownCloud root folder. This file contains:
 
 * General `rclone` responses and errors,
 * `rclone` responses for user migration,
@@ -301,7 +358,8 @@ During the migration process, a log file named `migrate-kiteworks-<timestamp>.cs
 
 If `rclone` errors at one point, it tries to finish running transfers but will stop afterwards. 
 
-.Example for migration issues reported
+Example for migration issues reported::
++
 [source,plaintext]
 ----
 Issues did arise when migrating files and folders.
@@ -312,7 +370,8 @@ Once resolved please re-run the migration process again.
 Migration will stop here now until no more conflicts exist.
 ----
 
-.Examples for case conflicts noted in the migration log file:
+Examples for case conflicts noted in the migration log file::
++
 [source,plaintext]
 ----
 NOTICE,user1,user1@example.com,"2024/04/03 15:20:27
@@ -324,26 +383,59 @@ NOTICE,user2,user2@example.com,"2024/04/03 15:20:32
 
 As you can see above, there is `Duplicate` notice for a file and another one for a directory name. `Duplicate` notices are logged for case conflicts. A conflict takes place because a file or directory that has been migrated earlier is in conflict with the name of the reported object. The conflicts for the particular users need to be resolved within ownCloud. When this is done, the migration can be restarted. `rclone` will compare both sides to identify already migrated objects and will continue with those objects that have not been migrated yet.
 
+==== Migrate Shares
+
+IMPORTANT: When running this command, you cant run the `migrate:files|users` command anymore!
+
+Issue the following command to start migrating shares:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-kiteworks:shares \
+  $KW_ADMIN_USER
+----
+
+The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job. During the migration process, a log file named `migrate-kiteworks-shares.csv` is created in the ownCloud root folder.
+
+==== Disable Users
+
+The migrate users step migrates all users as enabled users even they were disabled ownCloud users. This is needed so that a disabled user can provide shares. As a final step, run this command to disable users at Kiteworks that are disabled at ownCloud.
+
+Issue the following command to start disable users:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-kiteworks:disable-users \
+  $KW_ADMIN_USER
+----
+
+The command does not require user interaction. It can be run e.g. as a screen session so that reported issues can be seen directly or as a background job.
+
 ==== Solving Case Conflicts
 
 If there are case conflicts reported in the shell and/or the migration log, the ownCloud admin must solve them to continue the migration. 
 
 For reported conflicts, the admin should impersonate the user with the conflict and solve it by renaming the file or directory according to the Kiteworks naming rules. After fixing all open issues, the migration can be restarted and all formerly conflicted files or folders will get migrated.
 
+////
 == Tuning Transfer Performance
 
 By default, rclone transfers 4 files in parallel. This creates little load on the target system, but may take a longer time to complete. This is especially true when anticipating mostly small files with sizes of about 10KB instead of large files with sizes of 10 MB or above.
 
 Performance can be tuned with the environment variable `RCLONE_TRANSFERS` which defines the number of concurrent file uploads.
 
-The following example command is using 32 parallel transfers:
+The following example command is using 16 parallel transfers:
 
 [source,bash]
 ----
 sudo -u www-data \
-  RCLONE_TRANSFERS=32 \
+  RCLONE_TRANSFERS=16 \
   php /var/www/owncloud/occ \
-  migrate:to-kiteworks \
+  migrate:to-kiteworks:files \
   $KW_ADMIN_USER
 ----
 
@@ -351,7 +443,7 @@ Such a setting can greatly speed up the transfer of many small files, but can al
 
 {empty} +
 
-[role=center,width=80%,cols="^.^50%,^.^50%",options="header"]
+[.center,width=80%,cols="^.^50%,^.^50%",options="header"]
 |===
 | Data IO System Utilization
 | CPU System Utilization
@@ -363,5 +455,6 @@ a| image::maintenance/migrate_kiteworks/kiteworks-system-load-cpu.png[Kiteworks 
 The graphs show results from a test system.
 
 * The left half of the graphs show the default setting with 4 parallel transfers.
-* The right half of the graphs first show `RCLONE_TRANSFERS=10`, then close to the end using `RCLONE_TRANSFERS=32` with peaking CPU usage at near 100%.
+* The right half of the graphs first show `RCLONE_TRANSFERS=10`, then close to the end using `RCLONE_TRANSFERS=16` with peaking CPU usage at near 100%.
 * During the last section, as shown in the graphs, 100 files (total of 8 MB) were uploaded per minute. The default setting would achieve only about 20 files per minute.
+////

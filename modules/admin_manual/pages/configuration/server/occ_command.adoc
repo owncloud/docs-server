@@ -366,6 +366,8 @@ include::./occ_commands/app_commands/_market_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/app_commands/_metrics_commands.adoc[leveloffset=+2]
 
+include::./occ_commands/app_commands/_migrate_to_kitworks_commands.adoc[leveloffset=+2]
+
 include::./occ_commands/app_commands/_password_policy_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/app_commands/_ransomware_protection_commands.adoc[leveloffset=+2]
