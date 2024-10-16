@@ -35,11 +35,13 @@ ownCloud Server can work with identity providers (IdP) that support OpenID Conne
 The currently supported products are
 
 - {ms-azure-ad-url}[Microsoft Azure AD]
-- {ms-adfs-url}[Microsoft ADFS]
+- {ms-adfs-url}[Microsoft ADFS] ^1^
 - {ping-identity-url}[PingIdentity PingFederate]
 - {cidaas-url}[cidaas]
 - {keycloak-url}[Keycloak]
 - {kopano-konnect-github-url}[Kopano Konnect]
+
+(1) ... Note that ADFS does not support client-secrets that contain an `_` (underscore).
 
 Please get in touch with ownCloud Consulting if you need help with a specific identity provider product.
 
