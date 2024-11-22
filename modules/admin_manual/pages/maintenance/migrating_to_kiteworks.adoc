@@ -163,7 +163,8 @@ For ease of migrating external mounts, the admin should:
 * The following major prerequisites apply:
 
 ** The Kiteworks instance *must* be running version 8.6 or higher.
-** Kiteworks requires a license that includes `data migrator enabled`.
+** Kiteworks requires a `Data migrator` license. +
+The respective `Include feature` checkbox must be set to enabled.
 
 * You need to login into the Kiteworks appliance as role *System Admin*.
 // The kiteworks satellite service must be activated and available to the system admin user account.
