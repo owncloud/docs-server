@@ -174,7 +174,7 @@ The respective `Include feature` checkbox must be set to enabled.
 * Ensure sufficient quota settings in the Kiteworks user profiles:
 
 ** Users have a default quota of 2GB. +
-Before start migrating, go to the user profile and set the quota to unlimited.
+Before starting the migration, go to the user profile and set the quota to unlimited.
 
 * Set the web application firewall (WAF) to `report only` and not to `block file upload during migration`. Kiteworks support will help to configure the WAF.
 
