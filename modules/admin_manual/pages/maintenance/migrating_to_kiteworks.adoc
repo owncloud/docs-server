@@ -163,20 +163,16 @@ For ease of migrating external mounts, the admin should:
 * The following major prerequisites apply:
 
 ** The Kiteworks instance *must* be running version 8.6 or higher.
-** Kiteworks requires a `Data migrator` license. +
-The respective `Include feature` checkbox must be set to enabled.
+** Kiteworks requires a `Data migrator` license.
 
 * You need to login into the Kiteworks appliance as role *System Admin*.
 // The kiteworks satellite service must be activated and available to the system admin user account.
 
 * The Kiteworks system must provide sufficient disk space for the data to be migrated. The ownCloud xref:migration-verification[occ migrate:to-kiteworks:verify] step will report the estimated disk space needed.
 
-* Ensure sufficient quota settings in the Kiteworks user profiles:
+* Ensure quota is set to unlimited in the Kiteworks user profiles.
 
-** Users have a default quota of 2GB. +
-Before starting the migration, go to the user profile and set the quota to unlimited.
-
-* Set the web application firewall (WAF) to `report only` and not to `block file upload during migration`. Kiteworks support will help to configure the WAF.
+* Set the web application firewall (WAF) to report only and not to block file upload during migration. Kiteworks support will help to configure the WAF.
 
 * If it is planned to integrate Kiteworks into LDAP:
 +
