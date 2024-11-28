@@ -172,7 +172,7 @@ For ease of migrating external mounts, the admin should:
 
 * Ensure quota is set to unlimited in the Kiteworks user profiles.
 
-* Set the web application firewall (WAF) to report only and not to block file upload during migration. Kiteworks support will help to configure the WAF.
+* Set the web application firewall (WAF) to `report only` so that file uploads are not blocked during migration. Kiteworks support will help to configure the WAF.
 
 * If it is planned to integrate Kiteworks into LDAP:
 +
