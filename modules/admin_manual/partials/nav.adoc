@@ -142,27 +142,6 @@
 *** xref:admin_manual:maintenance/migrating.adoc[Migrating to a Different Server]
 *** xref:admin_manual:maintenance/migrating_to_kiteworks.adoc[Migrating to Kiteworks PCN]
 
-** xref:admin_manual:appliance/index.adoc[Appliance]
-*** xref:admin_manual:appliance/installation/installation.adoc[Installation]
-**** xref:admin_manual:appliance/installation/active_directory.adoc[Active Directory]
-
-*** xref:admin_manual:appliance/configuration/index.adoc[Configuration]
-**** xref:admin_manual:appliance/configuration/login_information.adoc[Login Information]
-**** xref:admin_manual:appliance/configuration/app_settings.adoc[App Settings]
-**** xref:admin_manual:appliance/configuration/certificates.adoc[Certificates]
-**** xref:admin_manual:appliance/configuration/firewall.adoc[Firewall]
-**** xref:admin_manual:appliance/configuration/add-groups-and-users.adoc[Add Groups and Users]
-**** xref:admin_manual:appliance/configuration/enterprise_trial.adoc[Enterprise Trial]
-**** xref:admin_manual:appliance/configuration/office.adoc[Office]
-**** xref:admin_manual:appliance/configuration/wnd_setup.adoc[Windows Network Drive Setup]
-**** xref:admin_manual:appliance/configuration/clamav.adoc[ClamAV]
-**** xref:admin_manual:appliance/configuration/index.php-less_URLs.adoc[Index.php-less URLs]
-
-*** xref:admin_manual:appliance/maintenance/index.adoc[Maintenance]
-**** xref:admin_manual:appliance/maintenance/backup.adoc[Backup]
-**** xref:admin_manual:appliance/maintenance/howto-update-owncloud.adoc[How to Update ownCloud]
-*** xref:admin_manual:appliance/troubleshooting.adoc[Troubleshooting]
-
 ** Enterprise
 *** Authentication
 **** xref:admin_manual:enterprise/authentication/enterprise_only_auth.adoc[Enterprise Only Authentication]
