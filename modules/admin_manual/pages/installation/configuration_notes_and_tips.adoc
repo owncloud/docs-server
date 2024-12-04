@@ -221,8 +221,3 @@ on how to correctly configure your environment can be found
 {oc-central-url}/t/no-basic-authentication-headers-were-found-message/819[in
 the forums] but we generally recommend not to use these modules
 and recommend mod_php instead.
-
-== Other Web Servers
-
-* https://github.com/owncloud/documentation/wiki/Alternate-Web-server-notes[Other HTTP servers]
-* https://github.com/owncloud/documentation/wiki/UCS-Installation[Univention Corporate Server installation]
