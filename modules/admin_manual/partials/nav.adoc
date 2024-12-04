@@ -163,8 +163,6 @@
 **** xref:admin_manual:appliance/maintenance/howto-update-owncloud.adoc[How to Update ownCloud]
 *** xref:admin_manual:appliance/troubleshooting.adoc[Troubleshooting]
 
-** xref:admin_manual:qnap/index.adoc[ownCloud on QNAP]
-
 ** Enterprise
 *** Authentication
 **** xref:admin_manual:enterprise/authentication/enterprise_only_auth.adoc[Enterprise Only Authentication]
