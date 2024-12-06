@@ -54,9 +54,8 @@ In the example below, you can see how to filter out any file that has not been f
 
 [source,xml]
 ----
-include::example$core/webdav_api/search/request/search_files/minimal_request_body.xml[indent=0]
+include::example$core/webdav_api/search/request/filter_files/minimal_filter_files_report_request_body.xml[indent=0]
 ----
-
 
 ==== Limiting The Number Of Results Returned
 
