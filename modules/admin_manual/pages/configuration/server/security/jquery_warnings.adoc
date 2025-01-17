@@ -14,6 +14,7 @@ Note that automatic scanners may still report false positives even if the CVE's 
 == Fixed Issues
 
 * jQuery
+
 ** CVE-2020-11022 and CVE-2020-11023 +
 https://github.com/owncloud/core/pull/37596[patched in 10.5.0]
 
@@ -27,10 +28,19 @@ https://github.com/owncloud/core/pull/38841[patched in 10.8.0]
 https://github.com/owncloud/core/pull/39545[patched in 10.9.0]
 
 * jQuery-ui
+
 ** CVE-2021-41182, CVE-2021-41183 and CVE-2021-41184 +
 https://github.com/owncloud/core/pull/39451[patched in 10.9.0]
 
 ** CVE-2022-31160 +
 Component "checkboxradio" is not used by ownCloud
+
+** CVE-2016-10744 +
+Component "select2" cannot be exploited
+
+* Apps
+
+** CVE-2024-4367 +
+When app `files_pdfviewer` is enabled with xref:configuration/server/config_apps_sample_php_parameters.adoc#enable-scripting-in-pdf-files[disabled scripting], CVE-2024-4367 can not be exploited
 
 If you know about any issues which were not patched yet or which are not included in this list please notify us at mailto:security@owncloud.com[security@owncloud.com].
