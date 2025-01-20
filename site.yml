@@ -30,22 +30,7 @@ output:
 asciidoc:
   attributes:
 #   branch-specific-variables: 'see antora.yml'
-#   build relevant
-    # asciidoctor prefix for section IDs
-    idprefix: ''
-    idseparator: '-'
-    # Antora User Interface Macros (btn, menu)
-    experimental: true
-    # Antora pagination (prev page, next page)
-    page-pagination: true
-#   common
-    docs-base-url: 'https://doc.owncloud.com'
-    oc-complete-base-url: 'https://download.owncloud.com/server/stable'
-    oc-contact-url: 'https://owncloud.com/contact/'
-    oc-help-url: 'https://owncloud.com/docs-guides/'
-    oc-marketplace-url: 'https://marketplace.owncloud.com'
-    oc-central-url: 'https://central.owncloud.org'
-    oc-support-url: 'https://owncloud.com/support'
+#   global attributes loaded via antora extension
 #   server
     # note that the version attributes just need to be present and have next as key
     # as they are just here for the test build
@@ -53,25 +38,6 @@ asciidoc:
     previous-server-version: 'next@' # do not change, soft set, correctly defined via antora.yml
     latest-server-download-version: 'next@' # do not change, soft set, correctly defined via antora.yml
     current-server-version: 'next@'         # do not change, soft set, correctly defined via antora.yml
-    oc-changelog-url: 'https://owncloud.com/changelog/server/'
-    oc-install-package-url: 'https://download.owncloud.com/server/stable/?sort=time&order=asc'
-    oc-examples-server-url: 'https://owncloud.install.com/owncloud'
-    oc-examples-server-ip: '127.0.0.1'
-    oc-examples-username: 'username'
-    oc-examples-password: 'password'
-    oc-complete-name: 'owncloud-complete-latest'
-    occ-command-example-prefix: 'sudo -u www-data ./occ'
-    occ-command-example-prefix-no-sudo: 'occ'
-    php-net-url: 'https://www.php.net'
-    php-supported-versions-url: 'https://www.php.net/supported-versions.php'
-    http-status-codes-base-url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status'
-    std-port-http: '8080'
-    std-port-memcache: '11211'
-    std-port-mysql: '3306'
-    std-port-redis: '6379'
-#   webui
-    latest-webui-version: 'next'
-    previous-webui-version: 'next'
   extensions:
     - ./ext-asciidoc/tabs.js
     - ./ext-asciidoc/remote-include-processor.js
@@ -80,6 +46,15 @@ asciidoc:
 antora:
   extensions:
     - ./ext-antora/generate-index.js
+    #- ./ext-antora/comp-version.js
+    - require: ./ext-antora/load-global-site-attributes.js
+      attributefile: https://raw.githubusercontent.com/owncloud/docs/refs/heads/master/global-attributes.yml
+      #attributefile: ./global-attributes.yml
+      enabled: true
+    # for testing only, prints attributes used
+    # use only one or the other, output can be big
+    #- ./ext-antora/attributes-used-in-site-yml.js
+    #- ./ext-antora/attributes-used-in-antora-yml.js
 
 # note that when we do pdf generation with Antora assembler, we need to add the attribute:
 # format: 'pdf' to the build process (to be checked if needed also in the docs repo)
