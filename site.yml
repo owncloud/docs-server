@@ -51,6 +51,14 @@ antora:
       attributefile: https://raw.githubusercontent.com/owncloud/docs/refs/heads/master/global-attributes.yml
       #attributefile: ./global-attributes.yml
       enabled: true
+    - require: ./ext-antora/find-orphaned-files.js
+      #printavailable: true
+      #excludeextension: ['.png', '.gif']
+      #falsepositives: ./false-positives.txt
+      pathfilter: ['modules/owncloud_web', 'modules/classic_ui']
+      excludecomponents: ['webui']
+      stopafterfind: true
+      enabled: false
     # for testing only, prints attributes used
     # use only one or the other, output can be big
     #- ./ext-antora/attributes-used-in-site-yml.js
