@@ -91,7 +91,7 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
                 "pull": "always",
                 "image": "owncloudci/nodejs:18",
                 "commands": [
-                    "yarn install",
+                    "npm install",
                 ],
             },
             {
@@ -99,7 +99,7 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
                 "pull": "always",
                 "image": "owncloudci/nodejs:18",
                 "commands": [
-                    "yarn antora --attribute format=html",
+                    "npm run antora",
                 ],
             },
             {
