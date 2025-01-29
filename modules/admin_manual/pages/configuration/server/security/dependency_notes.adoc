@@ -2,13 +2,13 @@
 :toc:right
 :page-aliases: configuration/server/security/jquery_warnings.adoc
 
-:description: The following list of dependencies can be reported as vulnerable but either have been fixed in the ownCloud code base or do not apply.
+:description: The following list of dependencies may be reported as vulnerable but either have been fixed in the ownCloud codebase or do not apply.
 
 == Introduction
 
 {description}
 
-If you know about any issues which were not patched yet or which are not included in this list, please notify us at mailto:security@owncloud.com[].
+If you are aware of any issues that have not yet been patched or which are not included in this list, please notify us at mailto:security@owncloud.com[].
 
 == Fixed Issues
 
