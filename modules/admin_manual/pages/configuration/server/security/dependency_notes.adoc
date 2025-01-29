@@ -1,4 +1,4 @@
-= Package Dependency Notes
+= Dependency Notes
 :toc:right
 :page-aliases: configuration/server/security/jquery_warnings.adoc
 
@@ -34,11 +34,11 @@ https://github.com/owncloud/core/pull/39451[patched in 10.9.0]
 ** CVE-2022-31160 +
 Component "checkboxradio" is not used by ownCloud
 
+* Select2
 ** CVE-2016-10744 +
 Component "select2" cannot be exploited
 
-* Apps
-
+* PDF
 ** CVE-2024-4367 +
 When app `files_pdfviewer` is enabled with xref:configuration/server/config_apps_sample_php_parameters.adoc#enable-scripting-in-pdf-files[disabled scripting], CVE-2024-4367 can not be exploited
 
