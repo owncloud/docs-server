@@ -2,11 +2,13 @@
 :toc:right
 :page-aliases: configuration/server/security/jquery_warnings.adoc
 
-:description: In some areas ownCloud is not using the latest version of dependency which could lead to vulnerabiltiy scanners to detect insecure components in ownCloud. Please find below a list of libraries which can be reported as vulnerably but have been fixed in the ownCloud code base or do not apply.
+:description: The following list of dependencies can be reported as vulnerable but either have been fixed in the ownCloud code base or do not apply.
 
 == Introduction
 
-{description} If you know about any issues which were not patched yet or which are not included in this list, please notify us at mailto:security@owncloud.com[].
+{description}
+
+If you know about any issues which were not patched yet or which are not included in this list, please notify us at mailto:security@owncloud.com[].
 
 == Fixed Issues
 
