@@ -8,8 +8,6 @@
 
 {description} If you know about any issues which were not patched yet or which are not included in this list, please notify us at mailto:security@owncloud.com[].
 
-Note that automatic scanners may still report false positives for jQuery even if the CVE's have been addressed as the scanners just look for the version shipped.
-
 == Fixed Issues
 
 * jQuery
