@@ -1,13 +1,12 @@
-= jQuery Warnings
+= Package Dependency Notes
 :toc:right
+:page-aliases: configuration/server/security/jquery_warnings.adoc
 
 :description: While ownCloud is using an older version of jQuery, we have fixed the known vulnerabilities in the patches listed below. We closely follow any security related news regarding the library for any new issues.
 
 == Introduction
 
 {description}
-
-NOTE: *The jQuery version shipped inside ownCloud is secure.*
 
 Note that automatic scanners may still report false positives even if the CVE's have been addressed as the scanners just look at the jQuery version shipped.
 
