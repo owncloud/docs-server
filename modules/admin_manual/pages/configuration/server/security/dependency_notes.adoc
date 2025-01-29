@@ -2,13 +2,13 @@
 :toc:right
 :page-aliases: configuration/server/security/jquery_warnings.adoc
 
-:description: While ownCloud is using an older version of jQuery, we have fixed the known vulnerabilities in the patches listed below. We closely follow any security related news regarding the library for any new issues.
+:description: In some areas ownCloud is not using the latest version of dependency which could lead to vulnerabiltiy scanners to detect insecure components in ownCloud. Please find below a list of libraries which can be reported as vulnerably but have been fixed in the ownCloud code base or do not apply.
 
 == Introduction
 
-{description}
+{description} If you know about any issues which were not patched yet or which are not included in this list, please notify us at mailto:security@owncloud.com[].
 
-Note that automatic scanners may still report false positives even if the CVE's have been addressed as the scanners just look at the jQuery version shipped.
+Note that automatic scanners may still report false positives for jQuery even if the CVE's have been addressed as the scanners just look for the version shipped.
 
 == Fixed Issues
 
@@ -41,5 +41,3 @@ Component "select2" cannot be exploited
 * PDF
 ** CVE-2024-4367 +
 When app `files_pdfviewer` is enabled with xref:configuration/server/config_apps_sample_php_parameters.adoc#enable-scripting-in-pdf-files[disabled scripting], CVE-2024-4367 can not be exploited
-
-If you know about any issues which were not patched yet or which are not included in this list please notify us at mailto:security@owncloud.com[security@owncloud.com].
