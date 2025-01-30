@@ -1,0 +1,12 @@
+= Large File Uploads
+:description: When uploading files through the web client, ownCloud is limited by the server configuration. We recommend that your ownCloud admin updates the server environment to sizes appropriate for users.
+
+{description}
+
+Modifying certain ownCloud variables requires administrative access. If
+you require larger upload limits than have been provided by the default
+(or already set by your administrator):
+
+* Contact your administrator to request an increase in these variables
+* Refer to the section in the
+xref:{latest-server-version}@server:admin_manual:configuration/files/big_file_upload_configuration.adoc[Admin Documentation] that describes how to manage file upload size limits.

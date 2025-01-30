@@ -8,14 +8,6 @@ content:
   - url: .
     branches:
     - HEAD
-  # the docs-xxx git is just present for the test build to satisfy used references
-  # the real build is made in the docs repo using correct values
-  #- url: https://github.com/owncloud/docs-main.git
-  #  branches:
-  #  - master
-  - url: https://github.com/owncloud/docs-webui.git
-    branches:
-    - master
 
 ui:
   output_dir: assets
