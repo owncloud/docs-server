@@ -1,0 +1,39 @@
+= Search & Full Text Search
+:toc: right
+:description: ownCloud comes with a regular search function allowing you to find files by their file name or parts of their names. Click on the magnifier icon in the upper right-hand corner of the web interface. In addition, a Full Text Search app can be enabled by your administrator.
+
+== Introduction
+
+{description} Refer to the xref:{latest-server-version}@server:admin_manual:configuration/general_topics/search.adoc[Full Text Search] app in the ownCloud Admin Manual for more information about how to deploy it.
+
+== Regular Search
+
+The regular search function provided as base functionality in the ownCloud web interface offers a simple search for *file names* only. Note that no file content will be part of any search result. 
+
+=== Rules for Regular Search
+
+* Search is not case-sensitive, capital letters are treated the same as lower case characters. You can type Spain or spain and will get the same results.
+* When you start typing, search also starts.
+* The search term is taken as it is and not interpreted to refine search results.
+* When entering the pattern to search for, you get results for *any filenames* that contain that pattern.
+* When starting at the top level of your files, which is "All files", you will also see results in subfolders.
+* When changing into a directory, search starts in this folder, displays the results, and continues to search in subsequent folders.
+* A click on one of the results takes you either to the location of the file, if you are not already in that folder, or the item is opened.
+
+== Full Text Search
+
+The Full Text Search app enables you to search not only for file names but also for content inside files. The most common file formats are supported. 
+ 
+=== Rules for Full Text Search
+
+* Like with the regular search, you can enter only the first part of a string and it matches all occurrences of words starting with the search string.
+
+* *OR case:* When using more than one search term _without_ any quotes, separated by a blank, each term is treated with a logical OR, case insensitive. Searching for _Desktop_ _Sync_ will return all results that contain _Desktop_ or _Sync_.
+ 
+* *AND / NOT case:* When using more than one search term _prefixed_ either by a plus (\+) or minus (-) symbol, separated by a blank, each term that is prefixed with a `+` is treated with a logical AND, terms that are prefixed with a `-` are treated as a logical NOT. All checks are case insensitive. Searching for +_Desktop_ +_Sync_ -MSI will return all results that contain _Desktop_ AND _Sync_ but not NOT _MSI_.
+
+* *Exact case:* When using more than one search term _enclosed_ with quotes, separated by a blank, the complete term is the search pattern. Searching for "_Desktop_ _Sync_" will return all results that contain _Desktop Sync_. Note that beside any match, all existing file names are additionally listed as matches.
+
+* *Wildcards:* When looking for all terms containing a specific string like "pain", wildcards can be used. Using an `asterisk` like `*ain` gives you results like braine, pain, Spain and painful. Using a `question mark` like `?ain` limits the preceding characters to exactly one, only pain and painful would show up.
++
+TIP: Using the asterisk within a word will ignore everything that follows after the asterisk. A trailing asterisk is always assumed in the search.
