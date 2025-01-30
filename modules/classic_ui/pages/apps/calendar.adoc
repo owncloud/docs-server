@@ -1,0 +1,4 @@
+= Using the Calendar App
+:description: The Calendar app is not enabled by default in ownCloud and needs to be enabled separately. You can download it via {oc-marketplace-url}/apps/market[the market app].
+
+{description}

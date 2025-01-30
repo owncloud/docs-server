@@ -339,7 +339,7 @@ image::apps/search_elastic/warning_could_not_setup_indexes_unknown_key.png[Warni
 
 == User Manual
 
-To find out more about the usage, check out the section in the User Manual: xref:{latest-webui-version}@webui:classic_ui:files/webgui/search.adoc[Search & Full Text Search].
+To find out more about the usage, check out the section in the User Manual: xref:classic_ui:files/webgui/search.adoc[Search & Full Text Search].
 
 == Known Limitations
 
