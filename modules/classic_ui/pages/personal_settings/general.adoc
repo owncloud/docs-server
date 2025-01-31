@@ -1,0 +1,113 @@
+= General Settings
+:toc: right
+:toclevels: 2
+:description: In general settings, some of the features you will see include the following:
+
+== Introduction
+
+{description}
+
+* Usage and available quota
+* Manage your profile picture
+* Full name +
+You can make this anything you want, as it is separate from your ownCloud login name, which is unique and cannot be changed
+* Email address
+* List your group memberships
+* Manage your password
+* Choose the language for your ownCloud interface
+* Account related settings 
+* Links to desktop and mobile apps
+* Manage your activity stream and notifications
+* Default folder to save new documents to
+* Your federated sharing ID
+* Social sharing links
+* ownCloud version
+
+The following image is an example screen of the General section:
+
+image::personal-settings/general/general.png[General settings page,width=400]
+
+== Managing Your Profile Picture
+
+image::personal-settings/general/profile-picture-overview-annotated.png[width=350]
+
+=== Changing Your Profile Picture
+
+There are two options to set your profile picture:
+
+* You can upload an image; or 
+* Select an existing profile picture
+
+==== Upload a Profile Picture
+
+To upload an image from your device, click the "_Upload new_" image:personal-settings/general/upload-profile-picture.png[] button, which opens a file browser with which you can choose an image to upload. After you’ve chosen an image, you will then be able to crop the uploaded image, if required, to just the segment of the image that you want to use for your profile picture. You can see an example in the screenshot below.
+
+.Crop the new profile picture
+image::personal-settings/general/set-profile-picture.png[width=300]
+
+When you’re happy with the image, click btn:[Choose as profile picture], and the image will be set as your profile picture.
+
+TIP: The image can be a maximum of 20MB in size.
+
+==== Select a Profile Picture
+
+To select a profile picture from images in your ownCloud, click the _Select from Files_ image:personal-settings/general/choose-profile-picture-button.png[] button and the profile picture chooser will open. From there, pick the profile picture that you want and click btn:[Choose].
+
+.Choose a new profile picture
+image::personal-settings/general/select-profile-picture.png[width=400]
+
+=== Remove Your Profile Picture
+
+To remove a custom profile picture, click the _Remove Profile_ image:personal-settings/general/remove-profile-picture-button.png[] button.
+After that, the image will revert to the default image, present when you first logged in.
+
+== Update Your Full Name
+
+To update (or change) your full name, amend the existing text in the text box below “Full name”. 
+After a few seconds, your full name will be auto-saved.
+
+.Successfully updated full name
+image::personal-settings/general/auto-save-fullname.png[]
+
+If the full name cannot be changed, you will see a notification, as in the example below.
+
+.Problem updating full name
+image::personal-settings/general/cannot-change-fullname.png[]
+
+== Update Your Email Address
+
+To update your email address, change the address in the text box below “Email” and click btn:[Set email]. 
+
+== Update Your Password
+
+.Update current password.
+image::personal-settings/general/update-password.png[]
+
+To change your password, under Password, enter your current password in the first password field (with the placeholder text “Current password”) and your new password in the second password field (with the placeholder text “New password”), and then click btn:[Change password]. 
+
+include::partial$configuration/user/update-password-note.adoc[]
+
+== Set the Language
+
+.Change profile’s language
+image::personal-settings/general/update-language.png[]
+
+To change the language for your user account, pick the desired language from the drop-down menu under Language. 
+The new language will be auto-saved shortly after you select it.
+
+== Account Related Settings
+
+In the Account section, you will see the following buttons:
+
+image::personal-settings/general/account-related-settings.png[width=450]
+
+* To comply with article 15 of the GDPR framework, ownCloud provides the following buttons to:
++
+--
+** Request data export
+** Request account deletion
+--
++
+When a user clicks on one of these buttons, the admin group will receive an email with the users request for further processing.
+
+* If users need to change their role, they need to click the btn:[Request new role] button, enter the request and send it to the admin group for further processing. A possible change can be that the user needs to be a group admin for a particular custom group.

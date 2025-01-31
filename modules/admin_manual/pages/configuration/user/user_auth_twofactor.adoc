@@ -43,13 +43,13 @@ For more information see the xref:configuration/user/user_oauth2.adoc[User Auth 
 
 Without the OAuth 2.0 App, users need to log in to their ownCloud account in a regular web browser first, then create an app password or tokens, which can be used in the ownCloud Desktop and Mobile apps.
 
-For more information see the xref:{latest-webui-version}@webui:classic_ui:personal_settings/security.adoc#app-passwords-tokens[App Passwords / Tokens] documentation.
+For more information see the xref:classic_ui:personal_settings/security.adoc#app-passwords-tokens[App Passwords / Tokens] documentation.
 
 == Troubleshooting
 
 === Tasks for the User
 
-Because the user has to opt in, see the xref:{latest-webui-version}@webui:classic_ui:personal_settings/security.adoc[Security section in Personal Settings] for tasks on the user side.
+Because the user has to opt in, see the xref:classic_ui:personal_settings/security.adoc[Security section in Personal Settings] for tasks on the user side.
 
 === Second Factor is Inaccessible
 
