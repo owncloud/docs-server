@@ -1,0 +1,4 @@
+= Contacts & Calendar
+:description: The Contacts, Calendar, and Mail apps can be installed from the ownCloud Marketplace in the  menu:Market[Productivity] category and can be installed by clicking btn:[Install] on their respective entries but are not with official support.
+
+{description}
