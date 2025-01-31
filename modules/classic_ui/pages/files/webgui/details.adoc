@@ -1,0 +1,12 @@
+= Details
+:toc: right
+:tab-type-text: sharing
+:tab-type-link: share
+:description: The Details view shows all information for a file, split up into four sections:
+
+{description}
+
+* xref:files/webgui/activity.adoc[Activities]
+* xref:files/webgui/comments.adoc[Comments]
+* xref:files/webgui/sharing.adoc[Sharing]
+* xref:files/version_control.adoc[Versions]
