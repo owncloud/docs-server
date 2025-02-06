@@ -147,7 +147,6 @@
 **** xref:admin_manual:enterprise/authentication/enterprise_only_auth.adoc[Enterprise Only Authentication]
 **** xref:admin_manual:enterprise/authentication/kerberos.adoc[Kerberos Authentication]
 *** Clients
-**** xref:admin_manual:enterprise/clients/creating_branded_apps.adoc[Creating Branded Apps]
 **** xref:admin_manual:enterprise/clients/custom_client_repos.adoc[Custom Client Repos]
 *** Collaboration
 **** xref:admin_manual:enterprise/collaboration/collabora_secure_view.adoc[Collabora Online / Secure View]
@@ -174,8 +173,6 @@
 **** xref:admin_manual:enterprise/reporting/config_report.adoc[Generate a Config Report]
 *** Security
 **** xref:admin_manual:enterprise/security/ransomware-protection/index.adoc[Ransomware Protection]
-*** Server Branding
-**** xref:admin_manual:enterprise/server_branding/enterprise_server_branding.adoc[Enterprise Server Branding]
 *** User Management
 **** xref:admin_manual:enterprise/user_management/user_auth_shibboleth.adoc[Shibboleth Integration]
 **** xref:admin_manual:enterprise/user_management/saml_2.0_sso.adoc[SAML 2.0 Based SSO]
