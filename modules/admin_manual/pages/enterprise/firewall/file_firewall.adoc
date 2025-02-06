@@ -153,7 +153,7 @@ NOTE: Logging all requests can generate a large amount of log data. It is recomm
 
 === Custom Configuration for Branded Clients
 
-If you are using xref:enterprise/clients/creating_branded_apps.adoc[branded ownCloud clients], you may define `firewall.branded_clients` in your `config.php` to identify your branded clients in the firewall *"User Device"* rule.
+If you are usingbranded ownCloud clients, you may define `firewall.branded_clients` in your `config.php` to identify your branded clients in the firewall *"User Device"* rule.
 
 The configuration is a `User-Agent` => `Device` map. `Device` must be one of the following:
 
