@@ -41,3 +41,7 @@ Component "select2" cannot be exploited
 * PDF
 ** CVE-2024-4367 +
 When app `files_pdfviewer` is enabled with xref:configuration/server/config_apps_sample_php_parameters.adoc#enable-scripting-in-pdf-files[disabled scripting], CVE-2024-4367 can not be exploited
+
+* Bootstrap
+** CVE-2024-6485 and CVE-2024-6484 +
+There is no vulnerability because affected components are not used by ownCloud
