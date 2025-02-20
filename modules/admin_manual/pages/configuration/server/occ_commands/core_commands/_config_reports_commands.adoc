@@ -25,7 +25,7 @@ Alternatively, you could generate the report and email it all in one command, by
 {occ-command-example-prefix} configreport:generate | mail \
     -s "configuration report" \
     -r <the email address to send from> \
-    support@owncloud.com
+    <the email address to send to>
 ----
 
 NOTE: These commands are not available in xref:maintenance-commands[single-user (maintenance) mode].
