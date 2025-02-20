@@ -1,64 +1,101 @@
 # Create a New Version Branch
 
-When doing a new release of ownCloud Server like `10.x`, a new version branch must be created based on `master`. It is necessary to do this in steps. Keep in mind that we only process master and the latest two versions. For older versions we only keep the pdf files statically - if possible.
+When doing a new release of this product documentation, a new version branch must be created based on `master`. It is necessary to do this in steps. Keep in mind that we only process master (version `next`) and the latest two named versions. Patch versions are excluded from this process and can be added in the product repo at any time without further notice. For patch versions, only content changes need to be added if any.
 
-**Step 1: This will create and configure the new `10.x` branch properly**
+Note that the `latest` version pointer mentioned below is virtual and not part of Antora but created by the webserver and redirects to the latest versioned product automatically.
 
-1.  Go to the settings of this repository and check/change the protection of the branch list so that
-    the upcoming `10.x` branch can get pushed.
-2.  Create a new `10.x` branch based on latest `origin/master`
-3.  Copy the `.drone.star` file from the _former_ `10.x-1` branch
-    (it contains the correct branch specific setup rules and replaces the current one coming from master)
-4.  In `.drone.star` set `latest_version` to `10.x` (on top in section `def main(ctx)`).
-5.  Check in `site.yml` in section `content.sources`: that the following value is set: `- url: .` and in `content.sources.url` the following value is set: `- HEAD`.
-6.  In `antora.yml`, set the `version:` key on top to the same as the branch name like `10.x`
-7.  In `antora.yml`, in section `asciidoc.attributes`, DO NOT adjust relevant `-version` keys. They are only used for local building.
-8.  In `site.yml`, in section `asciidoc.attributes`, DO NOT adjust relevant `-version` keys. They are only used for local building and will be correctly set in the docs repo when doing a full build.
-9.  Run a build by entering `yarn antora-local`. No build errors should occur.
-10.  Commit the changes and push the new `10.x` branch. This makes the branch available for futher processing. DO NOT CREATE A PR!
+**Step 1: Update github branch protection rules to allow pushing a new branch**
 
-**Step 2: This will configure the master branch properly to use the new `10.x` branch**
+Enable pushing a new branch.
 
-11. Create new `changes_necessary_for_10.x` branch based on latest `origin/master`.
-12. In `.drone.star` set `latest_version` to `10.x` (on top in section `def main(ctx)`).
-13. In `antora.yml`, check if the `version:` key is set to `next`.
-14. In `site.yml` and in `antora.yml`, DO NOT adjust relevant `-version` keys.
-15. Run a build by entering `yarn antora`. No build errors or warnings should occur.
-16. Commit changes and push them. (Check the branch protection rules upfront so that the push passes.)
-17. Create a Pull Request and see the text suggestion at the bottom. When CI is green, all is done correctly. Merge the PR to master when the 10.x branch is close to be released.
+1.  Go to the github settings of this repository and check/change the protection of the branch list in a way that
+    the upcoming `x.y` branch can get pushed.
 
-**Step 3: Protection and Renaming**
+**Step 2: Create and configure the new `x.y` branch properly**
 
-18. Go to the settings of this repository and change the protection of the branch list so that
-    the `10.x` branch gets protected.
-19. Unprotect the `10.x-2` branch and rename it to `x_archived_10.x-2`. Note that this step can be postponed if needed. Note that after renaming, local building cant be done anymore.
+This step creates the branch locally, necessary for content changes and for the repo building process. 
 
-**Step 4: Changes in the Docs Repo**
+1.  Create a new `x.y` branch based on latest `origin/master`
+1.  In `.drone.star` set `latest_version` to `x.y` (on top in section `def main(ctx)`).
+1.  Check in `site.yml` in section `content.sources` that the following value is set: `- url: .` and in `content.sources.url` the following value is set: `- HEAD`.
+1.  In `antora.yml`, set the `version:` key on top to the same as the branch name like `x.y`. Each branch must have it's unique version!
+1.  In `antora.yml`, in section `asciidoc.attributes`, DO NOT adjust relevant `-version` keys. They are required for local building.
+1.  In `site.yml`, in section `asciidoc.attributes`, DO NOT adjust relevant `-version` keys. They are used for local building and will be correctly set in the docs repo when doing a full build. NOTE: any attribute values defined here overwrite any attributes included via the `load-global-site-attributes.js` extension. 
+1.  Run a build by entering `npm run antora-local`. No build errors should occur.
+1.  Commit the changes and push the new `x.y` branch. This makes the branch available for futher processing. DO NOT CREATE A PR!
 
-20. In `site.yml` of the [docs](https://github.com/owncloud/docs/blob/master/site.yml) repo, adjust all `-version` keys in section `attributes` related to this repo according the new and former releases. Note that the values MUST NOT contain the trailing `@`. (The trailing @ character allows the value to be overwritten like from the corresponding `antora.yml` file which is only necessary for local building the corresponding docs-xxx repo.) Note that merging that PR should be _close before_ publishing the relevant code release.
+**Step 3: Protect the new branch**
 
-**Step 5: Set URI `latest` Path Part to 10.x**
+The branch has been pushed, add it to the rule set for protected version branches.
 
-21. Nothing needs to be done there. The moment when the new server release gets tagged - which is part of the release process - `latest` will be automatically set to the tagged release number. This works automatically up to version `10.20`. After that, backend admins need to be informed to updated the underlying process.
+1. Go to the github settings of this repository and change the protection of the branch list so that
+    the `x.y` branch just pushed before now gets included in the branch protection like the other active branches do.
 
-**Text Suggestion for Step 2**
+**Step 4: Configure the master branch to use the new `x.y` branch**
 
-The following text is a copy/paste suggestion for the PR in step 2, replace the branch numbers accordingly:
+This step is necessary to update the building process for content changes in this repo. 
+
+1. Create a new `changes_necessary_for_x.y` branch based on latest `origin/master`.
+1. In `.drone.star` set `latest_version` to `x.y` (on top in section `def main(ctx)`).
+1. In `antora.yml`, check if the `version:` key is set to `next`.
+1. In `site.yml` and in `antora.yml`, DO NOT adjust relevant `-version` keys.
+1. Run a build by entering `npm run antora-local`. No build errors or warnings should occur.
+1. Commit changes and push them. (Check the branch protection rules upfront so that the push passes.)
+1. Create a Pull Request `Changes necessary for x.y`, see the [text suggestion](#text-suggestion-for-step-4) below. When CI is green, all is done correctly, merge the PR when approved. This merge does NOT add the version to the main building process. You can now add at any time content changes to this version.
+
+**Step 5: Changes in the docs repo (main assembling repo)**
+
+This step finally sets the versions (branches) to be build. The new x.y version branch will be added and the oldest branch of the product will be removed from building. Note that merging the PR, the new version is live and the former version is removed. You should therefore merge _close before_ publishing the relevant product release. If this step is omitted or not timed well, the `latest` pointer from the webserver, which generates the redirect based on the latest tag of the product repo automatically, will generate a 404 instead pointing to the latest release!
+
+1. In the [docs](https://github.com/owncloud/docs/blob/master/site.yml) repo, create a new `enable_<product>_x.y` branch based on latest `origin/master`, where `<product>` is the placeholder for the product this version is added for like `ocis`, or `desktop` etc.
+1. In file `site.yml`, adjust the versions of the respective content source to the correct versions. Add the new one and remove the oldest one.
+1. In file `global-attributes.yml` adjust all `-version` keys related to this repo according the new and former releases. Note that the values MUST NOT contain the trailing `@`. (The trailing @ character allows the value to be overwritten like from the corresponding `antora.yml` file which is only necessary for local building the corresponding docs-xxx repo.)
+1. In file `global-attributes.yml` adjust all attributes that need an update relevant for that branch like compile timestamp etc.
+1. Create a Pull Request `Enable <product> x.y`, see the [text suggestion](#text-suggestion-for-step-5) below.
+
+**Step 6: Archive the dropped branch**
+
+This step _mandatory_ needs the doc PR described before to be merged!
+
+1. Unprotect the `x.z` branch which was dropped from the building process and rename it to `x_archived_x.z`. There are already branch protection rules for archived versions in place. Note that this step can be postponed if needed but it must not be processed before merging x.y in docs. Note that after renaming, also local building cant be done anymore without extra efforts - which is on purpose.
+
+## **Text Suggestion for Step 4**
+
+The following text is a copy/paste suggestion for the PR, replace the branch numbers accordingly:
+
 ```
-These are the changes necessary to finalize the creation of the 10.x branch.
+These are the changes necessary to finalize the creation of the x.y branch.
 
-* The 10.x branch is already pushed and prepared and is included in the branch protection rules.
+* The x.y branch is already pushed, prepared and is included in the branch protection rules.
 
-* When 10.x (core) is finally out, the 10.x-2 branch can be archived, see step 3 in [Create a New Version Branch](https://github.com/owncloud/docs-server/blob/master/docs/new-version-branch.md)
+* Note that this PR can be merged at any time but:
+  * must be merged **before** applying content changes and
+  * **before** merging the docs PR to include this version.
 
-* Note, that the 10.x branch in this repo is already created, but the `latest` pointer on the web will be set to it automatically when the tag in core is set. This means, that in the docs homepage, `latest` will point to 10.x-1 until the tag in core is set accordingly. When merging this PR, 10.x-2 will be dropped from the web.
+* Post merging this, we need to backport all relevant changes created in master to x.y
 
-* Note that this PR must be merged **before** the 10.x tag in core is set to avoid a 404 for `latest`.
+@mmattel @phil-davis
+```
 
-* Note before merging this PR, we should take care that 10.x-2 has all necessary changes merged.
+## **Text Suggestion for Step 5**
 
-@pako81 @jnweiger fyi
+The following text is a copy/paste suggestion for the PR, replace the branch numbers accordingly:
 
-@mmattel @EParzefall @phil-davis
-Post merging this, we need to backport all relevant changes to 10.x
+```
+Referencing: https://github.com/owncloud/docs-xxx/pull/yyy (Changes necessary for x.y)
+
+This PR enables the documetation for <product> x.y and drops version x.z
+
+Currently on draft to avoid accidentially merging before x.y is finally out.
+
+Only merge close before the product tag gets released.
+
+When this PR is merged, the dropped branch can be archived.
+For more details see the `Create a New Version Branch` section in the README.md of the respective docs-xxx repo repo.
+
+The `latest` pointer on the web will be set automatically when the tag in the product repo is set.
+
+Tested, a local build runs fine.
+
+@mmattel @phil-davis
 ```
