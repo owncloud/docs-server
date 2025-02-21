@@ -45,7 +45,7 @@ This step is necessary to update the building process for content changes in thi
 
 **Step 5: Changes in the docs repo (main assembling repo)**
 
-This step finally sets the versions (branches) to be build. The new x.y version branch will be added and the oldest branch of the product will be removed from building. Note that merging the PR, the new version is live and the former version is removed. You should therefore merge _close before_ publishing the relevant product release. If this step is omitted or not timed well, the `latest` pointer from the webserver, which generates the redirect based on the latest tag of the product repo automatically, will generate a 404 instead pointing to the latest release!
+This step finally sets the versions (branches) to be built. The new x.y version branch will be added and the oldest branch of the product will be removed from building. Note that after merging the PR, the new version is live and the former version is removed. You should therefore merge _close before_ publishing the relevant product release. If this step is omitted or not timed well, the `latest` pointer from the webserver, which generates the redirect based on the latest tag of the product repo automatically, will generate a 404 instead pointing to the latest release!
 
 1. In the [docs](https://github.com/owncloud/docs/blob/master/site.yml) repo, create a new `enable_<product>_x.y` branch based on latest `origin/master`, where `<product>` is the placeholder for the product this version is added for like `ocis`, or `desktop` etc.
 1. In file `site.yml`, adjust the versions of the respective content source to the correct versions. Add the new one and remove the oldest one.
@@ -84,9 +84,9 @@ The following text is a copy/paste suggestion for the PR, replace the branch num
 ```
 Referencing: https://github.com/owncloud/docs-xxx/pull/yyy (Changes necessary for x.y)
 
-This PR enables the documetation for <product> x.y and drops version x.z
+This PR enables the documentation for <product> x.y and drops version x.z
 
-Currently on draft to avoid accidentially merging before x.y is finally out.
+Currently on draft to avoid accidentally merging before x.y is finally out.
 
 Only merge close before the product tag gets released.
 
