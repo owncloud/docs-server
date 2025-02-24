@@ -113,6 +113,7 @@ PGPASSWORD="password" \
   pg_dump [db_name] \
   -h [server] \
   -U [username] \
+  -F tar \
   -f owncloud-dbbackup_`date +"%Y%m%d"`.bak
 ----
 
