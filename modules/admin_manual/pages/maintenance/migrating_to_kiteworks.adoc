@@ -1,7 +1,7 @@
-= Migrating to Kiteworks Private Content Network
+= Migrating to Kiteworks Private Data Network
 :toc: right
 :toclevels: 3
-:description: Kiteworks offers a great software stack keeping your shared data completely fenced, secured and monitored. It offers additional features ownCloud does not provide. This guide describes how to migrate an ownCloud instance to a https://www.kiteworks.com[Kiteworks Private Content Network (PCN)].
+:description: Kiteworks offers a great software stack keeping your shared data completely fenced, secured and monitored. It offers additional features ownCloud does not provide. This guide describes how to migrate an ownCloud instance to a https://www.kiteworks.com[Kiteworks Private Data Network (PDN)].
 
 == Introduction
 
@@ -181,14 +181,14 @@ image:maintenance/migrate_kiteworks/kiteworks-users-collaboration.png[Kiteworks 
 * If it is planned to integrate Kiteworks into LDAP:
 +
 --
-IMPORTANT: We recommend having the Kiteworks PCN connected and configured to an LDAP server _before_  starting the migration. This will avoid conflicting user entries that will exist in the local database additionally to the LDAP server connected.
+IMPORTANT: We recommend having the Kiteworks PDN connected and configured to an LDAP server _before_  starting the migration. This will avoid conflicting user entries that will exist in the local database additionally to the LDAP server connected.
 // New user accounts will be created during the migration, as needed. Existing user accounts will be used.
 --
 
 * If it is planned to use a virus scanner in Kiteworks:
 +
 --
-IMPORTANT: We recommend having the Kiteworks PCN configured using a virus scanner _before_ starting the migration. This way, infected files that have not been covered by ownCloud will be put under quarantine already during migration.
+IMPORTANT: We recommend having the Kiteworks PDN configured using a virus scanner _before_ starting the migration. This way, infected files that have not been covered by ownCloud will be put under quarantine already during migration.
 --
 
 * In the Kiteworks Admin Console, navigate to menu:Application Setup[Client and Plugins > API]. Then click btn:[Create Custom Application]:
