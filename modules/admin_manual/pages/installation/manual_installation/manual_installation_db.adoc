@@ -31,9 +31,9 @@ SQLite will be installed by ownCloud when installed via package manager. The nec
 
 == MYSQL/MariaDB
 
-MariaDB is the ownCloud recommended database. It may be used with either ownCloud Server or ownCloud Enterprise editions. Please look for additional configuration parameters in the
-xref:configuration/database/linux_database_configuration.adoc[Database Configuration on Linux]
-guides.
+MariaDB is the ownCloud recommended database. It may be used with either ownCloud Server or ownCloud Enterprise editions. Please look for additional configuration parameters in the xref:configuration/database/linux_database_configuration.adoc[Database Configuration on Linux] guides.
+
+Once the database installation is complete, refer to the Database section in the xref:configuration/server/harden_server.adoc#database[Hardening and Security Guidance] guide for additional important information.
 
 include::partial$installation/manual_installation/mariadb.adoc[leveloffset=+1]
 
