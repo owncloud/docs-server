@@ -67,12 +67,75 @@ With this information, you can begin customizing a rate-limiting solution specif
 * https://gist.github.com/procrastinatio/6b6579230d99be5bfa26d04acd788e7a[Rate limiting with HAProxy]
 * https://www.fir3net.com/Loadbalancers/F5-BIG-IP/f5-ltm-ratelimiting.html[Rate limiting with F5]
 
-== Operating system
+== Operating System
 
 === Enable hardening modules such as SELinux
 
 We also recommend to enable hardening modules such as SELinux
 where possible. See xref:installation/selinux_configuration.adoc[SELinux Configuration] to learn more about SELinux.
+
+== Database
+
+When using MySQL or MariaDB, enable the https://mariadb.com/docs/skysql-dbaas/ref/xpand/sql-modes/STRICT_TRANS_TABLES/#Setting_the_SQL_MODE[STRICT_TRANS_TABLES, window=_blank] if it is not already activated.
+
+. Check the status of `STRICT_TRANS_TABLES`:
++
+--
+To check if `STRICT_TRANS_TABLES` are enabled, enter the following command: Note that the MySQL command-line client must be installed and configured. Alternatively, you can use a GUI, such as phpMyAdmin, to issue SQL commands.
+
+[source,bash]
+----
+sudo mysql
+----
+
+Select the database. The example command uses `owncloud` as the database name:
+
+[source,sql]
+----
+use owncloud;
+----
+
+Finally, check whether `STRICT_TRANS_TABLES` is enabled by issuing the following command:
+
+[source,sql]
+----
+SELECT @@sql_mode;
+----
+
+If you see an output like this:
+
+[source,plaintext]
+----
++-------------------------------------------------------------------------------------------+
+| @@sql_mode                                                                                |
++-------------------------------------------------------------------------------------------+
+| STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |
++-------------------------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+----
+
+and it contains STRICT_TRANS_TABLES, no further action is required. Otherwise, follow the next list item to enable it.
+--
+
+. Enable `STRICT_TRANS_TABLES` for the selected database:
++
+--
+In the same `mysql` command line client and with the owncloud database selected, run the following command:
+
+[source,sql]
+----
+SET sql_mode = CONCAT(@@sql_mode, ',STRICT_TRANS_TABLES');
+----
+
+To verify that it is enabled, enter the following command:
+
+[source,sql]
+----
+SELECT @@sql_mode;
+----
+
+and check the output. 
+--
 
 == Deployment
 
