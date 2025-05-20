@@ -180,6 +180,8 @@ mysql -u root -e \
 
 It is recommended to run mysqltuner script to analyse database configuration after running with load for several days.
 
+Once the database installation is complete, refer to the Database section in the xref:configuration/server/harden_server.adoc#database[Hardening and Security Guidance] guide for additional important information.
+
 ==== Enable the Recommended Apache Modules
 
 [source,bash]
