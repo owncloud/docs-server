@@ -140,7 +140,7 @@
 *** Encryption
 **** xref:admin_manual:maintenance/encryption/migrating-from-user-key-to-master-key.adoc[Migrating from User Key to Master Key Encryption]
 *** xref:admin_manual:maintenance/migrating.adoc[Migrating to a Different Server]
-*** xref:admin_manual:maintenance/migrating_to_kiteworks.adoc[Migrating to Kiteworks PCN]
+*** xref:admin_manual:maintenance/migrating_to_kiteworks.adoc[Migrating to Kiteworks PDN]
 
 ** Enterprise
 *** Authentication
