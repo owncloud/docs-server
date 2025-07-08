@@ -2310,16 +2310,6 @@ The web based updater is enabled by default.
 'upgrade.disable-web' => false,
 ....
 
-=== Explicitly enable the web updater - used by /updater/
-By default, it is disabled.
-
-==== Code Sample
-
-[source,php]
-....
-'web-updater.enabled' => false,
-....
-
 === Define whether to enable automatic update of market apps
 Set to `false` to disable.
 
