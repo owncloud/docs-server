@@ -16,7 +16,6 @@ https://doc.owncloud.com/docs_main/next/server_release_notes.html[release notes]
 * The Updater app is not included in the 
 https://owncloud.com/download-server/[Linux packages on our Open Build Service],
 but only in the https://owncloud.com/download-server[tar and zip archives].
-* When you install ownCloud from packages you should keep it updated with your package manager.
 * Do not use the Updater app in conjunction with xref:installation/manual_installation/manual_installation.adoc#script-guided-installation[Scripts for the Script-Guided Installation]. See the link for more details.
 ====
 
