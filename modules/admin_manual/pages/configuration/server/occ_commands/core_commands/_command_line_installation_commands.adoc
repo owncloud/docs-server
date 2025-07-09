@@ -1,7 +1,6 @@
 = Command Line Installation
 
-ownCloud can be installed entirely from the command line.
-After downloading the tarball and copying ownCloud into the appropriate directories, or after installing ownCloud packages (See xref:installation/linux_packetmanager_install.adoc[Linux Package Manager Installation] and xref:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux]) you can use `occ` commands in place of running the graphical Installation Wizard.
+ownCloud can be installed entirely from the command line. After downloading the tarball and copying ownCloud into the appropriate directories, you can use `occ` commands in place of running the graphical Installation Wizard. Also see xref:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux].
 
 NOTE: These instructions assume that you have a fully working and configured webserver.
 If not, please refer to the documentation on configuring xref:installation/manual_installation/manual_installation.adoc#configure-the-web-server[Configure the Web Server] for detailed instructions.
@@ -12,7 +11,7 @@ Apply the xref:installation/manual_installation/manual_installation.adoc#script-
 ----
 {occ-command-example-prefix} occ
 ownCloud is not installed - only a limited number of commands are available
-ownCloud version 10.0.8
+ownCloud version 10.15.0
 
 Usage:
  [options] command [arguments]

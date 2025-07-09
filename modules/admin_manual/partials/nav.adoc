@@ -20,7 +20,6 @@
 ****** xref:admin_manual:installation/quick_guides/ubuntu_20_04.adoc[On Ubuntu 20.04]
 ****** xref:admin_manual:installation/quick_guides/ubuntu_22_04.adoc[On Ubuntu 22.04]
 ***** Linux Package Manager
-****** xref:admin_manual:installation/linux_packetmanager_install.adoc[Linux Package Manager Installation]
 **** xref:admin_manual:installation/installation_wizard.adoc[The Installation Wizard]
 *** xref:admin_manual:installation/troubleshooting.adoc[Troubleshooting]
 *** xref:admin_manual:installation/changing_the_web_route.adoc[Changing Your ownCloud URL]
@@ -127,8 +126,6 @@
 *** xref:admin_manual:maintenance/upgrading/upgrade.adoc[Upgrading]
 **** xref:admin_manual:maintenance/upgrading/manual_upgrade.adoc[Manual Upgrade]
 **** xref:admin_manual:maintenance/upgrading/database_upgrade.adoc[Database Upgrade]
-**** xref:admin_manual:maintenance/upgrading/package_upgrade.adoc[Upgrading from Package]
-**** xref:admin_manual:maintenance/upgrading/update.adoc[Using the Updater App]
 **** xref:admin_manual:maintenance/upgrading/upgrade_php.adoc[Upgrading PHP]
 **** xref:admin_manual:maintenance/upgrading/marketplace_apps.adoc[Marketplace Apps]
 *** Backup and Restore

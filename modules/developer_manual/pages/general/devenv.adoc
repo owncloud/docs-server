@@ -145,9 +145,8 @@ properly with ownCloud. The respective guides are available at:
 With the web and database servers setup, you next need to get a copy of
 ownCloud. There are two ways to do so:
 
-1.  Use a xref:admin_manual:installation/manual_installation/manual_installation.adoc[manual installation]
-2.  Use a xref:admin_manual:installation/linux_packetmanager_install.adoc[Linux Package Manager Installation]
-3.  Clone the development version from https://github.com/owncloud[GitHub]:
+. Use a xref:admin_manual:installation/manual_installation/manual_installation.adoc[manual installation]
+. Clone the development version from https://github.com/owncloud[GitHub]:
 
 For the sake of a brief example, assuming you chose to clone from
 GitHub, here’s an example of how to do so:
