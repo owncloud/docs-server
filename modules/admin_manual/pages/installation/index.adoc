@@ -16,7 +16,3 @@ This guide covers Ubuntu server preparations like dependencies, required package
 == Using a Docker-Based Installation
 
 This guide shows you how to install xref:installation/docker/index.adoc[ownCloud with Docker] using Docker Compose with a YAML file provided by ownCloud.
-
-== Linux Package Manager Installation
-
-While this is not a recommended method installing ownCloud Server, this guide shows you how to use the xref:installation/linux_packetmanager_install.adoc[Linux Package Manager] method.

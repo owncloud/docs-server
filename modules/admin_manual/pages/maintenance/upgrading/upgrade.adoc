@@ -9,11 +9,15 @@ We recommend that you keep your ownCloud server up to date. When an update or up
 Before beginning an upgrade, please keep the following points in mind:
 
 * Review the https://doc.owncloud.com/docs_main/next/server_release_notes.html[release notes] for important information about the needed migration steps during that upgrade to help ensure a smooth upgrade process.
+
 * Check ownCloud's xref:installation/manual_installation/manual_installation_prerequisites.adoc[mandatory requirements] (such as PHP versions and extensions), which can change from one version to the next. Ensure that you review them and update or upgrade your server, if required, before upgrading ownCloud.
-* Upgrading is disruptive, as your ownCloud server will be put into
-xref:configuration/server/occ_command.adoc#maintenance-commands[maintenance mode].
+
+* Upgrading is disruptive, as your ownCloud server will be put into xref:configuration/server/occ_command.adoc#maintenance-commands[maintenance mode].
+
 * Large installations may take several hours to complete the upgrade.
+
 * Review any installed xref:maintenance/manual_upgrade.adoc#review-third-party-apps[third-party apps] for compatibility with the new ownCloud release.
+
 * Downgrading *is not supported* as it risks corrupting your data. If you want to revert to an older ownCloud version, make a new, fresh installation and then restore your data from backup. Before attempting this, file a support ticket (if you have paid support) or ask for help in the ownCloud forums to resolve your issue without downgrading.
 
 include::partial$maintenance/major_release_note.adoc[]
@@ -26,12 +30,6 @@ CAUTION: Unsupported apps may disrupt your upgrade.
 
 == Upgrade Options
 
-There are three ways to upgrade your ownCloud server:
-
-1. *(Recommended)* Perform a xref:maintenance/manual_upgrade.adoc[manual upgrade], using the
-https://owncloud.com/download-server/[latest ownCloud release].
-2. *(Alternative for simple installations)* Click the [Open Updater] button in the Admin General page. This button is available, when the online updater has detected a new version available. This is not the recommended upgrade procedure, as builtin core upgrade scripts are error prone. If you see e.g. 'Internal Server Error' during the process, then the command `occ upgrade` is most likely able run the proper repair steps to fix that.
-3. *(Discouraged)* Use xref:maintenance/package_upgrade.adoc[your distribution’s package manager], in conjunction with our official ownCloud repositories. *Note:* This approach should not be used unattended nor in clustered setups. We discourage upgrades with Linux Package Manager because you might encounter unwanted side effects.
-
+Perform a xref:maintenance/manual_upgrade.adoc[manual upgrade], using the https://owncloud.com/download-server/[latest ownCloud release].
 
 NOTE: Enterprise customers: refer to xref:enterprise/installation/install.adoc[Installing & Upgrading ownCloud Enterprise Edition] for more information.

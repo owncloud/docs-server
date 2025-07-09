@@ -60,10 +60,7 @@ Testing starts with setting up a testing environment. We urge you not to
 put your production data on testing releases unless you have a backup
 somewhere!
 
-Start by installing ownCloud, either on real hardware or in a VM. You
-can find instructions for installing ownCloud in the
-xref:admin_manual:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux] or
-xref:admin_manual:installation/linux_packetmanager_install.adoc[Linux Package Manager Installation]
+Start by installing ownCloud, either on real hardware or in a VM. You can find instructions for installing ownCloud in the xref:admin_manual:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux].
 
 Please note that we are still working on the documentation and if you
 bump into a problem, you can
