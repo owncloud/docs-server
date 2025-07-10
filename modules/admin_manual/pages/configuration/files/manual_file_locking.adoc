@@ -24,19 +24,19 @@ The main user-facing component in the web interface looks like in the following 
 ^| Manual Locking Disabled
 ^| Manual Locking Enabled
 
-a|image::configuration/files/manual_file_locking/lock-file-not-visible.png[File locking not visible]
-a|image::configuration/files/manual_file_locking/lock-file-visible.png[File locking visible]
+a| image::configuration/files/manual_file_locking/lock-file-not-visible.png[File locking not visible]
+a| image::configuration/files/manual_file_locking/lock-file-visible.png[File locking visible]
 |===
 
 If manual locking is enabled, the following additional user-facing components are present:
 
 [width="100%",cols="50%,50%"]
 |===
-a|image::configuration/files/manual_file_locking/file-locked-symbol.png[File locked symbol]
-a|image::configuration/files/manual_file_locking/file-locked-hint.png[File locking hint]
+a| image::configuration/files/manual_file_locking/file-locked-symbol.png[File locked symbol]
+a| image::configuration/files/manual_file_locking/file-locked-hint.png[File locking hint]
 
-a|image::configuration/files/manual_file_locking/file-locked-details.png[File locking details]
-a|image::configuration/files/manual_file_locking/file-locked-unlock-symbol.png[File unlocking]
+a| image::configuration/files/manual_file_locking/file-locked-details.png[File locking details]
+a| image::configuration/files/manual_file_locking/file-locked-unlock-symbol.png[File unlocking]
 
 |===
 
