@@ -9,6 +9,6 @@
 
 == Custom Groups
 
-include::groups/custom_groups_endpoints.adoc[]
+include::./groups/custom_groups_endpoints.adoc[]
 
-include::groups/group_membership_endpoints.adoc[]
+include::./groups/group_membership_endpoints.adoc[]

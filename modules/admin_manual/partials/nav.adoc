@@ -169,7 +169,7 @@
 **** xref:admin_manual:enterprise/reporting/metrics.adoc[Metrics]
 **** xref:admin_manual:enterprise/reporting/config_report.adoc[Generate a Config Report]
 *** Security
-**** xref:admin_manual:enterprise/security/ransomware-protection/index.adoc[Ransomware Protection]
+**** xref:admin_manual:enterprise/security/ransomware-protection.adoc[Ransomware Protection]
 *** User Management
 **** xref:admin_manual:enterprise/user_management/user_auth_shibboleth.adoc[Shibboleth Integration]
 **** xref:admin_manual:enterprise/user_management/saml_2.0_sso.adoc[SAML 2.0 Based SSO]
