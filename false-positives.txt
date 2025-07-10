@@ -3,4 +3,3 @@
 
 modules/admin_manual/examples/configuration/ldap/Multi-AD.slapd.conf
 modules/admin_manual/examples/configuration/ldap/single.slapd.conf
-modules/admin_manual/images/configuration/files/create_public_share-10.png

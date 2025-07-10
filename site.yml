@@ -46,7 +46,7 @@ antora:
     - require: ./ext-antora/find-orphaned-files.js
       #printavailable: true
       #excludeextension: ['.png', '.gif']
-      #falsepositives: ./false-positives.txt
+      falsepositives: ./false-positives.txt
       pathfilter: ['modules/owncloud_web', 'modules/classic_ui']
       excludecomponents: ['webui']
       stopafterfind: true
