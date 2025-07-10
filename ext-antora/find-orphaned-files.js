@@ -2,12 +2,12 @@
 
 /**
  * Find Orphaned Files Extension.
- * Version 1.0.0
+ * Version 1.0.1
  * 
  * @param {Object} config   configuration object      - Configuration provided by site.yml
  * @param {Bool}            config.printavailable     - Print available components/versions first
- * @param {Bool}            config.printavailable     - Print available components/versions first
  * @param {String}          config.stopafterfind      - Stop build process after extension has run
+ * @param {String}          config.falsepositives     - Ignore files collected in a file, 'modules/...' 
  * @param {Array<string>}   [config.excludeextension] - Extensions to exclude from detection ['.png', ...]
  * @param {Array<string>}   [config.pathfilter]       - Strings to exclude from detection ['modules/ROOT', ...]
  * @param {Array<string>}   [config.excludecomponents]- Components to exclude from detection ['my_comp', ...]
@@ -98,6 +98,9 @@ module.exports.register = function ({config}) {
           console.log('\n')
           console.log('# ' + component, version, '\n')
 
+          // get ALL files from the content catalog, which is a list of files that Antora
+          // identifies on the filesystem to be considered for the docs build process
+          // remove those files we do not want to be part of
           const allFiles = get_all_files (contentCatalog, extensionToIgnore, pathsToIgnore)
           // allFiles.forEach(element => console.log(element))
 
@@ -118,12 +121,14 @@ module.exports.register = function ({config}) {
           const navFiles = get_all_nav_files (nav)
           // navFiles.forEach(element => console.log(element))
 
+          // this are all unique files that get referenced by authors inside docs
           // collect all references into an array to sort before adding to the set
           const coll = []
           pageReferences.forEach((element)    => coll.push(element))
           partialReferences.forEach((element) => coll.push(element))
           navReferences.forEach((element)     => coll.push(element))
           // coll.sort().forEach(element => console.log(element))
+
           const allUniqueReferences = new Set(coll.sort())
           // allUniqueReferences.forEach(element => console.log(element))
 
@@ -136,6 +141,8 @@ module.exports.register = function ({config}) {
           // allFilesNoNavNoFalsePositives.forEach(element => console.log(element))
 
           // remove found unique references from allFilesNoNavNoFalsePositives list
+          // the list of (a) allFilesNoNavNoFalsePositives is the base we substract (b) allUniqueReferences from
+          // ideally, this lists are equal and no remaining elements are found
           const orphandArray = setDifference(allFilesNoNavNoFalsePositives, allUniqueReferences)
           // orphandArray.forEach(element => console.log(element))
 
@@ -163,8 +170,8 @@ module.exports.register = function ({config}) {
  * we could make it shorter, but the we cant debug it
  * 
  * @param  {set} a_set       the first set
- * @param  {set} b_set       the secon set
- * @return {set} d_set       the difference between a and b
+ * @param  {set} b_set       the second set
+ * @return {set} d_set       the difference between a and b (a_minus_b)
  */
 function setDifference(a_set, b_set) {
     const d_set = new Set(Array.from(a_set).filter(x => {
@@ -245,7 +252,7 @@ function get_all_files (contentCatalog, extensionToIgnore, pathsToIgnore) {
         return item.includes(str)                // return and exit some if true
       })
       if (!found && item != 'undefined') {       // only if found and not the string 'undefined'
-        ex_files.push(item)
+        ex_files.push(item.trim())
       }
     })
 
@@ -395,7 +402,7 @@ function get_path_objects (pages, rg, fam_dir_arr, dir_sep, x) {
 
     // the path is on the last location, see splice
     for (let i=0; i < objectReferences.length; i++) {
-      uniqueObjectRefernces.add(objectReferences[i][2])
+      uniqueObjectRefernces.add(objectReferences[i][2].trim())
     }
 
     return uniqueObjectRefernces
