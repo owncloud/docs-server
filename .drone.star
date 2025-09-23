@@ -89,7 +89,7 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
             {
                 "name": "docs-deps",
                 "pull": "always",
-                "image": "owncloudci/nodejs:18",
+                "image": "owncloudci/nodejs:22",
                 "commands": [
                     "npm install",
                 ],
@@ -97,7 +97,7 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
             {
                 "name": "docs-build",
                 "pull": "always",
-                "image": "owncloudci/nodejs:18",
+                "image": "owncloudci/nodejs:22",
                 "commands": [
                     "npm run antora",
                 ],
