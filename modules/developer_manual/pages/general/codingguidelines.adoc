@@ -56,9 +56,6 @@ into classes.
 
 == General
 
-* Ideally, discuss your plans on the
-https://talk.owncloud.com[chat system] to see
-if others want to work with you on it
 * We use https://github.com/owncloud[Github], please get an account
 there and clone the repositories you want to work on
 * Fixes go directly to master, nevertheless they need to be tested

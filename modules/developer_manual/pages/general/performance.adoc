@@ -100,8 +100,3 @@ nice small scripts] that can be used for this.
 The recommendation is to automatically do 10000 PROPFINDs or file
 uploads, measure the time and compare the time before and after the
 change.
-
-== Getting help
-
-If you need help with performance or other issues please ask on our
-https://talk.owncloud.com[chat system] for more details.

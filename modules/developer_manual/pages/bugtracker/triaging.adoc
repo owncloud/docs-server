@@ -226,7 +226,6 @@ occasionally take a long time.
 == Collaboration
 
 You can just get started with bug triaging.
-But if you want, you can register at the https://talk.owncloud.com[chat system].
 
 You can also join the '#owncloud-testing' channel on irc://freenode.net and https://webchat.freenode.net/, to ask questions but keep in mind that people aren't active 24/7, and it can occasionally take a while to get a response.
 Last, but not least, ownCloud contributor https://gist.github.com/jancborchardt/6155185[Jan Borchardt has a great guide for developers and triagers] about dealing with issues, including some 'stock answers' and thoughts on how to deal with pull requests.

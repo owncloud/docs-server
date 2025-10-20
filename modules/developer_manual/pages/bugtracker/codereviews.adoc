@@ -48,7 +48,3 @@ pull requests should be handled
 
 * https://github.com/owncloud/core/pull/121
 * https://github.com/owncloud/core/pull/146
-
-== Questions?
-
-Feel free to drop a line on our https://talk.owncloud.com[chat system].

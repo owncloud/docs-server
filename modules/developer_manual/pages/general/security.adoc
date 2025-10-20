@@ -664,8 +664,3 @@ header('Location:'. $_GET['redirectURL']);
 <?php
 header('Location: https://example.com'. $_GET['redirectURL']);
 ----
-
-== Getting Help
-
-If you need help to ensure that a function is secure, please ask on our
-https://talk.owncloud.com[chat system] for details.
