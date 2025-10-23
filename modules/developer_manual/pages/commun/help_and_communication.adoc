@@ -14,12 +14,6 @@ Ask questions on {oc-central-url}[ownCloud Central].
 We strongly recommend using ownCloud Central, as it hosts dedicated FAQ pages. 
 These include topics which address typical mistakes and commonly occurring issues.
 
-=== Talk
-
-Ask questions on RocketChat:
-
-* https://talk.owncloud.com[Talk via RocketChat]
-
 === Social Media
 
 Ask questions on social media:

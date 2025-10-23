@@ -168,24 +168,6 @@ def build(ctx, environment, latest_version, deployment_branch, base_branch, pdf_
             #        ],
             #    },
             #},
-            {
-                "name": "notify",
-                "pull": "if-not-exists",
-                "image": "plugins/slack",
-                "settings": {
-                    "webhook": from_secret("rocketchat_talk_webhook"),
-                    "channel": "builds",
-                },
-                "when": {
-                    "event": [
-                        "push",
-                        "cron",
-                    ],
-                    "status": [
-                        "failure",
-                    ],
-                },
-            },
         ],
         "depends_on": [
             "check-starlark",
