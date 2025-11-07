@@ -29,40 +29,49 @@ For the planning, the ownCloud instance can stay productive during the migration
 
 The following items will be migrated. In some cases, special rules apply as noted:
 
-* Ordinary users. +
-At Kiteworks, the email address will be used as the user name.
-* Guest users. +
+* Ordinary users: +
+At Kiteworks, the email address will be used as the user name. If the user data already exists in Kiteworks, it will not be overwritten.
+
+* Guest users: +
 Will be translated into Kiteworks user profile `restricted`.
-* Disabled users. +
+
+* Disabled users: +
 Disabled users cant login, but may contain shares to be migrated.
-* The content of the users home directory. +
+
+* The content of the users home directory: +
 The data of the home directory can be encrypted. In that case, data will be gathered, decrypted and transferred via a secured channel to the Kiteworks instance.
-* User shares received. +
+
+* User shares received: +
 As long as they reference content from another user's home.
-* User shares granted. +
+
+* User shares granted: +
 As long as they reference content from the user's home. A share where all permissions are already granted thru a parent folder are considered redundant and are not created.
-* Share permissions. +
+
+* Share permissions: +
 Will be translated into Kiteworks predefined roles.
 
 === Items Excluded from the Migration
 
 The following items are NOT migrated. These items need to be migrated manually:
 
-* External mounts like +
+* External mounts such as: +
 `WND`, `SMB`, `Google Drive`, etc. +
 This includes admin mounts and user created mounts. See the xref:external-mount-points[ownCloud prerequisites] section for a special note. 
 
-* S3 primary object store (S3 for the users home) cannot be migrated for the time being.
+* S3 primary object store (S3 for the users home) cannot be migrated for the time being:
 +
 --
 IMPORTANT: If you have configured S3 primary as your storage location for the users home, get in touch with {oc-support-url}[ownCloud support].
 --
 
-* Federated shares. +
+* Federated shares: +
 Federated shares are, in terms of data migration, like special external mounts, see above.
 
-* Public links. +
+* Public links: +
 They are not supported on Kiteworks and skipped during the migration process.
+
+* Passwords: +
+User passwords will not be migrated. Newly created users must reset their passwords after the migration to create new ones.
 
 == Limitations
 
