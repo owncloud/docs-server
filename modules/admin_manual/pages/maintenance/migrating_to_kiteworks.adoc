@@ -276,13 +276,14 @@ There are two possible outputs, and each one is printed on the console:
 * If the file cannot be generated due to write restrictions on the file system, the content of the JSON file is printed. Then, you must generate the file manually, adapt the file name as required:
 +
 --
-Copy the output from the `occ` command and open an editor such as `nano`:
+Copy the output from the `occ` command and:
 
 [source,plaintext]
 ----
-nano kw-satellite.json
+open an editor of choice
 paste the content copied
-save the file and exit
+save the file such as 'kw-satellite.json'
+exit the editor
 ----
 --
 
