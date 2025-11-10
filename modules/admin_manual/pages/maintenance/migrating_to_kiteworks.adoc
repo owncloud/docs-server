@@ -134,6 +134,8 @@ To be prepared for the migration, both sides need to match the prerequisites. Pl
 * All users must have an email address and they must be unique. +
 The `occ migrate:to-kiteworks:verify` step will point out missing email addresses. These must be rectified before any migration can start.
 
+* The ownCloud config setting xref:configuration/server/config_sample_php_parameters.adoc#override-cli-url[overwrite.cli.url] must exist and have a value. This config key is typically added and configured during setup. The `occ migrate:to-kiteworks:verify` step will check for this config setting. The value must match the ownCloud installation.
+
 * We recommend installing and enabling, if not already present and enabled, the {oc-marketplace-url}/apps/impersonate[Impersonate] app. This app can be used for example to solve file and folder case conflicts that can be reported during the migration process.
 ====
 
@@ -256,7 +258,7 @@ Details for commands used can be found in the xref:configuration/server/occ_comm
 
 === Migration Initialization
 
-The migration initialization is a mandatory step and will create a json file that is used to create a so-called "Satellite" - a trusted partner - on the Kiteworks instance.
+The migration initialization is a mandatory step and will generate required data to create a so-called "Satellite" - a trusted partner - on the Kiteworks instance. Use the following command to start migration initialization:
 
 [source,bash]
 ----
@@ -268,7 +270,23 @@ sudo -u www-data php \
   "KW_SECRET"
 ----
 
-As output, a file named `mft-owncloud-migration.json` is created in the ownCloud root folder. Use this file now to create a new satellite on the Kiteworks instance. The satellite must be switched to STATUS btn:[ON].
+There are two possible outputs, and each one is printed on the console:
+
+* A JSON file with the printed name is generated in the ownCloud root folder. You can use it directly for the required steps on the Kiteworks side, or
+* If the file cannot be generated due to write restrictions on the file system, the content of the JSON file is printed. Then, you must generate the file manually, adapt the file name as required:
++
+--
+Copy the output from the `occ` command and open an editor such as `nano`:
+
+[source,plaintext]
+----
+nano kw-satellite.json
+paste the content copied
+save the file and exit
+----
+--
+
+Use this file to create a new satellite on the Kiteworks instance now. The satellite must be switched to STATUS btn:[ON] to enabled it.
 
 {empty} +
 
