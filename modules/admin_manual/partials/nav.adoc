@@ -10,17 +10,8 @@
 *** xref:admin_manual:installation/deployment_recommendations.adoc[Deployment Recommendations]
 **** xref:admin_manual:installation/deployment_recommendations/nfs.adoc[NFS]
 *** xref:admin_manual:installation/system_requirements.adoc[System Requirements]
-*** xref:admin_manual:installation/configuration_notes_and_tips.adoc[Configuration Notes and Tips]
 *** xref:admin_manual:installation/index.adoc[Installation Options]
 **** xref:admin_manual:installation/docker/index.adoc[Installing With Docker]
-**** Manual Installation on Linux
-***** Detailed Installation Guide
-****** xref:admin_manual:installation/manual_installation/manual_installation.adoc[Detailed Installation on Ubuntu (various versions)]
-***** Quick Installation Guide
-****** xref:admin_manual:installation/quick_guides/ubuntu_20_04.adoc[On Ubuntu 20.04]
-****** xref:admin_manual:installation/quick_guides/ubuntu_22_04.adoc[On Ubuntu 22.04]
-***** Linux Package Manager
-**** xref:admin_manual:installation/installation_wizard.adoc[The Installation Wizard]
 *** xref:admin_manual:installation/troubleshooting.adoc[Troubleshooting]
 *** xref:admin_manual:installation/changing_the_web_route.adoc[Changing Your ownCloud URL]
 *** xref:admin_manual:installation/apps_management_installation.adoc[Installing and Managing Apps]
