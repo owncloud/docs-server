@@ -16,10 +16,6 @@
 *** xref:admin_manual:installation/apps_management_installation.adoc[Installing and Managing Apps]
 *** xref:admin_manual:installation/apps_supported.adoc[Supported Apps]
 **** xref:admin_manual:installation/apps/mediaviewer/index.adoc[Media Viewer]
-*** xref:admin_manual:installation/selinux_configuration.adoc[SELinux Configuration]
-*** xref:admin_manual:installation/letsencrypt/index.adoc[Using Let's Encrypt SSL Certificates]
-**** xref:admin_manual:installation/letsencrypt/using_letsencrypt.adoc[Using Letsencrypt]
-**** xref:admin_manual:installation/letsencrypt/apache.adoc[Apache]
 
 ** Configuration
 *** xref:admin_manual:configuration/database/index.adoc[Database]
