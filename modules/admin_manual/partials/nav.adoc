@@ -19,7 +19,6 @@
 
 ** Configuration
 *** xref:admin_manual:configuration/database/index.adoc[Database]
-**** xref:admin_manual:configuration/database/db_conversion.adoc[Database Conversion]
 **** xref:admin_manual:configuration/database/linux_database_configuration.adoc[Database Configuration]
 
 *** xref:admin_manual:configuration/files/encryption/index.adoc[Encryption]
