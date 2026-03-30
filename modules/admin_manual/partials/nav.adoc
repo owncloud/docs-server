@@ -13,7 +13,6 @@
 *** xref:admin_manual:installation/index.adoc[Installation Options]
 **** xref:admin_manual:installation/docker/index.adoc[Installing With Docker]
 *** xref:admin_manual:installation/troubleshooting.adoc[Troubleshooting]
-*** xref:admin_manual:installation/changing_the_web_route.adoc[Changing Your ownCloud URL]
 *** xref:admin_manual:installation/apps_management_installation.adoc[Installing and Managing Apps]
 *** xref:admin_manual:installation/apps_supported.adoc[Supported Apps]
 **** xref:admin_manual:installation/apps/mediaviewer/index.adoc[Media Viewer]
