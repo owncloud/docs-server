@@ -2,7 +2,6 @@
 :toc: right
 :dockerhub-url: https://hub.docker.com/r/owncloud/server
 :docker-compose-url: https://docs.docker.com/compose/
-:linux-server-doc-url: https://docs.linuxserver.io/faq
 :docker-compose-build-url: https://docs.docker.com/compose/compose-file/build/
 :description: ownCloud can be installed using the official ownCloud Docker image.
 
@@ -395,33 +394,6 @@ The loglevel is set to the fixed value 2: _"Warnings, errors, and fatal issues"_
 ----
 OWNCLOUD_LOGLEVEL=0
 ----
-
-=== Raspberry Pi
-
-If your container fails to start on Raspberry Pi or other ARM devices, you most likely have an old version of `libseccomp2` on your host. This should only affect distros based on Rasbian Buster 32 bit. Install a newer version with the following command:
-
-[source,bash]
-----
-cd /tmp
-wget http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.5.1-1_armhf.deb
-sudo dpkg -i libseccomp2_2.5.1-1_armhf.deb
-----
-
-Alternatively you can add the backports repo for Debian Buster:
-
-[source,bash]
-----
-sudo apt-key adv --keyserver keyserver.ubuntu.com \
-     --recv-keys 04EE7237B7D453EC 648ACFD622F3D138
-echo "deb http://deb.debian.org/debian buster-backports main" | \
-     sudo tee -a /etc/apt/sources.list.d/buster-backports.list
-sudo apt update
-sudo apt install -t buster-backports libseccomp2
-----
-
-In any case, you should restart the container after confirming you have `libseccomp2.4.4` installed.
-
-For more information see: {linux-server-doc-url}[Linux Server Docs]
 
 === Terminating containers
 
