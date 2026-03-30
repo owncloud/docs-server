@@ -1,88 +1,41 @@
 = System Requirements
 :toc: right
 :toclevels: 1
-:ppa-guide-url: https://itsfoss.com/ppa-guide/
 :desktop-system-requirements-url: https://doc.owncloud.com/desktop/installing.html#system-requirements
 :ios-system-requirements-url: https://doc.owncloud.com/ios-app/ios_faq.html
 :android-system-requirements-url: https://doc.owncloud.com/android/faq.html
 
-:description: Read this documentation for a recommended or supported environment for your ownCloud Server. This documentation applies to both a new installation or upgrade of an existing installation.
+:description: Read this documentation for the supported environment for your ownCloud Server. Starting with ownCloud Server 11, only Docker-based installations are supported.
 
 == Introduction
 
 {description}
 
-== General Note
+== Docker Host Requirements
 
-There is an important note about a xref:installation/manual_installation/manual_installation_prerequisites.adoc#openssl-version[prerequisite of openSSL]. We highly recommend checking this prerequisite as it needs to be checked regardless of the Operating System chosen.
+ownCloud Server 11 is exclusively deployed via Docker. The following requirements apply to the Docker host:
 
-== Officially Recommended Environment
-
-For _best performance_, _stability_, _support_ and _full functionality_, we officially recommend and support:
-
-[width="60%"cols="30%,60%a",options="header"]
+[width="60%",cols="30%,60%a",options="header"]
 |===
-| Platform
-| Options
+| Component
+| Requirement
 
-| Operating System
-| Ubuntu 20.04 LTS
+| Docker
+| Docker Engine 20.10 or later
 
-| Database
-| xref:#database-requirements[MariaDB] 10.11 ^1^
+| Docker Compose
+| Docker Compose v2 or later
 
-| Redis
-| >= 6
+| Architecture
+| 64-bit (x86_64 / amd64)
 
-| Web server
-| Apache 2.4 with xref:installation/manual_installation/manual_installation.adoc#configure-the-web-server[`prefork and mod_php`]
-
-| PHP Runtime
-| {recommended-php-version}
+| RAM
+| Minimum 512MB; 1GB or more recommended
 |===
-
-(1) MariaDB 10.6 and later is *only supported* with ownCloud release 10.9 and upwards. See the xref:installation/manual_installation/manual_installation.adoc#install-a-database[Install a Database] guide and xref:maintenance/upgrading/database_upgrade.adoc[Database Upgrade] guide.
-
-== Officially Supported Environments
-
-For _best performance_, _stability_, _support_, and _full functionality_ we officially support:
-
-=== Server
-
-[width="90%"cols=".^ 30%,90%a",options="header"]
-|===
-| Platform
-| Options
-
-| Operating System (64bit)
-| * Debian 10
-* Red Hat Enterprise Linux 7, 8 and 9 +
-including all 100% compatible derivatives (please note Red Hat Enterprise Linux 9 support is Enterprise only. Contact ownCloud support for more information)
-* SUSE Linux Enterprise Server 12 with SP4/5 and 15
-* Ubuntu 20.04 and 22.04
-* openSUSE Leap 15.2
-
-| Database
-| * xref:#database-requirements[MySQL] 8+ or xref:#database-requirements[MariaDB] 10.2 through 10.11 ^1^ (*Recommended*)
-* Oracle 11 and 12 can be run in Oracle 19c with compatibility mode (*Enterprise only*)
-* PostgreSQL 9, 10, 11, 12, 13 or 14
-* SQLite (*Not for production*)
-
-| Redis
-| * >= 6
-
-|Web server
-|* Apache 2.4 with xref:installation/manual_installation/manual_installation.adoc#configure-the-web-server[`prefork` and `mod_php`]
-
-| PHP Runtime
-|* {supported-php-versions}
-|===
-
-(1) MariaDB 10.6 and later is *only supported* with ownCloud release 10.9 and upwards. See the xref:installation/manual_installation/manual_installation.adoc#install-a-database[Install a Database] guide and xref:maintenance/upgrading/database_upgrade.adoc[Database Upgrade] guide.
 
 [NOTE]
 ====
-For Linux distributions, we support, if technically feasible, the latest two versions per platform and the previous LTS Version.
+The operating system, web server, PHP runtime, and database are all managed inside the Docker images provided by ownCloud. No manual configuration of these components is required on the host.
 ====
 
 === Hypervisors
@@ -119,16 +72,6 @@ You can find detailed system requirements in the documentation for the mobile ap
 ====
 You can find out more in the https://owncloud.com/changelog[changelog].
 ====
-
-== Database Requirements
-
-The following database settings are currently required if you’re running ownCloud together with a MySQL or MariaDB database:
-
-* Disabled or `BINLOG_FORMAT = MIXED` or `BINLOG_FORMAT = ROW` configured Binary Logging (See: xref:configuration/database/linux_database_configuration.adoc#mysql-mariadb[MySQL / MariaDB with Binary Logging Enabled])
-* InnoDB storage engine (The MyISAM storage engine is *not supported*, see:
-xref:configuration/database/linux_database_configuration.adoc#mysql-mariadb[MySQL / MariaDB storage engine])
-* `READ COMMITTED` transaction isolation level (See:
-xref:configuration/database/linux_database_configuration.adoc#set-read-committed-as-the-transaction-isolation-level[MySQL / MariaDB `READ COMMITTED` transaction isolation level])
 
 == Memory Requirements
 
