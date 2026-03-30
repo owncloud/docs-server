@@ -21,9 +21,7 @@ file (`config/config.php`) using the following syntax:
 ],
 ----
 
-NOTE: A non-blocking or correctly configured SELinux setup is needed for these backends to work, 
-if SELinux is enabled on your server. Please refer to the
-xref:installation/selinux_configuration.adoc[SELinux configuration] for further details.
+NOTE: A non-blocking or correctly configured SELinux setup is needed for these backends to work if SELinux is enabled on your server.
 
 Currently the https://github.com/owncloud/user_external[External user support app] (user_external),
 _which is not enabled by default_, provides three backends. These are:

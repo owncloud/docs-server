@@ -106,7 +106,7 @@ Any 64-bit Linux distribution capable of running Docker Engine 20.10 or later is
 
 ==== SSL Configuration
 
-SSL termination is handled by a reverse proxy in front of the Docker deployment. A standard SSL certificate is required. See our xref:installation/letsencrypt/index.adoc[Let's Encrypt SSL Certificates] documentation.
+SSL termination is handled by a reverse proxy in front of the Docker deployment. A standard SSL certificate is required.
 
 ==== Load Balancer
 
