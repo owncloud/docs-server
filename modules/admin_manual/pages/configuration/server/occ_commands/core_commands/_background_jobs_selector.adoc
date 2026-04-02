@@ -25,5 +25,7 @@ background
 {occ-command-example-prefix} background:webcron
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 TIP: Check out the sections xref:configuration/server/occ_command.adoc#managing-background-jobs[Managing Background Jobs] and xref:configuration/server/background_jobs_configuration.adoc[Background Jobs configuration] to learn more.
 

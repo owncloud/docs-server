@@ -70,6 +70,8 @@ Before backing up the database, set your ownCloud instance into maintenance mode
 {occ-command-example-prefix} maintenance:mode --on
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 NOTE: This guide uses a backup file name like `owncloud-dbbackup_<timestamp>.bak`.
 
 === MySQL/MariaDB
@@ -137,6 +139,8 @@ Perform the following tasks to reactivate your ownCloud instance:
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 .Enable browser access
 Start your web server, or alternatively enable the virtual host serving ownCloud:

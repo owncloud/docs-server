@@ -29,6 +29,8 @@ The command `search:index:create` creates the initial full text search index for
 {occ-command-example-prefix} search:index:create <user_id> (<user_id>)...
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,100%"]
@@ -57,6 +59,8 @@ This example creates a full text search index for the user with user id `testuse
 Indexing user testuser
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Example 2
 
 This example creates a full text search index for the users with user ids `admin` and `testuser`.
@@ -69,6 +73,8 @@ Indexing user admin
 Indexing user testuser
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Fill a Secondary Index
 
 Fill a secondary index based on the indexed data we have. Files not matching the "indexed" status will be ignored. This is intended to be used in index data migrations, so the connector for this secondary index should have been configured as "write connector". See the xref:configuration/general_topics/search.adoc[Full Text Search] documentation for more details. Note that the values of the `connector_name` are hardcoded and have to be written as described.
@@ -77,6 +83,8 @@ Fill a secondary index based on the indexed data we have. Files not matching the
 ----
 {occ-command-example-prefix} search:index:fillSecondary [options] [--] <connector_name> <user_id>...
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -117,6 +125,8 @@ If you want to rebuild the whole index, run `search:index:reset` and then `searc
 {occ-command-example-prefix} search:index:rebuild <user_id> (<user_id>)...
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,100%"]
@@ -153,6 +163,8 @@ This will delete all full text search index data for testuser! Do you want to pr
 Rebuilding full text search Index for testuser
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Example 2
 
 This example rebuilds the full text search index for the users with user IDs `admin` and `testuser`.
@@ -169,6 +181,8 @@ This will delete all search index data for admin, testuser! Do you want to proce
 Rebuilding Search Index for admin
 Rebuilding Search Index for testuser
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Rebuild the Entire Index
 
@@ -188,6 +202,8 @@ Reset all the configured indexes. Changes in the configuration of the indexes as
 ----
 {occ-command-example-prefix} search:index:reset
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -209,6 +225,8 @@ This will delete the whole search index! Do you want to proceed?
 Search index has been reset.
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Update the Full Text Search Index
 
 Updates to the search index due to changed content or changed metadata are happening via background jobs that are added to a queue. These background jobs are normally run by the ownCloud cronjob. The command `search:index:update` updates the full text search index by running all pending background jobs.
@@ -217,6 +235,8 @@ Updates to the search index due to changed content or changed metadata are happe
 ----
 {occ-command-example-prefix} search:index:update
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -237,6 +257,8 @@ Start Updating the Elastic search index:
 No pending jobs found.
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Set App Modes
 
 To do an initial full indexing without the Full Text Search app interfering, it can be put in passive mode. See the xref:configuration/general_topics/search.adoc#app-modes[App Modes] section in the Full Text Search description for details.
@@ -247,6 +269,8 @@ To do an initial full indexing without the Full Text Search app interfering, it 
     search_elastic mode --value passive
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Switching back to active mode can be done by running the following command:
 
 [source,bash,subs="attributes+"]
@@ -254,6 +278,8 @@ Switching back to active mode can be done by running the following command:
 {occ-command-example-prefix} config:app:set \
     search_elastic mode --value active
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Restrict Search Results
 
@@ -267,6 +293,8 @@ Search results can be restricted in different ways, see the xref:configuration/g
     search_elastic nocontent --value true
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Switching back to provide all content search results can be done by running the following command:
 
 [source,bash,subs="attributes+"]
@@ -274,6 +302,8 @@ Switching back to provide all content search results can be done by running the 
 {occ-command-example-prefix} config:app:set \
     search_elastic nocontent --value false
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Limit Metadata Search for Groups 
 
@@ -283,3 +313,5 @@ Switching back to provide all content search results can be done by running the 
     search_elastic group.nocontent \
     --value group1,group2,"group with blank"
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

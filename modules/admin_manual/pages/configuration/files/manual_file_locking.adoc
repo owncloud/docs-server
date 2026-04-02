@@ -53,6 +53,8 @@ Using the occ command::
 {occ-command-example-prefix} config:app:set files enable_lock_file_action --value yes
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Configuration
 
 To prevent files being locked infinitely, there is a mechanism that automatically expires locks after a certain time. The expiration time of locks can either be configured via the web interface or using occ commands. In addition, administrators can define groups whose members can break locks.
@@ -78,12 +80,16 @@ Using the occ command::
 {occ-command-example-prefix} config:app:set files lock_timeout_default --value 1800
 ----
 +
+NOTE: Run this command inside the ownCloud Docker container.
++
 * Maximum locks timeout
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set files lock_timeout_max --value 86400
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 * Define lock breaker groups
 +
@@ -93,3 +99,5 @@ The example below defines two lock breaker groups named `unlockers` and `admin`.
 ----
 {occ-command-example-prefix} config:app:set core lock-breaker-groups --value '["unlockers","admin"]'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

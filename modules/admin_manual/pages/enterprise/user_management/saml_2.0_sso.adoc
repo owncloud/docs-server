@@ -152,6 +152,8 @@ Use `upn` as `uid` and set the app mode to 'SSO Only' by running:
 {occ-command-example-prefix} shibboleth:mapping -u upn
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 `displayName` and email are only relevant for `autoprovisioning` mode.
 Add Claims in ADFS and map them in the `attribute-map.xml` if needed.
 

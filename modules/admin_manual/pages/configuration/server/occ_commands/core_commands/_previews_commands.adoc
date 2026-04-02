@@ -17,6 +17,8 @@ Removing not referenced previews can be necessary, e.g., when the image has been
 {occ-command-example-prefix} previews:cleanup [options] [--] [<chunk_size>]
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="25%,70%",]
@@ -54,6 +56,8 @@ In the example below, you run one loop with max (default) 1000 files processed.
 ----
 {occ-command-example-prefix} previews:cleanup
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Other combinations could be:
 

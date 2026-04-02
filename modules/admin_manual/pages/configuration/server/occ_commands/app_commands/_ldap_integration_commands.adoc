@@ -23,6 +23,9 @@ Search for an LDAP user, using this syntax:
 ----
 {occ-command-example-prefix} ldap:search [options] [--] <search>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -116,6 +119,8 @@ Searches match at the beginning of the attribute value only. This example search
 {occ-command-example-prefix} ldap:search "rob"
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 This will find "robbie", "roberta", and "robin".
 Broaden the search to find, for example, `jeroboam` with the asterisk wildcard:
 
@@ -123,6 +128,8 @@ Broaden the search to find, for example, `jeroboam` with the asterisk wildcard:
 ----
 {occ-command-example-prefix} ldap:search "*rob"
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 The following examples use `offset` and `limit` options:
 
@@ -136,6 +143,8 @@ Rekha Cox (Rekha.Cox)
 Rekha Craft (Rekha.Craft)
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:search "re" --offset 0 --limit 3
@@ -144,12 +153,16 @@ Rebecca Vintin (Rebecca.Vintin)
 Rebekka Da-Cahuna (Rebekka.Da-Cahuna)
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:search "re" --offset 3 --limit 3
 Rekha Cox (Rekha.Cox)
 Rekha Craft (Rekha.Craft)
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Check if an LDAP User Exists
 
@@ -183,12 +196,16 @@ Example:
 {occ-command-example-prefix} ldap:check-user robert
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 `ldap:check-user` will not run a check when it finds a disabled LDAP connection. This prevents users that exist on disabled LDAP connections from being marked as deleted. If you know for sure that the user you are searching for is not in one of the disabled connections and exists on an active connection, use the `--force` option to force a check of all active LDAP connections.
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:check-user --force robert
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Create an Empty LDAP Configuration
 
@@ -215,6 +232,8 @@ Configurations that you create without assigning a <configID> are automatically 
    Created new configuration with configID 's01'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == List and View Your Configurations
 
 You can list and view your configurations:
@@ -223,6 +242,8 @@ You can list and view your configurations:
 ----
 {occ-command-example-prefix} ldap:show-config [options] [--] [<configID>]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -252,12 +273,16 @@ If you omit the `configID`, all configuration ID's with their settings are liste
 {occ-command-example-prefix} ldap:show-config
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 View the configuration for a single `configID`:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} ldap:show-config s01
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Delete an Existing LDAP Configuration
 
@@ -282,6 +307,8 @@ Deletes an existing LDAP configuration.
 Deleted configuration with configID 's01'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Invalidate LDAP Cache
 
 This command invalidates the LDAP cache for all users:
@@ -291,6 +318,8 @@ This command invalidates the LDAP cache for all users:
 {occ-command-example-prefix} ldap:invalidate-cache
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Manipulate LDAP Configurations
 
 This command manipulates LDAP configurations.
@@ -299,6 +328,8 @@ This command manipulates LDAP configurations.
 ----
 {occ-command-example-prefix} ldap:set-config <configID> <configKey> <configValue>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -322,6 +353,8 @@ This example sets search attributes:
 ----
 {occ-command-example-prefix} ldap:set-config s01 ldapAttributesForUserSearch "cn;givenname;sn;displayname;mail"
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Available keys, along with default values for configValue, are listed in the table below.
 
@@ -390,6 +423,8 @@ Tests whether your configuration is correct and can bind to the server.
 {occ-command-example-prefix} ldap:test-config <configID>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -406,12 +441,16 @@ Example:
 The configuration is valid and the connection could be established!
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Set and Unset LDAP App Configurations
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set user_ldap updateAttributesInterval --value=7200
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 In the example above, the interval is being set to 7200 seconds.
 Assuming the above example was used, the command would output the following:
@@ -428,6 +467,8 @@ If you want to reset (or unset) the setting, then you can use the following comm
 {occ-command-example-prefix} config:app:delete user_ldap updateAttributesInterval
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 *Reuse Existing LDAP Accounts if Available*
 
 If you want to allow new LDAP logins to attempt to reuse existing `oc_accounts` entries that match the resolved username attribute, and have backend set to `User_Proxy`, then set the `reuse_accounts` config setting to `yes`.
@@ -438,6 +479,8 @@ Below is an example of how to do so.
 ----
 {occ-command-example-prefix} config:app:set user_ldap reuse_accounts --value="yes"
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 This functionality is valuable for several reasons; these are:
 

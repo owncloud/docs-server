@@ -28,6 +28,8 @@ To start the migration, it must be initialized first:
 {occ-command-example-prefix} migrate:to-kiteworks:init KW_HOST KW_APPLICATION_ID "KW_SECRET"
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -59,6 +61,8 @@ After initialisation, the migration must be verified to be ready:
 {occ-command-example-prefix} migrate:to-kiteworks:verify $KW_ADMIN_USER
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -83,6 +87,8 @@ After verification, migrating users can be started:
 ----
 {occ-command-example-prefix} migrate:to-kiteworks:users $KW_ADMIN_USER $KW_PROFILE_GUEST
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -112,6 +118,8 @@ After migrating users, migrating files can be started:
 {occ-command-example-prefix} migrate:to-kiteworks:files $KW_ADMIN_USER
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -137,6 +145,8 @@ After migrating files, shares can be migrated. Note that when initiating this st
 {occ-command-example-prefix} migrate:to-kiteworks:shares $KW_ADMIN_USER
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -161,6 +171,8 @@ After migrating shares, the final step can be processed. This is to disable migr
 ----
 {occ-command-example-prefix} migrate:to-kiteworks:disable-users $KW_ADMIN_USER
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 

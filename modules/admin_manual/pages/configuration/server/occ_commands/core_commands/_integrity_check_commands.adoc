@@ -23,12 +23,16 @@ After creating your signing key, sign your app like this example:
    --path=/Users/karlmay/Programming/contacts
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Verify your app:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} integrity:check-app --path=/pathto/app appname
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 When it returns nothing, your app is signed correctly.
 When it returns a message then there is an error.

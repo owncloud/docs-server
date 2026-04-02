@@ -18,6 +18,8 @@ To ignore all CLI triggered events, you can set the following option, defaults t
      --value "yes"
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Get Value of Ignore CLI Events
 
 This command reads the value of `admin_audit ignore_cli_events`:
@@ -26,6 +28,8 @@ This command reads the value of `admin_audit ignore_cli_events`:
 ----
 {occ-command-example-prefix} config:app:get "admin_audit ignore_cli_events"
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [source,plaintext]
 ----
@@ -40,3 +44,5 @@ This command completely removes the key and the value:
 ----
 {occ-command-example-prefix} config:app:delete "admin_audit ignore_cli_events"
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

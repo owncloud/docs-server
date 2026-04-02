@@ -65,66 +65,43 @@ toc::[]
 
 == Running occ
 
-=== Check if occ Is Set to Executable
+All `occ` commands must be run inside the running ownCloud Docker container. There are two ways to do this.
 
-Note that this step is not necessary when using a docker installation.
+=== Running a Single occ Command
 
-To check if the `occ` command is set to executable, change to your ownCloud directory first, then enter the command:
-
-[source,bash]
-----
-ls -lhF occ
-----
-
-This should give an output similar to this:
-
-[source,plaintext]
-----
--rwxr-x--x 1 root www-data 283 May 18 17:44 occ* 
-----
-
-In case it does not, set the occ command to executable with:
+To run a single `occ` command without entering the container, use `docker compose exec` from the directory containing your `docker-compose.yml`:
 
 [source,bash]
 ----
-sudo chmod +x occ
+docker compose exec owncloud occ <command>
 ----
 
-=== As Your HTTP User
+[[docker-exec]]
+=== Opening a Shell Inside the Container
 
-On a regular ownCloud installation, `occ` is in the `owncloud/` directory, this is on Ubuntu Linux for example `/var/www/owncloud` . `occ` itself is a PHP script.
-
-*You must run it as your HTTP user* to ensure that the correct permissions are maintained on your ownCloud files and directories. The default HTTP user is different on the various Linux distributions. 
-
-* The HTTP user and group in Debian/Ubuntu is `www-data`.
-* The HTTP user and group in Fedora/CentOS is `apache`.
-* The HTTP user and group in Arch Linux is `http`.
-* The HTTP user in openSUSE is `wwwrun`, and the HTTP group is `www`.
-
-[TIP]
-====
-Use the following command to find your HTTP user:
-[source,bash]
-----
-ps -ef | egrep '(apache|httpd)' | grep -v grep | grep -v root | head -n1 | awk '{print $1}'
-----
-====
-
-If your HTTP server is configured to use a different PHP version than the default (/usr/bin/php), `occ` should be run with the same version. +
-For example, in CentOS with SCL-PHP74 installed, the command looks like this:
+To run multiple commands interactively, open a bash shell inside the container:
 
 [source,bash]
 ----
-sudo -u apache /opt/rh/php74/root/usr/bin/php /var/www/html/owncloud/occ
+docker compose exec owncloud bash
 ----
+
+Once inside, run `occ` commands directly:
+
+[source,bash]
+----
+occ <command>
+----
+
+Type `exit` to leave the container shell.
 
 === occ Command Structure
 
 The `occ` command has _options_, _commands_, and _arguments_.
 
-. Options are optional. 
+. Options are optional.
 . Commands are required.
-. Arguments can be required _or_ optional. 
+. Arguments can be required _or_ optional.
 
 The generic syntax is:
 
@@ -132,25 +109,6 @@ The generic syntax is:
 ----
 occ [options] command [arguments]
 ----
-
-.Example command running occ in Ubuntu
-[source,bash]
-----
-sudo -u www-data /var/www/owncloud/occ
-----
-
-If your web server is configured to use a different PHP version than the default (/usr/bin/php), the `occ` command should be run with the same version.
-
-=== With a Docker Container
-
-If your ownCloud instance is set up in a docker container, you need a user in the group `docker` to perform `occ` commands. An example command looks like this:
-
-[source,docker]
-----
-docker exec --user www-data <owncloud-container-name> occ <your-command>
-----
-
-For more information on docker, refer to section xref:installation/docker/index.adoc[Installing with Docker].
 
 === Example Commands
 

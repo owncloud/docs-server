@@ -23,6 +23,8 @@ NOTE: These commands are not available in xref:maintenance-commands[single-user 
 {occ-command-example-prefix} dav:cleanup-chunks [options] [--] [<minimum-age-in-days>]
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="25%,70%",]
@@ -54,6 +56,8 @@ Cleaning chunks for admin
    0 [>---------------------------]
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Create Addressbook
 
 Create a dav address book.
@@ -62,6 +66,8 @@ Create a dav address book.
 ----
 {occ-command-example-prefix} dav:create-addressbook <user> <name>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -83,6 +89,8 @@ This example creates the address book `mollybook` for the user molly:
 {occ-command-example-prefix} dav:create-addressbook molly mollybook
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Molly will immediately see her address book.
 
 == Create Calendar
@@ -93,6 +101,8 @@ Create a dav calendar.
 ----
 {occ-command-example-prefix} dav:create-calendar <user> <name>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -114,6 +124,8 @@ This example creates a new calendar `mollycal` for user molly:
 {occ-command-example-prefix} dav:create-calendar molly mollycal
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Molly will immediately see her calendar.
 
 // NOTE: dav:migrate-addressbooks has been removed with: https://github.com/owncloud/core/pull/23976
@@ -127,6 +139,8 @@ Synchronizes the birthday calendar. It adds all birthdays to your calendar from 
 ----
 {occ-command-example-prefix} dav:sync-birthday-calendar [<user>]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -145,6 +159,8 @@ This example syncs to your calendar from user `bernie`:
 {occ-command-example-prefix} dav:sync-birthday-calendar bernie
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Sync System Addressbook
 
 Synchronizes all users to the system addressbook.
@@ -153,3 +169,5 @@ Synchronizes all users to the system addressbook.
 ----
 {occ-command-example-prefix} dav:sync-system-addressbook
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

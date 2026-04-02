@@ -36,6 +36,8 @@ So its app id is `twofactor_backup_codes`.
 {occ-command-example-prefix} market:install <ids> [option]
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="80%",cols="30%,70%",]
@@ -66,6 +68,8 @@ Only `zip`, `gzip`, and `bzip2` archives are supported.
 {occ-command-example-prefix} market:install -l /mnt/data/richdocuments-2.0.0.tar.gz
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 NOTE: The target directory has to be *accessible to the webserver user* and you have to *enable* the app afterwards with the `occ app:enable` command.
 
 == Uninstall an Application
@@ -76,6 +80,8 @@ To uninstall an application use the following commands:
 ----
 {occ-command-example-prefix} market:uninstall <ids>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -94,6 +100,8 @@ It returns the ids of the apps.
 {occ-command-example-prefix} market:list
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Upgrade an Application
 
 Install new app versions if available on the marketplace by using following commands:
@@ -102,6 +110,8 @@ Install new app versions if available on the marketplace by using following comm
 ----
 {occ-command-example-prefix} market:upgrade <ids> [options]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 

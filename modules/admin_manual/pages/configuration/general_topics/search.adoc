@@ -52,7 +52,9 @@ To install the app, use the Marketplace app on your ownCloud server or proceed m
 ----
 {occ-command-example-prefix} app:enable search_elastic
 ----
-+
+
+NOTE: Run this command inside the ownCloud Docker container.
+
 or enable it via the GUI menu:Settings[Admin > Apps > Full Text Search > Enable].
 
 == Configuration
@@ -183,6 +185,8 @@ You can at any time reset the index if required by clicking on btn:[Reset index]
 {occ-command-example-prefix} search:index:reset
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Using occ Commands
 
 You can use the:
@@ -193,6 +197,8 @@ You can use the:
 ----
 {occ-command-example-prefix} search:index:reset
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 * xref:configuration/server/occ_command.adoc#config-commands[occ Config Commands command set] to configure the app.
 +
@@ -230,6 +236,8 @@ Set app options::
     search_elastic scanExternalStorages --value 0
 ----
 +
+NOTE: Run this command inside the ownCloud Docker container.
++
 or
 +
 [source,bash,subs="attributes+"]
@@ -237,6 +245,8 @@ or
 {occ-command-example-prefix} config:app:set \
     search_elastic scanExternalStorages --value 1
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == App Modes
 
@@ -269,6 +279,8 @@ To do an initial full indexing without the app interfering, it can be put in _pa
     search_elastic mode --value passive
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 or
 
 [source,bash,subs="attributes+"]
@@ -276,6 +288,8 @@ or
 {occ-command-example-prefix} config:app:set \
     search_elastic mode --value active
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Restrict Search Results
 
@@ -288,6 +302,8 @@ If you only want to use the Full Text Search app as a more scalable search on fi
 {occ-command-example-prefix} config:app:set \
     search_elastic nocontent --value true
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [NOTE]
 ====
@@ -306,6 +322,8 @@ If you only want to use search for shared filenames, you can disable full text s
     --value nofulltext
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 You can also configure multiple groups by separating them with comma:
 
 [source,bash,subs="attributes+"]
@@ -314,6 +332,8 @@ You can also configure multiple groups by separating them with comma:
     search_elastic group.nocontent \
     --value nofulltext,anothergroup,"group with blanks"
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 This allows a scalable search in shared files without clouding the results with content based hits.
 
@@ -328,6 +348,8 @@ When everything has been set up and configured, you can initiate creating the in
 ----
 {occ-command-example-prefix} search:index:create
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Issues
 
