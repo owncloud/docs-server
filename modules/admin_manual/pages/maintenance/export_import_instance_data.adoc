@@ -46,6 +46,8 @@ This will create a folder `/tmp/export/user1` which contains all the files and m
 {occ-command-example-prefix} instance:export:user user1 /tmp/export
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Copy the Export to the Target Instance
 
 Copy the created export to the target instance, for example, using `scp`:
@@ -65,6 +67,8 @@ to federated shares pointing to the source instance:
 {occ-command-example-prefix} instance:import:user /tmp/export/user1
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 NOTE: A new user's last login timestamp on the target instance will be set to the current time. The import command sets up the user's file system and the system does not need to do any further "first login" processing when the user first logs in to the target instance.
 
 === Recreate all Shares to Point to the Target Instance
@@ -76,6 +80,8 @@ they point to the target instance. To do so, run this command on the source inst
 ----
 {occ-command-example-prefix} instance:export:migrate:share user1 https://newinstance.com
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Delete the User on the Source Instance
 
@@ -90,6 +96,8 @@ on the target instance. See xref:known-limitations[Known Limitations] for furthe
 ----
 {occ-command-example-prefix} user:delete user1
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == What is Exported
 

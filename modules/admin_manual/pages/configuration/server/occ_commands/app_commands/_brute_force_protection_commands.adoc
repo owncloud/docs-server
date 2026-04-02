@@ -13,6 +13,8 @@ The combination of `uid` and `IP address` is used to trigger the ban.
 {occ-command-example-prefix} config:list brute_force_protection
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Set the Setting
 
 To set a new value, use the command below and replace `<Key>` and value `<Value>` accordingly.
@@ -21,6 +23,8 @@ To set a new value, use the command below and replace `<Key>` and value `<Value>
 ----
 {occ-command-example-prefix} config:app:set brute_force_protection <Key> --value=<Value> --update-only
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Fail Tolerance [attempts]
 

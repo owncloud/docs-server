@@ -22,6 +22,8 @@ Disable two-factor authentication for a user:
 {occ-command-example-prefix} twofactorauth:disable [options] [--] <uid>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -38,6 +40,8 @@ Enable two-factor authentication for a user:
 ----
 {occ-command-example-prefix} twofactorauth:enable [options] [--] <uid>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 

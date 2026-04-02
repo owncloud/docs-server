@@ -123,10 +123,14 @@ To enable the encryption app, run the following command:
 {occ-command-example-prefix} app:enable encryption
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:enable
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 If the encryption app is successfully enabled, you should see the following confirmations:
 
@@ -165,12 +169,16 @@ To be safe and avoid any issues on a running instance, put your server in single
 {occ-command-example-prefix} maintenance:singleuser --on
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Enabling encryption via the command line involves several commands. If not already done, enable the default encryption module app with the following command:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable encryption
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Then enable encryption, using the following command:
 
@@ -179,12 +187,16 @@ Then enable encryption, using the following command:
 {occ-command-example-prefix} encryption:enable
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Finally, encrypt all data, using the following command:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:encrypt-all --yes
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 NOTE: This command is not typically required as the master key is often enabled at installation time. As a result when enabling it, there should be no data to encrypt. In case it’s being enabled after the installation and there are files which are unencrypted, xref:configuration/server/occ_command.adoc#encrypt-all[encrypt-all] can be used to encrypt them. Depending on the amount of existing data and the location, this operation can take a long time.
 
@@ -195,6 +207,8 @@ Now you can turn off the single user mode:
 {occ-command-example-prefix} maintenance:singleuser --off
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === View Current Encryption Status
 
 Get the current encryption status and the loaded encryption module:
@@ -203,6 +217,8 @@ Get the current encryption status and the loaded encryption module:
 ----
 {occ-command-example-prefix} encryption:status
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Replacing an Existing Master Key
 
@@ -217,6 +233,8 @@ You must first put your ownCloud server into single-user mode to prevent any use
 {occ-command-example-prefix} maintenance:singleuser --on
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 [source,plaintext]
 ----
 Single user mode is currently enabled
@@ -229,6 +247,8 @@ Decrypt all user data files, or optionally a single user:
 {occ-command-example-prefix} encryption:decrypt-all [username]
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Disable Encryption
 
 To disable encryption, put your ownCloud server into single-user mode, and then disable your encryption module with these commands:
@@ -238,10 +258,14 @@ To disable encryption, put your ownCloud server into single-user mode, and then 
 {occ-command-example-prefix} maintenance:singleuser --on
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:disable
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Take it out of single-user mode when you are finished, by using the following command:
 
@@ -249,6 +273,8 @@ Take it out of single-user mode when you are finished, by using the following co
 ----
 {occ-command-example-prefix} maintenance:singleuser --off
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [IMPORTANT]
 ====
@@ -263,6 +289,8 @@ Get the current encryption status and the loaded encryption module:
 ----
 {occ-command-example-prefix} encryption:status
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Enable Users' File Recovery Keys
 
@@ -315,6 +343,8 @@ You must first put your ownCloud server into single-user mode to prevent any use
 {occ-command-example-prefix} maintenance:singleuser --on
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 [source,plaintext]
 ----
 Single user mode is currently enabled
@@ -329,10 +359,14 @@ You may disable encryption only with `occ`. Make sure you have backups of all th
 {occ-command-example-prefix} maintenance:singleuser --on
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} encryption:disable
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 IMPORTANT: Encryption cannot be disabled without the user’s password or
 xref:enable-users-file-recovery-keys[file recovery key].
@@ -344,6 +378,8 @@ command:
 ----
 {occ-command-example-prefix} maintenance:singleuser --off
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 It is possible to disable encryption with the file recovery key _if_ every user has enabled it. In this case, "decrypt all" will decrypt all files of all users.
 
@@ -357,6 +393,8 @@ View current location of keys:
 ----
 {occ-command-example-prefix} encryption:show-key-storage-root
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [source,plaintext]
 ----
@@ -384,6 +422,8 @@ chmod -R 0770 /var/www/owncloud/data/new_keys
 ----
 {occ-command-example-prefix} encryption:change-key-storage-root new_keys
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [source,plaintext]
 ----

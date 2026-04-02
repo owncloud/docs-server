@@ -6,3 +6,5 @@ With encryption migrated from User Key-based encryption to Master Key-based, dis
 ----
 {occ-command-example-prefix} maintenance:singleuser --off
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

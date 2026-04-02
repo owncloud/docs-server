@@ -330,12 +330,16 @@ The simplest way, useful for initial testing is, to start the `wnd:listen` proce
 {occ-command-example-prefix} wnd:listen <host> <share> <username>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 The password is an optional parameter and you will be asked for it if you didn't provide it as in the example above. If necessary, the workgroup can be set together with the username as well. Use following syntax and set quotes, which is important to keep the backslash `'<workgroup>\<username>'`. The whole example command looks like:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> '<workgroup>\<username>'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 In order to start `wnd:listen` without any user interaction like as service, provide the password from a password file.
 
@@ -345,6 +349,8 @@ In order to start `wnd:listen` without any user interaction like as service, pro
      --password-file=/my/secret/password/file \
      --password-trim
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 For additional options to provide the password, check xref:password-options[Password Options].
 
@@ -362,6 +368,8 @@ As a simple example, you can check the following:
 ----
 {occ-command-example-prefix} wnd:process-queue <host> <share>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 You can run that command, even if there are no notifications to be processed.
 
@@ -478,6 +486,8 @@ If you need to serialize the execution of the `wnd:process-queue`, check the fol
 flock -n /opt/my-lock-file {occ-command-example-prefix} wnd:process-queue <host> <share>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 In that case, flock will try to get the lock of that file and won't run the command if it isn't possible. For our case, and considering that file isn't being used by any other process, it will run only one `wnd:process-queue` at a time. If someone tries to run the same command a second time while the previous one is running, the second will fail and won't be executed.
 
 The lock file `/opt/my-lock-file` itself will be created as an empty file by the `flock` command if it does not yet exist, but after it has been created the lock file doesn't change. Only an flock will be applied and removed. The file won't be removed after the script completes.
@@ -488,6 +498,8 @@ You can use flock also in cron, see the example below:
 ----
 * * * * *  flock -n /opt/my-lock-file -c 'sudo -u www-data /var/www/owncloud/occ wnd:process-queue <HOST> <SHARE>'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Check {flock-docs-url}[flock's documentation] for details and more options.
 
@@ -610,6 +622,8 @@ Take the example of attempting to connect to the host MyHost, the share named `M
 {occ-command-example-prefix} wnd:listen MyHost MyData user password
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 NOTE: The command is case-sensitive, and that it must match the information from the mount point configuration.
 
 === Kerberos Testing
@@ -719,12 +733,18 @@ There are several ways to supply a password:
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username>
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
+
 . Sent as a parameter to the command.
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username> <password>
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
+
 . Read from a file, using the `--password-file` switch to specify the file to read from. Note, that the password must be in plain text inside the file, and neither spaces nor newline characters will be removed from the file by default, unless the `--password-trim` option is added. The password file must be readable by the apache user (or www-data)
 +
 [source,bash,subs="attributes+"]
@@ -733,12 +753,16 @@ There are several ways to supply a password:
      --password-file=/my/secret/password/file
 ----
 +
+NOTE: Run this command inside the ownCloud Docker container.
++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file \
      --password-trim
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 NOTE: If you use the `--password-file` switch, the entire contents of the file will be used for the password, so please be careful with newlines.
 +
@@ -751,6 +775,8 @@ IMPORTANT: If using `--password-file` make sure that the file is only readable b
 {occ-command-example-prefix} wnd:listen <host> <share> <username>
      --password-from-service-account
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 IMPORTANT: You need to ensure that the triple of `<host>`, `<share>` and `<username>` (including any kind of workgroup if used) matches the configuration made for the WND collaborative share. The command will fail otherwise.
 
@@ -778,6 +804,8 @@ This provides a bit more security because the `/tmp/plainpass` password as shown
 cat /tmp/plainpass | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 ==== base64
 
 Similar to plainpass, the content in this case gets encoded in the {base64-url}[Base64 format]. There's not much security, but it has additional obfuscation.
@@ -787,6 +815,8 @@ Similar to plainpass, the content in this case gets encoded in the {base64-url}[
 base64 -d /tmp/encodedpass | \
    {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 ==== pass
 
@@ -799,6 +829,8 @@ Example using "pass"
 pass the-password-name | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 ==== HashiCorp Vault
 
 This example uses {vaultproject-url}[Vault] as the secrets store. See {hashicorp-url}[HCP Vault] on how to setup the secrets store. Then use something like the following:
@@ -807,6 +839,8 @@ This example uses {vaultproject-url}[Vault] as the secrets store. See {hashicorp
 ----
 vault kv get -field=password secret/samba | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Use Vault's ACLs to limit access to the token. Destroy the token after starting the service during boot with systemd.
 
@@ -817,6 +851,9 @@ If both the argument and the option are passed, e.g.,
 ----
 {occ-command-example-prefix} wnd:listen <host> <share> <username> <password> --password-file=/opt/pass`
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
+
 then the `--password-file` option will take precedence.
 
 === Optimizing wnd:process-queue
@@ -911,12 +948,16 @@ Setups with several servers might have some difficulties in some scenarios:
      --serializer-param file=/opt/oc/store2
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 To set it up, make sure the listener is running as a system service:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} wnd:listen host share username password
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Setup a Cron job or similar with something like the following two commands:
 
@@ -928,6 +969,8 @@ Setup a Cron job or similar with something like the following two commands:
 
 sudo rm -f /opt/oc/store1 # With a different schedule
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 The first run will create the `/opt/oc/store1` with the serialized storages, the rest of the executions will use that file. The second Cron job, the one removing the file, will force the `wnd:process-queue` to
 refresh the data.

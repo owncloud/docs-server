@@ -53,6 +53,8 @@ To enable maintenance mode, run the following command.
 {occ-command-example-prefix} maintenance:mode --on
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Sync your Data Directory
 
 [source,bash]
@@ -158,6 +160,8 @@ To fix the config.php settings:
 {occ-command-example-prefix} config:system:set --value /mnt/owncloud/data datadirectory
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Adjust config.php
 
 . Change the `datadirectory` key in your `config.php` to the new path.
@@ -174,6 +178,8 @@ To disable maintenance mode of your instance run the following command:
 {occ-command-example-prefix} maintenance:mode --off
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Start the Web Server
 
 [source,bash]
@@ -187,3 +193,5 @@ sudo service apache2 start
 ----
 {occ-command-example-prefix} files:scan --all
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

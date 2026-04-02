@@ -12,6 +12,8 @@ These commands are not available in xref:maintenance-commands[single-user (maint
 {occ-command-example-prefix} versions:cleanup [<user_id>]...
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Options
 
 [width="100%",cols="22%,70%",]
@@ -33,6 +35,8 @@ Delete versions for users on backend Database
   edward
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 You can delete versions for specific users in a space-delimited list:
 
 [source,bash,subs="attributes+"]
@@ -41,6 +45,8 @@ You can delete versions for specific users in a space-delimited list:
 Delete versions of   freda
 Delete versions of   molly
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == versions:expire
 
@@ -51,6 +57,8 @@ The default is to delete expired files for all users, or you may list users in a
 ----
 {occ-command-example-prefix} versions:expire [<user_id>]...
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Options
 

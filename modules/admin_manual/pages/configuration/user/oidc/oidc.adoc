@@ -92,6 +92,8 @@ If a malformed JSON string is found, an error is logged. The _key->value_ pairs 
     --value='{"provider-url":"https:\/\/idp.example.net","client-id":"fc9b5c78-ec73-47bf-befc-59d4fe780f6f","client-secret":"e3e5b04a-3c3c-4f4d-b16c-2a6e9fdd3cd1","loginButtonName":"Login via OpenId Connect"}'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 NOTE: Only set either the database or the config.php keys but not both for the OpenID Connect app.
 
 == Set Up Service Discovery

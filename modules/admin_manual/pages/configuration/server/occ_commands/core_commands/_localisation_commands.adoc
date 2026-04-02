@@ -45,6 +45,8 @@ After that, run the following command to create the translation.
 {occ-command-example-prefix} l10n:createjs comments de_AT
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 This will generate two translation files, `de_AT.js` and `de_AT.json`, in `/var/www/owncloud/apps/comments/l10n`.
 
 === Create Translations in Multiple Languages
@@ -55,3 +57,5 @@ To create translations in multiple languages simultaneously, supply multiple lan
 ----
 {occ-command-example-prefix} l10n:createjs comments de_AT de_DE hu_HU es fr
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

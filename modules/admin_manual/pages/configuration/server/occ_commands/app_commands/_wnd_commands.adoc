@@ -27,6 +27,8 @@ Listen to smb changes and store notifications for later processing in the databa
 {occ-command-example-prefix} wnd:listen [options] [--] <host> <share> <username> [<password>]
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="90%",cols="40%,80%",]
@@ -83,6 +85,8 @@ Process the notifications stored by the `wnd:listen` command
 {occ-command-example-prefix} wnd:process-queue [options] [--] <host> <share>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="90%",cols="40%,80%",]
@@ -111,6 +115,8 @@ Sets the service account for the target mount point. You'll be asked for the pas
 ----
 {occ-command-example-prefix} wnd:set-service-account [options] [--] <mount-id>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Please see the occ documentation of
 xref:configuration/server/occ_command.adoc#files_externallist[files_external:list]

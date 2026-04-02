@@ -17,6 +17,8 @@ The `activity:send-emails` command sends all pending activity emails immediately
 {occ-command-example-prefix} activity:send-emails
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Manage Rename and Move Action Notifications
 
 Starting with Activity app version 2.7.0, rename and move action notifications can be sent. This feature is disabled by default and must be enabled manually.
@@ -28,6 +30,8 @@ Starting with Activity app version 2.7.0, rename and move action notifications c
 {occ-command-example-prefix} config:app:set activity enable_move_and_rename_activities --value "yes"
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Disable Rename and Move Action Notifications
 
 [source,bash,subs="attributes+"]
@@ -35,9 +39,13 @@ Starting with Activity app version 2.7.0, rename and move action notifications c
 {occ-command-example-prefix} config:app:set activity enable_move_and_rename_activities --value "no"
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 or
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete activity enable_move_and_rename_activities
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

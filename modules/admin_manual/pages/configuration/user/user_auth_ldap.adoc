@@ -316,6 +316,8 @@ Disallowing login with LDAP Email Address requires enabling strict login checkin
 ----
 {occ-command-example-prefix} config:system:set --type boolean --value true strict_login_enforced
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 ====
 
 Other Attributes::
@@ -620,6 +622,8 @@ Since ownCloud 8.0.10 and up the home folder rule is enforced. This means that o
 {occ-command-example-prefix} config:app:set user_ldap enforce_home_folder_naming_rule --value=1
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Starting with ownCloud 10.0, the home folder naming rule is only applied when first provisioning the user. This prevents data loss due to re-provisioning the users home folder in case of unintentional changes in LDAP.
 --
 
@@ -730,6 +734,8 @@ To enable this functionality, the `reuse_accounts` config setting must be set to
 ....
 {occ-command-example-prefix} config:app:set user_ldap reuse_accounts --value=yes
 ....
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === ownCloud Avatar Integration
 

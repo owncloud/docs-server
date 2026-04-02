@@ -47,6 +47,8 @@ Archive files which have reached a certain age.
 {occ-command-example-prefix} lifecycle:archive [options]
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Options
 
 [width="90%",cols="40%,80%",]
@@ -64,6 +66,8 @@ Expire files from archive which have reached a certain age.
 ----
 {occ-command-example-prefix} lifecycle:expire [options]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Options
 
@@ -83,6 +87,8 @@ Restore files from archive to the original location. Note that the location for 
 {occ-command-example-prefix} lifecycle:restore <path>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="90%",cols="40%,80%",]
@@ -100,6 +106,8 @@ Restore all files in folder `project1` for user alice with path `/work/projects/
 {occ-command-example-prefix} lifecycle:restore /alice/archive/files/work/projects/project1
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Restore All Files From Archive
 
 Restore all archived files for all users in the system back to their original locations. This command has no additional arguments or options.
@@ -108,6 +116,8 @@ Restore all archived files for all users in the system back to their original lo
 ----
 {occ-command-example-prefix} lifecycle:restore-all
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Set Default Upload Time
 
@@ -120,6 +130,8 @@ This can happen with files that were uploaded before the files_lifecycle app was
 ----
 {occ-command-example-prefix} lifecycle:set-upload-time [options] [--] <date>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -153,6 +165,8 @@ The following example command sets the time passed since upload (or restore) for
 {occ-command-example-prefix} config:app:set files_lifecycle archive_period --value='90'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Set the Expire Period
 
 The number of days since archiving after which files will be permanently deleted.
@@ -163,6 +177,8 @@ The following example command sets the time passed to delete files to 180 days.
 ----
 {occ-command-example-prefix} config:app:set files_lifecycle expire_period --value='180'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Set Groups to be Excluded
 
@@ -175,6 +191,8 @@ The following example command specifies groups whose members will not be part of
 {occ-command-example-prefix} config:app:set files_lifecycle excluded_groups --value='group1,group2'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Restoration Policy for Users
 
 Set a policy who can restore files. Use the value `soft` for self-service and `hard` for admin/groupadmin-service.
@@ -185,6 +203,8 @@ The following example command sets the restoration policy for users to `soft` (d
 ----
 {occ-command-example-prefix} config:app:set files_lifecycle policy --value='soft'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Disable User Interface
 
@@ -197,9 +217,13 @@ The following example command disables the user interface for the File Lifecycle
 {occ-command-example-prefix} config:app:set files_lifecycle disable_ui --value='yes'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 You can reenable it by deleting the key:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete files_lifecycle disable_ui
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

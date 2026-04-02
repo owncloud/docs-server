@@ -10,4 +10,6 @@ Use this command to synchronize federated servers:
 {occ-command-example-prefix} federation:sync-addressbooks
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 NOTE: This command is only available when the "Federation" app (`federation`) is enabled.

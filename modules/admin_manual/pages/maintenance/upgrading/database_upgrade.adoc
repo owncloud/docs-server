@@ -41,6 +41,8 @@ xref:maintenance/backup_and_restore/backup.adoc[Backing up ownCloud] guide.
 ----
 {occ-command-example-prefix} maintenance:mode --on
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Prevent browser access +
 +
@@ -59,6 +61,8 @@ sudo service apache2 stop
 ----
 {occ-command-example-prefix} db:restore-default-row-format
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Upgrade MariaDB to version 10.6+
 +
@@ -80,6 +84,8 @@ when using a dockerized environment as part of the upgrade procedure.
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Enable browser access +
 Start your web server, Alternatively, enable the virtual host serving ownCloud again:

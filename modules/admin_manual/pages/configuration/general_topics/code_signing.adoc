@@ -216,6 +216,8 @@ a command to manually scan all apps:
 {occ-command-example-prefix} integrity:check-app <appid>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 TIP: See xref:configuration/server/occ_command.adoc[the occ command] to learn more about using `occ`.
 
 == Errors

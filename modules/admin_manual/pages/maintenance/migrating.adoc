@@ -152,6 +152,8 @@ cd /var/www/owncloud/
 {occ-command-example-prefix} maintenance:mode --on
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 After that’s done, then wait a few minutes and stop your web server, in this case Apache:
 
 [source,bash]
@@ -227,6 +229,8 @@ first verify that ownCloud is in maintenance mode.
 {occ-command-example-prefix} maintenance:mode
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Next, start up the database and web server on the new machine.
 
 [source,bash]
@@ -244,6 +248,8 @@ maintenance mode.
 ----
 {occ-command-example-prefix} maintenance:mode --off
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 And finally, log in as admin and confirm normal function of ownCloud. If
 you have a domain name, and you want an SSL certificate, we recommend

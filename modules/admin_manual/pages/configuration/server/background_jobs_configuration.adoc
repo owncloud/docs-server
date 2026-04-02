@@ -21,6 +21,8 @@ As an example:
 {occ-command-example-prefix} background:cron
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Is the same as using the *Cron* section on your ownCloud Admin page.
 
 === Docker Note
@@ -94,6 +96,8 @@ There is no way to do so via the ownCloud UI. But, the most direct way to do so,
 {occ-command-example-prefix} system:cron
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Each of these processes would acquire their own list of jobs to process without overlapping any other.
 
 === Available Background Jobs
@@ -129,6 +133,8 @@ The ExpireTrash job, contained in `OCA\Files_Trashbin\BackgroundJob\ExpireTrash`
 {occ-command-example-prefix} trashbin:expire
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 ==== ExpireVersions
 
 The ExpireVersions job, contained in `OCA\Files_Versions\BackgroundJob\ExpireVersions`, will expire versions of files which are older than the specified maximum version retention time. It can be run, as follows, using the xref:configuration/server/occ_command.adoc#versions[OCC versions] command:
@@ -137,6 +143,8 @@ The ExpireVersions job, contained in `OCA\Files_Versions\BackgroundJob\ExpireVer
 ----
 {occ-command-example-prefix} versions:expire
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 CAUTION: Please take care when adding `ExpireTrash` and `ExpireVersions` as xref:cron[Cron] jobs. Make sure that they're not started in parallel on multiple machines. Running in parallel on a single machine is fine. But, currently, there isn't sufficient locking in place to prevent them from conflicting with each other if running in parallel across multiple machines.
 
@@ -149,6 +157,8 @@ The `CardDAV SyncJob`, contained in `OCA\DAV\CardDAV\SyncJob`, syncs the local s
 {occ-command-example-prefix} dav:sync-system-addressbook
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 ==== SyncJob (Federation)
 
 OCAFederationSyncJob
@@ -160,6 +170,8 @@ xref:configuration/server/occ_command.adoc#federation-sync[OCC federation sync] 
 ----
 {occ-command-example-prefix} federation:sync-addressbooks
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Troubleshooting
 

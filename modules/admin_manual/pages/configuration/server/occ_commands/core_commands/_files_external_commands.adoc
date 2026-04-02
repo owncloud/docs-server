@@ -69,6 +69,8 @@ files_external:list [--show-password] [--full] [-a|--all] [-s|--short] [--] [<us
 +----------+------------------+----------+
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 NOTE: The `--importable-format` option helps to make the technical mount settings visible.
 To see all settings you still need to use the other options such as `--show-password`,
 `--full` and `--all`. When you want to export the mount settings for later import,

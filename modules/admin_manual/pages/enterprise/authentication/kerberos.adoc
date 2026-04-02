@@ -215,6 +215,8 @@ This option can also be used if you have only one web site but want to keep the 
 {occ-command-example-prefix} app:enable kerberos
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Domain Controller Side
 
 ==== Service Principal Name (SPN)

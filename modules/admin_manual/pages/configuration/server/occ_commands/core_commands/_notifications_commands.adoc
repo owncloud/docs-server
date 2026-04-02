@@ -15,6 +15,8 @@ notifications
 {occ-command-example-prefix} notifications:generate [-u|--user USER] [-g|--group GROUP] [-l|--link <linktext>] [--] <subject> [<message>]
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments:
 
 [width="100%",cols="20%,70%",]
@@ -44,4 +46,6 @@ Example:
 ----
 {occ-command-example-prefix} notifications:generate -g Office "Emergency Alert" "Rebooting in 5min"
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 

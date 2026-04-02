@@ -26,10 +26,14 @@ Command line::
 {occ-command-example-prefix} market:install windows_network_drive
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable windows_network_drive
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Configuration
 
@@ -180,6 +184,8 @@ Running the following command would work:
 ----
 {occ-command-example-prefix} wnd:listen MyHost MyData svc_owncloud password
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 The command is case-sensitive, and it must match the information from the mount point configuration.
 
