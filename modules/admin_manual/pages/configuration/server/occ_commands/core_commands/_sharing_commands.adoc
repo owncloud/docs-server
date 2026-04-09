@@ -20,6 +20,8 @@ So, to cleanup all orphaned remote storages, run it as follows:
 {occ-command-example-prefix} sharing:cleanup-remote-storages
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 You can also set it up to run as xref:background-jobs-selector[a background job].
 
 NOTE: These commands are not available in xref:maintenance-commands[single-user (maintenance) mode].
@@ -33,9 +35,13 @@ Currently, if a federated share is invalid or the API endpoint returns a "not fo
 {occ-command-example-prefix} config:app:set files_sharing enable_cleanup_invalid_external_shares --value no
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 To revert that setting to its default behavior, run:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete files_sharing enable_cleanup_invalid_external_shares
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

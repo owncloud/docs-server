@@ -10,6 +10,8 @@ From the command-line in the root directory of your ownCloud installation, run i
 {occ-command-example-prefix} configreport:generate
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 This will generate the report and send it to `STDOUT`. 
 You can optionally pipe the output to a file and then attach it to an email to ownCloud support, by running the following command:
 
@@ -17,6 +19,8 @@ You can optionally pipe the output to a file and then attach it to an email to o
 ----
 {occ-command-example-prefix} configreport:generate > generated-config-report.txt
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Alternatively, you could generate the report and email it all in one command, by running:
 
@@ -27,5 +31,7 @@ Alternatively, you could generate the report and email it all in one command, by
     -r <the email address to send from> \
     <the email address to send to>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 NOTE: These commands are not available in xref:maintenance-commands[single-user (maintenance) mode].

@@ -36,6 +36,8 @@ This information is obtained by running xref:configuration/server/occ_command.ad
 {occ-command-example-prefix} security:routes
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 It should print a list of all the routes as in the following truncated example.
 
 [source,plaintext]
@@ -71,8 +73,7 @@ With this information, you can begin customizing a rate-limiting solution specif
 
 === Enable hardening modules such as SELinux
 
-We also recommend to enable hardening modules such as SELinux
-where possible. See xref:installation/selinux_configuration.adoc[SELinux Configuration] to learn more about SELinux.
+We also recommend to enable hardening modules such as SELinux where possible.
 
 == Database
 

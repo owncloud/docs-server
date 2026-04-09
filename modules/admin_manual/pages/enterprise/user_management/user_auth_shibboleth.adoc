@@ -54,6 +54,8 @@ You can also change the app mode and environment mappings by using the `occ` com
 {occ-command-example-prefix} shibboleth:mapping --uid login
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 In *Single sign-on only* mode the app checks if the environment variable for the Shibboleth session, by default *Shib-Session-Id*, is set. 
 If that is the case it will take the value of the environment variable as the `uid`, by default `eppn`, and check if a user is known by that `uid`. 
 In effect, this allows another user backend, e.g., the LDAP app, to provide the `displayname`, `email` and `avatar`.
@@ -88,12 +90,16 @@ From 3.1.2 you can now specify a mapper that is used on inbound ownCloud user ID
      uid_mapper --value="OCA\User_Shibboleth\Mapper\ADFSMapper"
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 You may view the currently configured mapper using:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} shibboleth:mapping
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 The following mappers are provided with the app:
 

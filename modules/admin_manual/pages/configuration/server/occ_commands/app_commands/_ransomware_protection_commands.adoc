@@ -31,6 +31,8 @@ Scan the ownCloud database for changes in order to discover anomalies in a userâ
 {occ-command-example-prefix} ransomguard:scan <timestamp> <user>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -48,6 +50,8 @@ Revert all operations in a user account after a given point in time. Note that `
 ----
 {occ-command-example-prefix} ransomguard:restore <timestamp> <user>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -67,6 +71,8 @@ When necessary, set a user account as `read-only` for ownCloud and other WebDAV 
 {occ-command-example-prefix} ransomguard:lock <user>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -83,6 +89,8 @@ When ransomware issues have been resolved, the user account can be unlocked.
 ----
 {occ-command-example-prefix} ransomguard:unlock <user>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -105,6 +113,8 @@ This command will set the location of the blacklist file the app will use. The l
 {occ-command-example-prefix} ransomguard:blacklist:set-file <filePath>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 ==== Arguments
 
 [width="100%",cols="20%,70%",]
@@ -122,6 +132,8 @@ This command will update the contents of the blacklist file using another file a
 {occ-command-example-prefix} ransomguard:blacklist:update:from-file <filePath>
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 ==== Arguments
 
 [width="100%",cols="20%,70%",]
@@ -138,6 +150,8 @@ This command will update the contents by getting the blacklist from a website. T
 ----
 {occ-command-example-prefix} ransomguard:blacklist:update:from-site <siteUrl>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 ==== Arguments
 

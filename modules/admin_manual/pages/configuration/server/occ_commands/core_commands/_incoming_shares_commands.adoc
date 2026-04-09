@@ -13,6 +13,8 @@ NOTE: The command polls all received federated shares, so does not require a pat
 {occ-command-example-prefix} incoming-shares:poll
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 [IMPORTANT] 
 ====
 When using federation, it is recommended to execute `occ incoming-shares:poll` regularly xref:configuration/server/background_jobs_configuration.adoc#cron-jobs[using Cron jobs]. 

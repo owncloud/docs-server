@@ -56,6 +56,8 @@ Example to set missing upload time values to November, 1st 2019:
 {occ-command-example-prefix} lifecycle:set-upload-time 2019-11-01
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 TIP: The extension only considers files. Folder structures are kept available.
 
 === Policy Configuration
@@ -77,11 +79,15 @@ Example to set the time passed since upload (or restore) for archiving files to 
 {occ-command-example-prefix} config:app:set files_lifecycle archive_period --value='90'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 To query existing values, use this example command:
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:get files_lifecycle archive_period
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 ==== Restoration Policies for Users
 
@@ -94,6 +100,8 @@ The _soft policy_ is used by default. To switch from the hard policy to the soft
 ----
 {occ-command-example-prefix} config:app:set files_lifecycle policy --value='soft'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 ===== Hard Policy
 
@@ -108,6 +116,8 @@ To put the _hard policy_ in place, use this _occ_ command:
 {occ-command-example-prefix} config:app:set files_lifecycle policy --value='hard'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 === Archive and Expiration Background Jobs
 
 To put File Lifecycle Management into actual operation, there are two _occ_ commands for archiving files and for permanently deleting them from the archive. Scanning the database for files that are due for archiving or expiration, given the chosen policies, can take some time. For this reason, these jobs are delegated to specific _occ_ commands which should be executed using CRON on a daily schedule.
@@ -120,6 +130,8 @@ To move files scheduled for archiving (days since upload/restore > `archive_time
 {occ-command-example-prefix} lifecycle:archive
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 TIP: There is a dry-run mode (append `-d`) that simulates the execution of this command to allow checking the configuration before putting the actual process in place.
 
 ==== Archive Expiration Background Job
@@ -129,6 +141,8 @@ To permanently delete files from the archive that have met the policy rules (day
 ----
 {occ-command-example-prefix} lifecycle:expire
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 TIP: There is a dry-run mode (append `-d`) that simulates the execution of this command to allow checking the configuration before putting the actual process in place.
 
@@ -148,6 +162,8 @@ When a user `alice` requests to restore all files, e.g., in the folder `/work/pr
 {occ-command-example-prefix} lifecycle:restore /alice/archive/files/work/projects/project1
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 ==== Restoring All Files from All Archives
 File Lifecycle Management provides a way to restore all files from all archives back to their owners' file directories. To do this, system administrators can use the `restore-all` _occ_ command:
 
@@ -155,6 +171,8 @@ File Lifecycle Management provides a way to restore all files from all archives 
 ----
 {occ-command-example-prefix} lifecycle:restore-all
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 The command will restore all files from all users and report on the progress.
 
@@ -169,12 +187,16 @@ In some scenarios it can be desired to disable the whole user interface for this
 {occ-command-example-prefix} config:app:set files_lifecycle disable_ui --value='yes'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 To enable the user interface components again, this config value needs to be removed:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:delete files_lifecycle disable_ui
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Audit Events
 

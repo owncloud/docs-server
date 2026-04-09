@@ -38,6 +38,8 @@ This example deletes queued background job #12.
 Job has been deleted.
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Executing a Background Job
 
 The command `background:queue:execute` executes a queued background job.
@@ -79,6 +81,8 @@ Found job: OCA\UpdateNotification\Notification\BackgroundJob with ID 12
 Running job...
 Finished in 0 seconds
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == List Queued Backgroundjobs
 
@@ -126,6 +130,8 @@ This example lists the queue status:
 +--------+----------------------------------------------------+---------------+----------+---------------------------+-------------+------------------------+
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 There may be background jobs that are no longer valid. This can be because they are for an app that is now disabled or deleted, or jobs from an older version of an app that are no longer relevant. These jobs can be displayed with the `--display-invalid-jobs` option. Invalid jobs are listed with status "invalid". You can then delete invalid jobs with the `background:queue:delete` command using the job id.
 
 [source,bash,subs="attributes+"]
@@ -153,3 +159,5 @@ There may be background jobs that are no longer valid. This can be because they 
 | 228    | OCA\Files\BackgroundJob\PreviewCleanupJob          |                                                                                                                                                                                      | 2023-07-21T08:25:49+00:00 | 2023-07-21T08:26:28+00:00 | N/A         | 0                      |         |
 +--------+----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+---------------------------+-------------+------------------------+---------+
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

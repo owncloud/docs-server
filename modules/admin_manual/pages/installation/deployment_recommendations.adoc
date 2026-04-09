@@ -44,11 +44,9 @@ This is because every ownCloud customer has their own particular needs and IT in
 The recommendations presented here are based on a standard ownCloud installation, one without any particular _apps_, _themes_, or _code changes_. But, server load is dependent upon the number of _clients_, _files_, and _user activity_, as well as other usage patterns. Therefore, these recommendations are only rules of thumb based on our experience and customer feedback.
 ====
 
-* Operating system: Linux.
-* Web server: Apache 2.4.
+* Docker Engine and Docker Compose on the host. See xref:installation/system_requirements.adoc[System Requirements].
 * Database: MySQL/MariaDB with InnoDB storage engine (MyISAM is not supported, see:
 xref:configuration/database/linux_database_configuration.adoc#mysql-mariadb[MySQL / MariaDB storage engine])
-* And a recent PHP Version. See xref:installation/system_requirements.adoc[System Requirements]
 * Consider setting up a scale-out deployment, or using xref:classic_ui:files/federated_cloud_sharing.adoc[Federated Cloud Sharing] to keep individual ownCloud instances to a manageable size.
 
 NOTE: Whatever the size of your organization, always keep one thing in mind: +
@@ -102,13 +100,13 @@ image:installation/deprecs-1.png[Network diagram for small enterprises.]
 
 One server with at least 2 CPU cores, 16GB RAM, and local storage as needed.
 
-==== Operating system
+==== Docker Host Operating System
 
-Enterprise-grade Linux distribution with full support from an operating system vendor. We recommend Ubuntu 20.04, RedHat Enterprise Linux and SUSE Linux Enterprise Server 12+.
+Any 64-bit Linux distribution capable of running Docker Engine 20.10 or later is supported.
 
 ==== SSL Configuration
 
-The SSL termination is done in Apache. A standard SSL certificate is required to be installed. See the {apache-ssl-howto-url}[official Apache documentation] or our xref:installation/letsencrypt/index.adoc[Let's Encrypt SSL Certificates] documentation.
+SSL termination is handled by a reverse proxy in front of the Docker deployment. A standard SSL certificate is required.
 
 ==== Load Balancer
 
@@ -194,13 +192,13 @@ image:installation/deprecs-2.png[Network diagram for a mid-sized enterprise.]
 * 1 {haproxy-and-load-balancing-url}[HAproxy load balancer] with two sockets and 16GB RAM.
 * NFS storage server as needed.
 
-==== Operating System
+==== Docker Host Operating System
 
-Enterprise grade Linux distribution with full support from an operating system vendor. We recommend both RedHat Enterprise Linux and SUSE Linux Enterprise Server 12+.
+Any 64-bit Linux distribution capable of running Docker Engine 20.10 or later is supported on each application server node.
 
 ==== SSL Configuration
 
-The SSL termination is done in the {haproxy-load-balancer-url}[HAProxy load balancer]. A standard SSL certificate is needed, installed according to the {haproxy-documentation-url}[HAProxy documentation].
+SSL termination is done in the {haproxy-load-balancer-url}[HAProxy load balancer]. A standard SSL certificate is needed, installed according to the {haproxy-documentation-url}[HAProxy documentation].
 
 ==== Load Balancer
 
@@ -282,9 +280,9 @@ image:installation/deprecs-3.png[image]
  2 Hardware load balancer, for example, {bigip-f5-url}[BIG IP from F5].
 * NFS storage server as needed.
 
-==== Operating system
+==== Docker Host Operating System
 
-RHEL 7+ with latest service packs.
+Any 64-bit Linux distribution capable of running Docker Engine 20.10 or later is supported on each application server node.
 
 ==== SSL Configuration
 
@@ -371,18 +369,3 @@ NOTE: This setting is disabled by default. See the {galera-cluster-wsrep-docs-ur
 * {db-high-availability-url}[Database High Availability]
 * {bitnami-perf-enhancements-url}[Performance enhancements for Apache and PHP]
 
-== Local Session Management
-
-Local session management on the application server. PHP sessions are stored in a temporary filesystem, mounted at the operating system-specific session storage location. You can find out where that is by running
-
-[source,bash]
-----
-grep -R 'session.save_path' /etc/php*
-----
-
-and then add it to the `/etc/fstab` file, for example:
-
-[source,bash,subs="attributes+"]
-----
-include::example$installation/deployment_recommendations/set_session_path.sh[]
-----

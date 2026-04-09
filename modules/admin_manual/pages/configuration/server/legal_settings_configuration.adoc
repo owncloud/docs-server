@@ -51,12 +51,16 @@ Get the current values, if any, for the Imprint and Privacy Policy URLs:
 {occ-command-example-prefix} config:app:get core legal.privacy_policy_url
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 Set the Imprint and Privacy Policy URLs:
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} config:app:set core legal.imprint_url --value=new_value
 {occ-command-example-prefix} config:app:set core legal.privacy_policy_url --value=new_value
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 For more information about these commands, refer to xref:configuration/server/occ_command.adoc#config-commands[the config command reference in the occ commands documentation].
 

@@ -39,6 +39,8 @@ Available commands:
   maintenance:install  Install ownCloud
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 
 == Command Description
 
@@ -50,6 +52,8 @@ Display your `maintenance:install` options.
 ownCloud is not installed - only a limited number of commands are available
 Usage:
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [source,plaintext]
 ----
@@ -122,3 +126,5 @@ cd /var/www/owncloud/
 ownCloud is not installed - only a limited number of commands are available
 ownCloud was successfully installed
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

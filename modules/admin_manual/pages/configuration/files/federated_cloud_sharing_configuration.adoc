@@ -36,6 +36,8 @@ image::configuration/files/browser-address-bars.png[Lock icon in Firefox, Google
 ----
 {occ-command-example-prefix} system:cron
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Run the `OCA\Federation\SyncJob` job with the `force` option on both servers. +
 You can get the corresponding job ID by using the `background:queue:status` occ command:
@@ -44,6 +46,8 @@ You can get the corresponding job ID by using the `background:queue:status` occ 
 ----
 {occ-command-example-prefix} background:queue:execute --force <jobId>
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . The check should now be green
 
@@ -54,6 +58,8 @@ You can get the corresponding job ID by using the `background:queue:status` occ 
 {occ-command-example-prefix} dav:sync-system-addressbook
 {occ-command-example-prefix} federation:sync-addressbook
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Configure automatic acceptance of new federated shares
 +
@@ -65,6 +71,8 @@ NOTE: Automatic acceptance of new federated shares will not work if the option `
 {occ-command-example-prefix} config:app:set federation auto_accept_trusted --value '0'
 {occ-command-example-prefix} config:app:set federatedfilesharing auto_accept_trusted --value 'yes'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 --
 
 == Working With Proxies
@@ -117,6 +125,8 @@ Alternatively you can use the command line:
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_enabled --value 'yes'
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 You can also configure these settings of the cronjob:
 
 . the minimum amount of time since last login of a user so that a scan is triggered (ensures only active users get fed shares synced)
@@ -125,6 +135,8 @@ You can also configure these settings of the cronjob:
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_min_login --value <integer-seconds>
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . the minimum amount of time since last scanned so that the next scan is triggered (avoid frequent scan when active collaboration)
 +
@@ -132,6 +144,8 @@ You can also configure these settings of the cronjob:
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_min_scan --value <integer-seconds>
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . the maximum number of federated share scans per 10 minutes (scan performed only if fed share files got updated)
 +
@@ -139,6 +153,8 @@ You can also configure these settings of the cronjob:
 ----
 {occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_batch --value <integer-number>
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Use the following command to force a run of the scanner cronjob:
 +
@@ -146,6 +162,8 @@ You can also configure these settings of the cronjob:
 ----
 {occ-command-example-prefix} background:queue:execute --force --accept-warning <id-of-fed-scanner-job>
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Known Issues
 
@@ -172,6 +190,8 @@ It is possible to configure the VCARD properties that are searched in order to r
 ----
 {occ-command-example-prefix} config:app:set dav remote_search_properties --value=CLOUD,FN,EMAIL
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Possible values are:
 

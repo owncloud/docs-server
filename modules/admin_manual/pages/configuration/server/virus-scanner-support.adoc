@@ -69,12 +69,16 @@ image::configuration/server/virus-scanner-support/antivirus-app.png[Anti-Virus A
 {occ-command-example-prefix} market:install files_antivirus
 ----
 +
+NOTE: Run this command inside the ownCloud Docker container.
++
 and enable it with the following occ command:
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix} app:enable files_antivirus
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Ways of Configuration
 
@@ -92,6 +96,8 @@ All of the configuration settings for the Anti-Virus app are configurable by pas
     av_socket --value="/var/run/clamav/clamd.ctl"
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 To get a current option, run for example:
 
 [source,bash,subs="attributes+"]
@@ -99,6 +105,8 @@ To get a current option, run for example:
 {occ-command-example-prefix} config:app:get files_antivirus \
     av_socket
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [caption=]
 .Available configuration settings, availability is _av_mode_ dependent
@@ -301,6 +309,8 @@ In both daemon modes, background scans are enabled by default. If you want to di
 ----
 {occ-command-example-prefix} config:app:set files_antivirus av_scan_background --value 'false'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 ====
 
 [[daemon-socket-same-server]]
@@ -418,6 +428,8 @@ Use the following occ commands to set configurations based on your environment:
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_host --value="172.17.0.3"
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Specify the port of the anti-virus server:
 +
@@ -426,6 +438,8 @@ Use the following occ commands to set configurations based on your environment:
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_port --value="1344"
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Enable background scans:
 +
@@ -434,6 +448,8 @@ Use the following occ commands to set configurations based on your environment:
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_scan_background --value="true"
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Specify what to do with the offending file:
 +
@@ -442,6 +458,8 @@ Use the following occ commands to set configurations based on your environment:
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_infected_action --value="delete"
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 Possible values are `delete` and `only_log`.
 +
@@ -458,6 +476,8 @@ The following settings are just examples and must be adjusted for the scanner yo
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_mode --value="icap"
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Set the request service:
 +
@@ -466,6 +486,8 @@ The following settings are just examples and must be adjusted for the scanner yo
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_request_service --value="avscan"
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . Set the response header:
 +
@@ -474,6 +496,8 @@ The following settings are just examples and must be adjusted for the scanner yo
 {occ-command-example-prefix} config:app:set files_antivirus \
     av_response_header --value="X-Infection-Found"
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 === ClamAV & Kaspersky (ICAP)
 

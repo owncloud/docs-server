@@ -101,7 +101,7 @@ TIP: Please refer to xref:configuration/server/import_ssl_cert.adoc[Importing Sy
 The following backends are provided by the external storages app. Other
 apps may provide their own backends, which are not listed here.
 
-NOTE: A non-blocking or correctly configured SELinux setup is needed for these backends to work. Please refer to xref:installation/selinux_configuration.adoc[the SELinux configuration].
+NOTE: A non-blocking or correctly configured SELinux setup is needed for these backends to work.
 
 == Allow Users to Mount External Storage
 
@@ -136,6 +136,8 @@ You might need to setup a cron job that runs
 ----
 {occ-command-example-prefix} files:scan --all`
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 * Alternatively, replace `--all` with the user name to trigger a rescan of the user’s files periodically,
 for example every 15 minutes, which includes the mounted external storage.

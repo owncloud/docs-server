@@ -188,6 +188,8 @@ For details of the occ user commands used below, see the xref:configuration/serv
   - lisa: /var/www/owncloud/data/lisa
 ----
 +
+NOTE: Run this command inside the ownCloud Docker container.
++
 Here you can see, that the home of user `lisa` is located in `/var/www/owncloud/data/lisa`
 
 . Prepare new mounts *in advance* for one or more users:
@@ -206,6 +208,8 @@ Use the OS methods to create one or more new mount points for users home directo
 ----
 {occ-command-example-prefix} user:move-home lisa /mnt/newhome_1
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 The user gets disconnected and the user's home is now moved which may take a while depending on the load of the server and the bandwidth available on the mount points. When the move operation has finished, 
 +
@@ -227,6 +231,8 @@ NOTE: If you are using LDAP and the xref:enterprise/external_storage/ldap_home_c
   - lisa: /mnt/newhome_1/lisa
 ----
 +
+NOTE: Run this command inside the ownCloud Docker container.
++
 Here you can see that the home of user `lisa` is now located in `/mnt/newhome_1/lisa`.
 
 . To list the available user home root directories, use the following command:
@@ -239,6 +245,8 @@ The following command lists all available user homes. Note a home only gets list
   - /var/www/owncloud/data
   - /mnt/newhome_1/lisa
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . To list all users from a users home root directory, use the following command:
 +
@@ -250,3 +258,5 @@ The following command lists all users from a given home.
   - admin
   - user01
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

@@ -65,7 +65,7 @@ The following pages describe how to enable HTTPS on the Apache webserver.
 == The test with getenv("PATH") only returns an empty response
 
 Some environments are not passing a valid PATH variable to ownCloud. 
-The xref:installation/configuration_notes_and_tips.adoc#php-fpm[PHP FPM tips] provides the information about how to configure your environment.
+For Docker-based installations, ensure that the PATH variable is correctly set in the container environment via your Docker Compose configuration.
 
 == The "Strict-Transport-Security" HTTP header is not configured
 
