@@ -1,0 +1,302 @@
+= Migrating to ownCloud Infinite Scale
+:toc: right
+:toclevels: 3
+:description: This guide describes how to migrate an ownCloud 10 instance to ownCloud Infinite Scale (oCIS) using the migrate-to-ocis app and its occ commands.
+
+== Introduction
+
+{description}
+
+The migration transfers users, groups, files, and shares from an ownCloud 10 (OC10) instance to a target oCIS instance in a series of sequential steps. The OC10 server is not modified by the migration — it remains operational throughout most of the process.
+
+== Overview
+
+The migration works with an app to be installed on the ownCloud 10 side. The app is provided by ownCloud as part of the guided migration. Please contact {oc-support-url}[ownCloud support] to get it.
+
+Both instances need to be fully configured and running, and they must be reachable from each other.
+
+The migration process consists of these steps:
+
+. Initialize the migration.
+. Verify the ownCloud instance is ready.
+. Migrate users.
+. Assign a role to migrated users.
+. Migrate groups.
+. Migrate files.
+. Migrate shares.
+
+The migration moves forward through these steps in order. Once a step has completed successfully, it cannot be repeated. If you need to start over, you can reset the migration with the `--force` flag on the `init` command. Note that data already migrated to the target oCIS instance will remain there, so the oCIS instance should be fresh and clean before resetting.
+
+=== What Is Migrated
+
+The following items are migrated:
+
+* Enabled users
+* User groups and their memberships
+* Files in each user's home directory (using rclone, bundled with the app)
+* User shares, group shares, and link shares
+
+=== What Is Not Migrated
+
+The following items are NOT migrated:
+
+* Disabled users (the migration will skip them and continue)
+* Files owned by disabled users
+* Shares created by or targeting disabled users (an error is shown but the migration continues)
+* Passwords — migrated users will have an unknown password and will need a password reset or onboarding process
+
+== Notes
+
+* *User passwords*: Migrated users are created with an unknown password and cannot log in normally after migration. The admin must set up a temporary password or onboarding process for each user.
+
+* *Share link passwords*: Passwords for migrated share links will be unknown and will not match the original OC10 passwords. Users should change the passwords of all their share links after the migration.
+
+* *Passwordless share links*: By default, oCIS requires a password for share links. Passwordless links from OC10 will fail to migrate unless the oCIS policy is changed. Set `OCIS_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD=false` on the oCIS instance before migration if you need to migrate passwordless links.
+
+== Prerequisites
+
+=== ownCloud 10
+
+[IMPORTANT]
+====
+* *Shell/SSH access to the ownCloud server* is required. All migration steps use `occ` commands.
+
+* The *ownCloud-provided _migrate-to-ocis_ app must be installed* on the OC10 instance:
+** This app comes bundled with its own copy of rclone.
+** See the xref:installation/apps_management_installation.adoc[Installing and Managing Apps] documentation for details.
+
+* All *enabled* users must have a valid email address, and email addresses must be unique across all enabled users. +
+The `occ migrate:to-ocis:verify` step will report any users with missing or duplicate emails. These must be resolved before migration can proceed.
+
+* *Disabled users will not be migrated.* They will be skipped during the migration steps.
+====
+
+==== Installing Required Components
+
+In all examples using the `occ` command we assume that ownCloud is installed at `/var/www/owncloud`. Adapt the path according to your environment.
+
+* Install and enable the migration app:
+** Copy the app into the ownCloud `apps` or `apps-external` folder.
+** Set correct user and group permissions for your environment.
+** Enable the app:
++
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  app:enable migrate_to_ocis
+----
+
+=== oCIS
+
+[IMPORTANT]
+====
+* The auth-app service must be enabled with impersonation active. Set the following environment variables on the oCIS instance:
++
+[source,plaintext]
+----
+OCIS_ADD_RUN_SERVICES: "auth-app"
+PROXY_ENABLE_APP_AUTH: true
+AUTH_APP_ENABLE_IMPERSONATION: true
+----
+
+* An *app token must be created for the oCIS admin user* using the auth-app. This token, together with the admin username, is used as the username and password for all oCIS operations during the migration.
+
+* The oCIS instance should be *fresh and clean* before starting the migration. If the target instance already contains data, it may cause conflicts.
+====
+
+== Migration Steps
+
+After the prerequisites are met, the migration can be started. Details for each occ command can be found in the xref:configuration/server/occ_command.adoc#migrate-to-ocis[Migrate to oCIS] occ command reference.
+
+=== Initialize
+
+Initialize the migration by pointing to the target oCIS instance. The host and the `--insecure` flag (if used) are stored and reused for all subsequent steps:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:init \
+  ocis.server.example
+----
+
+Use `-k` to ignore the SSL certificate of the oCIS instance:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:init -k \
+  ocis.server.example
+----
+
+Use `-f` to reset a previous migration and start from the beginning. Ensure the target oCIS instance is clean before resetting:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:init -f \
+  ocis.server.example
+----
+
+=== Verify
+
+Verify that the OC10 installation is ready for migration. This checks that all enabled users have valid, non-duplicate email addresses:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:verify
+----
+
+Disabled users will be shown in the verification output but will not stop the migration. If a disabled user needs to be migrated, enable them before running this step — or reset the migration and re-verify.
+
+You can skip this step with `--skip`, but you take full responsibility for any email-related problems during migration.
+
+=== Migrate Users
+
+Migrate the OC10 users to oCIS. The admin password is asked interactively:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:migrate:users admin
+----
+
+New users are created in oCIS to match the OC10 users. If a user already exists in oCIS (for example the `admin` account), the existing account will be reused.
+
+=== Assign a Role
+
+Assign a role to all migrated users. Available roles are fetched from the oCIS instance and the role to assign is selected interactively:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:assign-role admin
+----
+
+The same role is assigned to all migrated OC10 users, except the admin. This step is mandatory and cannot be skipped.
+
+=== Migrate Groups
+
+Migrate the OC10 groups and their user memberships to oCIS. The admin password is asked interactively:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:migrate:groups admin
+----
+
+If a group already exists in oCIS, the existing group will be reused. Users not found in oCIS (for example because they were disabled and not migrated) will be skipped, but this will not stop the migration.
+
+=== Migrate Files
+
+Migrate each user's files to oCIS using the rclone binary bundled with the app. oCIS impersonation is used to access each user's account. The admin password is asked interactively:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:migrate:files admin
+----
+
+The following users are skipped and will not cause the migration to stop:
+
+* Users that have never logged in (they have no files to migrate).
+* Users not found in oCIS (typically disabled users that were not migrated).
+
+=== Migrate Shares
+
+Migrate all user shares, group shares, and link shares. oCIS impersonation is used to access each user's account. The admin password is asked interactively:
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:migrate:shares admin
+----
+
+The same users are skipped as in the file migration step. The following share errors will be reported but will not stop the migration:
+
+* Shares pointing to missing users or groups (that were not migrated).
+* Link shares that fail due to password restrictions.
+
+For password-protected link shares: the share will be migrated with a new password that does not match the original OC10 password. Users should change the passwords of all their share links after migration.
+
+== Migration with LDAP Users
+
+If OC10 is connected to an LDAP server, the migration differs slightly: the user and group migration steps are skipped because users and groups come from the LDAP server. Only local (non-LDAP) users and groups are not covered — these must be created manually in oCIS before starting migration, with matching usernames and group names.
+
+=== OC10 Requirements
+
+In addition to the regular requirements:
+
+* LDAP users *must* have the email attribute set (LDAP wizard -> Advanced tab -> Email field; usually `mail`).
+* The username attribute should be set to the `uid` or `samAccountName` attribute. By default, the internal username attribute (usually `entryUUID` / `objectGUID`) is used, which is typically incorrect for migration. +
+Run the following to change the attribute to `uid` and re-sync users afterwards:
++
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  ldap:set-config '' ldapUserName uid
+----
+
+=== oCIS Requirements
+
+In addition to the auth-app requirements, verify the following oCIS environment variables:
+
+* `OCIS_LDAP_USER_ENABLED_ATTRIBUTE` must exist and not be false. The default value uses the ownCloud schema which is unlikely to be present in your LDAP.
+* `OCIS_LDAP_USER_SCHEMA_ID` and `OCIS_LDAP_GROUP_SCHEMA_ID` should be set appropriately (for example `entryUUID`).
+* `OCIS_ADMIN_USER_ID` must match the configured `OCIS_LDAP_USER_SCHEMA_ID` value for the LDAP user acting as admin.
+
+The following serves as a configuration template:
+
+[source,plaintext]
+----
+OCIS_LDAP_INSECURE: "true"
+
+OCIS_LDAP_URI: ldap://10.0.2.27:14141
+OCIS_LDAP_BIND_DN: "cn=admin,dc=owncloudqa,dc=com"
+OCIS_LDAP_BIND_PASSWORD: owncloud123
+
+OCIS_LDAP_GROUP_BASE_DN: "ou=groups,dc=owncloudqa,dc=com"
+OCIS_LDAP_GROUP_FILTER: "(objectclass=groupOfNames)"
+OCIS_LDAP_GROUP_OBJECTCLASS: "groupOfNames"
+
+OCIS_LDAP_USER_BASE_DN: "ou=people,dc=owncloudqa,dc=com"
+OCIS_LDAP_USER_FILTER: "(objectclass=inetOrgPerson)"
+OCIS_LDAP_USER_OBJECTCLASS: "inetOrgPerson"
+
+OCIS_LDAP_USER_ENABLED_ATTRIBUTE: "employeeType"
+IDP_LDAP_LOGIN_ATTRIBUTE: "uid"
+
+OCIS_LDAP_GROUP_SCHEMA_ID: "entryUUID"
+OCIS_LDAP_USER_SCHEMA_ID: "entryUUID"
+OCIS_ADMIN_USER_ID: "a73c6ea6-6e7c-103f-8110-dd19ecb0bb36"
+----
+
+Verify LDAP access is working before starting the migration by logging in with some LDAP users.
+
+=== Migration Steps for LDAP
+
+The migration steps for LDAP are the same as for regular migration, except that user and group migration are skipped:
+
+[source,bash]
+----
+sudo -u www-data php /var/www/owncloud/occ migrate:to-ocis:init -k ocis.server.example
+sudo -u www-data php /var/www/owncloud/occ migrate:to-ocis:verify
+sudo -u www-data php /var/www/owncloud/occ migrate:to-ocis:migrate:users --skip admin
+sudo -u www-data php /var/www/owncloud/occ migrate:to-ocis:assign-role admin
+sudo -u www-data php /var/www/owncloud/occ migrate:to-ocis:migrate:groups --skip admin
+sudo -u www-data php /var/www/owncloud/occ migrate:to-ocis:migrate:files admin
+sudo -u www-data php /var/www/owncloud/occ migrate:to-ocis:migrate:shares admin
+----
+
+Only LDAP users (and any manually created users) will have their files and shares migrated.
