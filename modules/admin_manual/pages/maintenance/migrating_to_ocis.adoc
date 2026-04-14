@@ -161,6 +161,7 @@ sudo -u www-data \
 ----
 
 The same role is assigned to all migrated OC10 users, except the oCIS admin. OC10 roles are not preserved during migration — all users receive a single role regardless of their original OC10 role. For most installations the `User` role is the appropriate choice.
+
 NOTE: OC10 admin users who are members of the OC10 `admin` group will have that group membership migrated to oCIS, but they will not receive oCIS admin privileges unless the assigned role grants them. The oCIS admin must manually set the appropriate oCIS role for any user that should have elevated permissions after migration. +
 OC10 subadmin privileges have no equivalent role in oCIS and are not migrated.
 
