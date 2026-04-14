@@ -44,6 +44,11 @@ The following items are NOT migrated:
 * Files owned by disabled users
 * Shares created by or targeting disabled users (an error is shown but the migration continues)
 * Passwords — migrated users will have an unknown password and will need a password reset or onboarding process
+* External mounts — this includes:
+** Drives added by users
+** Drives created by the admin and shared with users
+** Shares pointing to external mount locations +
+External mount data is excluded by the file migration step. These mounts must be recreated and their data migrated manually after the migration.
 
 == Notes
 
@@ -180,7 +185,12 @@ sudo -u www-data \
   migrate:to-ocis:assign-role admin
 ----
 
-The same role is assigned to all migrated OC10 users, except the admin. This step is mandatory and cannot be skipped.
+The same role is assigned to all migrated OC10 users, except the oCIS admin. OC10 roles are not preserved during migration — all users receive a single role regardless of their original OC10 role. For most installations the `User` role is the appropriate choice.
+
+NOTE: OC10 admin users who are members of the OC10 `admin` group will have that group membership migrated to oCIS, but they will not receive oCIS admin privileges unless the assigned role grants them. The oCIS admin must manually set the appropriate oCIS role for any user that should have elevated permissions after migration. +
+OC10 subadmin privileges have no equivalent role in oCIS and are not migrated.
+
+This step is mandatory and cannot be skipped.
 
 === Migrate Groups
 
@@ -205,6 +215,8 @@ sudo -u www-data \
   php /var/www/owncloud/occ \
   migrate:to-ocis:migrate:files admin
 ----
+
+Each user's home directory contents are migrated into that user's *personal Space* in oCIS. External mounts and received shares are excluded — only files owned by the user in their OC10 home are transferred.
 
 The following users are skipped and will not cause the migration to stop:
 
