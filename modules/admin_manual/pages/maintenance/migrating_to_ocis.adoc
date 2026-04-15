@@ -187,7 +187,9 @@ As the final step, continue with xref:#migrate-files-and-shares[Migrate Files an
 
 === Migration With LDAP Users
 
-If OC10 is connected to an LDAP server, user and group migration need additional steps. As a prerequisite, the users and groups are already migrated and present to the LDAP server oCIS is connected to.
+In general, users and groups must be accessible to oCIS. This can be achieved either connecting oCIS to the same LDAP server, or by migrating users and groups from the LDAP server that OC10 is connected to to a different backend for oCIS.
+
+The following procedures are necessary for the data migration to be possible.
 
 OC10 Requirements::
 +
