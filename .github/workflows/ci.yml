@@ -28,3 +28,12 @@ jobs:
 
       - name: Build documentation
         run: npm run antora
+
+  trigger-docs-build:
+    name: Trigger docs build
+    needs: docs-build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    uses: owncloud/reusable-workflows/.github/workflows/trigger-docs-build.yml@main
+    secrets:
+      DOCS_TRIGGER_APP_ID: ${{ secrets.DOCS_TRIGGER_APP_ID }}
+      DOCS_TRIGGER_APP_PRIVATE_KEY: ${{ secrets.DOCS_TRIGGER_APP_PRIVATE_KEY }}
