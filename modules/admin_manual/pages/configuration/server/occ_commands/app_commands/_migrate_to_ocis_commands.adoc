@@ -1,0 +1,167 @@
+= Migrate to oCIS
+
+The _Migrate to oCIS_ app is not available on the ownCloud marketplace. If you plan a migration, get in touch with {oc-support-url}[ownCloud support] for more details.
+
+See the xref:maintenance/migrating_to_ocis.adoc[Migrating to ownCloud Infinite Scale] documentation for the sequence and details of the migration.
+
+The following commands manage the migration of ownCloud to oCIS:
+
+[source,plaintext]
+----
+ migrate:to-ocis
+  migrate:to-ocis:init             Initialize the migration process.
+  migrate:to-ocis:verify           Verifies the ownCloud instance to be ready for migration.
+  migrate:to-ocis:migrate:users    Migrates ownCloud users to the configured oCIS instance.
+  migrate:to-ocis:assign-role      Assigns the chosen role to all users in the configured oCIS instance.
+  migrate:to-ocis:migrate:groups   Migrates ownCloud groups to the configured oCIS instance.
+  migrate:to-ocis:migrate:files    Migrates ownCloud files to the configured oCIS instance.
+  migrate:to-ocis:migrate:shares   Migrates ownCloud shares to the configured oCIS instance.
+----
+
+== Initialize the Migration Process
+
+To start the migration, it must be initialized first:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-ocis:init OCIS_HOST
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| OCIS_HOST
+| The hostname or URL of the target oCIS instance
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `-f, --force`
+| Reset the migration and start from the beginning. Data already migrated to the oCIS instance will remain there and the target oCIS instance should be cleaned before restarting.
+
+| `-k, --insecure`
+| Ignore the SSL certificate of the oCIS instance. Useful for self-signed or untrusted certificates.
+|===
+
+== Verify That the Migration can be Started
+
+After initialization, verify that the ownCloud instance meets all requirements for migration:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-ocis:verify
+----
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `--skip`
+| Skip this step and move to the next one. Any problems caused by duplicate or missing emails will be your responsibility.
+|===
+
+== Migrate Users
+
+After verification, migrate the ownCloud users to oCIS:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-ocis:migrate:users <ocis-admin>
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| <ocis-admin>
+| The oCIS admin account username. The password will be asked interactively.
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `--skip`
+| Skip this step. Use this for LDAP migrations where users are already provisioned by the LDAP server.
+|===
+
+== Assign a Role to Migrated Users
+
+After migrating users, assign a role to all migrated users. The available roles are fetched from the oCIS instance and the role to assign is selected interactively:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-ocis:assign-role <ocis-admin>
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| <ocis-admin>
+| The oCIS admin account username. The password will be asked interactively.
+|===
+
+NOTE: This step is mandatory and cannot be skipped.
+
+== Migrate Groups
+
+After assigning roles, migrate the ownCloud groups to oCIS:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-ocis:migrate:groups <ocis-admin>
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| <ocis-admin>
+| The oCIS admin account username. The password will be asked interactively.
+|===
+
+=== Options
+
+[width="100%",cols="20%,70%",]
+|===
+| `--skip`
+| Skip this step. Note that shares targeting groups may fail to be created if those groups are not present in oCIS.
+|===
+
+== Migrate Files
+
+After migrating groups, migrate each user's files to oCIS using the rclone binary bundled with the app. oCIS impersonation via the auth-app is used to access each user's account:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-ocis:migrate:files <ocis-admin>
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| <ocis-admin>
+| The oCIS admin account username. The password will be asked interactively.
+|===
+
+== Migrate Shares
+
+After migrating files, migrate all user, group, and link shares. oCIS impersonation via the auth-app is used to access each user's account:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix} migrate:to-ocis:migrate:shares <ocis-admin>
+----
+
+=== Arguments
+
+[width="100%",cols="20%,70%",]
+|===
+| <ocis-admin>
+| The oCIS admin account username. The password will be asked interactively.
+|===
