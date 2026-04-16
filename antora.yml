@@ -1,6 +1,7 @@
 name: server
 title: ownCloud Server
 version: next
+prerelease: true
 start_page: ROOT:index.adoc
 nav:
 - modules/ROOT/partials/nav.adoc
