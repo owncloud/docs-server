@@ -89,6 +89,8 @@ sudo -u www-data \
   app:enable migrate_to_ocis
 ----
 
+* Details for the occ command can be found in the xref:configuration/server/occ_command.adoc#migrate-to-ocis[Migrate to oCIS] occ command reference.
+
 === oCIS
 
 See the https://doc.owncloud.com/[ownCloud Documentation] for how to setup an oCIS instance and more configuration details.
@@ -253,9 +255,29 @@ Verify LDAP access is working before starting the migration by logging in with s
 
 As the next step, continue with xref:#preparing-data-migration[Preparing Data Migration].
 
+Because data migration requires steps to be passed, even nothing needs to be done, the following commands must be issued:
+
+Mark user and groupe migration as dome::
++
+--
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:migrate:users --skip admin
+----
+
+[source,bash]
+----
+sudo -u www-data \
+  php /var/www/owncloud/occ \
+  migrate:to-ocis:migrate:groups --skip admin
+----
+--
+
 == Preparing Data Migration
 
-After the user, group and role prerequisites are met, the migration can be started. Details for the occ command can be found in the xref:configuration/server/occ_command.adoc#migrate-to-ocis[Migrate to oCIS] occ command reference.
+After the user, group and role prerequisites are met, the migration can be started.
 
 Initialize::
 +
