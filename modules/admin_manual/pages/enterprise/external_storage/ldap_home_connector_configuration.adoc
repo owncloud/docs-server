@@ -20,6 +20,8 @@ The Windows home directory can be published as a share and due to the permission
 To integrate a user's home folder from Windows into ownCloud, the Home share is locally mounted. An LDAP attribute is added to the user's profile containing the path of the local mount and then used by the LDAP Home Connector to show the user's home in ownCloud.
 
 // Based on the kroki extension.
+image:enterprise/external_storage/ldap-home-connector/ldap-home-connector-diagram.png[]
+////
 [ditaa, "LDAP User Home diagram"]
 ----
    +---------------+                          +------------------+
@@ -62,6 +64,7 @@ To integrate a user's home folder from Windows into ownCloud, the Home share is 
                         |    user home   |
                         +----------------+
 ----
+////
 
 == Prerequisites
 
