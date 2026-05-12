@@ -127,7 +127,7 @@ include::example$installation/docker/docker-compose.yml[]
 [source,bash,subs="attributes+"]
 ----
 cat << EOF > .env
-OWNCLOUD_VERSION={latest-server-version}
+OWNCLOUD_VERSION=latest
 OWNCLOUD_DOMAIN=localhost:{std-port-http}
 OWNCLOUD_TRUSTED_DOMAINS=localhost
 ADMIN_USERNAME=admin
