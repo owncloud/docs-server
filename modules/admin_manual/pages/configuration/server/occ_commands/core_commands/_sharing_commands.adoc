@@ -2,22 +2,15 @@
 
 == Cleanup Remote Storages
 
-This is an occ command to clean up orphaned remote storages. 
-To explain why this is necessary, a little background is required. 
-While shares are able to be deleted as a normal matter of course, remote storages with `shared::` are not included in this process.
+This is an occ command to clean up orphaned remote storages. To explain why this is necessary, a little background is required. While shares are able to be deleted as a normal matter of course, remote storages with `shared::` are not included in this process.
 
-This might not, normally, be a problem. 
-However, if a user has re-shared a remote share which has been deleted it will. 
-This is because when the original share is deleted, the remote re-share reference is not.
-Internally, the `fileid` will remain in the file cache and storage for that file will not be deleted.
+This might not, normally, be a problem. However, if a user has re-shared a remote share which has been deleted it will. This is because when the original share is deleted, the remote re-share reference is not. Internally, the `fileid` will remain in the file cache and storage for that file will not be deleted.
 
-As a result, any user(s) who the share was re-shared with will now get an error when trying to access that file or folder. 
-That's why the command is available.
-So, to cleanup all orphaned remote storages, run it as follows:
+As a result, any user(s) who the share was re-shared with will now get an error when trying to access that file or folder. That's why the command is available. So, to cleanup all orphaned remote storages, run it as follows:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} sharing:cleanup-remote-storages
+{occ-command-example-prefix-docker} sharing:cleanup-remote-storages
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -30,18 +23,18 @@ NOTE: These commands are not available in xref:maintenance-commands[single-user 
 
 Currently, if a federated share is invalid or the API endpoint returns a "not found", the availability check tests whether this is a problem with a server. If checks complete, that given share is removed. However, in some cases these checks might not be enough like in complex migrations of tightly federated setups. In that case, invalidation behavior can be disabled using the below app setting. When set, instead of removing the share, a warning is displayed in the browser.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files_sharing enable_cleanup_invalid_external_shares --value no
+{occ-command-example-prefix-docker} config:app:set files_sharing enable_cleanup_invalid_external_shares --value no
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
 
 To revert that setting to its default behavior, run:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:delete files_sharing enable_cleanup_invalid_external_shares
+{occ-command-example-prefix-docker} config:app:delete files_sharing enable_cleanup_invalid_external_shares
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

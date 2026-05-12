@@ -51,7 +51,7 @@ image::apps/impersonate/impersonate_enable.png[Define who can use Impersonate,wi
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate enabled --value 'yes'
 ----
 +
@@ -61,7 +61,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate enabled --value '["admin","einstein-g"]'
 ----
 +
@@ -87,7 +87,7 @@ image::apps/impersonate/impersonate_oc_admins_only.png[Impersonate for ownCloud 
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_all_groupadmins --value false
 ----
 +
@@ -95,7 +95,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups --value false
 ----
 +
@@ -103,7 +103,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups_list --value '[]'
 ----
 +
@@ -117,7 +117,7 @@ image::apps/impersonate/impersonate_group_admins_only.png[Impersonate for all gr
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_all_groupadmins --value true
 ----
 +
@@ -125,7 +125,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups --value false
 ----
 +
@@ -133,7 +133,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups_list --value '[]'
 ----
 +
@@ -147,7 +147,7 @@ image::apps/impersonate/impersonate_groups_only.png[Impersonate for specific gro
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_all_groupadmins --value false
 ----
 +
@@ -155,7 +155,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups --value true
 ----
 +
@@ -163,7 +163,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups_list --value '["group1", "group2"]'
 ----
 +

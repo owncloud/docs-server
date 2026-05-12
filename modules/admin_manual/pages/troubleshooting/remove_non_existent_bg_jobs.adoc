@@ -35,7 +35,7 @@ Use the following command to list all active background jobs triggered by ownClo
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:status --display-invalid-jobs
+{occ-command-example-prefix-docker} background:queue:status --display-invalid-jobs
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -62,7 +62,7 @@ When you have identified the `ID` of the background job to  be removed, run foll
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:delete ID
+{occ-command-example-prefix-docker} background:queue:delete ID
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

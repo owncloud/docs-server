@@ -11,9 +11,9 @@ Ignore all CLI triggered events.
 
 To ignore all CLI triggered events, you can set the following option, defaults to track cli events:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
      "admin_audit ignore_cli_events" \
      --value "yes"
 ----
@@ -24,9 +24,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 This command reads the value of `admin_audit ignore_cli_events`:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:get "admin_audit ignore_cli_events"
+{occ-command-example-prefix-docker} config:app:get "admin_audit ignore_cli_events"
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -40,9 +40,9 @@ yes
 
 This command completely removes the key and the value:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:delete "admin_audit ignore_cli_events"
+{occ-command-example-prefix-docker} config:app:delete "admin_audit ignore_cli_events"
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

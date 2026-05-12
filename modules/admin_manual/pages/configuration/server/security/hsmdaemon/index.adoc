@@ -400,7 +400,7 @@ ep6Y1aAVAYpAesZ1+sQzzUepjO82o34kjmm63Drmz+6KED4oIBARQkXeW/OoxgUg6kQhQK1thA/3Ww33
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix}  encryption:hsmdaemon:decrypt --keyId $key_id "$test_enc"
+{occ-command-example-prefix-docker}  encryption:hsmdaemon:decrypt --keyId $key_id "$test_enc"
 
 decrypted string (base64 encoded): 'SGVsbG8sIHdvcmxkIQo='
 ----
@@ -499,7 +499,7 @@ Set the generated secret for ownCloud:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set encryption hsm.jwt.secret --value '7a7d1826-b514-4d9f-afc7-a7485084e8de'
+{occ-command-example-prefix-docker} config:app:set encryption hsm.jwt.secret --value '7a7d1826-b514-4d9f-afc7-a7485084e8de'
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -517,9 +517,9 @@ Enable the HSM mode and enable encryption by running the commands in the followi
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable encryption
-{occ-command-example-prefix} config:app:set encryption hsm.url --value 'http://localhost:8513'
-{occ-command-example-prefix} encryption:enable
+{occ-command-example-prefix-docker} app:enable encryption
+{occ-command-example-prefix-docker} config:app:set encryption hsm.url --value 'http://localhost:8513'
+{occ-command-example-prefix-docker} encryption:enable
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

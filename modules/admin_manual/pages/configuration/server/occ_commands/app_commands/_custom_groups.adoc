@@ -16,9 +16,9 @@ You can get the value of a current setting. For details how to do so see the xre
 
 By default, administrators can administrate custom groups of an instance. When changed, only group admins can administrate custom groups. You can change this behaviour with the following command:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:set \
+{occ-command-example-prefix-docker} config:system:set \
   customgroups.disallow-admin-access-all \
   --type boolean --value true
 ----
@@ -36,9 +36,9 @@ This occ command will create a key-value pair in your config.php which must be w
 
 You can hide custom groups from a user's personal settings page based on a user's group membership. This makes it easier to collect users you want to exclude into defined groups which will be further used for this setting:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:set \
+{occ-command-example-prefix-docker} config:system:set \
   customgroups.disallowed-groups \
   --type json \
   --value '["no_guest_app_users", "project5"]'
@@ -61,9 +61,9 @@ This occ command will create a key-value pair in your config.php which must be w
 
 This setting defines if ordinary users are allowed to create custom groups. By default, all users can create custom groups, but this can be restricted to admins (if allowed as above) and group-admins. Values to be set can be 'true' and 'false', defaults to 'false'.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
   customgroups \
   only_subadmin_can_create \
   --value 'true'
@@ -75,9 +75,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 This setting defines if an existing ordinary group member is allowed to add other users to the target group or remove them. By default, all users can add members to groups, but this can be restricted to admins (if allowed as above) and group-admins. Values to be set can be 'yes' and 'no', defaults to 'no'.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
   core \
   shareapi_only_share_with_group_members \
   --value 'yes'
@@ -89,9 +89,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 This setting allows the creation of multiple groups with the same display name. By default, group display names must be unique, but it can be be allowed to have multiple identical group display names. Values to be set can be 'true' and 'false', defaults to 'false'.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
   customgroups \
   allow_duplicate_names \
   --value 'false'

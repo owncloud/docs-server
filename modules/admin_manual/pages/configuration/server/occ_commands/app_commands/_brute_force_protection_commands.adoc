@@ -8,9 +8,9 @@ The combination of `uid` and `IP address` is used to trigger the ban.
 
 == List the Current Settings
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:list brute_force_protection
+{occ-command-example-prefix-docker} config:list brute_force_protection
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -19,9 +19,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 To set a new value, use the command below and replace `<Key>` and value `<Value>` accordingly.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set brute_force_protection <Key> --value=<Value> --update-only
+{occ-command-example-prefix-docker} config:app:set brute_force_protection <Key> --value=<Value> --update-only
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

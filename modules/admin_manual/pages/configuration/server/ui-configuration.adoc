@@ -19,7 +19,7 @@ This progress bar can be hidden with the following command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files hide_upload_estimation --value="yes"
+{occ-command-example-prefix-docker} config:app:set files hide_upload_estimation --value="yes"
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -28,7 +28,7 @@ To show the progress bar again, type one of the following commands:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files hide_upload_estimation --value="no"
+{occ-command-example-prefix-docker} config:app:set files hide_upload_estimation --value="no"
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -37,7 +37,7 @@ or
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:delete files hide_upload_estimation
+{occ-command-example-prefix-docker} config:app:delete files hide_upload_estimation
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

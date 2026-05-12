@@ -18,7 +18,7 @@ As an example:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:cron
+{occ-command-example-prefix-docker} background:cron
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -93,7 +93,7 @@ There is no way to do so via the ownCloud UI. But, the most direct way to do so,
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} system:cron
+{occ-command-example-prefix-docker} system:cron
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -130,7 +130,7 @@ The ExpireTrash job, contained in `OCA\Files_Trashbin\BackgroundJob\ExpireTrash`
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} trashbin:expire
+{occ-command-example-prefix-docker} trashbin:expire
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -141,7 +141,7 @@ The ExpireVersions job, contained in `OCA\Files_Versions\BackgroundJob\ExpireVer
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} versions:expire
+{occ-command-example-prefix-docker} versions:expire
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -154,7 +154,7 @@ The `CardDAV SyncJob`, contained in `OCA\DAV\CardDAV\SyncJob`, syncs the local s
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:sync-system-addressbook
+{occ-command-example-prefix-docker} dav:sync-system-addressbook
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -168,7 +168,7 @@ xref:configuration/server/occ_command.adoc#federation-sync[OCC federation sync] 
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} federation:sync-addressbooks
+{occ-command-example-prefix-docker} federation:sync-addressbooks
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

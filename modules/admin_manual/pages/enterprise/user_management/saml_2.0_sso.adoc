@@ -148,8 +148,8 @@ Use `upn` as `uid` and set the app mode to 'SSO Only' by running:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} shibboleth:mode ssoonly
-{occ-command-example-prefix} shibboleth:mapping -u upn
+{occ-command-example-prefix-docker} shibboleth:mode ssoonly
+{occ-command-example-prefix-docker} shibboleth:mapping -u upn
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

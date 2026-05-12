@@ -2,7 +2,7 @@
 
 == Introduction
 
-Starting with ownCloud Server 11, the only supported installation method is a Docker-based installation. Manual installation on Linux is no longer supported.
+Starting with ownCloud Server 11, the only supported installation method is a Docker-based installation which includes PHP 8. Manual installation on Linux is no longer supported.
 
 == Using a Docker-Based Installation
 

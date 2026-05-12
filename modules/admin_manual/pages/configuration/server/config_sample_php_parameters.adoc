@@ -820,7 +820,7 @@ Note that the above rule is not valid in every case, as there are some rare setu
 cases where this may not apply. However, to avoid any update problems this
 configuration value is explicitly opt-in.
 
-After setting this value run `{occ-command-example-prefix} maintenance:update:htaccess`. Now, when the
+After setting this value run `{occ-command-example-prefix-docker} maintenance:update:htaccess`. Now, when the
 following conditions are met ownCloud URLs won't contain `index.php`:
 
 - `mod_rewrite` is installed
@@ -1850,7 +1850,7 @@ and MySQL can handle 4 byte characters instead of 3 byte characters.
 
 If you want to convert an existing 3-byte setup into a 4-byte setup please
 set the parameters in MySQL as mentioned below and run the migration command:
-`{occ-command-example-prefix} db:convert-mysql-charset`
+`{occ-command-example-prefix-docker} db:convert-mysql-charset`
 The config setting will be set automatically after a successful run.
 
 Consult the documentation for more details.
@@ -2341,7 +2341,7 @@ We strongly encourage you never to use it in production.
 === Define the data-fingerprint of the current data served
 This is a property used by the clients to find out if a backup has been
 restored on the server. Once a backup is restored run
-{occ-command-example-prefix} maintenance:data-fingerprint
+{occ-command-example-prefix-docker} maintenance:data-fingerprint
 To set this to a new value.
 
 Updating/Deleting this value can make connected clients stall until

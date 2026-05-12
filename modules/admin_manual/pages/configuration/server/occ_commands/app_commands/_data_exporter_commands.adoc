@@ -19,9 +19,9 @@ The following commands are available for the Data Exporter app:
 
 == Export User Data
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} instance:export:user <userId> <exportDirectory>
+{occ-command-example-prefix-docker} instance:export:user <userId> <exportDirectory>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -36,9 +36,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 == Import User Data
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} instance:import:user [options] [--] <importDirectory>
+{occ-command-example-prefix-docker} instance:import:user [options] [--] <importDirectory>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -61,9 +61,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 == Migrate Shares
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} instance:export:migrate:share <userId> <remoteServer>
+{occ-command-example-prefix-docker} instance:export:migrate:share <userId> <remoteServer>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

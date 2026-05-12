@@ -50,7 +50,7 @@ To enable maintenance mode, run the following command.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --on
+{occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -157,7 +157,7 @@ To fix the config.php settings:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:set --value /mnt/owncloud/data datadirectory
+{occ-command-example-prefix-docker} config:system:set --value /mnt/owncloud/data datadirectory
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -175,7 +175,7 @@ To disable maintenance mode of your instance run the following command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --off
+{occ-command-example-prefix-docker} maintenance:mode --off
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -191,7 +191,7 @@ sudo service apache2 start
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files:scan --all
+{occ-command-example-prefix-docker} files:scan --all
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

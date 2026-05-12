@@ -89,7 +89,7 @@ git clone https://github.com/owncloud/notes.git
 [source,bash,subs="attributes+"]
 ----
 cd ..
-{occ-command-example-prefix} app:enable notes
+{occ-command-example-prefix-docker} app:enable notes
 ----
 
 . Change into the newly cloned directory, for example:

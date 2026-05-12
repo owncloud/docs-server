@@ -19,9 +19,9 @@ All `occ` commands must be run inside the running ownCloud Docker container. The
 
 To run a single `occ` command without entering the container, use `docker compose exec` from the directory containing your `docker-compose.yml`:
 
-[source,bash]
+[source,docker,subs="attributes+"]
 ----
-docker compose exec owncloud occ <command>
+{occ-command-example-prefix-docker} <command>
 ----
 
 [[docker-exec]]
@@ -62,9 +62,9 @@ occ [options] command [arguments]
 
 Running `occ` with no options lists all commands and options, like this example on Ubuntu:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix}
+{occ-command-example-prefix-docker}
 ownCloud version 11.0.0
 
 Usage:
@@ -91,27 +91,27 @@ Available commands:
 ...
 ----
 
-This is the same as `{occ-command-example-prefix} list`. 
+This is the same as `{occ-command-example-prefix-docker} list`. 
 Run it with the `-h` option for syntax help:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} -h
+{occ-command-example-prefix-docker} -h
 ----
 
 Display your ownCloud version:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} -V
+{occ-command-example-prefix-docker} -V
   ownCloud version 11.0.0
 ----
 
 Query your ownCloud server status:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} status
+{occ-command-example-prefix-docker} status
   - installed: true
   - version: 11.0.0.0
   - versionstring: 11.0.0
@@ -122,17 +122,17 @@ The `status` command from above has an option to define the output format.
 
 The default is plain text, but it can also be `json`:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} status --output=json
+{occ-command-example-prefix-docker} status --output=json
 {"installed":true,"version":"11.0.0.0","versionstring":"11.0.0","edition":""}
 ----
 
 or `json_pretty`:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} status --output=json_pretty
+{occ-command-example-prefix-docker} status --output=json_pretty
 {
    "installed": true,
    "version": "11.0.0.0",
@@ -145,9 +145,9 @@ This output option is available on all list and list-like commands, which includ
 
 Get detailed information on individual commands with the `help` command, like in this example for the `maintenance:mode` command:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} help maintenance:mode --help
+{occ-command-example-prefix-docker} help maintenance:mode --help
 Usage:
  maintenance:mode [options]
 
@@ -177,8 +177,6 @@ include::./occ_commands/core_commands/_background_jobs_selector.adoc[leveloffset
 include::./occ_commands/core_commands/_config_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_config_reports_commands.adoc[leveloffset=+2]
-
-include::./occ_commands/core_commands/_command_line_installation_commands.adoc[leveloffset=+2]
 
 include::./occ_commands/core_commands/_command_line_upgrade_commands.adoc[leveloffset=+2]
 

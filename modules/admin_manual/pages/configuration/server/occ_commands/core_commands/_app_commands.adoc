@@ -17,9 +17,9 @@ app
 List all of your installed apps or optionally provide a search pattern to restrict the list of apps to those whose name matches the given regular expression. 
 The output shows whether they are enabled or disabled.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:list [--] [<search-pattern>]
+{occ-command-example-prefix-docker} app:list [--] [<search-pattern>]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -61,9 +61,9 @@ When used, the output will contain the app's version number as well.
 
 Enable an app, for example the Market app.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable market
+{occ-command-example-prefix-docker} app:enable market
 market enabled
 ----
 
@@ -71,9 +71,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 == Disable an App
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:disable market
+{occ-command-example-prefix-docker} app:disable market
 market disabled
 ----
 
@@ -90,9 +90,9 @@ NOTE: Be aware that the following apps cannot be disabled: _DAV_, _FederatedFile
 
 By default all checks are enabled. The Activity app is an example of a correctly-formatted app.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:check-code notifications
+{occ-command-example-prefix-docker} app:check-code notifications
 App is compliant - awesome job!
 ----
 
@@ -100,9 +100,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 If your app has issues, you'll see output like this.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:check-code foo_app
+{occ-command-example-prefix-docker} app:check-code foo_app
 Analysing /var/www/owncloud/apps/files/foo_app.php
 4 errors
    line   45: OCP\Response - Static method of deprecated class must not be called
@@ -117,9 +117,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 You can get the full file path to an app.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:getpath notifications
+{occ-command-example-prefix-docker} app:getpath notifications
 /var/www/owncloud/apps/notifications
 ----
 

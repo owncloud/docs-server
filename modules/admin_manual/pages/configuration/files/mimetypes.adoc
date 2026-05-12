@@ -109,7 +109,7 @@ use the xref:configuration/server/occ_command.adoc[occ command] to propagate the
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mimetype:update-js
+{occ-command-example-prefix-docker} maintenance:mimetype:update-js
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -156,7 +156,7 @@ The name and location of the file are important.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mimetype:update-js
+{occ-command-example-prefix-docker} maintenance:mimetype:update-js
 ----
 +
 NOTE: Run this command inside the ownCloud Docker container.

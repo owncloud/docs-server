@@ -89,7 +89,7 @@ See the following occ command on how to set it. Make up a passphrase, referred t
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:set "metrics_shared_secret" --value "<your-metrics-secret>"
+{occ-command-example-prefix-docker} config:system:set "metrics_shared_secret" --value "<your-metrics-secret>"
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -103,7 +103,7 @@ The dashboard is enabled by default. You can disable it with the following comma
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set metrics disable_dashboard --value=yes
+{occ-command-example-prefix-docker} config:app:set metrics disable_dashboard --value=yes
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

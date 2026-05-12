@@ -67,7 +67,7 @@ Before backing up the database, set your ownCloud instance into maintenance mode
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --on
+{occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -137,7 +137,7 @@ Perform the following tasks to reactivate your ownCloud instance:
 .Bring back ownCloud into normal operation mode
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --off
+{occ-command-example-prefix-docker} maintenance:mode --off
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

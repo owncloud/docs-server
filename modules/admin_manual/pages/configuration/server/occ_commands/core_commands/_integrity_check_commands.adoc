@@ -1,8 +1,6 @@
 = Integrity Check
 
-Apps which have an official tag *must* be code signed. 
-Unsigned official apps won't be installable anymore. 
-Code signing is optional for all third-party applications.
+Apps which have an official tag *must* be code signed. Unsigned official apps won't be installable anymore. Code signing is optional for all third-party applications.
 
 [source,plaintext]
 ----
@@ -15,9 +13,9 @@ integrity
 
 After creating your signing key, sign your app like this example:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} integrity:sign-app \
+{occ-command-example-prefix-docker} integrity:sign-app \
    --privateKey=/Users/karlmay/contacts.key \
    --certificate=/Users/karlmay/CA/contacts.crt \
    --path=/Users/karlmay/Programming/contacts
@@ -27,15 +25,14 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Verify your app:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} integrity:check-app --path=/pathto/app appname
+{occ-command-example-prefix-docker} integrity:check-app --path=/pathto/app appname
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
 
-When it returns nothing, your app is signed correctly.
-When it returns a message then there is an error.
+When it returns nothing, your app is signed correctly. When it returns a message then there is an error.
 
 `integrity:sign-core` is for ownCloud core developers only.
 

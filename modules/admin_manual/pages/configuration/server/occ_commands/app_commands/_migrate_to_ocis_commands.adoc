@@ -22,9 +22,9 @@ The following commands manage the migration of ownCloud to oCIS:
 
 To start the migration, it must be initialized first:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-ocis:init OCIS_HOST
+{occ-command-example-prefix-docker} migrate:to-ocis:init OCIS_HOST
 ----
 
 === Arguments
@@ -50,9 +50,9 @@ To start the migration, it must be initialized first:
 
 After initialization, verify that the ownCloud instance meets all requirements for migration:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-ocis:verify
+{occ-command-example-prefix-docker} migrate:to-ocis:verify
 ----
 
 === Options
@@ -69,7 +69,7 @@ After verification, migrate the ownCloud users to oCIS:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-ocis:migrate:users <ocis-admin>
+{occ-command-example-prefix-docker} migrate:to-ocis:migrate:users <ocis-admin>
 ----
 
 === Arguments
@@ -92,9 +92,9 @@ After verification, migrate the ownCloud users to oCIS:
 
 After migrating users, assign a role to all migrated users. The available roles are fetched from the oCIS instance and the role to assign is selected interactively:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-ocis:assign-role <ocis-admin>
+{occ-command-example-prefix-docker} migrate:to-ocis:assign-role <ocis-admin>
 ----
 
 === Arguments
@@ -111,9 +111,9 @@ NOTE: This step is mandatory and cannot be skipped.
 
 After assigning roles, migrate the ownCloud groups to oCIS:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-ocis:migrate:groups <ocis-admin>
+{occ-command-example-prefix-docker} migrate:to-ocis:migrate:groups <ocis-admin>
 ----
 
 === Arguments
@@ -136,9 +136,9 @@ After assigning roles, migrate the ownCloud groups to oCIS:
 
 After migrating groups, migrate each user's files to oCIS using the rclone binary bundled with the app. oCIS impersonation via the auth-app is used to access each user's account:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-ocis:migrate:files <ocis-admin>
+{occ-command-example-prefix-docker} migrate:to-ocis:migrate:files <ocis-admin>
 ----
 
 === Arguments
@@ -153,9 +153,9 @@ After migrating groups, migrate each user's files to oCIS using the rclone binar
 
 After migrating files, migrate all user, group, and link shares. oCIS impersonation via the auth-app is used to access each user's account:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-ocis:migrate:shares <ocis-admin>
+{occ-command-example-prefix-docker} migrate:to-ocis:migrate:shares <ocis-admin>
 ----
 
 === Arguments

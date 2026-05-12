@@ -1,7 +1,8 @@
 = Files External
 
 These commands replace the `data/mount.json` configuration file used in ownCloud releases before 9.0.
-Commands for managing external storage.
+
+Commands for managing external storage:
 
 [source,plaintext]
 ----
@@ -22,8 +23,7 @@ These commands replicate the functionality in the ownCloud Web GUI, plus two new
 
 Use `files_external:export` to export all admin mounts to stdout, and `files_external:export [user_id]` to export the mounts of the specified ownCloud user.
 
-NOTE: These commands are only available when the "External storage support" app (`files_external`) is enabled. 
-It is not available in xref:maintenance-commands[single-user (maintenance) mode].
+NOTE: These commands are only available when the "External storage support" app (`files_external`) is enabled. It is not available in xref:maintenance-commands[single-user (maintenance) mode].
 
 == files_external:list
 
@@ -31,9 +31,9 @@ List configured mounts.
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-files_external:list [--show-password] [--full] [-a|--all] [-s|--short] [--] [<user_id>]
+{occ-command-example-prefix-docker} files_external:list [--show-password] [--full] [-a|--all] [-s|--short] [--] [<user_id>]
 ----
 
 === Arguments
@@ -58,9 +58,9 @@ files_external:list [--show-password] [--full] [-a|--all] [-s|--short] [--] [<us
 
 === Example
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:list user_1 --short
+{occ-command-example-prefix-docker} files_external:list user_1 --short
 +----------+------------------+----------+
 | Mount ID | Mount Point      | Type     |
 +----------+------------------+----------+
@@ -71,11 +71,7 @@ files_external:list [--show-password] [--full] [-a|--all] [-s|--short] [--] [<us
 
 NOTE: Run this command inside the ownCloud Docker container.
 
-NOTE: The `--importable-format` option helps to make the technical mount settings visible.
-To see all settings you still need to use the other options such as `--show-password`,
-`--full` and `--all`. When you want to export the mount settings for later import,
-use the `files_external:export` command. `files_external:export` ensures that all the
-necessary settings are included in the output.
+NOTE: The `--importable-format` option helps to make the technical mount settings visible. To see all settings you still need to use the other options such as `--show-password`, `--full` and `--all`. When you want to export the mount settings for later import, use the `files_external:export` command. `files_external:export` ensures that all the necessary settings are included in the output.
 
 == files_external:applicable
 
@@ -183,7 +179,7 @@ Create a new mount configuration.
 
 === Usage
 
-[source,plaintext
+[source,plaintext]
 ----
 files_external:create [options]
     [--]
@@ -262,9 +258,9 @@ Delete an external mount.
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-files_external:delete [options] [--] <mount_id>
+{occ-command-example-prefix-docker} files_external:delete [options] [--] <mount_id>
 ----
 
 === Arguments
@@ -286,9 +282,9 @@ files_external:delete [options] [--] <mount_id>
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-files_external:export [options] [--] [<user_id>]
+{occ-command-example-prefix-docker} files_external:export [options] [--] [<user_id>]
 ----
 
 === Arguments
@@ -312,9 +308,9 @@ Import mount configurations.
 
 === Usage
 
-[source,plaintext
+[source,docker,subs="attributes+"]
 ----
-files_external:import [options] [--] <path>
+{occ-command-example-prefix-docker} files_external:import [options] [--] <path>
 ----
 
 === Arguments
@@ -340,9 +336,9 @@ Manage mount options for a mount.
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-files_external:option <mount_id> <key> [<value>]
+{occ-command-example-prefix-docker} files_external:option <mount_id> <key> [<value>]
 ----
 
 === Arguments
@@ -361,9 +357,9 @@ Verify mount configuration.
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-files_external:verify [options] [--] <mount_id>
+{occ-command-example-prefix-docker} files_external:verify [options] [--] <mount_id>
 ----
 
 === Arguments

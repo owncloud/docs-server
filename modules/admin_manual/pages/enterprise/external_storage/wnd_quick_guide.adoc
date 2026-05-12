@@ -23,14 +23,14 @@ WebUI::
 Command line::
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} market:install windows_network_drive
+{occ-command-example-prefix-docker} market:install windows_network_drive
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable windows_network_drive
+{occ-command-example-prefix-docker} app:enable windows_network_drive
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -182,7 +182,7 @@ Running the following command would work:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen MyHost MyData svc_owncloud password
+{occ-command-example-prefix-docker} wnd:listen MyHost MyData svc_owncloud password
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

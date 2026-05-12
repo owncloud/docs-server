@@ -327,7 +327,7 @@ The simplest way, useful for initial testing is, to start the `wnd:listen` proce
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username>
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -336,7 +336,7 @@ The password is an optional parameter and you will be asked for it if you didn't
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> '<workgroup>\<username>'
+{occ-command-example-prefix-docker} wnd:listen <host> <share> '<workgroup>\<username>'
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -345,7 +345,7 @@ In order to start `wnd:listen` without any user interaction like as service, pro
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> \
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file \
      --password-trim
 ----
@@ -366,7 +366,7 @@ As a simple example, you can check the following:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:process-queue <host> <share>
+{occ-command-example-prefix-docker} wnd:process-queue <host> <share>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -483,7 +483,7 @@ If you need to serialize the execution of the `wnd:process-queue`, check the fol
 
 [source,bash,subs="attributes+"]
 ----
-flock -n /opt/my-lock-file {occ-command-example-prefix} wnd:process-queue <host> <share>
+flock -n /opt/my-lock-file {occ-command-example-prefix-docker} wnd:process-queue <host> <share>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -619,7 +619,7 @@ Take the example of attempting to connect to the host MyHost, the share named `M
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen MyHost MyData user password
+{occ-command-example-prefix-docker} wnd:listen MyHost MyData user password
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -731,7 +731,7 @@ There are several ways to supply a password:
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username>
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username>
 ----
 +
 NOTE: Run this command inside the ownCloud Docker container.
@@ -740,7 +740,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> <password>
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> <password>
 ----
 +
 NOTE: Run this command inside the ownCloud Docker container.
@@ -749,7 +749,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> \
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file
 ----
 +
@@ -757,7 +757,7 @@ NOTE: Run this command inside the ownCloud Docker container.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> \
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file \
      --password-trim
 ----
@@ -772,7 +772,7 @@ IMPORTANT: If using `--password-file` make sure that the file is only readable b
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username>
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username>
      --password-from-service-account
 ----
 +
@@ -801,7 +801,7 @@ This provides a bit more security because the `/tmp/plainpass` password as shown
 
 [source,bash,subs="attributes+"]
 ----
-cat /tmp/plainpass | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
+cat /tmp/plainpass | {occ-command-example-prefix-docker} wnd:listen <host> <share> <username> --password-file=-
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -813,7 +813,7 @@ Similar to plainpass, the content in this case gets encoded in the {base64-url}[
 [source,bash,subs="attributes+"]
 ----
 base64 -d /tmp/encodedpass | \
-   {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
+   {occ-command-example-prefix-docker} wnd:listen <host> <share> <username> --password-file=-
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -826,7 +826,7 @@ Example using "pass"
 
 [source,bash,subs="attributes+"]
 ----
-pass the-password-name | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
+pass the-password-name | {occ-command-example-prefix-docker} wnd:listen <host> <share> <username> --password-file=-
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -837,7 +837,7 @@ This example uses {vaultproject-url}[Vault] as the secrets store. See {hashicorp
 
 [source,bash,subs="attributes+"]
 ----
-vault kv get -field=password secret/samba | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
+vault kv get -field=password secret/samba | {occ-command-example-prefix-docker} wnd:listen <host> <share> <username> --password-file=-
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -849,7 +849,7 @@ Use Vault's ACLs to limit access to the token. Destroy the token after starting 
 If both the argument and the option are passed, e.g.,
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> <password> --password-file=/opt/pass`
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> <password> --password-file=/opt/pass`
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -933,17 +933,17 @@ Setups with several servers might have some difficulties in some scenarios:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen host share username password
+{occ-command-example-prefix-docker} wnd:listen host share username password
 
-{occ-command-example-prefix} wnd:process-queue host share
+{occ-command-example-prefix-docker} wnd:process-queue host share
 
-{occ-command-example-prefix} wnd:process-queue host share -c 500
+{occ-command-example-prefix-docker} wnd:process-queue host share -c 500
 
-{occ-command-example-prefix} wnd:process-queue host share -c 500 \
+{occ-command-example-prefix-docker} wnd:process-queue host share -c 500 \
      --serializer-type file \
      --serializer-param file=/opt/oc/store
 
-{occ-command-example-prefix} wnd:process-queue host2 share2 -c 500 \
+{occ-command-example-prefix-docker} wnd:process-queue host2 share2 -c 500 \
      --serializer-type File \
      --serializer-param file=/opt/oc/store2
 ----
@@ -954,7 +954,7 @@ To set it up, make sure the listener is running as a system service:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen host share username password
+{occ-command-example-prefix-docker} wnd:listen host share username password
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -963,7 +963,7 @@ Setup a Cron job or similar with something like the following two commands:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:process-queue host share -c 500 \
+{occ-command-example-prefix-docker} wnd:process-queue host share -c 500 \
      --serializer-type file \
      --serializer-param file=/opt/oc/store1
 

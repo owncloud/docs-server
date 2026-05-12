@@ -2,9 +2,7 @@
 
 :temp-dir-url: https://systemd.io/TEMPORARY_DIRECTORIES/
 
-The `user` commands provide a range of functionality for managing ownCloud users. 
-This includes: creating and removing users, resetting user passwords, displaying a report which shows how many users you have, and when a user was last logged in.
-The full list, of commands is:
+The `user` commands provide a range of functionality for managing ownCloud users. This includes: creating and removing users, resetting user passwords, displaying a report which shows how many users you have, and when a user was last logged in. The full list, of commands is:
 
 [source,plaintext]
 ----
@@ -31,9 +29,9 @@ user
 
 You can create a new user with the `user:add` command.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:add \
+{occ-command-example-prefix-docker} user:add \
     [--password-from-env] \
     [--display-name [DISPLAY-NAME]] \
     [--email [EMAIL]] \
@@ -77,9 +75,9 @@ This example adds new user, Layla Smith, and adds her to the `users` and `db-adm
 If either group does not exist, it is created.
 
 .Create a user with a password, email address, and display name, and add them to two groups
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:add \
+{occ-command-example-prefix-docker} user:add \
   --display-name="Layla Smith" \
   --group="users" \
   --group="db-admins" \
@@ -96,9 +94,9 @@ If either group does not exist, it is created.
 NOTE: Run this command inside the ownCloud Docker container.
 
 .Create a user with a temporary password (the user will receive a link to set their password).
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:add \
+{occ-command-example-prefix-docker} user:add \
   --display-name "Layla Smith" \
   --email "***********" \
   --group "users" \
@@ -117,9 +115,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 To delete a user, you use the `user:delete` command.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:delete [options] [--] <uid>
+{occ-command-example-prefix-docker} user:delete [options] [--] <uid>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -141,9 +139,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 | Try to force the deletion of the user data even if the user is missing.
 |===
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:delete fred
+{occ-command-example-prefix-docker} user:delete fred
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -152,9 +150,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Admins can disable users via the occ command too:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:disable <uid>
+{occ-command-example-prefix-docker} user:disable <uid>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -171,9 +169,9 @@ NOTE: Once users are disabled, their connected browsers will be disconnected. Us
 
 == Enable Users
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:enable <uid>
+{occ-command-example-prefix-docker} user:enable <uid>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -192,9 +190,9 @@ List all available root directories for user homes that are currently in use. Fo
 
 This command is complementary when using `user:move-home`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-dirs [options]
+{occ-command-example-prefix-docker} user:home:list-dirs [options]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -209,9 +207,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Examples
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-dirs
+{occ-command-example-prefix-docker} user:home:list-dirs
   - /var/www/owncloud/data
 ----
 
@@ -223,9 +221,9 @@ List all users that have their home in a given path. For details see xref:config
 
 This command is complementary when using `user:move-home`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-users [options] [--] [<path>]
+{occ-command-example-prefix-docker} user:home:list-users [options] [--] [<path>]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -253,9 +251,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Note for the example below, some user accounts originated from LDAP.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-users /var/www/owncloud/data
+{occ-command-example-prefix-docker} user:home:list-users /var/www/owncloud/data
   - admin
   - aca4c3ec-691d-103b-8380-55a4da3d3a76
   - 9918b614-6a2e-103b-89a7-f5edf5d332f5
@@ -267,9 +265,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Run the following command to list all users from all available home directories. The example shows, that user `lisa` has been moved to a different home directory with `user:move-home`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-users --all
+{occ-command-example-prefix-docker} user:home:list-users --all
   - /mnt/newhome_1
     - lisa
   - /var/www/owncloud/data 
@@ -283,9 +281,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 To view a list of users who've not logged in for a given number of days, use the `user:inactive` command.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:inactive [options] [--] <days>
+{occ-command-example-prefix-docker} user:inactive [options] [--] <days>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -308,9 +306,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 The example below searches for users inactive for five days or more:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:inactive 5
+{occ-command-example-prefix-docker} user:inactive 5
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -349,9 +347,9 @@ Using the output option `json_pretty` will render the output formatted as follow
 
 To view a user's most recent login, use the `user:lastseen` command:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:lastseen <uid>
+{occ-command-example-prefix-docker} user:lastseen <uid>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -366,9 +364,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Example
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:lastseen layla
+{occ-command-example-prefix-docker} user:lastseen layla
   layla's last login: 09.01.2015 18:46
 ----
 
@@ -378,9 +376,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 You can list existing users with the `user:list` command.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list [options] [<search-pattern>]
+{occ-command-example-prefix-docker} user:list [options] [<search-pattern>]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -411,9 +409,9 @@ Allowed attributes, multiple values possible: +
 
 This example lists user IDs containing the string `ron`
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list ron
+{occ-command-example-prefix-docker} user:list ron
  - aaron: Aaron Smith
 ----
 
@@ -421,9 +419,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 The output can be formatted in JSON with the output option `json` or `json_pretty`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list --output=json_pretty
+{occ-command-example-prefix-docker} user:list --output=json_pretty
  {
    "aaron": "Aaron Smith",
    "herbert": "Herbert Smith",
@@ -435,9 +433,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 This example lists all users including the attribute `enabled`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list -a enabled
+{occ-command-example-prefix-docker} user:list -a enabled
  - admin: true
  - foo: true
 ----
@@ -448,9 +446,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 You can list the group membership of a user with the `user:list-groups` command.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list-groups [options] [--] <uid>
+{occ-command-example-prefix-docker} user:list-groups [options] [--] <uid>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -475,9 +473,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 This example lists group membership of user `julie`:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list-groups julie
+{occ-command-example-prefix-docker} user:list-groups julie
  - Executive
  - Finance
 ----
@@ -486,9 +484,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 The output can be formatted in JSON with the output option `json` or `json_pretty`:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list-groups --output=json_pretty julie
+{occ-command-example-prefix-docker} user:list-groups --output=json_pretty julie
  [
    "Executive",
    "Finance"
@@ -501,9 +499,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 This command modifies either the users username or email address.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:modify [options] [--] <uid> <key> <value>
+{occ-command-example-prefix-docker} user:modify [options] [--] <uid> <key> <value>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -524,9 +522,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 All three arguments are mandatory and can not be empty. Example to set the email address:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:modify carla email foobar@foo.com
+{occ-command-example-prefix-docker} user:modify carla email foobar@foo.com
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -537,9 +535,9 @@ The email address of `carla` is updated to `foobar@foo.com`.
 
 This command moves a user's home folder to a new location. For details see xref:configuration/user/user_management.adoc#moving-the-user-home[Moving the User Home] documentation. Note that moving a users home is only possible for POSIX file systems. Also see the `user:home` commands for additional support.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:move-home <user_id> <new_location>
+{occ-command-example-prefix-docker} user:move-home <user_id> <new_location>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -565,9 +563,9 @@ You must not use temp directories like `/tmp` and `/var/tmp` as target directory
 
 Example:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:move-home lisa /mnt/newhome_1
+{occ-command-example-prefix-docker} user:move-home lisa /mnt/newhome_1
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -576,21 +574,20 @@ This command moves the home directory of user `lisa` to the new location `/mnt/n
 
 == Generating a User Count Report
 
-Generate a simple report that counts all users including users on external user authentication servers such as LDAP,
-and guest users which are created by the guests app.
+Generate a simple report that counts all users including users on external user authentication servers such as LDAP, and guest users which are created by the guests app.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:report
+{occ-command-example-prefix-docker} user:report
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
 
 There are no arguments and no options beside the default once to parametrize the output.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:report
+{occ-command-example-prefix-docker} user:report
 +--------------------------+-----+
 | User Report              |     |
 +--------------------------+-----+
@@ -613,9 +610,9 @@ NOTE: A user directory is created, when a local user has logged on the first tim
 
 Resets the password of the named user.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:resetpassword [options] [--] <user>
+{occ-command-example-prefix-docker} user:resetpassword [options] [--] <user>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -667,9 +664,9 @@ User "fred" added to group "users"
 
 You can reset any user's password, including administrators (see xref:configuration/user/reset_admin_password.adoc[Reset Admin Password]):
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:resetpassword layla
+{occ-command-example-prefix-docker} user:resetpassword layla
   Enter a new password:
   Confirm the new password:
 Successfully reset password for layla
@@ -691,9 +688,9 @@ Successfully reset password for layla
 This example emails a password reset link to the user.
 Additionally, when the command completes, it outputs the password reset link to the console:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:resetpassword \
+{occ-command-example-prefix-docker} user:resetpassword \
   --send-email \
   --output-link \
   layla
@@ -718,9 +715,9 @@ To manage application settings for a user, use the `user:setting` command. This 
 * Set a setting value
 * Delete a setting
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:setting [options] [--] <uid> [[<app> [<key>]]
+{occ-command-example-prefix-docker} user:setting [options] [--] <uid> [[<app> [<key>]]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -786,9 +783,9 @@ A complete list cannot be supplied as it is impossible to know the entire list o
 
 To retrieve settings for a user, you need to call the `user:setting` command and supply at least the user's user name. You can drill down restricting results to a particular app and a key in the app.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:setting <uid> [<app>] [<key>]
+{occ-command-example-prefix-docker} user:setting <uid> [<app>] [<key>]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -811,9 +808,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 . Retrieve all settings set for a given user:
 +
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:setting layla
+{occ-command-example-prefix-docker} user:setting layla
   - core:
     - lang: en
   - login:
@@ -829,9 +826,9 @@ Here we see that the user has settings for the application `core`, when they las
 
 . Retrieve all settings set restricted to application `core` for a given user:
 +
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:setting layla core
+{occ-command-example-prefix-docker} user:setting layla core
  - core:
     - lang: en
 ----
@@ -843,9 +840,9 @@ In the output, you can see that one setting is in effect, `lang`, which is set t
 
 . Retrieve all settings set restricted to application `core`, key `lang` for a given user
 +
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:setting layla core lang
+{occ-command-example-prefix-docker} user:setting layla core lang
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -857,7 +854,7 @@ This will display the value for that setting, such as `en`.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:setting [options] [--] <uid> [<app>] [<key>]
+{occ-command-example-prefix-docker} user:setting [options] [--] <uid> [<app>] [<key>]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -866,30 +863,25 @@ IMPORTANT: In case you want to change the email address, use xref:modify-user-de
 
 Here's an example of how you would set the language of the user `layla`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:setting layla core lang --value=en
+{occ-command-example-prefix-docker} user:setting layla core lang --value=en
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
 
-Deleting a setting is quite similar to setting a setting. 
-In this case, you supply the username, application (or setting category) and key as above. 
-Then, in addition, you supply the `--delete` flag.
+Deleting a setting is quite similar to setting a setting. In this case, you supply the username, application (or setting category) and key as above. Then, in addition, you supply the `--delete` flag.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:setting layla core lang --delete
+{occ-command-example-prefix-docker} user:setting layla core lang --delete
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
 
 == Syncing User Accounts
 
-This command syncs users stored in external backend services, such as _LDAP_, _Shibboleth_, and _Samba_, with ownCloud's, internal user database.
-However, it's not essential to run it regularly, unless you have a large number of users whose account properties have changed in a backend outside of ownCloud.
-When run, it will pick up changes from alternative user backends, such as LDAP, where properties like `cn` or `display name` have changed, and sync them with ownCloud's user database.
-If accounts are found that no longer exist in the external backend, you are given the choice of either removing or disabling the
+This command syncs users stored in external backend services, such as _LDAP_, _Shibboleth_, and _Samba_, with ownCloud's, internal user database. However, it's not essential to run it regularly, unless you have a large number of users whose account properties have changed in a backend outside of ownCloud. When run, it will pick up changes from alternative user backends, such as LDAP, where properties like `cn` or `display name` have changed, and sync them with ownCloud's user database. If accounts are found that no longer exist in the external backend, you are given the choice of either removing or disabling the
 accounts.
 
 NOTE: It's also xref:configuration/server/background_jobs_configuration.adoc#available-background-jobs[one of the commands] that you should run on a regular basis to ensure that your ownCloud installation is running optimally.
@@ -898,9 +890,9 @@ NOTE: This command replaces the old `show-remnants` functionality, and brings th
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-user:sync [options] [--] [<backend-class>]
+{occ-command-example-prefix-docker} user:sync [options] [--] [<backend-class>]
 ----
 
 Synchronize users from a given backend to the accounts table.
@@ -964,18 +956,18 @@ and _Shibboleth_ backend.
 
 === LDAP
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy"
+{occ-command-example-prefix-docker} user:sync "OCA\User_LDAP\User_Proxy"
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
 
 === Samba
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:sync "OCA\User\SMB" -vvv
+{occ-command-example-prefix-docker} user:sync "OCA\User\SMB" -vvv
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -984,9 +976,9 @@ Below are examples of how to use the command with the *LDAP* backend along with 
 
 === Example 1
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
+{occ-command-example-prefix-docker} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
   Analysing all users ...
       6 [============================]
 
@@ -1002,9 +994,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Example 2
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
+{occ-command-example-prefix-docker} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
   Analysing all users ...
       6 [============================]
 
@@ -1024,9 +1016,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Example 3
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
+{occ-command-example-prefix-docker} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
   Analysing all users ...
       6 [============================]
 
@@ -1047,9 +1039,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Example 4
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
+{occ-command-example-prefix-docker} user:sync "OCA\User_LDAP\User_Proxy" -m disable -r
   Analysing all users ...
       6 [============================]
 
@@ -1068,9 +1060,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Example 5
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy" -m remove
+{occ-command-example-prefix-docker} user:sync "OCA\User_LDAP\User_Proxy" -m remove
 
 ----
 
@@ -1078,9 +1070,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Example 6
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:sync "OCA\User_LDAP\User_Proxy"
+{occ-command-example-prefix-docker} user:sync "OCA\User_LDAP\User_Proxy"
 If unknown users are found, what do you want to do with their accounts? (removing the account will also remove its data)
 [0] disable
 [1] remove

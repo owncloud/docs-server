@@ -168,7 +168,7 @@ It is still necessary to increment the application’s version number to trigger
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrations:generate app-name {simple, SQL, schema}
+{occ-command-example-prefix-docker} migrations:generate app-name {simple, SQL, schema}
 ----
 
 === A Simple Migration Step
@@ -213,7 +213,7 @@ This is the preferred way to manipulate the schema.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrations:execute dav 20161130090952
+{occ-command-example-prefix-docker} migrations:execute dav 20161130090952
 ----
 
 Because all migration steps will be executed upon installation, there is no explicit need for unit tests.

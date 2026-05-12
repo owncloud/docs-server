@@ -149,7 +149,7 @@ following commands:
 [source,bash,subs="attributes+"]
 ----
 cd /var/www/owncloud/
-{occ-command-example-prefix} maintenance:mode --on
+{occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -226,7 +226,7 @@ first verify that ownCloud is in maintenance mode.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode
+{occ-command-example-prefix-docker} maintenance:mode
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -246,7 +246,7 @@ maintenance mode.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --off
+{occ-command-example-prefix-docker} maintenance:mode --off
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

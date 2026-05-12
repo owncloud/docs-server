@@ -10,9 +10,9 @@ notifications
 
 == Command Description
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} notifications:generate [-u|--user USER] [-g|--group GROUP] [-l|--link <linktext>] [--] <subject> [<message>]
+{occ-command-example-prefix-docker} notifications:generate [-u|--user USER] [-g|--group GROUP] [-l|--link <linktext>] [--] <subject> [<message>]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -38,13 +38,11 @@ NOTE: Run this command inside the ownCloud Docker container.
 `--link=[LINK]`   | A link associated with the notification.
 |===
 
-At least one user or group must be set.
-A link can be useful for notifications shown in client apps.
-Example:
+At least one user or group must be set. A link can be useful for notifications shown in client apps. Example:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} notifications:generate -g Office "Emergency Alert" "Rebooting in 5min"
+{occ-command-example-prefix-docker} notifications:generate -g Office "Emergency Alert" "Rebooting in 5min"
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

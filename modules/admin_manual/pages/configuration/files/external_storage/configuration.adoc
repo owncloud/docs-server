@@ -134,7 +134,7 @@ You might need to setup a cron job that runs
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files:scan --all`
+{occ-command-example-prefix-docker} files:scan --all`
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

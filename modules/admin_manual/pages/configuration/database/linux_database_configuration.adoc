@@ -182,7 +182,7 @@ innodb_file_per_table=ON
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} db:convert-mysql-charset
+{occ-command-example-prefix-docker} db:convert-mysql-charset
 ----
 +
 NOTE: Run this command inside the ownCloud Docker container.

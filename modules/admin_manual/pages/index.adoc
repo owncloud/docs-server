@@ -4,7 +4,7 @@ Welcome to the ownCloud Classic Server Administration Guide. This guide describe
 
 == Installation Changes
 
-IMPORTANT: Compared to former releases, ownCloud 11 is only available as docker image which contains all the required libraries such as PHP 8.
+IMPORTANT: Unlike previous releases, ownCloud 11 is only available as a Docker image containing the necessary libraries, such as PHP 8.
 
 == Target Audience
 

@@ -12,9 +12,9 @@ previews
 
 Removing not referenced previews can be necessary, e.g., when the image has been deleted or the ID of the mountpoint changes which happens when renaming it. Previews will be generated anew when accessing the image again, but not referenced previews are orphans. To avoid orphans, an occ command has been added to manually remove those not referenced previews as they are eating up storage space unnecessarily. In addition, a background job has been created which automatically removes them on a regular basis. For more info see the xref:background-job[Background Job] section and the example listing xref:configuration/server/occ_command.adoc#list-queued-backgroundjobs[OCA\Files\BackgroundJob\PreviewCleanupJob].
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} previews:cleanup [options] [--] [<chunk_size>]
+{occ-command-example-prefix-docker} previews:cleanup [options] [--] [<chunk_size>]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -52,9 +52,9 @@ Description:
 
 In the example below, you run one loop with max (default) 1000 files processed.
  
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} previews:cleanup
+{occ-command-example-prefix-docker} previews:cleanup
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

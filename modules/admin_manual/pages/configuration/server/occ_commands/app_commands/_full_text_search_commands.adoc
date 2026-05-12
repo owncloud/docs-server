@@ -24,9 +24,9 @@ In addition to the settings provided by the Full Text Search app, you can set/re
 
 The command `search:index:create` creates the initial full text search index for one or all users. 
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:create <user_id> (<user_id>)...
+{occ-command-example-prefix-docker} search:index:create <user_id> (<user_id>)...
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -52,9 +52,9 @@ A full text search index is created for all users, if this value is omitted.
 
 This example creates a full text search index for the user with user id `testuser`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:create testuser
+{occ-command-example-prefix-docker} search:index:create testuser
 
 Indexing user testuser
 ----
@@ -65,9 +65,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 This example creates a full text search index for the users with user ids `admin` and `testuser`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:create admin testuser
+{occ-command-example-prefix-docker} search:index:create admin testuser
 
 Indexing user admin
 Indexing user testuser
@@ -79,9 +79,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Fill a secondary index based on the indexed data we have. Files not matching the "indexed" status will be ignored. This is intended to be used in index data migrations, so the connector for this secondary index should have been configured as "write connector". See the xref:configuration/general_topics/search.adoc[Full Text Search] documentation for more details. Note that the values of the `connector_name` are hardcoded and have to be written as described.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:fillSecondary [options] [--] <connector_name> <user_id>...
+{occ-command-example-prefix-docker} search:index:fillSecondary [options] [--] <connector_name> <user_id>...
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -120,9 +120,9 @@ Rebuild the index for a given user. All the indexes associated with the configur
 
 If you want to rebuild the whole index, run `search:index:reset` and then `search:index:create --all`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:rebuild <user_id> (<user_id>)...
+{occ-command-example-prefix-docker} search:index:rebuild <user_id> (<user_id>)...
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -150,9 +150,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 This example rebuilds the full text search index for the user with user ID `testuser`.
 
 .Rebuild the index for a single user
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:rebuild testuser
+{occ-command-example-prefix-docker} search:index:rebuild testuser
 
 Indexing user testuser
 
@@ -170,9 +170,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 This example rebuilds the full text search index for the users with user IDs `admin` and `testuser`.
 
 .Rebuild the index for multiple users
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:rebuild admin testuser
+{occ-command-example-prefix-docker} search:index:rebuild admin testuser
 
 This will delete all search index data for admin, testuser! Do you want to proceed?
   [0] no
@@ -188,19 +188,19 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 The entire index can be rebuilt by running the following two commands:
 
-[source="console",subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:reset
-{occ-command-example-prefix} search:index:create --all
+{occ-command-example-prefix-docker} search:index:reset
+{occ-command-example-prefix-docker} search:index:create --all
 ----
 
 == Reset the Full Text Search Index
 
 Reset all the configured indexes. Changes in the configuration of the indexes associated with the configured connectors will take place. All the data in those indexes will be removed, so you'll need to rebuild the indexes, usually with "search:index:rebuild".
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:reset
+{occ-command-example-prefix-docker} search:index:reset
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -215,9 +215,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Example
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:reset
+{occ-command-example-prefix-docker} search:index:reset
 This will delete the whole search index! Do you want to proceed?
   [0] no
   [1] yes
@@ -231,9 +231,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Updates to the search index due to changed content or changed metadata are happening via background jobs that are added to a queue. These background jobs are normally run by the ownCloud cronjob. The command `search:index:update` updates the full text search index by running all pending background jobs.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:update
+{occ-command-example-prefix-docker} search:index:update
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -250,9 +250,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 This example updates the full text search index for all users.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:update
+{occ-command-example-prefix-docker} search:index:update
 Start Updating the Elastic search index:
 No pending jobs found.
 ----
@@ -263,9 +263,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 To do an initial full indexing without the Full Text Search app interfering, it can be put in passive mode. See the xref:configuration/general_topics/search.adoc#app-modes[App Modes] section in the Full Text Search description for details.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic mode --value passive
 ----
 
@@ -273,9 +273,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Switching back to active mode can be done by running the following command:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic mode --value active
 ----
 
@@ -287,9 +287,9 @@ Search results can be restricted in different ways, see the xref:configuration/g
 
 === Index Metadata Only
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic nocontent --value true
 ----
 
@@ -297,9 +297,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Switching back to provide all content search results can be done by running the following command:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic nocontent --value false
 ----
 
@@ -307,9 +307,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Limit Metadata Search for Groups 
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic group.nocontent \
     --value group1,group2,"group with blank"
 ----

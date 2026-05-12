@@ -75,9 +75,9 @@ These commands manage the configurations of apps. Keys and values are stored in 
 
 == config:app:delete
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:delete [options] [--] <app> <name>
+{occ-command-example-prefix-docker} config:app:delete [options] [--] <app> <name>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -100,9 +100,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Examples:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:delete myappname provisioning_api
+{occ-command-example-prefix-docker} config:app:delete myappname provisioning_api
 Config value provisioning_api of app myappname deleted
 ----
 
@@ -111,9 +111,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 The delete command will by default not complain if the configuration was not set before. 
 If you want to be notified in that case, set the `--error-if-not-exists` flag.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:delete doesnotexist --error-if-not-exists
+{occ-command-example-prefix-docker} config:app:delete doesnotexist --error-if-not-exists
 Config provisioning_api of app appname could not be deleted because it did not exist
 ----
 
@@ -121,9 +121,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 == config:app:get
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:get [options] [--] <app> <name>
+{occ-command-example-prefix-docker} config:app:get [options] [--] <app> <name>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -147,9 +147,9 @@ the command will exit with 1.
 
 === Examples
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:get activity installed_version
+{occ-command-example-prefix-docker} config:app:get activity installed_version
 2.2.1
 ----
 
@@ -157,9 +157,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 == config:app:set
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set [options] [--] <app> <name>
+{occ-command-example-prefix-docker} config:app:set [options] [--] <app> <name>
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -183,9 +183,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Examples
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
    files_sharing \
    incoming_server2server_share_enabled \
    --value=true \
@@ -197,9 +197,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 The `config:app:set` command creates the value, if it does not already exist. To update an existing value, set `--update-only`:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
    doesnotexist \
    --value=true \
    --type=boolean \
@@ -218,18 +218,18 @@ The exported content can also be imported again to allow the fast setup of simil
 The import command will only add or update values. 
 Values that exist in the current configuration, but not in the one that is being imported are left untouched.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:import filename.json
+{occ-command-example-prefix-docker} config:import filename.json
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
 
 It is also possible to import remote files, by piping the input:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:import < local-backup.json
+{occ-command-example-prefix-docker} config:import < local-backup.json
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -241,9 +241,9 @@ Use the `occ app:enable`, `occ app:disable` and `occ update` commands instead.
 
 The `config:list` command lists all configuration values for your ownCloud setup as well as for any apps.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:list [options] [--] [<app>]
+{occ-command-example-prefix-docker} config:list [options] [--] [<app>]
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -275,9 +275,9 @@ include::partial$configuration/server/occ_command/config-list-report.json[]
 
 To generate a full report which includes sensitive values, such as passwords and salts, use the `--private` option, as in the following example.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:list --private
+{occ-command-example-prefix-docker} config:list --private
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -287,17 +287,17 @@ NOTE: Run this command inside the ownCloud Docker container.
 The output can be filtered to just the core information, core and apps, or one specific app.
 In the example below, you can see how to filter for each of these categories.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
 # List only system configuration details
-{occ-command-example-prefix} config:list -- system
+{occ-command-example-prefix-docker} config:list -- system
 
 # List system and app configuration details
 # This is the default, so doesn't need to be explicitly specified
-{occ-command-example-prefix} config:list -- all
+{occ-command-example-prefix-docker} config:list -- all
 
 # List configuration details of the dav app
-{occ-command-example-prefix} config:list -- dav
+{occ-command-example-prefix-docker} config:list -- dav
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -322,9 +322,9 @@ These commands manage system configurations.
 
 == config:system:delete
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:delete [options] [--] <name> (<name>)...
+{occ-command-example-prefix-docker} config:system:delete [options] [--] <name> (<name>)...
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -346,9 +346,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 === Examples:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:delete maintenance:mode
+{occ-command-example-prefix-docker} config:system:delete maintenance:mode
 System config value maintenance:mode deleted
 ----
 
@@ -356,9 +356,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 == config:system:get
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:get [options] [--] <name> (<name>)...
+{occ-command-example-prefix-docker} config:system:get [options] [--] <name> (<name>)...
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -381,19 +381,19 @@ the command will exit with 1.
 
 === Examples:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:get version
-10.7.0.4
+{occ-command-example-prefix-docker} config:system:get version
+10.16.0.2
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
 
 == config:system:set
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:set [options] [--] <name> (<name>)...
+{occ-command-example-prefix-docker} config:system:set [options] [--] <name> (<name>)...
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -422,9 +422,9 @@ NOTE: In order to write a boolean, float, JSON, or integer value to the configur
 
 Disable the maintenance mode:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:set maintenance \
+{occ-command-example-prefix-docker} config:system:set maintenance \
    --value=false \
    --type=boolean
 
@@ -436,9 +436,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Create the `app_paths` config setting (using a JSON payload because of multi array values):
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:set apps_paths \
+{occ-command-example-prefix-docker} config:system:set apps_paths \
       --type=json \
       --value='[
         {
@@ -458,9 +458,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 Adding Redis to the configuration:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:set \
+{occ-command-example-prefix-docker} config:system:set \
    redis \
    --value '{"host": "{oc-examples-server-ip}", "port": "{std-port-redis}"}' \
    --type json
@@ -473,9 +473,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 Some configurations (e.g., the trusted domain setting) are an array of data. 
 The array starts counting with 0. In order to set (and also get) the value of one key, you can specify multiple `config` names separated by spaces:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:get trusted_domains
+{occ-command-example-prefix-docker} config:system:get trusted_domains
 localhost
 owncloud.local
 sample.tld
@@ -485,12 +485,12 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 To replace `sample.tld` with `example.com` trusted_domains => 2 needs to be set:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:system:set trusted_domains 2 --value=example.com
+{occ-command-example-prefix-docker} config:system:set trusted_domains 2 --value=example.com
 System config value trusted_domains => 2 set to string example.com
 
-{occ-command-example-prefix} config:system:get trusted_domains
+{occ-command-example-prefix-docker} config:system:get trusted_domains
 localhost
 owncloud.local
 example.com

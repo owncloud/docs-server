@@ -39,7 +39,7 @@ xref:maintenance/backup_and_restore/backup.adoc[Backing up ownCloud] guide.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --on
+{occ-command-example-prefix-docker} maintenance:mode --on
 ----
 +
 NOTE: Run this command inside the ownCloud Docker container.
@@ -59,7 +59,7 @@ sudo service apache2 stop
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} db:restore-default-row-format
+{occ-command-example-prefix-docker} db:restore-default-row-format
 ----
 +
 NOTE: Run this command inside the ownCloud Docker container.
@@ -82,7 +82,7 @@ when using a dockerized environment as part of the upgrade procedure.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --off
+{occ-command-example-prefix-docker} maintenance:mode --off
 ----
 +
 NOTE: Run this command inside the ownCloud Docker container.

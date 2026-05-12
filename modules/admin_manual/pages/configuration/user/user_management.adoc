@@ -184,7 +184,7 @@ For details of the occ user commands used below, see the xref:configuration/serv
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list lisa -a home
+{occ-command-example-prefix-docker} user:list lisa -a home
   - lisa: /var/www/owncloud/data/lisa
 ----
 +
@@ -206,7 +206,7 @@ Use the OS methods to create one or more new mount points for users home directo
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:move-home lisa /mnt/newhome_1
+{occ-command-example-prefix-docker} user:move-home lisa /mnt/newhome_1
 ----
 +
 NOTE: Run this command inside the ownCloud Docker container.
@@ -227,7 +227,7 @@ NOTE: If you are using LDAP and the xref:enterprise/external_storage/ldap_home_c
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list lisa -a home
+{occ-command-example-prefix-docker} user:list lisa -a home
   - lisa: /mnt/newhome_1/lisa
 ----
 +
@@ -241,7 +241,7 @@ The following command lists all available user homes. Note a home only gets list
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-dirs
+{occ-command-example-prefix-docker} user:home:list-dirs
   - /var/www/owncloud/data
   - /mnt/newhome_1/lisa
 ----
@@ -254,7 +254,7 @@ The following command lists all users from a given home.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-users /var/www/owncloud/data
+{occ-command-example-prefix-docker} user:home:list-users /var/www/owncloud/data
   - admin
   - user01
 ----

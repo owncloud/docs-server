@@ -12,12 +12,11 @@ background:queue
 
 == Deleting a Background Job
 
-The command `background:queue:delete` deletes a queued background job.
-It requires the job id of the job to be deleted.
+The command `background:queue:delete` deletes a queued background job. It requires the job id of the job to be deleted.
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-background:queue:delete <Job ID>
+{occ-command-example-prefix-docker} background:queue:delete <Job ID>
 ----
 
 === Arguments
@@ -31,9 +30,9 @@ WARNING: Deleting a job cannot be undone. Be sure that you want to delete the jo
 
 This example deletes queued background job #12.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:delete 12
+{occ-command-example-prefix-docker} background:queue:delete 12
 
 Job has been deleted.
 ----
@@ -42,12 +41,11 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 == Executing a Background Job
 
-The command `background:queue:execute` executes a queued background job.
-It requires the job id of the job to be executed.
+The command `background:queue:execute` executes a queued background job. It requires the job id of the job to be executed.
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-background:queue:execute [options] [--] <Job ID>
+{occ-command-example-prefix-docker} background:queue:execute [options] [--] <Job ID>
 ----
 
 === Arguments
@@ -68,9 +66,9 @@ background:queue:execute [options] [--] <Job ID>
 
 This example executes queued background job #12.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:execute 12
+{occ-command-example-prefix-docker} background:queue:execute 12
 
 This command is for maintenance and support purposes.
 This will run the specified background job now. Regular scheduled runs of the job will
@@ -88,9 +86,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 The command `background:queue:status` will list queued background jobs, including details when it last ran.
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-background:queue:status
+{occ-command-example-prefix-docker} background:queue:status
 ----
 
 === Options
@@ -102,9 +100,9 @@ background:queue:status
 
 This example lists the queue status:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:status
+{occ-command-example-prefix-docker} background:queue:status
 
 +--------+----------------------------------------------------+---------------+----------+---------------------------+-------------+------------------------+
 | Job ID | Job                                                | Job Arguments | Last Run | Last Checked              | Reserved At | Execution Duration (s) |
@@ -134,9 +132,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 There may be background jobs that are no longer valid. This can be because they are for an app that is now disabled or deleted, or jobs from an older version of an app that are no longer relevant. These jobs can be displayed with the `--display-invalid-jobs` option. Invalid jobs are listed with status "invalid". You can then delete invalid jobs with the `background:queue:delete` command using the job id.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:status --display-invalid-jobs
+{occ-command-example-prefix-docker} background:queue:status --display-invalid-jobs
 
 +--------+----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+---------------------------+-------------+------------------------+---------+
 | Job ID | Job                                                | Job Arguments                                                                                                                                                                        | Last Run                  | Last Checked              | Reserved At | Execution Duration (s) | Status  |

@@ -13,16 +13,16 @@ background
 
 == Examples
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
 # Set the background scheduler to Ajax
-{occ-command-example-prefix} background:ajax
+{occ-command-example-prefix-docker} background:ajax
 
 # Set the background scheduler to Cron
-{occ-command-example-prefix} background:cron
+{occ-command-example-prefix-docker} background:cron
 
 # Set the background scheduler to Webcron
-{occ-command-example-prefix} background:webcron
+{occ-command-example-prefix-docker} background:webcron
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

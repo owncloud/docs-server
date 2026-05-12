@@ -6,9 +6,9 @@
 
 Convert charset of MySQL/MariaDB to use utf8mb4. If you are using an older ownCloud installation, the database may not be setup to use the 4-byte unicode charset. This command changes the database charset to use `utf8mb4`. Check your database charset before you use this command.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} db:convert-mysql-charset
+{occ-command-example-prefix-docker} db:convert-mysql-charset
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -17,9 +17,9 @@ NOTE: Run this command inside the ownCloud Docker container.
 
 This command sets the default row format of MySQL/MariaDB tables. This is only necessary once before you are going to e.g. install MariaDB 10.6 or higher because the COMPRESSED row format is now read-only by default. As a prerequisite, ownCloud 10.9 needs to be installed first. See the xref:maintenance/upgrading/database_upgrade.adoc[Database Upgrade] guide for details. 
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} db:restore-default-row-format
+{occ-command-example-prefix-docker} db:restore-default-row-format
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

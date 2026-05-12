@@ -50,7 +50,7 @@ To install the app, use the Marketplace app on your ownCloud server or proceed m
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable search_elastic
+{occ-command-example-prefix-docker} app:enable search_elastic
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -182,7 +182,7 @@ You can at any time reset the index if required by clicking on btn:[Reset index]
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:reset
+{occ-command-example-prefix-docker} search:index:reset
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -195,7 +195,7 @@ You can use the:
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:reset
+{occ-command-example-prefix-docker} search:index:reset
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -208,7 +208,7 @@ List app settings::
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:list search_elastic
+{occ-command-example-prefix-docker} config:list search_elastic
 ----
 +
 [source,plaintext]
@@ -232,7 +232,7 @@ Set app options::
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic scanExternalStorages --value 0
 ----
 +
@@ -242,7 +242,7 @@ or
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic scanExternalStorages --value 1
 ----
 
@@ -275,7 +275,7 @@ To do an initial full indexing without the app interfering, it can be put in _pa
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic mode --value passive
 ----
 
@@ -285,7 +285,7 @@ or
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic mode --value active
 ----
 
@@ -299,7 +299,7 @@ If you only want to use the Full Text Search app as a more scalable search on fi
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic nocontent --value true
 ----
 
@@ -317,7 +317,7 @@ If you only want to use search for shared filenames, you can disable full text s
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic group.nocontent \
     --value nofulltext
 ----
@@ -328,7 +328,7 @@ You can also configure multiple groups by separating them with comma:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set \
+{occ-command-example-prefix-docker} config:app:set \
     search_elastic group.nocontent \
     --value nofulltext,anothergroup,"group with blanks"
 ----
@@ -346,7 +346,7 @@ When everything has been set up and configured, you can initiate creating the in
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} search:index:create
+{occ-command-example-prefix-docker} search:index:create
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

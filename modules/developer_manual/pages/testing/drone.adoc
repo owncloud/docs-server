@@ -21,7 +21,7 @@ This document will show you how to run drone tests locally.
 +
 [source,console,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:install
+{occ-command-example-prefix-docker} maintenance:install
 ----
 
 - Change into directory:

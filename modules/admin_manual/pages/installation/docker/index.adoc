@@ -35,9 +35,9 @@ Users not added to the `docker` group can run docker commands with a preceding `
 
 An example `occ` command looks like this:
 
-[source,docker]
+[source,docker,subs="attributes+"]
 ----
-docker exec --user www-data <owncloud-container-name> occ <your-command>
+{occ-command-example-prefix-docker} <your-command>
 ----
 
 == Quick Evaluation
@@ -63,6 +63,18 @@ With the command `docker ps` you can list your running docker containers and sho
 You can log in to your ownCloud instance via a browser at `pass:a[http://localhost:{std-port-http}]` with the preconfigured user `admin` and password `admin`.
 
 NOTE: Access only works locally with http, not https.
+
+[IMPORTANT]
+====
+If you want to access the occ CLI command set with the quick evaluation setup, you must use:
+
+[source,docker]
+----
+docker exec --user www-data oc-eval occ <command>
+----
+
+instead the `docker compose exec` version as used in the documentation.
+====
 
 If the outcome meets the expectations but a supported installation with MariaDB is targeted, remove the eval version before proceeding with the next section.
 
@@ -157,9 +169,9 @@ Only a few settings are required, these are:
 | `{std-port-http}`
 |===
 
-NOTE: `ADMIN_USERNAME` and `ADMIN_PASSWORD` will not change between deploys even if you change the
-values in the .env file. To change them, you'll need to do `docker volume prune`, which
-*will delete all your data*.
+NOTE: `ADMIN_USERNAME` and `ADMIN_PASSWORD` +
+will not change between deploys even if you change the values in the `.env` file. +
+To change them, you'll need to issue `docker volume prune`, which *will delete all your data*.
 --
 
 . Then, you can build and start the container, using your preferred Docker _command-line tool_.
@@ -227,37 +239,37 @@ docker run -v <YOUR_DOCKER_VOLUME>:/mnt \
 
 [TIP]
 ====
-Although the containers are up and running, it may still take a few minutes until ownCloud is fully
-functional. +
+Although the containers are up and running, it may still take a few minutes until ownCloud is fully functional. +
 To inspect the log output:
+
 [source,docker]
 ----
 docker compose logs --follow owncloud
 ----
+
 Wait until the output shows **Starting apache daemon...** before you access the web UI.
 ====
 
 [IMPORTANT]
 ====
 Although all important data persists after:
+
 [source,docker]
 ----
 docker compose down; docker compose up -d
 ----
+
 there are certain details that get lost, e.g., default apps may re-appear after they were uninstalled.
 ====
 --
 
 === Logging In
 
-To log in to the ownCloud UI, open `pass:a[http://localhost:{std-port-http}]` in your browser
-of choice, where you see the standard ownCloud login screen as in the
-image below.
+To log in to the ownCloud UI, open `pass:a[http://localhost:{std-port-http}]` (or the URL defined) in your browser of choice, where you see the standard ownCloud login screen as in the image below.
 
-image:docker/owncloud-ui-login.png[The ownCloud UI via Docker]
+image::docker/owncloud-ui-login.png[The ownCloud UI via Docker,width=300]
 
-The username and password are the credentials which you stored in `.env` earlier.
-Note that these will not change between deploys even if you change the values in .env.
+The username and password are the credentials which you stored in `.env` earlier. Note that these will not change between deploys even if you change the values in .env.
 
 === Stopping the Containers
 
@@ -277,31 +289,25 @@ docker compose down --rmi all --volumes
 === Running occ commands
 
 If you want to run an occ command, first go to the directory where your `.yaml` or `.env` file is located.
-Here, you are able to run any command referring to
-xref:configuration/server/occ_command.adoc[Using the occ Command] by entering:
+Here, you are able to run any command referring to xref:configuration/server/occ_command.adoc[Using the occ Command] by entering:
 
 [source,docker]
 ----
 docker compose exec owncloud occ <command>
 ----
 
-[IMPORTANT]
-====
-Don't use the `php` command prefix, this leads to several errors and is not intended to run in
-docker environments.
-====
+IMPORTANT: Don't use the `php` command prefix, this leads to several errors and is not intended to run in docker environments.
 
 === Upgrading ownCloud on Docker
 
-When a new version of ownCloud gets released, you should update your instance. To do so, follow
-these simple steps:
+When a new version of ownCloud gets released, you should update your instance. To do so, follow these simple steps:
 
 . Go to your docker directory where your `.yaml` and `.env` files exist.
 . Put ownCloud into maintenance mode with the following command:
 +
-[source,docker]
+[source,docker,subs="attributes+"]
 ----
-docker compose exec owncloud occ maintenance:mode --on
+{occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
 . Create a backup of the database in case something goes wrong during the upgrade process, using the following command:
@@ -325,15 +331,16 @@ NOTE: You need to adjust the password and database name if you have changed it i
 docker compose down
 ----
 
-. Update the version number of ownCloud in your `.env` file. You can use sed
-for it, as in the following example.
+. Update the version number of ownCloud in your `.env` file. You can use sed for it, as in the following example.
 +
+--
 Make sure that you adjust the example to match your installation.
-+
+
 [source,bash]
 ----
 sed -i 's/^OWNCLOUD_VERSION=.*$/OWNCLOUD_VERSION=<newVersion>/' .env
 ----
+--
 
 . View the file to ensure the change has been implemented.
 +
@@ -344,35 +351,32 @@ cat .env
 
 . Start your docker instance again.
 +
+--
 [source,docker]
 ----
 docker compose up -d
 ----
-+
-Now you should have the current ownCloud running with `docker compose`. Note that the container will
-automatically run `occ upgrade` when starting up. If you notice the container starting over and over again,
-you can check the update log with the following command:
-+
+
+Now you should have the current ownCloud running with `docker compose`. Note that the container will automatically run `occ upgrade` when starting up. If you notice the container starting over and over again, you can check the update log with the following command:
+
 [source,docker]
 ----
 docker compose logs --timestamp owncloud
 ----
+--
 
 . If all went well, end maintenance mode:
 +
-[source,docker]
+[source,docker,subs="attributes+"]
 ----
-docker compose exec owncloud occ maintenance:mode --off
+{occ-command-example-prefix-docker} maintenance:mode --off
 ----
 
 === Docker Compose YAML File
 
 The file `docker-compose.yml` contains the configuration of your ownCloud container.
 
-[NOTE]
-====
-Since ownCloud Server 10.5, the dedicated enterprise docker image `registry.owncloud.com/owncloud/enterprise` is deprecated. All supported enterprise features and apps are now included in the public image `owncloud/server` available on Docker Hub. A login to our registry `registry.owncloud.com` is no longer required.
-====
+NOTE: Since ownCloud Server 10.5, the dedicated enterprise docker image `registry.owncloud.com/owncloud/enterprise` is *deprecated*. All supported enterprise features and apps are now included in the public image `owncloud/server` available on Docker Hub. A login to our registry `registry.owncloud.com` is no longer required.
 
 [source,yaml]
 ----
@@ -396,7 +400,7 @@ The loglevel is set to the fixed value 2: _"Warnings, errors, and fatal issues"_
 OWNCLOUD_LOGLEVEL=0
 ----
 
-=== Terminating containers
+=== Terminating Containers
 
 If your container is terminating for whatever reason, you will not be able to run `docker(-compose) exec` to make investigations inside the container as there will be no running container. Instead you need to use `docker(-compose) run`. It's important that you prefix any command to be run by `/usr/bin/owncloud`, otherwise the container will not be initialized correctly. See the example command below:
 

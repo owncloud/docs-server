@@ -13,9 +13,9 @@ log
 
 Run `log:owncloud` to see your current logging status:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} log:owncloud
+{occ-command-example-prefix-docker} log:owncloud
 Log backend ownCloud: enabled
 Log file: /opt/owncloud/data/owncloud.log
 Rotate at: disabled
@@ -47,10 +47,10 @@ Options for `log:manage`:
 
 Log level can be adjusted by entering the number or the name:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} log:manage --level 4
-{occ-command-example-prefix} log:manage --level error
+{occ-command-example-prefix-docker} log:manage --level 4
+{occ-command-example-prefix-docker} log:manage --level error
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

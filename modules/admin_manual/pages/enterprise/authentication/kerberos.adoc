@@ -212,7 +212,7 @@ This option can also be used if you have only one web site but want to keep the 
 +
 [source.bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable kerberos
+{occ-command-example-prefix-docker} app:enable kerberos
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.

@@ -12,7 +12,7 @@ To enable maintenance mode, run the following command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --on
+{occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
@@ -30,7 +30,7 @@ To disable maintenance mode, run the following command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --off
+{occ-command-example-prefix-docker} maintenance:mode --off
 ----
 
 NOTE: Run this command inside the ownCloud Docker container.
