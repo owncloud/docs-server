@@ -10,4 +10,4 @@ image::personal-settings/storage/external-storage.png[]
 
 == Configuration
 
-To configure one or more external storages, please refer to the xref:{latest-server-version}@server:admin_manual:configuration/files/external_storage/index.adoc[External Storage documentation].
+To configure one or more external storages, please refer to the xref:server:admin_manual:configuration/files/external_storage/index.adoc[External Storage documentation].

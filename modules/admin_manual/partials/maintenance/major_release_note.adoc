@@ -1,6 +1,6 @@
 [IMPORTANT]
 ====
-When upgrading, also check the minimum and maximum supported PHP version of the ownCloud target release. An ownCloud release may require a particular minimum and/or maximum PHP version. Check that the PHP version provided by the Operating System meets the requirements. For details see the https://doc.owncloud.com/docs_main/next/server_release_notes.html[Server Release Notes] and the xref:{latest-server-version}@server:admin_manual:installation/system_requirements.adoc[System Requirements] for the latest Release.
+When upgrading, also check the minimum and maximum supported PHP version of the ownCloud target release. An ownCloud release may require a particular minimum and/or maximum PHP version. Check that the PHP version provided by the Operating System meets the requirements. For details see the https://doc.owncloud.com/docs_main/next/server_release_notes.html[Server Release Notes] and the xref:server:admin_manual:installation/system_requirements.adoc[System Requirements] for the latest Release.
 ====
 
 [TIP]
@@ -15,7 +15,7 @@ Here are some examples:
 |===
 |Version
 |Can Upgrade to {latest-server-download-version} ?
-|Requirements (always check the xref:{latest-server-version}@server:admin_manual:installation/system_requirements.adoc[System Requirements] too)
+|Requirements (always check the xref:server:admin_manual:installation/system_requirements.adoc[System Requirements] too)
 
 |10.X.Y
 |Yes
