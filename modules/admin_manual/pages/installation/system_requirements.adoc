@@ -1,11 +1,10 @@
 = System Requirements
 :toc: right
-:toclevels: 1
-:desktop-system-requirements-url: https://doc.owncloud.com/desktop/installing.html#system-requirements
-:ios-system-requirements-url: https://doc.owncloud.com/ios-app/ios_faq.html
-:android-system-requirements-url: https://doc.owncloud.com/android/faq.html
-
 :description: Read this documentation for the supported environment for your ownCloud Server. Starting with ownCloud Server 11, only Docker-based installations are supported.
+
+:desktop-system-requirements-url: https://doc.owncloud.com/desktop/
+:ios-system-requirements-url: https://doc.owncloud.com/ios-app/
+:android-system-requirements-url: https://doc.owncloud.com/android/
 
 == Introduction
 
@@ -15,7 +14,7 @@
 
 ownCloud Server 11 is exclusively deployed via Docker. The following requirements apply to the Docker host:
 
-[width="60%",cols="30%,60%a",options="header"]
+[width="100%",cols="30%,70%a",options="header"]
 |===
 | Component
 | Requirement
@@ -30,7 +29,8 @@ ownCloud Server 11 is exclusively deployed via Docker. The following requirement
 | 64-bit (x86_64 / amd64)
 
 | RAM
-| Minimum 512MB; 1GB or more recommended
+| Minimum 512MB; 1GB or more recommended. +
+Memory requirements for running an ownCloud server are greatly variable, depending on the numbers of users and files, and volume of server activity.
 |===
 
 [NOTE]
@@ -47,33 +47,18 @@ The operating system, web server, PHP runtime, and database are all managed insi
 
 === Web Browser
 
-* Edge (current version on Windows 10)
-* IE11 or newer (except Compatibility Mode)
 * Firefox 60 ESR+
 * Chrome 66+
 * Safari 10+
+* Edge (current version on Windows 10)
+* IE11 or newer (except Compatibility Mode)
 
-=== Desktop Sync Client
-
-We always recommend to use the newest sync client with the latest server release.
-
-You can find {desktop-system-requirements-url}[detailed system requirements] in the documentation for the Desktop Synchronization Client.
-
-=== Mobile Apps
+=== Desktop and Mobile Apps
 
 We always recommend to use the newest mobile apps with the latest server release.
 
-You can find detailed system requirements in the documentation for the mobile apps.
+You can find detailed system requirements in the documentation for the Apps in:
 
+* {desktop-system-requirements-url}[Desktop App]
 * {ios-system-requirements-url}[iOS system requirements]
 * {android-system-requirements-url}[Android system requirements]
-
-[TIP]
-====
-You can find out more in the https://owncloud.com/changelog[changelog].
-====
-
-== Memory Requirements
-
-Memory requirements for running an ownCloud server are greatly variable, depending on the numbers of users and files, and volume of server activity. ownCloud officially requires a minimum of 128MB RAM.
-But, we recommend a minimum of 512MB.

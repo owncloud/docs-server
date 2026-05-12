@@ -1,5 +1,4 @@
 = Installation Options
-:page-aliases: go/admin-install.adoc
 
 == Introduction
 
