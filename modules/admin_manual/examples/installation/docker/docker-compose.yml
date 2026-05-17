@@ -72,15 +72,15 @@ services:
 volumes:
   oc_files:
     driver: local
+# template when using bind mounts
 #    driver_opts:
 #      type: none
 #      device: /mnt/oc
 #      o: bind
   mysql:
     driver: local
+# use the above template for bind mounts
   redis:
-    driver: local
-  apache:
     driver: local
 
 networks:

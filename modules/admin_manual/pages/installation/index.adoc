@@ -1,9 +1,0 @@
-= Installation Options
-
-== Introduction
-
-Starting with ownCloud Server 11, the only supported installation method is a Docker-based installation which includes PHP 8. Manual installation on Linux is no longer supported.
-
-== Using a Docker-Based Installation
-
-This guide shows you how to install xref:installation/docker/index.adoc[ownCloud with Docker] using Docker Compose with a YAML file provided by ownCloud.

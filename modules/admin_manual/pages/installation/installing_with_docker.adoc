@@ -10,7 +10,7 @@
 
 {description} This {dockerhub-url}[official image] is designed to be used in a docker compose setup but can also be used for a quick evaluation.
 
-The image contains the PHP and Apache setups, and nothing else needs to be added for it to work properly.
+Starting with ownCloud Server 11, the only supported installation method is a Docker-based installation which includes PHP 8 and Apache. Manual installation on Linux is no longer supported.
 
 == Database Notes
 
@@ -243,7 +243,7 @@ Wait until the output shows **Starting apache daemon...** before you access the 
 
 IMPORTANT: All files stored in this setup are contained in Docker volumes rather than a physical filesystem tree. It is the admin's responsibility to make the files persistent. For details how to migrate, see the https://docs.docker.com/reference/cli/docker/container/cp/[docker container cp] command documentation.
 
-IMPORTANT: If you, for example, uninstall apps that are shipped with the image, these apps will be reappear on next container startup.
+IMPORTANT: For example, if you uninstall apps that came with the image, they will reappear when the container is restarted.
 --
 
 === Logging In
@@ -270,8 +270,7 @@ docker compose down --rmi all --volumes
 
 === Running occ commands
 
-If you want to run an occ command, first go to the directory where your `.yaml` or `.env` file is located.
-Here, you are able to run any command referring to xref:configuration/server/occ_command.adoc[Using the occ Command] by entering:
+If you want to run an occ command, first go to the directory where your compose `.yaml` file is located. Here, you are able to run any command referring to xref:configuration/server/occ_command.adoc[Using the occ Command] by entering:
 
 [source,docker]
 ----
@@ -279,6 +278,71 @@ docker compose exec owncloud occ <command>
 ----
 
 IMPORTANT: Don't use the `php` command prefix, this leads to several errors and is not intended to run in docker environments.
+
+=== Additional Evironment Variables
+
+The image provides additional environment variables that can be configured for the use with the container. To identify available ones, see the file `overwrite.config.php` which can be found in the `config` directory. This directory is located in `/mnt/data` in the container or locally at the respective bind mount.
+
+=== Alternative Configuration
+
+Rather than using environment variables to configure your ownCloud instance, you can use additional configuration files, as was possible with earlier releases of ownCloud. This configuration method is only possible when using bind mounts because access to the `config` sub folder of the mounted is required.
+
+[source,plaintext]
+----
+mount_point/
+  - apps/
+  - certs/
+  - config/
+  - files/
+  - sessions/
+----
+
+For more and important details see: xref:installation/mount_folder_structure.adoc[Mount Folder Structure].
+
+== Troubleshooting
+
+=== Admin Settings
+
+With docker, the admin user cannot control certain settings in the WebUI, instead they are/can be now controlled by environment variables. Changing these variables requires stopping and restarting the container. When using environment variables, these changes need to be reflected in the compose file.
+
+=== Logging
+
+The loglevel is set to the fixed value 2: _"Warnings, errors, and fatal issues"_.
+
+.To get the highest log level "Everything" (including debug output), use:
+
+[source,plaintext]
+----
+OWNCLOUD_LOGLEVEL=0
+----
+
+=== Container CLI
+
+If you need to access the ownCloud containers CLI for any reason, you can do so using the following command:
+
+[source,docker,subs="attributes+"]
+----
+docker exec -it owncloud_server /bin/bash
+----
+
+=== Terminating Containers
+
+If your container is terminating for whatever reason, you will not be able to run `docker(-compose) exec` to make investigations inside the container as there will be no running container. Instead you need to use `docker(-compose) run`. It's important that you prefix any command to be run by `/usr/bin/owncloud`, otherwise the container will not be initialized correctly. See the example command below:
+
+[source,bash]
+----
+docker( compose) run <containername> /usr/bin/owncloud bash
+----
+
+
+=== MySQL
+
+If your ownCloud installation fails and you see the following error in your ownCloud log please refer to xref:configuration/database/linux_database_configuration.adoc#mysql-mariadb[MySQL / MariaDB with Binary Logging Enabled] for how to resolve it.
+
+[source,plaintext]
+----
+An unhandled exception has been thrown: exception ‘PDOException’ with message 'SQLSTATE[HY000]: General error: 1665 Cannot execute statement: impossible to write to binary log since BINLOG_FORMAT = STATEMENT and at least one table uses a storage engine limited to row-based logging. InnoDB is limited to row-logging when transaction isolation level is READ COMMITTED or READ UNCOMMITTED.'
+----
 
 === Upgrading ownCloud
 
@@ -343,43 +407,4 @@ docker compose logs --timestamp owncloud
 [source,docker,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} maintenance:mode --off
-----
-
-=== Container CLI
-
-If, for any reason, you need to enter the owncloud containers CLI, you can do that with the following command:
-
-[source,docker,subs="attributes+"]
-----
-docker exec -it owncloud_server /bin/bash
-----
-
-=== Additional Evironment Variables
-
-The image provides additional environment variables that can be configured for the use with the container. To identify available ones, see the file `overwrite.config.php` which can be found in the `config` directory. This directory is located in `/mnt/data` in the container or locally at the respective bind mount.
-
-== Troubleshooting
-
-=== Admin Settings
-
-With docker, the admin user cannot control certain settings in the WebUI, instead they are/can be now controlled by environment variables. Changing these variables requires stopping and restarting the container. When using environment variables, these changes need to be reflected in the compose file.
-
-==== Logging
-
-The loglevel is set to the fixed value 2: _"Warnings, errors, and fatal issues"_.
-
-.To get the highest log level "Everything" (including debug output), use:
-
-[source,plaintext]
-----
-OWNCLOUD_LOGLEVEL=0
-----
-
-=== Terminating Containers
-
-If your container is terminating for whatever reason, you will not be able to run `docker(-compose) exec` to make investigations inside the container as there will be no running container. Instead you need to use `docker(-compose) run`. It's important that you prefix any command to be run by `/usr/bin/owncloud`, otherwise the container will not be initialized correctly. See the example command below:
-
-[source,bash]
-----
-docker( compose) run <containername> /usr/bin/owncloud bash
 ----
