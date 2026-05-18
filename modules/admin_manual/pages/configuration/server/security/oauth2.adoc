@@ -70,15 +70,18 @@ OAuth2 support is available in ownCloud via the {oc-marketplace-url}/apps/oauth2
 
 To use the OAuth2 app, your ownCloud installation will need to meet the following dependencies:
 
-* *Apache:* If you are hosting your ownCloud installation using the Apache web server, then {mod_rewrite-url}[mod_rewrite] and {mod_headers-url}[mod_headers] modules must be installed and enabled.
-* *Redis:* You will need to have a Redis server available, ideally the latest, stable version.
-* *PHP-Redis:* You PHP installation must have the php-redis extension (>= 4.2) installed and enabled.
+For the provided ownCloud image, the configuration already meets these criterias:
 
-See the xref:installation/manual_installation/manual_installation.adoc[Detailed Installation Guide] for how to install Redis and PHP-Redis.
+* *Apache:* +
+{mod_rewrite-url}[mod_rewrite] and {mod_headers-url}[mod_headers] modules are installed and enabled.
+* *PHP-Redis:* +
+You PHP installation has the php-redis extension installed and enabled.
+
+A Redis server is required but not part of the ownCloud image. It can be deployed easily. For details see the xref:installation/installing_with_docker.adoc[Installing With Docker] documentation.
 
 === Installation
 
-To install the application, download the {oc-marketplace-url}/apps/oauth2[OAuth2 app] from the marketplace to the ownCloud `app` directory or use the Market app.
+The OAuth2 app is already part of the provided Docker image and does not need to be installed. It only needs to be enabled.
 
 === Basic Configuration
 
@@ -126,9 +129,7 @@ When deleting in the web UI, you might need to scroll horizontally to see the de
 
 Clients first have to be registered in the web-UI menu:Settings[Admin > Authentication]. You need to specify a name for the client (the name is unrelated to the OAuth 2.0 protocol and is just used to recognize it later) and the redirection URI. A _client identifier_ and _client secret_ are generated when adding a new client, which both consist of 64 characters.
 
-Refer to the
-{official-client-registration-rfc-url}[official client registration RFC from the IETF]
-for further information about client registration.
+Refer to the {official-client-registration-rfc-url}[official client registration RFC from the IETF] for further information about client registration.
 
 ==== Authorization Request
 
@@ -157,22 +158,17 @@ For every registered client, an authorization request can be made. The client re
 | Can be set by the client "to maintain state between the request and callback". See `RFC 6749`_ for more information.
 |==========================
 
-Refer to the
-{official-authorization-request-rfc-url}[official authorization request RFC from the IETF]
-for further information about client registration.
+Refer to the {official-authorization-request-rfc-url}[official authorization request RFC from the IETF] for further information about client registration.
 
 ==== Authorization Response
 
 After the resource owner's authorization, the app redirects to the `redirect_uri` specified in the authorization request and adds the authorization code as `URL parameter code`. An authorization code is valid for 10 minutes.
 
-Refer to the
-{official-authorization-response-rfc-url}[official authorization response RFC from the IETF]
-for further information about client registration.
+Refer to the {official-authorization-response-rfc-url}[official authorization response RFC from the IETF] for further information about client registration.
 
 ==== Access Token Request
 
-With the authorization code, the client can request an access token using the access token URL.
-{client-authentication-url}[Client authentication] is done using basic authentication with the client identifier as username and the client secret as a password. The following URL parameters have to be specified:
+With the authorization code, the client can request an access token using the access token URL. {client-authentication-url}[Client authentication] is done using basic authentication with the client identifier as username and the client secret as a password. The following URL parameters have to be specified:
 
 [width="100%",cols="15%,60%,50%",options="header",]
 |==========================
@@ -197,9 +193,7 @@ With the authorization code, the client can request an access token using the ac
 |
 |==========================
 
-Refer to the
-{official-access-token-request-rfc-url}[official access token request RFC from the IETF]
-for further information about client registration.
+Refer to the {official-access-token-request-rfc-url}[official access token request RFC from the IETF] for further information about client registration.
 
 ==== Access Token Response
 
@@ -217,12 +211,9 @@ The app responds to a valid access token request with a JSON response like the f
 }
 ----
 
-Refer to the
-{official-access-token-response-rfc-url}[official access token response RFC from the IETF]
-for further information about client registration.
+Refer to the {official-access-token-response-rfc-url}[official access token response RFC from the IETF] for further information about client registration.
 
-NOTE: For a succinct explanation of the differences between access tokens and authorization codes, 
-check out this {stackoverflow-url}[answer on StackOverflow].
+NOTE: For a succinct explanation of the differences between access tokens and authorization codes, 8check out this {stackoverflow-url}[answer on StackOverflow].
 
 === Limitations
 

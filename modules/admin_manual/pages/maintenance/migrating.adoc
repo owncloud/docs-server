@@ -102,7 +102,7 @@ services:
 
 This section describes the migration of *ownCloud 10* to *ownCloud 11*, if ownCloud 10 was installed natively. It only focuses on ownCloud but not on any migration of the database!
 
-Due to the vast variability of installations, the description focuses on major steps rather than details.
+Due to the wide range of installation types, the description focuses on the main steps rather than the details. When using encryption with the ownCloud 10 instance, the openSSL requirements must be met without circumventing retired ciphers. See the ownCloud 10 encryption documentation for more details.
 
 . Enable maintenance mode on ownCloud 10
 . Create a mount point to bind mount the Docker volume. +

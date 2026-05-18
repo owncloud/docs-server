@@ -11,8 +11,7 @@
 
 == Dependencies
 
-To connect ownCloud to an SMB file server, you need to prepare your server. Please see the
-xref:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux] guides for more information, prerequisites and requirements.
+All dependencies are provided with the ownCloud image.
 
 == Access Testing
 
@@ -52,7 +51,5 @@ image::configuration/files/external_storage/smb.png[Samba external storage confi
 
 == Further Information
 
-* xref:configuration/files/external_storage/configuration.adoc[External Storage Configuration]
-for additional mount options and information.
-* xref:configuration/files/external_storage/auth_mechanisms.adoc[External Storage Authentication Mechanisms]
-for more information on authentication schemes.
+* xref:configuration/files/external_storage/configuration.adoc[External Storage Configuration] for additional mount options and information.
+* xref:configuration/files/external_storage/auth_mechanisms.adoc[External Storage Authentication Mechanisms] for more information on authentication schemes.
