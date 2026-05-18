@@ -57,8 +57,8 @@ The operating system, web server, PHP runtime, and database are all managed insi
 
 We always recommend to use the newest Desktop and Mobile Apps with the latest server release.
 
-You can find detailed system requirements in the documentation for each App in:
+You can find the system requirements for each app in its documentation:
 
 * {desktop-system-requirements-url}[Desktop App]
-* {ios-system-requirements-url}[iOS system requirements]
-* {android-system-requirements-url}[Android system requirements]
+* {ios-system-requirements-url}[iOS App]
+* {android-system-requirements-url}[Android App]

@@ -243,7 +243,7 @@ Wait until the output shows **Starting apache daemon...** before you access the 
 
 IMPORTANT: All files stored in this setup are contained in Docker volumes rather than a physical filesystem tree. It is the admin's responsibility to make the files persistent. For details how to migrate, see the https://docs.docker.com/reference/cli/docker/container/cp/[docker container cp] command documentation.
 
-IMPORTANT: For example, if you uninstall apps that came with the image, they will reappear when the container is restarted.
+IMPORTANT: Any apps that came with the image will reappear when the container is restarted - if you uninstall them.
 --
 
 === Logging In
@@ -324,6 +324,10 @@ If you need to access the ownCloud containers CLI for any reason, you can do so 
 ----
 docker exec -it owncloud_server /bin/bash
 ----
+
+=== List Shipped Apps
+
+The Docker image comes with all apps provided by ownCloud, regardless of the licensing scheme. To see a list of the apps that have been shipped, you can either look in the GUI or list the contents of `/var/www/owncloud/apps` when accessing the xref:#container-cli[container CLI].
 
 === Terminating Containers
 
