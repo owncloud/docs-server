@@ -3,6 +3,7 @@
 # run-tests.sh calls wait_healthy before sourcing cases, so if we reach
 # this file the stack is already healthy — this case validates that the
 # wait_healthy function in run-tests.sh didn't time out and skip cases.
+[[ -n "${WORK_DIR:-}" ]] || { echo "ERROR: Run via tests/docker/run-tests.sh, not directly."; exit 1; }
 source "$(dirname "${BASH_SOURCE[0]}")/../harness.sh"
 
 echo "--- 01: stack health ---"

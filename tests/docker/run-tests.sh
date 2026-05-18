@@ -48,7 +48,10 @@ wait_healthy() {
         done
 
         # owncloud_server: no Docker healthcheck — poll HTTP instead
-        if ! curl -sf --max-time 3 http://localhost:8080/status.php >/dev/null 2>&1; then
+        local port
+        port=$(grep '^HTTP_PORT=' "$WORK_DIR/.env" | cut -d= -f2)
+        port=${port:-8080}
+        if ! curl -sf --max-time 3 "http://localhost:${port}/status.php" >/dev/null 2>&1; then
             all_healthy=false
         fi
 
@@ -63,7 +66,10 @@ wait_healthy() {
     return 1
 }
 
-wait_healthy 180 || true  # allow cases to run even after timeout to gather more data
+if ! wait_healthy 180; then
+    echo "Aborting test run: stack did not become ready."
+    exit 1
+fi
 
 # --- Run cases ---
 # Disable exit-on-error so individual occ command failures are caught by the harness

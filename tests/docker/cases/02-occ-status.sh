@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Test: occ status reports installed=true and a version 11.x string.
+[[ -n "${WORK_DIR:-}" ]] || { echo "ERROR: Run via tests/docker/run-tests.sh, not directly."; exit 1; }
 source "$(dirname "${BASH_SOURCE[0]}")/../harness.sh"
 
 echo "--- 02: occ status ---"

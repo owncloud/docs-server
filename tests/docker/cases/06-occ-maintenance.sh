@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Test: occ maintenance:mode --on enables maintenance mode, --off disables it.
 # Verifies the documented round-trip works.
+[[ -n "${WORK_DIR:-}" ]] || { echo "ERROR: Run via tests/docker/run-tests.sh, not directly."; exit 1; }
 source "$(dirname "${BASH_SOURCE[0]}")/../harness.sh"
 
 echo "--- 06: occ maintenance:mode ---"

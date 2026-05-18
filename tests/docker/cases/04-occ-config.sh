@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Test: occ config:app:set writes a value; occ config:app:get reads it back.
 # Uses a throw-away key in the 'testapp' namespace.
+[[ -n "${WORK_DIR:-}" ]] || { echo "ERROR: Run via tests/docker/run-tests.sh, not directly."; exit 1; }
 source "$(dirname "${BASH_SOURCE[0]}")/../harness.sh"
 
 echo "--- 04: occ config round-trip ---"

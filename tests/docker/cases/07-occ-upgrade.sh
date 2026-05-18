@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Test: occ upgrade --no-interaction exits 0 on a freshly installed, up-to-date instance.
 # On a current install the command should report "Update successful" or "already up-to-date".
+[[ -n "${WORK_DIR:-}" ]] || { echo "ERROR: Run via tests/docker/run-tests.sh, not directly."; exit 1; }
 source "$(dirname "${BASH_SOURCE[0]}")/../harness.sh"
 
 echo "--- 07: occ upgrade ---"
