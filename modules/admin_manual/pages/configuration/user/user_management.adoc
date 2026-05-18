@@ -184,9 +184,11 @@ For details of the occ user commands used below, see the xref:configuration/serv
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list lisa -a home
+{occ-command-example-prefix-docker} user:list lisa -a home
   - lisa: /var/www/owncloud/data/lisa
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 Here you can see, that the home of user `lisa` is located in `/var/www/owncloud/data/lisa`
 
@@ -204,8 +206,10 @@ Use the OS methods to create one or more new mount points for users home directo
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:move-home lisa /mnt/newhome_1
+{occ-command-example-prefix-docker} user:move-home lisa /mnt/newhome_1
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 The user gets disconnected and the user's home is now moved which may take a while depending on the load of the server and the bandwidth available on the mount points. When the move operation has finished, 
 +
@@ -223,9 +227,11 @@ NOTE: If you are using LDAP and the xref:enterprise/external_storage/ldap_home_c
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list lisa -a home
+{occ-command-example-prefix-docker} user:list lisa -a home
   - lisa: /mnt/newhome_1/lisa
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 Here you can see that the home of user `lisa` is now located in `/mnt/newhome_1/lisa`.
 
@@ -235,10 +241,12 @@ The following command lists all available user homes. Note a home only gets list
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-dirs
+{occ-command-example-prefix-docker} user:home:list-dirs
   - /var/www/owncloud/data
   - /mnt/newhome_1/lisa
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 . To list all users from a users home root directory, use the following command:
 +
@@ -246,7 +254,9 @@ The following command lists all users from a given home.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-users /var/www/owncloud/data
+{occ-command-example-prefix-docker} user:home:list-users /var/www/owncloud/data
   - admin
   - user01
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

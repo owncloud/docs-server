@@ -44,10 +44,12 @@ You can see an example of calling the commands listed below, configured to requi
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:decrypt-all --continue=yes && \
-  {occ-command-example-prefix} encryption:disable --no-interaction && \
-  {occ-command-example-prefix} app:disable --no-interaction encryption
+{occ-command-example-prefix-docker} encryption:decrypt-all --continue=yes && \
+  {occ-command-example-prefix-docker} encryption:disable --no-interaction && \
+  {occ-command-example-prefix-docker} app:disable --no-interaction encryption
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 NOTE: The decryption of the files by the ownCloud administrator requires the current passwords of all users! This only works when users have enabled password recovery and if an admin recovery password is available.
 
@@ -85,11 +87,13 @@ The following example shows how to do this on the command line.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable encryption && \
-  {occ-command-example-prefix} encryption:enable && \
-  {occ-command-example-prefix} encryption:select-encryption-type masterkey -y && \
-  {occ-command-example-prefix} encryption:encrypt-all --yes
+{occ-command-example-prefix-docker} app:enable encryption && \
+  {occ-command-example-prefix-docker} encryption:enable && \
+  {occ-command-example-prefix-docker} encryption:select-encryption-type masterkey -y && \
+  {occ-command-example-prefix-docker} encryption:encrypt-all --yes
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Verify the Encrypted Files
 

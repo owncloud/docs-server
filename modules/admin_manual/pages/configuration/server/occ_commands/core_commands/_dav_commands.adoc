@@ -18,10 +18,12 @@ NOTE: These commands are not available in xref:maintenance-commands[single-user 
 
 `dav:cleanup-chunks` cleans up outdated chunks (uploaded files) more than a certain number of days old. By default, the command cleans up chunks more than 2 days old. However, by supplying the number of days to the command, the range can be increased.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:cleanup-chunks [options] [--] [<minimum-age-in-days>]
+{occ-command-example-prefix-docker} dav:cleanup-chunks [options] [--] [<minimum-age-in-days>]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -44,9 +46,9 @@ NOTE: These commands are not available in xref:maintenance-commands[single-user 
 
 In the example below, chunks older than 10 days will be removed.
  
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:cleanup-chunks 10
+{occ-command-example-prefix-docker} dav:cleanup-chunks 10
 
 # example output
 Cleaning chunks older than 10 days(2017-11-08T13:13:45+00:00)
@@ -54,14 +56,18 @@ Cleaning chunks for admin
    0 [>---------------------------]
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 == Create Addressbook
 
 Create a dav address book.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:create-addressbook <user> <name>
+{occ-command-example-prefix-docker} dav:create-addressbook <user> <name>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -78,10 +84,12 @@ Create a dav address book.
 
 This example creates the address book `mollybook` for the user molly:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:create-addressbook molly mollybook
+{occ-command-example-prefix-docker} dav:create-addressbook molly mollybook
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Molly will immediately see her address book.
 
@@ -89,10 +97,12 @@ Molly will immediately see her address book.
 
 Create a dav calendar.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:create-calendar <user> <name>
+{occ-command-example-prefix-docker} dav:create-calendar <user> <name>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -109,10 +119,12 @@ Create a dav calendar.
 
 This example creates a new calendar `mollycal` for user molly:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:create-calendar molly mollycal
+{occ-command-example-prefix-docker} dav:create-calendar molly mollycal
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Molly will immediately see her calendar.
 
@@ -123,10 +135,12 @@ Molly will immediately see her calendar.
 
 Synchronizes the birthday calendar. It adds all birthdays to your calendar from address books shared with you.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:sync-birthday-calendar [<user>]
+{occ-command-example-prefix-docker} dav:sync-birthday-calendar [<user>]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -140,16 +154,20 @@ Synchronizes the birthday calendar. It adds all birthdays to your calendar from 
 
 This example syncs to your calendar from user `bernie`:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:sync-birthday-calendar bernie
+{occ-command-example-prefix-docker} dav:sync-birthday-calendar bernie
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Sync System Addressbook
 
 Synchronizes all users to the system addressbook.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:sync-system-addressbook
+{occ-command-example-prefix-docker} dav:sync-system-addressbook
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

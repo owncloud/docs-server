@@ -50,8 +50,10 @@ image::configuration/files/manual_file_locking/manual-file-locking-with-lock-bre
 Using the occ command::
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files enable_lock_file_action --value yes
+{occ-command-example-prefix-docker} config:app:set files enable_lock_file_action --value yes
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Configuration
 
@@ -75,15 +77,19 @@ Using the occ command::
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files lock_timeout_default --value 1800
+{occ-command-example-prefix-docker} config:app:set files lock_timeout_default --value 1800
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 * Maximum locks timeout
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files lock_timeout_max --value 86400
+{occ-command-example-prefix-docker} config:app:set files lock_timeout_max --value 86400
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 * Define lock breaker groups
 +
@@ -91,5 +97,7 @@ The example below defines two lock breaker groups named `unlockers` and `admin`.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set core lock-breaker-groups --value '["unlockers","admin"]'
+{occ-command-example-prefix-docker} config:app:set core lock-breaker-groups --value '["unlockers","admin"]'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

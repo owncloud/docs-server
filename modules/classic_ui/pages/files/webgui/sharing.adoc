@@ -31,7 +31,7 @@ Based on the input, ownCloud will decide how to create the shares (e.g., share w
 [NOTE]
 ====
 From 10.0.8, user and group name search results are dependent on a new
-xref:{latest-server-version}@server:admin_manual:configuration/server/config_sample_php_parameters.adoc[configuration setting], called `user.search_min_length` (it is set to 4 by default). This setting enhances the search performance but requires that search terms contain at least the defined number of characters. Consequently, search terms shorter than the defined number of characters will not return a list of matches. However, they will return an existing user or group with a name of the same length as the search term.
+xref:server:admin_manual:configuration/server/config_sample_php_parameters.adoc[configuration setting], called `user.search_min_length` (it is set to 4 by default). This setting enhances the search performance but requires that search terms contain at least the defined number of characters. Consequently, search terms shorter than the defined number of characters will not return a list of matches. However, they will return an existing user or group with a name of the same length as the search term.
 ====
 
 After a file or folder has been shared, xref:share-permissions[Share Permissions] can be set for it. In the image below, you can see that the directory "event-Photos" is shared with the user "pierpont", who can share, edit, create, change, and delete the directory.

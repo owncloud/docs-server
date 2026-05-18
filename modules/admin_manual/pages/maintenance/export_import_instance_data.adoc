@@ -43,8 +43,10 @@ This will create a folder `/tmp/export/user1` which contains all the files and m
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} instance:export:user user1 /tmp/export
+{occ-command-example-prefix-docker} instance:export:user user1 /tmp/export
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Copy the Export to the Target Instance
 
@@ -62,8 +64,10 @@ to federated shares pointing to the source instance:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} instance:import:user /tmp/export/user1
+{occ-command-example-prefix-docker} instance:import:user /tmp/export/user1
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 NOTE: A new user's last login timestamp on the target instance will be set to the current time. The import command sets up the user's file system and the system does not need to do any further "first login" processing when the user first logs in to the target instance.
 
@@ -74,8 +78,10 @@ they point to the target instance. To do so, run this command on the source inst
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} instance:export:migrate:share user1 https://newinstance.com
+{occ-command-example-prefix-docker} instance:export:migrate:share user1 https://newinstance.com
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Delete the User on the Source Instance
 
@@ -88,8 +94,10 @@ on the target instance. See xref:known-limitations[Known Limitations] for furthe
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:delete user1
+{occ-command-example-prefix-docker} user:delete user1
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == What is Exported
 

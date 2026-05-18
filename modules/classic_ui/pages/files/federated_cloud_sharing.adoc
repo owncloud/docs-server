@@ -7,7 +7,7 @@ servers, in effect creating your own cloud of ownClouds.
 
 {description} You can create direct share links with users on other ownCloud servers.
 
-IMPORTANT: xref:{latest-server-version}@server:admin_manual:configuration/files/federated_cloud_sharing_configuration.adoc[Federated Sharing] has to be configured by the administrator.
+IMPORTANT: xref:server:admin_manual:configuration/files/federated_cloud_sharing_configuration.adoc[Federated Sharing] has to be configured by the administrator.
 
 == How Federated Sharing Works
 

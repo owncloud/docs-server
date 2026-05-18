@@ -26,7 +26,7 @@
     previous-docs-version: 'next'
 #   server
     latest-server-version: '10.15'
-    latest-server-download-version: '10.15.0'
+    latest-server-download-version: '10.16.2'
     previous-server-version: '10.14'
     current-server-version: '10.15'
     oc-changelog-url: 'https://owncloud.com/changelog/server/'
@@ -37,7 +37,7 @@
     oc-examples-password: 'password'
     oc-complete-name: 'owncloud-complete-latest'
     occ-command-example-prefix: 'sudo -u www-data ./occ'
-    occ-command-example-prefix-no-sudo: 'occ'
+    occ-command-example-prefix-docker: 'docker compose exec owncloud occ'
     php-net-url: 'https://www.php.net'
     php-supported-versions-url: 'https://www.php.net/supported-versions.php'
     http-status-codes-base-url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status'

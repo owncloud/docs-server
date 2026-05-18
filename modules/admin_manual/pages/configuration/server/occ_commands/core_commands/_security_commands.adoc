@@ -1,8 +1,6 @@
 = Security
 
-Use these commands when you manage security related tasks.
-Routes displays all routes of ownCloud. 
-You can use this information to grant strict access via firewalls, proxies or load balancers etc.
+Use these commands when you manage security related tasks. Routes displays all routes of ownCloud. You can use this information to grant strict access via firewalls, proxies or load balancers etc.
 
 == Command Description
 
@@ -21,10 +19,12 @@ security:routes [options]
 
 Example 1:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} security:routes
+{occ-command-example-prefix-docker} security:routes
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [source,plaintext]
 ----
@@ -41,10 +41,12 @@ Example 1:
 
 Example 2:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} security:routes --output=json-pretty
+{occ-command-example-prefix-docker} security:routes --output=json-pretty
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [source,plaintext]
 ----
@@ -59,10 +61,12 @@ Example 2:
 
 Example 3:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} security:routes --with-details
+{occ-command-example-prefix-docker} security:routes --with-details
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 [source,plaintext]
 ----
@@ -87,21 +91,27 @@ security:certificates:remove  Remove trusted certificate
 
 This example lists your installed certificates:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} security:certificates
+{occ-command-example-prefix-docker} security:certificates
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Import a new certificate:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} security:certificates:import /path/to/certificate
+{occ-command-example-prefix-docker} security:certificates:import /path/to/certificate
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Remove a certificate:
 
-[source,bash,subs="attributes+"]
+[source,docker	,subs="attributes+"]
 ----
-{occ-command-example-prefix} security:certificates:remove [certificate name]
+{occ-command-example-prefix-docker} security:certificates:remove [certificate name]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.

@@ -64,8 +64,10 @@ Before restoring the database, set your ownCloud instance into maintenance mode:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --on
+{occ-command-example-prefix-docker} maintenance:mode --on
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 NOTE: This guide assumes that your previous backup is called `owncloud-dbbackup.bak`, though the file may have a timestamp added in the filename.
 
@@ -186,15 +188,19 @@ Run the following command to tell desktop and mobile clients that a server backu
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:data-fingerprint
+{occ-command-example-prefix-docker} maintenance:data-fingerprint
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Bring back ownCloud into normal operation mode
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --off
+{occ-command-example-prefix-docker} maintenance:mode --off
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Enable browser access
 

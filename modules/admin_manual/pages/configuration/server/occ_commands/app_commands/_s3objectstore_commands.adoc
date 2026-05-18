@@ -6,10 +6,12 @@ Marketplace URL: {oc-marketplace-url}/apps/files_primary_s3[S3 Primary Object St
 
 == List objects, buckets or versions of an object
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} s3:list
+{occ-command-example-prefix-docker} s3:list
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -21,10 +23,12 @@ Marketplace URL: {oc-marketplace-url}/apps/files_primary_s3[S3 Primary Object St
 
 == Create a bucket as necessary to be used
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} s3:create-bucket
+{occ-command-example-prefix-docker} s3:create-bucket
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 

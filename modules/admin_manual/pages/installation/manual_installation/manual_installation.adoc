@@ -155,7 +155,7 @@ Replace all the parameters according to your needs.
 [source,bash,subs="attributes+"]
 ----
 cd /var/www/owncloud/
-{occ-command-example-prefix} maintenance:install \
+{occ-command-example-prefix-docker} maintenance:install \
    --database "mysql" \
    --database-name "owncloud" \
    --database-user "root"\

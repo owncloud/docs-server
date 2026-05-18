@@ -6,12 +6,14 @@
   system:cron             Execute background jobs as cron
 ----
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} -h system:cron
+{occ-command-example-prefix-docker} -h system:cron
 -Usage:
   system:cron [options]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Options
 
@@ -24,10 +26,12 @@ Do not use when executing from crontab
 
 To execute xref:configuration/server/background_jobs_configuration.adoc[background jobs] using xref:configuration/server/background_jobs_configuration.adoc#cron[cron], you can use the `system:cron` command, as in the following example:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} system:cron
+{occ-command-example-prefix-docker} system:cron
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 If the `--progress` or `-p` argument is specified, then progress output will be displayed in the console, as in the example below.
 
@@ -56,10 +60,13 @@ Instead of the following configuration
 ----
 
 Use the following one instead
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} system:cron
+{occ-command-example-prefix-docker} system:cron
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
+
 ====
 
 [NOTE]

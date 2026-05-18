@@ -41,4 +41,4 @@ Your calendar will now be visible in the Calendar application
 
 Now should now find your contacts in the address book of your iPhone.
 If it’s still not working, have a look at the
-xref:{latest-server-version}@server:admin_manual:configuration/general_topics/general_troubleshooting.adoc#troubleshooting-contacts-calendar[Troubleshooting Contacts & Calendar] guides.
+xref:server:admin_manual:configuration/general_topics/general_troubleshooting.adoc#troubleshooting-contacts-calendar[Troubleshooting Contacts & Calendar] guides.
