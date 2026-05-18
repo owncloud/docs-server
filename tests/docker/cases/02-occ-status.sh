@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Test: occ status reports installed=true and a version 11.x string.
-source "$(dirname "$0")/../harness.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../harness.sh"
 
 echo "--- 02: occ status ---"
 

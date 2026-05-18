@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Test: occ maintenance:mode --on enables maintenance mode, --off disables it.
 # Verifies the documented round-trip works.
-source "$(dirname "$0")/../harness.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../harness.sh"
 
 echo "--- 06: occ maintenance:mode ---"
 

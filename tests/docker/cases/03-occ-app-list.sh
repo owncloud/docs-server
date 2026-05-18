@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Test: occ app:list returns output and includes known core apps.
-source "$(dirname "$0")/../harness.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../harness.sh"
 
 echo "--- 03: occ app:list ---"
 
