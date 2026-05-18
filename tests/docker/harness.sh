@@ -5,7 +5,9 @@
 
 PASS=${PASS:-0}
 FAIL=${FAIL:-0}
-ISSUES=${ISSUES:-()}   # re-declaration is harmless when already set by run-tests.sh
+if [[ -z "${ISSUES+set}" ]]; then
+    ISSUES=()
+fi
 
 pass() {
     PASS=$((PASS + 1))
@@ -40,11 +42,12 @@ assert_contains() {
 
 # assert_exit_0 COMMAND [ARGS...]
 assert_exit_0() {
-    local label="$*"
-    if "$@" >/dev/null 2>&1; then
+    local label="$*" out
+    if out=$("$@" 2>&1); then
         pass "$label"
     else
         fail "command exited non-zero: $label"
+        echo "    output: $out" >&2
     fi
 }
 
