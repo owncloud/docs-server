@@ -3,7 +3,7 @@ name: Docker Docs Test Suite
 on:
   push:
     branches:
-      - feat/docker-only
+      - ci/test-docker-docs
   pull_request:
     branches:
       - master
