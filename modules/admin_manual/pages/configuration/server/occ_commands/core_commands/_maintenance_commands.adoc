@@ -53,11 +53,7 @@ The `maintenance:install` command supports the following options:
 
 | `--database`=DATABASE
 | Supported database type. [default: `sqlite`] +
-Possible values: `sqlite` ,`mysql`, `pgsql`, `oci` +
-Note that `oci` (Oracle) is only available with the Enterprise license.
-
-| `--database-connection-string`=DATABASE-CONNECTION-STRING
-| Oracle specific connection string. As soon as this parameter is provided, other parameters like database-host and database-name are not used and do not need to be provided.
+Possible values: `sqlite` ,`mysql` and `pgsql`
 
 | `--database-name`=DATABASE-NAME
 | Name of the database.

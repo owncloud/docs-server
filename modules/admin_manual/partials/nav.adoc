@@ -144,9 +144,6 @@
 **** xref:admin_manual:enterprise/file_management/files_lifecycle.adoc[File Lifecycle Management]
 *** Firewall
 **** xref:admin_manual:enterprise/firewall/file_firewall.adoc[File Firewall]
-*** Installation
-**** xref:admin_manual:enterprise/installation/install.adoc[Installing & Upgrading ownCloud Enterprise Edition]
-**** xref:admin_manual:enterprise/installation/oracle_db_configuration.adoc[Oracle DB Setup & Configuration]
 *** Logging
 **** xref:admin_manual:enterprise/logging/admin_audit.adoc[Auditing]
 *** Reporting

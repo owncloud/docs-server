@@ -1,6 +1,7 @@
 = Installing with Docker
 :toc: right
 :description: ownCloud can be installed using the official ownCloud Docker image.
+:page-aliases: enterprise/installation/install.adoc
 
 :dockerhub-url: https://hub.docker.com/r/owncloud/server
 :docker-compose-url: https://docs.docker.com/compose/
@@ -129,7 +130,7 @@ include::example$installation/docker/docker-compose.yml[]
 [#env-file]
 [source,bash,subs="attributes+"]
 ----
-OWNCLOUD_IMAGE=10.16.2
+OWNCLOUD_IMAGE={latest-server-download-version}
 OWNCLOUD_DOMAIN=localhost
 OWNCLOUD_TRUSTED_DOMAINS=localhost
 OWNCLOUD_OVERWRITE_CLI_URL=http://localhost
@@ -299,6 +300,48 @@ mount_point/
 
 For more and important details see: xref:installation/mount_folder_structure.adoc[Mount Folder Structure].
 
+== Enterprise License Keys
+
+An Enterprise license keys can be added by:
+
+* Using an environment variable named `OWNCLOUD_LICENSE_KEY`, or
+* By adding a config entry. +
+Here you need a bind mount and create an addifional config file that needs to be placed in the `<mount-point>/config` directory.
+* It is also possible to activate your Enterprise Edition on the webUI. +
+Open owncloud and navigate to: menu:Settings[Admin > General]. Copy your license key into the field `Enter a new license:` and click `Save` to confirm.
+
+=== Introduction
+
+You need to install a license key to use ownCloud Enterprise Edition. There are two types of license keys:
+
+* One is a free 30-day trial key.
+* The other is a full license key for Enterprise customers.
+
+You can https://owncloud.com/download/[download and try ownCloud Enterprise for 30 days for free], which auto-generates a free 30-day key. When this key expires, your ownCloud installation is not removed, only enterprise features are disabled. If you become an Enterprise customer, you can enter your new key to regain access. See https://owncloud.com/how-to-buy-owncloud/[How to Buy ownCloud] for sales and contact information.
+
+=== Configuration
+
+Once you get your Enterprise license key, it needs to be copied to your ownCloud configuration file `config/config.php` like in this example:
+
+[source,php]
+----
+'license-key' => 'test-20150101-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-YYYYYY',
+----
+
+Each running instance of ownCloud requires a license key. Keys will work across upgrades without issue, so new keys will not be required when you upgrade your ownCloud Enterprise to a new version.
+
+TIP: If you want to remove the current license, open ownCloud and navigate to menu:Settings[Admin > General] and click btn:[Remove current license key].
+
+=== User Counting
+
+Your ownCloud Enterprise License Key is valid for the purchased amount of users, as per the ownCloud EULA - ownCloud Commercial License. When you generate a config.report, you will get:
+
+* a counting of the enabled users, 
+* the ownCloud guest users -- if the guest app is enabled and
+* the number of user directories created.
+
+The latter is the user number you will need licenses for. Guest users are currently counted with a fair use policy -- which means, that you can't have more guest users than you have licensed users. If you exceed the number of licensed users, please contact your account manager or ownCloud Partner and true-up as per your contract or EULA with us. The user directories are created on first login. When a user is deleted, the user directories are deleted as well. Users which are disabled count. The last login is not relevant.
+
 == Troubleshooting
 
 === Admin Settings
@@ -337,7 +380,6 @@ If your container is terminating for whatever reason, you will not be able to ru
 ----
 docker( compose) run <containername> /usr/bin/owncloud bash
 ----
-
 
 === MySQL
 

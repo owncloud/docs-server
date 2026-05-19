@@ -3,8 +3,8 @@
 :toclevels: 1
 :keywords: nfs, network file system, nfsv4, mtu, async, noasync
 :description: This guide covers the official ownCloud NFS (Network File System) deployment recommendations.
+
 :autofs-url: https://help.ubuntu.com/community/Autofs
-:lockd-url: https://docs.oracle.com/cd/E19455-01/806-0916/rfsrefer-9/index.html
 :mount-man-page-url: http://man7.org/linux/man-pages/man8/mount.8.html
 :netplan-docs-url: https://netplan.io/reference
 :networkmanager-url: https://help.ubuntu.com/community/NetworkManager
@@ -97,7 +97,7 @@ Any tuning considerations should therefore first be attempted on the backend sto
 ownCloud recommends using NFSv4 over previous versions for a number of key reasons.
 These are:
 
-* *Improved Security:* It {nfs-strong-security-architecture-url}[mandates a strong security architecture]. It does not require {rpc-statd-url}[rpc.statd] or {lockd-url}[lockd]. As a result, it only uses port 2049.
+* *Improved Security:* It {nfs-strong-security-architecture-url}[mandates a strong security architecture]. It does not require {rpc-statd-url}[rpc.statd]. As a result, it only uses port 2049.
 * *Improved Reliability:* Uses TCP by default.
 * *Improved Performance:* It uses Multi-Component Messages, which reduce network traffic. It is capable of using a 32KB page size, compared to the default, 1024 bytes.
 * Use of {nfs-read-write-delegations-url}[Read/Write Delegations].
