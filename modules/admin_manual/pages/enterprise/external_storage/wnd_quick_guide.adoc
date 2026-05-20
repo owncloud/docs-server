@@ -6,29 +6,17 @@
 
 This is a quick guide for installing and configuring the Windows Network Drive (WND) app.
 
-== Prerequisites
+== Enable the App
 
-To successfully use the Windows Network Drive app, you must meet the prerequisites which can be found in the xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc[Server Preparation for Ubuntu 20.04]. In particular, these are the sections required which address `smbclient` (
-xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc#clean-ubuntu-20-04-installation[Clean Ubuntu 20.04 Installation]) and `libsmbclient-php` (
-xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc#libsmbclient-php-library[libsmbclient-php Library]).
-
-== Installation
-
-Install the WND app either via the Web Interface or the command line:
+The app is part of the ownCloud Docker image and only needs to be enabled:
 
 WebUI::
-* The Windows Network Drive app has to be downloaded from the Market App. Navigate to the Market app, search for Windows Network Drive and install it.
-* Post installing enable it via menu:Settings[Admin > Apps].
+Go to menu:Settings[Admin > Apps] and enable the app.
 
 Command line::
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} market:install windows_network_drive
-----
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} app:enable windows_network_drive
+{occ-command-example-prefix-docker} app:enable windows_network_drive
 ----
 
 == Configuration
@@ -52,7 +40,6 @@ Configure external share:
 * Domain: domain name of your server
 * Available for: limit access to groups
 * Settings: (gear wheel) enable the options you need
-
 
 IMPORTANT: If you plan to use ownCloud **only** in the Web Browser - your setup of the WND is complete.
 
@@ -178,8 +165,10 @@ Running the following command would work:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen MyHost MyData svc_owncloud password
+{occ-command-example-prefix-docker} wnd:listen MyHost MyData svc_owncloud password
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 The command is case-sensitive, and it must match the information from the mount point configuration.
 

@@ -31,10 +31,12 @@ To install an application from the Marketplace, you need to supply the app’s i
 For example, the URL for _Two factor backup codes_ is {oc-marketplace-url}/apps/twofactor_backup_codes.
 So its app id is `twofactor_backup_codes`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} market:install <ids> [option]
+{occ-command-example-prefix-docker} market:install <ids> [option]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -57,14 +59,16 @@ Only `zip`, `gzip`, and `bzip2` archives are supported.
 
 == Usage Example
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
 # Install an app from the marketplace.
-{occ-command-example-prefix} market:install twofactor_backup_codes
+{occ-command-example-prefix-docker} market:install twofactor_backup_codes
 
 # Install an app from a local archive.
-{occ-command-example-prefix} market:install -l /mnt/data/richdocuments-2.0.0.tar.gz
+{occ-command-example-prefix-docker} market:install -l /mnt/data/richdocuments-2.0.0.tar.gz
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 NOTE: The target directory has to be *accessible to the webserver user* and you have to *enable* the app afterwards with the `occ app:enable` command.
 
@@ -72,10 +76,12 @@ NOTE: The target directory has to be *accessible to the webserver user* and you 
 
 To uninstall an application use the following commands:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} market:uninstall <ids>
+{occ-command-example-prefix-docker} market:uninstall <ids>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -89,19 +95,23 @@ To uninstall an application use the following commands:
 This command lists apps available on the marketplace.
 It returns the ids of the apps.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} market:list
+{occ-command-example-prefix-docker} market:list
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Upgrade an Application
 
 Install new app versions if available on the marketplace by using following commands:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} market:upgrade <ids> [options]
+{occ-command-example-prefix-docker} market:upgrade <ids> [options]
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 

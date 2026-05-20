@@ -109,8 +109,10 @@ use the xref:configuration/server/occ_command.adoc[occ command] to propagate the
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mimetype:update-js
+{occ-command-example-prefix-docker} maintenance:mimetype:update-js
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === Example - Changing the JSON File Icon
 
@@ -154,8 +156,10 @@ The name and location of the file are important.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mimetype:update-js
+{occ-command-example-prefix-docker} maintenance:mimetype:update-js
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 
 After doing so, whenever you view a folder that contains JSON files or upload one, your new icon file will be used to represent the file, as in the image below.
 

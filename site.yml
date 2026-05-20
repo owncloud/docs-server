@@ -28,7 +28,7 @@ asciidoc:
     # as they are just here for the test build
     latest-server-version: 'next@'   # do not change, soft set, correctly defined via antora.yml
     previous-server-version: 'next@' # do not change, soft set, correctly defined via antora.yml
-    latest-server-download-version: 'next@' # do not change, soft set, correctly defined via antora.yml
+    latest-server-download-version: '10.16.2'
     current-server-version: 'next@'         # do not change, soft set, correctly defined via antora.yml
   extensions:
     - ./ext-asciidoc/tabs.js

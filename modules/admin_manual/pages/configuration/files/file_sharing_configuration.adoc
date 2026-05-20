@@ -99,12 +99,14 @@ xref:configuration/server/occ_command.adoc#config-commands[occ config:app:set co
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} \
+{occ-command-example-prefix-docker} \
     config:app:set \
     core \
     shareapi_public_notification_lang \
     --value '<language code>'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 NOTE: In the example above, the `<language code>` is an
 {two-letter-url}[ISO 3166-1 alpha-2 two-letter country code], such as *de*, *gb*, *us*, *es* or others.
@@ -223,20 +225,24 @@ Here is an example of how to transfer all files from one user to another.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files:transfer-ownership \
+{occ-command-example-prefix-docker} files:transfer-ownership \
   <source-user> \
   <destination-user>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Here is an example of how to transfer _a limited group_ a single folder from one user to another. In it, `folder/to/move`, and any file and folder inside it will be moved to `<destination-user>`.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files:transfer-ownership \
+{occ-command-example-prefix-docker} files:transfer-ownership \
   --path="folder/to/move" \
   <source-user> \
   <destination-user>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 When using this command keep two things in mind:
 
@@ -251,8 +257,10 @@ for a complete list of `occ` commands.
 IMPORTANT: If an exception occurred during the transfer ownership command or the command terminated prematurely, it is advised to run following command for the source *and* target user:
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files:troubleshoot-transfer-ownership --uid <uid>`
+{occ-command-example-prefix-docker} files:troubleshoot-transfer-ownership --uid <uid>`
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 == Creating Persistent File Shares
 
@@ -275,18 +283,20 @@ This command provides for the creation of both personal (for a specific user) an
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:create \
+{occ-command-example-prefix-docker} files_external:create \
     /my_share_name windows_network_drive \
     password::logincredentials \
     --config={host=127.0.0.1, share='home', root='$user', domain='owncloud.local'} \
     --user someuser
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 or
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:create \
+{occ-command-example-prefix-docker} files_external:create \
     /my_share_name windows_network_drive \
     password::logincredentials \
     --config host=127.0.0.1 \
@@ -296,21 +306,25 @@ or
     --user someuser
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 ==== General Share
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:create \
+{occ-command-example-prefix-docker} files_external:create \
     /my_share_name windows_network_drive \
     password::logincredentials \
     --config={host=127.0.0.1, share='home', root='$user', domain='owncloud.local'}
 ----
 
+NOTE: Run this command inside the ownCloud Docker container.
+
 or
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:create \
+{occ-command-example-prefix-docker} files_external:create \
     /my_share_name windows_network_drive \
     password::logincredentials \
     --config host=127.0.0.1 \
@@ -318,6 +332,8 @@ or
     --config root='$user' \
     --config domain='somedomain.local'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 === occ files_external:import
 
@@ -327,17 +343,21 @@ You can create general and personal shares passing the configuration details via
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:import \
+{occ-command-example-prefix-docker} files_external:import \
     /import.json
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 ==== Personal Share
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:import \
+{occ-command-example-prefix-docker} files_external:import \
     /import.json --user someuser
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 In the two examples above, here is a sample JSON file, showing all of the available configuration options that the command supports.
 

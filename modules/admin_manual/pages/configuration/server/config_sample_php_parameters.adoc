@@ -172,7 +172,6 @@ Available:
 - sqlite (SQLite3 - Not in Enterprise Edition)
 - mysql (MySQL/MariaDB)
 - pgsql (PostgreSQL)
-- oci (Oracle - Enterprise Edition Only)
 
 ==== Code Sample
 
@@ -637,7 +636,7 @@ You may need to increase this if you are running an anti-malware or spam scanner
 ....
 
 === Define the SMTP security style
-Depends on `mail_smtpmode`. Specify when you are using `ssl` or `tls`.
+Depends on `mail_smtpmode`. Specify when you are using `ssl` or not.
 
 Leave empty for no encryption.
 
@@ -656,17 +655,6 @@ Depends on `mail_smtpmode`. Change this to `true` if your mail server requires a
 [source,php]
 ....
 'mail_smtpauth' => false,
-....
-
-=== Define the SMTP authentication type
-Depends on `mail_smtpmode`. If SMTP authentication is required,
-choose the authentication type as `LOGIN` (default) or `PLAIN`.
-
-==== Code Sample
-
-[source,php]
-....
-'mail_smtpauthtype' => 'LOGIN',
 ....
 
 === Define the SMTP authentication username
@@ -1067,6 +1055,15 @@ Is ownCloud connected to the Internet or running in a closed network?
 [source,php]
 ....
 'has_internet_connection' => true,
+....
+
+=== The following URL is used to detect internet connectivity.
+
+==== Code Sample
+
+[source,php]
+....
+'internet_connectivity_detect_url' => 'https://detectportal.firefox.com/success.txt',
 ....
 
 === Check for a `.well-known` setup
@@ -1907,7 +1904,6 @@ Available:
 - sqlite (SQLite3 - Not in Enterprise Edition)
 - mysql (MySQL)
 - pgsql (PostgreSQL)
-- oci (Oracle - Enterprise Edition Only)
 
 ==== Code Sample
 
@@ -1917,7 +1913,6 @@ Available:
 	'sqlite',
 	'mysql',
 	'pgsql',
-	'oci',
   ],
 ....
 
@@ -2308,6 +2303,16 @@ The web based updater is enabled by default.
 [source,php]
 ....
 'upgrade.disable-web' => false,
+....
+
+=== Explicitly enable the web updater - used by /updater/
+By default, it is disabled.
+
+==== Code Sample
+
+[source,php]
+....
+'web-updater.enabled' => false,
 ....
 
 === Define whether to enable automatic update of market apps

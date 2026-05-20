@@ -1,35 +1,25 @@
 = How to Upgrade Your ownCloud Server
 :toc: right
-:page-aliases: maintenance/upgrade.adoc, maintenance/upgrading/index.adoc
+:description: When an update or upgrade is available for your ownCloud server, you will see a notification at the top of your ownCloud Web interface.
 
 == Introduction
 
-We recommend that you keep your ownCloud server up to date. When an update or upgrade is available for your ownCloud server, you will see a notification at the top of your ownCloud Web interface. When you click the btn:[notification], it will bring you here.
+We recommend that you keep your ownCloud server up to date. {description} When you click the btn:[notification], it will bring you here.
 
 Before beginning an upgrade, please keep the following points in mind:
 
 * Review the https://doc.owncloud.com/docs_main/next/server_release_notes.html[release notes] for important information about the needed migration steps during that upgrade to help ensure a smooth upgrade process.
 
-* Check ownCloud's xref:installation/manual_installation/manual_installation_prerequisites.adoc[mandatory requirements] (such as PHP versions and extensions), which can change from one version to the next. Ensure that you review them and update or upgrade your server, if required, before upgrading ownCloud.
-
 * Upgrading is disruptive, as your ownCloud server will be put into xref:configuration/server/occ_command.adoc#maintenance-commands[maintenance mode].
 
 * Large installations may take several hours to complete the upgrade.
 
-* Review any installed xref:maintenance/manual_upgrade.adoc#review-third-party-apps[third-party apps] for compatibility with the new ownCloud release.
+* Review any installed xref:maintenance/upgrading/manual_upgrade.adoc#review-third-party-apps[third-party apps] for compatibility with the new ownCloud release.
 
 * Downgrading *is not supported* as it risks corrupting your data. If you want to revert to an older ownCloud version, make a new, fresh installation and then restore your data from backup. Before attempting this, file a support ticket (if you have paid support) or ask for help in the ownCloud forums to resolve your issue without downgrading.
 
-include::partial$maintenance/major_release_note.adoc[]
-
 == Prerequisites
 
-We strongly recommend that you always maintain xref:maintenance/backup_and_restore/backup.adoc[regular backups] as well as make a fresh backup before every upgrade. We also recommend that you review any installed xref:maintenance/manual_upgrade.adoc#review-third-party-apps[third-party apps] for compatibility with the new ownCloud release. Ensure that they are all disabled before beginning the upgrade. After the upgrade is complete, enable all those that are compatible with the new release again.
+We strongly recommend that you always maintain xref:maintenance/backup_and_restore/backup.adoc[regular backups] as well as make a fresh backup before every upgrade. We also recommend that you review any installed xref:maintenance/upgrading/manual_upgrade.adoc#review-third-party-apps[third-party apps] for compatibility with the new ownCloud release. Ensure that they are all disabled before beginning the upgrade. After the upgrade is complete, enable all those that are compatible with the new release again.
 
 CAUTION: Unsupported apps may disrupt your upgrade.
-
-== Upgrade Options
-
-Perform a xref:maintenance/manual_upgrade.adoc[manual upgrade], using the https://owncloud.com/download-server/[latest ownCloud release].
-
-NOTE: Enterprise customers: refer to xref:enterprise/installation/install.adoc[Installing & Upgrading ownCloud Enterprise Edition] for more information.

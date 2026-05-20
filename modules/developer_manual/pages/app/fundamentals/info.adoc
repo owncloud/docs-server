@@ -183,7 +183,7 @@ application.
 == database
 
 Each supported database has to be listed here. Valid values are
-`sqlite`, `mysql`, `pgsql`, `oci` and `mssql`. In the future it will be
+`sqlite`, `mysql` and `pgsql`. In the future it will be
 possible to specify versions here as well. In case no database is
 specified it is assumed that all databases are supported.
 

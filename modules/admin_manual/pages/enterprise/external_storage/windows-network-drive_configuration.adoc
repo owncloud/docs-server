@@ -1,7 +1,6 @@
 = Windows Network Drive (WND)
 :toc: right
 :toclevels: 3
-:page-aliases: enterprise/external_storage/index.adoc
 :description: The Windows Network Drives app seamlessly integrates Windows and Samba/CIFS shared network drives as external storages. WND has great advantages compared to standard SMB access.
 
 :anacron-examples: http://www.thegeekstuff.com/2011/05/anacron-examples
@@ -96,35 +95,11 @@ Files are synchronized bidirectionally, and you can create, upload and delete fi
 
 Depending on the authentication method, passwords for each mount are encrypted and stored in the ownCloud database, using a long random secret key stored in `config.php`. This allows ownCloud to access the shares when the users who own the mounts are not logged in. This access will not work if the mount is session based, where passwords are not stored and are available only for the current active session. In case other users are granted access to this mount, they will see a red triangle with an exclamation mark on the bottom right of the mount icon identifying lack of access.
 
-== Installation
-
-Install the {oc-marketplace-url}/apps/windows_network_drive[External Storage: Windows Network Drives app] from the ownCloud Market App or ownCloud Marketplace. To make it work, a few  dependencies have to be installed.
-
-* A Samba client. This is included in all Linux distributions. On Debian, Ubuntu, and other Debian derivatives it is called `smbclient`. On SUSE, Red Hat, CentOS, and other Red Hat derivatives it is `samba-client`.
-* `php-smbclient` (version 0.8.0+). It should be included in most Linux distributions. You can use https://github.com/eduardok/libsmbclient-php#installation-from-pecl[Installation from PECL], if your distribution does not provide it or if you want to use a more updated version than the one provided by the OS. See xref:installation/manual_installation/server_prep_ubuntu_22.04.adoc#updating-pear[Updating pear] for a necessary prerequisite.
-* `which` and `stdbuf`. These should be included in most Linux distributions.
-
-To install and configure the necessary packages, see the xref:installation/manual_installation/manual_installation.adoc#prepare-your-server[Prepare Your Server] section of the manual installation documentation.
-
 TIP: For more information on SMB/CIFS in ownCloud, refer to the xref:configuration/files/external_storage/smb.adoc[Samba file server configuration documentation].
 
 TIP: If you encounter errors when using the WND app like `NT_STATUS_REVISION_MISMATCH`, please get in touch by {oc-support-url}[Opening a Service Request].
 
-[IMPORTANT]
-====
-ownCloud requires at least {samba-478-url}[Samba 4.7.8] or {samba-481-url}[Samba 4.8.1] on the ownCloud server, when:
-
-. The Windows Network Drive Listener is used; *and*
-. The remote Windows/Samba file server requires at least {smb2-url}[version 2.0 of the SMB protocol].
-
-The xref:wnd-listener-setup[Windows Network Drive Listener] only supports version 1 of the SMB protocol (SMB1) with _earlier_ Samba versions.
-
-*Background*
-
-A {samba-url}[Samba] server, often a Microsoft Windows Server, can enforce the minimum and maximum protocol versions used by connecting clients. However, in light of the {wannacry-ransomware-attack-url}[WannaCry ransomware attack], {msft-security-bulletin-ms17-010-url}[Microsoft patched Windows Server] to only allow SMB2 as minimum protocol by default, as SMB1 is insecure.
-
-The ownCloud windows network drive listener utilizes the SMB notification feature which works well with SMB1 in conjunction with most Samba versions. However, when the minimum protocol a server accepts is SMB2, ownCloud requires Samba 4.7.8+ (4.8+ etc.) to be able to properly work, as prior versions of Samba had a bug that broke this feature.
-====
+IMPORTANT: The remote Windows/Samba file server requires at least {smb2-url}[version 2.0 of the SMB protocol].
 
 == Configuration
 
@@ -327,24 +302,30 @@ The simplest way, useful for initial testing is, to start the `wnd:listen` proce
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username>
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 The password is an optional parameter and you will be asked for it if you didn't provide it as in the example above. If necessary, the workgroup can be set together with the username as well. Use following syntax and set quotes, which is important to keep the backslash `'<workgroup>\<username>'`. The whole example command looks like:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> '<workgroup>\<username>'
+{occ-command-example-prefix-docker} wnd:listen <host> <share> '<workgroup>\<username>'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 In order to start `wnd:listen` without any user interaction like as service, provide the password from a password file.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> \
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file \
      --password-trim
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 For additional options to provide the password, check xref:password-options[Password Options].
 
@@ -360,8 +341,10 @@ As a simple example, you can check the following:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:process-queue <host> <share>
+{occ-command-example-prefix-docker} wnd:process-queue <host> <share>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 You can run that command, even if there are no notifications to be processed.
 
@@ -475,8 +458,10 @@ If you need to serialize the execution of the `wnd:process-queue`, check the fol
 
 [source,bash,subs="attributes+"]
 ----
-flock -n /opt/my-lock-file {occ-command-example-prefix} wnd:process-queue <host> <share>
+flock -n /opt/my-lock-file {occ-command-example-prefix-docker} wnd:process-queue <host> <share>
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 In that case, flock will try to get the lock of that file and won't run the command if it isn't possible. For our case, and considering that file isn't being used by any other process, it will run only one `wnd:process-queue` at a time. If someone tries to run the same command a second time while the previous one is running, the second will fail and won't be executed.
 
@@ -488,6 +473,8 @@ You can use flock also in cron, see the example below:
 ----
 * * * * *  flock -n /opt/my-lock-file -c 'sudo -u www-data /var/www/owncloud/occ wnd:process-queue <HOST> <SHARE>'
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Check {flock-docs-url}[flock's documentation] for details and more options.
 
@@ -607,8 +594,10 @@ Take the example of attempting to connect to the host MyHost, the share named `M
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen MyHost MyData user password
+{occ-command-example-prefix-docker} wnd:listen MyHost MyData user password
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 NOTE: The command is case-sensitive, and that it must match the information from the mount point configuration.
 
@@ -717,28 +706,38 @@ There are several ways to supply a password:
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username>
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username>
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
+
 . Sent as a parameter to the command.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> <password>
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> <password>
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
+
 . Read from a file, using the `--password-file` switch to specify the file to read from. Note, that the password must be in plain text inside the file, and neither spaces nor newline characters will be removed from the file by default, unless the `--password-trim` option is added. The password file must be readable by the apache user (or www-data)
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> \
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file
 ----
 +
+NOTE: Run this command inside the ownCloud Docker container.
++
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> \
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> \
      --password-file=/my/secret/password/file \
      --password-trim
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 NOTE: If you use the `--password-file` switch, the entire contents of the file will be used for the password, so please be careful with newlines.
 +
@@ -748,9 +747,11 @@ IMPORTANT: If using `--password-file` make sure that the file is only readable b
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username>
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username>
      --password-from-service-account
 ----
++
+NOTE: Run this command inside the ownCloud Docker container.
 +
 IMPORTANT: You need to ensure that the triple of `<host>`, `<share>` and `<username>` (including any kind of workgroup if used) matches the configuration made for the WND collaborative share. The command will fail otherwise.
 
@@ -775,8 +776,10 @@ This provides a bit more security because the `/tmp/plainpass` password as shown
 
 [source,bash,subs="attributes+"]
 ----
-cat /tmp/plainpass | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
+cat /tmp/plainpass | {occ-command-example-prefix-docker} wnd:listen <host> <share> <username> --password-file=-
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 ==== base64
 
@@ -785,8 +788,10 @@ Similar to plainpass, the content in this case gets encoded in the {base64-url}[
 [source,bash,subs="attributes+"]
 ----
 base64 -d /tmp/encodedpass | \
-   {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
+   {occ-command-example-prefix-docker} wnd:listen <host> <share> <username> --password-file=-
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 ==== pass
 
@@ -796,8 +801,10 @@ Example using "pass"
 
 [source,bash,subs="attributes+"]
 ----
-pass the-password-name | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
+pass the-password-name | {occ-command-example-prefix-docker} wnd:listen <host> <share> <username> --password-file=-
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 ==== HashiCorp Vault
 
@@ -805,8 +812,10 @@ This example uses {vaultproject-url}[Vault] as the secrets store. See {hashicorp
 
 [source,bash,subs="attributes+"]
 ----
-vault kv get -field=password secret/samba | {occ-command-example-prefix} wnd:listen <host> <share> <username> --password-file=-
+vault kv get -field=password secret/samba | {occ-command-example-prefix-docker} wnd:listen <host> <share> <username> --password-file=-
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Use Vault's ACLs to limit access to the token. Destroy the token after starting the service during boot with systemd.
 
@@ -815,8 +824,11 @@ Use Vault's ACLs to limit access to the token. Destroy the token after starting 
 If both the argument and the option are passed, e.g.,
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen <host> <share> <username> <password> --password-file=/opt/pass`
+{occ-command-example-prefix-docker} wnd:listen <host> <share> <username> <password> --password-file=/opt/pass`
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
+
 then the `--password-file` option will take precedence.
 
 === Optimizing wnd:process-queue
@@ -896,38 +908,44 @@ Setups with several servers might have some difficulties in some scenarios:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen host share username password
+{occ-command-example-prefix-docker} wnd:listen host share username password
 
-{occ-command-example-prefix} wnd:process-queue host share
+{occ-command-example-prefix-docker} wnd:process-queue host share
 
-{occ-command-example-prefix} wnd:process-queue host share -c 500
+{occ-command-example-prefix-docker} wnd:process-queue host share -c 500
 
-{occ-command-example-prefix} wnd:process-queue host share -c 500 \
+{occ-command-example-prefix-docker} wnd:process-queue host share -c 500 \
      --serializer-type file \
      --serializer-param file=/opt/oc/store
 
-{occ-command-example-prefix} wnd:process-queue host2 share2 -c 500 \
+{occ-command-example-prefix-docker} wnd:process-queue host2 share2 -c 500 \
      --serializer-type File \
      --serializer-param file=/opt/oc/store2
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 To set it up, make sure the listener is running as a system service:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen host share username password
+{occ-command-example-prefix-docker} wnd:listen host share username password
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 Setup a Cron job or similar with something like the following two commands:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:process-queue host share -c 500 \
+{occ-command-example-prefix-docker} wnd:process-queue host share -c 500 \
      --serializer-type file \
      --serializer-param file=/opt/oc/store1
 
 sudo rm -f /opt/oc/store1 # With a different schedule
 ----
+
+NOTE: Run this command inside the ownCloud Docker container.
 
 The first run will create the `/opt/oc/store1` with the serialized storages, the rest of the executions will use that file. The second Cron job, the one removing the file, will force the `wnd:process-queue` to
 refresh the data.
