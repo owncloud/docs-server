@@ -32,4 +32,4 @@ IMPORTANT: Consider the alphabetic order the system is reading config files. Wit
 
 <3> The files folder matches the `data` directory with former ownCloud releases.
 
-<4> Unused, present for historic reasons.
+<4> Unused, present for legacy reasons.

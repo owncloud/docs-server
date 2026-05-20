@@ -11,18 +11,18 @@
 
 == Dependencies
 
-All dependencies are provided with the ownCloud image.
+All dependencies are provided by the ownCloud image.
 
 == Access Testing
 
-To ensure that you can connect to your file server with SMB, do a small test upfront like the following.
+To ensure that you can connect to your file server with SMB, do a small test upfront like the following. Note that the `smbclient` command is not part of the ownCloud Docker image and must be provided and issued from the host.
 
 [source,bash]
 ----
 sudo smbclient -L <file_server_name> -U <full_domain_name>/<user_name>
 ----
 
-Please fix any issues before you connect ownCloud to a SMB file server.
+Make sure you have resolved any issues before connecting ownCloud to an SMB file server.
 
 == Configuration
 
@@ -36,8 +36,7 @@ When configuring ownCloud, you will need the following information:
 * The remote subfolder inside the remote Samba share to mount. +
 This is optional, as it defaults to `/`.
 +
-TIP: To assign the ownCloud logon username automatically to the subfolder, use `$user` instead of a
-subfolder name. The foldername=username must be present and is not created on access.
+TIP: To assign the ownCloud logon username automatically to the subfolder, use `$user` instead of a subfolder name. The foldername=username must be present and is not created on access.
 
 * The ownCloud users and groups who get access to the share.
 * A domain name, might be required or optional depending on your setup

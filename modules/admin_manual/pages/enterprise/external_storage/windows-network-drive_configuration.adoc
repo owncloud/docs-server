@@ -1,7 +1,6 @@
 = Windows Network Drive (WND)
 :toc: right
 :toclevels: 3
-:page-aliases: enterprise/external_storage/index.adoc
 :description: The Windows Network Drives app seamlessly integrates Windows and Samba/CIFS shared network drives as external storages. WND has great advantages compared to standard SMB access.
 
 :anacron-examples: http://www.thegeekstuff.com/2011/05/anacron-examples
@@ -96,35 +95,11 @@ Files are synchronized bidirectionally, and you can create, upload and delete fi
 
 Depending on the authentication method, passwords for each mount are encrypted and stored in the ownCloud database, using a long random secret key stored in `config.php`. This allows ownCloud to access the shares when the users who own the mounts are not logged in. This access will not work if the mount is session based, where passwords are not stored and are available only for the current active session. In case other users are granted access to this mount, they will see a red triangle with an exclamation mark on the bottom right of the mount icon identifying lack of access.
 
-== Installation
-
-Install the {oc-marketplace-url}/apps/windows_network_drive[External Storage: Windows Network Drives app] from the ownCloud Market App or ownCloud Marketplace. To make it work, a few  dependencies have to be installed.
-
-* A Samba client. This is included in all Linux distributions. On Debian, Ubuntu, and other Debian derivatives it is called `smbclient`. On SUSE, Red Hat, CentOS, and other Red Hat derivatives it is `samba-client`.
-* `php-smbclient` (version 0.8.0+). It should be included in most Linux distributions. You can use https://github.com/eduardok/libsmbclient-php#installation-from-pecl[Installation from PECL], if your distribution does not provide it or if you want to use a more updated version than the one provided by the OS. See xref:installation/manual_installation/server_prep_ubuntu_22.04.adoc#updating-pear[Updating pear] for a necessary prerequisite.
-* `which` and `stdbuf`. These should be included in most Linux distributions.
-
-To install and configure the necessary packages, see the xref:installation/manual_installation/manual_installation.adoc#prepare-your-server[Prepare Your Server] section of the manual installation documentation.
-
 TIP: For more information on SMB/CIFS in ownCloud, refer to the xref:configuration/files/external_storage/smb.adoc[Samba file server configuration documentation].
 
 TIP: If you encounter errors when using the WND app like `NT_STATUS_REVISION_MISMATCH`, please get in touch by {oc-support-url}[Opening a Service Request].
 
-[IMPORTANT]
-====
-ownCloud requires at least {samba-478-url}[Samba 4.7.8] or {samba-481-url}[Samba 4.8.1] on the ownCloud server, when:
-
-. The Windows Network Drive Listener is used; *and*
-. The remote Windows/Samba file server requires at least {smb2-url}[version 2.0 of the SMB protocol].
-
-The xref:wnd-listener-setup[Windows Network Drive Listener] only supports version 1 of the SMB protocol (SMB1) with _earlier_ Samba versions.
-
-*Background*
-
-A {samba-url}[Samba] server, often a Microsoft Windows Server, can enforce the minimum and maximum protocol versions used by connecting clients. However, in light of the {wannacry-ransomware-attack-url}[WannaCry ransomware attack], {msft-security-bulletin-ms17-010-url}[Microsoft patched Windows Server] to only allow SMB2 as minimum protocol by default, as SMB1 is insecure.
-
-The ownCloud windows network drive listener utilizes the SMB notification feature which works well with SMB1 in conjunction with most Samba versions. However, when the minimum protocol a server accepts is SMB2, ownCloud requires Samba 4.7.8+ (4.8+ etc.) to be able to properly work, as prior versions of Samba had a bug that broke this feature.
-====
+IMPORTANT: The remote Windows/Samba file server requires at least {smb2-url}[version 2.0 of the SMB protocol].
 
 == Configuration
 

@@ -12,6 +12,7 @@
 *** xref:admin_manual:installation/system_requirements.adoc[System Requirements]
 *** xref:admin_manual:installation/installing_with_docker.adoc[Installing With Docker]
 *** xref:admin_manual:installation/mount_folder_structure.adoc[Mount Folder Structure]
+*** xref:admin_manual:installation/configuration_notes.adoc[Configuration Notes]
 *** xref:admin_manual:installation/apps_management_installation.adoc[Apps Management]
 **** xref:admin_manual:installation/apps_supported.adoc[Supported Apps]
 ***** xref:admin_manual:installation/apps/mediaviewer/index.adoc[Media Viewer]

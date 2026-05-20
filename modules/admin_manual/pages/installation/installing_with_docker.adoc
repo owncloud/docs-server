@@ -280,25 +280,9 @@ docker compose exec owncloud occ <command>
 
 IMPORTANT: Don't use the `php` command prefix, this leads to several errors and is not intended to run in docker environments.
 
-=== Additional Evironment Variables
+=== Configuration
 
-The image provides additional environment variables that can be configured for the use with the container. To identify available ones, see the file `overwrite.config.php` which can be found in the `config` directory. This directory is located in `/mnt/data` in the container or locally at the respective bind mount.
-
-=== Alternative Configuration
-
-Rather than using environment variables to configure your ownCloud instance, you can use additional configuration files, as was possible with earlier releases of ownCloud. This configuration method is only possible when using bind mounts because access to the `config` sub folder of the mounted is required.
-
-[source,plaintext]
-----
-mount_point/
-  - apps/
-  - certs/
-  - config/
-  - files/
-  - sessions/
-----
-
-For more and important details see: xref:installation/mount_folder_structure.adoc[Mount Folder Structure].
+For more configuration options, please refer to the xref:installation/configuration_notes.adoc[Configuration Notes] documentation.
 
 == Enterprise License Keys
 
@@ -306,7 +290,7 @@ An Enterprise license keys can be added by:
 
 * Using an environment variable named `OWNCLOUD_LICENSE_KEY`, or
 * By adding a config entry. +
-Here you need a bind mount and create an addifional config file that needs to be placed in the `<mount-point>/config` directory.
+For more details see the xref:installation/configuration_notes.adoc[Configuration Notes] documentation.
 * It is also possible to activate your Enterprise Edition on the webUI. +
 Open owncloud and navigate to: menu:Settings[Admin > General]. Copy your license key into the field `Enter a new license:` and click `Save` to confirm.
 
