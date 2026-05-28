@@ -1,40 +1,100 @@
 # ownCloud Server Documentation
 
-**IMPORTANT**
+<!-- OSPO-managed README | Generated: 2026-04-16 | v2 -->
 
-Since April 2026, this repository requires [Commit Signing](https://docs.github.com/articles/about-gpg) and uses [Conventional Commits](https://www.conventionalcommits.org) for commits and the Pull Request title.
+[![License](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE) [![ownCloud OSPO](https://img.shields.io/badge/OSPO-ownCloud-blue)](https://kiteworks.com/opensource)
 
-**Table of Contents**
+Antora-based documentation component for ownCloud Server (OC10). This repository contains the AsciiDoc source files for server administration, user management, configuration, and maintenance documentation, published to [doc.owncloud.com](https://doc.owncloud.com).
 
-* [Building the Server Docs](#building-the-server-docs)
-* [General Notes](#general-notes)
-* [Generating the Documentation](#generating-the-documentation)
-* [Target Branch and Backporting](#target-branch-and-backporting)
-* [Branching Workflow](#branching-workflow)
-* [Create a New Version Branch for ownCloud Server](#create-a-new-version-branch-for-owncloud-server)
+## Getting Started
 
-## Building the Server Docs
+To preview changes locally:
 
-The ownCloud Server documentation is not built independently. Instead, it is built together with the [main documentation](https://github.com/owncloud/docs/). However, you can build a local copy of the ownCloud Server documentation to preview changes you are making.
+```bash
+npm install
+npm run antora-local
+npm run serve
+```
 
-Whenever a Pull Request of this repo gets merged, it automatically triggers a full docs build.
+This generates a standalone preview at `http://localhost:8080`. For the full site build, merge your changes and the [docs](https://github.com/owncloud/docs) repository will automatically rebuild.
 
-## General Notes
+## Documentation
 
-To make life easier, most of the content written in [docs](https://github.com/owncloud/docs#readme) applies also here. For ease of reading, the most important steps are documented here too. For more information see the link provided. Only a few topics of this repo are unique like the branching.
+- [Branching Workflow](./docs/the-branching-workflow.md)
+- [Version Branch Creation](./docs/new-version-branch.md)
+- [Main Documentation Build](https://github.com/owncloud/docs)
 
-## Generating the Documentation
+## Part of ownCloud Documentation
 
-See [Generating the Documentation](https://github.com/owncloud/docs#generating-the-documentation) in the docs repo for more details as it applies to all documentation repositories.
+This is a content component for the [ownCloud docs](https://github.com/owncloud/docs) Antora build. The ownCloud Server source code lives at [owncloud/core](https://github.com/owncloud/core). Published documentation is available at [doc.owncloud.com](https://doc.owncloud.com).
 
-## Target Branch and Backporting
+## Community & Support
 
-See the [following section](https://github.com/owncloud/docs#target-branch-and-backporting) as the same rules and notes apply.
+**[Star](https://github.com/owncloud/docs-server)** this repo and **Watch** for release notifications!
 
-## Branching Workflow
+- [ownCloud Website](https://owncloud.com)
+- [Community Discussions](https://github.com/orgs/owncloud/discussions)
+- [Matrix Chat](https://app.element.io/#/room/#owncloud:matrix.org)
+- [Documentation](https://doc.owncloud.com)
+- [Enterprise Support](https://owncloud.com/contact-us/)
+- [OSPO Home](https://kiteworks.com/opensource)
 
-Please refer to the [Branching Workflow for ownCloud Server](./docs/the-branching-workflow.md) for more information.
+## Contributing
 
-## Create a New Version Branch for ownCloud Server
+We welcome contributions! Please read the [Contributing Guidelines](CONTRIBUTING.md)
+and our [Code of Conduct](CODE_OF_CONDUCT.md) before getting started.
 
-Please refer to [Create a New Version Branch for ownCloud Server](./docs/new-version-branch.md) for more information.
+### Workflow
+
+- **Rebase Early, Rebase Often!** We use a rebase workflow. Always rebase on the target branch before submitting a PR.
+- **Dependabot**: Automated dependency updates are managed via Dependabot. Review and merge dependency PRs promptly.
+- **Signed Commits**: All commits **must** be PGP/GPG signed. See [GitHub's signing guide](https://docs.github.com/en/authentication/managing-commit-signature-verification).
+- **DCO Sign-off**: Every commit must carry a `Signed-off-by` line:
+  ```
+  git commit -s -S -m "your commit message"
+  ```
+- **GitHub Actions Policy**: Workflows may only use actions that are (a) owned by `owncloud`, (b) created by GitHub (`actions/*`), or (c) verified in the GitHub Marketplace.
+
+## Security
+
+**Do not open a public GitHub issue for security vulnerabilities.**
+
+Report vulnerabilities at **<https://security.owncloud.com>** -- see [SECURITY.md](SECURITY.md).
+
+Bug bounty: [YesWeHack ownCloud Program](https://yeswehack.com/programs/owncloud-bug-bounty-program)
+
+## License
+
+This project is licensed under the [AGPL-3.0](LICENSE).
+
+## About the ownCloud OSPO
+
+The [Kiteworks Open Source Program Office](https://kiteworks.com/opensource), operating under
+the [ownCloud](https://owncloud.com) brand, launched on May 5, 2026, to steward the open source
+ecosystem around ownCloud's products. The OSPO ensures transparent governance, license compliance,
+community health, and sustainable collaboration between the open source community and
+[Kiteworks](https://www.kiteworks.com), which acquired ownCloud in 2023.
+
+- **OSPO Home**: <https://kiteworks.com/opensource>
+- **GitHub**: <https://github.com/owncloud>
+- **ownCloud**: <https://owncloud.com>
+
+For questions about the OSPO or licensing, contact ospo@kiteworks.com.
+
+### License Migration to Apache 2.0
+
+The OSPO is driving a strategic relicensing of ownCloud repositories toward the
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0), following
+the [Apache Software Foundation's third-party license policy](https://www.apache.org/legal/resolved.html).
+
+Individual repositories will migrate as their audit is completed. The LICENSE file
+in each repo reflects its **current** license status (not the target).
+
+**Current license: AGPL-3.0** (Category X per Apache policy -- cannot be included in Apache-2.0 works).
+
+Migration prerequisites for this repository:
+
+- **CLA/DCO coverage**: All past contributors must have signed agreements permitting relicensing
+- **Copyleft dependency audit**: All AGPL/GPL dependencies must be replaced or isolated
+- **KDE heritage review**: Any code with KDE-era copyrights requires legal analysis
+- **Complete relicensing**: AGPL-3.0 is a strong copyleft license; migration requires full relicensing of all files, not just a header change
