@@ -12,6 +12,6 @@ The image provides additional environment variables that can be configured for t
 
 == Using a Configuration File
 
-Rather than using environment variables to configure your ownCloud instance, you can use additional configuration files, as was possible with earlier releases of ownCloud. This configuration method is only possible when using bind mounts, because access to the `config` sub folder is required.
+Rather than using environment variables to configure your ownCloud instance, you can use *additional* configuration files, as was possible with earlier releases of ownCloud. This configuration method is only possible when using bind mounts, because access to the `config` sub folder is required.
 
 For more and important details see: xref:installation/mount_folder_structure.adoc[Mount Folder Structure].

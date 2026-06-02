@@ -1,10 +1,9 @@
-services:
-  owncloud:
+# This oc-common template is a compose extension for ownCloud.
+# It is used for starting the main ownCloud instance and reused e.g. when defining listeners for WND.
+# This eases compose maintenance a lot.
+x-owncloud: &oc-common
     image: owncloud/server:${OWNCLOUD_IMAGE}
-    container_name: owncloud_server
     restart: always
-    ports:
-      - ${HTTP_PORT}:8080
     depends_on:
       - mariadb
       - redis
@@ -28,6 +27,23 @@ services:
         target: /mnt/data
     networks:
       - oc_network
+
+services:
+
+  owncloud:
+    # Start the main ownCloud instance
+    <<: *oc-common
+    container_name: owncloud_server
+    ports:
+      - ${HTTP_PORT}:8080
+
+#  owncloud-wnd-1:
+#    # Enterprise only: uncomment and configure it accordingly if WND is used !
+#    # Create as many of these services (containers) as you need listeners for different host/share pairs.
+#    # Read the documentation for more details, such when you want to use a password file.
+#    <<: *oc-common
+#    container_name: owncloud-wnd-1
+#    command: ["/usr/bin/owncloud", "occ", "wnd:listen", "myhost", "myshare", "workgroup\myuser", "password"]
 
   mariadb:
     image: mariadb:${MARIADB_IMAGE}
@@ -72,14 +88,14 @@ services:
 volumes:
   oc_files:
     driver: local
-# template when using bind mounts
+# Options when using bind mounts
 #    driver_opts:
 #      type: none
 #      device: /mnt/oc
 #      o: bind
   mysql:
     driver: local
-# use the above template for bind mounts
+# Use the above options when configuring bind mounts
   redis:
     driver: local
 
