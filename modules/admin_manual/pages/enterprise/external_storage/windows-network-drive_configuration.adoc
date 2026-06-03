@@ -25,7 +25,7 @@
 
 {description}
 
-The {oc-marketplace-url}/apps/windows_network_drive[Windows Network Drives app] creates a control panel in your Admin page. Any Windows file share and Samba servers on Linux and other Unix-type operating systems use the SMB/CIFS file-sharing protocol. The files and directories on the SMB/CIFS server will be visible on your Files page just like your other ownCloud files and folders.
+The *Windows Network Drives app*, which is part of the shipped Docker image creates a control panel in your Admin page. Any Windows file share and Samba servers on Linux and other Unix-type operating systems use the SMB/CIFS file-sharing protocol. The files and directories on the SMB/CIFS server will be visible on your Files page just like your other ownCloud files and folders.
 
 Compared to standard SMB access, WND has advanced features like:
 
