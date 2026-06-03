@@ -1,13 +1,14 @@
 = Previews Configuration
 :toc: right
+:description: The ownCloud preview system generates thumbnails and previews of files for all ownCloud apps that display files such as the Files or the Files Mediaviewer app.
 
 == Introduction
 
-The ownCloud preview system generates thumbnails and previews of files for all ownCloud apps that display files such as the Files or the Files Mediaviewer app.
+{description}
 
 The following image shows some examples of previews of various file types.
 
-image:preview_images.png[Thumbnails of various image and audio/video files.]
+image:preview_images.png[Thumbnails of Various Image and Audio/Video Files.]
 
 By default, ownCloud can generate previews for the following filetypes:
 
@@ -36,7 +37,7 @@ IMPORTANT: Be careful enabling preview thumbnail generation for documents which 
 
 == Default Preview Providers
 
-Please note that the ownCloud preview system comes already with sensible defaults, and therefore it is usually not necessary to adjust those configuration values. If you want to configure previews, add or change the following parameters in `config/config.php`. 
+Please note that the ownCloud preview system comes already with sensible defaults, and therefore it is usually not necessary to adjust those configuration values. If you want to configure previews, add or change the following parameters by editing your _additional_ xref:installation/configuration_notes.adoc#using-a-configuration-file[configuration file]. 
 
 The default list of enabled preview providers which do not need to be explicitly enabled in the config are:
 
@@ -53,20 +54,29 @@ OC\Preview\TXT
 OC\Preview\XBitmap
 ----
 
-If you want to add or change the default list, you MUST define all elements used. If you just declare an additional item, only this item will be taken and none of the default list. 
+If you want to add or change the default list, you MUST define all elements used by editing your _additional_ xref:installation/configuration_notes.adoc#using-a-configuration-file[configuration file]. If you just declare an additional item in the configuration, this item will be taken and none of the default list. 
 
 == Prerequisites
 
-When defining your own preview providers, some things need to be considered. For some file types, ownCloud uses ImageMagick to generate previews. By default, the delivered version of ImageMagick for Ubuntu 20.04 is version 6, and the wrapper for php is version 3.4. This version of ImageMacick is _not_ capable of processing additional file formats like SVG or HEIC and many others. If you want to use those providers, you must upgrade ImageMagick to version 7 and the php wrapper to version 3.5. See the xref:installation/manual_installation/server_prep_ubuntu_20.04.adoc#php-imagick-library[php-imagick Library] section in the installation guide for more information.
+When defining your own preview providers, some things need to be considered. For some file types, ownCloud uses ImageMagick to generate previews. The ownCloud Docker Image provides the `imagic` php extension, but not the ImageMagick binary. To mitigate this issue, you need to manually create an image that installs this requirement. Please note that other binaries may be required, which are listed in the relevant section.
+
+Starting with version 7 of ImageMagick, additional file formats like SVG or HEIC and many others can be processed.
+
+You can check your ImageMagick version installed in your image by issuing the following command:
+
+[source,docker]
+----
+docker exec -it owncloud_server sh -c 'convert --version'
+----
 
 === Notes for PDF Preview Generation
 
-If you handle the security risk and decide to allow creating previews for PDF files, change the following imagick security policy. Use an editor of your choice like `nano` and change the following file, adapt the path if using ImageMagick 7:
+ImageMagick uses ghostscript for converting PDF. Please also make sure, that ghostscript is installed.
+
+If you handle the security risk and decide to allow creating previews for PDF files, change the following imagick security policy. Use an editor of your choice such as `nano` and change the following file. Note that you need to configure a Docker Volume to access the data:
 
 [source,bash]
 ----
-sudo nano /etc/ImageMagick-6/policy.xml
- or
 sudo nano /etc/ImageMagick-7/policy.xml
 ----
 
@@ -84,22 +94,16 @@ and change:
 rights="none" --> rights="read|write"
 ----
 
-After changing the policy file for ImageMagick, restart your Apache web server or your php-fpm service.
-ImageMagick uses ghostscript for converting PDF. Please also make sure, that ghostscript is installed and the PDF format is listed when invoking the following command:
+After changing the policy file for ImageMagick, restart your container. Check that the PDF format is listed when invoking the following command:
 
 [source,bash]
 ----
-convert -list format | grep -i pdf
+docker exec -it owncloud_server sh -c 'convert -list format | grep -i pdf'
 ----
 
 === Notes for Video Preview Generation
 
 To be able to create previews for video files when using the `OC\Preview\Movie` provider, you must install `ffmpeg`. There can be significant load on the server during conversion when video thumbnail generation is enabled.
-
-[source,bash]
-----
-sudo apt install -y ffmpeg
-----
 
 === List Extensions Used for the Preview Generation
 
@@ -107,12 +111,12 @@ To get a list of file extensions linked to the image or video provider, change i
 
 [source,bash]
 ----
-cat resources/config/mimetypemapping.dist.json | grep image
+docker exec -it owncloud_server sh -c 'cat /var/www/owncloud/resources/config/mimetypemapping.dist.json | grep image'
 ----
 
 == Preview Format Requirements
 
-The following providers require the php `imagick` extension to be enabled (check `phpinfo();`) and compiled with support for these formats:
+The following providers require the php `imagick` extension which is included in the Docker Image provided:
 
 [source,plaintext]
 ----

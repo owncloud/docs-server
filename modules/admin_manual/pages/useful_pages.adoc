@@ -14,4 +14,4 @@ Note that this section always points to the latest server version available. In 
 * xref:server:admin_manual:installation/installing_with_docker.adoc[Installation with Docker]
 * xref:server:admin_manual:configuration/server/occ_command.adoc[OCC Commands]
 * xref:server:admin_manual:configuration/server/caching_configuration.adoc#small-organization-single-server-setup[File Locking and Caching Configuration]
-* xref:server:admin_manual:maintenance/manual_upgrade.adoc[Manual Upgrade]
+* xref:server:admin_manual:maintenance/upgrading/manual_upgrade.adoc[Manual Upgrade]

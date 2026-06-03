@@ -1,9 +1,9 @@
 = Using the occ Command
 :toc: macro
 :toclevels: 2
+:description: ownCloud's 'occ' command (ownCloud console) is ownCloud's command-line interface.
 
-ownCloud's `occ` command (ownCloud console) is ownCloud's command-line interface. 
-You can perform many common server operations with `occ`, such as installing and upgrading ownCloud, managing users and groups, encryption, passwords, app settings, and more.
+{description} You can perform many common server operations with `occ`, such as installing and upgrading ownCloud, managing users and groups, encryption, passwords, app settings, and more.
 
 //The following is a trick to create a distance between the upper text and the table of contents. Using {empty} produces a clean empty line. Else the "Table of Contents" would stick right below the last text. See: https://discuss.asciidoctor.org/Getting-blank-lines-in-AsciiDoc-td47.html
  

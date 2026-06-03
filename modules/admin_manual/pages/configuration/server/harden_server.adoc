@@ -6,37 +6,24 @@ go/enable-http-strict-transport-security.adoc
 
 == Introduction
 
-ownCloud aims to ship with secure defaults that do not need to get
-modified by administrators. However, in some cases some additional
-security hardening can be applied in scenarios were the administrator
-has complete control over the ownCloud instance. This page assumes that
-you run ownCloud Server on Apache2 in a Linux environment.
+ownCloud aims to ship with secure defaults that do not need to get modified by administrators. However, in some cases some additional security hardening can be applied in scenarios were the administrator has complete control over the ownCloud instance. This page assumes that you run ownCloud Server on Apache2 in a Linux environment.
 
-NOTE: ownCloud will warn you in the administration interface if some critical security-relevant options are missing.
-However, it is still up to the server administrator to review and maintain system security.
+NOTE: ownCloud will warn you in the administration interface if some critical security-relevant options are missing. However, it is still up to the server administrator to review and maintain system security.
 
 == Limit on Password Length
 
-ownCloud uses the https://en.m.wikipedia.org/wiki/Bcrypt[bcrypt]
-algorithm. It only verifies the
-first 72 characters of passwords. This applies to all passwords you
-use in ownCloud: user passwords, passwords on link shares and passwords
-on external shares.
+ownCloud uses the https://en.m.wikipedia.org/wiki/Bcrypt[bcrypt] algorithm. It only verifies the first 72 characters of passwords. This applies to all passwords you use in ownCloud: user passwords, passwords on link shares and passwords on external shares.
 
 == Rate Limiting
 
-Currently ownCloud deliberately does not provide any form of rate-limiting (though it does provide {oc-marketplace-url}/apps/brute_force_protection[brute-force protection]).
-This is because ownCloud needs to integrate in to a diverse range of environments and infrastructure, which often already provide specialized rate-limiting solutions, e.g., _Apache_, _HAProxy_, and _F5_.
+Currently ownCloud deliberately does not provide any form of rate-limiting (though it does provide {oc-marketplace-url}/apps/brute_force_protection[brute-force protection]). This is because ownCloud needs to integrate in to a diverse range of environments and infrastructure, which often already provide specialized rate-limiting solutions, e.g., _Apache_, _HAProxy_, and _F5_.
 
-If you are yet to implement a rate-limiting solution for your ownCloud instance, start by retrieving a list of all active routes.
-This information is obtained by running xref:configuration/server/occ_command.adoc#security[occ's security:routes command], as in the following example.
+If you are yet to implement a rate-limiting solution for your ownCloud instance, start by retrieving a list of all active routes. This information is obtained by running xref:configuration/server/occ_command.adoc#security[occ's security:routes command], as in the following example.
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} security:routes
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 It should print a list of all the routes as in the following truncated example.
 
@@ -71,7 +58,7 @@ With this information, you can begin customizing a rate-limiting solution specif
 
 == Operating System
 
-=== Enable hardening modules such as SELinux
+=== Enable Hardening Modules Such as SELinux
 
 We also recommend to enable hardening modules such as SELinux where possible.
 
@@ -140,96 +127,20 @@ and check the output.
 
 == Deployment
 
-=== Place data directory outside of the web root
+=== Disable Preview Image Generation
 
-A simple but efficient way to increase the security of your data is to place your `data` directory outside of the Web root (i.e. outside of `/var/www`), ideally at the time of installation.
+ownCloud is able to generate preview images of common file types such as images or text files. By default, the preview generation for some file types that we consider secure enough for deployment is enabled. However, administrators should be aware that these previews are generated using PHP libraries written in C which might be vulnerable to attack vectors.
 
-=== Disable preview image generation
-
-ownCloud is able to generate preview images of common file types such as
-images or text files. By default, the preview generation for some file
-types that we consider secure enough for deployment is enabled. However, administrators should be aware that these previews are
-generated using PHP libraries written in C which might be vulnerable to
-attack vectors.
-
-For high security deployments, we recommend disabling the preview
-generation by setting the `enable_previews` switch to `false` in
-`config.php`. As administrator you are also able to manage which
-preview providers are enabled by modifying the `enabledPreviewProviders`
+For high security deployments, we recommend disabling the preview generation by setting the `enable_previews` switch to `false` in `config.php`. As administrator you are also able to manage which preview providers are enabled by modifying the `enabledPreviewProviders`
 option switch.
 
 == Use HTTPS
 
-Using ownCloud without an encrypted HTTPS connection opens up your
-server to a man-in-the-middle (MITM) attack and risks the interception
-of user data and passwords. It is a best practice, and highly
-recommended, to always use HTTPS on production servers and to never
-allow unencrypted HTTP.
+Using ownCloud without an encrypted HTTPS connection opens up your server to a man-in-the-middle (MITM) attack and risks the interception of user data and passwords. It is a best practice, and highly recommended, to always use HTTPS on production servers and to never allow unencrypted HTTP.
 
-For information on how to setup HTTPS, consult the documentation of your Web server. The following examples
-apply to Apache.
+Since Apache is included in the Docker image, HTTPS needs to be configured on the web proxy. Please refer to the web proxy documentation for details. You may also want to enable HTTP Strict Transport Security to prevent browsers from connecting to the ownCloud instance using HTTP and to stop site visitors from bypassing invalid certificate warnings.
 
-=== Redirect all unencrypted traffic to HTTPS
-
-To redirect all HTTP traffic to HTTPS, administrators are encouraged to
-issue a permanent redirect using the 301 status code. Using Apache,
-this can be achieved by adding a setting such as the following in the
-Apache VirtualHosts configuration containing the `<VirtualHost *:80>`
-entry:
-
-[source,apache]
-----
-Redirect permanent / https://example.com/
-----
-
-=== Enable HTTP Strict Transport Security
-
-While redirecting all traffic to HTTPS is good, it may not completely
-prevent man-in-the-middle attacks. Therefore we recommend
-setting the HTTP Strict Transport Security header, which instructs browsers
-to not allow any connection to the ownCloud instance using HTTP, and it
-attempts to prevent site visitors from bypassing invalid certificate
-warnings.
-
-This can be achieved by adding the following settings in the Apache
-VirtualHost file containing the `<VirtualHost *:443>` entry:
-
-[source,apache]
-----
-<IfModule mod_headers.c>
-  Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
-</IfModule>
-----
-
-If you don’t have access to your Apache configuration, it is also
-possible to add this to the main `.htaccess` file shipped with ownCloud.
-Make sure you’re adding it below the line:
-
-----
-#### DO NOT CHANGE ANYTHING ABOVE THIS LINE ####
-----
-
-This example configuration will make all subdomains only accessible via
-HTTPS. If you have subdomains not accessible via HTTPS, remove
-`includeSubDomains`.
-
-NOTE: This requires the `mod_headers` extension in Apache.
-
-=== Proper SSL configuration
-
-Default SSL configurations by Web servers are often not
-state-of-the-art and require fine-tuning for an optimal performance and
-security. The available SSL ciphers and options depend
-completely on your environment, therefore we can't provide a general recommendation.
-
-However, We do recommend using the
-https://mozilla.github.io/server-side-tls/ssl-config-generator/[Mozilla SSL Configuration Generator]
-to generate a configuration suitable for your environment, and the free
-https://www.ssllabs.com/ssltest/[Qualys SSL Labs Tests] gives good
-guidance on whether your SSL server is correctly configured.
-
-Also ensure that HTTP compression is disabled to mitigate the BREACH
-attack.
+Note that the free https://www.ssllabs.com/ssltest/[Qualys SSL Labs Tests] gives good guidance on whether your SSL server is correctly configured.
 
 == Use a dedicated domain for ownCloud
 

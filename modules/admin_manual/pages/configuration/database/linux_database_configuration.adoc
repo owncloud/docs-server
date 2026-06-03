@@ -1,5 +1,7 @@
 = Database Configuration on Linux
 :toc: right
+:description: ownCloud requires a database in which administrative data is stored. 
+
 :avoid-deadlocks-galery-haproxy-url: https://severalnines.com/blog/avoiding-deadlocks-galera-set-haproxy-single-node-writes-and-multi-node-reads
 :haproxy-url: https://www.haproxy.org/
 :maxscale-url: https://github.com/mariadb-corporation/MaxScale/wiki
@@ -13,7 +15,7 @@
 
 == Introduction
 
-ownCloud requires a database in which administrative data is stored. The following databases are currently supported:
+{description} The following databases are currently supported:
 
 * xref:mysql-mariadb[MySQL / MariaDB]
 * xref:postgresql[PostgreSQL]
@@ -89,7 +91,7 @@ mysql.trace_mode=Off
 ----
 ////
 
-An ownCloud instance configured with MySQL would contain the hostname on which the database is running, a valid username and password to access it, and the name of the database. The config as created by the xref:installation/installation_wizard.adoc[installation wizard] would therefore contain entries like this:
+An ownCloud instance configured with MySQL would contain the hostname on which the database is running, a valid username and password to access it, and the name of the database. The config as created by the xref:installation/installing_with_docker.adoc[Installing with Docker] procedure will therefore contain entries such as:
 
 [source,php]
 ----
