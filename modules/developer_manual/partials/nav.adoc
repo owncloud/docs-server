@@ -18,7 +18,6 @@
 *** xref:developer_manual:core/code-standard.adoc[Code Standards Compliance]
 *** xref:developer_manual:testing/index.adoc[Testing]
 **** xref:developer_manual:testing/test-pilots.adoc[ownCloud Test Pilots]
-**** xref:developer_manual:testing/drone.adoc[Drone Testing]
 **** xref:developer_manual:testing/unit-testing.adoc[Unit Testing]
 **** xref:developer_manual:testing/acceptance-tests.adoc[Acceptance Tests]
 **** xref:developer_manual:testing/ui-testing.adoc[User Interface Testing]
