@@ -15,8 +15,6 @@ To enable maintenance mode, run the following command:
 {occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 You may also put your server into this mode by editing config/config.php.
 
 [source,php]
@@ -32,8 +30,6 @@ To disable maintenance mode, run the following command:
 ----
 {occ-command-example-prefix-docker} maintenance:mode --off
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 You may also put your server into this mode by editing config/config.php. +
 

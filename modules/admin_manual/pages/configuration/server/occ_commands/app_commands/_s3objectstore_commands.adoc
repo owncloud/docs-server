@@ -11,8 +11,6 @@ Marketplace URL: {oc-marketplace-url}/apps/files_primary_s3[S3 Primary Object St
 {occ-command-example-prefix-docker} s3:list
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Arguments
 
 [width="80%",cols="30%,70%",]
@@ -27,8 +25,6 @@ NOTE: Run this command inside the ownCloud Docker container.
 ----
 {occ-command-example-prefix-docker} s3:create-bucket
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 

@@ -24,16 +24,12 @@ This quick guide gives a brief summary of the commands needed without going into
 {occ-command-example-prefix-docker} maintenance:singleuser --off
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === View the Encryption Status
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} encryption:status
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Decrypt Encrypted Files
 
@@ -46,8 +42,6 @@ Depending on the amount of existing data, this operation can take a long time.
 {occ-command-example-prefix-docker} maintenance:singleuser --off
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Deactivate Master-Key-Based Encryption
 
 [source,bash,subs="attributes+"]
@@ -58,16 +52,12 @@ NOTE: Run this command inside the ownCloud Docker container.
 {occ-command-example-prefix-docker} app:disable encryption
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 If the master key has been compromised or exposed, you can replace it. You will need the current master key for it.
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} encryption:recreate-master-key
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == Clean up Your Database
 

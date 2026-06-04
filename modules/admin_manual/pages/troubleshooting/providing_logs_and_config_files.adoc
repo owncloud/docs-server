@@ -20,15 +20,11 @@ Check if it is disabled:
 {occ-command-example-prefix-docker} app:list --disabled configreport
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 Enable it if it was formerly disabled:
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} app:enable configreport
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Generate via webUI
 
@@ -43,8 +39,6 @@ To generate a config report from the command line, run the following command fro
 ----
 {occ-command-example-prefix-docker} configreport:generate > config_report.txt
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == ownCloud Server Log File
 
@@ -77,5 +71,3 @@ If LDAP is used, viewing the LDAP configuration is important when checking for e
 ----
 {occ-command-example-prefix-docker} ldap:show-config > ldap_config.txt
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.

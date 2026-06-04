@@ -24,8 +24,6 @@ The following commands are available for the Data Exporter app:
 {occ-command-example-prefix-docker} instance:export:user <userId> <exportDirectory>
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Arguments
 
 [width="80%",cols="30%,70%",]
@@ -40,8 +38,6 @@ NOTE: Run this command inside the ownCloud Docker container.
 ----
 {occ-command-example-prefix-docker} instance:import:user [options] [--] <importDirectory>
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -65,8 +61,6 @@ NOTE: Run this command inside the ownCloud Docker container.
 ----
 {occ-command-example-prefix-docker} instance:export:migrate:share <userId> <remoteServer>
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 

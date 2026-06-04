@@ -7,8 +7,6 @@ You can run migration steps with the `migrations` command.
 {occ-command-example-prefix-docker} migrations:execute <app> <version>
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 == Arguments
 
 [width="100%",cols="20%,70%",]
@@ -25,6 +23,3 @@ This example executes the migration step for the core app:
 ----
 {occ-command-example-prefix-docker} migrations:execute core 20181220085457
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
-

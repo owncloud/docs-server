@@ -22,8 +22,6 @@ The output shows whether they are enabled or disabled.
 {occ-command-example-prefix-docker} app:list [--] [<search-pattern>]
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -67,8 +65,6 @@ Enable an app, for example the Market app.
 market enabled
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 == Disable an App
 
 [source,docker,subs="attributes+"]
@@ -76,8 +72,6 @@ NOTE: Run this command inside the ownCloud Docker container.
 {occ-command-example-prefix-docker} app:disable market
 market disabled
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 NOTE: Be aware that the following apps cannot be disabled: _DAV_, _FederatedFileSharing_, _Files_ and _Files_External_.
 
@@ -96,8 +90,6 @@ By default all checks are enabled. The Activity app is an example of a correctly
 App is compliant - awesome job!
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 If your app has issues, you'll see output like this.
 
 [source,docker,subs="attributes+"]
@@ -111,8 +103,6 @@ Analysing /var/www/owncloud/apps/files/foo_app.php
    line   49: OC_Util - Static method of private class must not be called
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 == Get the App Installation Path
 
 You can get the full file path to an app.
@@ -122,6 +112,3 @@ You can get the full file path to an app.
 {occ-command-example-prefix-docker} app:getpath notifications
 /var/www/owncloud/apps/notifications
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
-

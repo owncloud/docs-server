@@ -39,8 +39,6 @@ Removing files directly from the primary storage is not supported and should not
    files:check-cache [options] [--] <uid> <target-file>
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Arguments
 
 [width="100%",cols="20%,70%",]
@@ -65,16 +63,12 @@ Examples of checking files for user maria:
 welcome.txt has been accessed properly
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 [source,docker,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} files:check-cache maria maria@smbhome/myfile.txt
 
 Ignoring maria@smbhome/myfile.txt because it is shared or not inside the primary storage
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == The files:checksums:verify command
 
@@ -100,8 +94,6 @@ Mismatch for thumbnails/9/2048-2048-max.png:
  Filecache:   SHA1:2634fed078d1978f24f71892bf4ee0e4bd0c3c99 MD5:dd249372f7a68c551f7e6b2615d49463 ADLER32:821230d4
  Actual:  SHA1:da39a3ee5e6b4b0d3255bfef95601890afd80709 MD5:d41d8cd98f00b204e9800998ecf8427e ADLER32:00000001
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Options
 
@@ -133,8 +125,6 @@ When a mount point gets removed, the storage ID and file cache related info stay
    files:remove-storage [options] [--] [<storage-id>]...
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Arguments
 
 [width="100%",cols="23%,70%",]
@@ -165,8 +155,6 @@ This command should be handled with absolute care because *any* storage ID and t
 ----
 {occ-command-example-prefix-docker} files:remove-storage --show-candidates
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 [source,plaintext]
 ----
@@ -200,8 +188,6 @@ IMPORTANT: Scanning is only possible when using POSIX filesystems but not for ob
  Usage:
    files:scan [options] [--] [<user_id>]...
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -253,8 +239,6 @@ To get a list of scannable mounts for a given user, use the following command:
 {occ-command-example-prefix-docker} files_external:list user_id
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 TIP: Mounts are only scannable at the point of origin. Scanning of shares including federated shares is not necessary on the receiver side and therefore not possible.
 
 NOTE: Mounts based on session credentials can not be scanned as the users credentials are not available to the occ command set.
@@ -286,16 +270,12 @@ This way is much faster than running the command for every user separately, but 
 {occ-command-example-prefix-docker} maintenance:singleuser --off
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 The following command filters by the storage of the specified user.
 
 [source,docker,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} files:scan USERID --repair
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 TIP: If many users are affected, it could be convenient to create a shell script, which iterates over a list of User ID's.
 
@@ -315,8 +295,6 @@ This command is useful before removing users.
  Usage:
    files:transfer-ownership [options] [--] <source-user> <destination-user>
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -349,8 +327,6 @@ For example, to move all files from `<source-user>` to `<destination-user>` tran
     <destination-user>
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 You can also move a limited set of files from `<source-user>` to `<destination-user>` transfer folder by making use of the `--path` switch, as in the example below.
 Ownership of `folder/to/move` and all files and folders which it contains will be transferred to `<destination-user>` transfer folder.
 
@@ -362,8 +338,6 @@ Ownership of `folder/to/move` and all files and folders which it contains will b
     <destination-user>
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 If the entire user folder of `<source-user>` needs to be migrated to `<destination-user>` user folder, use the `--destination-use-user-folder` switch, as in the example below.
 The destination user needs to be created but never log in, we recommend using owncloud maintenance mode for this operation.
 
@@ -374,8 +348,6 @@ The destination user needs to be created but never log in, we recommend using ow
     <source-user> \
     <destination-user>
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 Please keep the following in mind when using this command:
 
@@ -398,8 +370,6 @@ NOTE: By default, the command performs a dry run and displays the problems found
  Usage:
    files:troubleshoot-transfer-ownership [options] [--] [<type>]
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 
@@ -425,8 +395,6 @@ Run the command with one of the type arguments:
     <all|invalid-owner|invalid-initiator>
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 The command can attempt to fix the issues with the `--fix` flag, +
 or execute for a single user using `--uid <uid>`
 
@@ -436,5 +404,3 @@ or execute for a single user using `--uid <uid>`
     --fix \
     --uid=UID
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.

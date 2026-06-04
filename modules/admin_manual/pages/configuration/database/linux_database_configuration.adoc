@@ -140,18 +140,18 @@ innodb_file_per_table=ON
 
 . Run the following occ command:
 +
+--
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} db:convert-mysql-charset
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
-+
+
 When this is done, tables will be created with:
-+
+
 * A `utf8mb4` character set.
 * A `utf8mb4_bin` collation.
 * `row_format` set to compressed.
+--
 
 [TIP]
 ====

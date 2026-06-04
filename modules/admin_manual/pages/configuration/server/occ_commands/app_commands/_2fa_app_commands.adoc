@@ -22,8 +22,6 @@ Delete the redundant secrets of non-existing users:
 {occ-command-example-prefix-docker} twofactor_totp:delete-redundant-secret
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 == Set Secret Verification Status
 
 Set secret verification status of specified users or all users:
@@ -32,8 +30,6 @@ Set secret verification status of specified users or all users:
 ----
 {occ-command-example-prefix-docker}  twofactor_totp:set-secret-verification-status [options] [--] <set-verified>
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Arguments
 

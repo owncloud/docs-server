@@ -92,8 +92,6 @@ See the following occ command on how to set it. Make up a passphrase, referred t
 {occ-command-example-prefix-docker} config:system:set "metrics_shared_secret" --value "<your-metrics-secret>"
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 TIP: This token gets stored in config.php as `metrics_shared_secret`, which could also be done manually
 instead of using the occ command.
 
@@ -105,8 +103,6 @@ The dashboard is enabled by default. You can disable it with the following comma
 ----
 {occ-command-example-prefix-docker} config:app:set metrics disable_dashboard --value=yes
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Endpoints and Parameters
 

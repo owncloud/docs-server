@@ -49,8 +49,6 @@ You can see an example of calling the commands listed below, configured to requi
   {occ-command-example-prefix-docker} app:disable --no-interaction encryption
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 NOTE: The decryption of the files by the ownCloud administrator requires the current passwords of all users! This only works when users have enabled password recovery and if an admin recovery password is available.
 
 === Remove the Encryption Records from the ownCloud Database
@@ -92,8 +90,6 @@ The following example shows how to do this on the command line.
   {occ-command-example-prefix-docker} encryption:select-encryption-type masterkey -y && \
   {occ-command-example-prefix-docker} encryption:encrypt-all --yes
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == Verify the Encrypted Files
 

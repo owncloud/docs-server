@@ -19,8 +19,6 @@ This command adds a trusted federated server.
 {occ-command-example-prefix-docker} federation:trusted-servers:add <url>
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Arguments
 
 [width="100%",cols="25%,70%",]
@@ -39,8 +37,6 @@ In the example below, the named trusted server is added.
     https://myserver:8888/server/owncloud
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 == List Trusted Servers
 
 This command lists all trusted federated servers that have been added.
@@ -49,8 +45,6 @@ This command lists all trusted federated servers that have been added.
 ----
 {occ-command-example-prefix-docker} federation:trusted-servers:list
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Example
 
@@ -61,8 +55,6 @@ In the example below, all trusted servers that have been added are listed.
 {occ-command-example-prefix-docker} configured 
 
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 *Output:*
 
@@ -85,8 +77,6 @@ This command removes a trusted federated server.
 {occ-command-example-prefix-docker} federation:trusted-servers:remove <id>
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Arguments
 
 [width="100%",cols="25%,70%",]
@@ -103,8 +93,6 @@ In the example below, the trusted server with ID=2 gets removed.
 ----
 {occ-command-example-prefix-docker} federation:trusted-servers:remove 2
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 *Output:*
 

@@ -21,8 +21,6 @@ After creating your signing key, sign your app like this example:
    --path=/Users/karlmay/Programming/contacts
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 Verify your app:
 
 [source,docker,subs="attributes+"]
@@ -30,11 +28,8 @@ Verify your app:
 {occ-command-example-prefix-docker} integrity:check-app --path=/pathto/app appname
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 When it returns nothing, your app is signed correctly. When it returns a message then there is an error.
 
 `integrity:sign-core` is for ownCloud core developers only.
 
 TIP: See xref:configuration/general_topics/code_signing.adoc[code signing] to learn more.
-

@@ -31,8 +31,6 @@ This example adds a new group, called "Finance":
   Created group "Finance"
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 == Listing Groups
 
 You can list the names of existing groups with the `group:list` command.
@@ -62,8 +60,6 @@ This example lists groups containing the string "finance".
  - Finance-Managers
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 This example lists groups containing the string "finance" formatted with `json_pretty`.
 
 [source,docker,subs="attributes+"]
@@ -75,8 +71,6 @@ This example lists groups containing the string "finance" formatted with `json_p
    "Finance-Managers"
  ]
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == Listing Group Members
 
@@ -104,8 +98,6 @@ This example lists members of the "Finance" group.
  - julie: Julie Jones
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 This example lists members of the Finance group formatted with `json_pretty`.
 
 [source,docker,subs="attributes+"]
@@ -116,8 +108,6 @@ This example lists members of the Finance group formatted with `json_pretty`.
    "julie": "Julie Jones"
  }
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == Adding Members to Groups
 
@@ -137,8 +127,6 @@ This example adds members "aaron" and "julie" to group "Finance":
   User "julie" added to group "Finance"
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 You may attempt to add members that are already in the group, without error. This allows you to add members in a scripted way without needing to know if the user is already a member of the group. For example:
 
 [source,docker,subs="attributes+"]
@@ -148,8 +136,6 @@ You may attempt to add members that are already in the group, without error. Thi
   User "julie" is already a member of group "Finance"
   User fred" added to group "Finance"
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == Removing Members from Groups
 
@@ -170,8 +156,6 @@ This example removes members "aaron" and "julie" from group "Finance".
   Member "julie" removed from group "Finance"
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 You may attempt to remove members that have already been removed from the group, without error. This allows you to remove members in a scripted way without needing to know if the user is still a member of the group. For example:
 
 [source,docker,subs="attributes+"]
@@ -181,8 +165,6 @@ You may attempt to remove members that have already been removed from the group,
   Member "fred" removed from group "Finance"
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 == Deleting a Group
 
 To delete a group, you use the `group:delete` command, as in the example below:
@@ -191,5 +173,3 @@ To delete a group, you use the `group:delete` command, as in the example below:
 ----
 {occ-command-example-prefix-docker} group:delete Finance
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.

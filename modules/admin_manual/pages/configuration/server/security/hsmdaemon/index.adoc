@@ -405,8 +405,6 @@ ep6Y1aAVAYpAesZ1+sQzzUepjO82o34kjmm63Drmz+6KED4oIBARQkXeW/OoxgUg6kQhQK1thA/3Ww33
 decrypted string (base64 encoded): 'SGVsbG8sIHdvcmxkIQo='
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 [source,bash]
 ----
 sudo tail -5 /var/log/hsm.log
@@ -502,8 +500,6 @@ Set the generated secret for ownCloud:
 {occ-command-example-prefix-docker} config:app:set encryption hsm.jwt.secret --value '7a7d1826-b514-4d9f-afc7-a7485084e8de'
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 If the command succeeds, you should see the following console output:
 
 [source,plaintext]
@@ -521,8 +517,6 @@ Enable the HSM mode and enable encryption by running the commands in the followi
 {occ-command-example-prefix-docker} config:app:set encryption hsm.url --value 'http://localhost:8513'
 {occ-command-example-prefix-docker} encryption:enable
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 If the commands are successful, you should see the following console output:
 

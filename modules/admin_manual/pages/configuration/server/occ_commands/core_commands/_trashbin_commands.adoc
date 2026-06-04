@@ -24,8 +24,6 @@ Remove deleted files for users on backend Database
  edward
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 This example removes the deleted files of users `molly` and `freda`:
 
 [source,docker,subs="attributes+"]
@@ -34,7 +32,5 @@ This example removes the deleted files of users `molly` and `freda`:
 Remove deleted files of   molly
 Remove deleted files of   freda
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 `trashbin:expire` deletes only expired files according to the `trashbin_retention_obligation` setting in `config.php` (see xref:configuration/server/config_sample_php_parameters.adoc[the "Deleted Files" section documentation]). The default is to delete expired files for all users, or you may list users in a space-delimited list.

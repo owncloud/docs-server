@@ -9,6 +9,4 @@ Servers connected with federation shares can share user address books, and auto-
 {occ-command-example-prefix-docker} federation:sync-addressbooks
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 NOTE: This command is only available when the "Federation" app (`federation`) is enabled.

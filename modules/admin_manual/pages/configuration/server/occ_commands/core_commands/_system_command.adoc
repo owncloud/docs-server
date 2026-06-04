@@ -13,8 +13,6 @@
   system:cron [options]
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 == Options
 
 [width="100%",cols="20%,70%",]
@@ -30,8 +28,6 @@ To execute xref:configuration/server/background_jobs_configuration.adoc[backgrou
 ----
 {occ-command-example-prefix-docker} system:cron
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 If the `--progress` or `-p` argument is specified, then progress output will be displayed in the console, as in the example below.
 
@@ -64,8 +60,6 @@ Use the following one instead
 ----
 {occ-command-example-prefix-docker} system:cron
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 ====
 

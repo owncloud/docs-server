@@ -8,5 +8,3 @@ Marketplace URL: {oc-marketplace-url}/apps/user_shibboleth[SAML/SSO Integration]
 ----
 {occ-command-example-prefix-docker} shibboleth:mode [mode]
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.

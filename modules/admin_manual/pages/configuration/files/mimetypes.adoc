@@ -112,36 +112,36 @@ use the xref:configuration/server/occ_command.adoc[occ command] to propagate the
 {occ-command-example-prefix-docker} maintenance:mimetype:update-js
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Example - Changing the JSON File Icon
 
 image:configuration/mimetypes/json-alias-before.png[The default icon for JSON files]
 
 Let’s go through an example of to change the icon that ownCloud uses to represent JSON files, which you can see above.
 
-1. From the root directory of your ownCloud installation, copy
+. From the root directory of your ownCloud installation, copy
 +
+--
 [source,plaintext]
 ----
 resources/config/mimetypealiases.dist.json
 ----
-+
+
 to
-+
+
 [source,plaintext]
 ----
 config/mimetypealiases.json
 ----
+--
 
-2. Update the alias for `application/json`, which you should find on line 8, to match the following, and save the file:
+. Update the alias for `application/json`, which you should find on line 8, to match the following, and save the file:
 +
 [source,plaintext]
 ----
 "application/json": "text/json",
 ----
 
-3. Copy a new SVG icon to represent JSON files to `core/img/filetypes`, calling it `text-json.svg`.
+. Copy a new SVG icon to represent JSON files to `core/img/filetypes`, calling it `text-json.svg`.
 +
 [NOTE]
 ====
@@ -152,16 +152,16 @@ The name and location of the file are important.
 // to be tested if we need to add a config setting to exclude those files from integrity checks
 ====
 
-4. Run the following command to update the mimetype alias database.
+. Run the following command to update the mimetype alias database.
 +
+--
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} maintenance:mimetype:update-js
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
 
 After doing so, whenever you view a folder that contains JSON files or upload one, your new icon file will be used to represent the file, as in the image below.
+--
 
 image:configuration/mimetypes/json-alias-after.png[A replaced icon for JSON files]
 
@@ -210,6 +210,7 @@ If you want to update or extend the existing mapping, as with updating the mimet
 ----
 resources/config/mimetypemapping.dist.json
 ----
+
 and save it as
 
 [source,plaintext]

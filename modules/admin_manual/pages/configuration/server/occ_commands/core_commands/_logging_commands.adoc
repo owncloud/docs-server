@@ -21,8 +21,6 @@ Log file: /opt/owncloud/data/owncloud.log
 Rotate at: disabled
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === Options
 
 [width="100%",cols="20%,50%",]
@@ -53,7 +51,4 @@ Log level can be adjusted by entering the number or the name:
 {occ-command-example-prefix-docker} log:manage --level error
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 TIP: Setting the log level to debug ( 0 ) can be used for finding the cause of an error, but should not be the standard as it increases the log file size.
-

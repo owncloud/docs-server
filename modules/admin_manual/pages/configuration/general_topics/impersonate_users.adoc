@@ -54,8 +54,6 @@ image::apps/impersonate/impersonate_enable.png[Define who can use Impersonate,wi
 {occ-command-example-prefix-docker} config:app:set \
     impersonate enabled --value 'yes'
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
 
 ** You can also use an occ command to define groups whose members are granted the right to _use_ impersonation:
 +
@@ -64,8 +62,6 @@ NOTE: Run this command inside the ownCloud Docker container.
 {occ-command-example-prefix-docker} config:app:set \
     impersonate enabled --value '["admin","einstein-g"]'
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
 
 == Define Who is Allowed to Impersonate
 
@@ -90,25 +86,19 @@ image::apps/impersonate/impersonate_oc_admins_only.png[Impersonate for ownCloud 
 {occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_all_groupadmins --value false
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
-+
+++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups --value false
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
-+
+++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups_list --value '[]'
 ----
 +
-NOTE: Run this command inside the ownCloud Docker container.
-
 * If you want to allow all group admins to impersonate users within groups which they administer:
 +
 image::apps/impersonate/impersonate_group_admins_only.png[Impersonate for all group admins,width=500]
@@ -120,25 +110,19 @@ image::apps/impersonate/impersonate_group_admins_only.png[Impersonate for all gr
 {occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_all_groupadmins --value true
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
-+
+++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups --value false
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
-+
+++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups_list --value '[]'
 ----
 +
-NOTE: Run this command inside the ownCloud Docker container.
-
 * If you want to limit impersonation to admins of specific groups, first click btn:[Allow group admins of specific groups...]. With the option checked, click into the textbox underneath it. You will see a list of all groups on your ownCloud installation, which will change, based on what you type in the textbox to search for specific groups. Choose one or more groups from the list, and they will be added to the textbox, restricting this functionality to admins of those groups only.
 +
 image::apps/impersonate/impersonate_groups_only.png[Impersonate for specific group admins,width=500]
@@ -150,21 +134,16 @@ image::apps/impersonate/impersonate_groups_only.png[Impersonate for specific gro
 {occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_all_groupadmins --value false
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
-+
+++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups --value true
 ----
-+
-NOTE: Run this command inside the ownCloud Docker container.
-+
+++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} config:app:set \
     impersonate impersonate_include_groups_list --value '["group1", "group2"]'
 ----
 +
-NOTE: Run this command inside the ownCloud Docker container.

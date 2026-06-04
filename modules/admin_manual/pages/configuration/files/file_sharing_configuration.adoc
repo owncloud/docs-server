@@ -106,8 +106,6 @@ xref:configuration/server/occ_command.adoc#config-commands[occ config:app:set co
     --value '<language code>'
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 NOTE: In the example above, the `<language code>` is an
 {two-letter-url}[ISO 3166-1 alpha-2 two-letter country code], such as *de*, *gb*, *us*, *es* or others.
 
@@ -230,8 +228,6 @@ Here is an example of how to transfer all files from one user to another.
   <destination-user>
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 Here is an example of how to transfer _a limited group_ a single folder from one user to another. In it, `folder/to/move`, and any file and folder inside it will be moved to `<destination-user>`.
 
 [source,bash,subs="attributes+"]
@@ -241,8 +237,6 @@ Here is an example of how to transfer _a limited group_ a single folder from one
   <source-user> \
   <destination-user>
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 When using this command keep two things in mind:
 
@@ -259,8 +253,6 @@ IMPORTANT: If an exception occurred during the transfer ownership command or the
 ----
 {occ-command-example-prefix-docker} files:troubleshoot-transfer-ownership --uid <uid>`
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == Creating Persistent File Shares
 
@@ -290,8 +282,6 @@ This command provides for the creation of both personal (for a specific user) an
     --user someuser
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 or
 
 [source,bash,subs="attributes+"]
@@ -306,8 +296,6 @@ or
     --user someuser
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 ==== General Share
 
 [source,bash,subs="attributes+"]
@@ -317,8 +305,6 @@ NOTE: Run this command inside the ownCloud Docker container.
     password::logincredentials \
     --config={host=127.0.0.1, share='home', root='$user', domain='owncloud.local'}
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 or
 
@@ -333,8 +319,6 @@ or
     --config domain='somedomain.local'
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 === occ files_external:import
 
 You can create general and personal shares passing the configuration details via JSON files, using the `occ files_external:import` command.
@@ -347,8 +331,6 @@ You can create general and personal shares passing the configuration details via
     /import.json
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 ==== Personal Share
 
 [source,bash,subs="attributes+"]
@@ -356,8 +338,6 @@ NOTE: Run this command inside the ownCloud Docker container.
 {occ-command-example-prefix-docker} files_external:import \
     /import.json --user someuser
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 In the two examples above, here is a sample JSON file, showing all of the available configuration options that the command supports.
 

@@ -24,8 +24,6 @@ When a backup has been restored, the ETag information, which is necessary when a
 {occ-command-example-prefix-docker} maintenance:data-fingerprint
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 This command changes the ETag for all files in the communication with sync clients, informing them that one or more files were modified. After the command completes, users will be prompted to resolve any conflicts between newer and older file versions.
 
 == Install ownCloud
@@ -41,8 +39,6 @@ NOTE: This command is only available if the following key in your `config.php` i
 ----
 {occ-command-example-prefix-docker} maintenance:install [options]
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 The `maintenance:install` command supports the following options:
 
@@ -91,8 +87,6 @@ Usage:
 {occ-command-example-prefix-docker} maintenance:mimetype:update-db [options]
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 The `maintenance:mimetype:update-db` command supports the following options:
 
 [cols="25%,75%",options="header"]
@@ -115,8 +109,6 @@ Usage:
 {occ-command-example-prefix-docker} maintenance:update-js
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 == Enable or Disable Maintenance Mode
 
 `maintenance:mode` command locks the sessions of all logged-in users, including administrators, and displays a status screen warning that the server is in maintenance mode. Users who are not already logged in cannot log in until maintenance mode is turned off. Once you take the server out of maintenance mode, logged-in users must refresh their Web browsers to continue working.
@@ -126,8 +118,6 @@ Usage:
 ----
 {occ-command-example-prefix-docker} maintenance:mode [options]
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 The `maintenance:mode` command supports the following options:
 
@@ -150,16 +140,12 @@ Turn on maintenance mode:
 {occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 Turn it off when you’re finished with the maintenance tasks:
 
 [source,docker,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} maintenance:mode --off
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == Installation Repair Commands
 
@@ -173,8 +159,6 @@ Usage:
 ----
 {occ-command-example-prefix-docker} maintenance:repair [options]
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 === Repair Command Options
 
@@ -203,8 +187,6 @@ Here is an example of running the command:
 ----
 {occ-command-example-prefix-docker} maintenance:repair
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 To list all off the possible repair steps, use the `--list` option. It should output the following list to the console:
 
@@ -242,8 +224,6 @@ Usage:
      --single="OCA\DAV\Repair\RemoveInvalidShares"
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 TIP: The step's name must be quoted, otherwise you will see the following warning message appear, and the command will fail:
 "_Repair step not found. Use --list to show available steps._"
 
@@ -259,16 +239,12 @@ Usage:
 {occ-command-example-prefix-docker} maintenance:singleuser --on
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 Turn it off when you're finished:
 
 [source,docker,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} maintenance:singleuser --off
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 == Update the .htaccess File
 
@@ -280,5 +256,3 @@ Usage:
 ----
 {occ-command-example-prefix-docker} maintenance:update:htaccess
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.

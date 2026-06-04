@@ -24,8 +24,6 @@ Example 1:
 {occ-command-example-prefix-docker} security:routes
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 [source,plaintext]
 ----
 +-----------------------------------------------------------+-----------------+
@@ -46,8 +44,6 @@ Example 2:
 {occ-command-example-prefix-docker} security:routes --output=json-pretty
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 [source,plaintext]
 ----
 [
@@ -65,8 +61,6 @@ Example 3:
 ----
 {occ-command-example-prefix-docker} security:routes --with-details
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
 
 [source,plaintext]
 ----
@@ -96,8 +90,6 @@ This example lists your installed certificates:
 {occ-command-example-prefix-docker} security:certificates
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 Import a new certificate:
 
 [source,docker,subs="attributes+"]
@@ -105,13 +97,9 @@ Import a new certificate:
 {occ-command-example-prefix-docker} security:certificates:import /path/to/certificate
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 Remove a certificate:
 
 [source,docker	,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} security:certificates:remove [certificate name]
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.

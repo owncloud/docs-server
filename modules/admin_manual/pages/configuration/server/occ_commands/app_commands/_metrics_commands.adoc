@@ -28,8 +28,6 @@ Note: You can also set the config key/value manually into your config.php file.
      --value "your-metrics-secret"
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 The above command adds the following at the end of `config.php`:
 
 [source,php]
@@ -46,8 +44,6 @@ This command reads the value of the `metrics_shared_secret` key from config.php:
 {occ-command-example-prefix-docker} config:system:get "metrics_shared_secret"
 ----
 
-NOTE: Run this command inside the ownCloud Docker container.
-
 [source,plaintext]
 ----
 your-metrics-secret
@@ -61,6 +57,3 @@ This command completely removes the key and the value from config.php:
 ----
 {occ-command-example-prefix-docker} config:system:delete "metrics_shared_secret"
 ----
-
-NOTE: Run this command inside the ownCloud Docker container.
-
