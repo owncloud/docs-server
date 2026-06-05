@@ -95,9 +95,12 @@ Files are synchronized bidirectionally, and you can create, upload and delete fi
 
 Depending on the authentication method, passwords for each mount are encrypted and stored in the ownCloud database, using a long random secret key stored in `config.php`. This allows ownCloud to access the shares when the users who own the mounts are not logged in. This access will not work if the mount is session based, where passwords are not stored and are available only for the current active session. In case other users are granted access to this mount, they will see a red triangle with an exclamation mark on the bottom right of the mount icon identifying lack of access.
 
-TIP: For more information on SMB/CIFS in ownCloud, refer to the xref:configuration/files/external_storage/smb.adoc[Samba file server configuration documentation].
-
-TIP: If you encounter errors when using the WND app like `NT_STATUS_REVISION_MISMATCH`, please get in touch by {oc-support-url}[Opening a Service Request].
+[IMPORTANT]
+====
+* For more information on SMB/CIFS in ownCloud, refer to the xref:configuration/files/external_storage/smb.adoc[Samba File Server Configuration] documentation.
+* Please note that the referenced document provides additional information on testing an SMB connection with `smbclient`. This CLI tool is not included in the shipped image, but can be added.
+* If you encounter errors when using the WND app like `NT_STATUS_REVISION_MISMATCH`, please get in touch by {oc-support-url}[Opening a Service Request].
+====
 
 IMPORTANT: The remote Windows/Samba file server requires at least {smb2-url}[version 2.0 of the SMB protocol].
 

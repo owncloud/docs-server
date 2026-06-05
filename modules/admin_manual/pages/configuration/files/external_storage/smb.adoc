@@ -11,11 +11,13 @@
 
 == Dependencies
 
-All dependencies are provided by the ownCloud image.
+All dependencies to connect to an SMB server, except for testing the connection manually, are provided by the ownCloud image.
 
 == Access Testing
 
-To ensure that you can connect to your file server with SMB, do a small test upfront like the following. Note that the `smbclient` command is not part of the ownCloud Docker image and must be provided and issued from the host.
+IMPORTANT: The Docker image does not provide the `smbclient` CLI tool. To mitigate this issue, you need to manually create an image that installs and enables this requirement.
+
+To ensure that you can connect to your file server with SMB, do a small test upfront like the following.
 
 [source,bash]
 ----

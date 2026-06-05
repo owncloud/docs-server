@@ -135,7 +135,9 @@ The administration server. This is typically the same as the LDAP/Active Directo
 ** If this is not the case, you need to https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member[Setting up Samba as a Domain Member].
 ////
 
-* The Docker image does not provide the required Kerberos `krb5` PHP extension and the `krb5-user` CLI tool. This tool is an actual requirement, the Kerberos implementation in the WND app requires the `kvno` command which is contained in the package installed. To mitigate this issue, you need to manually create an image that installs and enables these requirements.
+* {empty}
++
+IMPORTANT: The Docker image does not provide the required Kerberos `krb5` PHP extension and the `krb5-user` CLI tool. This tool is an actual requirement, the Kerberos implementation in the WND app requires the `kvno` command which is contained in the package installed. To mitigate this issue, you need to manually create an image that installs and enables these requirements.
 
 * DNS records +
 Create a DNS record for the public FQDN of the ownCloud instance (`<FQDN>`).

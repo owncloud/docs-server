@@ -58,7 +58,9 @@ If you want to add or change the default list, you MUST define all elements used
 
 == Prerequisites
 
-When defining your own preview providers, some things need to be considered. For some file types, ownCloud uses ImageMagick to generate previews. The ownCloud Docker Image provides the `imagic` php extension, but not the ImageMagick binary. To mitigate this issue, you need to manually create an image that installs this requirement. Please note that other binaries may be required, which are listed in the relevant section.
+When defining your own preview providers, some things need to be considered. For some file types, ownCloud uses ImageMagick to generate previews.
+
+IMPORTANT: The ownCloud Docker Image provides the `imagic` php extension, but not the ImageMagick binary. To mitigate this issue, you need to manually create an image that installs this requirement. Please note that other binaries may be required, which are listed in the relevant sections below.
 
 Starting with version 7 of ImageMagick, additional file formats like SVG or HEIC and many others can be processed.
 
