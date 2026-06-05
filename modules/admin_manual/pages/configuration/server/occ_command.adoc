@@ -11,37 +11,40 @@
 
 toc::[]
 
-== Running occ
+== Running occ Commands
 
-All `occ` commands must be run inside the running ownCloud Docker container. There are two ways to do this.
+In order to run any `occ` command, the ownCloud container must be up and running. Two different methods exist for initiating occ commands.
 
-=== Running a Single occ Command
+NOTE: For any of these methods, you must be in the directory where the compose file is located to access the running container.
 
-To run a single `occ` command without entering the container, use `docker compose exec` from the directory containing your `docker-compose.yml`:
+NOTE: Any occ examples use the host method to access occ.
+
+=== Using occ via the Host
+
+Use the command `docker compose exec owncloud` and replace `<command>` with the command you want to execute. Please note that this is the preferred method, particularly when using scripting.
 
 [source,docker,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} <command>
 ----
 
-[[docker-exec]]
-=== Opening a Shell Inside the Container
+=== Using occ via the Containers Shell
 
-To run multiple commands interactively, open a bash shell inside the container:
+Issue the following command to open a bash shell inside the container:
 
 [source,bash]
 ----
-docker compose exec owncloud bash
+docker compose exec owncloud /bin/bash
 ----
 
-Once inside, run `occ` commands directly:
+Once on the containers shell, run `occ` commands directly and replace `<command>` with the command you want to execute:
 
 [source,bash]
 ----
 occ <command>
 ----
 
-Type `exit` to leave the container shell.
+Type `exit` or press kbd:[CTRL D] to leave the containers shell.
 
 === occ Command Structure
 

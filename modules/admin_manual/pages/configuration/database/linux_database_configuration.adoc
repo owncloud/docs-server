@@ -1,5 +1,6 @@
 = Database Configuration on Linux
 :toc: right
+:page-aliases: configuration/database/index.adoc, configuration/database/db_conversion.adoc
 :description: ownCloud requires a database in which administrative data is stored. 
 
 :avoid-deadlocks-galery-haproxy-url: https://severalnines.com/blog/avoiding-deadlocks-galera-set-haproxy-single-node-writes-and-multi-node-reads

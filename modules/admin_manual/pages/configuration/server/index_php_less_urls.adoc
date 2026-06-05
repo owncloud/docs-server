@@ -7,7 +7,7 @@ Note that with the Docker Image provided by ownCloud, `index.php` less URLs are 
 
 == Check
 
-You can check this by listing the `config.php` file via the bind mount after the first setup which will contain the following keys. Note that the URL matches your setup:
+You can check this by printing the `config/config.php` file via the bind mount after the first setup which will contain the following keys. Note that the URL matches your setup:
 
 [source,php]
 ----
