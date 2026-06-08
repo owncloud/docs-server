@@ -16,7 +16,6 @@
 *** xref:admin_manual:installation/configuration_notes.adoc[Configuration Notes]
 *** xref:admin_manual:installation/apps_management_installation.adoc[Apps Management]
 **** xref:admin_manual:installation/apps_supported.adoc[Supported Apps]
-***** xref:admin_manual:installation/apps/mediaviewer/index.adoc[Media Viewer]
 
 ** Configuration
 *** xref:admin_manual:configuration/database/linux_database_configuration.adoc[Database Configuration]
