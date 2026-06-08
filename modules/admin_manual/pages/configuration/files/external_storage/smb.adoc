@@ -48,7 +48,7 @@ TIP: To assign the ownCloud logon username automatically to the subfolder, use `
 You can specify a `Domain` which is useful in cases where the SMB server requires a domain and a username, and an advanced authentication mechanism like Active Directory (AD), or when using session credentials where the username cannot be modified. This is concatenated with the username, so the backend gets `domain\username`
 ====
 
-image::configuration/files/external_storage/smb.png[Samba external storage configuration,width=500]
+image::configuration/files/external_storage/smb.png[Samba external storage configuration,width=350]
 
 == Further Information
 

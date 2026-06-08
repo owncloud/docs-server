@@ -4,7 +4,7 @@
 
 {description}
 
-image::configuration/files/external_storage/webdav.png[Webdav configuration form,width=500]
+image::configuration/files/external_storage/webdav.png[Webdav configuration form,width=350]
 
 You need the following information:
 

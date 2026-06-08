@@ -38,75 +38,6 @@ Check the ownCloud xref:installation/system_requirements.adoc[System Requirement
 
 Third-party apps may cause problems during upgrades. To avoid this happening, we strongly encourage administrators to always disable third-party apps before upgrades, and for troubleshooting purposes.
 
-=== ownCloud Logfiles
-
-In a standard ownCloud installation the log level is set to `Normal`. To find any issues you need to raise the log level to `All` in your `config.php` file, or to *Everything* on your ownCloud Admin page. Please see xref:configuration/server/logging/logging_configuration.adoc[Logging Configuration] for more information on these log levels.
-
-Some logging - for example JavaScript console logging - needs debugging enabled. Edit config/config.php and change `'debug' => false,` to `'debug' => true,` Be sure to change it back when you are finished.
-
-For JavaScript issues you will also need to view the javascript console. All major browsers have developer tools for viewing the console. Usually you can access them by pressing F12.
-
-For more information on developer tools for Mozilla Firefox, refer to: https://developer.mozilla.org/en-US/docs/Tools
-
-To learn more about Chrome or Chromium developer tools, go to: https://developer.chrome.com/docs/devtools/
-
-NOTE: The logfile of ownCloud is located in the data directory `owncloud/data/owncloud.log`.
-
-=== PHP Version and Information
-
-You will need to know your PHP version and configuration details. There are two ways to retrieve this information: using PHP's phpinfo function and using a set of options to PHP on the command-line.
-
-==== Using PHP's phpinfo Function
-
-Create a plain-text file named "_phpinfo.php_" and place it in your webserver's root directory, for example `/var/www/html/phpinfo.php`. 
-
-TIP: Your webserver's root directory may be in a different location; your Linux distribution's documentation will tell you where it is located. 
-
-This file contains the following line:
-
-[source,php]
-----
-<?php phpinfo(); ?>
-----
-
-Open this file in a web browser, by pointing your browser to `localhost/phpinfo.php`:
-
-image:phpinfo.png[image]
-
-Your PHP version is at the top, and the rest of the page contains abundant system information such as active modules, active `.ini` files, and much more. When you are finished reviewing your information you must delete `phpinfo.php`, or move it outside of your Web directory, because it is a security risk to expose such sensitive data.
-
-==== Using the Command-Line
-
-To retrieve your PHP version, run the following command:
-
-[source,bash]
-----
-php -v
-----
-
-To retrieve a list of PHP's active modules, run the following command.
-
-[source,bash]
-----
-php -m
-----
-
-You will see output similar to the following displayed in the terminal.
-----
-[PHP Modules]
-ast
-calendar
-Core
-ctype
-curl
-date
-dom
-exif
-fileinfo
-----
-
-To obtain information about PHP's configuration, you can either retrieve it all at once, by running `php -i` or retrieve information about individual modules, by running `php --ri` followed by the module's name, such as `php --ri curl`.
-
 === Debugging Sync Issues
 
 IMPORTANT: The data directory on the server is exclusive to ownCloud and must not be modified manually.
@@ -120,7 +51,7 @@ If you need to directly upload files from the same server please use a WebDAV co
 
 `\https://example.com/owncloud/remote.php/dav`
 
-=== Common problems / error messages
+=== Common Problems / Error Messages
 
 Some common problems / error messages found in your logfiles as
 described above:
@@ -135,45 +66,37 @@ headers to PHP and so the login to ownCloud via WebDAV, CalDAV and CardDAV clien
 More information on how to correctly configure your environment can be found 
 {oc-central-url}/t/no-basic-authentication-headers-were-found-message/819[at the forums].
 
-== OAuth2
+== Troubleshooting Logs
 
-=== ownCloud clients cannot connect to the ownCloud server
+In order to start troubleshooting, you will need the relevant log information and the correct log level.
 
-If ownCloud clients cannot connect to your ownCloud server, check to see if PROPFIND requests receive `HTTP/1.1 401 Unauthorized` responses. If this is happening, more than likely your webserver configuration is stripping out https://tools.ietf.org/html/rfc6750[the bearer authorization header].
+=== Location of Logfiles
 
-If you’re using the Apache web server, add the following `SetEnvIf` directive to your Apache configuration, whether in the general Apache config, in a configuration include file, or in ownCloud’s .htaccess
-file.
+The first step when encountering issues is to check the log files provided by PHP, the embedded Apache server and ownCloud itself. In a Dockerised ownCloud environment, the logs can be found at the following location:
 
-[source,apache]
-----
-SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-----
+* The logfile of ownCloud is located at:
+`<mount_point>/owncloud.log`.
 
-== Missing Data Directory
+* The Apache2 log is routed to Docker stdout. +
+The logging capabilities of Docker should be used to obtain log details.
 
-During the normal course of operations, the ownCloud data directory may be temporarily unavailable for a variety of reasons. These can include network timeouts on mounted network disks, unintentional unmounting of the partition on which the directory sits, or a corruption of the RAID setup. If you have experienced this, here’s how ownCloud works and what you can expect.
+* The PHP log is routed to Docker stdout. +
+The logging capabilities of Docker should be used to obtain log details.
 
-During normal operation, ownCloud’s data directory contains a hidden file, named `.ocdata`. The purpose of this file is for setups where the data folder is mounted (such as via NFS) and for some reason the mount disappeared. If the directory isn’t available, the data folder would, in effect, be completely empty and the `.ocdata` would be missing. When this happens, ownCloud will return a https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error[503 Service not available] error, to prevent clients believing that the files are gone.
+=== ownCloud Log-Levels
 
-== Troubleshooting Web server and PHP problems
+In a standard ownCloud installation the log level is set to `Normal`.
 
-=== Logfiles
+* To find any issues you need to raise the log level to `All` in your _additional_ xref:installation/configuration_notes.adoc#using-a-configuration-file[configuration file], or to *Everything* on your ownCloud Admin page. Please see xref:configuration/server/logging/logging_configuration.adoc[Logging Configuration] for more information on these log levels.
 
-When having issues the first step is to check the logfiles provided by PHP, the Web server and ownCloud itself.
+* Some logging - for example JavaScript console logging - needs debugging enabled. +
+Edit the config and change `'debug' => false,` to `'debug' => true,` Be sure to change it back when you are finished.
 
-NOTE: In the following the paths to the logfiles of a default Debian installation running Apache2 with mod_php is assumed. On other Web servers, Linux distros or operating systems they can differ.
-
-* The logfile of Apache2 is located in `/var/log/apache2/error.log`.
-* The logfile of PHP can be configured in your
-`/etc/php/7.4/apache2/php.ini`. You need to set the directive `log_errors`
-to `On` and choose the path to store the logfile in the `error_log`
-directive. After those changes you need to restart your Web server.
-* The logfile of ownCloud is located in the data directory
-`/var/www/owncloud/data/owncloud.log`.
+* For JavaScript issues you will also need to view the javascript console. All major browsers have developer tools for viewing the console. Usually you can access them by pressing F12.
 
 == Troubleshooting WebDAV
 
-=== General troubleshooting
+=== General Troubleshooting
 
 ownCloud uses SabreDAV, and the SabreDAV documentation is comprehensive and helpful.
 
@@ -276,10 +199,31 @@ Misconfigured Web server::
   Your Web server is misconfigured and blocks the needed DAV methods.
   Please refer to xref:troubleshooting-webdav[Troubleshooting WebDAV] above for troubleshooting steps.
 
-== Client Sync Stalls
+== OAuth2
+
+=== ownCloud Apps Cannot Connect to the ownCloud Server
+
+If ownCloud clients cannot connect to your ownCloud server, check to see if PROPFIND requests receive `HTTP/1.1 401 Unauthorized` responses. If this is happening, more than likely your web-proxy server configuration is stripping out the https://tools.ietf.org/html/rfc6750[bearer authorization header].
+
+Wen using an Apache web-proxy server, add the following `SetEnvIf` directive to that Apache configuration. Please note that the embedded Apache webserver of the ownCloud image already has this included in the `.htaccess` file located in the containers `/var/www/owncloud` directory.
+
+[source,apache]
+----
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+----
+
+== Missing Data Directory
+
+In situations where the `<mount-point>` of your compose definition uses NFS or an external RAID systrem, the moint point may be temporarily unavailable because the resource is not available on the host. If you have experienced this, here’s how ownCloud works and what you can expect.
+
+During normal operation, ownCloud’s data directory contains a hidden file, named `.ocdata`. The purpose of this file is for setups where the data folder is mounted (such as via NFS) and for some reason the mount disappeared. If the directory isn’t available, the data folder would, in effect, be completely empty and the `.ocdata` would be missing. When this happens, ownCloud will return a https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error[503 Service not available] error, to prevent clients believing that the files are gone.
+
+If the operating environment is restored, the Compose environment needs to be shut down and restarted, after which ownCloud will resume normal operation.
+
+== App Synchronization Stalls
 
 One known reason is stray locks. These should expire automatically after an hour. If stray locks don’t expire (identified by e.g. repeated `file.txt is locked` and/or `Exception\\\\FileLocked` messages in your data/owncloud.log), make sure that you are running system cron and not Ajax cron (See xref:configuration/server/background_jobs_configuration.adoc[Background Jobs]). See https://github.com/owncloud/core/issues/22116 and {oc-central-url}/t/file-is-locked-how-to-unlock/985 for some discussion and additional info of this issue.
 
-== Other issues
+== Other Issues
 
 Some services like _Cloudflare_ can cause issues by minimizing JavaScript and loading it only when needed. When having issues like a not working login button or creating new users make sure to disable such services first.

@@ -70,9 +70,9 @@ DELETE FROM oc_appconfig WHERE appid='encryption';
 
 == Clean up Your Storage
 
-The removal of remaining encryption keys is a manual process. You have to delete all encryption keys on the storage by running the following command. Modify the path to your data directory according to your installation. The `find` command limits the search to exactly one directory below the user level and for security reasons prompts before each deletion:
+The removal of remaining encryption keys is a manual process. You have to delete all encryption keys on the storage by running the following command. Modify the path to your data directory according to your installation. The `find` command limits the search to exactly one directory below the user level and for security reasons prompts before each deletion. Replace the `<mount-point>` placeholder with the correct value, as defined in your Docker Compose file.
 
 [source,bash]
 ----
-find /var/www/owncloud/data/ -mindepth 2 -maxdepth 2 -type d -name "files_encryption" -exec rm -R -i {} +
+find <mount-point>/files/ -mindepth 2 -maxdepth 2 -type d -name "files_encryption" -exec rm -R -i {} +
 ----

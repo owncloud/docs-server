@@ -281,7 +281,7 @@ $CONFIG = [
                     'key' => 'wasabi-access-key-here',
                     'secret' => 'wasabi-secret-key-here',
                 ],
-		 // path style can either be used (true) or not (false).
+         // path style can either be used (true) or not (false).
                 'use_path_style_endpoint' => false,
                   // replace with the Wasabi endpoint URL for your bucket
                 'endpoint' => 'https://s3.us-east-2.wasabisys.com',

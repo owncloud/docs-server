@@ -49,19 +49,18 @@ menu:Settings[Admin > General > Log > "Download logfile"].
 
 === Generate via Command Line
 
-If the log file is too big, you will need to transfer it from the command line. The location of the log file can be found in your config.php. By default it is in your data directory. Note that you may need to compress the logfile before uploading:
+If the log file is too big, you will need to transfer it from the command line. By default it is named `owncloud.log` and located at the Docker Volume `<moint-point>/files`.
 
-[source,php]
-----
-'datadirectory' => '/var/www/owncloud/data',
-----
+Note that you may need to compress the logfile before uploading.
 
-When not using the default location for the logfile, it can be specified via:
+When not using the default location for the logfile, it can be specified via your _additional_ xref:installation/configuration_notes.adoc#using-a-configuration-file[configuration file]:
 
 [source,php]
 ----
 'logfile' => '<your-path>/owncloud.log',
 ----
+
+NOTE: You must create a Docker Volume to make the configured path available.
 
 == LDAP Config
 

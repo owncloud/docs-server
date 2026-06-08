@@ -67,7 +67,7 @@ WARNING: Deleting a job cannot be undone. Be sure that you want to delete the jo
 
 === Remove Jobs Manually Added via Crontab
 
-If an erroring job as been added manually in `crontab`, remove the job from the crontab queue list. First, list the entries of crontab for the web server user:
+If an erroring job as been added manually in `crontab`, remove the job from the crontab queue list on your host. First, list the entries of crontab for the web server user:
 
 [source,bash]
 ----
