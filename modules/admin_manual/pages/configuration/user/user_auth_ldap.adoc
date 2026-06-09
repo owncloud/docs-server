@@ -14,7 +14,6 @@
 :openldap-index-tuning-guide-url: https://www.openldap.org/doc/admin24/tuning.html#Indexes
 :oracle-ismemberof-url: https://docs.oracle.com/cd/E29127_01/doc.111170/e28967/ismemberof-5dsat.htm
 :reverse-group-membership-maintenance-url: https://www.openldap.org/doc/admin24/overlays.html#Reverse%20Group%20Membership%20Maintenance
-:selinux-url: https://selinuxproject.org/page/Main_Page
 :service-ldap-with-tls-url: https://ubuntu.com/server/docs/service-ldap-with-tls
 :ldap-over-ssl-ldaps-certificate-url: https://social.technet.microsoft.com/wiki/contents/articles/2980.ldap-over-ssl-ldaps-certificate.aspx
 

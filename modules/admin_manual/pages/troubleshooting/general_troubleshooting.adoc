@@ -66,6 +66,33 @@ headers to PHP and so the login to ownCloud via WebDAV, CalDAV and CardDAV clien
 More information on how to correctly configure your environment can be found 
 {oc-central-url}/t/no-basic-authentication-headers-were-found-message/819[at the forums].
 
+[#view-the-apache-config]
+== Troubleshooting the Apache Config
+
+IMPORTANT: The following content is intended for informational purposes only. No changes should be made.
+
+The configuration of the embedded Apache2 server is located under the directory `/etc/apache2/` of the ownCloud container, but not in the standard Debian subdirectories due to the way the image is built. During the build process, the default `conf-\*` and `sites-*` directories are stripped and replaced with an overlay of their own:
+
+[width="100%",cols="60%,80%",options="header"]
+|===
+| Path (inside the container)
+| Comment
+
+| `/etc/apache2/apache2.conf`
+| Global config
+
+| `/etc/apache2/sites-enabled/default.conf`
+| Generated at container startup from the gomplate template `/etc/templates/apache.conf.tmpl`
+
+| `/etc/apache2/conf-enabled/`
+| Additional snippets (charset, security, remoteip, servername)
+
+| `/etc/apache2/ports.conf`
+| Port binding
+|===
+
+This means, that the ownCloud Apache2 configuration is stored in the `/etc/apache2` directory; it just looks different from a standard Debian installation.
+
 == Troubleshooting Logs
 
 In order to start troubleshooting, you will need the relevant log information and the correct log level.
@@ -75,13 +102,27 @@ In order to start troubleshooting, you will need the relevant log information an
 The first step when encountering issues is to check the log files provided by PHP, the embedded Apache server and ownCloud itself. In a Dockerised ownCloud environment, the logs can be found at the following location:
 
 * The logfile of ownCloud is located at:
-`<mount_point>/owncloud.log`.
++
+`<mount_point>/owncloud.log`
 
-* The Apache2 log is routed to Docker stdout. +
+* The Apache2 logs are by default routed to Docker stdout/stderr.
++
+--
+`Error log` → `/dev/stderr` (to override use envvar: `OWNCLOUD_ERRORLOG_LOCATION`) +
+`Access log` → `/dev/stdout` (to override use envvar: `OWNCLOUD_ACCESSLOG_LOCATION`)
+
+The logging capabilities of Docker should be used to obtain log details.
+--
+
+* The PHP logs are by default routed to Docker stdout/stderr. +
 The logging capabilities of Docker should be used to obtain log details.
 
-* The PHP log is routed to Docker stdout. +
-The logging capabilities of Docker should be used to obtain log details.
++
+.Quick tip reading Docker logs for ownCloud
+[source,bash]
+----
+docker compose logs owncloud -f
+----
 
 === ownCloud Log-Levels
 
@@ -146,13 +187,12 @@ RewriteRule .* - [R=401,L]
 
 Some clients - especially on iOS/Mac OS X - have problems finding the proper sync URL, even when explicitly configured to use it.
 
-If you want to use CalDAV or CardDAV clients together with ownCloud it is important to have a correct working setup of the following URLs:
+If you want to use CalDAV or CardDAV clients together with ownCloud, it is important to have a correct working setup of the following URLs:
 
 [verse]
 --
 `\https://example.com/.well-known/carddav`
 `\https://example.com/.well-known/caldav`
-
 --
 
 Those need to be redirecting your clients to the correct DAV endpoints. If running ownCloud at the document root of your Web server the correct
@@ -164,9 +204,9 @@ and if running in a subfolder like `owncloud`:
 
 `\https://example.com/owncloud/remote.php/dav`
 
-For the first case the .htaccess file shipped with ownCloud should do this work for your when running Apache. You only need to make sure that your Web server is using this file.
+For the first case the `.htaccess` file shipped with ownCloud should do this work.
 
-If your ownCloud instance is installed in a subfolder called `owncloud` and you’re running Apache create or edit the .htaccess file within the document root of your Web server and add the following lines:
+If your ownCloud instance is installed in a subfolder called `owncloud`, edit the `.htaccess` file and add the following lines:
 
 [source,apache]
 ----
@@ -205,7 +245,7 @@ Misconfigured Web server::
 
 If ownCloud clients cannot connect to your ownCloud server, check to see if PROPFIND requests receive `HTTP/1.1 401 Unauthorized` responses. If this is happening, more than likely your web-proxy server configuration is stripping out the https://tools.ietf.org/html/rfc6750[bearer authorization header].
 
-Wen using an Apache web-proxy server, add the following `SetEnvIf` directive to that Apache configuration. Please note that the embedded Apache webserver of the ownCloud image already has this included in the `.htaccess` file located in the containers `/var/www/owncloud` directory.
+When using an Apache web-proxy server, you may need to add the following `SetEnvIf` directive to that Apache configuration. Please note that the embedded Apache webserver of the ownCloud image already has this included in the `.htaccess` file located in the containers `/var/www/owncloud` directory.
 
 [source,apache]
 ----

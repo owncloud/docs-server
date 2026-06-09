@@ -70,8 +70,6 @@ TIP: Please refer to xref:configuration/server/import_ssl_cert.adoc[Importing Sy
 
 The following backends are provided by the external storages app. Other apps may provide their own backends, which are not listed here.
 
-NOTE: A non-blocking or correctly configured SELinux setup is needed for these backends to work.
-
 == Allow Users to Mount External Storage
 
 Check "__Allow users to mount external storage__" to allow your users to mount storages on external services. Then enable the backends you want to allow.

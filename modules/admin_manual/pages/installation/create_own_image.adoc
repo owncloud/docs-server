@@ -12,7 +12,7 @@ You can build your own image at any time to add binaries or functionalities that
 
 In some situations, creating your own image is mandatory because certain apps or configurations require binaries that are not included in the image. These binaries have not been added on purpose in order to keep the image as slim as possible, and because situations requiring them depend on individual use cases.
 
-Apps or Configurations that Require Building an own Image::
+Apps or Configurations that Require Building an own Docker image::
 +
 --
 The following references link to the relevant pages that describe the reason when building individual images may be required.
@@ -22,3 +22,7 @@ The following references link to the relevant pages that describe the reason whe
 * xref:admin_manual:enterprise/authentication/kerberos.adoc[Kerberos Authentication]
 * xref:admin_manual:configuration/files/previews_configuration.adoc[Preview Configuration]
 --
+
+== Impact on own Built Images
+
+ownCloud cannot be held responsible for any changes made when creating a Docker image based on the one provided by ownCloud. The only exception is, when an image is created under the supervision of ownCloud Support.

@@ -56,12 +56,6 @@ With this information, you can begin customizing a rate-limiting solution specif
 * https://gist.github.com/procrastinatio/6b6579230d99be5bfa26d04acd788e7a[Rate limiting with HAProxy]
 * https://www.fir3net.com/Loadbalancers/F5-BIG-IP/f5-ltm-ratelimiting.html[Rate limiting with F5]
 
-== Operating System
-
-=== Enable Hardening Modules Such as SELinux
-
-We also recommend to enable hardening modules such as SELinux where possible.
-
 == Database
 
 When using MySQL or MariaDB, enable the https://mariadb.com/docs/skysql-dbaas/ref/xpand/sql-modes/STRICT_TRANS_TABLES/#Setting_the_SQL_MODE[STRICT_TRANS_TABLES, window=_blank] if it is not already activated.

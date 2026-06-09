@@ -108,7 +108,7 @@ When running `docker ps` again, the entry for `oc-eval` should be gone.
 
 == Docker Compose
 
-The configuration:
+The example configuration:
 
 * Exposes ports {std-port-http}, allowing for HTTP connections.
 * Uses separate _MariaDB_ and _Redis_ containers.
@@ -140,13 +140,7 @@ include::example$installation/docker/docker-compose.yml[]
 [#env-file]
 [source,bash,subs="attributes+"]
 ----
-OWNCLOUD_IMAGE={latest-server-download-version}
-OWNCLOUD_DOMAIN=localhost
-OWNCLOUD_TRUSTED_DOMAINS=localhost
-OWNCLOUD_OVERWRITE_CLI_URL=http://localhost
-HTTP_PORT=8080
-MARIADB_IMAGE=10.11
-REDIS_IMAGE=7
+include::example$installation/docker/dot.env[]
 ----
 +
 Only a few settings are required, these are:
@@ -249,8 +243,7 @@ Check that all the containers have successfully started, by running `docker comp
 | 0.0.0.0:{std-port-http}->{std-port-http}/tcp
 |===
 
-In it, you can see that the database, ownCloud and Redis containers are running, and that ownCloud
-is accessible via port {std-port-http} on the host machine.
+Here you can see, that the database, ownCloud and Redis containers are running, and that ownCloud is accessible via port {std-port-http} on the host machine.
 
 [TIP]
 ====
@@ -289,7 +282,7 @@ docker compose stop
 To stop and remove containers along with the related networks, images and volumes:
 [source,docker]
 ----
-docker compose down --rmi all --volumes
+docker compose down --rmi all --volumes --remove-orphans
 ----
 
 === Running occ commands
@@ -353,12 +346,13 @@ The latter is the user number you will need licenses for. Guest users are curren
 
 === Admin Settings
 
-With docker, the admin user cannot control certain settings in the WebUI, instead they are/can be now controlled by environment variables. Changing these variables requires stopping and restarting the container. When using environment variables, these changes need to be reflected in the compose file.
+With Docker, the admin user cannot control certain settings in the WebUI, instead they are/can be now controlled by environment variables. Changing these variables requires stopping and restarting the container. When using environment variables, these changes need to be reflected in the compose file.
 
-=== Logging
+=== Logging and Apache2 Config
 
 See the `General Troubleshooting` guide for:
 
+* The xref:troubleshooting/general_troubleshooting.adoc#view-the-apache-config[View the Apache Config]
 * The xref:troubleshooting/general_troubleshooting.adoc#location-of-logfiles[Location of Logfiles].
 * The xref:troubleshooting/general_troubleshooting.adoc#owncloud-log-levels[ownCloud Log-Levels].
 
@@ -373,7 +367,11 @@ docker exec -it owncloud_server /bin/bash
 
 === List Shipped Apps
 
-The Docker image comes with all apps provided by ownCloud, regardless of the licensing scheme. To see a list of the apps that have been shipped, you can either look in the GUI or list the contents of `/var/www/owncloud/apps` when accessing the xref:#container-cli[container CLI].
+The Docker image comes with all apps provided by ownCloud, regardless of the licensing scheme. To see a list of the apps that have been shipped, you can either look:
+
+* In the GUI via menu:Settings[Admin > Apps]
+* See the xref:installation/apps_supported.adoc[Supported Apps in ownCloud] page which provides you additional documentation links
+* List the contents of `/var/www/owncloud/apps` when accessing the xref:#container-cli[container CLI].
 
 === Terminating Containers
 
