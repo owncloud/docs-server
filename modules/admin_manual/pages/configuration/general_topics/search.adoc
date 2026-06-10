@@ -1,6 +1,5 @@
 = Full Text Search 
 :toc: right
-:toclevels: 4
 :page_aliases: configuration/search/index.adoc
 :description: ownCloud offers the ability to use full text search via the Full Text Search app connecting to an Elasticsearch Server. This allows users to search not only for file names but also for content within files stored in ownCloud.
 
@@ -19,15 +18,17 @@ The {search_elastic-app-url}[Full Text Search] app integrates full text search i
 
 == Prerequisites
 
-. A fully functioning {elastic-search-url}[Elasticsearch Server 7]. Follow the {elastic-search-install-url}[Installation and Upgrade Guide] for your environment.
+. A fully functioning {elastic-search-url}[Elasticsearch Server]. Follow the {elastic-search-install-url}[Installation and Upgrade Guide] for your environment.
 +
 [NOTE]
 ====
-* Version 1.0.0 of the Full Text Search app only works with Elasticsearch version 5.6.
-* With version >=2.0.0 of the app, Elasticsearch version > 7 is required and has been tested and is supported up to version 8.6.2 though newer versions may work without any issues.
+With version >=2.0.0 of the app:
+
+* Elasticsearch version > 7 is required and has been tested
+* and is supported up to version 8.6.2 though newer versions may work without any issues.
 ====
 
-. The {ingest-url}[Ingest Attachment Processor Plugin] lets Elasticsearch extract metadata and text from over a thousand different file types such as PPT, XLS, PDF and more. To install the processor, run the following command from your Elasticsearch installation directory:
+. The {ingest-url}[Ingest Attachment Processor Plugin] lets Elasticsearch extract metadata and text from over a thousand different file types such as PPT, XLS, PDF and more. To install the processor, run the following command _from your Elasticsearch installation directory_:
 +
 [source,bash]
 ----
@@ -43,17 +44,16 @@ sudo service elasticsearch restart
 
 == Installation
 
-To install the app, use the Marketplace app on your ownCloud server or proceed manually:
+To enable the *Search App*:
 
-. Download and extract the tarball of the {search_elastic-app-url}[Full Text Search app] to the apps directory (or xref:installation/apps_management_installation.adoc#using-custom-app-directories[custom apps directory, prefered]) of your ownCloud instance.
-. Use the xref:configuration/server/occ_command.adoc#apps-commands[App Commands] to enable the `search_elastic` application with:
+* Use the xref:configuration/server/occ_command.adoc#apps-commands[App Commands] to enable the `search_elastic` application with:
 +
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} app:enable search_elastic
 ----
 
-or enable it via the GUI menu:Settings[Admin > Apps > Full Text Search > Enable].
+* Or enable it via the GUI menu:Settings[Admin > Apps > Full Text Search > Enable].
 
 == Configuration
 
@@ -67,7 +67,7 @@ For the URL, both `HTTP` and `HTTPS` incuding the address and port can be used.
 
 The app provides several authentication methods. Select the one of your choice and check out the details for the respective authentication method below:
 
-image::apps/search_elastic/search_elastic_auth_items.png[Auth Items,width=450]
+image::apps/search_elastic/search_elastic_auth_items.png[Auth Items,width=350]
 
 ==== No Authentication
 
@@ -135,20 +135,25 @@ Additional searches you can do with the "RelevanceV2" connector:
 
 * Search by extension +
 `ext:pdf`, `ext:docx`, `ext:gif`, `ext:mp4`, `ext:tar.gz`, `ext:gz`, etc., any extension is possible
+
 * Search by size, only in bytes or megabytes
 ** Search by byte size: +
 `size.b:<8092` , `size.b:>102400`, `size.b:[8092 TO 16184]`
 ** Search by megabyte size: +
 `size.mb:<3`, `size.mb:>9`, `size.mb:[3 TO 9]`
+
 * Search by type: only "file" or "folder" +
 `type:file`, `type:folder`
+
 * Search by date:
 ** Search by timestamp: +
 `mtime:<1678960862`, `mtime:>1678960862`, `mtime:[1608111372 TO 1678960862]` +
 ** Search by date: +
 `mtime:<2021-08-25`, `mtime:>2023-01-18`, `mtime:[2022-01-01 TO 2022-12-31]`
+
 * Search by mimetype: +
-`mime:image`, `mime:gif`, `mime:text` +
+`mime:image`, `mime:gif`, `mime:text`
++
 NOTE: To search for the whole mimetype such as "image/gif" use `mime.key:image\/gif`.
 
 Each search term will narrow the search. For example `brown ext:pdf` will be interpreted as "name or content containing brown AND extension = pdf", so "brown.pdf" and "a brown paper.pdf" will appear, but not "brown.txt" or "blue.pdf"
@@ -157,8 +162,10 @@ Some examples of complex searches:
 
 * Files containing "confidential" updated since 2023 whose size is less than 10MB: +
 `confidential mtime:>2023-01-01 size.mb:<10`
+
 * Folders containing more than 1GB: +
 `type:folder size.mb:>1024`
+
 * Images between March and June 2020: +
 `mime:image mtime:[2020-03-01 TO 2020-06-30]`
 
@@ -196,16 +203,16 @@ You can use the:
 
 * xref:configuration/server/occ_command.adoc#config-commands[occ Config Commands command set] to configure the app.
 +
---
 Examples:
-
++
+--
 List app settings::
-
++
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} config:list search_elastic
 ----
-
++
 [source,plaintext]
 ----
 {
@@ -223,7 +230,7 @@ List app settings::
 }
 ----
 --
-
++
 Set app options::
 +
 --
@@ -250,20 +257,26 @@ The Full Text Search app provides two modes, which are *active* and *passive*.
 
 After enabling the app, it will be by default in _active mode_::
 +
+--
 * File changes will be indexed in background jobs. +
 System cron is recommended, otherwise a lot of jobs might queue up.
+
 * Search results will be based on Elasticsearch.
+
 * Search functionality based on ownCloud core database queries will no longer be used.
 +
 NOTE: Active mode can cause a downtime for search when indexing starts on an already heavily used instance, because it takes a while until all files have been indexed.
+--
 
 === Passive Mode
 
 To do an initial full indexing without the app interfering, it can be put in _passive_ mode::
 +
+--
 * The administrator can run occ commands changing the search configuration without notice to the users.
 * The app will not index any changes by itself.
 * Search results will still be based on ownCloud core database queries.
+--
 
 === Changing the App Mode
 
@@ -337,9 +350,9 @@ When everything has been set up and configured, you can initiate creating the in
 
 When the Elasticsearch server is down or the index has not been set up, you may get the following message. Check if the ES server is reachable or if the index was set up properly as one solution to fix the issue.
 
-image::apps/search_elastic/warning_could_not_setup_indexes_connection_failure.png[Warning no Index,width=350]
+image::apps/search_elastic/warning_could_not_setup_indexes_connection_failure.png[Warning no Index,width=300]
 
-image::apps/search_elastic/warning_could_not_setup_indexes_unknown_key.png[Warning unknown Key,width=350]
+image::apps/search_elastic/warning_could_not_setup_indexes_unknown_key.png[Warning unknown Key,width=300]
 
 == User Manual
 

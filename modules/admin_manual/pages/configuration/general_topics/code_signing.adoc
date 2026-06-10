@@ -4,15 +4,9 @@
 
 == Introduction
 
-ownCloud supports code signing for the core releases, and for ownCloud
-applications. Code signing gives our users an additional layer of
-security by ensuring that nobody other than authorized persons can push
-updates.
+ownCloud supports code signing for the core releases, and for ownCloud applications. Code signing gives our users an additional layer of security by ensuring that nobody other than authorized persons can push updates.
 
-It also ensures that all upgrades have been executed properly, so that
-no files are left behind, and all old files are properly replaced. In
-the past, invalid updates were a significant source of errors when
-updating ownCloud.
+It also ensures that all upgrades have been executed properly, so that no files are left behind, and all old files are properly replaced. In the past, invalid updates were a significant source of errors when updating ownCloud.
 
 All the possible errors and their explanations can be found xref:errors[here]
 
@@ -20,27 +14,17 @@ All the possible errors and their explanations can be found xref:errors[here]
 
 === Why Did ownCloud Add Code Signing?
 
-By supporting Code Signing we add another layer of security by ensuring
-that nobody other than authorized persons can push updates for
-applications, and ensuring proper upgrades.
+By supporting Code Signing we add another layer of security by ensuring that nobody other than authorized persons can push updates for applications, and ensuring proper upgrades.
 
 === Do We Lock Down ownCloud?
 
-The ownCloud project is open source and always will be. We do not want
-to make it more difficult for our users to run ownCloud. Any code
-signing errors on upgrades will not prevent ownCloud from running, but
-will display a warning on the Admin page. For applications that are not
-tagged "Official" the code signing process is optional.
+The ownCloud project is open source and always will be. We do not want to make it more difficult for our users to run ownCloud. Any code signing errors on upgrades will not prevent ownCloud from running, but will display a warning on the Admin page. For applications that are not tagged "Official" the code signing process is optional.
 
 === Not Open Source Anymore?
 
-The ownCloud project is open source and always will be. The code signing
-process is optional, though highly recommended. The code check for the
-core parts of ownCloud is enabled when the ownCloud release version
-branch has been set to stable.
+The ownCloud project is open source and always will be. The code signing process is optional, though highly recommended. The code check for the core parts of ownCloud is enabled when the ownCloud release version branch has been set to stable.
 
-For custom distributions of ownCloud it is recommended to change the
-release version branch in version.php to something else than "stable".
+For custom distributions of ownCloud it is recommended to change the release version branch in version.php to something else than "stable".
 
 === Is Code Signing Mandatory For Apps?
 
@@ -48,10 +32,9 @@ Code signing is optional for all third-party applications.
 
 == Fixing Invalid Code Integrity Messages
 
-A code integrity error message (`There were problems with the code integrity check. More information…`)
-appears in a yellow banner at the top of your ownCloud Web interface:
+A code integrity error message (`There were problems with the code integrity check. More information…`) appears in a yellow banner at the top of your ownCloud Web interface:
 
-image:issues/code-integrity-notification.png[Code integrity warning banner.]
+image:issues/code-integrity-notification.png[Code integrity warning banner., width=350]
 
 NOTE: The yellow banner is only shown for admin users.
 
@@ -62,11 +45,9 @@ provides the following options:
 2.  Show a list of invalid files.
 3.  Trigger a rescan.
 
-image:issues/code-integrity-admin.png[Links for resolving code integrity warnings.]
+image:issues/code-integrity-admin.png[Links for resolving code integrity warnings., width=350]
 
-To debug issues caused by the code integrity check click on btn:[List of invalid files],
-and you will be shown a text document listing the different issues.
-The content of the file will look similar to the following example:
+To debug issues caused by the code integrity check click on btn:[List of invalid files], and you will be shown a text document listing the different issues. The content of the file will look similar to the following example:
 
 ----
 Technical information
@@ -177,37 +158,27 @@ Array
 
 In above error output it can be seen that:
 
-1.  In the ownCloud core (that is, the ownCloud server itself) the files
-`index.php` and `version.php` do have the wrong version.
-2.  In the ownCloud core the unrequired extra file `/test.php` has
-been found.
-3.  It was not possible to verify the signature of the calendar
-application.
-4.  The certificate of the task application was revoked.
-5. The file `.htaccess` is missing.
+. In the ownCloud core (that is, the ownCloud server itself) the files `index.php` and `version.php` do have the wrong version.
+. In the ownCloud core the unrequired extra file `/test.php` has been found.
+. It was not possible to verify the signature of the calendar application.
+. The certificate of the task application was revoked.
+. The file `.htaccess` is missing.
 
 You have to do the following steps to solve this:
 
-1.  Upload the correct `index.php` and `version.php` files from e.g. the archive of your ownCloud version.
-2.  Delete the `test.php` file.
-3.  Contact the developer of the application. A new version of the app
-containing a valid signature file needs to be released.
-4.  Contact the developer of the application. A new version of the app
-signed with a valid signature needs to be released.
-5. Download the official server tar ball and copy the `.htaccess` into your instance.
+. Upload the correct `index.php` and `version.php` files from e.g. the archive of your ownCloud version.
+. Delete the `test.php` file.
+. Contact the developer of the application. A new version of the app containing a valid signature file needs to be released.
+. Contact the developer of the application. A new version of the app signed with a valid signature needs to be released.
+. Download the official server tar ball and copy the `.htaccess` into your instance.
 
-For other means on how to receive support please take a look at
-the {oc-help-url}[Docs & Guides page]. After fixing these problems
-verify by clicking btn:[Rescan].
+For other means on how to receive support please take a look at he {oc-help-url}[Docs & Guides page]. After fixing these problems verify by clicking btn:[Rescan].
 
 NOTE: When using a FTP client to upload those files make sure it is using the `Binary` transfer mode instead of the `ASCII` transfer mode.
 
 == Rescans
 
-Rescans are triggered at installation, and by updates. You may run scans
-manually with the `occ` command. The first command scans the ownCloud
-core files, and the second command scans the named app. There is not yet
-a command to manually scan all apps:
+Rescans are triggered at installation, and by updates. You may run scans manually with the `occ` command. The first command scans the ownCloud core files, and the second command scans the named app. There is not yet a command to manually scan all apps:
 
 
 [source,bash,subs="attributes+"]
@@ -222,37 +193,30 @@ TIP: See xref:configuration/server/occ_command.adoc[the occ command] to learn mo
 
 Please don’t modify the mentioned `signature.json` itself.
 
-The following errors can be encountered when trying to verify a code
-signature.
+The following errors can be encountered when trying to verify a code signature.
 
 * `INVALID_HASH`
-** The file has a different hash than specified within `signature.json`.
-This usually happens when the file has been modified after writing the
-signature data.
+** The file has a different hash than specified within `signature.json`. This usually happens when the file has been modified after writing the signature data.
+
 * `FILE_MISSING`
-** The file cannot be found but has been specified within
-`signature.json`. Either a required file has been left out, or
-`signature.json` needs to be edited.
+** The file cannot be found but has been specified within `signature.json`. Either a required file has been left out, or `signature.json` needs to be edited.
+
 * `EXTRA_FILE`
-** The file does not exist in `signature.json`. This usually happens
-when a file has been removed and `signature.json` has not been updated.
-It also happens if you have placed additional files in your ownCloud
-installation folder.
+** The file does not exist in `signature.json`. This usually happens when a file has been removed and `signature.json` has not been updated. It also happens if you have placed additional files in your ownCloud installation folder.
+
 * `EXCEPTION`
-** Another exception has prevented the code verification. There are
-currently these following exceptions:
+** Another exception has prevented the code verification. There are currently these following exceptions:
 *** `Signature data not found.`
-**** The app has mandatory code signing enforced but no `signature.json`
-file has been found in its `appinfo` folder.
+**** The app has mandatory code signing enforced but no `signature.json` file has been found in its `appinfo` folder.
+
 *** `Certificate is not valid.`
-**** The certificate has not been issued by the official ownCloud Code
-Signing Root Authority.
+**** The certificate has not been issued by the official ownCloud Code Signing Root Authority.
+
 *** `Certificate is not valid for required scope. (Requested: %s, current: %s)`
-**** The certificate is not valid for the defined application.
-Certificates are only valid for the defined app identifier and cannot be
-used for others.
+**** The certificate is not valid for the defined application. Certificates are only valid for the defined app identifier and cannot be used for others.
+
 *** `Signature could not get verified.`
-**** There was a problem with verifying the signature of
-`signature.json`.
+**** There was a problem with verifying the signature of `signature.json`.
+
 *** `Certificate has been revoked.`
 **** The certificate which was used to sign the application was revoked.
