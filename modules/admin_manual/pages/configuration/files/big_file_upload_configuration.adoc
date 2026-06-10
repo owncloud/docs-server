@@ -1,87 +1,113 @@
 = Big File Upload Configuration
 :toc: right
 :stem:
-:mod_reqtimeout-url: https://httpd.apache.org/docs/current/mod/mod_reqtimeout.html
 :limitrequestbody-url: https://httpd.apache.org/docs/current/en/mod/core.html#limitrequestbody
-:sslrenegbuffersize-url: https://httpd.apache.org/docs/current/mod/mod_ssl.html#sslrenegbuffersize
-:fcgidmaxrequestinmem-url: https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html#fcgidmaxrequestinmem
-:fcgidmaxrequestlen-url: https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html#fcgidmaxrequestlen
-:mod_fcgid_bug_51747-url: https://bz.apache.org/bugzilla/show_bug.cgi?id=51747
 :userini: .user.ini
 :htaccess: .htaccess
 
 == Introduction
 
-If you're expecting big file uploads, some considerations have to be taken into account. Setups based on your needs can be configured.
+If you're expecting to upload large files, there are some things you need to consider. Setups can be configured based on your needs.
 
 == General Considerations
 
-* Consider that user quotas may prevent big file uploads due to a user reaching the space limitation.
+* Bear in mind that user quotas may prevent large file uploads if a user exceeds their storage limit.
 
-* Though ownCloud already disables the PHP setting *Output Buffering* in the shipped `.htaccess` and `.user.ini` to prevent PHP memory-related errors, it can be the case that you must manually set it in your `php.ini` or `VirtualHosts` when the other two configuration files can't be used in your environment.
+* Although the PHP setting `output_buffering` is already disabled in the shipped `.htaccess` file by ownCloud to prevent PHP memory-related errors, you may still need to manually set additional configuration options, as described below.
 
-* The directory used for `upload_tmp_dir` must be fully accessible by PHP / the webserver user, usually `www-data`.
+* If the temporary directory used for uploading files is changed, it must be: +
+** Fully accessible by the PHP/webserver user, which is usually `www-data`.
+** It is mounted as a Docker volume to provide the necessary space.
 
-* Your temp directory or partition has to be big enough to hold multiple parallel uploads from multiple users. The formula for this is `temp_space = concurrent_uploads * chunk size` +
+* The size of your temporary directory or partition must be sufficient to accommodate multiple parallel uploads from different users. The formula for this is:
++
+--
+----
+temp_space = concurrent_uploads * chunk size
+----
+
 For example, if the chunk size is *10MB* (which is the default but might vary between different clients) and the average number of users uploading at the same time is *25*, then you’ll need 250MB of temp space, as the formula below shows.
-+
+
 ----
-10MB x 25 users = 250MB required temp space
+10MB x 25 users = 250MB of required temp space
+----
+--
+
+* The user's upload directory, usually in `<mount-point>/files/<username>/uploads` also has to be big enough. The formula is a bit different, as this directory collects all chunks of a file for that upload for that user until the upload is completed. The space needed for this directory is temporarily the same size as for the final file size. As an example, if a user wants to upload a 4GB file, temporarily 4GB of space needs to be available in the upload directory to hold the chunks. When the upload has finished, all chunks are written to the final destination and the chunks are deleted afterwards freeing that temporary space.
++
+--
+The formula for the upload directory's temp space for all users is:
+
+----
+temp_space = concurrent_uploads * average_upload_size_per_user
 ----
 
-* The user's upload directory, usually in `<datadirectory>/<username>/uploads` (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-directory-where-user-files-are-stored[Sample Config PHP Parameters] for details) also has to be big enough. The formula is a bit different, as this directory collects all chunks of a file for that upload for that user until the upload is completed. The space needed for this directory is temporarily the same size as for the final file size. As an example, if a user wants to upload a 4GB file, temporarily 4GB of space needs to be available in the upload directory to hold the chunks. When the upload has finished, all chunks are written to the final destination and the chunks are deleted afterwards freeing that temporary space. The formula for the upload directory's temp space for all users is: `temp_space = concurrent_uploads * average_upload_size_per_user`. The location of the upload directory can be defined via the config setting xref:configuration/server/config_sample_php_parameters.adoc#define-the-dav-chunk-base-directory[dav.chunk_base_dir].
-+
+The location of the upload directory can be defined via the environment variable xref:{config-sample}#define-the-dav-chunk-base-directory[OWNCLOUD_DAV_CHUNK_BASE_DIR]. You must provide a Docker volume for it if it is redefined.
+
 [NOTE]
 ====
 The space temporarily consumed in the upload directory will not count against the user quota. If a user has no quota left in his peronal storage and the quota excludes external mounts, uploads to a windows network drive share as example will succeed. The file temporarily created in the upload directory will not count against his personal storage.
 ====
+--
 
-== Configuration via .htaccess
+* If you have configured the xref:{config-sample}#define-the-lifetime-of-a-session-after-inactivity[session_lifetime] setting in your configuration,  or via the environment variable (see below), make sure it is not too low. This setting needs to be configured to at least the time (in seconds) that the longest upload will take. If unsure, remove this entirely from your configuration.
 
-NOTE: ownCloud provides its own `.htaccess` file located in the containers `/var/www/owncloud` directory. You must provide a Docker volume to access this file. 
+== Configuration
 
-Set the following parameters inside the corresponding file using your own desired values, as in the following examples:
+[IMPORTANT]
+====
+If you have used PHP or .htaccess/.userini configuration before using the Dockerised ownCloud deployment, you now must switch to the environment variables that have been provided.
 
-If you did not used a Dockerised installation before, you may have used a {userini} file in the same location of {htaccess}. The file example shown with {userini} must be converted to {htaccess} when using the Dockerised ownCloud installation and is provided as example only.
+The following PHP keys are affected and need to be reconfigured. The values are only exemplary:
 
-{userini}::
 [source,php]
 ----
 post_max_size=16G
-output_buffering=0
 upload_max_filesize=16G
 upload_tmp_dir=/mnt/php_big_temp/
+max_input_time=3600
+max_execution_time=3600
+memory_limit=512
 ----
 
-{htaccess}::
-[source,php]
-----
-php_value	post_max_size=16G
-php_value	output_buffering=0
-php_value	post_max_size=16G
-php_value	upload_tmp_dir=/mnt/php_big_temp/
-----
+Please note that `output_buffering=0` is already set in the shipped `.htaccess` file.
+====
 
-If you see PHP timeouts in your log files, increase the timeout values, which are in seconds, as in the example below. Use the `php_value` prefix like above when configuring the `{htaccess}` file:
 
-[source,php]
-----
-php_value	max_input_time=3600
-php_value	max_execution_time=3600
-----
+The following ownCloud environment variables can be adapted when configuring big file uploads:
 
-NOTE: Consider that any settings made in `{htaccess}` need to be repopulated after an upgrade of ownCloud.
+[width="100%",cols="50%,50%",options="header"]
+|===
+| Environment Variable
+| PHP or Config Key
 
-== Configuring via ownCloud
+| OWNCLOUD_MAX_UPLOAD
+a| `post_max_size` and +
+`upload_max_filesize`
 
-As an alternative, you can also configure some parameters in your _additional_ xref:installation/configuration_notes.adoc#using-a-configuration-file[configuration file].
+| OWNCLOUD_TEMP_DIRECTORY
+| `upload_tmp_dir`
 
-* Set a temporary location for uploaded files by using the `tempdirectory` setting.
-* If you have configured the `session_lifetime` setting in your configuration, see xref:configuration/server/config_sample_php_parameters.adoc[Sample Config PHP Parameters], make sure it is not too low. This setting needs to be configured to at least the time (in seconds) that the longest upload will take. If unsure, remove this entirely from your configuration to reset it to the default shown in the `config.sample.php`.
+| OWNCLOUD_MAX_INPUT_TIME
+| `max_input_time`
 
-== Important Changes in Apache 2.4.54
+| OWNCLOUD_MAX_EXECUTION_TIME
+| `max_execution_time`
 
-In Apache HTTP Server 2.4.53 and earlier, the default value of the LimitRequestBody directive was 0 (unlimited). This has changed starting with Apache HTTP Server 2.4.54 where the default value is set to 1073741824 bytes (1 GB). This means, that uploads to public folders when chunking is not in effect will be limited to this file size. Change this value according to your needs in order to allow large file uploads. Please refer to the official Apache documentation {limitrequestbody-url}[LimitRequestBody] for more information.
+| OWNCLOUD_MEMORY_LIMIT
+| `memory_limit`
+
+| OWNCLOUD_SESSION_KEEPALIVE
+a| xref:{config-sample}#enable-session-keep-alive-when-a-user-is-logged-in-to-the-web-ui[session_keepalive]
+
+| OWNCLOUD_SESSION_LIFETIME
+a| xref:{config-sample}#define-the-lifetime-of-a-session-after-inactivity[session_lifetime]
+|===
+
+
+== Apache Config LimitRequestBody
+
+The default value of the {limitrequestbody-url}[LimitRequestBody] setting in Apache is 1073741824 bytes (1 GB). ownCloud has set this value to 0 (zero) for its embedded Apache configuration, which is equivalent to `unlimited`. This means that uploads to public folders will not be limited to any file size by Apache when chunking is not in effect.
 
 == General Upload Issues
 
@@ -90,19 +116,14 @@ Various environmental factors could cause a restriction of the upload size. Exam
 * Some services like `Cloudflare` are also known to cause uploading issues.
 * Upload limits enforced by proxies used by your clients.
 
-== Important Changes in Apache 2.4.54
-
-In Apache HTTP Server 2.4.53 and earlier, the default value of the `LimitRequestBody` directive was 0 (unlimited). This has changed starting with Apache HTTP Server 2.4.54 where the default value is set to 1073741824 bytes (1 GB). This means, that uploads to public folders when chunking is not in effect will be limited to this file size. Change this value according to your needs in order to allow large file uploads. Please refer to the official Apache documentation {limitrequestbody-url}[LimitRequestBody, windows=_blank] for more information.
-
 == Long-Running Uploads
 
-For very long-running uploads *those lasting longer than 1h* to public folders, _when chunking is not in effect_, `filelocking.ttl` should be set to a significantly large value in your _additional_ xref:installation/configuration_notes.adoc#using-a-configuration-file[configuration file]. If not, large file uploads will fail with a file locking error, because the Redis garbage collection will delete the initially acquired file lock after 1 hour by default.
+For very long-running uploads *those lasting longer than 1h* to public folders, _when chunking is not in effect_, xref:{config-sample}#define-the-ttl-for-file-locking[OWNCLOUD_FILELOCKING_TTL] should be set to a significantly large value. If not, large file uploads will fail with a file locking error, because the Redis garbage collection will delete the initially acquired file lock after 1 hour by default.
 
 To estimate a good value, use the following formula:
 
-[source,plaintext]
 ----
-time_in_seconds = (maximum_upload_file_size / slowest_assumed_upload_connection).
+time_in_seconds = (maximum_upload_file_size / slowest_assumed_upload_connection)
 ----
 
 For the value of "_slowest assumed upload connection_", take the *upload* speed of the user with the slowest connection and divide it by two. For example, let's assume that the user with the slowest connection has an 8MBit/s DSL connection; which usually indicates the download speed. This type of connection would, usually, have 1MBit/s upload speed (but confirm with the ISP). Divide this value in half, to have a buffer when there is network congestion, to arrive at 512KBit/s as the final value.

@@ -24,7 +24,7 @@ NOTE: File versioning only gets triggered if the change is made via the ownCloud
 
 Versions are displayed in the WebUI in the details view in the right sidebar if you click on the file row in the file listing. You can restore the current file to one of the earlier backup copies in the list, by clicking on the btn:[restore] icon of the specific version.
 
-image::configuration/files/files_versions/files-versions.png[File Versions in the WebUI]
+image::configuration/files/files_versions/files-versions.png[File Versions in the WebUI, width=350]
 
 == How Versions are Deleted
 
@@ -72,15 +72,15 @@ The versions are adjusted along this pattern every time a new version is created
 
 WARNING: The versions app never uses more than 50% of the user’s storage quota. If the stored versions exceed this limit, ownCloud deletes the oldest file versions until it meets the disk space limit again.
 
-TIP: Adjust the `'versions_retention_obligation'` setting in `config.php` to avoid filling up the user's quota. For details see the section below.
+TIP: Adjust the `OWNCLOUD_VERSIONS_RETENTION_OBLIGATION` setting to avoid filling up the user's quota. For details see the section below.
 
 == Change the Expiration Settings
 
-You may alter the xref:configuration/server/config_sample_php_parameters.adoc#define-the-files-versions-retention-obligation[default pattern] in `config.php`. The default setting is `auto`, which sets the default pattern:
+You may alter the default pattern xref:{config-sample}#define-the-files-versions-retention-obligation[OWNCLOUD_VERSIONS_RETENTION_OBLIGATION]. The default setting is `auto`, which sets the default pattern:
 
-[source,php]
+[source,.env]
 ----
-'versions_retention_obligation' => 'auto',
+OWNCLOUD_VERSIONS_RETENTION_OBLIGATION='auto'
 ----
 
 === Possible Config Values
@@ -107,27 +107,27 @@ You may alter the xref:configuration/server/config_sample_php_parameters.adoc#de
 
 Keep all versions for at least 10 days, apply expiration rules to all versions that are older than 10 days. This will keep a lot more versions during the last 10 days compared to the default pattern.
 
-[source,php]
+[source,.env]
 ----
-'versions_retention_obligation' => '10, auto',
+OWNCLOUD_VERSIONS_RETENTION_OBLIGATION='10, auto'
 ----
 
 ==== Example 2:
 
 Apply expiration rules to all versions that are created during the last 30 days and do not keep any versions older than 30 days.
 
-[source,php]
+[source,.env]
 ----
-'versions_retention_obligation' => 'auto, 30',
+OWNCLOUD_VERSIONS_RETENTION_OBLIGATION='auto, 30'
 ----
 
 ==== Example 3:
 
 Do not apply any expiration rules. Delete all versions after 30 days.
 
-[source,php]
+[source,.env]
 ----
-'versions_retention_obligation' => '30, 30',
+OWNCLOUD_VERSIONS_RETENTION_OBLIGATION='30, 30'
 ----
 
 == Restoring a Version
@@ -142,9 +142,9 @@ Save additional metadata (author, version tag, etc.) of each version of uploaded
 
 image::configuration/files/files_versions/version-metadata.png[Extended Version Metadata,width=300]
 
-You can enable the feature xref:configuration/server/config_sample_php_parameters.adoc#save-additional-metadata-for-versions[via an entry in config.php]. 
+You can enable the feature using xref:{config-sample}#save-additional-metadata-for-versions[OWNCLOUD_SAVE_VERSION_METADATA]. 
 
-WARNING: The metadata is only collected after enabling the feature using the xref:configuration/server/config_sample_php_parameters.adoc#save-additional-metadata-for-versions[config.php] configuration file. This means the author or version number will show only for new versions of the file and be empty for older versions.
+WARNING: The metadata is only collected after enabling the feature has been enabled. This means the author or version number will show only for new versions of the file and be empty for older versions.
 
 === Show the Author of a Version
 
@@ -154,11 +154,14 @@ Each update to the file that generates a new file version will additionally show
 
 ownCloud can automatically generate and increment version numbers for new file versions. Based on this feature, one can define the actual version to be a major version which gets a major version number and all new upcoming versions start counting from this major number. Major versions are persistent versions that are not subject to any retention policies set by ownCloud.
 
-TIP: Publishing the version persists it until the original file is deleted by somebody with such permission or by the system administrator via occ versions:cleanup command. For more information check the xref:configuration/files/file_versioning.adoc#how-versions-are-deleted[versions retention] section.
+[TIP]
+====
+* Publishing the version persists it until the original file is deleted by somebody with such permission or by the system administrator via occ versions:cleanup command. For more information check the xref:configuration/files/file_versioning.adoc#how-versions-are-deleted[versions retention] section.
 
-TIP: To create a new persistent major version, the user has to click on the check mark next to the version info tab. Check the image above.
+* To create a new persistent major version, the user has to click on the check mark next to the version info tab. Check the image above.
 
-TIP: The versions follow the X.Y format, where X is a major part and Y is a minor part of the version. Version tags cannot be modified by the user, they are auto-generated by ownCloud. 
+* The versions follow the X.Y format, where X is a major part and Y is a minor part of the version. Version tags cannot be modified by the user, they are auto-generated by ownCloud. 
+====
 
 == Enterprise File Retention
 

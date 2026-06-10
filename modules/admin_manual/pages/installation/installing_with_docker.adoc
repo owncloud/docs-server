@@ -145,7 +145,7 @@ include::example$installation/docker/dot.env[]
 +
 Only a few settings are required, these are:
 +
-[width="100%",cols="40%,80%,30%",options="header"]
+[width="100%",cols="45%,80%,30%",options="header"]
 |===
 | Setting Name
 | Description
@@ -168,14 +168,14 @@ The same trusted domains rules apply to everything else.
 
 | `my_domain` or `my_ip` ...
 
-| `OWNCLOUD_TRUSTED_DOMAINS` *^1,2^*
+a| xref:{config-sample}#define-list-of-trusted-domains-that-users-can-log-into[OWNCLOUD_TRUSTED_DOMAINS] *^1,2^*
 a| Multiple ownCloud Domains. +
-See the config (xref:configuration/server/config_sample_php_parameters.adoc#define-list-of-trusted-domains-that-users-can-log-into[description]) for more details.
+See the config description for more details.
 
 | `my_host,my_ip,my_domain`
 
-| `OWNCLOUD_OVERWRITE_CLI_URL`
-| See the config (xref:configuration/server/config_sample_php_parameters.adoc#override-cli-url[description]) for more details.
+a| xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL]
+| See the config description for more details.
 | `\http://localhost`
 
 | `ADMIN_USERNAME`

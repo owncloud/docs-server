@@ -141,46 +141,6 @@ This is because it does not store locks, and data can disappear from the cache a
 
 NOTE: Be sure to install the *memcached* PHP module, and not _memcache_, as in the following examples. ownCloud supports only the *memcached* PHP module.
 
-==== Installing Memcached
-
-===== On Ubuntu/Debian/Mint
-
-On Ubuntu/Debian/Mint run the following command:
-
-[source,bash]
-----
-sudo apt-get install memcached php-memcached
-----
-
-NOTE: The installer will automatically start `memcached` and configure it to launch at startup.
-
-==== Configuration File Paths
-
-[cols=",",options="header",]
-|===
-| PHP Version | Filename
-| {recommended-php-version} | `/etc/php/{recommended-php-version}/mods-available/memcached.ini`
-|===
-
-Note that the PHP version depends on your envoronment.
-
-After that, assuming that you don’t encounter any errors:
-
-. Restart your Web server
-. Add the appropriate entries to `config.php` (which you can find an example of below)
-. Refresh your ownCloud admin page
-
-==== Clearing the Memcached Cache
-
-The Memcached cache can be flushed from the command line, using a range of common Linux/Unix tools including `netcat` and `telnet`. The following example uses telnet to log in, run the {flushall_url}[flush_all command], and log out:
-
-[source,bash,subs="attributes+"]
-----
-telnet localhost {std-port-memcache}
-flush_all
-quit
-----
-
 == Configuring Memory Caching
 
 Memory caches must be explicitly configured in ownCloud by:
