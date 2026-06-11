@@ -4,7 +4,6 @@
 :cron_url: https://en.wikipedia.org/wiki/Cron
 :crontab_url: https://linux.die.net/man/1/crontab
 :systemd_url: https://wiki.archlinux.org/index.php/Systemd/Timers
-:oc-docker-url: https://github.com/owncloud-docker/base#environment-variables
 
 == Introduction
 
@@ -25,40 +24,39 @@ Is the same as using the *Cron* section on your ownCloud Admin page.
 
 === Docker Note
 
-If you are using the official docker images you don't need to take care about the configuration for background jobs, the docker image is already configured to use cron internally. If required, this can also be adjusted by the {oc-docker-url}[environment variables] `OWNCLOUD_CROND_ENABLED` and `OWNCLOUD_CROND_SCHEDULE`.
+NOTE: With the Docker image provided, you don't need to take care about the configuration for background jobs. The Docker image is already configured to use cron internally. If required, this can also be adjusted by the environment variables `OWNCLOUD_CROND_ENABLED` and `OWNCLOUD_CROND_SCHEDULE`.
 
 == Cron Jobs
 
-You can schedule Cron jobs in three ways: xref:cron[Cron], xref:webcron[Webcron], or xref:ajax[AJAX]. These can all be configured in the admin settings menu. However, the recommended method is to use Cron. The following sections describe the differences between each method.
+You can schedule Cron jobs in the following ways: xref:cron[Cron] or xref:ajax[AJAX]. These can all be configured in the admin settings menu. However, the recommended method is to use Cron. The following sections describe the differences between each method.
 
 There are a number of things to keep in mind when choosing an automation option:
 
-. While the default method is AJAX, though the preferred way is to use Cron. +
-The reason for this distinction is that AJAX is easier to get up and running. As a result, it makes sense (often times) to accept it in the interests of expediency. However, doing so is known to cause issues, such as backlogs and potentially not running every job on a heavily-loaded system. What's more, an increasing amount of ownCloud automation has been migrated from AJAX to Cron in recent versions. For this reason, we encourage you to not use it for too long — especially if your site is rapidly growing.
-
-. While Webcron is better than AJAX, it has limitations too. +
-For example, running Webcron will only remove a single item from the job queue, not all of them. Cron, however, will clear the entire queue.
+* Although the default method is AJAX, the preferred way is to use Cron.
++
+The reason for this distinction is that AJAX is easier to set up. As a result, it often makes sense to accept it in the interests of expediency. However, this can cause issues such as backlogs and jobs not running on a heavily loaded system.
 
 NOTE: It's for this reason that we encourage you to use Cron — if at all possible.
 
 === Cron
 
-Using the operating system Cron feature is the preferred method for executing regular tasks. This method enables the execution of scheduled jobs without the inherent limitations which the web server might have.
+Using the hosts Cron feature is the preferred method for executing regular tasks. This method enables the execution of scheduled jobs without the inherent limitations which the embedded Apache web server might have.
 
 For example, to run a Cron job on a *nix system every 15 minutes (recommended), under the default web server user (often, `www-data` or `wwwrun`) you must set up the following Cron job to call the occ `system:cron` command:
 
-[source,bash]
+[source,bash,subs="attributes+"]
 ----
 sudo crontab -u www-data -e
-*/15  *  *  *  * /usr/bin/php -f /path/to/your/owncloud/occ system:cron
+*/15  *  *  *  * cd <path-to-compose-file> && {occ-command-example-prefix-docker} system:cron
 ----
 
 You can verify if the cron job has been added and scheduled by executing:
 
-[source,bash]
+[source,bash,subs="attributes+"]
 ----
 sudo crontab -u www-data -l
-*/15  *  *  *  * /usr/bin/php -f /path/to/your/owncloud/occ system:cron
+
+*/15  *  *  *  * cd <path-to-compose-file> && {occ-command-example-prefix-docker} system:cron
 ----
 
 NOTE: You have to make sure that PHP is found by Cron; hence why we've deliberately added the full path.
@@ -67,25 +65,16 @@ Please refer to {crontab_url}[the crontab man page] for the exact command syntax
 
 NOTE: There are other methods to invoke programs by the system regularly, e.g., {systemd_url}[systemd timers]
 
-=== Webcron
-
-By registering your ownCloud `cron.php` script address as an external webcron service (for example, http://www.easycron.com/[easyCron]), you ensure that background jobs are executed regularly. To use this type of service, your external webcron service must be able to access your ownCloud server using the Internet. For example:
-
-[source,plaintext]
-----
-URL to call: http[s]://<domain-of-your-server>/owncloud/cron.php
-----
-
 === AJAX
 
 The AJAX scheduling method is the default option. +
-However, it is also the _least_ reliable. Each time a user visits the ownCloud page, a single background job is executed. The advantage of this mechanism, however, is that it does not require access to the system nor registration with a third party service.  The disadvantage of this mechanism, when compared to the xref:webcron[Webcron] service, is that it requires regular visits to the page for it to be triggered.
+However, it is also the _least_ reliable. Each time a user visits the ownCloud page, a single background job is executed. The advantage of this mechanism, however, is that it does not require access to the system nor registration with a third party service.  The disadvantage of this mechanism is, that it requires regular visits to the page for it to be triggered.
 
 NOTE: Especially when using the Activity App or external storages, where new files are added, updated, or deleted one of the other methods should be used.
 
 === Parallel Task Execution
 
-Regardless of the approach which you take, since ownCloud 9.1, Cron jobs can be run in parallel. This is done by running `background:cron` multiple times. Depending on the process which you are automating, this may not be necessary. However, for longer-running tasks, such as those which are LDAP related, it may be very beneficial.
+Regardless of the approach which you take, Cron jobs can be run in parallel. This is done by running `background:cron` multiple times. Depending on the process which you are automating, this may not be necessary. However, for longer-running tasks, such as those which are LDAP related, it may be very beneficial.
 
 There is no way to do so via the ownCloud UI. But, the most direct way to do so, is by opening three console tabs and in each one run
 
