@@ -29,7 +29,7 @@ The caching backends supported by ownCloud are:
 * xref:apcu[APCu] +
   This is a data cache only and does *not* cache any opcode. APCu is part of the Docker image.
 * xref:redis[Redis] +
-  This is an in-memory data structure store (cache) for single and multi-server ownCloud installations, which provides file locking and can be set up in local or distributed environments. The `php-redis` extension is already part of the Docker image. The Redis installation is part of the Docker Compose deployment example, see the xref:installation/installing_with_docker.adoc#docker-compose[Installalling With Docker] documentation for more details.
+  This is an in-memory data structure store (cache) for single and multi-server ownCloud installations, which provides file locking and can be set up in local or distributed environments. The required `php-redis` extension is already part of the Docker image. Redis is used of the Docker Compose deployment example. For details see the xref:installation/installing_with_docker.adoc#docker-compose[Installalling With Docker] documentation.
 
 [NOTE]
 ====
@@ -38,7 +38,7 @@ You may use _both_ a local and a distributed cache. The recommended ownCloud cac
 
 === Cache Directory Location
 
-The cache directory defaults to `data/$user/cache` where `$user` is the current user. You may use the `'cache_path'` directive in your configuration for different locations. For details see the  xref:configuration/server/config_sample_php_parameters.adoc#define-the-location-of-the-cache-folder[Define the location of the cache folder] description.
+The cache directory defaults to `<mount-point>/files/$user/cache` and `$user` is the current ownCloud user. You may use the xref:configuration/server/config_sample_php_parameters.adoc#define-the-location-of-the-cache-folder[OWNCLOUD_CACHE_PATH] environment variable for different locations.
 
 == Cache Types
 
@@ -55,14 +55,20 @@ php -r 'phpinfo();' | grep opcache.enable
 
 === APCu
 
-The easiest cache to use is APCu, because it is a pure data cache, very fast as it is memory-based only and _nothing needs to be configured_.
+The easiest cache to use is APCu, because it is a pure data cache, very fast as it is memory-based only. If defined, _nothing needs to be configured_.
 
 === Redis
 
 {redis_url}[Redis] is an excellent modern memory cache to use for both distributed caching and as a local cache for
 xref:configuration/files/files_locking_transactional.adoc[transactional file locking], because it guarantees that cached objects are available for as long as they are needed.
 
-Please note that with Redis version 6 upwards, a new authentication mechanism has been introduced named ACL (Access Control Lists). ownCloud does currently not support Redis ACLs, but does support the password protection available with current Redis versions which can be configurted with environment variables.
+[NOTE]
+====
+Authentication with Redis:
+
+* ownCloud does support the password protection available with current Redis versions which can be configurted with environment variables.
+* With Redis version 6 upwards, a new authentication mechanism has been introduced named ACL (Access Control Lists). ownCloud does currently not support Redis ACLs.
+====
 
 ==== Redis Performance Consideration
 
@@ -76,7 +82,7 @@ Please note that with Redis version 6 upwards, a new authentication mechanism ha
 
 ==== Clearing the Redis Cache
 
-The Redis cache can be flushed from the command-line using the {rediscli_url}[redis-cli tool], To do so, you first must enter the Redis containers shell and usethe following example:
+The Redis cache can be flushed from the command-line using the {rediscli_url}[redis-cli tool]. To do so, you first must enter the Redis containers shell and use the following command example:
 
 [source,bash]
 ----
@@ -85,7 +91,7 @@ SELECT <dbIndex>
 FLUSHDB
 ----
 
-`<dbIndex>` is the number of the Redis database where the cache is stored. It is zero by default at ownCloud. To check what yours is currently set to for ownCloud, check the `dbindex` value in `config/config.php`. To change it, see the xref:configuration/server/config_sample_php_parameters.adoc#memory-caching-backend-configuration[Memory caching backend configuration]
+Please note that `<dbIndex>` is the index number of the Redis database where the cache is stored. It is zero by default at ownCloud. To check what yours is currently set to for ownCloud, check if the `OWNCLOUD_REDIS_DB` environment variable has been configured. For more details see the xref:configuration/server/config_sample_php_parameters.adoc#memory-caching-backend-configuration[Memory caching backend configuration] documentation.
 
 NOTE: Out of the box, every Redis instance supports 16 databases so `<dbIndex>` has to be set between 0 and 15.
 
@@ -93,23 +99,27 @@ Please read more about the instructions for the {redis_select_url}[select] and {
 
 == Configuring Memory Caching
 
-Memory caches must be explicitly configured in ownCloud by:
+Memory caches must be provided and explicitly configured in ownCloud by:
 
-. Installing and enabling your desired cache (whether that be the PHP extension and/or the caching server).
-. Adding the appropriate entry to ownCloud’s `config.php`.
+. When using Redis, it must be provided by either as described in the xref:installation/installing_with_docker.adoc#docker-compose[Docker Compose] example of the installation documentation or by other means.
+. Configuring the caches used.
 
 See the
 xref:configuration/server/config_sample_php_parameters.adoc#memory-caching-backend-configuration[Memory caching backend configuration]
-for an overview of all possible config parameters, as the examples below only show basic configuration settings. After installing and enabling your chosen memory cache, verify that it is active by viewing the
-xref:configuration/general_topics/general_troubleshooting.adoc#php-version-and-information[PHP configuration details].
+for an overview of all possible config parameters, as the examples below only show basic configuration settings.
 
 === Opcache Configuration
 
-Opcache is already configured with the Docker image provided.
+Opcache is already enabled and configured with the Docker image provided.
 
 === APCu Configuration
 
-APCu is, if nothing else is configured, already configured via the default of the environment variable `OWNCLOUD_MEMCACHE_LOCAL`.
+The environment variable that defines the memory cache has a default value, which is used if nothing else is configured. This value is described below:
+
+[source,.env]
+----
+OWNCLOUD_MEMCACHE_LOCAL='\OC\Memcache\APCu'
+----
 
 === Redis Configuration
 
@@ -157,6 +167,16 @@ prevents simultaneous file saving. It is enabled by default and uses the databas
      'password' => '',     // Optional, if not defined no password will be used.
  ],
 ----
+
+////
+'filelocking.enabled' => true,
+'memcache.locking' => '\OC\Memcache\Redis',
+'redis' => [
+     'host' => 'localhost',
+     'port' => {std-port-redis},
+     'timeout' => 0,
+     'password' => '',     // Optional, if not defined no password will be used.
+////
 
 CAUTION: For enhanced security, it is recommended to configure Redis to require a password. See {redis_security_url} for more information.
 
