@@ -7,14 +7,12 @@
 
 == Introduction
 
-Because of one or more legal frameworks around the world, some ownCloud instances may need to display links to both an Imprint as well as a Privacy Policy on all pages (both in the Web UI and within email templates).
-An Imprint document is a legally mandated statement of the ownership and authorship of the ownCloud installation.
-You can think of an Imprint as a rather fancy "*About Us*" page or an enhanced "*Terms and Conditions*" page; in Germany, this is known as an "*Impressum*".
+Because of one or more legal frameworks around the world, some ownCloud instances may need to display links to both an Imprint as well as a Privacy Policy on all pages (both in the Web UI and within email templates). An Imprint document is a legally mandated statement of the ownership and authorship of the ownCloud installation. You can think of an Imprint as a rather fancy "*About Us*" page or an enhanced "*Terms and Conditions*" page; in Germany, this is known as an "*Impressum*".
 
 [NOTE]
 ====
-Imprint and Privacy Policy links are shown on all *public* pages and in e-mail footers.
-Authenticated pages, such as files app or settings, do not show them.
+* Imprint and Privacy Policy links are shown on all *public* pages and in e-mail footers. 
+* Authenticated pages, such as files app or settings, do not show them.
 ====
 
 Some of the more global legal frameworks prominent are:
@@ -36,7 +34,7 @@ In the Web UI, under menu:Settings[Admin > General], under the heading "*Legal*"
 
 [#img-owncloud-webui-legal-urls-configuration]
 .Configuring Imprint and Privacy Policy URLs in the ownCloud Web UI.
-image:configuration/server/owncloud-webui-legal-urls-configuration.png[Configuring Imprint and Privacy Policy URLs in the ownCloud Web UI.]
+image:configuration/server/owncloud-webui-legal-urls-configuration.png[Configuring Imprint and Privacy Policy URLs in the ownCloud Web UI., width=350]
 
 NOTE: The values entered will auto-save.
 
@@ -58,7 +56,7 @@ Set the Imprint and Privacy Policy URLs:
 {occ-command-example-prefix-docker} config:app:set core legal.privacy_policy_url --value=new_value
 ----
 
-For more information about these commands, refer to xref:configuration/server/occ_command.adoc#config-commands[the config command reference in the occ commands documentation].
+For more information about these commands, refer to the xref:configuration/server/occ_command.adoc#config-commands[config command reference in the occ commands documentation].
 
 == Viewing the URLs
 
@@ -69,4 +67,4 @@ Customized email templates and themes that were built prior to ownCloud version 
 
 Once the settings have been updated, you will see two links appear at the bottom the ownCloud login page, one for each option, as in the screenshot below.
 
-image:configuration/server/legal-settings/login-form-with-legal-settings-links.png[The Imprint and Privacy Policy URLs on the ownCloud login page]
+image:configuration/server/legal-settings/login-form-with-legal-settings-links.png[The Imprint and Privacy Policy URLs on the ownCloud login page, width=350]

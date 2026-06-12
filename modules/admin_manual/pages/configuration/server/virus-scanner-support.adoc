@@ -34,7 +34,7 @@ Starting with Anti-Virus version 1.1.0, additional scanners like the FortiSandbo
 Antivirus scanner modes::
 The following image shows the currently supported scanners including how they are connected.
 +
-image::configuration/server/virus-scanner-support/av_modes.png[Antivirus Configuration Modes,width=500]
+image::configuration/server/virus-scanner-support/av_modes.png[Antivirus Configuration Modes,width=350]
 
 Common notes::
 A file is parsed and an exit code returned, or an exit code is evaluated if no result is available to determine the response from the scan. In case of an infected file, the appropriate action is _always_ to delete the file. Though the setting can be made, the choice `delete` or `log` for the infected condition only applies to the special case of background scans.
@@ -56,27 +56,14 @@ During a _background_ scan, the app can take one of two actions:
 
 Set btn:[When infected files were found during a background scan] to the value that suits your needs.
 
-== Install the ownCloud Anti-Virus App
+== Enable the ownCloud Anti-Virus App
 
-. The Anti-Virus app needs to be installed from the ownCloud Market (it's available in the  _"Security"_ category) and then as admin enabled in ownCloud under menu:Settings[Admin > Apps].
-+
-image::configuration/server/virus-scanner-support/antivirus-app.png[Anti-Virus App,width=500]
-
-. To install the app via the occ command, execute:
-+
---
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix-docker} market:install files_antivirus
-----
-
-and enable it with the following occ command:
+The Anti-Virus app needs to be enabled with the following occ command:
 
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} app:enable files_antivirus
 ----
---
 
 == Ways of Configuration
 
@@ -216,8 +203,10 @@ ownCloud integrates with ClamAV natively in several ways, see xref:configuration
 
 === Installing ClamAV
 
-Install ClamAV on Ubuntu with the following command:
+Installing ClamAV can be achieved in multiple ways. Most easiest is to use a Dokerised environment. The image and a documentation link can be found on https://hub.docker.com/hardened-images/catalog/dhi/clamav[DockerHub].
 
+Alternatively you can install ClamAV natively on Ubuntu with the following command::
++
 [source,bash]
 ----
 sudo apt install clamav clamav-daemon
@@ -227,8 +216,9 @@ This automatically creates the default configuration files and launches the `cla
 
 ==== Enabling and Running ClamAV
 
-Enable and start the `clamd` service with following commands.
-
+Enable and start the `clamd` service with following commands::
++
+--
 [source,bash]
 ----
 sudo systemctl daemon-reload
@@ -244,6 +234,7 @@ Synchronizing state of clamav-daemon.service with SysV service script with
 /lib/systemd/systemd-sysv-install.
 Executing: /lib/systemd/systemd-sysv-install enable clamav-daemon
 ----
+--
 
 ==== ClamAV Virus Database Updates
 
@@ -288,89 +279,18 @@ Once ClamAV is installed, select menu:Settings[General (Admin)] and, in the "*Lo
 
 image::configuration/server/virus-scanner-support/antivirus-logging.png[Setting loglevels]
 
-==== Configuration Modes
+==== Configuration Mode
 
-ClamAV runs in one of three modes:
+ClamAV can run in an ownCloud Dockerised deployment only in *ClamAV Daemon (TCP Socket)* mode.
 
-* xref:daemon-socket-same-server[ClamAV Daemon (Unix Socket)]
-* xref:daemon-different-server[ClamAV Daemon (TCP Socket)]
-* xref:executable[ClamAV Executable]
+In _ClamAV Daemon (TCP Socket)_ mode, ClamAV runs on a different server.
 
-[TIP]
-====
-In both daemon modes, background scans are enabled by default. If you want to disable them, run the command:
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix-docker} config:app:set files_antivirus av_scan_background --value 'false'
-----
-====
-
-[[daemon-socket-same-server]]
-===== ClamAV Daemon (Unix Socket)
-
-In _ClamAV Daemon (Unix Socket)_ mode, ClamAV runs in the background on the *same* server as the ownCloud installation, or the socket can be made available via a share mount. When there is no activity, `clamd` places a minimal load on your system. Consider that high CPU usage can occur when users upload large volumes of files.
-
-IMPORTANT: You must run `freshclam` at least once for ClamAV to generate the socket.
-
-image::configuration/server/virus-scanner-support/clamav_daemon_socket.png[ClamAV Deamon TCP,width=500]
-
-. Set btn:[Mode] to "*ClamAV Daemon (Unix Socket)*". ownCloud should detect your `clamd` socket and fill in the "*Socket*" field. This is the `LocalSocket` option in `clamd.conf`.
-+
-You can run `ss` (a utility to investigate sockets) to verify it, as in the example below:
-+
-[source,bash]
-----
-sudo ss -a | grep -iq clamav && echo "ClamAV is running"
-----
-+
-[TIP]
-====
-If you don't have `ss` installed, you may have `netstat` installed. If so, you can run the following to check if ClamAV is running:
-[source,bash]
-----
-netstat -a | grep -q clam && echo "ClamAV is running"
-----
-====
-
-. When infected files were found during a background scan, you have the choice of either:
-+
-* Logging any alerts without deleting the files
-* Immediately deleting infected files
-
-[[daemon-different-server]]
-===== ClamAV Daemon (TCP Socket)
-
-In _ClamAV Daemon (TCP Socket)_ mode, ClamAV can run on a different server. This is a good option to reduce load on the ownCloud servers when high network bandwidth is available and many concurrent uploads happen.
-
-image::configuration/server/virus-scanner-support/clamav_daemon_tcp.png[ClamAV Deamon TCP,width=500]
+image::configuration/server/virus-scanner-support/clamav_daemon_tcp.png[ClamAV Deamon TCP,width=350]
 
 . Set btn:[Mode] to "*ClamAV Daemon (TCP Socket)*".
 . Set btn:[Host] to the host name or IP address of the remote server running ClamAV, and set btn:[Port] to the server's port number.
 +
-TIP: The port number is the value of `TCPSocket` in `/etc/clamav/clamd.conf`.
-
-[[executable]]
-===== ClamAV Executable
-
-In _ClamAV Executable_ mode, ClamAV runs on the *same* server as the ownCloud installation, with the `clamscan` command running only when a file is uploaded.
-
-TIP: `clamscan` can respond slower and may not always be reliable for on-demand usage; it is better to use one of the daemon modes.
-
-image::configuration/server/virus-scanner-support/clamav_executable.png[ClamAV Executable,width=500]
-
-The image shows a command line option `--allmatch=yes` (continue scanning within the file after finding a match) which is not necessary to be set and just used here for demonstration purposes of the field.
-
-NOTE: Starting with ownCloud Anti-Virus version 1.0.0, the path to `clamscan` and the command line options are set via a config.php entry and are read-only in the user interface. Refer to the xref:configuration/server/config_apps_sample_php_parameters.adoc[config.php parameters for apps] for more details.
-
-NOTE: If you had configured the path and command line options before via the user interface, the values are being migrated from the database to config.php automatically. Check the settings in config.php for their presence after upgrading.
-
-. Set btn:[Mode] to "*ClamAV Executable*".
-. Set btn:[Path to clamscan] to the path of `clamscan`, which is the interactive ClamAV scanning command, on your server. To find the exact path, run
-+
-[source,bash]
-----
-which clamscan
-----
+TIP: The port number is the value of `TCPSocket` of ClamAV which usually can be found on the host running ClamAV at `/etc/clamav/clamd.conf`.
 
 ==== Set Back Log Level
 
@@ -380,11 +300,11 @@ When you are satisfied with how ClamAV is operating, you might want to go back a
 
 The Anti-Virus App shows one of three warnings if it is misconfigured or ClamAV is not available. You can see an example of all three below.
 
-image::configuration/server/virus-scanner-support/anti-virus-message-host-connection-problem.png[Configuration error message: 'Antivirus app is misconfigured or antivirus inaccessible. Could not connect to host 'localhost' on port 999'.]
+image::configuration/server/virus-scanner-support/anti-virus-message-host-connection-problem.png[Configuration error message: 'Antivirus app is misconfigured or antivirus inaccessible. Could not connect to host 'localhost' on port 999'., width=350]
 
-image::configuration/server/virus-scanner-support/anti-virus-message-misconfiguration-problem.png[Configuration error message: 'Antivirus app is misconfigured or antivirus inaccessible. The antivirus executable could not be found at path '/usr/bin/clamsfcan''.]
+image::configuration/server/virus-scanner-support/anti-virus-message-misconfiguration-problem.png[Configuration error message: 'Antivirus app is misconfigured or antivirus inaccessible. The antivirus executable could not be found at path '/usr/bin/clamsfcan' '., width=350]
 
-image::configuration/server/virus-scanner-support/anti-virus-message-socket-connection-problem.png[Configuration error message: 'Antivirus app is misconfigured or antivirus inaccessible. Could not connect to socket ´/var/run/clamav/cslamd-socket´: No such file or directory (code 2)'.]
+image::configuration/server/virus-scanner-support/anti-virus-message-socket-connection-problem.png[Configuration error message: 'Antivirus app is misconfigured or antivirus inaccessible. Could not connect to socket ´/var/run/clamav/cslamd-socket´: No such file or directory (code 2)'., width=350]
 
 == ICAP
 
@@ -487,7 +407,7 @@ If you decide to use ClamAV, you must first install and configure {c-icap-url}[c
 
 . Select btn:[ClamAV & Kaspersky (ICAP)] from the drop-down menu in the Anti-Virus app:
 +
-image::configuration/server/virus-scanner-support/icap_clamav.png[ClamAV & Kasperski (ICAP)],width=500]
+image::configuration/server/virus-scanner-support/icap_clamav.png[ClamAV & Kasperski (ICAP)], width=350]
 
 NOTE: The older versions of Kaspersky’s KAV did not send back the virus/infection name in an ICAP header. Starting with KAV v2.0.0, the header to transport the virus can be configured. Default: No header is sent. For more configuration details see {kaspersky-icap-url}[Using Kaspersky Scan Engine in ICAP mode].
 
@@ -501,7 +421,7 @@ Follow the procedure below to configure ownCloud for the McAfee Web Gateway 10.x
 
 . Select btn:[McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)] from the drop-down menu in the Anti-Virus app.
 +
-image::configuration/server/virus-scanner-support/icap_mcafee.png[McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)],width=500]
+image::configuration/server/virus-scanner-support/icap_mcafee.png[McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)],width=350]
 
 NOTE: McAfee provides demo versions with limited runtime for evaluation purposes. Have a look at the {mcaffee-demo-url}[McAfee Web page] for the Web Gateway.
 
@@ -511,7 +431,7 @@ NOTE: McAfee provides demo versions with limited runtime for evaluation purposes
 
 . Select btn:[Fortinet] from the drop-down menu in the Anti-Virus app.
 +
-image::configuration/server/virus-scanner-support/icap_mcafee.png[McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)],width=500]
+image::configuration/server/virus-scanner-support/icap_mcafee.png[McAfee Web Gateway / Skyhigh Secure Web Gateway (ICAP)],width=350]
 
 NOTE: Fortinet provides some demo versions of the FortiSandbox. Have a look at their {fortinetsandbox-url}[product page] for more information.
 

@@ -136,26 +136,19 @@ Since Apache is included in the Docker image, HTTPS needs to be configured on th
 
 Note that the free https://www.ssllabs.com/ssltest/[Qualys SSL Labs Tests] gives good guidance on whether your SSL server is correctly configured.
 
-== Use a dedicated domain for ownCloud
+== Use a Dedicated Domain for ownCloud
 
-Administrators are encouraged to install ownCloud on a dedicated domain
-such as `cloud.domain.tld` instead of `domain.tld` to benefit
-from the same-origin policy.
+Administrators are encouraged to install ownCloud on a dedicated domain such as `cloud.domain.tld` instead of `domain.tld` to benefit from the same-origin policy.
 
 == Ensure that your ownCloud instance is installed in a DMZ
 
-As ownCloud supports features such as Federated File Sharing, we do not
-consider Server Side Request Forgery (SSRF) a threat. Given all our external storage adapters, this can be considered a feature and not a vulnerability.
+As ownCloud supports features such as Federated File Sharing, we do not consider Server Side Request Forgery (SSRF) a threat. Given all our external storage adapters, this can be considered a feature and not a vulnerability.
 
-This means that a user on your ownCloud instance could probe whether
-other hosts are accessible from the ownCloud network. If you do not want
-this, you need to ensure that your ownCloud is installed in a
-segregated network and proper firewall rules are in place.
+This means that a user on your ownCloud instance could probe whether other hosts are accessible from the ownCloud network. If you do not want this, you need to ensure that your ownCloud is installed in a segregated network and proper firewall rules are in place.
 
 == Use of Security-Related Headers on the Web server
 
-Basic security headers are provided by ownCloud already in a default
-environment. These include:
+Basic security headers are provided by ownCloud already in a default environment. These include:
 
 `X-Content-Type-Options: nosniff`::
 Instructs some browsers to not sniff the MIME type of files. This is used for example to prevent browsers from interpreting text files as JavaScript.
@@ -183,22 +176,11 @@ Verify this security change by accessing a static resource and check the above m
 
 == Use Fail2ban
 
-Another approach to hardening ownCloud server
-is to use an intrusion detection system. An excellent
-one is https://www.fail2ban.org/wiki/index.php/Main_Page[Fail2ban].
-Fail2ban is designed to protect servers from brute force attacks. It
-works by scanning log files (such as those for _ssh_, _web_, _mail_,
-and _log_ servers) for certain patterns, specific to each server, and
-taking actions should those patterns be found.
+Another approach to hardening ownCloud server is to use an intrusion detection system. An excellent one is https://www.fail2ban.org/wiki/index.php/Main_Page[Fail2ban]. Fail2ban is designed to protect servers from brute force attacks. It works by scanning log files (such as those for _ssh_, _web_, _mail_, and _log_ servers) for certain patterns, specific to each server, and taking actions should those patterns be found.
 
-Actions include banning the IP from which the detected actions originate. This makes the process more difficult and prevents DDOS-style attacks. However, after a predefined time
-period, the banned IP is usually unbanned again.
+Actions include banning the IP from which the detected actions originate. This makes the process more difficult and prevents DDOS-style attacks. However, after a predefined time period, the banned IP is usually unbanned again.
 
-This helps if the login attempts were genuine, so that users don’t lock
-themselves out permanently. An example of such an action is users
-attempting to brute force log in to a server via ssh. In this case,
-Fail2ban would look for something similar to the following in
-`/var/log/auth.log`:
+This helps if the login attempts were genuine, so that users don’t lock themselves out permanently. An example of such an action is users attempting to brute force log in to a server via ssh. In this case, Fail2ban would look for something similar to the following in `/var/log/auth.log`:
 
 ----
 Mar 15 11:17:37 yourhost sshd[10912]: input_userauth_request: invalid user audra [preauth]
@@ -212,7 +194,7 @@ Mar 15 11:15:04 yourhost sshd[10837]: Received disconnect from 221.194.44.231: 1
 
 NOTE: If you’re not familiar with what’s going on, this snippet highlights a number of failed login attempts.
 
-=== Using Fail2ban to secure an ownCloud login
+=== Using Fail2ban to Secure an ownCloud Login
 
 On Ubuntu, you can install Fail2ban using the following commands:
 
@@ -222,30 +204,21 @@ apt update && apt upgrade
 apt install fail2ban
 ----
 
-Fail2ban installs several default filters for _Apache_ and
-various other services, but none for ownCloud. Given that, we have to
-define our own filter. To do so, you first need to make sure that
-ownCloud uses your local timezone for writing log entries; otherwise,
-fail2ban cannot react appropriately to attacks. To do this, edit your
-`config.php` file and add the following line:
+Fail2ban installs several default filters for _Apache_ and various other services, but none for ownCloud. Given that, we have to define our own filter. To do so, you first need to make sure that ownCloud uses your local timezone for writing log entries; otherwise, fail2ban cannot react appropriately to attacks. To do this, use the following environment variable:
 
-[source,php]
+[source,.env]
 ----
-'logtimezone' => 'Europe/Berlin',
+OWNCLOUD_LOG_TIMEZONE='Europe/Berlin'
 ----
 
-NOTE: Adjust the timezone to the one that your server is located in, based on 
-{php-net-url}/manual/en/timezones.php[PHP’s list of supported timezones].
+NOTE: Adjust the timezone to the one that your server is located in, based on  {php-net-url}/manual/en/timezones.php[PHP’s list of supported timezones].
 
-This change takes effect as soon as you save `config.php`. You can test
-the change by:
+This change takes effect as soon as you save `config.php`. You can test the change by:
 
-1. entering false credentials at your ownCloud login screen, then
-2. checking the timestamp of the resulting entry in ownCloud’s log
-file.
+. entering false credentials at your ownCloud login screen, then
+. checking the timestamp of the resulting entry in ownCloud’s log file.
 
-Next, define a new Fail2ban filter rule for ownCloud. To do so, create a
-new file called `/etc/fail2ban/filter.d/owncloud.conf`, and insert the
+Next, define a new Fail2ban filter rule for ownCloud. To do so, create a new file called `/etc/fail2ban/filter.d/owncloud.conf`, and insert the
 following configuration:
 
 [source,conf]
@@ -255,9 +228,7 @@ failregex={.*Login failed: \'.*\' \(Remote IP: \'<HOST>\'\)"}
 ignoreregex =
 ----
 
-This filter needs to be loaded when Fail2ban starts, so a further
-configuration entry is required to be added in
-`/etc/fail2ban/jail.d/defaults-debian.conf`, which you can see below:
+This filter needs to be loaded when Fail2ban starts, so a further configuration entry is required to be added in `/etc/fail2ban/jail.d/defaults-debian.conf`, which you can see below:
 
 [source,conf]
 ----
@@ -273,12 +244,11 @@ logpath = /var/owncloud_data/owncloud.log
 
 This configuration:
 
-1.  Enables the filter rules for TCP requests on ports 80 and 443.
-2.  Bans IPs for 10800 seconds (3 hours).
-3.  Sets the path to the log file to analyze for malicious logins
+.  Enables the filter rules for TCP requests on ports 80 and 443.
+.  Bans IPs for 10800 seconds (3 hours).
+.  Sets the path to the log file to analyze for malicious logins
 
-NOTE: The most important part of the configuration is the `logpath` parameter.
-If this does not point to the correct log file, Fail2ban will either not work properly or refuse to start.
+NOTE: The most important part of the configuration is the `logpath` parameter. If this does not point to the correct log file, Fail2ban will either not work properly or refuse to start.
 
 After saving the file, restart Fail2ban by running the following command:
 
@@ -287,25 +257,21 @@ After saving the file, restart Fail2ban by running the following command:
 service fail2ban restart
 ----
 
-To test that the new ownCloud configuration has been loaded, use the
-following command:
+To test that the new ownCloud configuration has been loaded, use the following command:
 
 [source,bash]
 ----
 fail2ban-client status
 ----
 
-If "owncloud" is listed in the console output, the filter is both
-loaded and active. If you want to test the filter, run the following
-command, adjusting the path to your `owncloud.log` if necessary:
+If "owncloud" is listed in the console output, the filter is both loaded and active. If you want to test the filter, run the following command, adjusting the path to your `owncloud.log` if necessary:
 
 [source,bash]
 ----
 fail2ban-regex /var/owncloud_data/owncloud.log /etc/fail2ban/filter.d/owncloud.conf
 ----
 
-The output will look similar to the following if you had one failed
-login attempt:
+The output will look similar to the following if you had one failed login attempt:
 
 [source,bash]
 ----
@@ -335,17 +301,14 @@ Date template hits:
 Lines: 40252 lines, 0 ignored, 1 matched, 40251 missed
 ----
 
-The `Failregex` counter increases in increments of 1 for every failed login attempt.
-To unban an IP locked either during testing or
-unintentionally, use the following command:
+The `Failregex` counter increases in increments of 1 for every failed login attempt. To unban an IP locked either during testing or unintentionally, use the following command:
 
 [source,bash]
 ----
 fail2ban-client set owncloud unbanip <IP>
 ----
 
-You can check the status of your ownCloud filter with the following
-command:
+You can check the status of your ownCloud filter with the following command:
 
 [source,bash]
 ----

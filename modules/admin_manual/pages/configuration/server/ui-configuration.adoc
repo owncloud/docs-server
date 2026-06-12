@@ -13,7 +13,7 @@ Note that this setting is available for ownCloud Server only.
 
 When uploading a document, an upload estimation (progress bar) is shown like in the example below:
 
-image:configuration/server/ui-configuration/upload-progress-bar.png[Upload Progress Bar]
+image:configuration/server/ui-configuration/upload-progress-bar.png[Upload Progress Bar, width=350]
 
 This progress bar can be hidden with the following command:
 
@@ -36,5 +36,4 @@ or
 {occ-command-example-prefix-docker} config:app:delete files hide_upload_estimation
 ----
 
-The current value can be queried with the `config:app:get` or the `config:list` command. For details see the 
-xref:configuration/server/occ_command.adoc#config-commands[occ Config Commands]
+The current value can be queried with the `config:app:get` or the `config:list` command. For details see the xref:configuration/server/occ_command.adoc#config-commands[occ Config Commands]

@@ -87,7 +87,6 @@
 ***** xref:admin_manual:configuration/server/security/hsmdaemon/index.adoc[The HSM (Hardware Security Module) Daemon]
 ***** xref:admin_manual:configuration/server/security/dependency_notes.adoc[Dependency Notes]
 **** xref:admin_manual:configuration/server/oc_server_tuning.adoc[Server Tuning]
-**** xref:admin_manual:configuration/server/thirdparty_php_configuration.adoc[Third Party PHP Configuration]
 **** xref:admin_manual:configuration/server/virus-scanner-support.adoc[Virus Scanner Support]
 **** xref:admin_manual:configuration/server/ui-configuration.adoc[UI Configuration]
 

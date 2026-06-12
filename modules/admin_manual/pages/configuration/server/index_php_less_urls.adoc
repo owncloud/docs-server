@@ -5,12 +5,10 @@
 
 Note that with the Docker Image provided by ownCloud, `index.php` less URLs are enabled by default.
 
-== Check
+The relevant environment variables are:
 
-You can check this by printing the `config/config.php` file via the bind mount after the first setup which will contain the following keys. Note that the URL matches your setup:
-
-[source,php]
+[source,.env]
 ----
-'overwrite.cli.url' => 'https://example.com',
-'htaccess.RewriteBase' => '/',
+OWNCLOUD_OVERWRITE_CLI_URL='https://example.com'
+OWNCLOUD_HTACCESS_REWRITE_BASE='/'
 ----

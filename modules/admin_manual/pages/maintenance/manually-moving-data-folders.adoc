@@ -4,19 +4,21 @@
 
 :mysql-string-replace-function-url: http://www.mysqltutorial.org/mysql-string-replace-function.aspx
 
+// this needs review for oc10 -> oc11
+
 == Introduction
 
 {description}
 
-Though using symbolic links to relocate the data directory can be beneficial, it can be necessary to hard relocate it.
-If a hard relocation is required, not only the physical location but also the database has to be updated. 
+As ownCloud is deployed via Docker, it is easy to move any data for a Dockerised deployment, as this simply involves relocating the contents of the mount point. Additional steps need to be taken into account when upgrading from a standard installation to Docker because the database needs to be updated.
 
 This guide assumes that:
 
-* The current folder is: `/var/www/owncloud/data`
-* The new folder is: `/mnt/owncloud/data`
-* You’re using Apache as your webserver
+* The current Docker volume folder is: `<mount-point>/oc`
+* The new Docker volume folder is: `<mount-point>/oc-new`
 * ownCloud's database name is `owncloud`
+* For a standard installation, the data directory is `var/www/owncloud/data`
+* The internal "data folder of a Dockerized installation is `/mnt/data/files`
 
 Please change the paths above to reflect your environment.
 
@@ -24,29 +26,23 @@ Please change the paths above to reflect your environment.
 
 The following steps are necessary to move the data directory.
 
-. Stop the web server
+. Stop the web proxy server
 . Enable maintenance mode
 . Sync your Data directory
 . Adjust ownCloud's configuration
 . Check permissions
 . Disable maintenance mode
-. Start the web server
+. Start the web proxy server
 
 Look at each section below for a detailed description.
 
-== Stop the Web Server
+== Stop the Web Proxy Server
 
-Stopping the web server makes sure there are no active connections to your server.
-
-[source,bash]
-----
-sudo service apache2 stop
-----
+To ensure there are no active user connections to your ownCloud instance, stop access to it from the web proxy server. Follow the web proxy server description to find out how to do this.
 
 == Enable Maintenance Mode
 
-It is necessary to enable maintenance mode to avoid running cron jobs.
-To enable maintenance mode, run the following command.
+It is necessary to enable maintenance mode to avoid running cron jobs. To enable maintenance mode, run the following command.
 
 [source,bash,subs="attributes+"]
 ----
@@ -57,7 +53,7 @@ To enable maintenance mode, run the following command.
 
 [source,bash]
 ----
-sudo rsync -avz /var/www/owncloud/data /mnt/owncloud
+sudo rsync -avz <mount-point>/files /mnt/<new-target>
 ----
 
 Make sure that `.ocdata` and `.htaccess` were synced to the new directory.
@@ -174,12 +170,9 @@ To disable maintenance mode of your instance run the following command:
 {occ-command-example-prefix-docker} maintenance:mode --off
 ----
 
-== Start the Web Server
+== Start the Web Proxy Server
 
-[source,bash]
-----
-sudo service apache2 start
-----
+Follow the web proxies server description for how to enable access to teh ownCloud instance.
 
 == Scan the Files
 
