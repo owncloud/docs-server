@@ -14,10 +14,11 @@ This folder structure is important not only for knowign your data is located, bu
 ----
 mount_point/
   - apps/      <1>
-  - certs/     <4>
+  - certs/     <5>
   - config/    <2>
   - files/     <3>
-  - sessions/  <4>
+  - skeleton/  <4>
+  - sessions/  <5>
 ----
 
 <1> The apps folder will contain ANY apps that will be added manually and are not automatically shipped by ownCloud. It matches xref: configuration/server/config_sample_php_parameters.adoc#define-alternative-app-directories[Define alternative app directories] aka the `apps-external` configuration of the config.
@@ -32,4 +33,6 @@ IMPORTANT: Consider the alphabetic order the system is reading config files. Wit
 
 <3> The files folder matches the `data` directory with former ownCloud releases.
 
-<4> Unused, present for legacy reasons.
+<4> The directory holding custom skeleton files.
+
+<5> Unused, present for legacy reasons.
