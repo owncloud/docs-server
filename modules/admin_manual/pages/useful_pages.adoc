@@ -11,7 +11,7 @@
 
 Note that this section always points to the latest server version available. In case you need a different version, select your topic and manually switch to one of the available ones.
 
-* xref:server:admin_manual:installation/installing_with_docker.adoc[Installation with Docker]
-* xref:server:admin_manual:configuration/server/occ_command.adoc[OCC Commands]
-* xref:server:admin_manual:configuration/server/caching_configuration.adoc#small-organization-single-server-setup[File Locking and Caching Configuration]
-* xref:server:admin_manual:maintenance/upgrading/manual_upgrade.adoc[Manual Upgrade]
+* xref:admin_manual:installation/installing_with_docker.adoc[Installation with Docker]
+* xref:admin_manual:configuration/server/occ_command.adoc[OCC Commands]
+* xref:admin_manual:configuration/server/caching_configuration.adoc#small-organization-single-server-setup[File Locking and Caching Configuration]
+* xref:admin_manual:maintenance/upgrading/manual_upgrade.adoc[Manual Upgrade]
