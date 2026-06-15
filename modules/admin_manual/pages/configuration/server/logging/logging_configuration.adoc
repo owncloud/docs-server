@@ -23,7 +23,7 @@ Logging level parameters are set in the config/config.php file, or on the Admin 
 
 === ownCloud
 
-All log information will be written to a separate log file which can be viewed using the log viewer on your Admin page. By default, a log file named *owncloud.log* will be created in the directory which has been configured by the *datadirectory* parameter in config/config.php. As an example see:
+All log information will be written to a separate log file which can be viewed using the log viewer on your Admin page. By default, a log file named *owncloud.log* will be created in the directory which has been configured by the *datadirectory* parameter in config/config.php.
 
 The path assigned to the `datadirectory` configuration key is the value of the `OWNCLOUD_VOLUME_FILES` environment variable.
 
@@ -78,7 +78,7 @@ The following example demonstrates how the conditions can look like.
 [source,.env]
 ----
 OWNCLOUD_LOG_CONDITIONS=\
-'[{"apps":["files_external"],\
+'[{"apps":["comments"],\
 'users':['user1','user2'],\
 "loglevel":0},\
 'log_secret':57b58edb6637fe3059b3595cf9c41b9'
