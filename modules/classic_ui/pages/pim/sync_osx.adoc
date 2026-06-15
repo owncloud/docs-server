@@ -45,4 +45,4 @@ with your favorite text editor.
 . You may have to restart addressbook once more. After this, it should work.
 
 If it’s still not working, have a look at the
-xref:{latest-server-version}@server:admin_manual:configuration/general_topics/general_troubleshooting.adoc#troubleshooting-contacts-calendar[Troubleshooting Contacts & Calendar] guides.
+xref:server:admin_manual:configuration/general_topics/general_troubleshooting.adoc#troubleshooting-contacts-calendar[Troubleshooting Contacts & Calendar] guides.

@@ -1,8 +1,8 @@
 = File Sharing
 :toc: right
 :page-aliases: go/admin-sharing.adoc
-:two-letter-url: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 :description: This section describes how to set general configuration rules for sharing files.
+:two-letter-url: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 
 == Introduction
 
@@ -21,7 +21,7 @@ If you don't see the sharing section:
 If so, disable the plugin and recheck.
 ====
 
-image:configuration/files/sharing-files-settings.png[ownCloud Sharing settings]
+image:configuration/files/sharing-files-settings.png[ownCloud Sharing settings, width=350]
 
 From this section, ownCloud users can:
 
@@ -65,32 +65,32 @@ NOTE: ownCloud includes a xref:configuration/server/security/password_policy.ado
 
 == Settings Explained
 
-=== Allow apps to use the Share API
+=== Allow Apps to use the Share API
 
 Check this option to enable users to share files. If this is not checked, no users can create file shares.
 
-=== Allow users to share via link
+=== Allow Users to Share via Link
 
 Check this option to enable creating public link shares for people who are not ownCloud users via hyperlink.
 
-==== Allow public uploads
+==== Allow Public Uploads
 
 Check this option to allow anyone to upload files to public link shares.
 
-==== Enforce password protection of public link shares
+==== Enforce Password Protection of Public Link Shares
 
 Check these options to force users to set a password on public link shares. Passwords can be enforced on any or all of read-only, read-write, read-write-delete and upload-only (File Drop) public link shares. This does not apply to local user and group shares.
 
-==== Set default expiration date of public link shares
+==== Set Default Expiration Date of Public Link Shares
 
 Check this option to set a default expiration date on public link shares. Check _Enforce as maximum expiration date_ to limit the maximum expiration date to be the default. Users can choose an earlier expiration date if they wish.
 
-==== Allow users to send mail notification for shared files
+==== Allow Users to Send Mail Notification for Shared Files
 
 Check this option to enable sending notifications from ownCloud. When clicked, the administrator can choose the language for public mail notifications for shared files.
 
 image:configuration/files/sharing/choose-public-mail-notification-language.png[Choose the language for public
-mail notifications for shared files in ownCloud.]
+mail notifications for shared files in ownCloud., width=350]
 
 What this means is, that email notifications will be sent in the language of the user that shared an item. By default the language is the share owner’s language.
 
@@ -99,109 +99,107 @@ xref:configuration/server/occ_command.adoc#config-commands[occ config:app:set co
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} \
+{occ-command-example-prefix-docker} \
     config:app:set \
     core \
     shareapi_public_notification_lang \
     --value '<language code>'
 ----
 
-NOTE: In the example above, the `<language code>` is an
-{two-letter-url}[ISO 3166-1 alpha-2 two-letter country code], such as *de*, *gb*, *us*, *es* or others.
+[NOTE]
+====
+* In the example above, the `<language code>` is an {two-letter-url}[ISO 3166-1 alpha-2 two-letter country code], such as *de*, *gb*, *us*, *es* or others.
 
-NOTE: To use this functionality, your ownCloud server must be configured to send mail.
+* To use this functionality, your ownCloud server must be configured to send mail.
+====
 
-==== Allow users to share file via social media
+==== Allow Users to Share File via Social Media
 
 Check this option to enable displaying of a set of links that allow for quickly sharing files and share links via *Twitter*, *Facebook*, *Google+*, *Diaspora*, and email.
 
-image:configuration/files/sharing/sharing-files-via-social-media.png[ownCloud social media sharing links]
+image:configuration/files/sharing/sharing-files-via-social-media.png[ownCloud social media sharing links, width=350]
 
-=== Set default expiration date for user shares
+=== Set Default Expiration Date for User Shares
 
 Check this option to set a default expiration date when sharing with another user. The user can change or remove the default expiration date of a share.
 
-==== Set the number of days to expire after
+==== Set the Number of Days to Expire After
 
 Set the default number of days that user shares will expire. The default value is 7 days.
 
-==== Enforce as maximum expiration date
+==== Enforce as Maximum Expiration Date
 
 Check this option to limit the maximum expiration date to be the default. Users can choose an earlier expiration date if they wish.
 
-=== Set default expiration date for group shares
+=== Set Default Expiration Date for Group Sshares
 
 Check this option to set a default expiration date when sharing with a group. The user can change or remove the default expiration date of a share.
 
-==== Set the number of days to expire after
+==== Set the Number of Days to Expire After
 
 Set the default number of days that group shares will expire. The default value is 7 days.
 
-==== Enforce as maximum expiration date
+==== Enforce as Maximum Expiration Date
 
 Check this option to limit the maximum expiration date to be the default. Users can choose an earlier expiration date if they wish.
 
-=== Set default expiration date for remote shares
+=== Set Default Expiration Ddate for Rremote Shares
 
 Check this option to set a default expiration date when sharing with a remote user. The user can change or remove the default expiration date of a share.
 
-==== Set the number of days to expire after
+==== Set the Number of Days to Expire After
 
 Set the default number of days that remote shares will expire. The default value is 7 days.
 
-==== Enforce as maximum expiration date
+==== Enforce as Maximum Expiration Date
 
 Check this option to limit the maximum expiration date to be the default. Users can choose an earlier expiration date if they wish.
 
-=== Automatically accept new incoming local user shares
+=== Automatically Accept new Incoming Local User Shares
 
 Disabling this option activates the "Pending Shares" feature. Users will be notified and have to accept new incoming user shares before they appear in the file list and are available for access giving them more control over their account. More information about
 https://doc.owncloud.com/docs_main/next/server_release_notes.html#pending-shares[pending shares]
 can be found in the release notes.
 
-=== Allow resharing
+=== Allow Resharing
 
 Check this option to enable users to re-share files shared with them.
 
-=== Allow sharing with groups
+=== Allow Sharing With Groups
 
 Check this option to enable users to share with groups.
 
-=== Default user and group share permissions
+=== Default User and Group Share Permissions
 
 Administrators can define the permissions for user/group shares that are set by default when users create new shares. As shares are created instantly after choosing the recipient, administrators can set the default to e.g. read-only to avoid creating shares with too many permissions unintentionally.
 
-=== Restrict users to only share with users in their groups
+=== Restrict Users to Only Share With Users in Their Groups
 
 Check this option to confine sharing within group memberships.
 
-NOTE: This setting does not apply to the Federated Cloud sharing feature. If
-xref:configuration/files/federated_cloud_sharing_configuration.adoc[Federated Cloud Sharing]
-is enabled, users can still share items with any users on any instances (_including the one they are on_) via a remote share.
+NOTE: This setting does not apply to the Federated Cloud sharing feature. If xref:configuration/files/federated_cloud_sharing_configuration.adoc[Federated Cloud Sharing] is enabled, users can still share items with any users on any instances (_including the one they are on_) via a remote share.
 
-=== Restrict users to only share with groups they are a member of
+=== Restrict Users to Only Share With Groups They are a Member of
 
-When this option is enabled, users can only share with groups they are a member of. They can still share with all users of the instance but not with groups they are not a member of. To restrict sharing to users in groups the sharer is a member of, the option _Restrict users to only share with users in their groups_ can be used. More information about
-https://doc.owncloud.com/docs_main/next/server_release_notes.html#more-granular-sharing-restrictions[granular sharing restrictions]
-can be found in the release notes.
+When this option is enabled, users can only share with groups they are a member of. They can still share with all users of the instance but not with groups they are not a member of. To restrict sharing to users in groups the sharer is a member of, the option _Restrict users to only share with users in their groups_ can be used. More information about https://doc.owncloud.com/docs_main/next/server_release_notes.html#more-granular-sharing-restrictions[granular sharing restrictions] can be found in the release notes.
 
-=== Allow users to send mail notification for shared files to other users
+=== Allow Users to Send Mail Notification for Shared Files to Other Users
 
 Check this option to enable users to send an email notification to every ownCloud user that the file is shared with.
 
-=== Exclude groups from sharing
+=== Exclude Groups From Sharing
 
 Check this option to prevent members of specific groups from creating any file shares. When you check this, you will get a dropdown list of all your groups to choose from. Members of excluded groups can still receive shares, but not create any.
 
-=== Allow username autocompletion in share dialog
+=== Allow Username Autocompletion in Share Dialog
 
 Check this option to enable auto-completion of ownCloud usernames.
 
-==== Restrict enumeration to group members
+==== Restrict Enumeration to Group Members
 
 Check this option to restrict auto-completion of ownCloud usernames to only those users who are members of the same group(s) that the user is in.
 
-=== Extra field to display in autocomplete results
+=== Extra Field to Display in Autocomplete Results
 
 The autocomplete dropdowns in ownCloud usually show the display name of other users when it is set. If it's not set, they show the user ID / login name, as display names are not unique you can run into situations where you cannot distinguish the proposed users. This option enables to add mail addresses or user ID's to make them distinguishable.
 
@@ -211,7 +209,7 @@ Sometimes it is necessary or desirable to block groups from receiving shares. Fo
 
 To blacklist one or more groups via the Web UI, under menu:Settings[Admin > Sharing], add one or more groups to the _Files Sharing_ list. As you type the group’s name, if it exists, it will appear in the drop-down list where you can select it.
 
-image:configuration/files/sharing/blacklisting-groups.png[Blacklisting groups]
+image:configuration/files/sharing/blacklisting-groups.png[Blacklisting groups, width=350]
 
 == Transferring Files to Another User
 
@@ -223,7 +221,7 @@ Here is an example of how to transfer all files from one user to another.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files:transfer-ownership \
+{occ-command-example-prefix-docker} files:transfer-ownership \
   <source-user> \
   <destination-user>
 ----
@@ -232,7 +230,7 @@ Here is an example of how to transfer _a limited group_ a single folder from one
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files:transfer-ownership \
+{occ-command-example-prefix-docker} files:transfer-ownership \
   --path="folder/to/move" \
   <source-user> \
   <destination-user>
@@ -241,18 +239,22 @@ Here is an example of how to transfer _a limited group_ a single folder from one
 When using this command keep two things in mind:
 
 1.  The directory provided to the `--path` switch *must* exist inside `data/<source-user>/files`.
-2.  The directory (and its contents) won’t be moved as is between the users. It will be moved inside the destination user’s `files` directory, and placed in a directory which follows the format:
-`transferred from <source-user> on <timestamp>`. Using the example above, it will be stored under:
+2.  The directory (and its contents) won’t be moved as is between the users. It will be moved inside the destination user’s `files` directory, and placed in a directory which follows the format: +
+`transferred from <source-user> on <timestamp>`. +
+Using the example above, it will be stored under: +
 `data/<destination-user>/files/transferred from <source-user> on 20170426_124510/`
 
-TIP: See the xref:configuration/server/occ_command.adoc[occ command reference],
-for a complete list of `occ` commands.
+TIP: See the xref:configuration/server/occ_command.adoc[occ command reference], for a complete list of `occ` commands.
 
-IMPORTANT: If an exception occurred during the transfer ownership command or the command terminated prematurely, it is advised to run following command for the source *and* target user:
+[IMPORTANT]
+====
+If an exception occurred during the transfer ownership command or the command terminated prematurely, it is advised to run following command for the source *and* target user:
+
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files:troubleshoot-transfer-ownership --uid <uid>`
+{occ-command-example-prefix-docker} files:troubleshoot-transfer-ownership --uid <uid>`
 ----
+====
 
 == Creating Persistent File Shares
 
@@ -275,7 +277,7 @@ This command provides for the creation of both personal (for a specific user) an
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:create \
+{occ-command-example-prefix-docker} files_external:create \
     /my_share_name windows_network_drive \
     password::logincredentials \
     --config={host=127.0.0.1, share='home', root='$user', domain='owncloud.local'} \
@@ -286,7 +288,7 @@ or
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:create \
+{occ-command-example-prefix-docker} files_external:create \
     /my_share_name windows_network_drive \
     password::logincredentials \
     --config host=127.0.0.1 \
@@ -300,7 +302,7 @@ or
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:create \
+{occ-command-example-prefix-docker} files_external:create \
     /my_share_name windows_network_drive \
     password::logincredentials \
     --config={host=127.0.0.1, share='home', root='$user', domain='owncloud.local'}
@@ -310,7 +312,7 @@ or
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:create \
+{occ-command-example-prefix-docker} files_external:create \
     /my_share_name windows_network_drive \
     password::logincredentials \
     --config host=127.0.0.1 \
@@ -327,7 +329,7 @@ You can create general and personal shares passing the configuration details via
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:import \
+{occ-command-example-prefix-docker} files_external:import \
     /import.json
 ----
 
@@ -335,7 +337,7 @@ You can create general and personal shares passing the configuration details via
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} files_external:import \
+{occ-command-example-prefix-docker} files_external:import \
     /import.json --user someuser
 ----
 

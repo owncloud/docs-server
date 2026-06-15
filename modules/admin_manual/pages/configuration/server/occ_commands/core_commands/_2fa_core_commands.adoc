@@ -17,9 +17,9 @@ The following commands are available for the two-factor authentication:
 
 Disable two-factor authentication for a user:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} twofactorauth:disable [options] [--] <uid>
+{occ-command-example-prefix-docker} twofactorauth:disable [options] [--] <uid>
 ----
 
 === Arguments
@@ -34,9 +34,9 @@ Disable two-factor authentication for a user:
 
 Enable two-factor authentication for a user:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} twofactorauth:enable [options] [--] <uid>
+{occ-command-example-prefix-docker} twofactorauth:enable [options] [--] <uid>
 ----
 
 === Arguments

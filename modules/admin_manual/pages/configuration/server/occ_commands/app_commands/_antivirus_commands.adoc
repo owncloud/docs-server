@@ -7,18 +7,18 @@ Parametrisation must be done with the `occ config` command set.
 
 == List the Current Settings
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:list files_antivirus
+{occ-command-example-prefix-docker} config:list files_antivirus
 ----
 
 == Set the Setting
 
 To set a new value, use the command below and replace `<Key>` and value `<Value>` accordingly.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files_antivirus <Key> --value=<Value> --update-only
+{occ-command-example-prefix-docker} config:app:set files_antivirus <Key> --value=<Value> --update-only
 ----
 
 === Antivirus Mode [string]

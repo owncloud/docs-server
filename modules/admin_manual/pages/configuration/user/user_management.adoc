@@ -182,13 +182,15 @@ For details of the occ user commands used below, see the xref:configuration/serv
 
 . To report a users home, use the following command:
 +
+--
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list lisa -a home
+{occ-command-example-prefix-docker} user:list lisa -a home
   - lisa: /var/www/owncloud/data/lisa
 ----
-+
+
 Here you can see, that the home of user `lisa` is located in `/var/www/owncloud/data/lisa`
+--
 
 . Prepare new mounts *in advance* for one or more users:
 +
@@ -196,57 +198,63 @@ Use the OS methods to create one or more new mount points for users home directo
 
 . Move the users home:
 +
+--
 [NOTE]
 ====
 * To move a users home, the target folder *must not contain* a subfolder with the user's ID.
 * The target folder *can contain* other user folders.
 ====
-+
+
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:move-home lisa /mnt/newhome_1
+{occ-command-example-prefix-docker} user:move-home lisa /mnt/newhome_1
 ----
-+
+
 The user gets disconnected and the user's home is now moved which may take a while depending on the load of the server and the bandwidth available on the mount points. When the move operation has finished, 
-+
---
+
 * all data from the user is _copied_ to the new home,
 * the new path is set in the ownCloud database and 
 * the user gets enabled again.
---
-+
+
 After checking, the old user's home location can safely be deleted manually.
-+
+
 NOTE: If you are using LDAP and the xref:enterprise/external_storage/ldap_home_connector_configuration.adoc[LDAP Home Connector] app, update the user's home mount in the attribute used accordingly.
+--
 
 . To check the user's new home, use the following command:
 +
+--
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:list lisa -a home
+{occ-command-example-prefix-docker} user:list lisa -a home
   - lisa: /mnt/newhome_1/lisa
 ----
-+
+
 Here you can see that the home of user `lisa` is now located in `/mnt/newhome_1/lisa`.
+--
 
 . To list the available user home root directories, use the following command:
 +
+--
 The following command lists all available user homes. Note a home only gets listed, if it contains at least one user.
-+
+
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-dirs
+{occ-command-example-prefix-docker} user:home:list-dirs
   - /var/www/owncloud/data
   - /mnt/newhome_1/lisa
 ----
+--
 
 . To list all users from a users home root directory, use the following command:
 +
+--
 The following command lists all users from a given home.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} user:home:list-users /var/www/owncloud/data
+{occ-command-example-prefix-docker} user:home:list-users /var/www/owncloud/data
   - admin
   - user01
 ----
+--

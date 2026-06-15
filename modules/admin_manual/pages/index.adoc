@@ -1,28 +1,19 @@
 = Introduction
-:owncloud-news-url: https://owncloud.com/news/
-:ownCloud-channel-url: https://www.youtube.com/channel/UC_4gez4lsWqciH-otOlXo5w
 
-Welcome to the ownCloud Classic Server Administration Guide. This guide describes administration tasks for ownCloud, the flexible open source file synchronization and sharing solution. ownCloud includes the ownCloud server, which runs on Linux, plus client applications for Microsoft Windows, Mac OS X, Linux, Android and Apple iOS operating systems.
+Welcome to the ownCloud Classic Server Administration Guide. This guide describes administration tasks for ownCloud, the flexible open source file synchronization and sharing solution.
 
-Current editions of ownCloud manuals are always available online at {docs-base-url}[doc.owncloud.com].
+== Installation Changes
+
+IMPORTANT: Unlike previous releases, ownCloud 11 is only available as a Docker image containing the necessary libraries, such as PHP 8.
+
+== Target Audience
+
+This guide is for administrators who want to install, administer, and optimize their ownCloud servers. To learn more about the ownCloud Web user interface, and desktop and mobile clients, please refer to their respective manuals. See the xref:developer_manual:index.adoc[developer manual] if you would like to contribute.
+
+== Editions
 
 ownCloud server is available in three editions:
 
 * The free community-supported server. This is the core server for all editions.
 * The Standard Subscription for customers who want paid support for the core Server, without Enterprise applications.
 * The Enterprise Subscription provides paid support for the Enterprise Edition. This includes the core Server and Enterprise apps.
-
-== ownCloud Videos and Blogs
-
-See the
-{ownCloud-channel-url}[official ownCloud channel] on YouTube for tutorials, overviews, and conference videos. Visit {owncloud-news-url}[News] to stay up to date.
-
-== Target Audience
-
-This guide is for administrators who want to install, administer, and optimize their ownCloud servers. To learn more about the ownCloud Web user interface, and desktop and mobile clients, please refer to their respective manuals. See the developer manual if you would like to contribute:
-
-* xref:classic_ui:index.adoc[ownCloud User Manual]
-* xref:developer_manual:index.adoc[ownCloud Developer Manual]
-* {docs-base-url}/desktop/[ownCloud Desktop Client]
-* {docs-base-url}/ios-app/[ownCloud iOS App]
-* {docs-base-url}/android/[ownCloud Android App]

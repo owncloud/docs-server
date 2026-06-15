@@ -14,9 +14,9 @@ federation:trusted-servers
 
 This command adds a trusted federated server.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} federation:trusted-servers:add <url>
+{occ-command-example-prefix-docker} federation:trusted-servers:add <url>
 ----
 
 === Arguments
@@ -31,9 +31,9 @@ This command adds a trusted federated server.
 
 In the example below, the named trusted server is added.
  
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} federation:trusted-servers:add /
+{occ-command-example-prefix-docker} federation:trusted-servers:add /
     https://myserver:8888/server/owncloud
 ----
 
@@ -41,18 +41,18 @@ In the example below, the named trusted server is added.
 
 This command lists all trusted federated servers that have been added.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} federation:trusted-servers:list
+{occ-command-example-prefix-docker} federation:trusted-servers:list
 ----
 
 === Example
 
 In the example below, all trusted servers that have been added are listed.
  
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} configured 
+{occ-command-example-prefix-docker} configured 
 
 ----
 
@@ -72,9 +72,9 @@ In the example below, all trusted servers that have been added are listed.
 
 This command removes a trusted federated server.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} federation:trusted-servers:remove <id>
+{occ-command-example-prefix-docker} federation:trusted-servers:remove <id>
 ----
 
 === Arguments
@@ -89,9 +89,9 @@ This command removes a trusted federated server.
 
 In the example below, the trusted server with ID=2 gets removed.
  
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} federation:trusted-servers:remove 2
+{occ-command-example-prefix-docker} federation:trusted-servers:remove 2
 ----
 
 *Output:*

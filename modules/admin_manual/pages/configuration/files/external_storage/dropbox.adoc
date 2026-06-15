@@ -55,7 +55,7 @@ Then, you need to provide a name for the folder in the "Folder name" field and a
 
 After you have entered these values, click btn:[Grant access]. ownCloud then interacts with the Dropbox API to set up the new shared folder. If the process is successful, a green circle icon appears at the far left-hand side of the row next to the folder name.
 
-image::configuration/files/external_storage/dropbox/successful-connection-to-dropbox.png[A Dropbox share successfully created,width=500]
+image::configuration/files/external_storage/dropbox/successful-connection-to-dropbox.png[A Dropbox share successfully created,width=350]
 
 === Other Options
 
@@ -65,12 +65,12 @@ If you want to grant access to the share to a select list of users and groups, y
 
 After a Dropbox share is created, a new folder is available under "All Files" with the name you provided when you created the share. It is represented by an external share folder icon as in the image below.
 
-image::configuration/files/external_storage/dropbox/successful-connection-to-dropbox.png[A Dropbox share successfully created,width=500]
+image::configuration/files/external_storage/dropbox/successful-connection-to-dropbox.png[A Dropbox share successfully created,width=350]
 
 This links to a new folder in your Dropbox account under "Dropbox > Apps" with the name of the Dropbox app that you created.
 
-image::configuration/files/external_storage/dropbox/dropbox-share-available.png[A new Dropbox share is available,width=500]
+image::configuration/files/external_storage/dropbox/dropbox-share-available.png[A new Dropbox share is available,width=350]
 
 Now, if you add files and folders in either the new Dropbox folder or the new ownCloud folder, they will be visible in both after they've been synced.
 
-image::configuration/files/external_storage/dropbox/dropbox-apps-folders.png[The Dropbox Apps folders,width=500]
+image::configuration/files/external_storage/dropbox/dropbox-apps-folders.png[The Dropbox Apps folders,width=350]

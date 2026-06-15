@@ -2,8 +2,7 @@
 
 Marketplace URL: {oc-marketplace-url}/apps/windows_network_drive[External Storage: Windows Network Drives]
 
-Integrate Windows and Samba/CIFS shared network drives as external storages. For details please see the
-xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] documentation.
+Integrate Windows and Samba/CIFS shared network drives as external storages. For details please see the xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] documentation.
 
 The `wnd` commands configure the WND app.
 
@@ -22,9 +21,9 @@ xref:enterprise/external_storage/windows-network-drive_configuration.adoc#wnd-no
 
 Listen to smb changes and store notifications for later processing in the database
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:listen [options] [--] <host> <share> <username> [<password>]
+{occ-command-example-prefix-docker} wnd:listen [options] [--] <host> <share> <username> [<password>]
 ----
 
 === Arguments
@@ -78,9 +77,9 @@ Listen to smb changes and store notifications for later processing in the databa
 
 Process the notifications stored by the `wnd:listen` command
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:process-queue [options] [--] <host> <share>
+{occ-command-example-prefix-docker} wnd:process-queue [options] [--] <host> <share>
 ----
 
 === Arguments
@@ -107,9 +106,9 @@ NOTE: This command is deprecated starting with ownCloud 10.8. All mount options 
  
 Sets the service account for the target mount point. You'll be asked for the password of the service account.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} wnd:set-service-account [options] [--] <mount-id>
+{occ-command-example-prefix-docker} wnd:set-service-account [options] [--] <mount-id>
 ----
 
 Please see the occ documentation of

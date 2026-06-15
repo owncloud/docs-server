@@ -40,43 +40,43 @@ IP/owncloud
 
 . You can use your existing Google account such as Groups, Drive, or Mail, or create a new one and log into the {google_cloud_console-url}[Google Cloud Console]. After logging in click the btn:[Create Project] button on the top right side.
 +
-image::configuration/files/external_storage/google_drive/001.png[Google Cloud Console,width=500]
+image::configuration/files/external_storage/google_drive/001.png[Google Cloud Console,width=350]
 
 . Add a new project by clicking the btn:[+] button on the top right side.
 +
-image::configuration/files/external_storage/google_drive/002.png[Create Project,width=500]
+image::configuration/files/external_storage/google_drive/002.png[Create Project,width=350]
 
 . Give your project a name, and either accept the default *Project ID* or create your own, then click the btn:[Create] button. For this example a random name was chosen, "owncloud-04-27". However, feel free to choose your own name.
 +
-image::configuration/files/external_storage/google_drive/003.png[Choose a name,width=500]
+image::configuration/files/external_storage/google_drive/003.png[Choose a name,width=350]
 
 . After your project is created, click on the btn:[notifications bell] and select your project.
 +
-image::configuration/files/external_storage/google_drive/004.png[Notification bell,width=500]
+image::configuration/files/external_storage/google_drive/004.png[Notification bell,width=350]
 
 . Go to Api overview to select google’s API.
 +
-image::configuration/files/external_storage/google_drive/005.png[API,width=500]
+image::configuration/files/external_storage/google_drive/005.png[API,width=350]
 
 . Select Google Drive API
 +
-image::configuration/files/external_storage/google_drive/006.png[Google API,width=500]
+image::configuration/files/external_storage/google_drive/006.png[Google API,width=350]
 
 . Enable the Google Drive API
 +
-image::configuration/files/external_storage/google_drive/007.png[Enable,width=500]
+image::configuration/files/external_storage/google_drive/007.png[Enable,width=350]
 
 . You now must create your credentials.
 +
-image::configuration/files/external_storage/google_drive/008.png[Create Credentials,width=500]
+image::configuration/files/external_storage/google_drive/008.png[Create Credentials,width=350]
 
 . First, select btn:[Web Browser] and btn:[User data].
 +
-image::configuration/files/external_storage/google_drive/009.png[Access type and Data,width=500]
+image::configuration/files/external_storage/google_drive/009.png[Access type and Data,width=350]
 
 . The next screen that opens is *Create OAuth 2.0 Client ID*. Enter your app name.
 +
-image::configuration/files/external_storage/google_drive/010.png[Access type and Data,width=500]
+image::configuration/files/external_storage/google_drive/010.png[Access type and Data,width=350]
 
 === Configure Authorisations
 
@@ -106,7 +106,7 @@ The following example procedure configures an admin-based storage mount. The dom
 
 . Login to your ownCloud account
 +
-image::configuration/files/external_storage/google_drive/011.png[Login in ownCloud,width=500]
+image::configuration/files/external_storage/google_drive/011.png[Login in ownCloud,width=350]
 
 . Go to Storage in the Settings
 +
@@ -118,13 +118,13 @@ image::configuration/files/external_storage/google_drive/013.png[Enable external
 
 . Select Google Drive
 +
-image::configuration/files/external_storage/google_drive/014.png[Select Google Drive from dropdown menu,width=500]
+image::configuration/files/external_storage/google_drive/014.png[Select Google Drive from dropdown menu,width=350]
 
 . The Google Drive App is enabled
 +
 Give the mount point a meaningful name. We have used `Google Drive` in this example.
 +
-image::configuration/files/external_storage/google_drive/015.png[Now you have your Google Drive App enabled]
+image::configuration/files/external_storage/google_drive/015.png[Now you have your Google Drive App enabled, width=350]
 
 . Copy the Authorized Redirect URI from the browser
 +
@@ -132,23 +132,23 @@ image::configuration/files/external_storage/google_drive/016.png[The URL from th
 
 . Enter it the Google Drive Console here
 +
-image::configuration/files/external_storage/google_drive/017.png[Client ID,width=500]
+image::configuration/files/external_storage/google_drive/017.png[Client ID,width=350]
 
 . Choose a project name for the consent screen.
 +
 A consent screen has to be created. This is the information in the screen Google shows you when you connect your ownCloud Google Drive app to Google the first time.
 +
-image::configuration/files/external_storage/google_drive/018.png[Choose a Project Name,width=500]
+image::configuration/files/external_storage/google_drive/018.png[Choose a Project Name,width=350]
 
 . Download the credentials as JSON file.
 +
-image::configuration/files/external_storage/google_drive/019.png[Download your Credentials,width=500]
+image::configuration/files/external_storage/google_drive/019.png[Download your Credentials,width=350]
 +
 You can either open this file with the editor of your choice (SublimeText for example), or you can put in your web browser to view it. You can always download this data from your Google Drive project at a later time for other Google Drive mounts.
 +
 Here is an example output:
 +
-image::configuration/files/external_storage/google_drive/020.png[Credentials,width=500]
+image::configuration/files/external_storage/google_drive/020.png[Credentials,width=350]
 
 . Client ID and Client Secret
 +
@@ -156,7 +156,7 @@ Enter the Client ID and Client Secret in the ownCloud Google Drive mount screen 
 +
 Click btn:[Allow] when the consent screen appears.
 +
-image::configuration/files/external_storage/google_drive/021.png[Grant Access,width=500]
+image::configuration/files/external_storage/google_drive/021.png[Grant Access,width=350]
 
 . Success
 +
@@ -164,10 +164,10 @@ You are finished when you see the green light confirming a successful connection
 +
 See the xref:configuration/files/external_storage/configuration.adoc[External Storage Configuration] for additional mount options and information.
 +
-image::configuration/files/external_storage/google_drive/022.png[All Green,width=500]
+image::configuration/files/external_storage/google_drive/022.png[All Green,width=350]
 
 . Files View
 +
 Go to your files view. You will see the newly mounted Google Drive.
 +
-image::configuration/files/external_storage/google_drive/023.png[Your Google Drive Folder,width=500]
+image::configuration/files/external_storage/google_drive/023.png[Your Google Drive Folder,width=350]

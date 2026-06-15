@@ -17,18 +17,18 @@ This quick guide gives a brief summary of the commands needed without going into
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --on
-{occ-command-example-prefix} app:enable encryption
-{occ-command-example-prefix} encryption:enable
-{occ-command-example-prefix} encryption:encrypt-all --yes
-{occ-command-example-prefix} maintenance:singleuser --off
+{occ-command-example-prefix-docker} maintenance:singleuser --on
+{occ-command-example-prefix-docker} app:enable encryption
+{occ-command-example-prefix-docker} encryption:enable
+{occ-command-example-prefix-docker} encryption:encrypt-all --yes
+{occ-command-example-prefix-docker} maintenance:singleuser --off
 ----
 
 === View the Encryption Status
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:status
+{occ-command-example-prefix-docker} encryption:status
 ----
 
 === Decrypt Encrypted Files
@@ -37,26 +37,26 @@ Depending on the amount of existing data, this operation can take a long time.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --on
-{occ-command-example-prefix} encryption:decrypt-all
-{occ-command-example-prefix} maintenance:singleuser --off
+{occ-command-example-prefix-docker} maintenance:singleuser --on
+{occ-command-example-prefix-docker} encryption:decrypt-all
+{occ-command-example-prefix-docker} maintenance:singleuser --off
 ----
 
 === Deactivate Master-Key-Based Encryption
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:disable
+{occ-command-example-prefix-docker} encryption:disable
 
 # ignore the "already disabled" message
-{occ-command-example-prefix} app:disable encryption
+{occ-command-example-prefix-docker} app:disable encryption
 ----
 
 If the master key has been compromised or exposed, you can replace it. You will need the current master key for it.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:recreate-master-key
+{occ-command-example-prefix-docker} encryption:recreate-master-key
 ----
 
 == Clean up Your Database
@@ -70,9 +70,9 @@ DELETE FROM oc_appconfig WHERE appid='encryption';
 
 == Clean up Your Storage
 
-The removal of remaining encryption keys is a manual process. You have to delete all encryption keys on the storage by running the following command. Modify the path to your data directory according to your installation. The `find` command limits the search to exactly one directory below the user level and for security reasons prompts before each deletion:
+The removal of remaining encryption keys is a manual process. You have to delete all encryption keys on the storage by running the following command. Modify the path to your data directory according to your installation. The `find` command limits the search to exactly one directory below the user level and for security reasons prompts before each deletion. Replace the `<mount-point>` placeholder with the correct value, as defined in your Docker Compose file.
 
 [source,bash]
 ----
-find /var/www/owncloud/data/ -mindepth 2 -maxdepth 2 -type d -name "files_encryption" -exec rm -R -i {} +
+find <mount-point>/files/ -mindepth 2 -maxdepth 2 -type d -name "files_encryption" -exec rm -R -i {} +
 ----

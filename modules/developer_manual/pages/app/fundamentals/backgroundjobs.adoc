@@ -43,7 +43,7 @@ To test the job classes, you can run Cron manually, as in the example below:
 
 [source,console,subs="attributes+"]
 ----
-{occ-command-example-prefix} system cron
+{occ-command-example-prefix-docker} system cron
 ----
 
 After doing so, you will need to reset the job to allow it to be run,

@@ -5,7 +5,7 @@
 
 Manual file locking allows users, if enabled, to lock files in shared areas while working on them in order to prevent concurrent changes from other users (check-in/check-out). 
 
-The feature builds on the WebDAV Locks backend which has been introduced with Server 10.1 and is now available in the ownCloud Web Interface. All storages are supported as locking takes place on the WebDAV level. The locks will only be available via ownCloud, not when a user works directly on the storage. Using the context menu of files, every user who has access can lock them. Users can recognize locked files by the means of a new lock indicator. While a file is locked, other users can still access it but they can not make any changes. Locked files can manually be unlocked by the lock owner (the user who locked the file; exclusive locking) using the "Locks" tab in the file details view (right sidebar).
+The feature builds on the WebDAV Locks backend and is now available in the ownCloud Web Interface. All storages are supported as locking takes place on the WebDAV level. The locks will only be available via ownCloud, not when a user works directly on the storage. Using the context menu of files, every user who has access can lock them. Users can recognize locked files by the means of a new lock indicator. While a file is locked, other users can still access it but they can not make any changes. Locked files can manually be unlocked by the lock owner (the user who locked the file; exclusive locking) using the "Locks" tab in the file details view (right sidebar).
 
 == Example Use Case
 
@@ -24,19 +24,19 @@ The main user-facing component in the web interface looks like in the following 
 ^| Manual Locking Disabled
 ^| Manual Locking Enabled
 
-a| image::configuration/files/manual_file_locking/lock-file-not-visible.png[File locking not visible]
-a| image::configuration/files/manual_file_locking/lock-file-visible.png[File locking visible]
+a| image::configuration/files/manual_file_locking/lock-file-not-visible.png[File locking not visible, width=350]
+a| image::configuration/files/manual_file_locking/lock-file-visible.png[File locking visible, width=350]
 |===
 
 If manual locking is enabled, the following additional user-facing components are present:
 
 [width="100%",cols="50%,50%"]
 |===
-a| image::configuration/files/manual_file_locking/file-locked-symbol.png[File locked symbol]
-a| image::configuration/files/manual_file_locking/file-locked-hint.png[File locking hint]
+a| image::configuration/files/manual_file_locking/file-locked-symbol.png[File locked symbol, width=350]
+a| image::configuration/files/manual_file_locking/file-locked-hint.png[File locking hint, width=350]
 
-a| image::configuration/files/manual_file_locking/file-locked-details.png[File locking details]
-a| image::configuration/files/manual_file_locking/file-locked-unlock-symbol.png[File unlocking]
+a| image::configuration/files/manual_file_locking/file-locked-details.png[File locking details, width=350]
+a| image::configuration/files/manual_file_locking/file-locked-unlock-symbol.png[File unlocking, width=350]
 
 |===
 
@@ -45,12 +45,12 @@ Administrators can enable _Manual File Locking_ for users either via the web int
 Web interface::
 Go to menu:Settings[Admin > General]
 +
-image::configuration/files/manual_file_locking/manual-file-locking-with-lock-breaker.png[Enable file locking]
+image:configuration/files/manual_file_locking/manual-file-locking-with-lock-breaker.png[Enable file locking, width=350]
 
 Using the occ command::
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files enable_lock_file_action --value yes
+{occ-command-example-prefix-docker} config:app:set files enable_lock_file_action --value yes
 ----
 
 == Configuration
@@ -75,21 +75,23 @@ Using the occ command::
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files lock_timeout_default --value 1800
+{occ-command-example-prefix-docker} config:app:set files lock_timeout_default --value 1800
 ----
-+
+
 * Maximum locks timeout
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files lock_timeout_max --value 86400
+{occ-command-example-prefix-docker} config:app:set files lock_timeout_max --value 86400
 ----
-+
+
 * Define lock breaker groups
 +
+--
 The example below defines two lock breaker groups named `unlockers` and `admin`.
-+
+
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set core lock-breaker-groups --value '["unlockers","admin"]'
+{occ-command-example-prefix-docker} config:app:set core lock-breaker-groups --value '["unlockers","admin"]'
 ----
+--

@@ -14,16 +14,18 @@ If you're using Microsoft Teams in your organization or for private purposes, yo
 
 NOTE: As a prerequisite, the OpenID Connect app is required. If you already have a OpenID Connect configuration made with another service, you have to reconfigure with Microsoft Azure AD, as only one identity provider configuration is allowed.
 
+CAUTION: To configure this app in an ownCloud Dockerised environment, you need to access and update the `.htaccess` file from the container which is not accessible by default. You also need to edit your _additional_ xref:installation/configuration_notes.adoc#using-a-configuration-file[configuration file] with keys that are not available as environment variables.
+
 == Prerequisites
 
-To get this working, you need to install and/or configure the following components:
+To get this working, you need to enable and configure the following components:
 
 === Option 1 "Enterprise": With Single Sign-On (SSO) and ownCloud Enterprise Edition
 . Microsoft Azure Active Directory
 
 . ownCloud apps:
-.. {oc-marketplace-url}/apps/openidconnect[OpenID Connect]
-.. {oc-marketplace-url}/apps/msteamsbridge[MS-Teams Bridge App]
+.. OpenID Connect
+.. MS-Teams Bridge App
 
 . The custom app(s) you have generated with {msteams-generator-url}[ownCloud Generator for Admins]
 
@@ -32,7 +34,7 @@ To get this working, you need to install and/or configure the following componen
 === Option 2 "Standard": With Basic Authentication and ownCloud Standard Edition
 
 . ownCloud apps:
-.. {oc-marketplace-url}/apps/openidconnect[OpenID Connect]
+.. OpenID Connect
 . The custom Microsoft Teams app(s) you have generated with the {msteams-generator-url}[ownCloud Generator for Admins]
 . Microsoft Teams
 
@@ -42,17 +44,20 @@ Note: If you are using the Standard Edition, you can skip the following steps th
 
 === Installation
 
-Assuming you have an ownCloud server version 10.7 or higher already running in your company or for personal use, perform the following steps:
+Perform the following steps:
 
-. Install and enable the MS-Teams Bridge app, minimum required version: v1.0.0.
-
-. Install and enable the {oc-marketplace-url}/apps/openidconnect[OpenID Connect] app from the ownCloud marketplace, minimum required version: v2.0.0.
+. Enable the MS-Teams Bridge app.
+. Enable the OpenID Connect app.
 
 === Configure the MS-Teams Bridge App
 
 You need to configure the MS-Teams Bridge app in two steps:
 
-. Add a _header_ directive to the Apache `.htaccess` configuration located in your ownCloud web root in section `<IfModule mod_env.c>`
+. Create a Docker volume for the `.htaccess` file only in the containers location `/var/www/owncloud/.htaccess` and mount it to a location of choice.
++
+IMPORTANT: Please note that this file may be updated by ownCloud and will need to be reviewed before any changes are reapplied.
+ 
+. Add a _header_ directive to the Apache `.htaccess` configuration located in section `<IfModule mod_env.c>`
 +
 [source,apache,options="nowrap"]
 ----
@@ -61,10 +66,8 @@ Header edit* Content-Security-Policy , ;
 ----
 +
 Using `merge`, the response header is appended to any existing header of the same name, unless the value to be appended already appears in the header's comma-delimited list of values. When a new value is merged onto an existing header it is separated from the existing header with a comma. Merging avoids that headers of the same type and content being sent multiple times. This can happen if headers are also set on other locations.
-+
-IMPORTANT: For the time being, if you add the header to the ownCloud's `.htaccess` file in the ownCloud web root, you have to manually add that header again after an ownCloud upgrade.
 
-. Add a config key to your `config.php` file
+. Add a config key to your _additional_ xref:installation/configuration_notes.adoc#using-a-configuration-file[configuration file].
 +
 This key is necessary for security reasons. Users will be asked to click a login button each time when accessing the ownCloud app after a fresh start of their Microsoft Teams app or after idle time. This behavior is by design. The button name can be freely set based on your requirements.
 +
@@ -75,7 +78,7 @@ This key is necessary for security reasons. Users will be asked to click a login
 ],
 ----
 
-. Enable xref:configuration/server/index_php_less_urls.adoc[index.php less URL´s] on your web server.
+. If not already configured, enable xref:configuration/server/index_php_less_urls.adoc[index.php less URL´s] on your web server.
 
 == Microsoft
 
@@ -92,31 +95,31 @@ The following procedure creates an ownCloud app ready to be used by your users w
 
 . Enter the Microsoft App/Client ID for your app. The ID´s to be entered *must* be the xref:configuration/user/oidc/ms-azure-setup.adoc#client-id[CLIENT-ID] from Microsoft Azure.
 +
-image:configuration/integration/ms-teams/enter-app-id-msteamsgen.png[,width=80%]
+image:configuration/integration/ms-teams/enter-app-id-msteamsgen.png[,width=350]
 
 . Enter the version of the app you create.
 +
-image:configuration/integration/ms-teams/define-app-version-msteamsgen.png[,width=80%]
+image:configuration/integration/ms-teams/define-app-version-msteamsgen.png[,width=350]
 
 . Enter the name of the app you create. Take care about how to name your app. It *cannot* be changed later on. We recommend naming it *ownCloud for Teams* for easy identification.
 +
-image:configuration/integration/ms-teams/app-name-msteamsgen.png[,width=80%]
+image:configuration/integration/ms-teams/app-name-msteamsgen.png[,width=350]
 
 . Enter the description of the app you create.
 +
-image:configuration/integration/ms-teams/app-description-msteamsgen.png[,width=80%]
+image:configuration/integration/ms-teams/app-description-msteamsgen.png[,width=350]
 
 . Set the AccentColor of the app you create.
 +
-image:configuration/integration/ms-teams/set-accent-color-msteamsgen.png[,width=80%]
+image:configuration/integration/ms-teams/set-accent-color-msteamsgen.png[,width=350]
 
 . Enter the URL how you access your owncloud instance like `+https://cloud.example.com+`.
 +
-image:configuration/integration/ms-teams/owncloud-url-msteamsgen.png[,width=80%]
+image:configuration/integration/ms-teams/owncloud-url-msteamsgen.png[,width=350]
 
 . After performing all the steps, click the menu:download[] button and store the generated zip file locally.
 +
-image:configuration/integration/ms-teams/download-zip-msteamsgen.png[,width=80%]
+image:configuration/integration/ms-teams/download-zip-msteamsgen.png[,width=350]
 
 . Go to the app section of Microsoft Teams and upload the generated zip file to your organization's app catalogue. Follow the {publish-custom-app-url}[Publish a custom app by uploading an app package] guide for more information.
 
@@ -134,15 +137,15 @@ As an alternative to creating an app for Microsoft Teams, it's also possible to 
 
 . Press the btn:[+] plus button at the top of the Teams window.
 +
-image:configuration/integration/ms-teams/add-a-tab-ms-teams.png[,width=80%]
+image:configuration/integration/ms-teams/add-a-tab-ms-teams.png[,width=350]
 
 . Search for *website* and add by clicking on it.
 +
-image:configuration/integration/ms-teams/add-website-ms-teams.png[,width=80%]
+image:configuration/integration/ms-teams/add-website-ms-teams.png[,width=350]
 
 . Add a meaningful name and the following URL replacing "cloud.example.com" with how you access your ownCloud instance.
 +
-image:configuration/integration/ms-teams/name-and-url-ms-teams.png[,width=80%]
+image:configuration/integration/ms-teams/name-and-url-ms-teams.png[,width=350]
 +
 [source,url]
 ----

@@ -11,10 +11,11 @@
 
 == Dependencies
 
-To connect ownCloud to an SMB file server, you need to prepare your server. Please see the
-xref:installation/manual_installation/manual_installation.adoc[Manual Installation on Linux] guides for more information, prerequisites and requirements.
+All dependencies to connect to an SMB server, except for testing the connection manually, are provided by the ownCloud image.
 
 == Access Testing
+
+IMPORTANT: The Docker image does not provide the `smbclient` CLI tool. To mitigate this issue, you need to manually create an image that installs and enables this requirement.
 
 To ensure that you can connect to your file server with SMB, do a small test upfront like the following.
 
@@ -23,7 +24,7 @@ To ensure that you can connect to your file server with SMB, do a small test upf
 sudo smbclient -L <file_server_name> -U <full_domain_name>/<user_name>
 ----
 
-Please fix any issues before you connect ownCloud to a SMB file server.
+Make sure you have resolved any issues before connecting ownCloud to an SMB file server.
 
 == Configuration
 
@@ -37,8 +38,7 @@ When configuring ownCloud, you will need the following information:
 * The remote subfolder inside the remote Samba share to mount. +
 This is optional, as it defaults to `/`.
 +
-TIP: To assign the ownCloud logon username automatically to the subfolder, use `$user` instead of a
-subfolder name. The foldername=username must be present and is not created on access.
+TIP: To assign the ownCloud logon username automatically to the subfolder, use `$user` instead of a subfolder name. The foldername=username must be present and is not created on access.
 
 * The ownCloud users and groups who get access to the share.
 * A domain name, might be required or optional depending on your setup
@@ -48,11 +48,9 @@ subfolder name. The foldername=username must be present and is not created on ac
 You can specify a `Domain` which is useful in cases where the SMB server requires a domain and a username, and an advanced authentication mechanism like Active Directory (AD), or when using session credentials where the username cannot be modified. This is concatenated with the username, so the backend gets `domain\username`
 ====
 
-image::configuration/files/external_storage/smb.png[Samba external storage configuration,width=500]
+image::configuration/files/external_storage/smb.png[Samba external storage configuration,width=350]
 
 == Further Information
 
-* xref:configuration/files/external_storage/configuration.adoc[External Storage Configuration]
-for additional mount options and information.
-* xref:configuration/files/external_storage/auth_mechanisms.adoc[External Storage Authentication Mechanisms]
-for more information on authentication schemes.
+* xref:configuration/files/external_storage/configuration.adoc[External Storage Configuration] for additional mount options and information.
+* xref:configuration/files/external_storage/auth_mechanisms.adoc[External Storage Authentication Mechanisms] for more information on authentication schemes.

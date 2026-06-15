@@ -35,7 +35,7 @@ Use the following command to list all active background jobs triggered by ownClo
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:status --display-invalid-jobs
+{occ-command-example-prefix-docker} background:queue:status --display-invalid-jobs
 ----
 
 The output may look like the following:
@@ -60,14 +60,14 @@ When you have identified the `ID` of the background job to  be removed, run foll
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:delete ID
+{occ-command-example-prefix-docker} background:queue:delete ID
 ----
 
 WARNING: Deleting a job cannot be undone. Be sure that you want to delete the job before doing so.
 
 === Remove Jobs Manually Added via Crontab
 
-If an erroring job as been added manually in `crontab`, remove the job from the crontab queue list. First, list the entries of crontab for the web server user:
+If an erroring job as been added manually in `crontab`, remove the job from the crontab queue list on your host. First, list the entries of crontab for the web server user:
 
 [source,bash]
 ----

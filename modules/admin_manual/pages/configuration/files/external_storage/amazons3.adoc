@@ -20,7 +20,7 @@ In the *Available for* field, enter the users or groups who have permission to a
 
 The `Enable SSL` checkbox enables HTTPS connections; using HTTPS is always highly recommended.
 
-image::configuration/files/external_storage/amazons3.png[image,width=500]
+image::configuration/files/external_storage/amazons3.png[image,width=350]
 
 Optionally, you can override the hostname, port and region of your S3 server, which is required for non-Amazon servers such as Ceph Object Gateway.
 
@@ -29,7 +29,5 @@ Optionally, you can override the hostname, port and region of your S3 server, wh
 `\http://hostname.domain/bucket` instead.
 
 See
-xref:configuration/files/external_storage/configuration.adoc[External Storage Configuration]
-for additional mount options and information, and
-xref:configuration/files/external_storage/auth_mechanisms.adoc[External Storage Authentication mechanisms]
-for more information on authentication schemes.
+xref:configuration/files/external_storage/configuration.adoc[External Storage Configuration] for additional mount options and information, and
+xref:configuration/files/external_storage/auth_mechanisms.adoc[External Storage Authentication Mechanisms] for more information on authentication schemes.

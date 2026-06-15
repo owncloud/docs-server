@@ -4,7 +4,7 @@
 
 == Introduction
 
-{description} Refer to the xref:{latest-server-version}@server:admin_manual:configuration/general_topics/search.adoc[Full Text Search] app in the ownCloud Admin Manual for more information about how to deploy it.
+{description} Refer to the xref:server:admin_manual:configuration/general_topics/search.adoc[Full Text Search] app in the ownCloud Admin Manual for more information about how to deploy it.
 
 == Regular Search
 

@@ -2,16 +2,6 @@
 :toc: right
 :toclevels: 2
 :description: The primary purpose of the ownCloud server-side encryption is to protect users’ files when they’re located on remote storage sites, such as Dropbox and Google Drive, smoothly and seamlessly from within ownCloud.
-:page-aliases: go/admin-encryption.adoc, \
-configuration/files/encryption/disabling-encryption.adoc, \
-configuration/files/encryption/enabling-user-key-encryption.adoc, \
-configuration/files/encryption/encryption-types.adoc, \
-configuration/files/encryption/external-backends.adoc, \
-configuration/files/encryption/master-key-encryption.adoc, \
-configuration/files/encryption/migration-guide.adoc, \
-configuration/files/encryption/moving-key-locations.adoc, \
-configuration/files/encryption/sharing-encrypted-files.adoc, \
-configuration/files/encryption_configuration.adoc
 
 :hackerone-url: https://hackerone.com/reports/108082
 :oc-uses-enc-url: https://owncloud.com/news/how-owncloud-uses-encryption-to-protect-your-data/
@@ -20,12 +10,13 @@ configuration/files/encryption_configuration.adoc
 
 {description}
 
+NOTE: Using Docker means that the data directory is a subfolder of the volumes mount point, which is required for certain file configurations. For more details see the xref:installation/mount_folder_structure.adoc[Mount Folder Structure] documentation.
+
 == General Notes
 
 Since ownCloud 9.0, server-side encryption for local and remote storage can operate independently. This allows encrypting a remote storage independent of the home storage on the ownCloud server.
 
-NOTE: Starting with ownCloud 9.0 we support Authenticated Encryption for all newly encrypted files. 
-See {hackerone-url}[Exploiting unauthenticated encryption mode] for more technical information about the impact.
+NOTE: Starting with ownCloud 9.0 we support Authenticated Encryption for all newly encrypted files. See {hackerone-url}[Exploiting unauthenticated encryption mode] for more technical information about the impact.
 
 For maximum security, make sure to configure external storage with menu:Check for changes[Never]. This will let ownCloud ignore new files not added via ownCloud. This way, a malicious external storage administrator cannot add new files to the storage without your knowledge. However, you may not use this setting _if_ your external storage is subject to legitimate external changes.
 
@@ -33,7 +24,6 @@ ownCloud’s server-side encryption encrypts files stored on the ownCloud server
 
 [NOTE]
 ====
-* See the important information on the xref:installation/manual_installation/manual_installation_prerequisites.adoc#openssl-version[OpenSSL Version] before you start configuring the encryption app.
 * Encrypting files increases their size by an 8KB header plus 100 bytes per each 8KB block of the file. Remember to take this into account when you are both provisioning storage and setting storage quotas.
 * If you are _running_ the encryption app before version 1.5.0 or _started_ with an encryption app version before 1.5.0, BASE64 encoding was used and might still be used for old files if untouched since then. In these cases, old encrypted files increased their size by roughly 35%. We recommend to update the ownCloud system to be able to use the benefits of reduced file sizes for new and rewritten files. Note that the encryption app version lower than 1.5.0 was delivered as part of the ownCloud system lower than 10.7.
 * User quotas are based on the _unencrypted_ file size — *not* the encrypted size. This means that admins need to calculate with higher disk space requirements on the backend.
@@ -120,12 +110,12 @@ To enable the encryption app, run the following command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable encryption
+{occ-command-example-prefix-docker} app:enable encryption
 ----
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:enable
+{occ-command-example-prefix-docker} encryption:enable
 ----
 
 If the encryption app is successfully enabled, you should see the following confirmations:
@@ -162,28 +152,28 @@ To be safe and avoid any issues on a running instance, put your server in single
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --on
+{occ-command-example-prefix-docker} maintenance:singleuser --on
 ----
 
 Enabling encryption via the command line involves several commands. If not already done, enable the default encryption module app with the following command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable encryption
+{occ-command-example-prefix-docker} app:enable encryption
 ----
 
 Then enable encryption, using the following command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:enable
+{occ-command-example-prefix-docker} encryption:enable
 ----
 
 Finally, encrypt all data, using the following command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:encrypt-all --yes
+{occ-command-example-prefix-docker} encryption:encrypt-all --yes
 ----
 
 NOTE: This command is not typically required as the master key is often enabled at installation time. As a result when enabling it, there should be no data to encrypt. In case it’s being enabled after the installation and there are files which are unencrypted, xref:configuration/server/occ_command.adoc#encrypt-all[encrypt-all] can be used to encrypt them. Depending on the amount of existing data and the location, this operation can take a long time.
@@ -192,7 +182,7 @@ Now you can turn off the single user mode:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --off
+{occ-command-example-prefix-docker} maintenance:singleuser --off
 ----
 
 === View Current Encryption Status
@@ -201,7 +191,7 @@ Get the current encryption status and the loaded encryption module:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:status
+{occ-command-example-prefix-docker} encryption:status
 ----
 
 === Replacing an Existing Master Key
@@ -214,7 +204,7 @@ You must first put your ownCloud server into single-user mode to prevent any use
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --on
+{occ-command-example-prefix-docker} maintenance:singleuser --on
 ----
 
 [source,plaintext]
@@ -226,7 +216,7 @@ Decrypt all user data files, or optionally a single user:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:decrypt-all [username]
+{occ-command-example-prefix-docker} encryption:decrypt-all [username]
 ----
 
 === Disable Encryption
@@ -235,19 +225,19 @@ To disable encryption, put your ownCloud server into single-user mode, and then 
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --on
+{occ-command-example-prefix-docker} maintenance:singleuser --on
 ----
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:disable
+{occ-command-example-prefix-docker} encryption:disable
 ----
 
 Take it out of single-user mode when you are finished, by using the following command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --off
+{occ-command-example-prefix-docker} maintenance:singleuser --off
 ----
 
 [IMPORTANT]
@@ -261,7 +251,7 @@ Get the current encryption status and the loaded encryption module:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:status
+{occ-command-example-prefix-docker} encryption:status
 ----
 
 === Enable Users' File Recovery Keys
@@ -297,10 +287,10 @@ NOTE: Sharing a recovery key with a user group is *not* supported. This is only 
 
 If you have misplaced your recovery key password and need to replace it, here’s what you need to do:
 
-1.  Delete the recovery key from both `data/owncloud_private_keys` and `data/public-keys`.
-2.  Edit your database table `oc_appconfig` and remove the rows with the config keys `recoveryKeyId` and `recoveryAdminEnabled` for the appid `files_encryption`.
-3.  Login as admin and activate the recovery key again with a new password. This will generate a new key pair.
-4.  All users who used the original recovery key will need to disable it and enable it again. This deletes the old recovery share keys from their files and encrypts their files with the new recovery key.
+.  Delete the recovery key from both `data/owncloud_private_keys` and `data/public-keys`.
+.  Edit your database table `oc_appconfig` and remove the rows with the config keys `recoveryKeyId` and `recoveryAdminEnabled` for the appid `files_encryption`.
+.  Login as admin and activate the recovery key again with a new password. This will generate a new key pair.
+.  All users who used the original recovery key will need to disable it and enable it again. This deletes the old recovery share keys from their files and encrypts their files with the new recovery key.
 
 NOTE: You can only change the recovery key password if you know the original. This is by design as only admins who know the recovery key password should be able to change it. Otherwise admins could hijack the recovery key from each other.
 
@@ -312,7 +302,7 @@ You must first put your ownCloud server into single-user mode to prevent any use
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --on
+{occ-command-example-prefix-docker} maintenance:singleuser --on
 ----
 
 [source,plaintext]
@@ -326,12 +316,12 @@ You may disable encryption only with `occ`. Make sure you have backups of all th
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --on
+{occ-command-example-prefix-docker} maintenance:singleuser --on
 ----
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:disable
+{occ-command-example-prefix-docker} encryption:disable
 ----
 
 IMPORTANT: Encryption cannot be disabled without the user’s password or
@@ -342,7 +332,7 @@ command:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --off
+{occ-command-example-prefix-docker} maintenance:singleuser --off
 ----
 
 It is possible to disable encryption with the file recovery key _if_ every user has enabled it. In this case, "decrypt all" will decrypt all files of all users.
@@ -355,7 +345,7 @@ View current location of keys:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:show-key-storage-root
+{occ-command-example-prefix-docker} encryption:show-key-storage-root
 ----
 
 [source,plaintext]
@@ -367,22 +357,22 @@ You can move the keys to another folder inside your data directory. Moving your 
 
 [source,bash]
 ----
-mkdir /var/www/owncloud/data/new_keys
+mkdir /mount_point/files/new_keys
 ----
 
 [source,bash]
 ----
-chown -R root:www-data /var/www/owncloud/data/new_keys
+chown -R root:www-data /mount_point/files/new_keys
 ----
 
 [source,bash]
 ----
-chmod -R 0770 /var/www/owncloud/data/new_keys
+chmod -R 0770 /mount_point/files/new_keys
 ----
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} encryption:change-key-storage-root new_keys
+{occ-command-example-prefix-docker} encryption:change-key-storage-root new_keys
 ----
 
 [source,plaintext]

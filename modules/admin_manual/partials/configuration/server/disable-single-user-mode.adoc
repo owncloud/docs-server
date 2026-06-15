@@ -4,5 +4,5 @@ With encryption migrated from User Key-based encryption to Master Key-based, dis
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:singleuser --off
+{occ-command-example-prefix-docker} maintenance:singleuser --off
 ----

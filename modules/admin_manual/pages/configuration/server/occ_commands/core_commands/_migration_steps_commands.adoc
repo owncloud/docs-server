@@ -2,9 +2,9 @@
 
 You can run migration steps with the `migrations` command.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrations:execute <app> <version>
+{occ-command-example-prefix-docker} migrations:execute <app> <version>
 ----
 
 == Arguments
@@ -19,8 +19,7 @@ You can run migration steps with the `migrations` command.
 
 This example executes the migration step for the core app:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrations:execute core 20181220085457
+{occ-command-example-prefix-docker} migrations:execute core 20181220085457
 ----
-
