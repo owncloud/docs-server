@@ -26,7 +26,7 @@ NOTE: If you would like to create or add (your own) ownCloud app, please refer t
 
 === Installing Apps Manually
 
-All apps that are installed manually, regradless using the Marketplace or you copy them, will be placed into the `apps` folder of the ownCloud volume. This volume is either the Docker volume or a defined bind mount. This apps folder corresponds to the `apps-external` folder. For more and important details see: xref:installation/mount_folder_structure.adoc[Mount Folder Structure].
+All apps that are installed manually, regardless of using the Marketplace or you copy them, will be placed into the `apps` folder of the ownCloud volume. This volume is either the Docker volume or a defined bind mount. This apps folder corresponds to the `apps-external` folder. For more and important details see: xref:installation/mount_folder_structure.adoc[Mount Folder Structure].
 
 Once the tarball has been extracted into the default app folder. Enable the application,
 

@@ -1,6 +1,6 @@
 = Email Configuration
 :toc: right
-:expermimental:
+:experimental:
 :page-aliases: go/admin-email.adoc
 
 == Introduction

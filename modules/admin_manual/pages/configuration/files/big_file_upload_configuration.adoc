@@ -46,7 +46,7 @@ The location of the upload directory can be defined via the environment variable
 
 [NOTE]
 ====
-The space temporarily consumed in the upload directory will not count against the user quota. If a user has no quota left in his peronal storage and the quota excludes external mounts, uploads to a windows network drive share as example will succeed. The file temporarily created in the upload directory will not count against his personal storage.
+The space temporarily consumed in the upload directory will not count against the user quota. If a user has no quota left in his personal storage and the quota excludes external mounts, uploads to a windows network drive share as example will succeed. The file temporarily created in the upload directory will not count against his personal storage.
 ====
 --
 

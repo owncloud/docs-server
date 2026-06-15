@@ -3,7 +3,7 @@
         "passwordsalt": "***REMOVED SENSITIVE VALUE***",
         "secret": "***REMOVED SENSITIVE VALUE***",
         "trusted_domains": [
-            "localhost",
+            "localhost"
         ],
         "datadirectory": "\/var\/www\/localhost\/data",
         "overwrite.cli.url": "http:\/\/localhost",

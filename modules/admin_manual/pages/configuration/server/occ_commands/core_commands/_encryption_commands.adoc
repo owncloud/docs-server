@@ -20,7 +20,7 @@ encryption
                                      file system with newly created master key
  encryption:select-encryption-type   Select the encryption type. Only `masterkey` is available.
                                      Note that this setting is only necessary when migration from user
-                                     key encryption. New encryptions will autmatically use master key.
+                                     key encryption. New encryptions will automatically use master key.
  encryption:set-default-module       Set the encryption default module
  encryption:show-key-storage-root    Show current key storage root
  encryption:status                   Lists the current status of encryption

@@ -8,7 +8,7 @@
 
 The following scenarios are described here:
 
-. Migrating to a differernt host
+. Migrating to a different host
 . Migrating to a different domain
 . Migrating from ownCloud 10 to ownCloud 11
 
@@ -44,7 +44,7 @@ Migration to a different host is easy with Docker.
 
 . Enable maintenance mode
 . Down the container
-. Make the data availabe on the new host:
+. Make the data available on the new host:
 .. Either copy the Docker volume if not using a shared mount point to the new host, or
 .. Create a new shared mount point
 . Copy / adapt the compose yaml file to reflect your changes
@@ -115,7 +115,7 @@ Remove any environment variables from the compose file that are no longer releva
 . Migrate the `data/files` directory into `mount-point/files`.
 . Migrate all apps from ownCloud 10 that are NOT part of ownCloud 11 into the `mount-point/apps` directory. +
 For more details see the xref:installation/apps_management_installation.adoc[Apps Management] documentation.
-. Make a copy of your existing `config.php` file *with a new name* and remove any setting that adresses the `data` directory and `apps` / `apps-external` directories into the `mount-point/config` directory. +
-See the inmportant note with regards to the config in the xref:installation/mount_folder_structure.adoc[Mount Folder Structure] documentation.
+. Make a copy of your existing `config.php` file *with a new name* and remove any setting that addresses the `data` directory and `apps` / `apps-external` directories into the `mount-point/config` directory. +
+See the important note with regards to the config in the xref:installation/mount_folder_structure.adoc[Mount Folder Structure] documentation.
 . Bring up the ownCloud 11 container.
 . Disable maintenance mode.

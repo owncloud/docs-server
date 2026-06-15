@@ -201,7 +201,7 @@ NOTE: See the linked section for important information when planning to use xref
 When the xref:enterprise/authentication/kerberos.adoc[Kerberos Authentication] has been set up, a necessary config key xref:configuration/server/config_apps_sample_php_parameters.adoc#a-map-of-servers-with-the-required-kerberos-data[wnd.kerberos.servers] needs to be provided upfront in `config.php`.
 
 * `Kerberos Server ID` +
-This ID can be chosen from the config paramater section `wnd.kerberos.servers` and defines required parameters for the WND Kerberos setup. Multiple ID's with different setups can be created.
+This ID can be chosen from the config parameter section `wnd.kerberos.servers` and defines required parameters for the WND Kerberos setup. Multiple ID's with different setups can be created.
 * `ockeytab` +
 This is the keytab file that has been described in xref:enterprise/authentication/kerberos.adoc#keytab-files[Keytab Files].
 * `ocservice` +
@@ -237,7 +237,7 @@ image::enterprise/external_storage/windows_network_drive/wnd-kerberos-1.png[WND 
 
 Note that this authentication method can only be used by ordinary users if the admin hands over the `Kerberos Server ID` created. Consider this as a very sensitive information like a password.
 
-When the data has been entered correctly, the moint point will show up as follows:
+When the data has been entered correctly, the mount point will show up as follows:
 
 image::enterprise/external_storage/windows_network_drive/wnd-kerberos-2.png[WND mountpoint with Kerberos authorization,width=500]
 
@@ -452,7 +452,7 @@ NOTE: The `wnd.activity.sendToSharees` key depends on the `wnd.activity.register
 
 Collaborative WND (CWND) can only be set by an admin in menu:Settings[Admin > Storage]. This mount type cannot be selected by users in the user section. To prepare access for your mount point using the CWND mount type, you must provide a _Service Account_ (SA) which is an ordinary SMB user granting read access to the share you want to mount. You can use one SA for all CWND mounts or separate ones. The SA is used to gather the contents of a share used by the WND Listener and provides a common `file_id` to all accessing users, while the accessing users can only access those files and folders for which they've been granted rights.
 
-NOTE: For obvious reasons, do not use the `$user` placeholder for the share name. It would map to the logged in users home directoy shared collaboratively.
+NOTE: For obvious reasons, do not use the `$user` placeholder for the share name. It would map to the logged in users home directory shared collaboratively.
 
 NOTE: For the time being, no CWND is possible with Kerberos because of a necessary service user which is currently not available for Kerberos.
 

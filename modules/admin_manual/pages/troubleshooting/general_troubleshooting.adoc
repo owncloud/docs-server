@@ -254,7 +254,7 @@ SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
 == Missing Data Directory
 
-In situations where the `<mount-point>` of your compose definition uses NFS or an external RAID systrem, the moint point may be temporarily unavailable because the resource is not available on the host. If you have experienced this, here’s how ownCloud works and what you can expect.
+In situations where the `<mount-point>` of your compose definition uses NFS or an external RAID system, the mount point may be temporarily unavailable because the resource is not available on the host. If you have experienced this, here’s how ownCloud works and what you can expect.
 
 During normal operation, ownCloud’s data directory contains a hidden file, named `.ocdata`. The purpose of this file is for setups where the data folder is mounted (such as via NFS) and for some reason the mount disappeared. If the directory isn’t available, the data folder would, in effect, be completely empty and the `.ocdata` would be missing. When this happens, ownCloud will return a https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error[503 Service not available] error, to prevent clients believing that the files are gone.
 

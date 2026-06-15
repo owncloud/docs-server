@@ -8,7 +8,7 @@
 
 == Folder Structure
 
-This folder structure is important not only for knowign your data is located, but also when migrating ownCloud to a Dockerised environment.
+This folder structure is important not only for knowing where your data is located, but also when migrating ownCloud to a Dockerised environment.
 
 [source,plaintext]
 ----
@@ -22,7 +22,7 @@ mount_point/
 
 <1> The apps folder will contain ANY apps that will be added manually and are not automatically shipped by ownCloud. It matches xref: configuration/server/config_sample_php_parameters.adoc#define-alternative-app-directories[Define alternative app directories] aka the `apps-external` configuration of the config.
 
-<2> The location for additional configuration files, if not using environment varialbles, as was possible with earlier releases of ownCloud.
+<2> The location for additional configuration files, if not using environment variables, as was possible with earlier releases of ownCloud.
 +
 --
 IMPORTANT: Do not delete or manipulate any files in the config folder provided by the system.

@@ -70,7 +70,7 @@ OAuth2 support is available in ownCloud via the {oc-marketplace-url}/apps/oauth2
 
 To use the OAuth2 app, your ownCloud installation will need to meet the following dependencies:
 
-For the provided ownCloud image, the configuration already meets these criterias:
+For the provided ownCloud image, the configuration already meets these criteria:
 
 * *Apache:* +
 {mod_rewrite-url}[mod_rewrite] and {mod_headers-url}[mod_headers] modules are installed and enabled.

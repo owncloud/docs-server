@@ -131,7 +131,7 @@ Set the default number of days that user shares will expire. The default value i
 
 Check this option to limit the maximum expiration date to be the default. Users can choose an earlier expiration date if they wish.
 
-=== Set Default Expiration Date for Group Sshares
+=== Set Default Expiration Date for Group Shares
 
 Check this option to set a default expiration date when sharing with a group. The user can change or remove the default expiration date of a share.
 
@@ -260,7 +260,7 @@ If an exception occurred during the transfer ownership command or the command te
 
 When a user is deleted, their files are also deleted. As you can imagine, this is a problem if they created file shares that need to be preserved, because these disappear as well. In ownCloud, files are tied to their owners. This means, whatever happens to the file owner also happens to the files.
 
-One solution to get around this issueis, to create persistent shares for your users. You can retain ownership of them, or you could create a special user for the purpose of establishing permanent file shares. Simply create a shared folder in the usual way, and share it with the users or groups who need to use it. Set the appropriate permissions on it and the share is independent which users come and go, the file shares will remain. Because all files added to the share or edited in it are automatically owned by the owner of the share regardless of who adds or edits them.
+One solution to get around this issue is to create persistent shares for your users. You can retain ownership of them, or you could create a special user for the purpose of establishing permanent file shares. Simply create a shared folder in the usual way, and share it with the users or groups who need to use it. Set the appropriate permissions on it and the share is independent which users come and go, the file shares will remain. Because all files added to the share or edited in it are automatically owned by the owner of the share regardless of who adds or edits them.
 
 == Create Shares Programmatically
 

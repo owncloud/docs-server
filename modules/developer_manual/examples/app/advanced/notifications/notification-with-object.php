@@ -3,8 +3,8 @@
 /** @var \OCP\Notification\INotification $notification */
 $notification = $this->notificationManager->createNotification();
 $action = $notification->createAction();
-$action->setLabel(....)
-    ->setLink(...)
+$action->setLabel(...)
+    ->setLink(...);
 $notification->setApp('customgroups')
     ->setDateTime(new \DateTime())
     ->setObject(
