@@ -91,8 +91,10 @@ See also xref:configuration/files/files_locking_transactional.adoc[Transactional
 
 Keep the distinction between local and shared caches:
 
-* **Local cache** (`memcache.local`) — defaults to APCu (`OWNCLOUD_MEMCACHE_LOCAL`). APCu is per-process and per-node. This is correct: it should *not* be shared.
-* **Distributed cache** (`memcache.distributed`) and **locking cache** (`memcache.locking`) — must point at the shared Redis (set automatically with `OWNCLOUD_REDIS_ENABLED=true`).
+* **Local cache** (`memcache.local`) — defaults to APCu (`OWNCLOUD_MEMCACHE_LOCAL`): +
+APCu is per-process and per-node. This is correct: it should *not* be shared.
+* **Distributed cache** (`memcache.distributed`) and **locking cache** (`memcache.locking`): +
+Must point at the shared Redis (set automatically with `OWNCLOUD_REDIS_ENABLED=true`).
 
 Never place a file-based cache on the NFS share.
 
@@ -103,7 +105,7 @@ By default the image stores PHP sessions on the data tree:
 
 [source,bash]
 ----
-OWNCLOUD_SESSION_SAVE_HANDLER=files               # default
+OWNCLOUD_SESSION_SAVE_HANDLER=files                      # default
 OWNCLOUD_SESSION_SAVE_PATH=${OWNCLOUD_VOLUME_SESSIONS}   # default -> NFS in a shared setup
 ----
 
@@ -120,7 +122,11 @@ OWNCLOUD_SESSION_SAVE_PATH=tcp://redis:6379?auth=<your-redis-password>
 `OWNCLOUD_SESSION_SAVE_PATH` is written verbatim into PHP's `session.save_path`. It is **not** auto-derived from `OWNCLOUD_REDIS_HOST`. If you set the handler to `redis` but leave the save path at its default (a filesystem path), PHP will try to use that path as a Redis connection string and sessions will break. Always set **both** variables together.
 ====
 
-When the Redis session handler is active, the image also exposes the PHP redis-session locking parameters: `OWNCLOUD_REDIS_SESSION_LOCKING_ENABLED` (default `1`), `OWNCLOUD_REDIS_SESSION_LOCK_WAIT_TIME` (default `20000`), and `OWNCLOUD_REDIS_SESSION_LOCK_RETRIES` (default `750`).
+When the Redis session handler is active, the image also exposes the PHP redis-session locking parameters:
+
+* `OWNCLOUD_REDIS_SESSION_LOCKING_ENABLED` (default `1`), 
+* `OWNCLOUD_REDIS_SESSION_LOCK_WAIT_TIME` (default `20000`), and 
+* `OWNCLOUD_REDIS_SESSION_LOCK_RETRIES` (default `750`).
 
 As a weaker fallback you may keep file-based sessions and enforce sticky sessions on the load balancer, as described for the scenarios in xref:installation/deployment_recommendations.adoc[Deployment Recommendations]. Redis-backed sessions are preferred because they let any node serve any request.
 
@@ -140,8 +146,11 @@ Mitigations:
 
 The image runs ownCloud as `www-data` (UID 33 on Debian/Ubuntu), with files owned `www-data:root`.
 
-* **Consistent numeric IDs.** NFS identity is numeric unless you run idmapd/Kerberos. Every node must map `www-data` to the *same* UID/GID as the share was written with. A mismatch causes permission-denied errors or ownership churn — and then the startup chown fights other nodes on every boot. On Kubernetes, set `securityContext.runAsUser`/`fsGroup` consistently (see the {k8s-fsgroup-url}[Kubernetes security context docs]) and align them with the export.
-* **root_squash.** The default {nfs-root-squash-url}[`root_squash`] export option maps remote root to `nobody`. The image's entrypoint and chown logic run as root inside the container, so with `root_squash` the chown itself can fail with `Operation not permitted` on files it does not own. Either export with `no_root_squash` (scope the export to trusted nodes only — it is a security trade-off), or pre-create and pre-own the tree and set `OWNCLOUD_SKIP_CHOWN=true`.
+* **Consistent numeric IDs** +
+NFS identity is numeric unless you run idmapd/Kerberos. Every node must map `www-data` to the *same* UID/GID as the share was written with. A mismatch causes permission-denied errors or ownership churn — and then the startup chown fights other nodes on every boot. On Kubernetes, set `securityContext.runAsUser`/`fsGroup` consistently (see the {k8s-fsgroup-url}[Kubernetes security context docs]) and align them with the export.
+
+* **root_squash** +
+The default {nfs-root-squash-url}[`root_squash`] export option maps remote root to `nobody`. The image's entrypoint and chown logic run as root inside the container, so with `root_squash` the chown itself can fail with `Operation not permitted` on files it does not own. Either export with `no_root_squash` (scope the export to trusted nodes only — it is a security trade-off), or pre-create and pre-own the tree and set `OWNCLOUD_SKIP_CHOWN=true`.
 
 == Attribute Cache Coherence
 
@@ -231,9 +240,14 @@ OWNCLOUD_SKIP_CHMOD=true
 
 Shared services, reachable by every node:
 
-* **Database** — clustered MySQL/MariaDB (InnoDB) or PostgreSQL.
-* **Redis** — single shared instance for locking, distributed cache, and sessions.
-* **Storage** — the NFS export mounted at `OWNCLOUD_VOLUME_FILES` (consistent UID 33, `no_root_squash` or pre-owned), or S3 primary object storage.
+* **Database** +
+Clustered MySQL/MariaDB (InnoDB) or PostgreSQL.
+
+* **Redis** +
+Single shared instance for locking, distributed cache, and sessions.
+
+* **Storage** +
+The NFS export mounted at `OWNCLOUD_VOLUME_FILES` (consistent UID 33, `no_root_squash` or pre-owned), or S3 primary object storage.
 
 == Checklist
 
