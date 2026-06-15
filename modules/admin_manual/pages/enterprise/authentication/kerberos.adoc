@@ -11,7 +11,7 @@ With the Kerberos app, you can reuse the authentication ticket generated from a 
 
 == General Information
 
-When using the Kerberos app, the Windows login session from the user is taken to log in to ownCloud. This is very convenient, as the user does not need to re-authenticate for using ownCloud as he already has authenticated to his Domain. In addition by using the Kerberos ticket, the user can also use file resoures via the xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] app without the need to re-authenticate. This generates a seamless user experience. This is done by the configuration made, which enables the webserver to make the ticket available for PHP for further processing.
+When using the Kerberos app, the Windows login session from the user is taken to log in to ownCloud. This is very convenient, as the user does not need to re-authenticate for using ownCloud as he already has authenticated to his Domain. In addition by using the Kerberos ticket, the user can also use file resources via the xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] app without the need to re-authenticate. This generates a seamless user experience. This is done by the configuration made, which enables the webserver to make the ticket available for PHP for further processing.
 
 === Kerberos Benefits
 
@@ -106,13 +106,13 @@ image::enterprise/authentication/kerberos/kerberos-principle.drawio.svg[Kerberos
 
 * Make sure the clocktime of the KDC, the client and the server the ownCloud instance is running on is in sync. 5 minutes are the highest difference you may allow for Kerberos to work properly. Without going into the details, you may use NTP for that task.
 
-* All members in the realm, which includes cients, must support `DES3, AES128 or AES256` encryption. This applies to Windows 10+ and modern Linux based OS desktops. If a client does not support this encryption standard, he can not use Kerberos. Alternatively the legacy crypto `RC4-HMAC-EXP` can be added during configuration - which is _strongly discouraged_ for security reasons. See the http://web.mit.edu/kerberos/krb5-1.5/krb5-1.5/doc/krb5-admin/Supported-Encryption-Types.html#Supported%20Encryption%20Types[Kerberos supported encryption types,window=_blank] for more information.
+* All members in the realm, which includes clients, must support `DES3, AES128 or AES256` encryption. This applies to Windows 10+ and modern Linux based OS desktops. If a client does not support this encryption standard, he can not use Kerberos. Alternatively the legacy crypto `RC4-HMAC-EXP` can be added during configuration - which is _strongly discouraged_ for security reasons. See the http://web.mit.edu/kerberos/krb5-1.5/krb5-1.5/doc/krb5-admin/Supported-Encryption-Types.html#Supported%20Encryption%20Types[Kerberos supported encryption types,window=_blank] for more information.
 
-* Replace in the configuration examples where applicapable the placeholders accordingly:
+* Replace in the configuration examples where applicable the placeholders accordingly:
 ** `<user-name>` +
 The name of the user account like `owncloud_spnego_user` which is used as principal.
 ** `<complex-password>` +
-A complex password for `<user-name>`. Remember this password as it helps debugging, but keep protected as you can access domain servcies with it. Also see: xref:keytab-files[Keytab Files] for additional info when this password needs to be changed.
+A complex password for `<user-name>`. Remember this password as it helps debugging, but keep protected as you can access domain services with it. Also see: xref:keytab-files[Keytab Files] for additional info when this password needs to be changed.
 ** `<FQDN>` +
 The fully qualified domain name the ownCloud instance is accessed, like `owncloud.example.com`.
 ** `<realm>` +
@@ -506,7 +506,7 @@ sudo apachectl -k graceful
 . Click *Advanced* and add, if not exists, the ownCloud website to the local zone . For example, `\https://<FQDN>`.
 . Click btn:[Add].
 
-.For Google Chrome on Linux or macOS, Kerberos authentication is configured ieither via command line parameters or policy files:
+.For Google Chrome on Linux or macOS, Kerberos authentication is configured either via command line parameters or policy files:
 {empty}
 
 . Command line parameters
@@ -555,7 +555,7 @@ and double click it.
 Though some research has been made, no options have been identified. This section will be updated on changes known.
 
 ////
-must be enabled via a command line sitch
+must be enabled via a command line switch
 
 https://support.google.com/chrome/thread/201738899/kerberos-sso-stopped-working-under-linux-after-updating-chrome-to-110?hl=en
 

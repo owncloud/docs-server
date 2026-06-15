@@ -12,4 +12,4 @@ class Author extends Entity {
 
 $author = new Author();
 $author->setId(3);
-$author->getPhoneNumber()  // null
+$author->getPhoneNumber();  // null

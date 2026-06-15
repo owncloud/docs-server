@@ -91,7 +91,7 @@ $CONFIG = [
             'bucket' => 'owncloud',
               //
               // uncomment to indicate available storage size in the objectstore in bytes (in this example 1TB),
-              // without this setting, apps relying on available storage might be limited in funcionality e.g. metrics app
+              // without this setting, apps relying on available storage might be limited in functionality e.g. metrics app
               //'availableStorage' => 1099511627776,
               //
               // uncomment to enable server side encryption

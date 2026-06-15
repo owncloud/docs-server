@@ -195,7 +195,7 @@ The available elements in EXIF metadata can vary depending how the file was crea
 
 * Screenshot or graphics software may have: +
 **Property XPath** = +///PNG:Software+ +
-**Property Value** = +gnome-screenhot+
+**Property Value** = +gnome-screenshot+
 +
 **Property XPath** = +//PNG:Comment+ +
 **Property Value** = +Created with GIMP+

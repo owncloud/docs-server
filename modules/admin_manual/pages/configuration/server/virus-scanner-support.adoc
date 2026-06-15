@@ -228,7 +228,7 @@ sudo systemctl start clamav-daemon.service
 
 When successful, an output similar to the following should appear on the terminal:
 
-[source,plainetxt]
+[source,plaintext]
 ----
 Synchronizing state of clamav-daemon.service with SysV service script with
 /lib/systemd/systemd-sysv-install.
@@ -285,7 +285,7 @@ ClamAV can run in an ownCloud Dockerised deployment only in *ClamAV Daemon (TCP 
 
 In _ClamAV Daemon (TCP Socket)_ mode, ClamAV runs on a different server.
 
-image::configuration/server/virus-scanner-support/clamav_daemon_tcp.png[ClamAV Deamon TCP,width=350]
+image::configuration/server/virus-scanner-support/clamav_daemon_tcp.png[ClamAV Daemon TCP,width=350]
 
 . Set btn:[Mode] to "*ClamAV Daemon (TCP Socket)*".
 . Set btn:[Host] to the host name or IP address of the remote server running ClamAV, and set btn:[Port] to the server's port number.

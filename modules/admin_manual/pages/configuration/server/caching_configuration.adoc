@@ -29,7 +29,7 @@ The caching backends supported by ownCloud are:
 * xref:apcu[APCu] +
   This is a data cache only and does *not* cache any opcode. APCu is part of the Docker image.
 * xref:redis[Redis] +
-  This is an in-memory data structure store (cache) for single and multi-server ownCloud installations, which provides file locking and can be set up in local or distributed environments. The required `php-redis` extension is already part of the Docker image. Redis is used of the Docker Compose deployment example. For details see the xref:installation/installing_with_docker.adoc#docker-compose[Installalling With Docker] documentation.
+  This is an in-memory data structure store (cache) for single and multi-server ownCloud installations, which provides file locking and can be set up in local or distributed environments. The required `php-redis` extension is already part of the Docker image. Redis is used of the Docker Compose deployment example. For details see the xref:installation/installing_with_docker.adoc#docker-compose[Installing With Docker] documentation.
 
 [NOTE]
 ====
@@ -66,7 +66,7 @@ xref:configuration/files/files_locking_transactional.adoc[transactional file loc
 ====
 Authentication with Redis:
 
-* ownCloud does support the password protection available with current Redis versions which can be configurted with environment variables.
+* ownCloud does support the password protection available with current Redis versions which can be configured with environment variables.
 * With Redis version 6 upwards, a new authentication mechanism has been introduced named ACL (Access Control Lists). ownCloud does currently not support Redis ACLs.
 ====
 

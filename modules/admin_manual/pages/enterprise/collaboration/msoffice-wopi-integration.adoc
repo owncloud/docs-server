@@ -79,7 +79,7 @@ To configure the WOPI app in your ownCloud installation, add the following confi
 # Only for Office 365 (cloud), not needed for Office Online Server
 # URL of the O365 proxy instance.
 # Note that you will get a working URL from ownCloud Support
-# post a written declaration that your company has an eligable
+# post a written declaration that your company has an eligible
 # Microsoft Business contract.
 'wopi.proxy.url' => 'https://o365.example.com',
 

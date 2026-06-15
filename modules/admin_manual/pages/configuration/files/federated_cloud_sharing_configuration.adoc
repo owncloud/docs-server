@@ -8,9 +8,9 @@
 
 [IMPORTANT]
 ====
-* For security reasonsfederated sharing *strictly requires HTTPS (SSL/TLS)*.
+* For security reasons, federated sharing *strictly requires HTTPS (SSL/TLS)*.
 
-* If you want to use HTTP for development and testing purposes, you have to set xref:{config-sample}#allow-schema-fallback-for-federated-sharing-servers[OWNCLOUD_SHRAING_FEDERATION_ALLOW_HTTP_FALLBACK] to 'true'.
+* If you want to use HTTP for development and testing purposes, you have to set xref:{config-sample}#allow-schema-fallback-for-federated-sharing-servers[OWNCLOUD_SHARING_FEDERATION_ALLOW_HTTP_FALLBACK] to 'true'.
 ====
 
 == Configuration

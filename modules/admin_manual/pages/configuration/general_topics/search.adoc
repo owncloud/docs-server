@@ -63,7 +63,7 @@ To configure the Full Text Search, go to menu:Settings[Admin > Search].
 
 Independent of the authentication method selected below, you need to provide the URL of the Elasticsearch server. For any of the authentication methods selected, your Elasticsearch server must be prepared upfront.
 
-For the URL, both `HTTP` and `HTTPS` incuding the address and port can be used. 
+For the URL, both `HTTP` and `HTTPS` including the address and port can be used.
 
 The app provides several authentication methods. Select the one of your choice and check out the details for the respective authentication method below:
 
@@ -364,5 +364,5 @@ Currently, the app has the following known limitations:
 
 * If a shared file is renamed by the sharee (share receiver), the sharee cannot find the file using the new filename.
 * Search results are not updated when a text file is rolled back to an earlier version.
-* The app does not return results for recieved federated share files.
+* The app does not return results for received federated share files.
 * Search does currently not work when encrypting files via the encryption app.

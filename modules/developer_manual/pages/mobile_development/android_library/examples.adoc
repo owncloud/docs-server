@@ -311,7 +311,7 @@ library.
 [source,java]
 ----
 private void startSharesRetrievalForFileOrFolder(String filePath, boolean getReshares) {
-  GeteRemoteSharesForFileOperation operation = new GetRemoteSharesForFileOperation(filePath, getReshares, false);
+  GetRemoteSharesForFileOperation operation = new GetRemoteSharesForFileOperation(filePath, getReshares, false);
   operation.execute( mClient, this, mHandler);
 }
 

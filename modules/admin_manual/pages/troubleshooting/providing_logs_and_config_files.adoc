@@ -49,7 +49,7 @@ menu:Settings[Admin > General > Log > "Download logfile"].
 
 === Generate via Command Line
 
-If the log file is too big, you will need to transfer it from the command line. By default it is named `owncloud.log` and located at the Docker Volume `<moint-point>/files`.
+If the log file is too big, you will need to transfer it from the command line. By default it is named `owncloud.log` and located at the Docker Volume `<mount-point>/files`.
 
 Note that you may need to compress the logfile before uploading.
 
