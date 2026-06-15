@@ -8,6 +8,7 @@
 ** Installation
 *** xref:admin_manual:installation/deployment_considerations.adoc[Deployment Considerations]
 *** xref:admin_manual:installation/deployment_recommendations.adoc[Deployment Recommendations]
+**** xref:admin_manual:installation/deployment_recommendations/clustered_shared_storage.adoc[Clustered Deployments with Shared Storage]
 **** xref:admin_manual:installation/deployment_recommendations/nfs.adoc[NFS]
 *** xref:admin_manual:installation/system_requirements.adoc[System Requirements]
 *** xref:admin_manual:installation/installing_with_docker.adoc[Installing With Docker]

@@ -1,0 +1,261 @@
+= Clustered Deployments with Shared Storage
+:toc: right
+:toclevels: 2
+:keywords: cluster, shared storage, nfs, kubernetes, swarm, scale-out, redis, locking, chown
+:description: How to run the ownCloud Docker image across multiple application nodes that share a common file storage (for example NFS), and the pitfalls to avoid.
+
+:k8s-fsgroup-url: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+:nfs-root-squash-url: https://linux.die.net/man/5/exports
+
+== Introduction
+
+In a scale-out deployment, several ownCloud application containers run in parallel — on Kubernetes, Docker Swarm, or a set of plain Docker hosts behind a load balancer — and serve the same ownCloud instance. To do this, every node must agree on the same state. State lives in three independent places, and each has its own sharing mechanism:
+
+[width="100%",cols="25%,40%,35%",options="header"]
+|===
+| State | Shared via | Notes
+
+| Database
+| A shared (clustered) MySQL/MariaDB or PostgreSQL
+| Covered in xref:installation/deployment_recommendations.adoc[Deployment Recommendations].
+
+| User file blobs
+| A shared filesystem (NFS) **or** an S3-compatible object store
+| The subject of this page.
+
+| Locks, distributed cache, sessions
+| A shared Redis reachable by **all** nodes
+| Mandatory the moment you run more than one node.
+|===
+
+The most common question is how to share the file storage. This page focuses on that — specifically on running the official Docker image on top of a shared filesystem such as NFS — and on the operational pitfalls that are specific to the container image rather than to NFS itself.
+
+For tuning the NFS client/mount layer (NFS version, mount options, `rsize`/`wsize`, MTU), see the dedicated xref:installation/deployment_recommendations/nfs.adoc[NFS Deployment Recommendations] page. This page assumes that layer is already configured.
+
+[IMPORTANT]
+====
+NFS is appropriate for the *user file blobs* and almost nothing else. Everything that is hot, lock-sensitive, or per-request — file locking, the transactional/distributed cache, and PHP sessions — must be served from *Redis*, not from a file on the share. Putting these on NFS is the single most common cause of corruption and instability in clustered ownCloud deployments.
+
+For genuinely large or multi-zone deployments, consider S3 primary object storage instead of NFS. It removes the locking, ownership, and single-point-of-failure problems described below. See <<object-storage-alternative,Object Storage as an Alternative>>.
+====
+
+== What Must Be Shared, and How
+
+The image stores everything under a single data root, `OWNCLOUD_VOLUME_ROOT` (default `/mnt/data`), with these sub-directories:
+
+[width="100%",cols="25%,75%",options="header"]
+|===
+| Path (env var) | Recommended placement in a cluster
+
+| `files` (`OWNCLOUD_VOLUME_FILES`)
+| **Shared filesystem (NFS).** This is the actual shared-storage use case.
+
+| `config` (`OWNCLOUD_VOLUME_CONFIG`)
+| Generated from `OWNCLOUD_*` environment variables on every node. Do not rely on a shared, mutable `config.php`. See <<config-from-env>>.
+
+| `sessions` (`OWNCLOUD_VOLUME_SESSIONS`)
+| **Redis** — not the shared filesystem. See <<sessions>>.
+
+| `apps` (`OWNCLOUD_VOLUME_APPS`)
+| Shipped apps are baked into the image. Keep custom/marketplace apps consistent across nodes; avoid serving app code over NFS where possible.
+|===
+
+In addition, these are *not* directories but must still be shared and must be backed by Redis:
+
+* **Transactional file locking** — see <<file-locking>>.
+* **Distributed memory cache** — see <<caching>>.
+
+== File Locking
+
+ownCloud uses transactional file locking to prevent two requests from mutating the same file concurrently (for example two clients syncing the same file, or chunked uploads being assembled).
+
+[WARNING]
+====
+Never rely on POSIX/NFS file locks (`flock`/`fcntl`, NFS NLM/lockd, or NFSv4 leases) for ownCloud's file locking in a cluster. These are unreliable across nodes — NFSv3 needs a separate lock daemon and is fragile, and NFSv4 leases suffer split-brain on network blips and slow client-crash recovery.
+====
+
+Back file locking with Redis instead. In the image this is wired automatically when Redis is enabled:
+
+[source,bash]
+----
+OWNCLOUD_REDIS_ENABLED=true
+OWNCLOUD_REDIS_HOST=redis        # reachable by ALL nodes
+OWNCLOUD_REDIS_PORT=6379
+----
+
+With `OWNCLOUD_REDIS_ENABLED=true` the image sets both `memcache.locking` and `memcache.distributed` to `\OC\Memcache\Redis`. The crucial point for a cluster: the Redis instance must be a *single shared* instance that every application node connects to. A per-node Redis (or APCu) gives you no cross-node locking, which leads to race conditions and corrupted or half-written files.
+
+See also xref:configuration/files/files_locking_transactional.adoc[Transactional File Locking] and xref:configuration/server/caching_configuration.adoc[Caching Configuration].
+
+== Caching
+
+Keep the distinction between local and shared caches:
+
+* **Local cache** (`memcache.local`) — defaults to APCu (`OWNCLOUD_MEMCACHE_LOCAL`): +
+APCu is per-process and per-node. This is correct: it should *not* be shared.
+* **Distributed cache** (`memcache.distributed`) and **locking cache** (`memcache.locking`): +
+Must point at the shared Redis (set automatically with `OWNCLOUD_REDIS_ENABLED=true`).
+
+Never place a file-based cache on the NFS share.
+
+[#sessions]
+== Sessions
+
+By default the image stores PHP sessions on the data tree:
+
+[source,bash]
+----
+OWNCLOUD_SESSION_SAVE_HANDLER=files                      # default
+OWNCLOUD_SESSION_SAVE_PATH=${OWNCLOUD_VOLUME_SESSIONS}   # default -> NFS in a shared setup
+----
+
+With multiple nodes and no sticky load balancing, file-based sessions on a shared filesystem race against each other and cause random logouts and CSRF failures. Move sessions to Redis instead:
+
+[source,bash]
+----
+OWNCLOUD_SESSION_SAVE_HANDLER=redis
+OWNCLOUD_SESSION_SAVE_PATH=tcp://redis:6379?auth=<your-redis-password>
+----
+
+[CAUTION]
+====
+`OWNCLOUD_SESSION_SAVE_PATH` is written verbatim into PHP's `session.save_path`. It is **not** auto-derived from `OWNCLOUD_REDIS_HOST`. If you set the handler to `redis` but leave the save path at its default (a filesystem path), PHP will try to use that path as a Redis connection string and sessions will break. Always set **both** variables together.
+====
+
+When the Redis session handler is active, the image also exposes the PHP redis-session locking parameters:
+
+* `OWNCLOUD_REDIS_SESSION_LOCKING_ENABLED` (default `1`), 
+* `OWNCLOUD_REDIS_SESSION_LOCK_WAIT_TIME` (default `20000`), and 
+* `OWNCLOUD_REDIS_SESSION_LOCK_RETRIES` (default `750`).
+
+As a weaker fallback you may keep file-based sessions and enforce sticky sessions on the load balancer, as described for the scenarios in xref:installation/deployment_recommendations.adoc[Deployment Recommendations]. Redis-backed sessions are preferred because they let any node serve any request.
+
+== Ownership, Permissions, and the Startup chown
+
+This is the pitfall most likely to bite at scale. On *every* container start, the image performs a recursive ownership fix over the data tree (and the config, files, apps, and sessions sub-trees when they live outside the data root). It walks the entire tree to find files not owned by `www-data:root` and chowns them.
+
+On a multi-terabyte or multi-million-file share, this metadata walk over NFS can take *minutes per node* on every start and every rolling deploy. It hammers the NFS server with `stat` RPCs, delays readiness, and — under Kubernetes liveness/readiness probes — can get the pod killed before it ever serves traffic, producing a crash loop. Multiple nodes performing the walk simultaneously during a rolling update can saturate the storage backend.
+
+Mitigations:
+
+* Set `OWNCLOUD_SKIP_CHOWN=true` (and usually `OWNCLOUD_SKIP_CHMOD=true`) on the application nodes once ownership is correct.
+* Fix ownership *once*, out of band — for example with a one-shot init job/container — rather than on every replica.
+* Keep `config`, `apps`, and `sessions` off the large NFS data root (separate volumes or non-NFS, with `sessions` on Redis) so there is less to traverse.
+
+== UID/GID Alignment and root_squash
+
+The image runs ownCloud as `www-data` (UID 33 on Debian/Ubuntu), with files owned `www-data:root`.
+
+* **Consistent numeric IDs** +
+NFS identity is numeric unless you run idmapd/Kerberos. Every node must map `www-data` to the *same* UID/GID as the share was written with. A mismatch causes permission-denied errors or ownership churn — and then the startup chown fights other nodes on every boot. On Kubernetes, set `securityContext.runAsUser`/`fsGroup` consistently (see the {k8s-fsgroup-url}[Kubernetes security context docs]) and align them with the export.
+
+* **root_squash** +
+The default {nfs-root-squash-url}[`root_squash`] export option maps remote root to `nobody`. The image's entrypoint and chown logic run as root inside the container, so with `root_squash` the chown itself can fail with `Operation not permitted` on files it does not own. Either export with `no_root_squash` (scope the export to trusted nodes only — it is a security trade-off), or pre-create and pre-own the tree and set `OWNCLOUD_SKIP_CHOWN=true`.
+
+== Attribute Cache Coherence
+
+NFS clients cache file attributes for a few seconds by default (`actimeo`/`ac*`). In a cluster, node A may write a file that node B does not immediately see with the correct size/mtime, which can make ownCloud's file-scan/etag logic momentarily disagree across nodes. For stronger coherence, lower the attribute-cache timeouts (`acregmax`/`acdirmax`) or, for strict coherence at a real throughput cost, mount with `noac`. This is a genuine correctness-vs-performance trade-off; test under load. See the mount-option discussion in xref:installation/deployment_recommendations/nfs.adoc[NFS Deployment Recommendations].
+
+== Background Jobs (cron) Must Run on Exactly One Node
+
+When `OWNCLOUD_CROND_ENABLED=true`, the image starts a cron daemon *inside that container*. If you enable it on every replica, you get N independent cron daemons all firing ownCloud background jobs against the shared database and shared files concurrently — causing contention, duplicated work, and unnecessary lock pressure.
+
+Run background jobs on a single dedicated node instead:
+
+* On the web/application replicas, disable the in-container cron but keep the cron background mode:
++
+[source,bash]
+----
+OWNCLOUD_BACKGROUND_MODE=cron
+OWNCLOUD_CROND_ENABLED=false
+----
+* Run exactly **one** dedicated cron node that mounts the same share and connects to the same database and Redis:
++
+[source,bash]
+----
+OWNCLOUD_BACKGROUND_MODE=cron
+OWNCLOUD_CROND_ENABLED=true
+----
++
+On Kubernetes this is a single-replica Deployment, or a `CronJob` invoking `occ system:cron`.
+
+See xref:configuration/server/background_jobs_configuration.adoc[Background Jobs Configuration].
+
+== Upgrades and Database Migrations Must Run on Exactly One Node
+
+[WARNING]
+====
+On every container start the image runs install-or-migrate: if ownCloud is already installed it runs `occ upgrade`, otherwise `occ maintenance:install`. The image performs *no* cluster coordination around this — every replica that boots will independently attempt the migration against the shared database. During a rolling deploy this means multiple nodes can run `occ upgrade` simultaneously against a not-yet-migrated schema and race on the DDL.
+====
+
+You must externally guarantee that exactly one node migrates:
+
+. Put the instance into xref:maintenance/enable_maintenance.adoc[maintenance mode] cluster-wide before upgrading.
+. Run the migration from a single node (or a dedicated init Job) — for example `occ upgrade`.
+. Keep the other nodes gated until the migration has completed, then bring them up.
+
+This is orthogonal to NFS but always surfaces in the same scale-out project, so plan it together. See xref:maintenance/upgrading/upgrade.adoc[Upgrading].
+
+[#config-from-env]
+== Configuration from Environment Variables
+
+In the Docker image, `config.php` is generated from `OWNCLOUD_*` environment variables rather than being an editable file. In a cluster, drive configuration through these variables so each node renders an identical, effectively immutable configuration on start. Avoid a single shared, mutable `config.php` on NFS: it is read on every request and rewritten by `occ` during upgrades, and a torn read during a cross-node write (made worse by attribute caching) can break a node. Keep `occ config:system:set`-style changes out of the steady state. See xref:installation/installing_with_docker.adoc[Installing With Docker] for the full environment-variable reference.
+
+[#object-storage-alternative]
+== Object Storage as an Alternative
+
+For cloud-scale or multi-zone deployments, S3-compatible primary object storage sidesteps most of the NFS pitfalls on this page: there are no POSIX locking semantics, no startup chown storm, and no single filer to act as a bottleneck or single point of failure. The image supports it through `OWNCLOUD_OBJECTSTORE_*` variables (bucket, endpoint, region, path-style, credentials, multipart sizing). See xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[S3 as Primary Object Storage].
+
+NFS remains a good choice when you need a POSIX filesystem, want self-hosted storage, or run a modest number of nodes. For horizontal scale, object storage is generally the better story.
+
+== Reference: Roles in a Clustered Deployment
+
+A clustered deployment typically has two container roles, both connecting to the same database, Redis, and shared storage.
+
+.Application/web replicas (one or more)
+[source,bash,subs="attributes+"]
+----
+OWNCLOUD_REDIS_ENABLED=true            # locking + distributed cache via shared Redis
+OWNCLOUD_REDIS_HOST=redis
+OWNCLOUD_SESSION_SAVE_HANDLER=redis    # sessions in Redis, not on NFS
+OWNCLOUD_SESSION_SAVE_PATH=tcp://redis:6379?auth=<redis-password>
+OWNCLOUD_SKIP_CHOWN=true               # ownership fixed once, out of band
+OWNCLOUD_SKIP_CHMOD=true
+OWNCLOUD_BACKGROUND_MODE=cron
+OWNCLOUD_CROND_ENABLED=false           # cron handled by the dedicated node
+# OWNCLOUD_VOLUME_FILES -> the NFS share; config from env; sessions in Redis
+----
+
+.Single cron/migration node
+[source,bash,subs="attributes+"]
+----
+OWNCLOUD_REDIS_ENABLED=true
+OWNCLOUD_REDIS_HOST=redis
+OWNCLOUD_BACKGROUND_MODE=cron
+OWNCLOUD_CROND_ENABLED=true            # the ONLY node running background jobs
+OWNCLOUD_SKIP_CHOWN=true
+OWNCLOUD_SKIP_CHMOD=true
+# also the node that runs occ upgrade during maintenance windows
+----
+
+Shared services, reachable by every node:
+
+* **Database** +
+Clustered MySQL/MariaDB (InnoDB) or PostgreSQL.
+
+* **Redis** +
+Single shared instance for locking, distributed cache, and sessions.
+
+* **Storage** +
+The NFS export mounted at `OWNCLOUD_VOLUME_FILES` (consistent UID 33, `no_root_squash` or pre-owned), or S3 primary object storage.
+
+== Checklist
+
+* [ ] One shared Redis reachable by all nodes (`OWNCLOUD_REDIS_ENABLED=true`).
+* [ ] Sessions on Redis — *both* `OWNCLOUD_SESSION_SAVE_HANDLER=redis` and a `tcp://` `OWNCLOUD_SESSION_SAVE_PATH`.
+* [ ] `OWNCLOUD_SKIP_CHOWN=true` / `OWNCLOUD_SKIP_CHMOD=true` on application nodes; ownership fixed once out of band.
+* [ ] Consistent numeric UID/GID for `www-data` (33) across nodes; `no_root_squash` or pre-owned tree.
+* [ ] Cron on exactly one node (`OWNCLOUD_CROND_ENABLED=true` there, `false` everywhere else).
+* [ ] Upgrades/migrations gated to a single node with cluster-wide maintenance mode.
+* [ ] NFS mount layer tuned per xref:installation/deployment_recommendations/nfs.adoc[NFS Deployment Recommendations]; attribute caching reviewed.
+* [ ] Considered S3 primary object storage for large or multi-zone deployments.
