@@ -73,22 +73,15 @@ Notes regarding the logfile key:
 Example::
 +
 --
-The following example demonstrates how all three conditions can look like.
-The first one that matches triggers the condition block writing the log entry to the defined logfile.
+The following example demonstrates how the conditions can look like.
 
-// we need a envvar solution here
-
-[source,php]
+[source,.env]
 ----
-'log.conditionslog.conditions
-' => [
-  [
-    'shared_secret' => '57b58edb6637fe3059b3595cf9c41b9',
-    'users' => ['user1', 'user2'],
-    'apps' => ['comments'],
-    'logfile' => '/tmp/test2.log'
-  ]
-],
+OWNCLOUD_LOG_CONDITIONS=\
+'[{"apps":["files_external"],\
+'users':['user1','user2'],\
+"loglevel":0},\
+'log_secret':57b58edb6637fe3059b3595cf9c41b9'
 ----
 
 Based on the conditional log settings above, the following logs are written to the same logfile:
