@@ -203,10 +203,10 @@ a| xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL]
 ====
 * `ADMIN_USERNAME` and `ADMIN_PASSWORD` +
 The values will not change between deploys even if you change them in the `.env` file. +
-These environment variables are used to the define the admin user *for system setup and first logon*. Once set, the values are fixed.
+These environment variables are used to define the admin user *for system setup and first logon*. Once set, the values are fixed.
 +
 --
-After the inital logon, you can:
+After the initial logon, you can:
 
 ** Remove the envvars from the deployment, which is highly recommended. +
 ** xref:configuration/user/reset_admin_password.adoc[Change the admin users password] with standard CLI or webUI methods. +

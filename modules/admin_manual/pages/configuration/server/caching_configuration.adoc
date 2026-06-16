@@ -167,7 +167,7 @@ OWNCLOUD_MEMCACHE_LOCAL='\OC\Memcache\Redis'
 
 CAUTION: ownCloud provides many configuration options for Redis, including enhanced security features such as password protection. See the Redis security URL and the ownCloud environment variables for more details.
 
-== Memcached Configuration
+=== Memcached Configuration
 
 If you select Memcached, you must enable it via environment variables. The example value for the host setting assumes that you have used the ownCloud Docker Compose deployment example. Adapt this value for your setup.
 
@@ -183,7 +183,7 @@ OWNCLOUD_MEMCACHED_PORT=11211
 ====
 If you are using multiple memcached servers, omit `OWNCLOUD_MEMCACHED_PORT` and use the following notation:
 
-`OWNCLOUD_MEMCACHED_HOST="'host_1',port1,host_2',port_2"`
+`OWNCLOUD_MEMCACHED_HOST="'host_1',port_1,'host_2',port_2"`
 ====
 ////
 
@@ -200,7 +200,7 @@ Additional memcached options can be set with the environment variable `OWNCLOUD_
 ----
 --
 
-=== Clearing the Memcached Cache
+==== Clearing the Memcached Cache
 
 The Memcached cache can be flushed from the command line, using a range of common Linux/Unix tools including netcat and telnet. The following example uses telnet to log in, run the flush_all command, and log out:
 
