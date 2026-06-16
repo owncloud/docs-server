@@ -139,7 +139,7 @@ Click the btn:[gear] icon on the lower left pane to set a default storage quota.
 
 === External Storage Quota
 
-You now have a configurable option in `config.php` that controls whether external storage is counted against user’s quotas. This is still experimental and may not work as expected. The default is to not counting external storage as part of user storage quotas. If you prefer to include it, then change the default `false` to `true`.:
+You have a configurable environment variable that controls whether external storage is counted against user’s quotas. This is still experimental and may not work as expected. The default is to not count external storage as part of user storage quotas. If you prefer to include it, set the value to `true`:
 
 [source,.env]
 ----

@@ -395,7 +395,7 @@ Example:
 Backup (Replica) Port::
 +
 --
-The connection port of the backup LDAP server.  If no port is supplied, but only a host, then the main port (as specified above) will be used.
+The connection port of the backup LDAP server. If no port is supplied, but only a host, then the main port (as specified above) will be used.
 
 Example:
 
@@ -626,11 +626,11 @@ It also will take effect when a user or group's DN changes and an old UUID was c
 Username-LDAP User Mapping::
 +
 --
-ownCloud uses usernames as keys to store and assign data. In order to precisely identify and recognize users, each LDAP user will have an internal username in ownCloud. This requires a mapping from an ownCloud username to an LDAP user. 
+ownCloud uses usernames as keys to store and assign data. In order to precisely identify and recognize users, each LDAP user will have an internal username in ownCloud. This requires a mapping from an ownCloud username to an LDAP user.
 
 The created username is mapped to the UUID of the LDAP user. Additionally, the DN is cached to reduce LDAP interaction, but it is not used for identification. If the DN changes, the change will be detected by ownCloud by checking the UUID value.
 
-The same is valid for groups. The internal ownCloud name is used all over in ownCloud. Clearing the mappings will have leftovers everywhere. 
+The same is valid for groups. The internal ownCloud name is used all over in ownCloud. Clearing the mappings will have leftovers everywhere.
 Never clear the mappings in a production environment, but only in a testing or experimental server.
 
 IMPORTANT: Clearing the mappings is not configuration sensitive, it affects all LDAP configurations!
@@ -715,7 +715,7 @@ Check:
 
 `/etc/ldap/ldap.conf` and `/etc/openldap/ldap.conf`
 
-and look for 
+and look for
 
 `TLS_CACERT      /etc/ssl/certs/ca-certificates.crt`
 
