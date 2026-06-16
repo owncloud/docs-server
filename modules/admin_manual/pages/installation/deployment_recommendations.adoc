@@ -4,9 +4,6 @@
 :owncloud-edition-url: https://owncloud.com/find-the-right-edition/
 :ibm-elastic-storage-server-url: https://www.ibm.com/us-en/marketplace/ibm-elastic-storage-server
 :redhat-ceph-url: https://www.redhat.com/en/technologies/storage/ceph
-:netapp-hybrid-flash-array-url: https://www.netapp.com/us/products/storage-systems/hybrid-flash-array/index.aspx
-:netapp-nfs-bpg-url: https://www.netapp.com/us/media/tr-4067.pdf
-:netapp-mysql-url: https://www.netapp.com/us/media/tr-4722.pdf
 :setting-up-replication-url: https://mariadb.com/kb/en/setting-up-replication/
 :mariadb-monitor-url: https://mariadb.com/kb/en/mariadb-maxscale-22-automatic-failover-with-mariadb-monitor
 :btrfs-url: https://en.wikipedia.org/wiki/Btrfs
@@ -19,7 +16,6 @@
 :avoiding-deadlocks-in-galera-cluster-url: http://severalnines.com/blog/avoiding-deadlocks-galera-set-haproxy-single-node-writes-and-multi-node-reads
 :galera-cluster-wsrep-docs-url: https://galeracluster.com/resources/
 :db-high-availability-url: http://www.severalnines.com/blog/become-mysql-dba-blog-series-database-high-availability
-:bitnami-perf-enhancements-url: http://blog.bitnami.com/2014/06/performance-enhacements-for-apache-and.html
 :haproxy-load-balancer-url: https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts
 :haproxy-documentation-url: http://www.haproxy.org/#docs
 :haproxy-and-load-balancing-url: https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts
@@ -236,9 +232,9 @@ A memory cache speeds up server performance, and ownCloud supports a number of m
 
 ==== Storage
 
-For accessing a backend storage system via NFS, you can use a dedicated storage system like {netapp-hybrid-flash-array-url}[NetApp Hybrid Flash Storage Systems], or other systems like {ibm-elastic-storage-server-url}[IBM Elastic Storage] based on their Power8 servers or {redhat-ceph-url}[RedHat Ceph] with their NFS-Ceph gateway.
+For accessing a backend storage system via NFS, you can use a dedicated storage system like NetApp Hybrid Flash Storage Systems, or other systems like {ibm-elastic-storage-server-url}[IBM Elastic Storage] based on their Power8 servers or {redhat-ceph-url}[RedHat Ceph] with their NFS-Ceph gateway.
 
-You may take a look on the {netapp-nfs-bpg-url}[NetApp NFS Best Practice and Implementation Guide] for best NFS configuring practices, especially section _9.4 Mount Option Best Practices with NFS_ on page 111 and {netapp-mysql-url}[MySQL Database on NetApp ONTAP] which also includes performance measurements.
+You may take a look at the NetApp NFS Best Practice and Implementation Guide for best NFS configuring practices, and the MySQL Database on NetApp ONTAP guide which also includes performance measurements.
 
 ==== Recommended Licensing Model
 
@@ -326,9 +322,9 @@ xref:configuration/server/caching_configuration.adoc#redis[Redis] for distribute
 
 ==== Storage
 
-For accessing a backend storage system via NFS, you can use a dedicated storage system like {netapp-hybrid-flash-array-url}[NetApp Hybrid Flash Storage Systems] or other systems like {ibm-elastic-storage-server-url}[IBM Elastic Storage] based on their Power8 servers or {redhat-ceph-url}[RedHat Ceph] with their NFS-Ceph gateway. Optionally, an S3 compatible object store can also be used.
+For accessing a backend storage system via NFS, you can use a dedicated storage system like NetApp Hybrid Flash Storage Systems or other systems like {ibm-elastic-storage-server-url}[IBM Elastic Storage] based on their Power8 servers or {redhat-ceph-url}[RedHat Ceph] with their NFS-Ceph gateway. Optionally, an S3 compatible object store can also be used.
 
-You may take a look on the {netapp-nfs-bpg-url}[NetApp NFS Best Practice and Implementation Guide] for best NFS configuring practices, especially section _9.4 Mount Option Best Practices with NFS_ on page 111 and {netapp-mysql-url}[MySQL Database on NetApp ONTAP] which also includes performance measurements.
+You may take a look at the NetApp NFS Best Practice and Implementation Guide for best NFS configuring practices, and the MySQL Database on NetApp ONTAP guide which also includes performance measurements.
 
 ==== Recommended Licensing Model
 
@@ -367,5 +363,4 @@ NOTE: This setting is disabled by default. See the {galera-cluster-wsrep-docs-ur
 == General References
 
 * {db-high-availability-url}[Database High Availability]
-* {bitnami-perf-enhancements-url}[Performance enhancements for Apache and PHP]
 
