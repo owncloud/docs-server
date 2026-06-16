@@ -29,8 +29,8 @@ The following items are migrated:
 
 * Users and groups with their membership +
 Either automatically or manually depending on the LDAP server used
-* Files of enabled users from in each user's home directory (using rclone, which is bundled with the app) +
-The data transferred is added to the users personal Space
+* Files in each enabled user's home directory (using rclone, which is bundled with the app) +
+The data transferred is added to the user's personal Space
 * User shares, group shares, and link shares
 
 === What Is Not Migrated
@@ -91,7 +91,7 @@ sudo -u www-data \
 
 === oCIS
 
-See the https://doc.owncloud.com/[ownCloud Documentation] for how to setup an oCIS instance and more configuration details.
+See the https://doc.owncloud.com/[ownCloud Documentation] for how to set up an oCIS instance and more configuration details.
 
 [IMPORTANT]
 ====
@@ -104,24 +104,24 @@ PROXY_ENABLE_APP_AUTH: true
 AUTH_APP_ENABLE_IMPERSONATION: true
 ----
 
-* An *app token must be created for the oCIS admin user* using the auth-app. This token, together with the admin username, is used as the username and password for all oCIS operations during the migration.
+* An *app token must be created for the oCIS admin user* using the xref:ocis:admin:deployment/services/s-list/auth-app.adoc[auth-app]. This token, together with the admin username, is used as the username and password for all oCIS operations during the migration.
 
 * The oCIS instance should be *fresh and clean* before starting the migration. If the target instance already contains data, it may cause conflicts.
 ====
 
 == User and Group Migration
 
-No data migration can be initiated until users and groups are available on the oCis side. To avoid a failing data migration step, no user or group changes, such as adding, deleting or changing, must be applied after this migration step.
+No data migration can be initiated until users and groups are available on the oCIS side. To avoid a failing data migration step, no user or group changes, such as adding, deleting or changing, must be applied after this migration step.
 
 Different steps are required for the migration of users and groups, depending on their location in OC10, to make them accessible to oCIS.
 
-Consider that the https://doc.owncloud.com/ocis/next/deployment/services/s-list/idm.html[internal IDM] provided by oCIS, which is a mini LDAP, has a very limited scope and is mainly targeted at small Infinite Scale installations or testing. It should therefore not be used in production environments. For larger setups or production environments, it is highly recommended to use a “real” LDAP server or to switch to an external Identity Management Solution instead.
+Consider that the xref:ocis:admin:deployment/services/s-list/idm.adoc[internal IDM] provided by oCIS, which is a mini LDAP, has a very limited scope and is mainly targeted at small Infinite Scale installations or testing. It should therefore not be used in production environments. For larger setups or production environments, it is highly recommended to use a “real” LDAP server or to switch to an external Identity Management Solution instead.
 
-To address these different requirements, migrating users and groups are divided into separate sections. A combination of local and LDAP-based users is not supported.
+To address these different requirements, the migration of users and groups is divided into separate sections. A combination of local and LDAP-based users is not supported.
 
 === Migrate With Local Users
 
-These steps describe the migration of local OC10 users and groups to an external LDAP or to the embedded oCIS IDM - where no external LDAP is used.
+These steps describe the migration of local OC10 users and groups to an external LDAP or to the embedded oCIS IDM — where no external LDAP is used.
 
 ==== Migrate Local Users to LDAP
 
@@ -131,7 +131,7 @@ As the next step, continue with xref:#preparing-data-migration[Preparing Data Mi
 
 ==== Migrate Local Users to IDM
 
-Migrate OC10 users and groups to oCIS internal IDM, no extrernal LDAP server used. As a prerequisite, run the steps in xref:#preparing-data-migration[Preparing Data Migration] first.
+Migrate OC10 users and groups to oCIS internal IDM, no external LDAP server used. As a prerequisite, run the steps in xref:#preparing-data-migration[Preparing Data Migration] first.
 
 Migrate Users::
 +
@@ -187,7 +187,7 @@ As the final step, continue with xref:#migrate-files-and-shares[Migrate Files an
 
 === Migration With LDAP Users
 
-In general, users and groups must be accessible to oCIS. This can be achieved either connecting oCIS to the same LDAP server, or by migrating users and groups from the LDAP server that OC10 is connected to to a different backend for oCIS.
+In general, users and groups must be accessible to oCIS. This can be achieved either by connecting oCIS to the same LDAP server, or by migrating users and groups from the LDAP server that OC10 uses into a different backend for oCIS.
 
 The following procedures are necessary for the data migration to be possible.
 
@@ -214,7 +214,7 @@ oCIS Requirements::
 In addition to the `auth-app` requirements, verify the following oCIS environment variables:
 
 * `OCIS_LDAP_USER_ENABLED_ATTRIBUTE` +
-The environment variable must exist and not be false. The default value uses the ownCloud schema which is unlikely to be present in your LDAP.
+The environment variable must exist and not be false. The default value uses the ownCloud schema, which is unlikely to be present in your LDAP.
 * `OCIS_LDAP_USER_SCHEMA_ID` and `OCIS_LDAP_GROUP_SCHEMA_ID` +
 These environment variables should be set appropriately (for example `entryUUID`).
 * `OCIS_ADMIN_USER_ID` +

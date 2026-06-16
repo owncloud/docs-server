@@ -75,7 +75,7 @@ sudo chown -R www-data: mynewtheme
 +
 [source,console,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable mynewtheme
+{occ-command-example-prefix-docker} app:enable mynewtheme
 ----
 
 . Exclude your new theme from integrity checking. Add the following setting to `config/config.php`:
@@ -500,7 +500,7 @@ Next, a controller class which implements the `OCP\Settings\ISettings` interface
 *getSectionID:* This method returns the identifier of the section that this panel should be shown under. ownCloud Server comes with a predefined list of sections which group related settings together; the intention of which is to improve the user experience. This can be found here in
 https://github.com/owncloud/core/blob/master/lib/private/Settings/SettingsManager.php#L195[this example]:
 
-*getPanel:* This method returns the `OCP\Template` or `OCP\TemplateReponse` which is used to render the panel. The method may also return `null` if the panel should not be shown to the user.
+*getPanel:* This method returns the `OCP\Template` or `OCP\TemplateResponse` which is used to render the panel. The method may also return `null` if the panel should not be shown to the user.
 
 *getPriority:* An integer between 0 and 100 representing the importance of the panel (higher is more important). Most apps should return a value:
 

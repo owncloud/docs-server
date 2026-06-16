@@ -11,7 +11,7 @@ With the Kerberos app, you can reuse the authentication ticket generated from a 
 
 == General Information
 
-When using the Kerberos app, the Windows login session from the user is taken to log in to ownCloud. This is very convenient, as the user does not need to re-authenticate for using ownCloud as he already has authenticated to his Domain. In addition by using the Kerberos ticket, the user can also use file resoures via the xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] app without the need to re-authenticate. This generates a seamless user experience. This is done by the configuration made, which enables the webserver to make the ticket available for PHP for further processing.
+When using the Kerberos app, the Windows login session from the user is taken to log in to ownCloud. This is very convenient, as the user does not need to re-authenticate for using ownCloud as he already has authenticated to his Domain. In addition by using the Kerberos ticket, the user can also use file resources via the xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] app without the need to re-authenticate. This generates a seamless user experience. This is done by the configuration made, which enables the webserver to make the ticket available for PHP for further processing.
 
 === Kerberos Benefits
 
@@ -106,13 +106,13 @@ image::enterprise/authentication/kerberos/kerberos-principle.drawio.svg[Kerberos
 
 * Make sure the clocktime of the KDC, the client and the server the ownCloud instance is running on is in sync. 5 minutes are the highest difference you may allow for Kerberos to work properly. Without going into the details, you may use NTP for that task.
 
-* All members in the realm, which includes cients, must support `DES3, AES128 or AES256` encryption. This applies to Windows 10 and modern Linux based OS desktops. If a client does not support this encryption standard, he can not use Kerberos. Alternatively the legacy crypto `RC4-HMAC-EXP` can be added during configuration - which is _strongly discouraged_ for security reasons. See the http://web.mit.edu/kerberos/krb5-1.5/krb5-1.5/doc/krb5-admin/Supported-Encryption-Types.html#Supported%20Encryption%20Types[Kerberos supported encryption types,window=_blank] for more information.
+* All members in the realm, which includes clients, must support `DES3, AES128 or AES256` encryption. This applies to Windows 10+ and modern Linux based OS desktops. If a client does not support this encryption standard, he can not use Kerberos. Alternatively the legacy crypto `RC4-HMAC-EXP` can be added during configuration - which is _strongly discouraged_ for security reasons. See the http://web.mit.edu/kerberos/krb5-1.5/krb5-1.5/doc/krb5-admin/Supported-Encryption-Types.html#Supported%20Encryption%20Types[Kerberos supported encryption types,window=_blank] for more information.
 
-* Replace in the configuration examples where applicapable the placeholders accordingly:
+* Replace in the configuration examples where applicable the placeholders accordingly:
 ** `<user-name>` +
 The name of the user account like `owncloud_spnego_user` which is used as principal.
 ** `<complex-password>` +
-A complex password for `<user-name>`. Remember this password as it helps debugging, but keep protected as you can access domain servcies with it. Also see: xref:keytab-files[Keytab Files] for additional info when this password needs to be changed.
+A complex password for `<user-name>`. Remember this password as it helps debugging, but keep protected as you can access domain services with it. Also see: xref:keytab-files[Keytab Files] for additional info when this password needs to be changed.
 ** `<FQDN>` +
 The fully qualified domain name the ownCloud instance is accessed, like `owncloud.example.com`.
 ** `<realm>` +
@@ -135,69 +135,9 @@ The administration server. This is typically the same as the LDAP/Active Directo
 ** If this is not the case, you need to https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member[Setting up Samba as a Domain Member].
 ////
 
-* Check that you have the latest xref:installation/manual_installation/server_prep_ubuntu_22.04.adoc#updating-pear[pear] version installed.
-
-* Install, if not already done the `php-dev-<your version>` environment:
+* {empty}
 +
---
-[source,bash]
-----
-sudo apt install php-dev-<your version>
-----
-
-Check the existance of `phpize` with:
-[source,bash]
-----
-whereis phpize
-----
---
-
-* Install and enable the `php-krb5` library:
-+
---
-[source,bash]
-----
-sudo apt install libkrb5-dev
-sudo pecl channel-update pecl.php.net
-sudo pecl install krb5
-----
-
-If not exists, add a file in `/etc/php/<your-php-version>/mods-available/krb5.ini` with the following content:
-
-[source,bash]
-----
-extension=krb5.so
-----
-
-Finalize with:
-
-[source,bash]
-----
-sudo phpenmod krb5
-----
-
-Check with:
-
-[source,bash]
-----
-php -i | grep Kerb   
-----
-[source,plaintext]
-----
-Kerberos 5 support => enabled
-Library version => Kerberos 5 release 1.17
-----
---
-
-* Install handy command-line tools for Kerberos: +
-Note that `krb5-user` is an actual requirement, the Kerberos implementation in the WND app requires the `kvno` command which is contained in that package.
-+
---
-[source,bash]
-----
-sudo apt install krb5-user
-----
---
+IMPORTANT: The Docker image does not provide the required Kerberos `krb5` PHP extension and the `krb5-user` CLI tool. This tool is an actual requirement, the Kerberos implementation in the WND app requires the `kvno` command which is contained in the package installed. To mitigate this issue, you need to manually create an image that installs and enables these requirements.
 
 * DNS records +
 Create a DNS record for the public FQDN of the ownCloud instance (`<FQDN>`).
@@ -208,11 +148,11 @@ Create a DNS record for the public FQDN of the ownCloud instance (`<FQDN>`).
 This option can also be used if you have only one web site but want to keep the servers hostname and website address distinct.
 // https://imatviyenko.github.io/blog/2018/09/11/Apache-AD-kerberos
 
-* Download the ownCloud Kerberos app from the {oc-marketplace-url}/apps/kerberos[Marketplace,window=_blank] and enabe it with:
+* Enable the shipped ownCloud Kerberos app with:
 +
 [source.bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} app:enable kerberos
+{occ-command-example-prefix-docker} app:enable kerberos
 ----
 
 === Domain Controller Side
@@ -223,9 +163,17 @@ This option can also be used if you have only one web site but want to keep the 
 
 * Note that Kerberos depends on accurate naming, as server names are used to build the Service Principal Name (SPN) used to request tickets from a KDC. For clients, this becomes crucial when a load balancer is used, because they have, intentionally, no idea which server they are going to connect. For more details see: https://ssimo.org/blog/id_019.html[Load Balancers and Kerberos,window=_blank].
 
-* A SPN consists of: `<service_class>/<hostname_or_FQDN>:<port>/<service name>`, where `<port>` and `<service name>` are optional components. 
+* A SPN consists of: +
 +
-Using `HTTP`, which is a built in service class, in the configuration example below, enables that all Web applications on the same host including applications hosted by Apache, if they are configured for the use with Kerberos, will be granted tickets based on the domain user account.
+--
+[source,plaintext]
+----
+<service_class>/<hostname_or_FQDN>:<port>/<service name>
+----
+where `<port>` and `<service name>` are optional components. 
+
+Using `HTTP`, which is a built in service class, in the configuration example below, enables that all Web applications on the same host including applications hosted by Apache, if they are configured for the use with Kerberos, will be granted tickets based on the domain user acc
+--
 
 * Note that SPN always include the name of the host computer on which the service instance is running, for more details see: https://learn.microsoft.com/en-us/windows/win32/ad/service-principal-names[Microsoft: Service Principal Names,window=_blank].
 
@@ -375,7 +323,7 @@ samba-tool domain exportkeytab --principal=HTTP/<FQDN> <keytab-file-location>/<u
 
 == Configure ownCloud Server
 
-Follow these steps on the server running ownCloud:
+Run the commands from the server hosting ownCloud, following these steps. Note that you need to provide a Docker Volume to add/manipulate and backup the various Kerberos configuration files.
 
 . Configure `/etc/krb5.conf` for use with Kerberos. +
 Note that only required/recommended or non-default settings are used:
@@ -427,10 +375,11 @@ sudo chmod 0400 <keytab-file-location>/<user-name>.keytab
 . Check the validity of the `keytab` file:
 +
 --
-[source,bash]
+[source,docker]
 ----
-klist -e -k -t <keytab-file-location>/<user-name>.keytab
+docker exec -it owncloud_server sh -c 'klist -e -k -t <keytab-file-location>/<user-name>.keytab'
 ----
+
 [source,plaintext]
 ----
 Keytab name: FILE:<user-name>.keytab
@@ -443,10 +392,11 @@ KVNO Timestamp        Principal
 . Display the current key version number for a principal:
 +
 --
-[source,bash]
+[source,docker]
 ----
-kvno HTTP/<FQDN>@<REALM>
+docker exec -it owncloud_server sh -c 'kvno HTTP/<FQDN>@<REALM>'
 ----
+
 [source,plaintext]
 ----
 HTTP/<FQDN>@<REALM>: kvno = 4
@@ -456,14 +406,16 @@ HTTP/<FQDN>@<REALM>: kvno = 4
 . Attempt to use the `keytab` file to authenticate as the service principal:
 +
 --
-[source,bash]
+[source,docker]
 ----
-kinit -k -t <keytab-file-location>/<user-name>.keytab HTTP/<FQDN>@<REALM>
+docker exec -it owncloud_server sh -c 'kinit -k -t <keytab-file-location>/<user-name>.keytab HTTP/<FQDN>@<REALM>'
 ----
-[source,bash]
+
+[source,docker]
 ----
-klist
+docker exec -it owncloud_server sh -c 'klist'
 ----
+
 [source,plaintext]
 ----
 Ticket cache: FILE:/tmp/krb5cc_0
@@ -478,10 +430,11 @@ Valid starting    Expires           Service principal
 . Destroy the Kerberos ticket for security reasons:
 +
 --
-[source,bash]
+[source,docker]
 ----
-kdestroy
+docker exec -it owncloud_server sh -c 'kdestroy'
 ----
+
 [source,plaintext]
 ----
 Tickets destroyed
@@ -553,7 +506,7 @@ sudo apachectl -k graceful
 . Click *Advanced* and add, if not exists, the ownCloud website to the local zone . For example, `\https://<FQDN>`.
 . Click btn:[Add].
 
-.For Google Chrome on Linux or macOS, Kerberos authentication is configured ieither via command line parameters or policy files:
+.For Google Chrome on Linux or macOS, Kerberos authentication is configured either via command line parameters or policy files:
 {empty}
 
 . Command line parameters
@@ -602,7 +555,7 @@ and double click it.
 Though some research has been made, no options have been identified. This section will be updated on changes known.
 
 ////
-must be enabled via a command line sitch
+must be enabled via a command line switch
 
 https://support.google.com/chrome/thread/201738899/kerberos-sso-stopped-working-under-linux-after-updating-chrome-to-110?hl=en
 

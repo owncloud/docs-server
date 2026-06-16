@@ -1,15 +1,14 @@
 = Versions
 
-NOTE: These commands are only available when the "Versions" app (`files_versions`) is enabled.
-These commands are not available in xref:maintenance-commands[single-user (maintenance) mode].
+NOTE: These commands are only available when the "Versions" app (`files_versions`) is enabled. These commands are not available in xref:maintenance-commands[single-user (maintenance) mode].
 
 == versions:cleanup
 
 `versions:cleanup` can delete all versioned files, as well as the `files_versions` folder, for either specific users, or for all users. A Published version persists until the original file is deleted by somebody with such permission or via the `occ versions:cleanup` command.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} versions:cleanup [<user_id>]...
+{occ-command-example-prefix-docker} versions:cleanup [<user_id>]...
 ----
 
 Options
@@ -21,9 +20,9 @@ Options
 
 The example below deletes all versioned files for all users:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} versions:cleanup
+{occ-command-example-prefix-docker} versions:cleanup
 Delete all versions
 Delete versions for users on backend Database
   freda
@@ -35,21 +34,20 @@ Delete versions for users on backend Database
 
 You can delete versions for specific users in a space-delimited list:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} versions:cleanup freda molly
+{occ-command-example-prefix-docker} versions:cleanup freda molly
 Delete versions of   freda
 Delete versions of   molly
 ----
 
 == versions:expire
 
-`versions:expire` deletes only expired files according to the `versions_retention_obligation` setting in `config.php` (see the File versions section in config_sample_php_parameters). 
-The default is to delete expired files for all users, or you may list users in a space-delimited list.
+`versions:expire` deletes only expired files according to the `versions_retention_obligation` setting in `config.php` (see the File versions section in config_sample_php_parameters). The default is to delete expired files for all users, or you may list users in a space-delimited list.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} versions:expire [<user_id>]...
+{occ-command-example-prefix-docker} versions:expire [<user_id>]...
 ----
 
 Options

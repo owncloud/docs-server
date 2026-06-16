@@ -1,0 +1,396 @@
+= Installing with Docker
+:toc: right
+:description: ownCloud can be installed using the official ownCloud Docker image.
+:page-aliases: enterprise/installation/install.adoc, \
+installation/manual_installation/manual_installation.adoc, \
+installation/quick_guides/ubuntu_20_04.adoc, \
+installation/quick_guides/ubuntu_22_04.adoc, \
+installation/installation_wizard.adoc, \
+installation/troubleshooting.adoc, \
+installation/changing_the_web_route.adoc, \
+installation/letsencrypt/index.adoc, \
+installation/letsencrypt/using_letsencrypt.adoc, \
+installation/letsencrypt/apache.adoc, \
+installation/selinux_configuration.adoc
+
+
+:dockerhub-url: https://hub.docker.com/r/owncloud/server
+:docker-compose-url: https://docs.docker.com/compose/
+:docker-compose-build-url: https://docs.docker.com/compose/compose-file/build/
+
+== Introduction
+
+{description} This {dockerhub-url}[official image] is designed to be used in a docker compose setup but can also be used for a quick evaluation.
+
+Starting with ownCloud Server 11, the only supported installation method is a Docker-based installation which includes PHP 8 and Apache. Manual installation on Linux is no longer supported.
+
+== Database Notes
+
+With the image provided, ownCloud has added database connectors for the following databases:
+
+* MySQL / MariaDB
+* Postgres
+* SQLite
+
+If you need a different connector or a different version of a connector, you have to manually create your own image based on the ownCloud image provided here. This could also be done directly in the {docker-compose-build-url}[docker compose file].
+
+== Getting Started
+
+Grant docker command privileges to certain users by adding them to the group `docker`:
+
+[source,bash]
+----
+sudo usermod -aG docker <your-user>
+----
+
+NOTE: The changes via `usermod` only take effect after the docker users log in. So you may have to log out and log in again or possibly reboot before you can run docker commands.
+
+Users not added to the `docker` group can run docker commands with a preceding `sudo`. In this section `sudo` is generally omitted before docker commands since we assume you have created a docker user, which is also the only way to run ownCloud's command-line interface `occ` in a docker container. For more information on `occ`, see section xref:configuration/server/occ_command.adoc[Using the occ Command].
+
+An example `occ` command looks like this:
+
+[source,docker,subs="attributes+"]
+----
+{occ-command-example-prefix-docker} <your-command>
+----
+
+== Quick Evaluation
+
+NOTE: The commands and links provided in the following descriptions are intended to showcase basic docker usage, but we cannot take responsibility for their proper functioning.
+
+For testing purposes or a quick hands-on to get familiar with the look and feel, ownCloud provides a container using the SQLite database. Note that SQLite is not supported by ownCloud for production purposes. To set up such a testing instance, run the following command:
+
+[source,docker,subs="attributes+"]
+----
+docker run --rm --name oc-eval -d -p{std-port-http}:{std-port-http} owncloud/server
+----
+
+This starts a docker container with the name "oc-eval" in the background (option `-d`). `owncloud/server` is the docker image downloaded from Docker Hub. If you don't start the container with option `-d`, the logs will be displayed in the shell. If you are running it in the background as in the example above, you can display the logs with the command:
+
+[source,docker]
+----
+docker logs oc-eval
+----
+
+With the command `docker ps` you can list your running docker containers and should see the entry for oc-eval.
+
+You can log in to your ownCloud instance via a browser at `pass:a[http://localhost:{std-port-http}]` with the preconfigured user `admin` and password `admin`.
+
+NOTE: Access only works locally with http, not https.
+
+[IMPORTANT]
+====
+If you want to access the occ CLI command set with the quick evaluation setup, you must use:
+
+[source,docker]
+----
+docker exec --user www-data oc-eval occ <command>
+----
+
+instead the `docker compose exec` version as used in the documentation.
+====
+
+If the outcome meets the expectations but a supported installation with MariaDB is targeted, remove the eval version before proceeding with the next section.
+
+[source,docker]
+----
+docker kill oc-eval
+----
+
+This removes the container if you used the option `--rm` as suggested in the example above. If you omitted that option, you need to first run the command:
+
+[source,docker]
+----
+docker rm oc-eval
+----
+
+When running `docker ps` again, the entry for `oc-eval` should be gone.
+
+== Docker Compose
+
+The example configuration:
+
+* Exposes ports {std-port-http}, allowing for HTTP connections.
+* Uses separate _MariaDB_ and _Redis_ containers.
+* Provides mounts plus a volume bind configuration example.
+
+=== Compose Setup
+
+The following instructions assume you install locally. For remote access, the value of xref:#env-file[OWNCLOUD_DOMAIN] and xref:#env-file[OWNCLOUD_TRUSTED_DOMAINS] must be updated to represent the hostname(s) and/or IP addresses that the server is reachable at.
+
+. Create a new project directory at a location of choice:
++
+--
+[source,bash]
+----
+mkdir owncloud-server-docker
+cd owncloud-server-docker
+----
+--
+
+. Create a `docker-compose.yml` file as base to derive from with the following content:
++
+[source,yml]
+----
+include::example$installation/docker/docker-compose.yml[]
+----
+
+. Create an `.env` configuration file in the same directory, which contains the required configuration settings.
++
+[#env-file]
+[source,bash,subs="attributes+"]
+----
+include::example$installation/docker/dot.env[]
+----
++
+Only a few settings are required, these are:
++
+[width="100%",cols="45%,80%,30%",options="header"]
+|===
+| Setting Name
+| Description
+| Example
+
+| `OWNCLOUD_IMAGE`
+| The ownCloud version
+a| `{latest-server-download-version}` or `latest`
+
+| `OWNCLOUD_DOMAIN` *^1^*
+a| A single ownCloud domain
+--
+IMPORTANT: Either use: +
+pass:[&ensp;] `OWNCLOUD_DOMAIN` +
+pass:[&ensp;&ensp;] _OR_ +
+pass:[&ensp;] `OWNCLOUD_TRUSTED_DOMAINS`. +
+Only use a single domain. +
+The same trusted domains rules apply to everything else.
+--
+
+| `my_domain` or `my_ip` ...
+
+a| xref:{config-sample}#define-list-of-trusted-domains-that-users-can-log-into[OWNCLOUD_TRUSTED_DOMAINS] *^1,2^*
+a| Multiple ownCloud Domains. +
+See the config description for more details.
+
+| `my_host,my_ip,my_domain`
+
+a| xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL]
+| See the config description for more details.
+| `\http://localhost`
+
+| `ADMIN_USERNAME`
+| The webUI admin username
+| `admin`
+
+| `ADMIN_PASSWORD`
+| The webUI admin user’s password
+| `admin`
+
+| `HTTP_PORT`
+| The HTTP port to bind to
+| `{std-port-http}`
+
+| `MARIADB_IMAGE`
+| The mariadb version
+| `10.11`
+
+| `REDIS_IMAGE`
+| The redis version
+| `7`
+|===
++
+[NOTE]
+====
+* `ADMIN_USERNAME` and `ADMIN_PASSWORD` +
+will not change between deploys even if you change the values in the `.env` file. +
+To change them, you will need to issue `docker volume prune`, which *will delete all your data*.
+* (1) ... `localhost` is always included and cannot be removed by omitting it. It must be used if only one entry is to be defined.
+* (2) ... To access ownCloud from your internal network without using an externally resolvable URL, you must add the IP address of the host or an internal resolvable URL running the container.
+====
+
+. Start the container using your preferred Docker _command-line tool_ such as:
++
+[source,docker]
+----
+docker compose up -d
+----
+
+. When the process completes:
++
+--
+Check that all the containers have successfully started, by running `docker compose ps`. If they are all working correctly, you should see output similar to the one below:
+
+[width="100%",cols="30%,50%,30%,50%",options="header"]
+|===
+| Name
+| Command
+| State
+| Ports
+
+| owncloud_mariadb
+| docker-entrypoint.sh --max ...
+| Up (healthy)
+| {std-port-mysql}/tcp
+
+| owncloud_redis
+| docker-entrypoint.sh --dat ...
+| Up (healthy)
+| {std-port-redis}/tcp
+
+| owncloud_server
+| /usr/bin/entrypoint /usr/b ...
+| Up (healthy)
+| 0.0.0.0:{std-port-http}->{std-port-http}/tcp
+|===
+
+Here you can see, that the database, ownCloud and Redis containers are running, and that ownCloud is accessible via port {std-port-http} on the host machine.
+
+[TIP]
+====
+Although the containers are up and running, it may still take a few minutes until ownCloud is fully functional. +
+To inspect the log output:
+
+[source,docker]
+----
+docker compose logs --follow owncloud
+----
+
+Wait until the output shows **Starting apache daemon...** before you access the web UI.
+====
+
+IMPORTANT: All files stored in this setup are contained in Docker volumes rather than a physical filesystem tree. It is the admin's responsibility to make the files persistent. For details how to migrate, see the https://docs.docker.com/reference/cli/docker/container/cp/[docker container cp] command documentation.
+
+IMPORTANT: Any apps that came with the image will reappear when the container is restarted - if you uninstall them.
+--
+
+=== Logging In
+
+To log in to the ownCloud UI, open `pass:a[http://localhost:{std-port-http}]` (or the URL defined) in your browser of choice, where you see the standard ownCloud login screen as in the image below.
+
+image::docker/owncloud-ui-login.png[The ownCloud UI via Docker,width=300]
+
+IMPORTANT: The username and password are the credentials which you stored in `.env` earlier. These will not change between deploys even if you change the values in the .env file.
+
+=== Stopping the Containers
+
+To stop the containers, issue the following command:
+[source,docker]
+----
+docker compose stop
+----
+
+To stop and remove containers along with the related networks, images and volumes:
+[source,docker]
+----
+docker compose down --rmi all --volumes --remove-orphans
+----
+
+=== Running occ commands
+
+If you want to run an occ command, first go to the directory where your compose `.yaml` file is located. Here, you are able to run any command referring to xref:configuration/server/occ_command.adoc[Using the occ Command] by entering:
+
+[source,docker]
+----
+docker compose exec owncloud occ <command>
+----
+
+IMPORTANT: Don't use the `php` command prefix, this leads to several errors and is not intended to run in docker environments.
+
+=== Configuration
+
+For more configuration options, please refer to the xref:installation/configuration_notes.adoc[Configuration Notes] documentation.
+
+== Enterprise License Keys
+
+An Enterprise license keys can be added by:
+
+* Using an environment variable named `OWNCLOUD_LICENSE_KEY`, or
+* By adding a config entry. +
+For more details see the xref:installation/configuration_notes.adoc[Configuration Notes] documentation.
+* It is also possible to activate your Enterprise Edition on the webUI. +
+Open owncloud and navigate to: menu:Settings[Admin > General]. Copy your license key into the field `Enter a new license:` and click `Save` to confirm.
+
+=== Introduction
+
+You need to install a license key to use ownCloud Enterprise Edition. There are two types of license keys:
+
+* One is a free 30-day trial key.
+* The other is a full license key for Enterprise customers.
+
+You can https://owncloud.com/download/[download and try ownCloud Enterprise for 30 days for free], which auto-generates a free 30-day key. When this key expires, your ownCloud installation is not removed, only enterprise features are disabled. If you become an Enterprise customer, you can enter your new key to regain access. See https://owncloud.com/how-to-buy-owncloud/[How to Buy ownCloud] for sales and contact information.
+
+=== Configuration
+
+Once you get your Enterprise license key, it needs to be copied to your ownCloud configuration file `config/config.php` like in this example:
+
+[source,php]
+----
+'license-key' => 'test-20150101-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-YYYYYY',
+----
+
+Each running instance of ownCloud requires a license key. Keys will work across upgrades without issue, so new keys will not be required when you upgrade your ownCloud Enterprise to a new version.
+
+TIP: If you want to remove the current license, open ownCloud and navigate to menu:Settings[Admin > General] and click btn:[Remove current license key].
+
+=== User Counting
+
+Your ownCloud Enterprise License Key is valid for the purchased amount of users, as per the ownCloud EULA - ownCloud Commercial License. When you generate a config.report, you will get:
+
+* a counting of the enabled users, 
+* the ownCloud guest users -- if the guest app is enabled and
+* the number of user directories created.
+
+The latter is the user number you will need licenses for. Guest users are currently counted with a fair use policy -- which means, that you can't have more guest users than you have licensed users. If you exceed the number of licensed users, please contact your account manager or ownCloud Partner and true-up as per your contract or EULA with us. The user directories are created on first login. When a user is deleted, the user directories are deleted as well. Users which are disabled count. The last login is not relevant.
+
+== Troubleshooting
+
+=== Admin Settings
+
+With Docker, the admin user cannot control certain settings in the WebUI, instead they are/can be now controlled by environment variables. Changing these variables requires stopping and restarting the container. When using environment variables, these changes need to be reflected in the compose file.
+
+=== Logging and Apache2 Config
+
+See the `General Troubleshooting` guide for:
+
+* The xref:troubleshooting/general_troubleshooting.adoc#view-the-apache-config[View the Apache Config]
+* The xref:troubleshooting/general_troubleshooting.adoc#location-of-logfiles[Location of Logfiles].
+* The xref:troubleshooting/general_troubleshooting.adoc#owncloud-log-levels[ownCloud Log-Levels].
+
+=== Container CLI
+
+If you need to access the ownCloud containers CLI for any reason, you can do so using the following command:
+
+[source,docker,subs="attributes+"]
+----
+docker exec -it owncloud_server /bin/bash
+----
+
+=== List Shipped Apps
+
+The Docker image comes with all apps provided by ownCloud, regardless of the licensing scheme. To see a list of the apps that have been shipped, you can either look:
+
+* In the GUI via menu:Settings[Admin > Apps]
+* See the xref:installation/apps_supported.adoc[Supported Apps in ownCloud] page which provides you additional documentation links
+* List the contents of `/var/www/owncloud/apps` when accessing the xref:#container-cli[container CLI].
+
+=== Terminating Containers
+
+If your container is terminating for whatever reason, you will not be able to run `docker(-compose) exec` to make investigations inside the container as there will be no running container. Instead you need to use `docker(-compose) run`. It's important that you prefix any command to be run by `/usr/bin/owncloud`, otherwise the container will not be initialized correctly. See the example command below:
+
+[source,bash]
+----
+docker( compose) run <containername> /usr/bin/owncloud bash
+----
+
+=== MySQL
+
+If your ownCloud installation fails and you see the following error in your ownCloud log please refer to xref:configuration/database/linux_database_configuration.adoc#mysql-mariadb[MySQL / MariaDB with Binary Logging Enabled] for how to resolve it.
+
+[source,plaintext]
+----
+An unhandled exception has been thrown: exception ‘PDOException’ with message 'SQLSTATE[HY000]: General error: 1665 Cannot execute statement: impossible to write to binary log since BINLOG_FORMAT = STATEMENT and at least one table uses a storage engine limited to row-based logging. InnoDB is limited to row-logging when transaction isolation level is READ COMMITTED or READ UNCOMMITTED.'
+----
+
+=== Upgrading ownCloud
+
+When a new version of ownCloud gets released, you should update your instance. To do so, read the documents located in the xref:maintenance/upgrading/upgrade.adoc[Upgrading] section.

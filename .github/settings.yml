@@ -103,7 +103,8 @@ labels:
     color: fef2c0
   - name: p1-urgent
     color: fc2929
-    description: Consider a hotfix release with only that fix (ex: lost trust, money, security issue, ...)
+    description: |
+      Consider a hotfix release with only that fix (ex: lost trust, money, security issue, ...)
   - name: p2-high
     color: fc2929
     description: Escalation, on top of current planning, release blocker.

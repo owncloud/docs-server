@@ -23,9 +23,9 @@ The following commands manage the migration of ownCloud to Kiteworks:
 
 To start the migration, it must be initialized first:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-kiteworks:init KW_HOST KW_APPLICATION_ID "KW_SECRET"
+{occ-command-example-prefix-docker} migrate:to-kiteworks:init KW_HOST KW_APPLICATION_ID "KW_SECRET"
 ----
 
 === Arguments
@@ -47,16 +47,16 @@ To start the migration, it must be initialized first:
 [width="100%",cols="20%,70%",]
 |===
 | `-f --force`
-| Normally, init is protected against accidentially overwriting an existing kiteworks connection. Use --force to do so.
+| Normally, init is protected against accidentally overwriting an existing kiteworks connection. Use --force to do so.
 |===
 
 == Verify That the Migration can be Started
 
 After initialisation, the migration must be verified to be ready:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-kiteworks:verify $KW_ADMIN_USER
+{occ-command-example-prefix-docker} migrate:to-kiteworks:verify $KW_ADMIN_USER
 ----
 
 === Arguments
@@ -79,9 +79,9 @@ After initialisation, the migration must be verified to be ready:
 
 After verification, migrating users can be started:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-kiteworks:users $KW_ADMIN_USER $KW_PROFILE_GUEST
+{occ-command-example-prefix-docker} migrate:to-kiteworks:users $KW_ADMIN_USER $KW_PROFILE_GUEST
 ----
 
 === Arguments
@@ -107,9 +107,9 @@ After verification, migrating users can be started:
 
 After migrating users, migrating files can be started:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-kiteworks:files $KW_ADMIN_USER
+{occ-command-example-prefix-docker} migrate:to-kiteworks:files $KW_ADMIN_USER
 ----
 
 === Arguments
@@ -132,9 +132,9 @@ After migrating users, migrating files can be started:
 
 After migrating files, shares can be migrated. Note that when initiating this step, migrating files and users cant be run again:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-kiteworks:shares $KW_ADMIN_USER
+{occ-command-example-prefix-docker} migrate:to-kiteworks:shares $KW_ADMIN_USER
 ----
 
 === Arguments
@@ -157,9 +157,9 @@ After migrating files, shares can be migrated. Note that when initiating this st
 
 After migrating shares, the final step can be processed. This is to disable migrated users in Kiteworks that are disabled in ownCloud:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} migrate:to-kiteworks:disable-users $KW_ADMIN_USER
+{occ-command-example-prefix-docker} migrate:to-kiteworks:disable-users $KW_ADMIN_USER
 ----
 
 === Arguments

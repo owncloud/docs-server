@@ -1,0 +1,28 @@
+= Create an own Docker Image
+:toc: right
+:description: The ownCloud image can be extended with additional functionalities.
+
+== Introduction
+
+The image provided by ownCloud can, and sometimes must be extended with binaries that are not part of the package.
+
+== When to Build an own Image
+
+You can build your own image at any time to add binaries or functionalities that are not included in the shipment. To do so, create your own Dockerfile with your requirements and use the provided ownCloud image as the basis for your work.
+
+In some situations, creating your own image is mandatory because certain apps or configurations require binaries that are not included in the image. These binaries have not been added on purpose in order to keep the image as slim as possible, and because situations requiring them depend on individual use cases.
+
+Apps or Configurations that Require Building an own Docker image::
++
+--
+The following references link to the relevant pages that describe the reason when building individual images may be required.
+
+* xref:admin_manual:configuration/files/external_storage/smb.adoc[SMB]
+* xref:admin_manual:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive Configuration]
+* xref:admin_manual:enterprise/authentication/kerberos.adoc[Kerberos Authentication]
+* xref:admin_manual:configuration/files/previews_configuration.adoc[Preview Configuration]
+--
+
+== Impact on own Built Images
+
+ownCloud cannot be held responsible for any changes made when creating a Docker image based on the one provided by ownCloud. The only exception is, when an image is created under the supervision of ownCloud Support.

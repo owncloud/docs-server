@@ -62,7 +62,7 @@ The command to backport this Pull Request would be called as follows:
 [source,console]
 ----
 <path>/backport.sh 1234567 10.9
-4 commits beeing cherry picked:
+4 commits being cherry picked:
 
 2e03d938
 fef19729

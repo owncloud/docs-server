@@ -1,16 +1,17 @@
 = Configuring Federation Sharing
 :toc: right
-:toclevels: 1
-:page-aliases: go/admin-sharing-federated.adoc
 :description: With Federated Cloud Sharing, you can easily and securely link file shares between ownCloud servers, in effect creating a "cloud" of ownCloud installations.
 
 == Introduction
 
 {description}
 
-IMPORTANT: For security reasons federated sharing **strictly requires HTTPS (SSL/TLS)**.
+[IMPORTANT]
+====
+* For security reasons, federated sharing *strictly requires HTTPS (SSL/TLS)*.
 
-IMPORTANT: If you want to use HTTP for development and testing purposes, you have to set `'sharing.federation.allowHttpFallback' => true,` in **config/config.php**.
+* If you want to use HTTP for development and testing purposes, you have to set xref:{config-sample}#allow-schema-fallback-for-federated-sharing-servers[OWNCLOUD_SHARING_FEDERATION_ALLOW_HTTP_FALLBACK] to 'true'.
+====
 
 == Configuration
 
@@ -20,9 +21,9 @@ Follow these steps to establish a trusted connection between two servers.
 If you open the server URL in your browser and see a lock icon on the left-hand side of the address bar, the certificate is valid:
 +
 .Lock icon in the address bars in Firefox, Google Chrome, and Safari
-image::configuration/files/browser-address-bars.png[Lock icon in Firefox, Google Chrome, and Safari]
+image:configuration/files/browser-address-bars.png[Lock icon in Firefox, Google Chrome, and Safari, width=300]
 
-. Verify that the `'overwrite.cli.url' => 'https://<SERVER_URL>'` setting is configured to the correct URL instead of `localhost` in *config.php*:
+. Verify that xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL] is set to `'https://<YOUR-SERVER-URL>'` instead of `localhost`:
 
 . Navigate to menu:Admin settings[Sharing > Federation]
 
@@ -34,7 +35,7 @@ image::configuration/files/browser-address-bars.png[Lock icon in Firefox, Google
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} system:cron
+{occ-command-example-prefix-docker} system:cron
 ----
 
 . Run the `OCA\Federation\SyncJob` job with the `force` option on both servers. +
@@ -42,7 +43,7 @@ You can get the corresponding job ID by using the `background:queue:status` occ 
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:execute --force <jobId>
+{occ-command-example-prefix-docker} background:queue:execute --force <jobId>
 ----
 
 . The check should now be green
@@ -51,8 +52,8 @@ You can get the corresponding job ID by using the `background:queue:status` occ 
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} dav:sync-system-addressbook
-{occ-command-example-prefix} federation:sync-addressbook
+{occ-command-example-prefix-docker} dav:sync-system-addressbook
+{occ-command-example-prefix-docker} federation:sync-addressbook
 ----
 
 . Configure automatic acceptance of new federated shares
@@ -62,16 +63,16 @@ NOTE: Automatic acceptance of new federated shares will not work if the option `
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set federation auto_accept_trusted --value '0'
-{occ-command-example-prefix} config:app:set federatedfilesharing auto_accept_trusted --value 'yes'
+{occ-command-example-prefix-docker} config:app:set federation auto_accept_trusted --value '0'
+{occ-command-example-prefix-docker} config:app:set federatedfilesharing auto_accept_trusted --value 'yes'
 ----
 --
 
 == Working With Proxies
 
-There are ownCloud instances that are not connected to the internet. They have no possibility to reach the public network. Therefore Federation will not work without a proxy.
+Some ownCloud instances are not connected to the internet. They cannot access the public network. Therefore, federation will not work without a proxy.
 
-Set the `proxy` and `proxyuserpwd` configuration variables, in `config/config.php`. `proxy` sets the proxy’s hostname, and `proxyuserpwd` sets the username and password credentials, in `username:password` format.
+Set the xref:{config-sample}#define-list-of-trusted-proxy-servers[OWNCLOUD_PROXY] and xref:{config-sample}#define-proxy-authentication[OWNCLOUD_PROXY_USERPWD] configuration variables.
 
 == Creating a New Federation Share
 
@@ -82,69 +83,70 @@ Follow these steps to create a new Federation share between two ownCloud servers
 . Create a federated share by entering username@serveraddress in the sharing dialog (for example `freda@https://example.com/owncloud`). When ownCloud verifies the link,
 it displays it with the *(federated)* label. Click on this label to establish the link.
 +
-image::configuration/files/federation-2.png[image, width=550]
+image:configuration/files/federation-2.png[image, width=350]
 
 . When the link is successfully completed, you have a single share option, and that is *can edit*.
 +
-image::configuration/files/federation-3.png[image, width=350]
+image:configuration/files/federation-3.png[image, width=350]
 +
 You may disconnect the share at any time by clicking the btn:[trash can] icon.
 
 == Federated Sharing Scanner CronJob Configuration
 
-IMPORTANT: As part of the migration step to 10.5, before enabling the cronjob described below, make sure to remove the system cron job from your crontab that executes legacy *occ incoming-shares:poll*
-
 The Federated Sharing Scanner is a background job used to scan the federated shares to ensure the integrity of the file cache.
 
 On each run the scanner will select federated shares that satisfy these requirements:
 
-. ensure that within a single cron run, at max [cronjob_scan_external_batch] scans will be performed out of all accepted external shares (default 100) 
+. Ensure that within a single cron run, at max xref:cronjob_scan_external_batch[cronjob_scan_external_batch] scans will be performed out of all accepted external shares (default 100) 
 
-. a scan of that external share has not been performed within the last [cronjob_scan_external_min_scan] seconds (default 3 hours)
+. A scan of that external share has not been performed within the last xref:cronjob_scan_external_min_scan[cronjob_scan_external_min_scan] seconds (default 3 hours)
 
-. the user still exists, and has been active recently, meaning logged in within the last [cronjob_scan_external_min_login] seconds (default 24 hours)
+. The user still exists, and has been active recently, meaning logged in within the last xref:cronjob_scan_external_min_login[cronjob_scan_external_min_login] seconds (default 24 hours)
 
-. there has been a change in the federated remote share root etag or mtime, signaling a mandatory rescan
+. There has been a change in the federated remote share root etag or mtime, signaling a mandatory rescan
 
 To enable the cronjob, go to menu:Settings[Admin Settings > Federated Cloud Sharing] and enable the checkbox:
 
-image::configuration/files/sharing/federated-cloud-sharing/scan-cronjob.png[Checkbox, width=500]
+image:configuration/files/sharing/federated-cloud-sharing/scan-cronjob.png[Checkbox, width=500]
 
 Alternatively you can use the command line:
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_enabled --value 'yes'
+{occ-command-example-prefix-docker} config:app:set files_sharing cronjob_scan_external_enabled --value 'yes'
 ----
 
 You can also configure these settings of the cronjob:
 
+[#cronjob_scan_external_min_login]
 . the minimum amount of time since last login of a user so that a scan is triggered (ensures only active users get fed shares synced)
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_min_login --value <integer-seconds>
+{occ-command-example-prefix-docker} config:app:set files_sharing cronjob_scan_external_min_login --value <integer-seconds>
 ----
 
+[#cronjob_scan_external_min_scan]
 . the minimum amount of time since last scanned so that the next scan is triggered (avoid frequent scan when active collaboration)
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_min_scan --value <integer-seconds>
+{occ-command-example-prefix-docker} config:app:set files_sharing cronjob_scan_external_min_scan --value <integer-seconds>
 ----
 
+[#cronjob_scan_external_batch]
 . the maximum number of federated share scans per 10 minutes (scan performed only if fed share files got updated)
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set files_sharing cronjob_scan_external_batch --value <integer-number>
+{occ-command-example-prefix-docker} config:app:set files_sharing cronjob_scan_external_batch --value <integer-number>
 ----
 
 . Use the following command to force a run of the scanner cronjob:
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} background:queue:execute --force --accept-warning <id-of-fed-scanner-job>
+{occ-command-example-prefix-docker} background:queue:execute --force --accept-warning <id-of-fed-scanner-job>
 ----
 
 == Known Issues
@@ -170,7 +172,7 @@ It is possible to configure the VCARD properties that are searched in order to r
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set dav remote_search_properties --value=CLOUD,FN,EMAIL
+{occ-command-example-prefix-docker} config:app:set dav remote_search_properties --value=CLOUD,FN,EMAIL
 ----
 
 Possible values are:

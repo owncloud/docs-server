@@ -7,7 +7,7 @@ You can find more information about the application in the xref:enterprise/secur
 
 == Command Description
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
 ransomguard
   ransomguard:scan                        Scan the ownCloud database for changes in order
@@ -26,9 +26,9 @@ ransomguard
 
 Scan the ownCloud database for changes in order to discover anomalies in a userâ€™s account and their origin. Add a `<timestamp>` and a `<user>` for the search to start with. Note that `<timestamp>` must be in the Linux timestamp format.
                                           
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} ransomguard:scan <timestamp> <user>
+{occ-command-example-prefix-docker} ransomguard:scan <timestamp> <user>
 ----
 
 === Arguments
@@ -44,9 +44,9 @@ Scan the ownCloud database for changes in order to discover anomalies in a userâ
 
 Revert all operations in a user account after a given point in time. Note that `<timestamp>` must be in the Linux timestamp format.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} ransomguard:restore <timestamp> <user>
+{occ-command-example-prefix-docker} ransomguard:restore <timestamp> <user>
 ----
 
 === Arguments
@@ -62,9 +62,9 @@ Revert all operations in a user account after a given point in time. Note that `
 
 When necessary, set a user account as `read-only` for ownCloud and other WebDAV clients when malicious activity is suspected.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} ransomguard:lock <user>
+{occ-command-example-prefix-docker} ransomguard:lock <user>
 ----
 
 === Arguments
@@ -79,9 +79,9 @@ When necessary, set a user account as `read-only` for ownCloud and other WebDAV 
 
 When ransomware issues have been resolved, the user account can be unlocked.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} ransomguard:unlock <user>
+{occ-command-example-prefix-docker} ransomguard:unlock <user>
 ----
 
 === Arguments
@@ -100,9 +100,9 @@ The information which files to blacklist can be dynamically maintained either vi
 
 This command will set the location of the blacklist file the app will use. The location needs to be shared in all ownCloud servers in case of a multi-server setup. If you try to update the blacklist using the command `blacklist:update:from-file` without having run the `blacklist:set-file` command first, the blacklist file will be generated using the bundled `blacklist.txt.dist` file and saved in the ownCloud's data directory as `ransomware_blacklist.txt`. That file will then be used as default. Running the command again using a different `<filePath>` as argument will copy the contents from the old location to the new location without deleting the old one. It is highly recommended to use a different filename than the bundled one.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} ransomguard:blacklist:set-file <filePath>
+{occ-command-example-prefix-docker} ransomguard:blacklist:set-file <filePath>
 ----
 
 ==== Arguments
@@ -117,9 +117,9 @@ This command will set the location of the blacklist file the app will use. The l
 
 This command will update the contents of the blacklist file using another file as source. The format of the file is the same as the `blacklist.txt.dist` file bundled in the app. The command will only add the new items, which are displayed in the terminal.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} ransomguard:blacklist:update:from-file <filePath>
+{occ-command-example-prefix-docker} ransomguard:blacklist:update:from-file <filePath>
 ----
 
 ==== Arguments
@@ -134,9 +134,9 @@ This command will update the contents of the blacklist file using another file a
 
 This command will update the contents by getting the blacklist from a website. The default site is https://fsrm.experiant.ca/api/v1/get. Other sites can be used as long as the response follows the same format as the default site. The behavior is the same as with the `from-file` variant.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} ransomguard:blacklist:update:from-site <siteUrl>
+{occ-command-example-prefix-docker} ransomguard:blacklist:update:from-site <siteUrl>
 ----
 
 ==== Arguments

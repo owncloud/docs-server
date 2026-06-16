@@ -294,7 +294,7 @@ make it disappear after location change or seven seconds:
 == Settings Area
 
 To create a settings area create a div with the id `app-settings` inside
-the `app-navgiation` div:
+the `app-navigation` div:
 
 [source,html]
 ----

@@ -1,0 +1,17 @@
+= Configuration Notes
+:toc: right
+:description: There are multiple ways to configure ownCloud to run in a Dockerized environment.
+
+== Introduction
+
+{description}
+
+== Using Environment Variables
+
+The image provides additional environment variables that can be configured for the use with the container. To identify available ones, see the file `overwrite.config.php` which can be found in the `config` folder. This folder is located in `/mnt/data` in the container or locally at the respective bind mount.
+
+== Using a Configuration File
+
+Rather than using environment variables to configure your ownCloud instance, you can use *additional* configuration files, as was possible with earlier releases of ownCloud. This configuration method is only possible when using bind mounts, because access to the `config` sub folder is required.
+
+For more and important details see: xref:installation/mount_folder_structure.adoc[Mount Folder Structure].

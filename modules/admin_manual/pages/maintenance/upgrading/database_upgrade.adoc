@@ -5,7 +5,7 @@
 
 == Introduction
 
-Usually, when upgrading a database, follow the guides the vendor provides. You may also take a look at the xref:installation/manual_installation/manual_installation.adoc#install-a-database[Install a Database] section for general notes.
+Usually, when upgrading a database, follow the guides the vendor provides.
 
 This document supports an upgrade in case there are prerequisites and/or special steps to be taken to upgrade to a particular database version.
 
@@ -13,7 +13,7 @@ This document supports an upgrade in case there are prerequisites and/or special
 
 ownCloud runs fine when using a MariaDB version lower than 10.6. You can upgrade ownCloud as usual without special considerations regarding the database.
 
-When planning to upgrade to MariaDB 10.6, some prerequisites have to be met and upgrade steps have to be taken. 
+When planning to upgrade to MariaDB 10.6+, some prerequisites have to be met and upgrade steps have to be taken. 
 
 This is mostly due to the fact that, unlike before, in MariaDB 10.6 _tables of the COMPRESSED row format are read-only by default_. For more information see the {compressed-row-format-url}[InnoDB COMPRESSED Row Format] document.
 
@@ -21,11 +21,9 @@ NOTE: This process only needs to be carried out once.
 
 === Overview
 
-. You must have upgraded your ownCloud installation to version 10.9 or above. To do so, follow the
-xref:maintenance/upgrading/manual_upgrade.adoc[Manual ownCloud Upgrade] guide.
+. You must have upgraded your ownCloud installation to version 10.9 or above. To do so, follow the xref:maintenance/upgrading/manual_upgrade.adoc[Manual ownCloud Upgrade] guide.
 
-. Backup your ownCloud installation, especially the database to rollback in case of issues. To do so, follow the
-xref:maintenance/backup_and_restore/backup.adoc[Backing up ownCloud] guide.
+. Backup your ownCloud installation, especially the database to rollback in case of issues. To do so, follow the xref:maintenance/backup_and_restore/backup.adoc[Backing up ownCloud] guide.
 
 . Prepare the database for the upgrade with an xref:configuration/server/occ_command.adoc#restore-the-table-format[occ command].
 
@@ -39,52 +37,38 @@ xref:maintenance/backup_and_restore/backup.adoc[Backing up ownCloud] guide.
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --on
+{occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
-. Prevent browser access +
-+
-Stop your web server to prevent users from trying to access ownCloud via the web. As an alternative, you can stop serving the virtual host for ownCloud.
-+
-Stop the web server:
-+
-[source,bash]
-----
-sudo service apache2 stop
-----
+. Prevent browser access: +
+Configure your web proxy server to prevent users from accessing ownCloud via the web.
 
 . Run an occ command to prepare the database for the upgrade
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} db:restore-default-row-format
+{occ-command-example-prefix-docker} db:restore-default-row-format
 ----
 
 . Upgrade MariaDB to version 10.6+
 +
 --
 Follow the instructions in the respective {upgrade-mariadb-url}[Upgrading MariaDB] guide to upgrade MariaDB. +
-If required, run the `mysql_upgrade` command when using a binary installation or as example
+If required, run the `mysql_upgrade` command when using a compose setup including MySQL.
 
 [source,bash]
 ----
-docker-compose exec owncloud mysql_upgrade -uroot -p
+docker compose exec owncloud mysql_upgrade -uroot -p
 ----
-
-when using a dockerized environment as part of the upgrade procedure.
 --
 
 . Set ownCloud back to normal operation mode:
 +
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} maintenance:mode --off
+{occ-command-example-prefix-docker} maintenance:mode --off
 ----
 
 . Enable browser access +
-Start your web server, Alternatively, enable the virtual host serving ownCloud again:
-+
-[source,bash]
-----
-sudo service apache2 start
-----
+Configure your web proxy server to enable users to access ownCloud via the web.
+

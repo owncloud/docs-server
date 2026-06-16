@@ -1,29 +1,19 @@
 = Providing Default Files
 
-You may distribute a set of default files and folders to all users by
-placing them in the `owncloud/core/skeleton` directory on your ownCloud
-server. These files appear only to new users after their initial login,
-and existing users will not see files that are added to this directory
-after their first login. The files in the skeleton directory are copied
-into the users’ data directories, so they may change and delete the
-files without affecting the originals.
+You may distribute a set of default files and folders to all users by placing them into the default `/var/www/owncloud/core/skeleton` directory which needs to be mounted by the host using a Docker volume first. These files appear only to new users after their initial login. Existing users will not see files that are added to this directory after their first login. The files in the skeleton directory are copied into the users’ data directories, so they may change and delete the files without affecting the originals.
 
 This screenshot shows a set of photos in the skeleton directory.
 
-image:skeleton-files.png[image]
+image:skeleton-files.png[image, width=350]
 
 They appear on the user’s ownCloud Files page just like any other files.
 
-image:skeleton-files1.png[image]
+image:skeleton-files1.png[image, width=350]
 
 == Additional Configuration
 
-The configuration option `skeletondirectory` available in your `config.php` allows you to configure the directory where the skeleton files are located.
-
-These files will be copied to the data directory of new users.
+You can redefine the location of the skeleton directory using the environment variable xref:{config-sample}#define-the-directory-where-the-skeleton-files-are-located[OWNCLOUD_SKELETON_DIRECTORY] which then needs to be made available using a Docker volume.
 
 Leave this directory empty if you do not want to copy any skeleton files.
 
-The value of the `skeletondirectory` key **must not be empty** if you decide to use it in your `config.php`.
-
-TIP: See xref:configuration/server/config_sample_php_parameters.adoc[Sample Config PHP Parameters] for more the complete list of `config.php` options.
+The value of this config *must not be empty*, if you decide to use it.

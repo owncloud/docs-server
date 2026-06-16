@@ -1,8 +1,6 @@
 = Group Commands
 
-The `group` commands provide a range of functionality for managing ownCloud groups. 
-This includes creating and removing groups and managing group membership. 
-Group names are case-sensitive, so "Finance" and "finance" are two different groups.
+The `group` commands provide a range of functionality for managing ownCloud groups. This includes creating and removing groups and managing group membership. Group names are case-sensitive, so "Finance" and "finance" are two different groups.
 
 The full list of commands is:
 
@@ -27,9 +25,9 @@ group:add groupname
 
 This example adds a new group, called "Finance":
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:add Finance
+{occ-command-example-prefix-docker} group:add Finance
   Created group "Finance"
 ----
 
@@ -38,13 +36,12 @@ This example adds a new group, called "Finance":
 You can list the names of existing groups with the `group:list` command.
 The syntax is:
 
+[source,docker,subs="attributes+"]
 ----
-group:list [options] [<search-pattern>]
+{occ-command-example-prefix-docker} group:list [options] [<search-pattern>]
 ----
 
-Groups containing the `search-pattern` string are listed. 
-Matching is not case-sensitive. 
-If you do not provide a search-pattern then all groups are listed.
+Groups containing the `search-pattern` string are listed. Matching is not case-sensitive. If you do not provide a search-pattern then all groups are listed.
 
 === Options
 
@@ -55,9 +52,9 @@ If you do not provide a search-pattern then all groups are listed.
 
 This example lists groups containing the string "finance".
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:list finance
+{occ-command-example-prefix-docker} group:list finance
  - All-Finance-Staff
  - Finance
  - Finance-Managers
@@ -65,9 +62,9 @@ This example lists groups containing the string "finance".
 
 This example lists groups containing the string "finance" formatted with `json_pretty`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:list --output=json_pretty finance
+{occ-command-example-prefix-docker} group:list --output=json_pretty finance
  [
    "All-Finance-Staff",
    "Finance",
@@ -80,8 +77,9 @@ This example lists groups containing the string "finance" formatted with `json_p
 You can list the user IDs of group members with the `group:list-members` command. 
 The syntax is:
 
+[source,docker,subs="attributes+"]
 ----
-group:list-members [options] <group>
+-{occ-command-example-prefix-docker} group:list-members [options] <group>
 ----
 
 === Options
@@ -95,16 +93,16 @@ This example lists members of the "Finance" group.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:list-members Finance
+{occ-command-example-prefix-docker} group:list-members Finance
  - aaron: Aaron Smith
  - julie: Julie Jones
 ----
 
 This example lists members of the Finance group formatted with `json_pretty`.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:list-members --output=json_pretty Finance
+{occ-command-example-prefix-docker} group:list-members --output=json_pretty Finance
  {
    "aaron": "Aaron Smith",
    "julie": "Julie Jones"
@@ -113,30 +111,27 @@ This example lists members of the Finance group formatted with `json_pretty`.
 
 == Adding Members to Groups
 
-You can add members to an existing group with the `group:add-member` command. 
-Members must be existing users. 
-The syntax is:
+You can add members to an existing group with the `group:add-member` command. Members must be existing users. The syntax is:
 
+[source,docker,subs="attributes+"]
 ----
-group:add-member [-m|--member [MEMBER]] <group>
+{occ-command-example-prefix-docker} group:add-member [-m|--member [MEMBER]] <group>
 ----
 
 This example adds members "aaron" and "julie" to group "Finance":
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:add-member --member aaron --member julie Finance
+{occ-command-example-prefix-docker} group:add-member --member aaron --member julie Finance
   User "aaron" added to group "Finance"
   User "julie" added to group "Finance"
 ----
 
-You may attempt to add members that are already in the group, without error. 
-This allows you to add members in a scripted way without needing to know if the user is already a member of the group. 
-For example:
+You may attempt to add members that are already in the group, without error. This allows you to add members in a scripted way without needing to know if the user is already a member of the group. For example:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:add-member --member aaron --member julie --member fred Finance
+{occ-command-example-prefix-docker} group:add-member --member aaron --member julie --member fred Finance
   User "aaron" is already a member of group "Finance"
   User "julie" is already a member of group "Finance"
   User fred" added to group "Finance"
@@ -147,26 +142,25 @@ For example:
 You can remove members from a group with the `group:remove-member` command. 
 The syntax is:
 
+[source,docker,subs="attributes+"]
 ----
-group:remove-member [-m|--member [MEMBER]] <group>
+{occ-command-example-prefix-docker} group:remove-member [-m|--member [MEMBER]] <group>
 ----
 
 This example removes members "aaron" and "julie" from group "Finance".
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:remove-member --member aaron --member julie Finance
+{occ-command-example-prefix-docker} group:remove-member --member aaron --member julie Finance
   Member "aaron" removed from group "Finance"
   Member "julie" removed from group "Finance"
 ----
 
-You may attempt to remove members that have already been removed from the group, without error. 
-This allows you to remove members in a scripted way without needing to know if the user is still a member of the group. 
-For example:
+You may attempt to remove members that have already been removed from the group, without error. This allows you to remove members in a scripted way without needing to know if the user is still a member of the group. For example:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:remove-member --member aaron --member fred Finance
+{occ-command-example-prefix-docker} group:remove-member --member aaron --member fred Finance
   Member "aaron" could not be found in group "Finance"
   Member "fred" removed from group "Finance"
 ----
@@ -175,7 +169,7 @@ For example:
 
 To delete a group, you use the `group:delete` command, as in the example below:
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} group:delete Finance
+{occ-command-example-prefix-docker} group:delete Finance
 ----

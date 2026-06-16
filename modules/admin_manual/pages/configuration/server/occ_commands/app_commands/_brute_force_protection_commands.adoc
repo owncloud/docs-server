@@ -8,18 +8,18 @@ The combination of `uid` and `IP address` is used to trigger the ban.
 
 == List the Current Settings
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:list brute_force_protection
+{occ-command-example-prefix-docker} config:list brute_force_protection
 ----
 
 == Set the Setting
 
 To set a new value, use the command below and replace `<Key>` and value `<Value>` accordingly.
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
-{occ-command-example-prefix} config:app:set brute_force_protection <Key> --value=<Value> --update-only
+{occ-command-example-prefix-docker} config:app:set brute_force_protection <Key> --value=<Value> --update-only
 ----
 
 === Fail Tolerance [attempts]

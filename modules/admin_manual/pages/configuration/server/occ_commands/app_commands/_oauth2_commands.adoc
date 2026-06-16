@@ -17,9 +17,9 @@ oauth2
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-oauth2:add-client <name> <client-id> <client-secret> <redirect-url> [<allow-sub-domains> [<trusted> [<force-trust>]]]
+{occ-command-example-prefix-docker} oauth2:add-client <name> <client-id> <client-secret> <redirect-url> [<allow-sub-domains> [<trusted> [<force-trust>]]]
 ----
 
 === Arguments
@@ -52,9 +52,9 @@ oauth2:add-client <name> <client-id> <client-secret> <redirect-url> [<allow-sub-
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-oauth2:list-clients [options]
+{occ-command-example-prefix-docker} oauth2:list-clients [options]
 ----
 
 === Options
@@ -95,9 +95,9 @@ oauth2:list-clients [options]
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-oauth2:modify-client <name> <key> <value>
+{occ-command-example-prefix-docker} oauth2:modify-client <name> <key> <value>
 ----
 
 === Arguments
@@ -119,9 +119,9 @@ oauth2:modify-client <name> <key> <value>
 
 === Usage
 
-[source,plaintext]
+[source,docker,subs="attributes+"]
 ----
-oauth2:remove-client <client-id>
+{occ-command-example-prefix-docker} oauth2:remove-client <client-id>
 ----
 
 === Arguments

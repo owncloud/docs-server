@@ -13,17 +13,16 @@ background
 
 == Examples
 
-[source,bash,subs="attributes+"]
+[source,docker,subs="attributes+"]
 ----
 # Set the background scheduler to Ajax
-{occ-command-example-prefix} background:ajax
+{occ-command-example-prefix-docker} background:ajax
 
 # Set the background scheduler to Cron
-{occ-command-example-prefix} background:cron
+{occ-command-example-prefix-docker} background:cron
 
 # Set the background scheduler to Webcron
-{occ-command-example-prefix} background:webcron
+{occ-command-example-prefix-docker} background:webcron
 ----
 
 TIP: Check out the sections xref:configuration/server/occ_command.adoc#managing-background-jobs[Managing Background Jobs] and xref:configuration/server/background_jobs_configuration.adoc[Background Jobs configuration] to learn more.
-

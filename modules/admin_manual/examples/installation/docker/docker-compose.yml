@@ -1,26 +1,16 @@
-version: "3"
-
-volumes:
-  files:
-    driver: local
-  mysql:
-    driver: local
-  redis:
-    driver: local
-
-services:
-  owncloud:
-    image: owncloud/server:${OWNCLOUD_VERSION}
-    container_name: owncloud_server
+# This oc-common template is a compose extension for ownCloud.
+# It is used for starting the main ownCloud instance and reused e.g. when defining listeners for WND.
+# This eases compose maintenance a lot.
+x-owncloud: &oc-common
+    image: owncloud/server:${OWNCLOUD_IMAGE}
     restart: always
-    ports:
-      - ${HTTP_PORT}:8080
     depends_on:
       - mariadb
       - redis
     environment:
       - OWNCLOUD_DOMAIN=${OWNCLOUD_DOMAIN}
       - OWNCLOUD_TRUSTED_DOMAINS=${OWNCLOUD_TRUSTED_DOMAINS}
+      - OWNCLOUD_OVERWRITE_CLI_URL=${OWNCLOUD_OVERWRITE_CLI_URL}
       - OWNCLOUD_DB_TYPE=mysql
       - OWNCLOUD_DB_NAME=owncloud
       - OWNCLOUD_DB_USERNAME=owncloud
@@ -31,18 +21,36 @@ services:
       - OWNCLOUD_MYSQL_UTF8MB4=true
       - OWNCLOUD_REDIS_ENABLED=true
       - OWNCLOUD_REDIS_HOST=redis
-    healthcheck:
-      test: ["CMD", "/usr/bin/healthcheck"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
     volumes:
-      - files:/mnt/data
+      - type: volume
+        source: oc_files
+        target: /mnt/data
+    networks:
+      - oc_network
+
+services:
+
+  owncloud:
+    # Start the main ownCloud instance
+    <<: *oc-common
+    container_name: owncloud_server
+    ports:
+      - ${HTTP_PORT}:8080
+
+#  owncloud-wnd-1:
+#    # Enterprise only: uncomment and configure it accordingly if WND is used !
+#    # Create as many of these services (containers) as you need listeners for different host/share pairs.
+#    # Read the documentation for more details, such when you want to use a password file.
+#    <<: *oc-common
+#    container_name: owncloud-wnd-1
+#    command: ["/usr/bin/owncloud", "occ", "wnd:listen", "myhost", "myshare", "workgroup\myuser", "password"]
 
   mariadb:
-    image: mariadb:10.11 # minimum required ownCloud version is 10.9
+    image: mariadb:${MARIADB_IMAGE}
     container_name: owncloud_mariadb
     restart: always
+    ports:
+      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=owncloud
       - MYSQL_USER=owncloud
@@ -57,11 +65,15 @@ services:
       retries: 5
     volumes:
       - mysql:/var/lib/mysql
+    networks:
+      - oc_network
 
   redis:
-    image: redis:6
+    image: redis:${REDIS_IMAGE}
     container_name: owncloud_redis
     restart: always
+    ports:
+      - "6379:6379"
     command: ["--databases", "1"]
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -70,3 +82,22 @@ services:
       retries: 5
     volumes:
       - redis:/data
+    networks:
+      - oc_network
+
+volumes:
+  oc_files:
+    driver: local
+# Options when using bind mounts
+#    driver_opts:
+#      type: none
+#      device: /mnt/oc
+#      o: bind
+  mysql:
+    driver: local
+# Use the above options when configuring bind mounts
+  redis:
+    driver: local
+
+networks:
+  oc_network:

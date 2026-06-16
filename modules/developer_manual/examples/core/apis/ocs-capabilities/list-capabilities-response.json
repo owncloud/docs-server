@@ -49,8 +49,7 @@
                         "read_only" : true,
                         "read_write" : true,
                         "upload_only" : true
-                     },
-                     "enforced" : true
+                     }
                   },
                   "multiple" : true,
                   "social_share" : true,

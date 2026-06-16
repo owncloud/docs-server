@@ -120,7 +120,7 @@ default:
 errorBeforeRequest :^( NSError *error) {
 //Error before request
 
-if (error.code == OCErrorForbidenCharacters) {
+if (error.code == OCErrorForbiddenCharacters) {
   //Forbidden characters
 }
 else
@@ -420,7 +420,7 @@ The block is executed when a pending background task finishes.
 
 [source,objective-c]
 ----
-[[AppDelegate sharedOCCommunication] setDownloadTaskComleteBlock:^NSURL *(NSURLSession *session, NSURLSessionDownloadTask *downloadTask, NSURL *location) {
+[[AppDelegate sharedOCCommunication] setDownloadTaskCompleteBlock:^NSURL *(NSURLSession *session, NSURLSessionDownloadTask *downloadTask, NSURL *location) {
 
 
 }];

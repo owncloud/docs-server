@@ -5,15 +5,11 @@
 
 This page helps with setting up your environment for use with and developing ownCloud.
 
-Feel free to skip already one or more of the following steps, if you have already completed them.
-Otherwise, if you’re just getting started, begin by getting the ownCloud source code.
+Feel free to skip already one or more of the following steps, if you have already completed them. Otherwise, if you’re just getting started, begin by getting the ownCloud source code.
 
 == Install the Core Software
 
-The first thing to do is to ensure that your server has the necessary software for installing and running ownCloud.
-While you can go further, you need to install at least the
-xref:admin_manual:installation/manual_installation/manual_installation.adoc[required packages].
-Then, you will need to install the software required to run the development environment's installation process.
+The first thing to do is to ensure that your server has the necessary software for installing and running ownCloud. While you can go further, you need to proceed with xref:admin_manual:installation/installing_with_docker.adoc[Installing With Docker]. Then, you will need to install the software required to run the development environment's installation process.
 
 * https://www.gnu.org/software/make/[Make]
 * https://nodejs.org[Node.js]
@@ -22,7 +18,9 @@ Then, you will need to install the software required to run the development envi
 * https://linux.die.net/man/1/unzip[unzip]
 * https://www.gnu.org/software/wget/[wget]
 
-=== Install Dependencies on Ubuntu 16.04/18.04
+=== Install Dependencies
+
+These dependencies need to be installed manually creating an own Docker Image.
 
 ==== Install nodejs, make, unzip, and git
 
@@ -78,8 +76,7 @@ Use it: php /usr/local/bin/composer
 
 ===== Verify the Installation
 
-To verify that Composer is properly installed, run `composer`. 
-You should see output similar to that below.
+To verify that Composer is properly installed, run `composer`. You should see output similar to that below.
 
 [source,console]
 ----
@@ -112,8 +109,7 @@ sudo apt-get install --no-install-recommends yarn
 
 ===== Verify that Yarn installed successfully:
 
-After you have installed yarn, you can run `yarn --version` to confirm that it’s fully installed. 
-If it is, then it will print output similar to the following to the console.
+After you have installed yarn, you can run `yarn --version` to confirm that it’s fully installed. If it is, then it will print output similar to the following to the console.
 
 ----
 yarn version v1.13.0
@@ -134,22 +130,15 @@ sudo zypper --quiet --non-interactive install \
 
 == Setup the Webserver and Database
 
-Next, you need to setup your web and database servers, so that they work
-properly with ownCloud. The respective guides are available at:
+Next, you need to setup your web and database servers, so that they work properly with ownCloud. The respective guides are available at:
 
-* xref:admin_manual:installation/manual_installation/manual_installation.adoc#configure-the-web-server[Apache Webserver Configuration]
 * xref:admin_manual:configuration/database/linux_database_configuration.adoc[Database Server Configuration]
 
 == Get The Source
 
-With the web and database servers setup, you next need to get a copy of
-ownCloud. There are two ways to do so:
+With the web and database servers setup, you next need to get a copy of ownCloud.
 
-. Use a xref:admin_manual:installation/manual_installation/manual_installation.adoc[manual installation]
-. Clone the development version from https://github.com/owncloud[GitHub]:
-
-For the sake of a brief example, assuming you chose to clone from
-GitHub, here’s an example of how to do so:
+* Clone the development version from https://github.com/owncloud/core[GitHub]:
 
 ----
 # Assuming that /var/www/html is the webserver's document root
@@ -158,17 +147,11 @@ git clone https://github.com/owncloud/core.git /var/www/html/core
 
 *What is the Web Server’s Root Directory?*
 
-The quickest way to find out is by using the `ls` command, for example:
-`ls -lah /var/www`. Depending on your Linux distribution, it’s likely
-to be one of `/var/www`, `/var/www/html`, or `/srv/http`.
+The quickest way to find out is by using the `ls` command, for example: `ls -lah /var/www`. Depending on your Linux distribution, it’s likely to be one of `/var/www`, `/var/www/html`, or `/srv/http`.
 
 === Set User, Group, and Permissions
 
-You now need to make sure that the web server user (and optionally the
-web server’s group) have read/write access to the directory where you
-installed ownCloud: The following commands assume that `/var/www` is the
-web server’s directory and that `www-data` is the web server user and
-group. The following commands will do this:
+You now need to make sure that the web server user (and optionally the- web server’s group) have read/write access to the directory where you installed ownCloud: The following commands assume that `/var/www` is the web server’s directory and that `www-data` is the web server user and group. The following commands will do this:
 
 ----
 # Set the user and group to the webserver user and group
@@ -180,9 +163,7 @@ sudo chmod o+rw -R /var/www/html/core/
 
 *What is the Web Server’s User and Group?*
 
-There are a few ways to identify the user and group the webserver is
-running as. Likely the easiest are `grep` and `ps`. Here’s an example of
-using both (which assumes that the distribution is Ubuntu 16.04).
+There are a few ways to identify the user and group the webserver is running as. Likely the easiest are `grep` and `ps`. Here’s an example of using both (which assumes that the distribution is Ubuntu 24.04).
 
 ----
 # Find the user defined in Apache's configuration files
@@ -197,11 +178,7 @@ Depending on your distribution, it will likely be one of `http`, `www-data`, `ap
 
 == Install Software Dependencies
 
-With the ownCloud source
-xref:admin_manual:installation/manual_installation/manual_installation.adoc#configure-the-web-server[available to your webserver],
-next install ownCloud’s dependencies by running
-https://www.gnu.org/software/make/[Make], from the directory where
-ownCloud’s located. Here’s an example of how to do so:
+With the ownCloud source installed locally, next install ownCloud’s dependencies by running https://www.gnu.org/software/make/[Make], from the directory where ownCloud’s located. Here’s an example of how to do so:
 
 [source,console]
 ----
@@ -209,18 +186,14 @@ ownCloud’s located. Here’s an example of how to do so:
 cd /var/www/html/core && make
 ----
 
-By default, running `make` will install the required dependencies for
-both PHP and JavaScript. However, there are other options that it
-supports, which you can see in the table below, which are useful for a
-variety of tasks.
+By default, running `make` will install the required dependencies for both PHP and JavaScript. However, there are other options that it supports, which you can see in the table below, which are useful for a variety of tasks.
 
 [cols=",",options="header",]
 |===
 | Target     | Description
 | make       | Pulls in both Composer and Bower dependencies
 | make clean | Cleans up dependencies. This is useful for starting over or when switching to older branches
-| make dist  | Builds a minimal owncloud-core tarball with only core apps in build/dist/core, stripped
-of unwanted files
+| make dist  | Builds a minimal owncloud-core tarball with only core apps in build/dist/core, stripped of unwanted files
 | make docs  | Builds the JavaScript documentation using http://usejsdoc.org[JSDoc]
 | make test  | Runs all of the test targets
 | make test-external | Runs one of the external storage tests, and is configurable through make variables
@@ -231,12 +204,7 @@ This replaces ./autotest.sh sqlite and is configurable through make variables
 
 == Enable Debug Mode
 
-Now that ownCloud’s available to your web server and the dependencies
-are installed, we strongly encourage you to disable JavaScript and CSS
-caching during development. This is so that when changes are made,
-they’re immediately visible, not at some later stage when the respective
-caches expire. To do so, enable debug mode by setting `debug` to `true`
-in config/config.php, as in the example below.
+Now that ownCloud’s available to your web server and the dependencies are installed, we strongly encourage you to disable JavaScript and CSS caching during development. This is so that when changes are made, they’re immediately visible, not at some later stage when the respective caches expire. To do so, enable debug mode by setting `debug` to `true` in config/config.php, as in the example below.
 
 [source,php]
 ----
@@ -253,7 +221,4 @@ is only meant for debugging and development!
 
 == Setup ownCloud
 
-With all that done, you’re now ready to use either
-xref:admin_manual:installation/installation_wizard.adoc[the installation wizard] or
-xref:admin_manual:installation/manual_installation/manual_installation.adoc#command-line-installation[command line installer]
-to finish setting up ownCloud.
+With all that done, install ownCloud using the xref:admin_manual:installation/installing_with_docker.adoc[Installing With Docker] documentation.

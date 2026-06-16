@@ -1,0 +1,37 @@
+= Mount Folder Structure
+:toc: right
+:description: When using bind mounts, ownCloud provides a predefined folder structure which is important to know.
+
+== Introduction
+
+{description}
+
+== Folder Structure
+
+This folder structure is important not only for knowing where your data is located, but also when migrating ownCloud to a Dockerised environment.
+
+[source,plaintext]
+----
+mount_point/
+  - apps/      <1>
+  - config/    <2>
+  - files/     <3>
+  - skeleton/  <4>
+  - sessions/  <5>
+----
+
+<1> The apps folder will contain ANY apps that will be added manually and are not automatically shipped by ownCloud. It matches xref: configuration/server/config_sample_php_parameters.adoc#define-alternative-app-directories[Define alternative app directories] aka the `apps-external` configuration of the config.
+
+<2> The location for additional configuration files, if not using environment variables, as was possible with earlier releases of ownCloud.
++
+--
+IMPORTANT: Do not delete or manipulate any files in the config folder provided by the system.
+
+IMPORTANT: Consider the alphabetic order the system is reading config files. With conflicting settings, the last one takes precedence.
+--
+
+<3> The files folder matches the `data` directory with former ownCloud releases.
+
+<4> The directory holding custom skeleton files.
+
+<5> The default PHP file-based `session.save_path` Do not alter.

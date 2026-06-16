@@ -129,7 +129,7 @@ To be prepared for the migration, both sides need to match the prerequisites. Pl
 
 * The *ownCloud-provided _migrate-to-kiteworks_ app must be installed* at the ownCloud instance:
 ** This app comes bundled with its own and independent copy of rclone.
-** See the xref:installation/apps_management_installation.adoc[Installing and Managing Apps] documentation for more details respecively the section xref:installing-required-components[Installing Required Components] below.
+** See the xref:installation/apps_management_installation.adoc[Installing and Managing Apps] documentation for more details and the section xref:installing-required-components[Installing Required Components] below.
 
 * All users must have an email address and they must be unique. +
 The `occ migrate:to-kiteworks:verify` step will point out missing email addresses. These must be rectified before any migration can start.

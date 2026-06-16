@@ -1,81 +1,75 @@
-= Migrating to a Different Server
+= Migrating ownCloud
 :toc: right
-:toclevels: 1
-:page-aliases: go/admin-untrusted-domains.adoc
+:description: There are several situations where ownCloud needs to be migrated.
 
 == Introduction
 
-If the need arises, ownCloud can be migrated to a different server.
-A typical use case would be a hardware change to a physical server.
-All migrations have to be performed with ownCloud in maintenance mode.
-Online migration is supported by ownCloud only when implementing
-industry-standard clustering and high-availability solutions *before*
-ownCloud is installed for the first time.
+{description}
 
-To start, let’s work through a potential use case. A configured ownCloud
-instance runs reliably on one machine, but for some reason the instance
-needs to be moved to a new machine. Depending on the size of the
-ownCloud instance the migration might take several hours.
+The following scenarios are described here:
 
-For the purpose of this use case, it is assumed that:
+. Migrating to a different host
+. Migrating to a different domain
+. Migrating from ownCloud 10 to ownCloud 11
 
-1. The end users reach the ownCloud instance via a virtual hostname
-(such as a DNS `CNAME` record) which can be pointed at the new location.
-2. The authentication method (e.g., LDAP) remains the same after the
-migration.
+Note that any database migration is not covered here.
 
-IMPORTANT: During the migration, do not make any changes to the original system, except for putting it into
-maintenance mode. This ensures, should anything unforeseen happen, that you can go back to your existing
-installation and resume availability of your installation while debugging the problem.
+IMPORTANT: During the migration process, do not make any changes to the original system except to put it into maintenance mode. This ensures that, should anything unforeseen happen, you can revert to your existing installation and resume its availability while debugging the problem.
 
-== How to Migrate
+== Maintenance Mode
 
-Firstly, set up the new machine with your desired Linux distribution. At this point, you can install xref:installation/manual_installation/manual_installation.adoc[ownCloud manually] via the
-compressed archive.
+To issue any occ commands, you must enter the directory where the ownCloud compose file is located. 
 
-Then, on the original machine turn on maintenance mode and then stop ownCloud.
-After waiting 6 - 7 minutes for all sync clients to register that the server is in maintenance mode, stop the web server that is serving ownCloud.
+* To enable maintenance mode, issue the following command:
++
+[source,bash,subs="attributes+"]
+----
+cd /var/www/owncloud/
+{occ-command-example-prefix-docker} maintenance:mode --on
+----
 
-After that, xref:maintenance/backup_and_restore/backup.adoc[create a database dump] from the database, copy it to the new machine and xref:maintenance/backup_and_restore/restore.adoc[import it] into the new database.
-Then, copy only your data, configuration, and database files from your original ownCloud instance to the new machine.
+* To disable maintenance mode, issue the following command:
++
+[source,bash,subs="attributes+"]
+----
+cd /var/www/owncloud/
+{occ-command-example-prefix-docker} maintenance:mode --off
+----
 
-IMPORTANT: You must keep the `data/` directory’s original file path during the migration.
-However, xref:maintenance/manually-moving-data-folders.adoc[you can change it] before you begin the migration, or after the migration’s completed.
+== Migration
 
-The data files should keep their original timestamp otherwise the
-clients will re-download all the files after the migration. This step
-might take several hours, depending on your installation. This can be
-done on a number of sync clients, such as by using `rsync` with `-t`
-option
+=== Host Migration
 
-With ownCloud still in maintenance mode and before changing the DNS
-`CNAME` record, start up the database and web server on the new machine.
-Then point your web browser to the migrated ownCloud instance and
-confirm that:
+Migration to a different host is easy with Docker.
 
-1. You see the maintenance mode notice
-2. That a log file entry is written by both the web server and ownCloud
-3. That no error messages occur.
+. Enable maintenance mode
+. Down the container
+. Make the data available on the new host:
+.. Either copy the Docker volume if not using a shared mount point to the new host, or
+.. Create a new shared mount point
+. Copy / adapt the compose yaml file to reflect your changes
+. Bring up the container
+. Disable maintenance mode
 
-If all of these things occur, then take ownCloud out of maintenance mode
-and repeat. After doing this, log in as an admin and confirm that
-ownCloud functions as normal.
+=== Domain Migration
 
-At this point, change the DNS `CNAME` entry to point your users to the
-new location. And with the `CNAME` entry updated, you now need to update
-the trusted domains.
+As the ownCloud 11 image provides an embedded Apache web server, you need a proxy to handle security and other web-related settings anyway. To migrate or add a domain, two steps are required:
 
-== Managing Trusted Domains
+. Update your proxy server settings
+. Update the ownCloud trusted domain settings 
 
-All URLs used to access your ownCloud server must be white-listed in your
-`config.php` file, under the `trusted_domains` setting. Users are
-allowed to log into ownCloud only when they point their browsers to a
-URL that is listed in the `trusted_domains` setting.
+==== Managing Trusted Domains
+
+All URLs used to access your ownCloud server must be white-listed in your configuration file, under the `trusted_domains` setting or via environment variables. Users are allowed to log into ownCloud only when they point their browsers to a URL that is listed in the `trusted_domains` setting.
 
 NOTE: This setting is important when changing or moving to a new domain name. You may use IP addresses and domain names.
 
-A typical configuration looks like this:
+NOTE: The loopback address, `127.0.0.1`, is automatically white-listed, so as long as you have access to the physical server you can always log in. In the event that a load-balancer is in place, there will be no issues as long as it sends the correct `X-Forwarded-Host` header.
 
+
+A typical configuration via the configuration file looks like this::
++
+--
 [source,php]
 ----
 'trusted_domains' => [
@@ -84,184 +78,44 @@ A typical configuration looks like this:
    2 => '192.168.1.50',
 ],
 ----
+--
 
-The loopback address, `127.0.0.1`, is automatically white-listed, so as
-long as you have access to the physical server you can always log in. In
-the event that a load-balancer is in place, there will be no issues as
-long as it sends the correct `X-Forwarded-Host` header.
+Here is an example of how this can be used from within a docker-compose.yml file::
++
+--
+In case of a docker based setup, the trusted_domains setting is controlled by the environment variables `OWNCLOUD_TRUSTED_DOMAINS` or `OWNCLOUD_DOMAIN`. The latter only takes effect, if `OWNCLOUD_TRUSTED_DOMAINS` is undefined and can provide one IP-address or hostname. `OWNCLOUD_TRUSTED_DOMAINS` can specify multiple values as a comma-separated list. For more details on environment variables see the xref:installation/installing_with_docker.adoc[Installing With Docker] documentation.
 
-In case of a docker based setup, the trusted_domains setting is controlled by the environment variables `OWNCLOUD_TRUSTED_DOMAINS` or `OWNCLOUD_DOMAIN`. The latter only takes effect, if `OWNCLOUD_TRUSTED_DOMAINS` is undefined and can provide one IP-address or hostname. `OWNCLOUD_TRUSTED_DOMAINS` can specify multiple values as a comma-separated list. 
-
-Here is an example of how this can be used from within a docker-compose.yml file to allow access to ownCloud under two different names, and one IP-address, in addition to localhost and 127.0.0.1:
+This will allow access to ownCloud under two different names, and one IP-address, in addition to localhost and 127.0.0.1:
 
 [source,yaml,subs="attributes+"]
 ----
 services:
   owncloud:
-    image: "owncloud/server:{latest-server-version}"
+    image: owncloud/server:{latest-server-download-version}
     environment:
       OWNCLOUD_TRUSTED_DOMAINS: "myowncloud.mydomain.com, myowncloud, 12.23.34.45"
 ...
 ----
+--
 
-== Example Migration
+=== ownCloud Server Migration
 
-The following is an example migration with assumptions to make
-this migration work:
+This section describes the migration of *ownCloud 10* to *ownCloud 11*, if ownCloud 10 was installed natively. It only focuses on ownCloud but not on any migration of the database!
 
-* Ubuntu 20.04+
-* SSH with `PermitRootLogin` set to `yes`
-* Database used is MySQL / MariaDB
+Due to the wide range of installation types, the description focuses on the main steps rather than the details. When using encryption with the ownCloud 10 instance, the openSSL requirements must be met without circumventing retired ciphers. See the ownCloud 10 encryption documentation for more details.
 
-=== Preparation
-
-If not already available on the new server, make sure SSH is installed:
-
-[source,bash]
-----
-sudo apt install ssh -y
-----
-
-Next, edit ssh-config and enable root ssh login.
-
-[source,bash]
-----
-nano /etc/ssh/sshd_config
-PermitRootLogin yes
-----
-
-And then restart SSH.
-
-[source,bash]
-----
-sudo service ssh restart
-----
-
-Lastly, install ownCloud on the new server.
-
-=== Migration
-
-==== Enable Maintenance Mode
-
-The first step is to enable maintenance mode. To do that, use the
-following commands:
-
-[source,bash,subs="attributes+"]
-----
-cd /var/www/owncloud/
-{occ-command-example-prefix} maintenance:mode --on
-----
-
-After that’s done, then wait a few minutes and stop your web server, in this case Apache:
-
-[source,bash]
-----
-sudo service apache2 stop
-----
-
-==== Transfer the Database
-
-Now, you have to transfer the database from the old server to the new
-one. To do that, first backup the database.
-
-[source,bash]
-----
-cd /var/www/owncloud/
-mysqldump --single-transaction -h localhost \
-    -u admin -ppassword owncloud > owncloud-dbbackup.bak
-----
-
-Then, export the database to the new server.
-
-[source,bash]
-----
-rsync -v owncloud-dbbackup.bak root@new_server_address:/var/www/owncloud
-----
-
-With that completed, import the database on new server.
-
-[source,bash]
-----
-mysql -h localhost -u admin -ppassword owncloud < owncloud-dbbackup.bak
-----
-
-NOTE: You can find the values for the mysqldump command in your config.php, in your owncloud root directory. `[server]= dbhost, [username]= dbuser, [password]= dbpassword, and [db_name]= dbname`.
-
-[NOTE]
-====
-.For InnoDB tables only
-The –single-transaction flag will start a transaction before running.
-Rather than lock the entire database, this will let `mysqldump` read the database in the current state at the time of the transaction, making for a consistent data dump.
-====
-
-[NOTE]
-====
-.For Mixed MyISAM / InnoDB tables
-Either dumping your MyISAM tables separately from InnoDB tables or use `--lock-tables` instead of `--single-transaction` to guarantee the database is in a consistent state when using `mysqldump`.
-====
-
-==== Transfer Data and Configure the New Server
-
-The following ownCloud directories will be synced to the target instance:
-`apps`, `config` and `data`.
-
-[source,bash]
-----
-rsync -avt apps config data root@new_server_address:/var/www/owncloud
-----
-
-NOTE: If you have an additional apps directory like `apps-external`, this directory needs
-to be added to the sync list above.
-
-IMPORTANT: If you want to move your data directory to another location on the target server,
-it is advised to do this as a second step. Please see
-xref:maintenance/manually-moving-data-folders.adoc[the data directory migration document] for more details.
-
-==== Finish the Migration
-
-Now it’s time to finish the migration. To do that, on the new server,
-first verify that ownCloud is in maintenance mode.
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} maintenance:mode
-----
-
-Next, start up the database and web server on the new machine.
-
-[source,bash]
-----
-sudo service mysql start
-sudo service apache2 start
-----
-
-With that done, point your web browser to the migrated ownCloud
-instance, and confirm that you see the maintenance mode notice, and that
-no error messages occur. If both of these occur, take ownCloud out of
-maintenance mode.
-
-[source,bash,subs="attributes+"]
-----
-{occ-command-example-prefix} maintenance:mode --off
-----
-
-And finally, log in as admin and confirm normal function of ownCloud. If
-you have a domain name, and you want an SSL certificate, we recommend
-https://certbot.eff.org/[certbot].
-
-==== Reverse the Changes to ssh-config
-
-Now you need to reverse the change to ssh-config. Specifically, set `PermitRootLogin`
-to `no` and restart ssh. To do that, run the following command:
-
-NOTE: This is a security measure and improves SSH security.
-
-[source,bash]
-----
-sudo service ssh restart
-----
-
-==== Update DNS and Trusted Domains
-
-Finally, update the DNS’ `CNAME` entry to point to your new server.
-If you have not only migrated physically from server to server but have also changed your ownCloud server’s domain name, you also need to update the domain in xref:managing-trusted-domains[the Trusted Domain setting] in `config.php`, on the target server.
+. Enable maintenance mode on ownCloud 10
+. Create a mount point to bind mount the Docker volume. +
+For more details see the xref:installation/mount_folder_structure.adoc[Mount Folder Structure] documentation.
+. Install ownCloud 11 using a bind mount and down the container. +
+This will install/prepare ownCloud 11 in a basic way but it is not configured to your needs. +
+For details see: xref:installation/installing_with_docker.adoc[Installing With Docker].
+. Adapt the compose yaml file to your needs. +
+Remove any environment variables from the compose file that are no longer relevant, such as those for the database. These settings are now covered by a new configuration file, see below.
+. Migrate the `data/files` directory into `mount-point/files`.
+. Migrate all apps from ownCloud 10 that are NOT part of ownCloud 11 into the `mount-point/apps` directory. +
+For more details see the xref:installation/apps_management_installation.adoc[Apps Management] documentation.
+. Make a copy of your existing `config.php` file *with a new name* and remove any setting that addresses the `data` directory and `apps` / `apps-external` directories into the `mount-point/config` directory. +
+See the important note with regards to the config in the xref:installation/mount_folder_structure.adoc[Mount Folder Structure] documentation.
+. Bring up the ownCloud 11 container.
+. Disable maintenance mode.
