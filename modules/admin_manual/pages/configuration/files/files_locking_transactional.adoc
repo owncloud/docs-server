@@ -12,4 +12,5 @@ ownCloud’s Transactional File Locking mechanism locks files to avoid file corr
 
 Transactional File locking will not prevent multiple users from editing the same document, nor give notice that other users are working on the same document. Multiple users can open and edit a file at the same time and Transactional File locking does not prevent this. Rather, it prevents simultaneous file saving.
 
-File locking is enabled by default, using the database locking backend. This places a significant load on your database. Using `memcache.locking` relieves the database load and improves performance. Admins of ownCloud servers with heavy workloads should install xref:configuration/server/caching_configuration.adoc[a memory cache] .
+File locking is enabled by default, using the database locking backend. This places a significant load on your database. Using `memcache.locking` (OWNCLOUD_MEMCACHE_LOCKING) relieves the database load and improves performance. Admins of ownCloud servers with heavy workloads should install a
+xref:configuration/server/caching_configuration.adoc[memory cache].

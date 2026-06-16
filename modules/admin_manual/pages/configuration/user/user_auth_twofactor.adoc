@@ -6,12 +6,12 @@
 
 {description} When users want to sign in, they need to provide two pieces of information (factors):
 
-* the password,
-* the six-digit verification code that's automatically displayed on the trusted device or sent to the phone number.
+* The password,
+* The six-digit verification code that's automatically displayed on the trusted device or sent to the phone number.
 
 == Setting Up 2FA
 
-To provide 2FA functionality, the {oc-marketplace-url}/apps/twofactor_totp[2-Factor Authentication] app needs to be installed and enabled. Though there are other apps available, the description and screenshots refer to the named one.
+To provide 2FA functionality, the `2-Factor Authentication` app needs to be enabled. Though there are other apps available, the description and screenshots refer to the named one.
 
 If the two-factor provider app is enabled:
 
@@ -19,11 +19,11 @@ If the two-factor provider app is enabled:
 * It can be enforced for all users as default.
 * Groups of users can be excluded from using 2FA.
 
-image::apps/2fa/2fa-exclude-groups.png[Setup Two-Factor Authentication, width=500]
+image::apps/2fa/2fa-exclude-groups.png[Setup Two-Factor Authentication, width=350]
 
 Note that when users are forced to use 2FA, they are not able to do the setup process the same way as when using opt-in. For this case on first login after enforcing 2FA, the user is shown a special login screen where the QR code to finalize the 2FA process is displayed.
 
-image::apps/2fa/2fa-init-qr.png[Login Screen with QR Code for Two-Factor Authentication, width=500]
+image::apps/2fa/2fa-init-qr.png[Login Screen with QR Code for Two-Factor Authentication, width=350]
 
 TIP: For the opt-in and login with enforced 2FA to work, ImageMagick and php-imagick are required to create the QR code. Depending on your operating system, these packages may need to be installed manually.
 
@@ -35,7 +35,7 @@ NOTE: OAuth 2.0 is the recommended authentication method for clients.
 
 === Enable OAuth 2.0 App
 
-When using the OAuth 2.0 App, the ownCloud Desktop client will open the login page in the system web browser and ownCloud Mobile Apps will open the login page in an embedded web view. After entering the regular credentials, users will see a second page, where they need to enter the second factor.
+When using the OAuth 2.0 App, the ownCloud Desktop app will open the login page in the system web browser and ownCloud Mobile Apps will open the login page in an embedded web view. After entering the regular credentials, users will see a second page, where they need to enter the second factor.
 
 For more information see the xref:configuration/user/user_oauth2.adoc[User Auth Open Authentication (OAuth2)] documentation.
 

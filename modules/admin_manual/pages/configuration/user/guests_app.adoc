@@ -11,9 +11,9 @@ NOTE: Guest users do not have storage space and can only work on content that is
 
 // video::L42PBHgqKVI[youtube,width=640,height=360]
 
-== Installation
+== Enable the App
 
-Install and enable the {oc-marketplace-url}/apps/guests[Guests] app if not already installed with your bundle. The Guests app requires the email settings to be configured in your ownCloud setup, because you need to be able to invite your guests by email.
+Enable the `Guests` app if not already done so. The Guests app requires the email settings to be configured in your ownCloud setup, because you need to be able to invite your guests by email.
 
 == Configuration
 
@@ -21,11 +21,9 @@ Check your Guests app's configuration in menu:Settings[Admin > Sharing]. There y
 
 With a blocklist, an admin can block domains for guest invitations:
 
-* Up to Guests 0.12.1, the blocklist entries were a suffix match. An entry like `example.com` would also block `user@otherexample.com` -- this was considered an error and admins relying on this feature must review their blocklists when upgrading to Guests 0.12.2.
-
 * Starting with Guests 0.12.2, the entries in the blocklist are exact matches. That means, that an entry `example.com` blocks `user@example.com`, but `user@mail.example.com` is *not* blocked. Admins are advised to list all possible subdomains explicitly.
 
-image::configuration/user/guest_app/guest_app_settings.png[width=470]
+image::configuration/user/guest_app/guest_app_settings.png[width=350]
 
 == Troubleshooting
 

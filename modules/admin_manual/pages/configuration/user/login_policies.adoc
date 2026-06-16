@@ -21,11 +21,11 @@ Login policies are handled via groups that users are members of and maintained v
 
 If no login policy is activated in the `loginPolicy.order` list, ownCloud will work normally. Only the policies in the `loginPolicy.order` list are used.
 
-To enable login policies, use the following example:
+To enable login policies, use the following example. Multiple values are comma separated without blanks:
 
-[source,php]
+[source,.env]
 ----
-'loginPolicy.order' => ['OC\Authentication\LoginPolicies\GroupLoginPolicy'],
+OWNCLOUD_LOGIN_POLICY_ORDER='OC\Authentication\LoginPolicies\GroupLoginPolicy'
 ----
 
 After enabling the `loginPolicy.order`, the configuration of the `groupLoginPolicy` can be made. The key definition below must be set according to the needs and the description in xref:configuration/server/config_sample_php_parameters.adoc#configuration-of-the-group-login-policy[Configuration of the Group Login Policy]:

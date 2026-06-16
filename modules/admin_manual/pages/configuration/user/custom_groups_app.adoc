@@ -9,13 +9,13 @@
 
 == Installation
 
-Install and enable the {oc-marketplace-url}/apps/customgroups[Custom Groups] app if not already installed with your bundle. The Custom Groups app requires the email settings to be configured in your ownCloud setup, because you need to be able to invite the group members by email.
+Enable the `Custom Groups` app if not already done so. The Custom Groups app requires the email settings to be configured in your ownCloud setup, because you need to be able to invite the group members by email.
 
 == Configuration
 
 Check your Custom Groups app's configuration in menu:Settings[Admin > Sharing > Custom Groups]. There you can set the following items:
 
-image::configuration/user/custom_groups/custom_groups.png[]
+image::configuration/user/custom_groups/custom_groups.png[image, width=350]
 
 === Overriding Default Behavior
 
@@ -54,4 +54,4 @@ Assigning custom group admins can only be done via the browser. In case the grou
 
 See the following image as example of user related settings and the https://doc.owncloud.com/webui/next/classic_ui/personal_settings/custom_groups.html[Custom Groups] section in the user manual for details:
 
-image::configuration/user/custom_groups/user_settings_custom_groups.png[]
+image::configuration/user/custom_groups/user_settings_custom_groups.png[image, width=350]
