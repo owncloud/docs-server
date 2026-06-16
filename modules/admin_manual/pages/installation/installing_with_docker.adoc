@@ -202,9 +202,19 @@ a| xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL]
 [NOTE]
 ====
 * `ADMIN_USERNAME` and `ADMIN_PASSWORD` +
-will not change between deploys even if you change the values in the `.env` file. +
-To change them, you will need to issue `docker volume prune`, which *will delete all your data*.
+The values will not change between deploys even if you change them in the `.env` file. +
+These environment variables are used to the define the admin user *for system setup and first logon*. Once set, the values are fixed.
++
+--
+After the inital logon, you can:
+
+** Remove the envvars from the deployment, which is highly recommended. +
+** xref:configuration/user/reset_admin_password.adoc[Change the admin users password] with standard CLI or webUI methods. +
+** Add another admin user and delete this one, which is highly recommended.
+--
+
 * (1) ... `localhost` is always included and cannot be removed by omitting it. It must be used if only one entry is to be defined.
+
 * (2) ... To access ownCloud from your internal network without using an externally resolvable URL, you must add the IP address of the host or an internal resolvable URL running the container.
 ====
 

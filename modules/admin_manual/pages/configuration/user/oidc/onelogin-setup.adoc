@@ -23,13 +23,13 @@ Follow these steps to configure OneLogin for use with OpenID Connect (OIDC):
 
 . Go to menu:Applications[Applications] to manage the registered applications.
 +
-image:configuration/user/oidc/onelogin/onelogin-select-application.png[width=80%]
+image:configuration/user/oidc/onelogin/onelogin-select-application.png[width=350]
 
 . Click on btn:[Add App] in the upper right corner.
 
 . Search for `openid` and select the `OpenId Connect (OIDC)` app
 +
-image:configuration/user/oidc/onelogin/onelogin-select-openid-app.png[width=80%]
+image:configuration/user/oidc/onelogin/onelogin-select-openid-app.png[width=350]
 
 . Provide a name and configure images if needed.
 
@@ -37,11 +37,11 @@ image:configuration/user/oidc/onelogin/onelogin-select-openid-app.png[width=80%]
 
 . Go to menu:Configuration[] and enter values for `Login Url` which points to you system and the `Redirect URI's`, which is the url of you system followed by `/index.php/apps/openidconnect/redirect` 
 +
-image:configuration/user/oidc/onelogin/onelogin-oidc-configuration.png[width=90%]
+image:configuration/user/oidc/onelogin/onelogin-oidc-configuration.png[width=350]
 
 . Go to menu:SSO[] and note the values for [#client-id]#Client ID#, [#client-secret]#Client Secret# and [#issuer-url]#Issuer URL# for later use.
 +
-image:configuration/user/oidc/onelogin/onelogin-oidc-sso.png[width=90%]
+image:configuration/user/oidc/onelogin/onelogin-oidc-sso.png[width=350]
 
 === Configure ownCloud Server
 

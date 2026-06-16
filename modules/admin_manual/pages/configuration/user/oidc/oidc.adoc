@@ -24,9 +24,7 @@
 
 NOTE: ownCloud only supports one configured identity provider which is then valid for all requests.
 
-Click on the
-xref:attachment$/configuration/user/oidc/OAuth-code-flow-sequence-diagram.png[OAuth code flow sequence diagram]
-link to get more details on the flow sequence.
+Click on the xref:attachment$/configuration/user/oidc/OAuth-code-flow-sequence-diagram.png[OAuth code flow sequence diagram] link to get more details on the flow sequence.
 
 == Supported Identity Providers
 
@@ -49,19 +47,22 @@ Please get in touch with ownCloud Consulting if you need help with a specific id
 
 Setting up ownCloud Server to work with OpenID Connect requires a couple of components to work together:
 
-- An external identity provider configured to work with the ownCloud components
-- A distributed memcache setup - such as Redis or Memcached - is required to operate this app. Follow the xref:configuration/server/caching_configuration.adoc[caching documentation] on how to set it up.
-- The {oc-marketplace-url}/apps/openidconnect[OpenID Connect App] installed on ownCloud Server
-- Configuration settings in `config.php` on ownCloud Server
+* An external identity provider configured to work with the ownCloud components
+* A distributed memcache setup - such as Redis or Memcached - is required to operate this app. Follow the xref:configuration/server/caching_configuration.adoc[caching documentation] on how to set it up.
+* The `OpenID Connect` app enabled on ownCloud Server.
+* Set the environment variable:
 +
-* `'http.cookie.samesite' \=> 'None',`
-+
-See xref:configuration/server/config_sample_php_parameters.adoc#define-how-to-relax-same-site-cookie-settings[config.sample.php] and {schemeful-samesite-url}[Schemeful Same-Site] for examples and details.
-+
+--
+`OWNCLOUD_HTTP_COOKIE_SAMESITE=None`
+
+See xref:configuration/server/config_sample_php_parameters.adoc#define-how-to-relax-the-same-site-cookie-settings[config.sample.php] and {schemeful-samesite-url}[Schemeful Same-Site] for examples and details.
+--
+
 * Settings for the OpenID Connect App
 +
 See xref:configuration/server/config_apps_sample_php_parameters.adoc#app-openid-connect-oidc[config.apps.sample.php] for examples and details or see section xref:save-settings-in-the-database[Save Settings in the Database] below when running clustered setups.
-- Service discovery for the xref:owncloud-desktop-and-mobile-clients[ownCloud Clients]
+
+* Service discovery for the xref:owncloud-desktop-and-mobile-clients[ownCloud Desktop and Mobile Apps]
 
 === Save Settings in the Database
 
@@ -116,18 +117,22 @@ https://cloud.example.com/index.php/apps/openidconnect/config
 
 . Webserver Rewrite Rule
 +
-To make the endpoint available under the static service discovery path, it is recommended to put a `RewriteRule` in place using in the `VirtualHost` section. The Apache module `rewrite` must be enabled, and if SSL is used, also the modules `proxy`, `proxy_http` and `proxy_connect`:
-+
-[source,apache]
+--
+To make the endpoint available under the static service discovery path, it is recommended to set the following environment variable:
+
+[source,.env]
 ----
-RewriteEngine on
-RewriteRule "^/.well-known/openid-configuration" "/index.php/apps/openidconnect/config" [P]
-SSLProxyEngine On #This can be omitted if no SSL is used
+OWNCLOUD_ENABLE_OIDC_REWRITE_URL=true
 ----
-+
+
+This variable sets the following rule in the embedded `.htaccess` file:
+
+`RewriteRule ^/.well-known/openid-configuration /index.php/apps/openidconnect/config`
+
 TIP: Depending on the respective infrastructure setup there can be other ways to solve this. In any case, please make sure _not to use redirect rules_ as this will violate the OpenID Connect specification.
-+
+
 IMPORTANT: If you use the `.htaccess` file in the ownCloud web root, you have to manually add that rewrite rule again after any ownCloud upgrade.
+--
 
 . Once service discovery is available as described above, the ownCloud clients will attempt to connect via OpenID Connect.
 
@@ -150,30 +155,11 @@ xref:configuration/user/oidc/ms-azure-setup.adoc[Example Setup Using Microsoft A
 Follow this link to see 
 xref:configuration/user/oidc/onelogin-setup.adoc[Example Setup Using OneLogin].
 
-== ownCloud Desktop and Mobile Clients
+== ownCloud Desktop and Mobile Apps
 
-ownCloud desktop and mobile clients detect whether OIDC is available (service discovery) and use this login method when a new account is created.
+ownCloud Desktop and Mobile Apps detect whether OIDC is available (service discovery) and use this login method when a new account is created.
 
-NOTE: The desktop and mobile apps (clients) have a default client ID and secret hard-coded, which are used for ownCloud's oauth2 app. When using Kopano as IdP, it does not pre-define a client ID and secret. You can use the default ones of the client to configure Kopano properly. With some IdPs like MS-Azure, these and other required parameters come from the IdP and must be coded into the client. Note that each IdP has different requirements. Get in touch with ownCloud for a branding subscription to customize the clients according to your needs.
-
-=== Client Support for OIDC
-
-[caption=]
-.Following owncloud clients support OIDC 
-[width="60%",cols="40%,60%",options="header"]
-|===
-| ownCloud Client
-| Release with OIDC support
-
-| Desktop
-| >= 2.7.0
-
-| Android
-| >= 2.15
-
-| iOS
-| >= 1.2
-|===
+NOTE: The Desktop and Mobile apps have a default client ID and secret hard-coded, which are used for ownCloud's oauth2 app. When using Kopano as IdP, it does not pre-define a client ID and secret. You can use the default ones of the client to configure Kopano properly. With some IdPs like MS-Azure, these and other required parameters come from the IdP and must be coded into the client. Note that each IdP has different requirements. Get in touch with ownCloud for a branding subscription to customize the clients according to your needs.
 
 === Client IDs, Secrets and Redirect URIs
 
@@ -187,7 +173,7 @@ All IdPs can use ownCloud's default _client IDs, secrets and redirect URIs_ with
 | Key
 
 | Server/Web
-| as specified in `config.php`
+| as specified via environment variables
 
 | Desktop
 | `xdXOt13JKxym1B1QcEncf2XDkLAexMBFwiT9j6EfhhHFJhs2KM9jbjTmf8JBXE69`
@@ -207,7 +193,7 @@ All IdPs can use ownCloud's default _client IDs, secrets and redirect URIs_ with
 | Key
 
 | Server/Web
-| as specified in `config.php`
+| as specified via environment variables
 
 | Desktop
 | `UBntmLjC2yYCeHwsyj73Uwo9TAaecAetRwMw0xYcvNL9yRdLSUi0hUAHfvCHFeFh`
