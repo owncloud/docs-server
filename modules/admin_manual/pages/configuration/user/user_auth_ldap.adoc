@@ -571,7 +571,7 @@ Email Field::
 User Home Folder Naming Rule::
 +
 --
-By default, the ownCloud server creates the user directory in your ownCloud data directory and gives it the ownCloud username, e.g., `/mnt/data/files/5a9df029-322d-4676-9c80-9fc8892c4e4b`. Note that `/mnt/data/files` is the default in the container, part of the Docker volume and can be redifined if required.
+By default, the ownCloud server creates the user directory in your ownCloud data directory and gives it the ownCloud username, e.g., `/mnt/data/files/5a9df029-322d-4676-9c80-9fc8892c4e4b`. Note that `/mnt/data/files` is the default in the container, part of the Docker volume and can be redefined if required.
 
 It is possible to override this setting and name it after an LDAP attribute value, e.g., `attr:cn`.  The attribute can return either an absolute path, e.g., `/mnt/storage43/alice`, or a relative path which must not begin with a `/`, e.g., `CloudUsers/CookieMonster`. This relative path is then created inside the data directory (e.g., `/mnt/data/files/CloudUsers/CookieMonster`).
 

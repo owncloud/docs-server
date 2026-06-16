@@ -194,7 +194,7 @@ For details of the occ user commands used below, see the xref:configuration/serv
   - lisa: /mnt/data/files/lisa
 ----
 
-Here you can see, that the home of user `lisa` is located in `/mnt/data/files//lisa`
+Here you can see, that the home of user `lisa` is located in `/mnt/data/files/lisa`
 --
 
 . Prepare new mounts *in advance* for one or more users:
@@ -258,7 +258,7 @@ The following command lists all users from a given home.
 
 [source,bash,subs="attributes+"]
 ----
-{occ-command-example-prefix-docker} user:home:list-users /mnt/data/files/
+{occ-command-example-prefix-docker} user:home:list-users /mnt/data/files
   - admin
   - user01
 ----

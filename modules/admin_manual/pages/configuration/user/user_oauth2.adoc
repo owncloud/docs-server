@@ -20,4 +20,4 @@ When using OAuth2 a unique access token is generated for each device or third pa
 
 == The OAuth2 App
 
-OAuth2 functionality is available `OAuth2` app which is is shipped with the ownCloud image. For more information on how to set it up, see section xref:configuration/server/security/oauth2.adoc[Open Authentication (OAuth2)]
+OAuth2 functionality is available via the `OAuth2` app which is shipped with the ownCloud image. For more information on how to set it up, see section xref:configuration/server/security/oauth2.adoc[Open Authentication (OAuth2)]
