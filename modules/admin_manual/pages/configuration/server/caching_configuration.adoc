@@ -29,11 +29,16 @@ The caching backends supported by ownCloud are:
 * xref:apcu[APCu] +
   This is a data cache only and does *not* cache any opcode. APCu is part of the Docker image.
 * xref:redis[Redis] +
-  This is an in-memory data structure store (cache) for single and multi-server ownCloud installations, which provides file locking and can be set up in local or distributed environments. The required `php-redis` extension is already part of the Docker image. Redis is used of the Docker Compose deployment example. For details see the xref:installation/installing_with_docker.adoc#docker-compose[Installing With Docker] documentation.
+  This is an in-memory data structure store (cache) for single and multi-server ownCloud installations, which provides file locking and can be set up in local or distributed environments. The required `php-redis` extension is already part of the Docker image. Redis is used in the Docker Compose deployment example. For details see the xref:installation/installing_with_docker.adoc#docker-compose[Installing With Docker] documentation.
+* xref:memcached[Memcached] +
+  This is a distributed cache for multi-server ownCloud installations and has *very limited* file locking capabilities. +
+  Using Memcached for distributed locking is generally not recommended. Because its nodes do not communicate with each other and data isn't persistent, locks can be released unexpectedly or lost entirely if a server restarts. For reliable locking, Redis is the industry standard.
+  +
+  See the following page to learn more about the https://scalegrid.io/blog/redis-vs-memcached-2021-comparison/[Redis vs. Memcached – 2021 Comparison].
 
 [NOTE]
 ====
-You may use _both_ a local and a distributed cache. The recommended ownCloud caches are APCu and Redis. If you do not install and enable a local memory cache you will see a warning on your ownCloud admin page. If you enable only a distributed cache in your `config.php` (`memcache.distributed`) and not a local cache (`memcache.local`) you will still see the cache warning.
+You may use _both_ a local and a distributed cache. The recommended ownCloud caches are APCu and Redis. If you do not install and enable a local memory cache you will see a warning on your ownCloud admin page. If you either enable Redis or Memcached, the distributed cache will be set automatically to the respective backend.
 ====
 
 === Cache Directory Location
@@ -97,12 +102,20 @@ NOTE: Out of the box, every Redis instance supports 16 databases so `<dbIndex>` 
 
 Please read more about the instructions for the {redis_select_url}[select] and {redis_flushdb_url}[flushdb] command.
 
+=== Memcached
+
+Memcached is a reliable old-timer for shared caching on distributed servers. It performs well with ownCloud with one exception: it is not suitable to use with Transactional File Locking. This is because it does not store locks, and data can disappear from the cache at any time. Given that, Redis is the best memory cache to use.
+
+NOTE: The `memcached` PHP extension is already embedded in the Docker image and enabled.
+
 == Configuring Memory Caching
 
 Memory caches must be provided and explicitly configured in ownCloud by:
 
-. When using Redis, it must be provided by either as described in the xref:installation/installing_with_docker.adoc#docker-compose[Docker Compose] example of the installation documentation or by other means.
+. When using Redis or Memcached, it must be provided by either as described in the xref:installation/installing_with_docker.adoc#docker-compose[Docker Compose] example of the installation documentation or by other means.
 . Configuring the caches used.
+
+Note that the `OWNCLOUD_MEMCACHE_LOCKING` environment variable corresponds to the configuration setting `memcache.locking`. However, there is no counterpart for the setting `memcache.distributed`, as it is set automatically based on the caching type enabled.
 
 See the
 xref:configuration/server/config_sample_php_parameters.adoc#memory-caching-backend-configuration[Memory caching backend configuration]
@@ -129,13 +142,14 @@ If you select Redis, you must enable it via environment variables. The example v
 ----
 OWNCLOUD_REDIS_ENABLED=true
 OWNCLOUD_REDIS_HOST=redis
+OWNCLOUD_REDIS_PORT=6379
 ----
 
 * If Redis is not enabled, none of the other Redis configurations will be taken into account.
-* If Redis is enabled, two additional configurations are set automatically. Note that these configs are not configurable via environment variables:
+* If Redis is enabled, two additional configurations are set automatically:
 +
 --
-[source,.php]
+[source,php]
 ----
 'memcache.locking' => '\OC\Memcache\Redis'
 'memcache.distributed' => '\OC\Memcache\Redis'
@@ -151,8 +165,51 @@ OWNCLOUD_FILELOCKING_ENABLED=true
 OWNCLOUD_MEMCACHE_LOCAL='\OC\Memcache\Redis'
 ----
 
-
 CAUTION: ownCloud provides many configuration options for Redis, including enhanced security features such as password protection. See the Redis security URL and the ownCloud environment variables for more details.
+
+=== Memcached Configuration
+
+If you select Memcached, you must enable it via environment variables. The example value for the host setting assumes that you have used the ownCloud Docker Compose deployment example. Adapt this value for your setup.
+
+[source,.env]
+----
+OWNCLOUD_MEMCACHED_ENABLED=true
+OWNCLOUD_MEMCACHED_HOST=memcached
+OWNCLOUD_MEMCACHED_PORT=11211
+----
+
+////
+[NOTE]
+====
+If you are using multiple memcached servers, omit `OWNCLOUD_MEMCACHED_PORT` and use the following notation:
+
+`OWNCLOUD_MEMCACHED_HOST="'host_1',port_1,'host_2',port_2"`
+====
+////
+
+Additional memcached options can be set with the environment variable `OWNCLOUD_MEMCACHED_OPTIONS`.
+
+* If Memcached is not enabled, none of the other Memcached configurations will be taken into account.
+* If Memcached is enabled, two additional configurations are set automatically:
++
+--
+[source,php]
+----
+'memcache.locking' => '\OC\Memcache\Memcached'
+'memcache.distributed' => '\OC\Memcache\Memcached'
+----
+--
+
+==== Clearing the Memcached Cache
+
+The Memcached cache can be flushed from the command line, using a range of common Linux/Unix tools including netcat and telnet. The following example uses telnet to log in, run the flush_all command, and log out:
+
+[source,bash]
+----
+telnet <memcached-hostname> 11211
+flush_all
+quit
+----
 
 == Deployment Type Configuration Examples
 

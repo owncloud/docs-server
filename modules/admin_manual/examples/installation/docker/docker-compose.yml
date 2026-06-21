@@ -85,6 +85,18 @@ services:
     networks:
       - oc_network
 
+# As alternative to Redis, you can enable Memcached.
+# See the caching configuration documentation for more details.
+
+#  memcached:
+#    image: memcached:latest
+#    container_name: owncloud_memcached
+#    restart: always
+#    ports:
+#      - "11211:11211"
+#    networks:
+#      - oc_network
+
 volumes:
   oc_files:
     driver: local
