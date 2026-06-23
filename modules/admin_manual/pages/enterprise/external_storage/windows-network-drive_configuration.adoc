@@ -312,7 +312,7 @@ NOTE: The capability of the listener depends on the ability of the used SMB/CIFS
 
 ==== WND Listener Setup
 
-The WND listener for ownCloud 10 includes two different commands that need to be executed:
+The WND listener for ownCloud Classic 10 includes two different commands that need to be executed:
 
 * xref:wndlisten[wnd:listen] Listen to changes and save them in the database
 * xref:wndprocess-queue[wnd:process-queue] Process saved listener changes from the database 
@@ -694,7 +694,7 @@ export HOME=/var/lib/apache2
 
 Restart Apache, open your ownCloud Admin page and start creating SMB/CIFS mounts.
 
-=== Basic Setup for One ownCloud Server
+=== Basic Setup for One ownCloud Classic
 
 . Go to the admin settings and set up the required WND mounts. Be aware though, that there are some limitations. These are:
 .. ownCloud needs access to the Windows account password for the mounts to update the file cache properly. This means that "__login credentials, saved in session__" won't work with the listener. ownCloud suggests to use "__login credentials, saved in DB__" as the best replacement instead.

@@ -21,7 +21,7 @@ there is no guarantee that the attackers will supply the key after
 payment is made. To help mitigate such threats and ensure ongoing access
 to user data, ownCloud provides the Ransomware Protection app.
 
-NOTE: It is essential to be aware that user data needs to be synchronized with you ownCloud Server using the
+NOTE: It is essential to be aware that user data needs to be synchronized with you ownCloud Classic using the
 ownCloud Desktop synchronization client. Data that is not synchronized and stored in ownCloud cannot be protected.
 
 == About Ransomware Protection
@@ -106,7 +106,7 @@ future-proof protection from ransomware attacks: retaining data and
 providing the means to roll back to a particular point in time.
 
 ownCloud Ransomware Protection will, therefore, record all changes on an
-ownCloud Server and allow administrators to rollback user data to a
+ownCloud Classic and allow administrators to rollback user data to a
 particular point in time, making use of ownCloud’s integrated Versioning
 and Trash bin features.
 
@@ -124,7 +124,7 @@ Ransomware prevention and protection reduces risks to a minimum acceptable level
 
 | Ransomware Prevention (Blocker)
 |
-| First line of defense against ransomware attacks. Ransomware Protection uses a file name pattern blacklist to prevent uploading files that have file extensions associated with ransomware (e.g. `.crypt`) thereby preserving the original files on the ownCloud Server.
+| First line of defense against ransomware attacks. Ransomware Protection uses a file name pattern blacklist to prevent uploading files that have file extensions associated with ransomware (e.g. `.crypt`) thereby preserving the original files on the ownCloud Classic server.
 
 | Ransomguard Scanner
 | `occ ransomguard:scan <timestamp> <user>`

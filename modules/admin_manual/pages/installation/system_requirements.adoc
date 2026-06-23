@@ -6,7 +6,7 @@
 :ios-system-requirements-url: https://doc.owncloud.com/ios-app/ios_faq.html
 :android-system-requirements-url: https://doc.owncloud.com/android/faq.html
 
-:description: Read this documentation for a recommended or supported environment for your ownCloud Server. This documentation applies to both a new installation or upgrade of an existing installation.
+:description: Read this documentation for a recommended or supported environment for your ownCloud Classic server. This documentation applies to both a new installation or upgrade of an existing installation.
 
 == Introduction
 

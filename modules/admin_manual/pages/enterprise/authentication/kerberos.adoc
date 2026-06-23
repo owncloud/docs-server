@@ -128,7 +128,7 @@ The administration server. This is typically the same as the LDAP/Active Directo
 
 // https://docs.typo3.org/p/causal/ig_ldap_sso_auth/2.1/en-us/AdministratorManual/ConfigureApacheKerberos.html
 
-=== ownCloud Server Side
+=== ownCloud Classic Side
 
 ////
 * The host the ownCloud instance is running on must be part of the domain.
@@ -373,7 +373,7 @@ samba-tool domain exportkeytab --principal=HTTP/<FQDN> <keytab-file-location>/<u
 
 . Move the generated keytab file `<user-name>.keytab` to the Linux server hosting the ownCloud instance to location `<keytab-file-location>`. Note that the file must be accessible by the web server.
 
-== Configure ownCloud Server
+== Configure ownCloud Classic
 
 Follow these steps on the server running ownCloud:
 

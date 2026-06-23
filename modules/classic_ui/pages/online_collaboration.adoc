@@ -20,7 +20,7 @@ NOTE: This feature is *not* available in the community edition, or for Public Li
 
 ==== How to Use Secure View
 
-image::enterprise/collaboration/secure-view/collabora-online-administration.png[Configure Secure View in ownCloud Server.,align="center"]
+image::enterprise/collaboration/secure-view/collabora-online-administration.png[Configure Secure View in ownCloud Classic.,align="center"]
 
 To enable Secure View for an existing, or new, share: 
 

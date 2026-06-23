@@ -9,7 +9,7 @@ The web UI can be configured for optimal user experience.
 
 === Hide the Upload Estimation
 
-Note that this setting is available for ownCloud Server only.
+Note that this setting is available for ownCloud Classic only.
 
 When uploading a document, an upload estimation (progress bar) is shown like in the example below:
 
