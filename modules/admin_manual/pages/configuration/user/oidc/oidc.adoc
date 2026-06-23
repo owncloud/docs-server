@@ -30,7 +30,7 @@ link to get more details on the flow sequence.
 
 == Supported Identity Providers
 
-ownCloud Server can work with identity providers (IdP) that support OpenID Connect. There are many identity providers available and the OpenID Connect implementations vary a lot in terms of supported features as well as configuration needs. 
+ownCloud Classic can work with identity providers (IdP) that support OpenID Connect. There are many identity providers available and the OpenID Connect implementations vary a lot in terms of supported features as well as configuration needs. 
 
 The currently supported products are
 
@@ -47,12 +47,12 @@ Please get in touch with ownCloud Consulting if you need help with a specific id
 
 == Prerequisites
 
-Setting up ownCloud Server to work with OpenID Connect requires a couple of components to work together:
+Setting up ownCloud Classic to work with OpenID Connect requires a couple of components to work together:
 
 - An external identity provider configured to work with the ownCloud components
 - A distributed memcache setup - such as Redis or Memcached - is required to operate this app. Follow the xref:configuration/server/caching_configuration.adoc[caching documentation] on how to set it up.
-- The {oc-marketplace-url}/apps/openidconnect[OpenID Connect App] installed on ownCloud Server
-- Configuration settings in `config.php` on ownCloud Server
+- The {oc-marketplace-url}/apps/openidconnect[OpenID Connect App] installed on ownCloud Classic
+- Configuration settings in `config.php` on ownCloud Classic
 +
 * `'http.cookie.samesite' \=> 'None',`
 +
@@ -98,7 +98,7 @@ NOTE: Only set either the database or the config.php keys but not both for the O
 
 . Webserver Service Discovery Information
 +
-In order to allow the ownCloud Clients (Desktop/Android/iOS) to make use of OpenID Connect, the webserver serving ownCloud Server needs to _provide service discovery information_ under the following static path:
+In order to allow the ownCloud Clients (Desktop/Android/iOS) to make use of OpenID Connect, the webserver serving ownCloud Classic needs to _provide service discovery information_ under the following static path:
 +
 [source,url]
 ----
@@ -260,7 +260,7 @@ ownCloud desktop and mobile apps come with default `scope` and `prompt` paramete
 
 === Migrate Clients from Basic Authentication to OIDC
 
-If your users are logged in to their desktop and mobile clients via basic authentication (username/password) against ownCloud Server and you are not using OAuth2 to authorize the ownCloud clients, a migration to OIDC can be conducted as follows:
+If your users are logged in to their desktop and mobile clients via basic authentication (username/password) against ownCloud Classic and you are not using OAuth2 to authorize the ownCloud clients, a migration to OIDC can be conducted as follows:
 
 1. Make sure you have a working OIDC configuration based on the above sections.
 2. Enable the OpenID Connect App.

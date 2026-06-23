@@ -40,7 +40,7 @@ different addressbook is a move operation. If you are worried about
 losing the contact, save it to a VCF file using ownCloud (Or LDIF using
 Thunderbird Addressbook) first! Like dragging from the ownCloud Addressbook
 to the Personal Address Book removes the contact from
-ownCloud Server (_deleting it from all the other synchronized
+ownCloud Classic (_deleting it from all the other synchronized
 installations_) and puts it in your Local Machine -only-Address Book. So
 be careful or you’ll have unintended consequences where you might have
 intended a copy operation.

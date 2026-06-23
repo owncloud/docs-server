@@ -2,7 +2,7 @@
 
 Marketplace URL: {oc-marketplace-url}/apps/metrics[Metrics]
 
-Monitoring and reporting of ownCloud Server. For details please see the
+Monitoring and reporting of ownCloud Classic. For details please see the
 xref:enterprise/reporting/metrics.adoc[Metrics] documentation.
 
 Set a secret for authenticating requests at the endpoint.

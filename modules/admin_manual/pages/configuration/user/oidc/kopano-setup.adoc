@@ -16,7 +16,7 @@ The sections below will explain these areas and provide configuration examples u
 
 For the configuration examples, let's assume we have:
 
-- ownCloud Server available as `+https://cloud.example.com+`
+- ownCloud Classic available as `+https://cloud.example.com+`
 - Kopano Konnect available as `+https://idp.example.com+`
 
 === Set Up and Configure Kopano
@@ -31,9 +31,9 @@ Specifically, you have to:
 
 TIP: Kopano Konnect can be set up via Docker. Images are available on Docker Hub (`kopano/konnectd`).
 
-=== Configure ownCloud Server
+=== Configure ownCloud Classic
 
-To set up ownCloud Server to work with OpenID Connect, you have to:
+To set up ownCloud Classic to work with OpenID Connect, you have to:
 
 1. Install the {oc-marketplace-url}/apps/openidconnect[OpenID Connect App]
 2. Configure `config.php`
@@ -44,7 +44,7 @@ TIP: It is recommended to first figure out all configurations on a test system a
 ==== List of OpenID Connect config.php Parameters
 
 Follow this link to read more about the
-xref:configuration/server/config_apps_sample_php_parameters.adoc#app-openid-connect-oidc[OIDC config.php parameters] available to configure OpenID Connect on ownCloud Server.
+xref:configuration/server/config_apps_sample_php_parameters.adoc#app-openid-connect-oidc[OIDC config.php parameters] available to configure OpenID Connect on ownCloud Classic.
 
 ==== Example config.php
 

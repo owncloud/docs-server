@@ -1,5 +1,5 @@
 = Introduction
-:description: ownCloud is an open source file sync and share software for everyone from individuals operating the free ownCloud Server edition, to large enterprises and service providers operating the ownCloud Enterprise Subscription.
+:description: ownCloud is an open source file sync and share software for everyone from individuals operating the free ownCloud Classic edition, to large enterprises and service providers operating the ownCloud Enterprise Subscription.
 
 *Welcome to ownCloud: your self-hosted file sync and share solution.*
 

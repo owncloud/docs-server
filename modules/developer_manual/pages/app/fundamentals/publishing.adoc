@@ -287,7 +287,7 @@ code. This does not depend on whether it happens intentionally or not.
 | The name/title of your app; Max. 50 characters; Provide a concise name so users can identify your app easily; Do not include your developers/company name.
 
 | summary
-| Provide a short description (max. 90 chars). This gets displayed below the product title and on the product tiles; mandatory since ownCloud 10.0.0.
+| Provide a short description (max. 90 chars). This gets displayed below the product title and on the product tiles; mandatory since ownCloud Classic 10.0.0.
 
 | description
 | Max. 4000 characters; Provide all necessary, detailed information about the product. This should contain all user relevant information. Don’t get lost in technical details, focus on the benefits the product offers; Also, use markdown to layout your description.
