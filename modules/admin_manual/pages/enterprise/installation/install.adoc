@@ -7,7 +7,7 @@
 After you have completed your initial installation of ownCloud as detailed in the README, 
 follow the instructions in xref:installation/installation_wizard.adoc[The Installation Wizard] 
 to finish setting up ownCloud. To upgrade your Enterprise server, refer to 
-xref:maintenance/upgrade.adoc[How to Upgrade Your ownCloud Server].
+xref:maintenance/upgrade.adoc[How to Upgrade Your ownCloud Classic].
 
 == Manual Installation
 

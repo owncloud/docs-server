@@ -116,7 +116,7 @@ These can be convenient when a longer list of files is needed, e.g., in a UI tes
 
 === Preparing to Run Acceptance Tests
 
-This is a concise guide to running acceptance tests on ownCloud 10.
+This is a concise guide to running acceptance tests on ownCloud Classic.
 Before you can do so, you need to meet a few prerequisites available; these are
 
 * ownCloud

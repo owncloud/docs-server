@@ -8,7 +8,7 @@
 
 Themes can be used to customize the look and feel of any aspect of an ownCloud installation. They can override the default _JavaScript_, _CSS_, _image_, and _template_ files, as well as the _user interface translations_ with custom versions. They can also affect both the web front-end and the ownCloud Desktop client. However, this documentation only covers customizing the web front-end, _so far_.
 
-NOTE: Before ownCloud 10, theming was done via the `config.php` entry `'theme' => ''`.  This is deprecated in ownCloud 10. Users who have this entry in their `config.php` should remove it and use a theme app to customize their ownCloud instance instead.
+NOTE: Before ownCloud Classic 10, theming was done via the `config.php` entry `'theme' => ''`.  This is deprecated in ownCloud Classic 10. Users who have this entry in their `config.php` should remove it and use a theme app to customize their ownCloud instance instead.
 
 == Quick Start
 
@@ -177,7 +177,7 @@ And here’s a longer, more complete example:
 The value of the `id` element needs to be the name of your theme’s folder. We recommend that it always be prefixed with `theme-`. The main reason for doing so, is that it is alphabetically sorted in a terminal
 when handling app folders.
 
-The `type` element needs to be the same as is listed above, so that ownCloud knows to handle the app as a theme. The dependencies element needs to be present to set the minimum and maximum versions of ownCloud which are supported. If it’s not present, a warning will be displayed in ownCloud 10 and an error will be thrown in the upcoming ownCloud 11.
+The `type` element needs to be the same as is listed above, so that ownCloud knows to handle the app as a theme. The dependencies element needs to be present to set the minimum and maximum versions of ownCloud which are supported. If it’s not present, a warning will be displayed in ownCloud Classic 10 and an error will be thrown in the upcoming ownCloud Classic 11.
 
 While the remaining elements are optional, they help when working with the theme in the ownCloud Admin dashboard. Consider filling out as many as possible, as completely as possible.
 
@@ -468,7 +468,7 @@ There are different options for testing themes:
 
 === How Can an App Register a Section in the Admin or Personal Section?
 
-As of ownCloud 10.0, apps must register Admin and Personal section settings in `info.xml`. As a result, all calls to
+As of ownCloud Classic 10.0, apps must register Admin and Personal section settings in `info.xml`. As a result, all calls to
 `OC_App::registerPersonal` and `OC_App::registerAdmin` should now be removed. The settings panels of any apps that are still using these calls will now be rendered in the `Additional` section of the dashboard.
 
 For each panel an app wishes to register, two things are required:
@@ -497,7 +497,7 @@ Next, a controller class which implements the `OCP\Settings\ISettings` interface
 * getPanel
 * getPriority
 
-*getSectionID:* This method returns the identifier of the section that this panel should be shown under. ownCloud Server comes with a predefined list of sections which group related settings together; the intention of which is to improve the user experience. This can be found here in
+*getSectionID:* This method returns the identifier of the section that this panel should be shown under. ownCloud Classic comes with a predefined list of sections which group related settings together; the intention of which is to improve the user experience. This can be found here in
 https://github.com/owncloud/core/blob/master/lib/private/Settings/SettingsManager.php#L195[this example]:
 
 *getPanel:* This method returns the `OCP\Template` or `OCP\TemplateReponse` which is used to render the panel. The method may also return `null` if the panel should not be shown to the user.

@@ -40,11 +40,11 @@ To generate a config report from the command line, run the following command fro
 {occ-command-example-prefix} configreport:generate > config_report.txt
 ----
 
-== ownCloud Server Log File
+== ownCloud Classic Log File
 
 === Generate via webUI
 
-You can use the webUI to download your ownCloud Server log file. To do so, navigate to: + 
+You can use the webUI to download your ownCloud Classic log file. To do so, navigate to: + 
 menu:Settings[Admin > General > Log > "Download logfile"].
 
 === Generate via Command Line

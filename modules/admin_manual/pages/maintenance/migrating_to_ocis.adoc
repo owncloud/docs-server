@@ -1,17 +1,17 @@
 = Migrating to ownCloud Infinite Scale
 :toc: right
 :toclevels: 3
-:description: This guide describes how to migrate an ownCloud 10 instance to ownCloud Infinite Scale (oCIS) using the migrate-to-ocis app and its occ commands.
+:description: This guide describes how to migrate an ownCloud Classic instance to ownCloud Infinite Scale (oCIS) using the migrate-to-ocis app and its occ commands.
 
 == Introduction
 
 {description}
 
-The migration transfers users, groups, files, and shares from an ownCloud 10 (OC10) instance to a target oCIS instance in a series of sequential steps. The OC10 server is not modified by the migration — it remains operational throughout most of the process.
+The migration transfers users, groups, files, and shares from an ownCloud Classic instance to a target oCIS instance in a series of sequential steps. The ownCloud Classic server is not modified by the migration — it remains operational throughout most of the process.
 
 == Overview
 
-The migration works with an app to be installed on the ownCloud 10 side. The app is provided by ownCloud as part of the guided migration. Please contact {oc-support-url}[ownCloud support] to get it.
+The migration works with an app to be installed on the ownCloud Classic side. The app is provided by ownCloud as part of the guided migration. Please contact {oc-support-url}[ownCloud support] to get it.
 
 Both instances need to be fully configured and running, and they must be reachable from each other.
 
@@ -51,19 +51,19 @@ External mount data is excluded by the file migration step. These mounts must be
 
 * *User passwords*: Migrated users are created with an unknown password and cannot log in normally after migration. The admin must set up a temporary password or onboarding process for each user.
 
-* *Share link passwords*: Passwords for migrated share links will be unknown and will not match the original OC10 passwords. Users should change the passwords of all their share links after the migration.
+* *Share link passwords*: Passwords for migrated share links will be unknown and will not match the original ownCloud Classic passwords. Users should change the passwords of all their share links after the migration.
 
-* *Passwordless share links*: By default, oCIS requires a password for share links. Passwordless links from OC10 will fail to migrate unless the oCIS policy is changed. Set the environment variable `OCIS_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD=false` on the oCIS instance before migration if you need to migrate passwordless links.
+* *Passwordless share links*: By default, oCIS requires a password for share links. Passwordless links from ownCloud Classic will fail to migrate unless the oCIS policy is changed. Set the environment variable `OCIS_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD=false` on the oCIS instance before migration if you need to migrate passwordless links.
 
 == Prerequisites
 
-=== ownCloud 10
+=== ownCloud Classic
 
 [IMPORTANT]
 ====
 * *Shell/SSH access to the ownCloud server* is required. All migration steps use `occ` commands.
 
-* The *ownCloud-provided _migrate-to-ocis_ app must be installed* on the OC10 instance:
+* The *ownCloud-provided _migrate-to-ocis_ app must be installed* on the ownCloud Classic instance:
 ** This app comes bundled with its own copy of rclone.
 ** See the xref:installation/apps_management_installation.adoc[Installing and Managing Apps] documentation for details.
 
@@ -113,7 +113,7 @@ AUTH_APP_ENABLE_IMPERSONATION: true
 
 No data migration can be initiated until users and groups are available on the oCis side. To avoid a failing data migration step, no user or group changes, such as adding, deleting or changing, must be applied after this migration step.
 
-Different steps are required for the migration of users and groups, depending on their location in OC10, to make them accessible to oCIS.
+Different steps are required for the migration of users and groups, depending on their location in ownCloud Classic, to make them accessible to oCIS.
 
 Consider that the https://doc.owncloud.com/ocis/next/deployment/services/s-list/idm.html[internal IDM] provided by oCIS, which is a mini LDAP, has a very limited scope and is mainly targeted at small Infinite Scale installations or testing. It should therefore not be used in production environments. For larger setups or production environments, it is highly recommended to use a “real” LDAP server or to switch to an external Identity Management Solution instead.
 
@@ -121,17 +121,17 @@ To address these different requirements, migrating users and groups are divided 
 
 === Migrate With Local Users
 
-These steps describe the migration of local OC10 users and groups to an external LDAP or to the embedded oCIS IDM - where no external LDAP is used.
+These steps describe the migration of local ownCloud Classic users and groups to an external LDAP or to the embedded oCIS IDM - where no external LDAP is used.
 
 ==== Migrate Local Users to LDAP
 
-If you have local users and groups in OC10 and wish to use an external LDAP server that oCIS is connected to — which is highly recommended for production environments — you must migrate these users and groups manually before proceeding to the xref:#migrate-files-and-shares[Migrate Files and Shares] section. Please note that user and group names must match. Check the additional requirements in xref:#migration-with-ldap-users[Migration With LDAP Users].
+If you have local users and groups in ownCloud Classic and wish to use an external LDAP server that oCIS is connected to — which is highly recommended for production environments — you must migrate these users and groups manually before proceeding to the xref:#migrate-files-and-shares[Migrate Files and Shares] section. Please note that user and group names must match. Check the additional requirements in xref:#migration-with-ldap-users[Migration With LDAP Users].
 
 As the next step, continue with xref:#preparing-data-migration[Preparing Data Migration].
 
 ==== Migrate Local Users to IDM
 
-Migrate OC10 users and groups to oCIS internal IDM, no extrernal LDAP server used. As a prerequisite, run the steps in xref:#preparing-data-migration[Preparing Data Migration] first.
+Migrate ownCloud Classic users and groups to oCIS internal IDM, no extrernal LDAP server used. As a prerequisite, run the steps in xref:#preparing-data-migration[Preparing Data Migration] first.
 
 Migrate Users::
 +
@@ -145,7 +145,7 @@ sudo -u www-data \
   migrate:to-ocis:migrate:users admin
 ----
 
-New users are created in oCIS to match the OC10 users. If a user already exists in oCIS (for example the `admin` account), the existing account will be reused.
+New users are created in oCIS to match the ownCloud Classic users. If a user already exists in oCIS (for example the `admin` account), the existing account will be reused.
 --
 
 Assign a Role::
@@ -160,10 +160,10 @@ sudo -u www-data \
   migrate:to-ocis:assign-role admin
 ----
 
-The same role is assigned to all migrated OC10 users, except the oCIS admin. OC10 roles are not preserved during migration — all users receive a single role regardless of their original OC10 role. For most installations the `User` role is the appropriate choice.
+The same role is assigned to all migrated ownCloud Classic users, except the oCIS admin. ownCloud Classic roles are not preserved during migration — all users receive a single role regardless of their original ownCloud Classic role. For most installations the `User` role is the appropriate choice.
 
-NOTE: OC10 admin users who are members of the OC10 `admin` group will have that group membership migrated to oCIS, but they will not receive oCIS admin privileges unless the assigned role grants them. The oCIS admin must manually set the appropriate oCIS role for any user that should have elevated permissions after migration. +
-OC10 subadmin privileges have no equivalent role in oCIS and are not migrated.
+NOTE: ownCloud Classic admin users who are members of the ownCloud Classic `admin` group will have that group membership migrated to oCIS, but they will not receive oCIS admin privileges unless the assigned role grants them. The oCIS admin must manually set the appropriate oCIS role for any user that should have elevated permissions after migration. +
+ownCloud Classic subadmin privileges have no equivalent role in oCIS and are not migrated.
 
 This step is mandatory and cannot be skipped.
 --
@@ -171,7 +171,7 @@ This step is mandatory and cannot be skipped.
 Migrate Groups::
 +
 --
-Migrate the OC10 groups and their user memberships to oCIS. The admin password is asked interactively:
+Migrate the ownCloud Classic groups and their user memberships to oCIS. The admin password is asked interactively:
 
 [source,bash]
 ----
@@ -187,11 +187,11 @@ As the final step, continue with xref:#migrate-files-and-shares[Migrate Files an
 
 === Migration With LDAP Users
 
-In general, users and groups must be accessible to oCIS. This can be achieved either connecting oCIS to the same LDAP server, or by migrating users and groups from the LDAP server that OC10 is connected to to a different backend for oCIS.
+In general, users and groups must be accessible to oCIS. This can be achieved either connecting oCIS to the same LDAP server, or by migrating users and groups from the LDAP server that ownCloud Classic is connected to to a different backend for oCIS.
 
 The following procedures are necessary for the data migration to be possible.
 
-OC10 Requirements::
+ownCloud Classic Requirements::
 +
 --
 In addition to the regular requirements:
@@ -294,7 +294,7 @@ sudo -u www-data \
 Verify::
 +
 --
-Verify that the OC10 installation is ready for migration. This checks that all enabled users have valid, non-duplicate email addresses:
+Verify that the ownCloud Classic installation is ready for migration. This checks that all enabled users have valid, non-duplicate email addresses:
 
 [source,bash]
 ----
@@ -321,7 +321,7 @@ sudo -u www-data \
   migrate:to-ocis:migrate:files admin
 ----
 
-Each user's home directory contents are migrated into that user's *personal Space* in oCIS. External mounts and received shares are excluded — only files owned by the user in their OC10 home are transferred.
+Each user's home directory contents are migrated into that user's *personal Space* in oCIS. External mounts and received shares are excluded — only files owned by the user in their ownCloud Classic home are transferred.
 
 The following users are skipped and will not cause the migration to stop:
 
@@ -344,4 +344,4 @@ The same users are skipped as in the file migration step. The following share er
 * Shares pointing to missing users or groups (that were not migrated).
 * Link shares that fail due to password restrictions.
 
-For password-protected link shares: the share will be migrated with a new password that does not match the original OC10 password. Users should change the passwords of all their share links after migration.
+For password-protected link shares: the share will be migrated with a new password that does not match the original ownCloud Classic password. Users should change the passwords of all their share links after migration.

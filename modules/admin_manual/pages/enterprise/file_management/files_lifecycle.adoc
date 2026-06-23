@@ -41,7 +41,7 @@ By default, archived files are stored within the ownCloud data directory but out
 
 === Setting Upload Times for Existing Files
 
-File Lifecycle Management uses the _upload time_ of files (server time at which they first appeared on the ownCloud server) to determine when to archive them. As ownCloud Server generally does not store this metadata, the File Lifecycle Management extension takes care of this when it is enabled.
+File Lifecycle Management uses the _upload time_ of files (server time at which they first appeared on the ownCloud server) to determine when to archive them. As ownCloud Classic generally does not store this metadata, the File Lifecycle Management extension takes care of this when it is enabled.
 
 When File Lifecycle Management is set up on an existing ownCloud installation, you therefore have to set an _upload time_ for all files that existed before the extension has been enabled. The same applies if it was temporarily disabled. Only then can the archiving policies work. To set an upload time for all files that do not yet have one, you can use the _occ_ command `lifecycle:set-upload-time`. 
 

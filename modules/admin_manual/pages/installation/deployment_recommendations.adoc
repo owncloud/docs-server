@@ -155,7 +155,7 @@ Local storage or Network File System (NFS) if already available.
 ==== Recommended Licensing Model
 
 * Standard or Enterprise Edition
-* See {owncloud-edition-url}[ownCloud Server or Enterprise Edition] for comparisons of the ownCloud editions.
+* See {owncloud-edition-url}[ownCloud Classic or Enterprise Edition] for comparisons of the ownCloud editions.
 
 == Scenario 2: Mid-Sized Enterprises
 
@@ -245,7 +245,7 @@ You may take a look on the {netapp-nfs-bpg-url}[NetApp NFS Best Practice and Imp
 ==== Recommended Licensing Model
 
 * Enterprise Edition
-* See {owncloud-edition-url}[ownCloud Server or Enterprise Edition] for comparisons of the ownCloud editions.
+* See {owncloud-edition-url}[ownCloud Classic or Enterprise Edition] for comparisons of the ownCloud editions.
 
 == Scenario 3: Large Enterprises and Service Providers
 
@@ -335,7 +335,7 @@ You may take a look on the {netapp-nfs-bpg-url}[NetApp NFS Best Practice and Imp
 ==== Recommended Licensing Model
 
 * Enterprise Edition
-* See {owncloud-edition-url}[ownCloud Server or Enterprise Edition] for comparisons of the ownCloud editions.
+* See {owncloud-edition-url}[ownCloud Classic or Enterprise Edition] for comparisons of the ownCloud editions.
 
 ==== Redis Configuration
 
