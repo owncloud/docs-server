@@ -135,10 +135,10 @@ More information about this issue is available in the following links:
 
 Checklist if something is not working:
 
-. **Client** can reach the **ownCloud Server** (browse to web page and log in)
+. **Client** can reach the **ownCloud Classic** (browse to web page and log in)
 . **Client** can reach the **Office Online Server** (via hosting/discovery url with https)
-. **ownCloud Server** can reach the **Office Online Server** (via hosting/discovery url with https)
-. **Office Online Server** can reach **ownCloud Server** (browse to web page and log in)
+. **ownCloud Classic** can reach the **Office Online Server** (via hosting/discovery url with https)
+. **Office Online Server** can reach **ownCloud Classic** (browse to web page and log in)
 
 Make sure TLS 1.2 is being used:
 

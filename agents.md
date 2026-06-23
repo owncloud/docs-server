@@ -1,4 +1,4 @@
-# AI Agent Guidelines for ownCloud Server Documentation
+# AI Agent Guidelines for ownCloud Classic Documentation
 
 This file provides context for AI coding agents (Claude Code, GitHub Copilot, Cursor, etc.) working in this repository.
 

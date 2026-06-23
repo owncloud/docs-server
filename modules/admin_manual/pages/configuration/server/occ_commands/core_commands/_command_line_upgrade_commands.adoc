@@ -16,11 +16,11 @@ upgrade [options]
 
 [width="100%",cols="20%,70%",]
 |===
-| `--major`          | Automatically update apps to new major versions during minor updates of ownCloud Server.
+| `--major`          | Automatically update apps to new major versions during minor updates of ownCloud Classic.
 | `--no-app-disable` | Skip disabling of third party apps.
 |===
 
-When you are performing an update or upgrade on your ownCloud Server (see the Maintenance section of this manual), it is better to use `occ` to perform the database upgrade step, rather than the Web GUI, in order to avoid timeouts. PHP scripts invoked from the Web interface are limited to 3600 seconds. In larger environments this may not be enough, leaving the system in an inconsistent state. After performing all the preliminary steps (see the xref:maintenance/upgrading/upgrade.adoc[Maintenance - Upgrade documentation]) use this command to upgrade your databases, like this example:
+When you are performing an update or upgrade on your ownCloud Classic (see the Maintenance section of this manual), it is better to use `occ` to perform the database upgrade step, rather than the Web GUI, in order to avoid timeouts. PHP scripts invoked from the Web interface are limited to 3600 seconds. In larger environments this may not be enough, leaving the system in an inconsistent state. After performing all the preliminary steps (see the xref:maintenance/upgrading/upgrade.adoc[Maintenance - Upgrade documentation]) use this command to upgrade your databases, like this example:
 
 [source,docker,subs="attributes+"]
 ----

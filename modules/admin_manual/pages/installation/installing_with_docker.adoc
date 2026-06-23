@@ -22,7 +22,7 @@ installation/selinux_configuration.adoc
 
 {description} This {dockerhub-url}[official image] is designed to be used in a docker compose setup but can also be used for a quick evaluation.
 
-Starting with ownCloud Server 11, the only supported installation method is a Docker-based installation which includes PHP 8 and Apache. Manual installation on Linux is no longer supported.
+Starting with ownCloud Classic 11, the only supported installation method is a Docker-based installation which includes PHP 8 and Apache. Manual installation on Linux is no longer supported.
 
 == Database Notes
 

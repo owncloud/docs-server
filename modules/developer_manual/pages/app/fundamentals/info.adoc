@@ -119,7 +119,7 @@ For publishing themes the category tag must be present — _but empty_ — as in
 
 *Required*. Provide a short application description (max. 90 chars).
 This gets displayed below the product title and on the product tiles. It
-is mandatory since ownCloud 10.0.0.
+is mandatory since ownCloud Classic 10.0.0.
 
 == types
 

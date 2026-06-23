@@ -10,7 +10,7 @@ The following scenarios are described here:
 
 . Migrating to a different host
 . Migrating to a different domain
-. Migrating from ownCloud 10 to ownCloud 11
+. Migrating from ownCloud Classic 10 to ownCloud Classic 11
 
 Note that any database migration is not covered here.
 
@@ -53,7 +53,7 @@ Migration to a different host is easy with Docker.
 
 === Domain Migration
 
-As the ownCloud 11 image provides an embedded Apache web server, you need a proxy to handle security and other web-related settings anyway. To migrate or add a domain, two steps are required:
+As the ownCloud Classic 11 image provides an embedded Apache web server, you need a proxy to handle security and other web-related settings anyway. To migrate or add a domain, two steps are required:
 
 . Update your proxy server settings
 . Update the ownCloud trusted domain settings 
@@ -98,24 +98,24 @@ services:
 ----
 --
 
-=== ownCloud Server Migration
+=== ownCloud Classic Migration
 
-This section describes the migration of *ownCloud 10* to *ownCloud 11*, if ownCloud 10 was installed natively. It only focuses on ownCloud but not on any migration of the database!
+This section describes the migration of *ownCloud Classic 10* to *ownCloud Classic 11*, if ownCloud Classic 10 was installed natively. It only focuses on ownCloud but not on any migration of the database!
 
-Due to the wide range of installation types, the description focuses on the main steps rather than the details. When using encryption with the ownCloud 10 instance, the openSSL requirements must be met without circumventing retired ciphers. See the ownCloud 10 encryption documentation for more details.
+Due to the wide range of installation types, the description focuses on the main steps rather than the details. When using encryption with the ownCloud Classic 10 instance, the openSSL requirements must be met without circumventing retired ciphers. See the ownCloud Classic 10 encryption documentation for more details.
 
-. Enable maintenance mode on ownCloud 10
+. Enable maintenance mode on ownCloud Classic 10
 . Create a mount point to bind mount the Docker volume. +
 For more details see the xref:installation/mount_folder_structure.adoc[Mount Folder Structure] documentation.
-. Install ownCloud 11 using a bind mount and down the container. +
-This will install/prepare ownCloud 11 in a basic way but it is not configured to your needs. +
+. Install ownCloud Classic 11 using a bind mount and down the container. +
+This will install/prepare ownCloud Classic 11 in a basic way but it is not configured to your needs. +
 For details see: xref:installation/installing_with_docker.adoc[Installing With Docker].
 . Adapt the compose yaml file to your needs. +
 Remove any environment variables from the compose file that are no longer relevant, such as those for the database. These settings are now covered by a new configuration file, see below.
 . Migrate the `data/files` directory into `mount-point/files`.
-. Migrate all apps from ownCloud 10 that are NOT part of ownCloud 11 into the `mount-point/apps` directory. +
+. Migrate all apps from ownCloud Classic 10 that are NOT part of ownCloud Classic 11 into the `mount-point/apps` directory. +
 For more details see the xref:installation/apps_management_installation.adoc[Apps Management] documentation.
 . Make a copy of your existing `config.php` file *with a new name* and remove any setting that addresses the `data` directory and `apps` / `apps-external` directories into the `mount-point/config` directory. +
 See the important note with regards to the config in the xref:installation/mount_folder_structure.adoc[Mount Folder Structure] documentation.
-. Bring up the ownCloud 11 container.
+. Bring up the ownCloud Classic 11 container.
 . Disable maintenance mode.

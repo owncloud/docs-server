@@ -6,7 +6,7 @@ go/enable-http-strict-transport-security.adoc
 
 == Introduction
 
-ownCloud aims to ship with secure defaults that do not need to get modified by administrators. However, in some cases some additional security hardening can be applied in scenarios were the administrator has complete control over the ownCloud instance. This page assumes that you run ownCloud Server on Apache2 in a Linux environment.
+ownCloud aims to ship with secure defaults that do not need to get modified by administrators. However, in some cases some additional security hardening can be applied in scenarios were the administrator has complete control over the ownCloud instance. This page assumes that you run ownCloud Classic on Apache2 in a Linux environment.
 
 NOTE: ownCloud will warn you in the administration interface if some critical security-relevant options are missing. However, it is still up to the server administrator to review and maintain system security.
 

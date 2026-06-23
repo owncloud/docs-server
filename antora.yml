@@ -1,5 +1,5 @@
 name: server
-title: ownCloud Server
+title: ownCloud Classic
 version: next
 prerelease: true
 start_page: ROOT:index.adoc
