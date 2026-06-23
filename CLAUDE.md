@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is an [Antora](https://antora.org/)-based documentation site for ownCloud Server. Documentation is written in AsciiDoc and built into a static HTML site. This repo is not built standalone in production — it is built as part of the main [owncloud/docs](https://github.com/owncloud/docs) repository, but can be built locally for preview.
+This is an [Antora](https://antora.org/)-based documentation site for ownCloud Classic. Documentation is written in AsciiDoc and built into a static HTML site. This repo is not built standalone in production — it is built as part of the main [owncloud/docs](https://github.com/owncloud/docs) repository, but can be built locally for preview.
 
 ## Commands
 

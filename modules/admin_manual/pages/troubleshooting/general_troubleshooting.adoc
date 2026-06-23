@@ -241,7 +241,7 @@ Misconfigured Web server::
 
 == OAuth2
 
-=== ownCloud Apps Cannot Connect to the ownCloud Server
+=== ownCloud Apps Cannot Connect to the ownCloud Classic
 
 If ownCloud clients cannot connect to your ownCloud server, check to see if PROPFIND requests receive `HTTP/1.1 401 Unauthorized` responses. If this is happening, more than likely your web-proxy server configuration is stripping out the https://tools.ietf.org/html/rfc6750[bearer authorization header].
 

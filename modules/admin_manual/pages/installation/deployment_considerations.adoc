@@ -53,11 +53,11 @@ When primary fails another replica can become primary. However, the increased co
 
 === Docker Host
 
-ownCloud Server 11 runs exclusively in Docker containers. The host operating system only needs to provide Docker Engine and Docker Compose. A basic web server (Apache), the required PHP runtime, and the application dependencies are all encapsulated within the ownCloud Docker image.
+ownCloud Classic 11 runs exclusively in Docker containers. The host operating system only needs to provide Docker Engine and Docker Compose. A basic web server (Apache), the required PHP runtime, and the application dependencies are all encapsulated within the ownCloud Docker image.
 
 === Web Proxy
 
-The Docker image does not handle SSL. Therefore, you must use a proxy in front of this image to add web security and other web-related settings. The embedded web server is pre-configured to serve ownCloud Server 11; further configuration is not possible.
+The Docker image does not handle SSL. Therefore, you must use a proxy in front of this image to add web security and other web-related settings. The embedded web server is pre-configured to serve ownCloud Classic 11; further configuration is not possible.
 
 === Relational Database
 

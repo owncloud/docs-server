@@ -1,10 +1,10 @@
-# ownCloud Server Documentation
+# ownCloud Classic Documentation
 
 <!-- OSPO-managed README | Generated: 2026-04-16 | v2 -->
 
 [![License](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE) [![ownCloud OSPO](https://img.shields.io/badge/OSPO-ownCloud-blue)](https://kiteworks.com/opensource)
 
-Antora-based documentation component for ownCloud Server (OC10). This repository contains the AsciiDoc source files for server administration, user management, configuration, and maintenance documentation, published to [doc.owncloud.com](https://doc.owncloud.com).
+Antora-based documentation component for ownCloud Classic (OC10). This repository contains the AsciiDoc source files for server administration, user management, configuration, and maintenance documentation, published to [doc.owncloud.com](https://doc.owncloud.com).
 
 ## Getting Started
 
@@ -26,7 +26,7 @@ This generates a standalone preview at `http://localhost:8080`. For the full sit
 
 ## Part of ownCloud Documentation
 
-This is a content component for the [ownCloud docs](https://github.com/owncloud/docs) Antora build. The ownCloud Server source code lives at [owncloud/core](https://github.com/owncloud/core). Published documentation is available at [doc.owncloud.com](https://doc.owncloud.com).
+This is a content component for the [ownCloud docs](https://github.com/owncloud/docs) Antora build. The ownCloud Classic source code lives at [owncloud/core](https://github.com/owncloud/core). Published documentation is available at [doc.owncloud.com](https://doc.owncloud.com).
 
 ## Community & Support
 

@@ -13,7 +13,7 @@ Convert charset of MySQL/MariaDB to use utf8mb4. If you are using an older ownCl
 
 == Restore the Table Format
 
-This command sets the default row format of MySQL/MariaDB tables. This is only necessary once before you are going to e.g. install MariaDB 10.6 or higher because the COMPRESSED row format is now read-only by default. As a prerequisite, ownCloud 10.9 needs to be installed first. See the xref:maintenance/upgrading/database_upgrade.adoc[Database Upgrade] guide for details. 
+This command sets the default row format of MySQL/MariaDB tables. This is only necessary once before you are going to e.g. install MariaDB 10.6 or higher because the COMPRESSED row format is now read-only by default. As a prerequisite, ownCloud Classic 10.9 needs to be installed first. See the xref:maintenance/upgrading/database_upgrade.adoc[Database Upgrade] guide for details. 
 
 [source,docker,subs="attributes+"]
 ----
