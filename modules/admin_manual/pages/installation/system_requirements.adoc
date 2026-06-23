@@ -1,6 +1,6 @@
 = System Requirements
 :toc: right
-:description: Read this documentation for the supported environment for your ownCloud Classic. Starting with ownCloud Classic 11, only Docker-based installations are supported.
+:description: Read this documentation for the supported environment for your ownCloud Classic server. Starting with ownCloud Classic 11, only Docker-based installations are supported.
 
 :desktop-system-requirements-url: https://doc.owncloud.com/desktop/
 :ios-system-requirements-url: https://doc.owncloud.com/ios-app/

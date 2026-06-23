@@ -124,7 +124,7 @@ Ransomware prevention and protection reduces risks to a minimum acceptable level
 
 | Ransomware Prevention (Blocker)
 |
-| First line of defense against ransomware attacks. Ransomware Protection uses a file name pattern blacklist to prevent uploading files that have file extensions associated with ransomware (e.g. `.crypt`) thereby preserving the original files on the ownCloud Classic.
+| First line of defense against ransomware attacks. Ransomware Protection uses a file name pattern blacklist to prevent uploading files that have file extensions associated with ransomware (e.g. `.crypt`) thereby preserving the original files on the ownCloud Classic server.
 
 | Ransomguard Scanner
 | `occ ransomguard:scan <timestamp> <user>`
