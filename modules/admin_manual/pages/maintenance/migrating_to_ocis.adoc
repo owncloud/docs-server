@@ -1,17 +1,17 @@
 = Migrating to ownCloud Infinite Scale
 :toc: right
 :toclevels: 3
-:description: This guide describes how to migrate an ownCloud Classic 10 instance to ownCloud Infinite Scale (oCIS) using the migrate-to-ocis app and its occ commands.
+:description: This guide describes how to migrate an ownCloud Classic instance to ownCloud Infinite Scale (oCIS) using the migrate-to-ocis app and its occ commands.
 
 == Introduction
 
 {description}
 
-The migration transfers users, groups, files, and shares from an ownCloud Classic 10 instance to a target oCIS instance in a series of sequential steps. The ownCloud Classic server is not modified by the migration — it remains operational throughout most of the process.
+The migration transfers users, groups, files, and shares from an ownCloud Classic instance to a target oCIS instance in a series of sequential steps. The ownCloud Classic server is not modified by the migration — it remains operational throughout most of the process.
 
 == Overview
 
-The migration works with an app to be installed on the ownCloud Classic 10 side. The app is provided by ownCloud as part of the guided migration. Please contact {oc-support-url}[ownCloud support] to get it.
+The migration works with an app to be installed on the ownCloud Classic side. The app is provided by ownCloud as part of the guided migration. Please contact {oc-support-url}[ownCloud support] to get it.
 
 Both instances need to be fully configured and running, and they must be reachable from each other.
 
@@ -57,7 +57,7 @@ External mount data is excluded by the file migration step. These mounts must be
 
 == Prerequisites
 
-=== ownCloud Classic 10
+=== ownCloud Classic
 
 [IMPORTANT]
 ====
