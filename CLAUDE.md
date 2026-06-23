@@ -33,10 +33,7 @@ Build with a custom local UI bundle (from `../docs-ui/`):
 npm run antora-dev-bundle
 ```
 
-Check for broken links (run after build):
-```
-npm run linkcheck
-```
+Link checking is documented in the `docs` repository (`docs/checking-broken-links.md`).
 
 ## Architecture
 
