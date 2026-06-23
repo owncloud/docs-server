@@ -1,7 +1,7 @@
 = Useful Pages
 :toc: right
 
-:description: When new to ownCloud Server, the following list of useful pages may help getting up and running quickly.
+:description: When new to ownCloud Classic, the following list of useful pages may help getting up and running quickly.
 
 == Introduction
 

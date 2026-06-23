@@ -9,7 +9,7 @@ to other databases!
 
 == Possible Databases
 
-When installing ownCloud Server & ownCloud Enterprise editions, the administrator may choose one of four supported database products. These are:
+When installing ownCloud Classic & ownCloud Enterprise editions, the administrator may choose one of four supported database products. These are:
 
 * SQLite
 * MYSQL/MariaDB (recommended)
@@ -29,7 +29,7 @@ SQLite has no client synchronization support, so other devices will not be able 
 
 == MYSQL/MariaDB
 
-MariaDB is the ownCloud recommended database. It may be used with either ownCloud Server or ownCloud Enterprise editions. Please look for additional configuration parameters in the xref:configuration/database/linux_database_configuration.adoc[Database Configuration on Linux] guides.
+MariaDB is the ownCloud recommended database. It may be used with either ownCloud Classic or ownCloud Enterprise editions. Please look for additional configuration parameters in the xref:configuration/database/linux_database_configuration.adoc[Database Configuration on Linux] guides.
 
 Once the database installation is complete, refer to the Database section in the xref:configuration/server/harden_server.adoc#database[Hardening and Security Guidance] guide for additional important information.
 

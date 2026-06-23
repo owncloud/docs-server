@@ -1,4 +1,4 @@
-# ownCloud Server Documentation
+# ownCloud Classic Documentation
 
 **IMPORTANT**
 
@@ -11,11 +11,11 @@ Since April 2026, this repository requires [Commit Signing](https://docs.github.
 * [Generating the Documentation](#generating-the-documentation)
 * [Target Branch and Backporting](#target-branch-and-backporting)
 * [Branching Workflow](#branching-workflow)
-* [Create a New Version Branch for ownCloud Server](#create-a-new-version-branch-for-owncloud-server)
+* [Create a New Version Branch for ownCloud Classic](#create-a-new-version-branch-for-owncloud-server)
 
 ## Building the Server Docs
 
-The ownCloud Server documentation is not built independently. Instead, it is built together with the [main documentation](https://github.com/owncloud/docs/). However, you can build a local copy of the ownCloud Server documentation to preview changes you are making.
+The ownCloud Classic documentation is not built independently. Instead, it is built together with the [main documentation](https://github.com/owncloud/docs/). However, you can build a local copy of the ownCloud Classic documentation to preview changes you are making.
 
 Whenever a Pull Request of this repo gets merged, it automatically triggers a full docs build.
 
@@ -33,8 +33,8 @@ See the [following section](https://github.com/owncloud/docs#target-branch-and-b
 
 ## Branching Workflow
 
-Please refer to the [Branching Workflow for ownCloud Server](./docs/the-branching-workflow.md) for more information.
+Please refer to the [Branching Workflow for ownCloud Classic](./docs/the-branching-workflow.md) for more information.
 
-## Create a New Version Branch for ownCloud Server
+## Create a New Version Branch for ownCloud Classic
 
-Please refer to [Create a New Version Branch for ownCloud Server](./docs/new-version-branch.md) for more information.
+Please refer to [Create a New Version Branch for ownCloud Classic](./docs/new-version-branch.md) for more information.

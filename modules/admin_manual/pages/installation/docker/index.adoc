@@ -371,12 +371,12 @@ The file `docker-compose.yml` contains the configuration of your ownCloud contai
 
 [NOTE]
 ====
-Since ownCloud Server 10.5, the dedicated enterprise docker image `registry.owncloud.com/owncloud/enterprise` is deprecated. All supported enterprise features and apps are now included in the public image `owncloud/server` available on Docker Hub. A login to our registry `registry.owncloud.com` is no longer required.
+Since ownCloud Classic 10.5, the dedicated enterprise docker image `registry.owncloud.com/owncloud/enterprise` is deprecated. All supported enterprise features and apps are now included in the public image `owncloud/server` available on Docker Hub. A login to our registry `registry.owncloud.com` is no longer required.
 ====
 
 [source,yaml]
 ----
-include::example$installation/docker/docker-compose.yml[Example Docker Compose YAML configuration file for ownCloud Server.]
+include::example$installation/docker/docker-compose.yml[Example Docker Compose YAML configuration file for ownCloud Classic.]
 ----
 
 == Troubleshooting

@@ -1,6 +1,6 @@
 = Prerequisites for Manual Installation on Linux
 :toc: right
-:description: This document guides you through the prerequisites for a manual ownCloud Server installation on Linux.
+:description: This document guides you through the prerequisites for a manual ownCloud Classic installation on Linux.
 
 :avconv-url: https://libav.org/
 :ffmpeg-url: https://ffmpeg.org/

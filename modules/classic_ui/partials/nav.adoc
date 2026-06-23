@@ -1,5 +1,5 @@
 // note that the module reference post xref is now a mandatory element
-* ownCloud Server UI
+* ownCloud Classic UI
 ** xref:classic_ui:index.adoc[Introduction]
 ** xref:classic_ui:files/webgui/overview.adoc[The WebUI]
 *** xref:classic_ui:webinterface.adoc[Web Interface]

@@ -134,7 +134,7 @@ Therefore we support three kinds of migration steps, these are:
 * *SQL:* create a list of executable SQL commands.
 * *Schema:* migration via schema migration operations.
 
-Starting with ownCloud 10, this is the preferred way to perform any kind of migrations and is enabled by default within core. 
+Starting with ownCloud Classic 10, this is the preferred way to perform any kind of migrations and is enabled by default within core. 
 Any app which wants to use this mechanism has to enable it in appinfo/info.xml, by adding the following:
 
 [source,xml]

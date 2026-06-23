@@ -16,7 +16,7 @@ upgrade [options]
 
 [width="100%",cols="20%,70%",]
 |===
-| `--major`          | Automatically update apps to new major versions during minor updates of ownCloud Server.
+| `--major`          | Automatically update apps to new major versions during minor updates of ownCloud Classic.
 | `--no-app-disable` | Skip disabling of third party apps.
 |===
 
