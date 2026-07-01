@@ -37,7 +37,6 @@ Cannot be disabled
 * First Run Wizard
 * {oc-marketplace-url}/apps/search_elastic[Full Text Search]
 * xref:configuration/user/guests_app.adoc[Guests]
-* {oc-marketplace-url}/apps/impersonate[Impersonate]
 * {oc-marketplace-url}/apps/announcementcenter[Notifications]
 * {oc-marketplace-url}/apps/openidconnect[OpenID Connect]
 * xref:configuration/files/external_storage/webdav.adoc[ownCloud WebDAV Endpoint] +
@@ -56,7 +55,6 @@ Handles old and new webdav endpoints
 * {oc-marketplace-url}/apps/objectstore[Object Storage Support]
 * {oc-marketplace-url}/apps/password_policy[Password Policy]
 * {oc-marketplace-url}/apps/ransomware_protection[Ransomware Protection]
-* {oc-marketplace-url}/apps/sharepoint[External Storage: SharePoint]
 * {oc-marketplace-url}/apps/systemtags_management[Collaborative Tags Management]
 * {oc-marketplace-url}/apps/user_shibboleth[SAML/Shibboleth User Backend]
 * {oc-marketplace-url}/apps/windows_network_drive[Windows Network Drives (requires External Storage)]

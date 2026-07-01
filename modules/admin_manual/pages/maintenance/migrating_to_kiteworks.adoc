@@ -135,8 +135,6 @@ To be prepared for the migration, both sides need to match the prerequisites. Pl
 The `occ migrate:to-kiteworks:verify` step will point out missing email addresses. These must be rectified before any migration can start.
 
 * The ownCloud config setting xref:configuration/server/config_sample_php_parameters.adoc#override-cli-url[overwrite.cli.url] must exist and have a value. This config key is typically added and configured during setup. The `occ migrate:to-kiteworks:verify` step will check for this config setting. The value must match the ownCloud installation.
-
-* We recommend installing and enabling, if not already present and enabled, the {oc-marketplace-url}/apps/impersonate[Impersonate] app. This app can be used for example to solve file and folder case conflicts that can be reported during the migration process.
 ====
 
 ==== Installing Required Components

@@ -57,7 +57,6 @@
 
 *** xref:admin_manual:configuration/general_topics/index.adoc[General Topics]
 **** xref:admin_manual:configuration/general_topics/code_signing.adoc[Code Signing]
-**** xref:admin_manual:configuration/general_topics/impersonate_users.adoc[Impersonate Users]
 **** xref:admin_manual:configuration/general_topics/search.adoc[Full Text Search]
 
 *** xref:admin_manual:configuration/server/index.adoc[Server]
@@ -136,7 +135,6 @@
 **** xref:admin_manual:enterprise/document_classification/classification_and_policy_enforcement.adoc[Classify Documents and Enforce Policies]
 *** External Storage
 **** xref:admin_manual:enterprise/external_storage/ldap_home_connector_configuration.adoc[LDAP Home Connector Configuration]
-**** xref:admin_manual:enterprise/external_storage/sharepoint-integration_configuration.adoc[Sharepoint integration Configuration]
 **** xref:admin_manual:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive Configuration]
 *** File Management
 **** xref:admin_manual:enterprise/file_management/files_tagging.adoc[File Tagging]
