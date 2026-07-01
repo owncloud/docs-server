@@ -28,7 +28,6 @@
 *** xref:classic_ui:online_collaboration.adoc[Online Collaboration]
 *** xref:classic_ui:files/webgui/quota.adoc[Storage Quotas]
 *** xref:classic_ui:external_storage/external_storage.adoc[External Storage]
-*** xref:classic_ui:external_storage/sharepoint_connecting.adoc[Connecting to SharePoint]
 *** xref:classic_ui:files/desktop_mobile_sync.adoc[Desktop Mobile Sync]
 ** xref:classic_ui:apps/index.adoc[Apps]
 *** xref:classic_ui:apps/activity.adoc[Activity]
