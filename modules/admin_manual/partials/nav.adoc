@@ -19,6 +19,8 @@
 **** xref:admin_manual:installation/apps_supported.adoc[Supported Apps]
 
 ** Configuration
+*** xref:admin_manual:configuration/envvars/envvars.adoc[Environment Variables]
+
 *** xref:admin_manual:configuration/database/linux_database_configuration.adoc[Database Configuration]
 
 *** xref:admin_manual:configuration/files/encryption/index.adoc[Encryption]
