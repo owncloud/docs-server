@@ -173,14 +173,16 @@ In general, when using this authentication method, the user and the password use
 * The username is the same as the `user id` of the ownCloud session. +
 For example, ownCloud user "Alice" with password "mysecret" (or even without password) will use "Alice" as username and the password from the config.php file to access the storage. Note that for LDAP, the `user id` is usually like _1223-cbdf-cacc-1234...,_ unless the configuration in the user_ldap app is changed.
 
-* The password will be fetched from a key inside the config.php file. +
-For details see the section below. Even if the account doesn't have a password like OAuth or OpenIDConnect, etc., the connection with the storage will use the password from  config.php.
+* The password will be fetched from a key inside the configuration file. +
+For details see the section below. Even if the account doesn't have a password like OAuth or OpenIDConnect, etc., the connection with the storage will use the password from teh configuration file.
 +
 NOTE: The password will be the same for any user accessing the particular mount!
 
 ==== Defining key/value pairs in config.php
 
-Key/value pairs in config.php must have the following structure:
+include::partial$manual_config_file.adoc[]
+
+Key/value pairs in the configuration file must have the following structure:
 
 .Example having a single array
 [source,php]

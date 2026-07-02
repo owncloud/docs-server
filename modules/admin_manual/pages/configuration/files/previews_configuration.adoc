@@ -64,7 +64,7 @@ IMPORTANT: The ownCloud Docker Image provides the `imagic` php extension, but no
 
 Starting with version 7 of ImageMagick, additional file formats like SVG or HEIC and many others can be processed.
 
-You can check your ImageMagick version installed in your image by issuing the following command:
+You can check your ImageMagick version, if installed in your image, by issuing the following command:
 
 [source,docker]
 ----

@@ -1,0 +1,50 @@
+= Important Configuration Notes
+:toc: right
+:description: This page provides some important configuration notes.
+
+== Introduction
+
+{description}
+
+Due to this version's Docker-only approach, some aspects of configuring your ownCloud Classic Server have changed. With a few exceptions, using environment variables is the only way to configure the instance.
+
+== Environment Variables
+
+The majority of config keys that are provided by ownCloud can be found in the xref:configuration/envvars/envvars.adoc[Environment Variables] documentation. For the few exceptions, the traditional configuration key approach must be used. The documentation for the configuration keys also refers to the corresponding environment variables.
+
+== Using Configuration Keys
+
+IMPORTANT: This approach should only be used if there is no environment variable available. This is noted in the relevant section of the documentation.
+
+=== Preparation
+
+In order to add configuration keys instead of using environment variables, some preparation is required.
+
+* Change to the mounted docker volume where the configuration is stored.
++
+[source,bash]
+----
+cd <mount_point>/config
+----
+
+* Next, create a new file with the same owner and permissions as the existing files. The naming must follow the scheme `<name>.config.php`. Replace `<name>` with the name of choice but consider that the order in which configuration files are read is alphabetical.
++
+IMPORTANT: If a key/value pair exists in a file, it will take precedence over any existing ones defined in a config file that is read earlier. It is therefore crucial that you use a name that makes the file last read.
+
+* This file must have the following mandatory content:
++
+[source,php]
+----
+<?php
+$CONFIG = array (
+
+);
+----
+
+=== Add own Configuration Keys
+
+Once you have finished preparing the file, you can add the relevant configuration keys manually.
+
+* Add your configuration keys and values to the array as usual.
++
+CAUTION: Be careful not to overwrite any existing values from other files defined via environment variables. These variables are activated and configured when the container starts up.
