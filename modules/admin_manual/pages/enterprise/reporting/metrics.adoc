@@ -5,19 +5,9 @@
 
 == Introduction
 
-The {oc-marketplace-url}/apps/metrics[Metrics App] provides a building block for reporting of ownCloud
-Server. For simple use cases, it ships with an integrated dashboard that summarizes information
-about users, storage as well as shares and allows exporting it to a CSV file. Additionally, it adds a
-Metrics HTTP API endpoint to ownCloud Classic, which can be used to obtain the Metrics data in regular
-intervals. Thus, more sophisticated analysis and visualizations can be conducted.
+The `Metrics App` provides a building block for reporting of ownCloud Server. For simple use cases, it ships with an integrated dashboard that summarizes information about users, storage as well as shares and allows exporting it to a CSV file. Additionally, it adds a Metrics HTTP API endpoint to ownCloud Classic, which can be used to obtain the Metrics data in regular intervals. Thus, more sophisticated analysis and visualizations can be conducted.
 
-The Metrics data are provided as snapshot values in the JSON format and are optimized to be consumed by
-professional data analyzers (like Splunk, ELK or Prometheus/Grafana) to collect statistics, derive
-visualizations and to set alerts for certain events of interest. They can be perfectly combined with the
-ownCloud Audit Logs (provided by the {oc-marketplace-url}/apps/admin_audit[Auditing App]) to gather time
-series data and to create a reporting engine for ownCloud.
-
-NOTE: Internet Explorer 11 is not compatible with Metrics, because new web technologies have been used that are not supported by IE 11.
+The metrics data is provided as snapshot values in JSON format and is optimised for consumption by professional data analysers, such as Splunk, ELK and Prometheus/Grafana, for the collection of statistics, the creation of visualisations and the setting of alerts for certain events of interest. They can be seamlessly integrated with the ownCloud Audit Logs, which are provided by the xref:enterprise/logging/admin_audit.adoc[Auditing App] to collect time series data and create a reporting engine for ownCloud.
 
 If you want to use Splunk in addition, check out xref:configuration/integration/splunk.adoc[ownCloud App for Splunk].
 
@@ -27,18 +17,18 @@ Specifically, the Metrics extension adds:
 - API endpoints for downloading metrics as CSV files
 - a dashboard that displays the snapshot data in the ownCloud Web UI and offers a CSV download in the system view and the user view.
 
-TIP: If you're operating very large instances with regard to users, files or shares, better use a
-special setup so you won't put the production database under huge load when gathering the values. For
-this, replicate your installation (application server and read-only database) and install and use the
-Metrics app on the replica.
+TIP: If you're operating very large instances with regard to users, files or shares, better use a special setup so you won't put the production database under huge load when gathering the values. For this, replicate your installation (application server and read-only database) and install and use the Metrics app on the replica.
 
 The following screenshots give you an impression of the Metrics app.
 
-.Figure 1. Metrics System Overview
-image:enterprise/reporting/metrics/metrics-system.png[Metrics System Overview]
+[width=100%,cols="50%,50%,options="header"]
+|===
+^| *Metrics System Overview*
+^| *Metrics User Overview*
 
-.Figure 2. Metrics User Overview
-image:enterprise/reporting/metrics/metrics-user.png[Metrics User Overview]
+| image:enterprise/reporting/metrics/metrics-system.png[Metrics System Overview]
+| image:enterprise/reporting/metrics/metrics-user.png[Metrics User Overview]
+|===
 
 == Available Data
 
@@ -92,8 +82,7 @@ See the following occ command on how to set it. Make up a passphrase, referred t
 {occ-command-example-prefix-docker} config:system:set "metrics_shared_secret" --value "<your-metrics-secret>"
 ----
 
-TIP: This token gets stored in config.php as `metrics_shared_secret`, which could also be done manually
-instead of using the occ command.
+TIP: This token gets stored in config.php as `metrics_shared_secret`, which could also be done manually instead of using the occ command.
 
 === Dashboard User Interface
 
@@ -132,14 +121,11 @@ curl -H "OC-MetricsApiKey: <your-metrics-secret>" \
      "https://<your owncloud>/ocs/v1.php/apps/metrics/api/v1/metrics?users=true&files=true&shares=true&quota=true&userData=true&format=json"
 ----
 
-TIP: Replace `<your-metrics-secret>` with your respective system config value and `<your owncloud>`
-with the URL of your ownCloud instance.
+TIP: Replace `<your-metrics-secret>` with your respective system config value and `<your owncloud>` with the URL of your ownCloud instance.
 
 ==== CSV Download Endpoints
 
-Downloading the current user and system metrics as CSV files is possible via the Web UI. If you want to
-set up cron jobs for downloading the metrics regularly without admin permissions, there are also public
-endpoints that require the configured token instead of admin privileges.
+Downloading the current user and system metrics as CSV files is possible via the Web UI. If you want to set up cron jobs for downloading the metrics regularly without admin permissions, there are also public endpoints that require the configured token instead of admin privileges.
 
 TIP: In the following `curl` examples, replace `<your-metrics-secret>` with your respective system config value and `<your owncloud>` with the URL of your ownCloud instance.
 
@@ -165,6 +151,4 @@ curl -H "Content-Type: application/csv" \
 
 == Limitations
 
-The Metrics app was designed for ownCloud deployments up to 250 users.
-On deployments with more than 250 users, it can take considerably longer to gather the requested data.
-To reduce the time needed, exclude _userData_ and _quota_.
+The Metrics app was designed for ownCloud deployments up to 250 users. On deployments with more than 250 users, it can take considerably longer to gather the requested data. To reduce the time needed, exclude _userData_ and _quota_.
