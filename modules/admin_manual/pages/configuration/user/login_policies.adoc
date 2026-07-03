@@ -9,6 +9,8 @@
 
 Login policies will emit a `failed login` event if the user isn't allowed to log in.
 
+// if there will be no one envvar for loginPolicy.groupLoginPolicy.forbidMap , we need to add: include::partial$manual_config_file.adoc[]
+
 == Use Cases
 
 Login policies can be used to restrict members of particular groups to use only particular login types. This is especially true for guest users as they do not have an ownCloud account and cannot be validated via OpenID Connect but can log in using their email and password.
