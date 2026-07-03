@@ -1,14 +1,15 @@
 = File Lifecycle Management
 :toc: right
+:description: The File Lifecycle Management extension allows service providers to manage the lifecycle of files
 
 == Introduction
 
-The File Lifecycle Management extension allows service providers to manage the lifecycle of files within ownCloud to
+{description} within ownCloud to:
 
 - keep storage usage under control by limiting the time users can work with files before they are cleaned up automatically
 - comply with regulations (like GDPR or company policies) by imposing automated retention and deletion policies for files that contain e.g., personal data and may only be stored in the company for a certain period of time.
 
-To impose a workflow of Use => Archive => Delete, the extension equips ownCloud with a dedicated archive and allows administrators to define rules for automated archiving (days passed since upload) and subsequent deletion of files (days passed since archiving). Only files are archived as folders do not consume storage space and existing folder structures should be kept available. The archiving and deletion processes are controlled by background jobs.
+To impose a workflow of *Use => Archive => Delete*, the extension equips ownCloud with a dedicated archive and allows administrators to define rules for automated archiving (days passed since upload) and subsequent deletion of files (days passed since archiving). Only files are archived as folders do not consume storage space and existing folder structures should be kept available. The archiving and deletion processes are controlled by background jobs.
 
 Depending on the desired level of enforcement, the extension provides two policies to control the restoration of files from the archive if they are still needed:
 
@@ -17,7 +18,7 @@ Depending on the desired level of enforcement, the extension provides two polici
 
 Users can view the lifecycle status for a file and see when the file is scheduled for archiving or deletion. All lifecycle events of a file are displayed transparently. They can be tracked for individual files as well as for a whole user account using the {oc-marketplace-url}/apps/activity[Activity] stream.
 
-image:apps/files_lifecycle/file-lifecycle-events.png[File Lifecycle Events, width=30%]
+image:apps/files_lifecycle/file-lifecycle-events.png[File Lifecycle Events, width=250]
 
 To stay informed, users can also receive regular Activity summaries by email. For auditing purposes, the extension integrates with the {oc-marketplace-url}/apps/admin_audit[Auditing] app to provide all events of interest in the logs.
 

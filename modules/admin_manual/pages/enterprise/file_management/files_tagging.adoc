@@ -10,9 +10,7 @@ The {oc-marketplace-url}/apps/workflow[Workflow App] enables admins to specify r
 * Automatic Tagging
 * Retention
 
-The Workflow App should be enabled by default (Apps page), and the three configuration modules will be visible on your ownCloud Admin page. See
-xref:classic_ui:files/webgui/tagging.adoc[Tagging Files]
-in the ownCloud User manual to learn how to apply and filter tags on files.
+The Workflow App should be enabled by default (Apps page), and the three configuration modules will be visible on your ownCloud Admin page. See xref:classic_ui:files/webgui/tagging.adoc[Tagging Files] in the ownCloud User manual to learn how to apply and filter tags on files.
 
 == Tag Manager
 
@@ -34,11 +32,11 @@ Tags are visible only to ownCloud admins.
 
 To access this functionality, select menu:Settings[Admin > Workflow &amp; Tags].
 
-image:enterprise/file_management/workflow-1.png[Tag Manager]
+image:enterprise/file_management/workflow-1.png[Tag Manager, width=250]
 
 This is an example of what your tags look like in the *Tags* view on your files page. Non-admin users will not see invisible tags, but visible and restricted tags only.
 
-image:enterprise/file_management/workflow-5.png[Tag Manager]
+image:enterprise/file_management/workflow-5.png[Tag Manager example, width=250]
 
 == Automatic Tagging
 
@@ -46,17 +44,17 @@ The Automatic Tagging module operates on newly-uploaded files. Create a set of c
 
 For example, you can assign the invisible tag *iOS Uploads* to all files uploaded from iOS devices. This tag is visible only to admins.
 
-image:enterprise/file_management/workflow-2.png[Automatic tagging]
+image:enterprise/file_management/workflow-2.png[Automatic tagging, width=350]
 
 When files with this tag are shared with you, you can view them with the Tags filter on the Files page.
 
-image:enterprise/file_management/workflow-3.png[Viewing tagged files]
+image:enterprise/file_management/workflow-3.png[Viewing tagged files, width=250]
 
 Automatic Tagging is especially useful with the Retention module.
 
 The settings of a workflow can be fine-tuned post creation, see the example below:
 
-image:enterprise/file_management/update_workflow.png[Update Workflow, width=50%]
+image:enterprise/file_management/update_workflow.png[Update Workflow, width=350]
 
 == Retention
 
@@ -64,7 +62,7 @@ The Retention module is your housecleaning power tool, because it automatically 
 
 NOTE: ownCloud does not preserve directory mtimes (modification time), though it does update file mtimes.
 
-image:enterprise/file_management/workflow-4.png[Setting retention times via tag]
+image:enterprise/file_management/workflow-4.png[Setting retention times via tag, width=350]
 
 For best performance, retention tags should be applied high in your file hierarchy. If subfolders have the same tags as their parent folders, their tags must also be processed, so it will take a little longer.
 
@@ -73,18 +71,24 @@ For best performance, retention tags should be applied high in your file hierarc
 There are two retention engines that further allow you to fine-tune your retention settings:
 
 TagBasedRetention::
-This is the default setting and checks files that have a particular tag assigned. Then it checks (depth-first) the children of the tagged item, before continuing with the other tagged items. Children that have already been checked will not be checked a second time.
 +
+--
+This is the default setting and checks files that have a particular tag assigned. Then it checks (depth-first) the children of the tagged item, before continuing with the other tagged items. Children that have already been checked will not be checked a second time.
+
 This is optimised for processing smaller numbers of files that have multiple retention tags.
+--
 
 UserBasedRetention::
++
+--
 Examines files per user. It first iterates over all files and folders (siblings first), then examines the tags for those
 items and checks their respective retention periods. This is optimised for many files with few retention tags.
 
-You can define the way that the retention engine behaves by adding the following `config.php` setting. The value can be either 
+You can define the way that the retention engine behaves by adding the following environment variable. The value can be either 
 `tagbased` (default) or `userbased`.
 
-[source,php]
+[source,.env]
 ----
-'workflow.retention_engine' => 'userbased',
+OWNCLOUD_WORKFLOW_RETENTION_ENGINE=userbased
 ----
+--
