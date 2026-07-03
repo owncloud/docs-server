@@ -3,6 +3,17 @@
 :secure-view-label: Secure View (with watermarks)
 :page-aliases: collabora_online_integration.adoc, enterprise/collaboration/index.adoc
 
+////
+
+Secure View is under review.
+The required marketplace app is not in ownClouds responsibility but a necessity for the functionality.
+If the functionality is dropped, a new OC image is provided no longer showing the sec view capabilities.
+Note that in this case, we ned to also remove entries in config.apps.samle (richdocuments) and do a config-to-docs run.
+Then we can remove the page, all of the images related and all occ commands that manage sec view (richdocuments).
+If the functionality is kept, the app needs to be OC11 ready and either provided in the image or downloadable.
+
+////
+
 == Introduction
 
 Collabora Online allows you to work with all kinds of Collabora office documents directly in your browser. This application can connect to a Collabora Online (or other) server (WOPI-like client) where ownCloud is the WOPI host.
@@ -34,7 +45,7 @@ If a file or folder has been shared multiple times to different groups with diff
 == Prerequisites
 
 * _Enterprise Edition_
-* The ownCloud Collabora Online app
+* {oc-marketplace-url}/apps/richdocuments[ownCloud Collabora Online] app version *2.2.0* or above
 * Collabora Online Server *4.0.10* or above, set up and integrated
 
 == Configure ownCloud for Collabora Online / Secure View
@@ -66,7 +77,7 @@ NOTE: Admins can specify that all shares are "_secure view_" by default and that
 
 When "_{secure-view-label}_" is enabled, any attempts to download the file will be blocked as shown in the screenshot below. In addition, copy & paste is disabled.
 
-image:enterprise/collaboration/access-denied.png[Access denied to a document when it is protected by secure view, width=80%]
+image:enterprise/collaboration/access-denied.png[Access denied to a document when it is protected by secure view, width=350]
 
 == Limitations and Security Hardening
 
