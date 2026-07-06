@@ -1,34 +1,48 @@
 = Manually Move the Data Directory
 :toc: right
-:description: Use these instructions if you intend to move your ownCloud's data directory from its current location to another without using a symbolic link.
+:page-aliases: maintenance/manually-moving-data-folders.adoc
+:description: Follow these instructions if you need to migrate the data directory to a Dockerized installation.
 
 :mysql-string-replace-function-url: http://www.mysqltutorial.org/mysql-string-replace-function.aspx
-
-// this needs review for oc10 -> oc11
+:mariadb-docker-url: https://mariadb.com/docs/server/server-management/automated-mariadb-deployment-and-administration/docker-and-mariadb/installing-and-using-mariadb-via-docker
 
 == Introduction
 
 {description}
 
-As ownCloud is deployed via Docker, it is easy to move any data for a Dockerised deployment, as this simply involves relocating the contents of the mount point. Additional steps need to be taken into account when upgrading from a standard installation to Docker because the database needs to be updated.
+Migrating the data directory, where ownCloud hosts user data, is a critical migration.
+
+Different steps need to be taken when migrating from an existing installation to a Dockerised one in the following scenarios using ownCloud Classic 11. *In both cases, updating the database is required*:
+
+. Local, no NFS: +
+Copy the `data` directory to a new location.
+
+. The `data` directory is part of an existing NFS export: +
+The old export can be removed and a new export with only the `data` directory needs to be provided and mounted.
 
 This guide assumes that:
 
-* The current Docker volume folder is: `<mount-point>/oc`
-* The new Docker volume folder is: `<mount-point>/oc-new`
-* ownCloud's database name is `owncloud`
-* For a standard installation, the data directory is `var/www/owncloud/data`
-* The internal "data folder of a Dockerized installation is `/mnt/data/files`
+* The data directory of a local installation is: +
+`/var/www/owncloud/data`
+
+* The Docker volume data directory is: +
+`<mount-point>/files`
+
+* The internal data directory of a Dockerized installation is: +
+`/mnt/data/files`
+
+* The ownCloud's database name is: +
+`owncloud`
 
 Please change the paths above to reflect your environment.
 
-== Summary
+== Overview of Steps
 
-The following steps are necessary to move the data directory.
+The following steps are necessary to migrate the data directory.
 
-. Stop the web proxy server
+. Stop access via the web (proxy) server
 . Enable maintenance mode
-. Sync your Data directory
+. Sync / remount your Data directory
 . Adjust ownCloud's configuration
 . Check permissions
 . Disable maintenance mode
@@ -36,11 +50,13 @@ The following steps are necessary to move the data directory.
 
 Look at each section below for a detailed description.
 
-== Stop the Web Proxy Server
+== Preparation
 
-To ensure there are no active user connections to your ownCloud instance, stop access to it from the web proxy server. Follow the web proxy server description to find out how to do this.
+=== Prevent User Access via the Web (Proxy) Server
 
-== Enable Maintenance Mode
+To prevent any active user connections to your ownCloud instance, stop access to it via the web (proxy) server. Refer to the web (proxy) server description to find out how to do this.
+
+=== Enable Maintenance Mode
 
 It is necessary to enable maintenance mode to avoid running cron jobs. To enable maintenance mode, run the following command.
 
@@ -49,25 +65,34 @@ It is necessary to enable maintenance mode to avoid running cron jobs. To enable
 {occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
-== Sync your Data Directory
+=== Database
+
+Back up your database by making a copy or an export. This way, you can always revert if something goes horribly wrong.
+
+== Data Directory
+
+Depending on the Setup, the `data` directory either needs to be copied or remounted.
+
+For small instances with limited data, copying is probably the best option. For anything with more user data, such as an existing NFS mount, remounting to a different location is preferable. If you have more user data that you are currently hosting locally, now might be a good time to switch to NFS.
+
+=== Sync to a new Location
+
+Please note that the target mount point is used intentionally as the Docker volume mount point for ease of handling. In this example, the source and target are on the same server and the source path is the ownCloud's default. Adapt accordingly to suit your needs.
 
 [source,bash]
 ----
-sudo rsync -avz <mount-point>/files /mnt/<new-target>
+sudo rsync -avz /var/www/owncloud/data <mount_point>/files
 ----
 
-Make sure that `.ocdata` and `.htaccess` were synced to the new directory.
+=== Mounting with NFS
 
-[source,bash]
-----
-ls -a | grep -i "^\.[A-Z]"
-----
+If the data directory is already part of a NFS mount point such as `/mnt/owncloud/data`, unmount it, remove the export, create a new export including the data directory and mount it to `<mount_point>/files`.
 
-== Adjust ownCloud's configuration
+IMPORTANT: Only mount the data directory from the source and not the full owncloud directory including the data directory.
 
-=== Adjust oc_storages table
+== Adjust ownCloud Database Configuration
 
-Connect to your database and enter following commands:
+{mariadb-docker-url}#connecting-to-mariadb-from-outside-the-container[Connect to your database, window=_blank] and enter the following command to select the ownCloud database: Adapt the database name if it is not named as shown:
 
 [source,sql]
 ----
@@ -76,13 +101,30 @@ use owncloud;
 
 === Update the oc_storages Table
 
-Run the SQL below:
+First print all the affected paths to be changed:
 
 [source,sql]
 ----
-UPDATE oc_storages 
-  SET id='local::/mnt/owncloud/data/'
-  WHERE id='local::/var/www/owncloud/data/';
+select * from oc_storages where id like 'local::%';
+----
+
+Then update the database paths and adapt them accordingly:
+
+[source,sql]
+----
+BEGIN TRANSACTION;
+
+UPDATE oc_storages
+  SET id = REPLACE(id, '/var/www/owncloud/data', '/mnt/data/files')
+WHERE id LIKE 'local::%'`;
+
+# check with the select statement above
+# in case something went wrong
+# ROLLBACK;
+
+# otherwise use
+# COMMIT;
+
 ----
 
 === Update the oc_accounts Table

@@ -16,47 +16,32 @@ Note that any database migration is not covered here.
 
 IMPORTANT: During the migration process, do not make any changes to the original system except to put it into maintenance mode. This ensures that, should anything unforeseen happen, you can revert to your existing installation and resume its availability while debugging the problem.
 
-== Maintenance Mode
+You can find details of the steps for your ownCloud instance in the xref:maintenance/upgrading/manual_upgrade.adoc[Manual ownCloud Upgrade] documentation.
 
-To issue any occ commands, you must enter the directory where the ownCloud compose file is located. 
-
-* To enable maintenance mode, issue the following command:
-+
-[source,bash,subs="attributes+"]
-----
-cd <compose_directory>
-{occ-command-example-prefix-docker} maintenance:mode --on
-----
-
-* To disable maintenance mode, issue the following command:
-+
-[source,bash,subs="attributes+"]
-----
-cd <compose_directory>
-{occ-command-example-prefix-docker} maintenance:mode --off
-----
-
-== Migration
+== Special Migrations
 
 === Host Migration
 
 Migration to a different host is easy with Docker.
 
-. Enable maintenance mode
-. Down the container
+. Enable maintenance mode.
+. Prevent browser access via the proxy.
+. Down the container.
 . Make the data available on the new host:
 .. Either copy the Docker volume if not using a shared mount point to the new host, or
-.. Create a new shared mount point
-. Copy / adapt the compose yaml file to reflect your changes
-. Bring up the container
-. Disable maintenance mode
+.. Create a new shared mount point.
+. Copy / adapt the compose yaml file to reflect your changes.
+. Bring up the container.
+. Disable maintenance mode.
+. Reconfigure proxy access to the ownCloud Instance.
+. Reenable browser access via the proxy.
 
 === Domain Migration
 
 As the ownCloud Classic 11 image provides an embedded Apache web server, you need a proxy to handle security and other web-related settings anyway. To migrate or add a domain, two steps are required:
 
-. Update your proxy server settings
-. Update the ownCloud trusted domain settings 
+. Update your proxy server settings.
+. Update the ownCloud trusted domain settings.
 
 ==== Managing Trusted Domains
 
@@ -73,16 +58,36 @@ A typical configuration looks like this:
 OWNCLOUD_TRUSTED_DOMAINS='server1.example.com','192.168.1.50'
 ----
 
-=== ownCloud Classic Migration
+== ownCloud Classic Migration
 
 === Docker to Docker
 
 If you have previously used a Docker-based installation with ownCloud Classic 10, no data migration is required.
 
+[IMPORTANT]
+====
+* The steps shown do not cover any measures that may be necessary when the ownCloud-provided image was customised .
+* Any third party app used needs to be PHP 8 compliant. In doubt, disable it and do not re-enable until this prerequisite is met.
+====
+
+[NOTE]
+====
+With a few exceptions, ownCloud 11 provides nearly all configuration keys as environment variables. Therefore, it is highly recommended that any configuration keys are migrated to envvars, if possible. See the xref:configuration/important_notes.adoc[Important Configuration Notes] documentation for more details.
+====
+
 The main migration steps are the following:
 
-* Put your instance into maintenance modes
-.
+* Put your instance into maintenance mode.
+* Disable and then delete any app that is provided by ownCloud. +
+The deleted ownCloud apps were written in PHP 7. +
+The updated apps, which are now compliant with PHP 8, are embedded in the image.
+* Prevent browser access via the proxy.
+* Down the compose environment.
+* Define the OC11 image that will be used with the container, then pull it.
+* Start the compose environment.
+* Turn Maintenance mode off.
+* Start the occ upgrade process.
+* Reenable browser access via the proxy.
 
 === Native to Docker
 

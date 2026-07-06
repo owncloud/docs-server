@@ -11,7 +11,7 @@ NOTE: This guide assumes that you have basic knowledge about Unix terminology, c
 
 NOTE: To run any occ commands, you must first change to the directory containing the Compose YAML file.
 
-NOTE: Accessing the webroot of ownCloud needs extra compose configuration that is not covered here.
+NOTE: Accessing the webroot of ownCloud needs extra deployment configuration that is not covered here.
 
 == General Preparation
 
@@ -38,19 +38,21 @@ Third party apps are all apps that are not distributed by {oc-marketplace-url}/p
 
 . Disable Apps via Command Line
 +
+--
 This command lists all apps by <app-id> and app version:
-+
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} app:list
 ----
-+
+
 This command disables the app with the given <app-id>:
-+
+
 [source,bash,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} app:disable <app-id>
 ----
+--
 
 . Disable via Browser +
 Go to menu:Settings[Admin > Apps] and disable all third-party apps.
