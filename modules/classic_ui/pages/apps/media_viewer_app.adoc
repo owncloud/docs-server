@@ -9,7 +9,7 @@
 
 == Introduction
 
-{description} It replaces the gallery and files_videoplayer apps, which have now been deprecated, and supports the same basic feature set as the deprecated apps.
+{description} It replaces the gallery and files_videoplayer apps, which have been deprecated and are no longer maintained, and supports the same basic feature set as the deprecated apps.
 
 It supports the following functionality:
 

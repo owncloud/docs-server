@@ -24,6 +24,7 @@ Cannot be disabled
 +
 [NOTE]
 ====
+* The _Gallery_ and _Files VideoPlayer_ apps are deprecated, archived, and no longer maintained. Use the Files Media Viewer app instead.
 * Before Files Media Viewer 1.0.4, the _Gallery_ and _Files VideoPlayer_ apps need to be **uninstalled before installing** the Media Viewer app.
 * Starting with Files Media Viewer 1.0.4, the _Gallery_ and _Files VideoPlayer_ apps need to be **disabled before using** the Files Media Viewer app.
 * Also see the: xref:configuration/files/previews_configuration.adoc[Previews Configuration] documentation for the Files Media Viewer App for more information.
