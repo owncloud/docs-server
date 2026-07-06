@@ -35,8 +35,6 @@
 *** xref:classic_ui:apps/contacts.adoc[Contacts]
 *** xref:classic_ui:apps/market.adoc[Market]
 *** xref:classic_ui:apps/media_viewer_app.adoc[Media Viewer App]
-** xref:classic_ui:integration/index.adoc[Integration]
-*** xref:classic_ui:integration/ms-teams.adoc[Microsoft Teams]
 ** xref:classic_ui:pim/index.adoc[Synchronization Clients]
 *** xref:classic_ui:pim/sync_ios.adoc[Sync iOS]
 *** xref:classic_ui:pim/sync_kde.adoc[Sync KDE]

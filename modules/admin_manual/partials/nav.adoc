@@ -52,7 +52,6 @@
 **** xref:admin_manual:configuration/files/trashbin_options.adoc[Managing the Trashbin]
 
 *** xref:admin_manual:configuration/integration/index.adoc[Integration]
-**** xref:admin_manual:configuration/integration/ms-teams.adoc[Microsoft Teams]
 **** xref:admin_manual:configuration/integration/splunk.adoc[ownCloud App for Splunk]
 
 *** xref:admin_manual:configuration/general_topics/index.adoc[General Topics]
