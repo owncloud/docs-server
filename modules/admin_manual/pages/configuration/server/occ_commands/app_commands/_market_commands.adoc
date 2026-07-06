@@ -28,8 +28,8 @@ Applications can be installed both from {oc-marketplace-url}/[the ownCloud Marke
 == Install Apps From The Marketplace
 
 To install an application from the Marketplace, you need to supply the app’s id, which can be found in the app’s Marketplace URL.
-For example, the URL for _Two factor backup codes_ is {oc-marketplace-url}/apps/twofactor_backup_codes.
-So its app id is `twofactor_backup_codes`.
+For example, the URL for _2-Factor Authentication_ is {oc-marketplace-url}/apps/twofactor_totp.
+So its app id is `twofactor_totp`.
 
 [source,docker,subs="attributes+"]
 ----
@@ -60,7 +60,7 @@ Only `zip`, `gzip`, and `bzip2` archives are supported.
 [source,docker,subs="attributes+"]
 ----
 # Install an app from the marketplace.
-{occ-command-example-prefix-docker} market:install twofactor_backup_codes
+{occ-command-example-prefix-docker} market:install twofactor_totp
 
 # Install an app from a local archive.
 {occ-command-example-prefix-docker} market:install -l /mnt/data/richdocuments-2.0.0.tar.gz
