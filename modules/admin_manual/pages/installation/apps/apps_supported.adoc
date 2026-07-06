@@ -1,11 +1,10 @@
 = Supported Apps in ownCloud
 :toc: right
-:toclevels: 1
-:page-aliases: installation/apps/mediaviewer/index.adoc
+:page-aliases: installation/apps/mediaviewer/index.adoc, installation/apps_supported.adoc
 
 == AGPL Apps
 
-Please note that apps without a link are now fully integrated into the core system and self-explanatory.
+Please note that apps without a link are fully integrated into the core system and self-explanatory.
 
 * {oc-marketplace-url}/apps/activity[Activity]
 * {oc-marketplace-url}/apps/files_antivirus[Anti-Virus]

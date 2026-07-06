@@ -24,7 +24,7 @@ To issue any occ commands, you must enter the directory where the ownCloud compo
 +
 [source,bash,subs="attributes+"]
 ----
-cd /var/www/owncloud/
+cd <compose_directory>
 {occ-command-example-prefix-docker} maintenance:mode --on
 ----
 
@@ -32,7 +32,7 @@ cd /var/www/owncloud/
 +
 [source,bash,subs="attributes+"]
 ----
-cd /var/www/owncloud/
+cd <compose_directory>
 {occ-command-example-prefix-docker} maintenance:mode --off
 ----
 
@@ -60,45 +60,31 @@ As the ownCloud Classic 11 image provides an embedded Apache web server, you nee
 
 ==== Managing Trusted Domains
 
-All URLs used to access your ownCloud server must be white-listed in your configuration file, under the `trusted_domains` setting or via environment variables. Users are allowed to log into ownCloud only when they point their browsers to a URL that is listed in the `trusted_domains` setting.
+All URLs used to access your ownCloud server must be white-listed using a environment variable. Users are allowed to log into ownCloud only when they point their browsers to a URL that is listed in the `OWNCLOUD_TRUSTED_DOMAINS` setting.
 
 NOTE: This setting is important when changing or moving to a new domain name. You may use IP addresses and domain names.
 
-NOTE: The loopback address, `127.0.0.1`, is automatically white-listed, so as long as you have access to the physical server you can always log in. In the event that a load-balancer is in place, there will be no issues as long as it sends the correct `X-Forwarded-Host` header.
+NOTE: The loopback address, `127.0.0.1`, is automatically whitelisted. In the event that a load-balancer is in place, there will be no issues as long as it sends the correct `X-Forwarded-Host` header.
 
+A typical configuration looks like this:
 
-A typical configuration via the configuration file looks like this::
-+
---
-[source,php]
+[source,.env]
 ----
-'trusted_domains' => [
-   0 => 'localhost',
-   1 => 'server1.example.com',
-   2 => '192.168.1.50',
-],
+OWNCLOUD_TRUSTED_DOMAINS='server1.example.com','192.168.1.50'
 ----
---
-
-Here is an example of how this can be used from within a docker-compose.yml file::
-+
---
-In case of a docker based setup, the trusted_domains setting is controlled by the environment variables `OWNCLOUD_TRUSTED_DOMAINS` or `OWNCLOUD_DOMAIN`. The latter only takes effect, if `OWNCLOUD_TRUSTED_DOMAINS` is undefined and can provide one IP-address or hostname. `OWNCLOUD_TRUSTED_DOMAINS` can specify multiple values as a comma-separated list. For more details on environment variables see the xref:installation/installing_with_docker.adoc[Installing With Docker] documentation.
-
-This will allow access to ownCloud under two different names, and one IP-address, in addition to localhost and 127.0.0.1:
-
-[source,yaml,subs="attributes+"]
-----
-services:
-  owncloud:
-    image: owncloud/server:{latest-server-download-version}
-    environment:
-      OWNCLOUD_TRUSTED_DOMAINS: "myowncloud.mydomain.com, myowncloud, 12.23.34.45"
-...
-----
---
 
 === ownCloud Classic Migration
+
+=== Docker to Docker
+
+If you have previously used a Docker-based installation with ownCloud Classic 10, no data migration is required.
+
+The main migration steps are the following:
+
+* Put your instance into maintenance modes
+.
+
+=== Native to Docker
 
 This section describes the migration of *ownCloud Classic 10* to *ownCloud Classic 11*, if ownCloud Classic 10 was installed natively. It only focuses on ownCloud but not on any migration of the database!
 

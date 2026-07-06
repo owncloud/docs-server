@@ -2,6 +2,7 @@
 :toc: right
 :toclevels: 2
 :keywords: cluster, shared storage, nfs, kubernetes, swarm, scale-out, redis, locking, chown
+:page-aliases: installation/deployment_recommendations/clsutered_shared_storage.adoc
 :description: How to run the ownCloud Docker image across multiple application nodes that share a common file storage (for example NFS), and the pitfalls to avoid.
 
 :k8s-fsgroup-url: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/

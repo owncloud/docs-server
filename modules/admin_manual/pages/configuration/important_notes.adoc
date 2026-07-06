@@ -1,5 +1,6 @@
 = Important Configuration Notes
 :toc: right
+:page-aliases: installation/configuration_notes.adoc
 :description: This page provides some important configuration notes.
 
 == Introduction

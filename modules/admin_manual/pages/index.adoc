@@ -2,9 +2,14 @@
 
 Welcome to the ownCloud Classic Administration Guide. This guide describes administration tasks for ownCloud, the flexible open source file synchronization and sharing solution.
 
-== Installation Changes
+== Important Changes
 
-IMPORTANT: Unlike previous releases, ownCloud Classic 11 is only available as a Docker image containing the necessary libraries, such as PHP 8.
+[IMPORTANT]
+====
+* Unlike previous releases, ownCloud Classic 11 is only available as a Docker image containing the necessary libraries, such as PHP 8, as well as an embedded, preconfigured Apache web server. Therefore, to access ownCloud Classic 11, you need to use a proxy web server that handles certificates.
+* The majority of apps provided by ownCloud that were formerly available from the Marketplace are now included in the image, including Enterprise-only apps. These apps have been updated to PHP 8. The only requirement is to enable them. For Enterprise-only apps, a licence key is required before they can be enabled. Apps not provided by ownCloud can still be used as long as they meet the PHP 8 compliance prerequisite.
+* Some apps, such as the Enterprise-only Sharepoint app have been retired and are not part of the image.
+====
 
 == Target Audience
 

@@ -1,5 +1,6 @@
 = Deployment Considerations
 :toc: right
+:page-aliases: installation/deployment_considerations.adoc
 
 == Hardware
 
@@ -74,7 +75,7 @@ What about the other DBMS?
 
 === Docker Volume
 
-When using bind mounts with the Docker volume, consider using a shared directory, such as NFS, as the mount point. This is important if you plan to implement Active-Passive failover scenarios, since the instance taking over must be able to access the configuration and app data..
+When using bind mounts with the Docker volume, consider using a shared directory, such as NFS, as the mount point. This is important if you plan to implement Active-Passive failover scenarios, since the instance taking over must be able to access the configuration and app data.
 
 === File Storage
 

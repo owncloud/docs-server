@@ -1,15 +1,16 @@
 = Installing and Managing Apps
 :toc: right
+:page-aliases: installation/apps_management_installation.adoc
 :description: After installing ownCloud, you may provide added functionality by installing applications.
 
 == Introduction
 
-{description} The Docker image comes with all apps provided by ownCloud, regardless of the licensing scheme. Apps that are not part of the image can be installed at any time.
+{description} The Docker image comes with all apps provided by ownCloud, regardless of the licensing scheme.
 
 [IMPORTANT]
 ====
 * Any apps that came with the image will reappear when the container is restarted - if you uninstall them.
-* Any apps that are installed manually *must be compatible with PHP 8*; otherwise, they will most likely fail to work and make your instance unstable.
+* Manually installed apps *must be compatible with PHP 8*; otherwise, they will most likely fail to work and make your instance unstable.
 ====
 
 == Installing and Managing Apps
@@ -26,7 +27,7 @@ NOTE: If you would like to create or add (your own) ownCloud app, please refer t
 
 === Installing Apps Manually
 
-All apps that are installed manually, regardless of using the Marketplace or you copy them, will be placed into the `apps` folder of the ownCloud volume. This volume is either the Docker volume or a defined bind mount. This apps folder corresponds to the `apps-external` folder. For more and important details see: xref:installation/mount_folder_structure.adoc[Mount Folder Structure].
+All apps that are installed manually, regardless of the source, will be placed into the `<mount_point>/apps` folder. This volume is either the Docker volume or a defined bind mount. This apps folder corresponds to the `apps-external` folder. For more and important details see: xref:installation/mount_folder_structure.adoc[Mount Folder Structure].
 
 Once the tarball has been extracted into the default app folder. Enable the application,
 

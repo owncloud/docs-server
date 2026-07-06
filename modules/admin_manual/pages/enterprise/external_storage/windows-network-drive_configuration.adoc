@@ -36,7 +36,9 @@ Compared to standard SMB access, WND has advanced features like:
 . Enhanced ACL support
 . Collaborative WND (CWND)
 
-.Brief Description of Advanced Features:
+IMPORTANT: The Docker image does not provide the `smbclient` CLI tool. To mitigate this issue, you need to manually create an image that installs and enables this requirement.
+
+=== Brief Description of Advanced Features
 
 User lockout prevention and password reset::
 Depending on the Windows or Samba policy, users could get locked out of their account if they enter a wrong password a number of times. The lockout prevention tries to avoid this from happening by resetting the password if it is wrong. This is also true for Collaborative WND when using `login credentials saved in database` and a repeatedly running files-scan job which may use outdated credentials. In the case of ownCloud's standard SMB connector, the password won't be reset. It could happen that users get locked out of the file server.
@@ -99,7 +101,6 @@ Depending on the authentication method, passwords for each mount are encrypted a
 [IMPORTANT]
 ====
 * For more information on SMB/CIFS in ownCloud, refer to the xref:configuration/files/external_storage/smb.adoc[Samba File Server Configuration] documentation.
-* Please note that the referenced document provides additional information on testing an SMB connection with `smbclient`. This CLI tool is not included in the shipped image, but can be added.
 * If you encounter errors when using the WND app like `NT_STATUS_REVISION_MISMATCH`, please get in touch by {oc-support-url}[Opening a Service Request].
 ====
 

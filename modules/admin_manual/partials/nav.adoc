@@ -6,17 +6,18 @@
 ** xref:admin_manual:gdpr.adoc[GDPR]
 
 ** Installation
-*** xref:admin_manual:installation/deployment_considerations.adoc[Deployment Considerations]
-*** xref:admin_manual:installation/deployment_recommendations.adoc[Deployment Recommendations]
-**** xref:admin_manual:installation/deployment_recommendations/clustered_shared_storage.adoc[Clustered Deployments with Shared Storage]
-**** xref:admin_manual:installation/deployment_recommendations/nfs.adoc[NFS]
+*** Deployment
+**** xref:admin_manual:installation/deployment/deployment_considerations.adoc[Deployment Considerations]
+**** xref:admin_manual:installation/deployment/deployment_recommendations.adoc[Deployment Recommendations]
+**** xref:admin_manual:installation/deployment/deployment_recommendations/clustered_shared_storage.adoc[Clustered Deployments with Shared Storage]
+**** xref:admin_manual:installation/deployment/deployment_recommendations/nfs.adoc[NFS]
 *** xref:admin_manual:installation/system_requirements.adoc[System Requirements]
 *** xref:admin_manual:installation/installing_with_docker.adoc[Installing With Docker]
 *** xref:admin_manual:installation/create_own_image.adoc[Create an own Docker Image]
 *** xref:admin_manual:installation/mount_folder_structure.adoc[Mount Folder Structure]
-*** xref:admin_manual:installation/configuration_notes.adoc[Configuration Notes]
-*** xref:admin_manual:installation/apps_management_installation.adoc[Apps Management]
-**** xref:admin_manual:installation/apps_supported.adoc[Supported Apps]
+*** Apps
+**** xref:admin_manual:installation/apps/apps_management_installation.adoc[Apps Management]
+**** xref:admin_manual:installation//apps/apps_supported.adoc[Supported Apps]
 
 ** Configuration
 
