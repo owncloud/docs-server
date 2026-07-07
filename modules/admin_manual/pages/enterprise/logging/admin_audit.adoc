@@ -1572,7 +1572,7 @@ All comment events have the same data:
 | integer
 | Always `1`
 
-| `owner
+| `owner`
 | string
 | The SMB owner
 
