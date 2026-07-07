@@ -118,10 +118,11 @@
 **** xref:admin_manual:maintenance/backup_and_restore/restore.adoc[Restore]
 *** xref:admin_manual:maintenance/enable_maintenance.adoc[Maintenance Mode]
 *** xref:admin_manual:maintenance/export_import_instance_data.adoc[Export and Import Instance Data]
-*** xref:admin_manual:maintenance/migrate-data-folder.adoc[Migrate the Data Folder]
 *** Encryption
 **** xref:admin_manual:maintenance/encryption/migrating-from-user-key-to-master-key.adoc[Migrating from User Key to Master Key Encryption]
-*** xref:admin_manual:maintenance/migrating.adoc[Migrating ownCloud]
+*** Migrating ownCloud
+**** xref:admin_manual:maintenance/migrate_owncloud/migrating.adoc[Migrating an Instance]
+**** xref:admin_manual:maintenance/migrate_owncloud/migrate-datadirectory.adoc[Migrate the Datadirectory]
 *** xref:admin_manual:maintenance/migrating_to_kiteworks.adoc[Migrating to Kiteworks PDN]
 *** xref:admin_manual:maintenance/migrating_to_ocis.adoc[Migrating to ownCloud Infinite Scale]
 
