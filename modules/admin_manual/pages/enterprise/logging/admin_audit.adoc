@@ -36,7 +36,7 @@ It is recommended that messages are redirected to a separate file. To do so, add
 
 [source,.env]
 ----
-OWNCLOUD_LOG_CONDITIONS=[{"apps":["files_external"],"loglevel":0,"logfile":'/mnt/data/files/admin_audit.log'}]
+OWNCLOUD_LOG_CONDITIONS=[{"apps":["admin_audit"],"loglevel":0,"logfile":"/mnt/data/files/admin_audit.log"}]
 ----
 
 NOTE: All messages regardless of log level will be logged there.
@@ -877,7 +877,7 @@ Sharing events come with a default set of fields
 
 | `success`
 | boolean
-| If the request was successful `tue` or `false`
+| If the request was successful `true` or `false`
 |===
 
 ===== public_link_removed
