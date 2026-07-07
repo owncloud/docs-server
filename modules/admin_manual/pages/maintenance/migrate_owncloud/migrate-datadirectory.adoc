@@ -152,7 +152,7 @@ UPDATE oc_storages
     '/var/www/owncloud/data',
     '/mnt/data/files'
   )
-  WHERE id LIKE 'local::%'`;
+  WHERE id LIKE 'local::%';
 
 # check with the select statement above
 # in case something went wrong
@@ -185,7 +185,7 @@ UPDATE oc_accounts
     '/var/www/owncloud/data',
     '/mnt/data/files'
   )
-  WHERE home LIKE '/var/www/owncloud/data%'`;
+  WHERE home LIKE '/var/www/owncloud/data%';
 
 # check with the select statement above
 # in case something went wrong
