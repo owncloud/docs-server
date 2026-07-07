@@ -52,7 +52,7 @@ All involved servers (Office Online Server and the ownCloud server) need to be a
 
 To configure the WOPI app in your ownCloud installation, add the following environment variables, adjusting them as necessary based on the details of your setup:
 
-[source,php,subs="post_replacements,attributes+"]
+[source,.env,subs="post_replacements,attributes+"]
 ----
 # ownCloud Support URL: {oc-support-url}
 
