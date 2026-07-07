@@ -137,9 +137,9 @@
 - `OWNCLOUD_FILES_EXTERNAL_ALLOW_NEW_LOCAL=$\{OWNCLOUD_ALLOW_EXTERNAL_LOCAL_STORAGE}` +
   Enable or disable the files_external local mount option (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-the-files_external-local-mount-option[documentation]).
 - `OWNCLOUD_GRACE_PERIOD_DEMO_KEY_LINK=` +
-  Override the link shown in the grace period popup (see xref:enterprise/installation/install.adoc#license-keys[documentation]).
+  Override the link shown in the grace period popup (see xref:installation/installing_with_docker.adoc#enterprise-license-keys[documentation]).
 - `OWNCLOUD_GRACE_PERIOD_DEMO_KEY_SHOW_POPUP=` +
-  Show or hide the grace period demo key popup (see xref:enterprise/installation/install.adoc#license-keys[documentation]).
+  Show or hide the grace period demo key popup (see xref:installation/installing_with_docker.adoc#enterprise-license-keys[documentation]).
 - `OWNCLOUD_FORWARDED_FOR_HEADERS=` +
   Define forwarded_for_headers (see xref:configuration/server/config_sample_php_parameters.adoc#define-forwarded_for_headers[documentation]).
 - `OWNCLOUD_GROUPS_ENABLE_MEDIAL_SEARCH=` +
@@ -163,7 +163,7 @@
 - `OWNCLOUD_LDAP_IGNORE_NAMING_RULES=` +
   Ignore LDAP naming rules (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-ldap[documentation]).
 - `OWNCLOUD_LICENSE_KEY=` +
-  ownCloud Enterprise License Key (see xref:enterprise/installation/install.adoc#license-keys[documentation]).
+  ownCloud Enterprise License Key (see xref:installation/installing_with_docker.adoc#enterprise-license-keys[documentation]).
 - `OWNCLOUD_LICENSE_CLASS=`
 - `OWNCLOUD_LOGIN_ALTERNATIVES=` +
   Define additional login buttons on the logon screen (see xref:configuration/server/config_sample_php_parameters.adoc#define-additional-login-buttons-on-the-logon-screen[documentation]).
