@@ -63,7 +63,7 @@
 - `OWNCLOUD_CROND_SCHEDULE="*/1 * * * *"` +
   Cron schedule to run ownCloud background jobs.
 - `OWNCLOUD_CRON_LOG=` +
-  Define logging if cron ran successfully(see xref:configuration/server/config_sample_php_parameters.adoc#define-logging-if-cron-ran-successfully))
+  Define logging if cron ran successfully (see xref:configuration/server/config_sample_php_parameters.adoc#define-logging-if-cron-ran-successfully[documentation]).
 - `OWNCLOUD_CSRF_DISABLED=` +
   Enable or disable ownCloud’s built-in CSRF protection mechanism (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-ownclouds-built-in-csrf-protection-mechanism[documentation]).
 - `OWNCLOUD_CUSTOMCLIENT_ANDROID=` +
@@ -274,7 +274,7 @@
   Path to a custom `openssl.cnf` file, e.g. when using a custom PKI or CA in the container (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-default-cipher-for-encrypting-files[documentation]).
 - `OWNCLOUD_OPERATION_MODE=` +
   Define ownCloud operation modes (see xref:configuration/server/config_sample_php_parameters.adoc#define-owncloud-operation-modes[documentation]).
-- `OWNCLOUD_OVERWRITE_CLI_URL=\${\{OWNCLOUD_PROTOCOL}://\$\{OWNCLOUD_DOMAIN}$\{OWNCLOUD_SUB_URL}` +
+- `OWNCLOUD_OVERWRITE_CLI_URL=$\{OWNCLOUD_PROTOCOL}://$\{OWNCLOUD_DOMAIN}$\{OWNCLOUD_SUB_URL}` +
   Override cli URL (see xref:configuration/server/config_sample_php_parameters.adoc#override-cli-url[documentation]).
 - `OWNCLOUD_OVERWRITE_COND_ADDR=` +
   Override condition for the remote IP address with a regular expression (see xref:configuration/server/config_sample_php_parameters.adoc#override-condition-for-the-remote-ip-address-with-a-regular-expression[documentation]).
@@ -318,7 +318,7 @@
   Path to custom scripts that need to be executed before an ownCoud installation command.
 - `OWNCLOUD_PRE_SERVER_PATH=/etc/pre_server.d` +
   Path to custom scripts that need to be executed before an ownCloud server startup.
-- `\{OWNCLOUD_PROTOCOL=http` +
+- `OWNCLOUD_PROTOCOL=http` +
   Protocol used in `OWNCLOUD_OVERWRITE_CLI_URL` by default.
 - `OWNCLOUD_PROXY_IGNORE=` +
   Comma-separated list of hostnames that bypass the proxy (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-url-of-your-proxy-server[documentation]).
@@ -355,29 +355,29 @@
 - `OWNCLOUD_REDIS_TIMEOUT=` +
   Sets the redis timeout value (see xref:configuration/server/config_sample_php_parameters.adoc#define-redis-cluster-connection-details[documentation]).
 - `OWNCLOUD_REDIS_TLS_ALLOW_SELF_SIGNED=` +
-  Allow self-signed certificates on the Redis server (`true`/`false`) (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  Allow self-signed certificates on the Redis server (`true`/`false`) (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REDIS_TLS_CAFILE=` +
-  Path to CA certificate file for TLS-secured Redis connections (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  Path to CA certificate file for TLS-secured Redis connections (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REDIS_TLS_CAPATH=` +
-  Directory containing CA certificates for TLS-secured Redis connections (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  Directory containing CA certificates for TLS-secured Redis connections (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REDIS_TLS_CIPHERS=` +
-  OpenSSL cipher list for Redis TLS connections (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  OpenSSL cipher list for Redis TLS connections (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REDIS_TLS_LOCAL_CERT=` +
-  Path to client certificate file for mutual TLS to Redis (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  Path to client certificate file for mutual TLS to Redis (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REDIS_TLS_LOCAL_PK=` +
-  Path to client private key file for mutual TLS to Redis (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  Path to client private key file for mutual TLS to Redis (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REDIS_TLS_PASSPHRASE=` +
-  Passphrase for an encrypted Redis client private key (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  Passphrase for an encrypted Redis client private key (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REDIS_TLS_PEER_NAME=` +
-  Expected hostname in the Redis server certificate, overrides the connection host for SNI (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  Expected hostname in the Redis server certificate, overrides the connection host for SNI (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REDIS_TLS_VERIFY_PEER=` +
-  Validate the Redis server certificate against the CA (`true`/`false`) (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  Validate the Redis server certificate against the CA (`true`/`false`) (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REDIS_TLS_VERIFY_PEER_NAME=` +
-  Validate that the Redis server certificate CN/SAN matches the peer name (`true`/`false`) (see [phpredis docs](https://github.com/phpredis/phpredis[documentation]).
+  Validate that the Redis server certificate CN/SAN matches the peer name (`true`/`false`) (see the https://github.com/phpredis/phpredis[phpredis docs]).
 - `OWNCLOUD_REMEMBER_LOGIN_COOKIE_LIFETIME=` +
   Define the lifetime of the remember-login cookie (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-lifetime-of-the-remember-login-cookie[documentation]).
 - `OWNCLOUD_SAVE_VERSION_METADATA=` +
-  Enabled extened version metadata (see [description](https://doc.owncloud.com/server/latest/admin_manual/configuration/files/file_versioning.adoc#extended-version-metadata) and [documentation](https://doc.owncloud.com/server/next/admin_manual/configuration/server/config_sample_php_parameters.adoc#save-additional-metadata-for-versions[documentation]).
+  Enable extended version metadata (see https://doc.owncloud.com/server/latest/admin_manual/configuration/files/file_versioning.adoc#extended-version-metadata[description] and https://doc.owncloud.com/server/next/admin_manual/configuration/server/config_sample_php_parameters.adoc#save-additional-metadata-for-versions[documentation]).
 - `OWNCLOUD_SECRET=` +
   Define ownClouds internal secret (see xref:configuration/server/config_sample_php_parameters.adoc#define-ownclouds-internal-secret[documentation]).
 - `OWNCLOUD_SESSION_KEEPALIVE=` +
