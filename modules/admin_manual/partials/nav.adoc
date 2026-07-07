@@ -17,7 +17,7 @@
 *** xref:admin_manual:installation/mount_folder_structure.adoc[Mount Folder Structure]
 *** Apps
 **** xref:admin_manual:installation/apps/apps_management_installation.adoc[Apps Management]
-**** xref:admin_manual:installation//apps/apps_supported.adoc[Supported Apps]
+**** xref:admin_manual:installation/apps/apps_supported.adoc[Supported Apps]
 
 ** Configuration
 
