@@ -21,7 +21,7 @@ TIP: If you're operating very large instances with regard to users, files or sha
 
 The following screenshots give you an impression of the Metrics app.
 
-[width=100%,cols="50%,50%,options="header"]
+[width=100%,cols="50%,50%",options="header"]
 |===
 ^| *Metrics System Overview*
 ^| *Metrics User Overview*

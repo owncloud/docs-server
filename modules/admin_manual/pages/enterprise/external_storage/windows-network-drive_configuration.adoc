@@ -281,7 +281,7 @@ IMPORTANT: The ownCloud LDAP Integration app must configure the `sAMAccountName`
 
 [TIP]
 ====
-Some groups, such as `everyone` might not be handled properly. This is because such groups don't exist in the LDAP server, or might not be found if the domain is different, such as `authority\system` or `builtin\domain-users`.
+Some groups, such as `everyone` might not be handled properly. This is because such groups don't exist in the LDAP server, or might not be found if the domain is different, such as `nt authority\system` or `builtin\domain-users`.
 ====
 
 The value to select for this provider is: `ocLdapPermissionManager`.
