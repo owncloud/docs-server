@@ -63,7 +63,7 @@ OWNCLOUD_TRUSTED_DOMAINS='server1.example.com','192.168.1.50'
 [IMPORTANT]
 ====
 * The steps shown do not cover any measures that may be necessary when the ownCloud-provided image was or needs to be customised .
-* Any third party app used needs to be PHP 8 compliant. In doubt, disable it and do not re-enable until this prerequisite is met.
+* Any third party app used needs to be PHP 8 compliant. If in doubt, disable it and do not re-enable until this prerequisite is met.
 ====
 
 [NOTE]

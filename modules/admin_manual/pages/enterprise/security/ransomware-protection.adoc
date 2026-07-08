@@ -13,7 +13,7 @@ Once this happens, attackers usually ask victims to pay a ransom, often via cryp
 
 While paying the ransom works in some cases, it is not recommended, as there is no guarantee that the attackers will supply the key after payment is made. To help mitigate such threats and ensure ongoing access to user data, ownCloud provides the Ransomware Protection app.
 
-NOTE: It is essential to be aware that user data needs to be synchronized with you ownCloud Classic using the ownCloud Desktop synchronization client. Data that is not synchronized and stored in ownCloud cannot be protected.
+NOTE: It is essential to be aware that user data needs to be synchronized with your ownCloud Classic server using the ownCloud Desktop synchronization client. Data that is not synchronized and stored in ownCloud cannot be protected.
 
 == About Ransomware Protection
 
@@ -59,7 +59,7 @@ While Ransomware Prevention mitigates risks of a range of ransomware attacks, it
 
 Ultimately there is a consensus that only one solution can provide future-proof protection from ransomware attacks: retaining data and providing the means to roll back to a particular point in time.
 
-ownCloud Ransomware Protection will, therefore, record all changes on an ownCloud Classic and allow administrators to rollback user data to a particular point in time, making use of ownCloud’s integrated Versioning and Trash bin features.
+ownCloud Ransomware Protection will, therefore, record all changes on an ownCloud Classic server and allow administrators to rollback user data to a particular point in time, making use of ownCloud’s integrated Versioning and Trash bin features.
 
 Doing so allows all user data that is synchronized with the server to be rolled back to its state before the attack occurred. A combination of Ransomware prevention and protection reduces risks to a minimum acceptable level.
 

@@ -156,8 +156,8 @@ Only a few settings are required, these are:
 a| `{latest-server-download-version}` or `latest`
 
 | `OWNCLOUD_DOMAIN` *^1^*
-a| Only for the use with a single ownCloud domain +
-The same rules trusted domains apply to everything else.
+a| Only for use with a single ownCloud domain +
+The same rules for trusted domains apply to everything else.
 [IMPORTANT]
 ====
 Either use: +
