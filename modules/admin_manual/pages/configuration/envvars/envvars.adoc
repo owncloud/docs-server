@@ -158,13 +158,10 @@
   Define files that are excluded from integrity checking (see xref:configuration/server/config_sample_php_parameters.adoc#define-files-that-are-excluded-from-integrity-checking[documentation]).
 - `OWNCLOUD_INTEGRITY_IGNORE_MISSING_APP_SIGNATURE=` +
   Define apps or themes that are excluded from integrity checking (see xref:configuration/server/config_sample_php_parameters.adoc#define-apps-or-themes-that-are-excluded-from-integrity-checking[documentation]).
-- `OWNCLOUD_KNOWLEDGEBASE_ENABLED=`
-- `OWNCLOUD_APPSTORE_ENABLED=`
 - `OWNCLOUD_LDAP_IGNORE_NAMING_RULES=` +
   Ignore LDAP naming rules (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-ldap[documentation]).
 - `OWNCLOUD_LICENSE_KEY=` +
   ownCloud Enterprise License Key (see xref:installation/installing_with_docker.adoc#enterprise-license-keys[documentation]).
-- `OWNCLOUD_LICENSE_CLASS=`
 - `OWNCLOUD_LOGIN_ALTERNATIVES=` +
   Define additional login buttons on the logon screen (see xref:configuration/server/config_sample_php_parameters.adoc#define-additional-login-buttons-on-the-logon-screen[documentation]).
 - `OWNCLOUD_LOGIN_POLICY_ORDER=` +
