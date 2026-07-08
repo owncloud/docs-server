@@ -144,7 +144,7 @@ Then update the database paths and adapt them accordingly. Please note that the 
 
 [source,sql]
 ----
-BEGIN TRANSACTION;
+START TRANSACTION;
 
 UPDATE oc_storages
   SET id = REPLACE(
@@ -177,7 +177,7 @@ Then update the database paths and adapt them accordingly. Please note that the 
 
 [source,sql]
 ----
-BEGIN TRANSACTION;
+START TRANSACTION;
 
 UPDATE oc_accounts
   SET home = REPLACE(
@@ -208,7 +208,7 @@ If any results are returned, run the SQL query below to update them, changing th
 
 [source,sql]
 ----
-BEGIN TRANSACTION;
+START TRANSACTION;
 
 UPDATE oc_jobs 
   SET argument = REPLACE(
