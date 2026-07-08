@@ -100,7 +100,7 @@ The following mappers are provided with the app:
 
 == Shibboleth with Desktop and Mobile Clients
 
-The ownCloud Desktop Client can interact with an ownCloud instance running inside a Shibboleth Service Provider by using OAuth2 tokens to authenticate.The ownCloud Android and iOS mobile apps also work with OAuth2 tokens.
+The ownCloud Desktop Client can interact with an ownCloud instance running inside a Shibboleth Service Provider by using OAuth2 tokens to authenticate. The ownCloud Android and iOS mobile apps also work with OAuth2 tokens.
 
 == WebDAV Support
 
