@@ -85,7 +85,7 @@ To Monitor the ownCloud Splunk audit log, add this to `inputs.conf`, assuming yo
 
 [source,plaintext]
 ----
-[monitor:/<mount_point>/files/admin_audit.log]
+[monitor://<mount_point>/files/admin_audit.log]
  disabled = false
  sourcetype = _json
  index = main
