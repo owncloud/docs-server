@@ -8,7 +8,7 @@
 Secure View is under review.
 The required marketplace app is not in ownClouds responsibility but a necessity for the functionality.
 If the functionality is dropped, a new OC image is provided no longer showing the sec view capabilities.
-Note that in this case, we ned to also remove entries in config.apps.samle (richdocuments) and do a config-to-docs run.
+Note that in this case, we need to also remove entries in config.apps.sample (richdocuments) and do a config-to-docs run.
 Then we can remove the page, all of the images related and all occ commands that manage sec view (richdocuments).
 If the functionality is kept, the app needs to be OC11 ready and either provided in the image or downloadable.
 
