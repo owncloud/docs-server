@@ -1,0 +1,251 @@
+= Migrate the Datadirectory
+:toc: right
+:page-aliases: maintenance/manually-moving-data-folders.adoc
+:description: Follow these instructions if you need to migrate the data directory to a Dockerized installation.
+
+:mysql-string-replace-function-url: http://www.mysqltutorial.org/mysql-string-replace-function.aspx
+:mariadb-docker-url: https://mariadb.com/docs/server/server-management/automated-mariadb-deployment-and-administration/docker-and-mariadb/installing-and-using-mariadb-via-docker
+
+== Introduction
+
+{description}
+
+Migrating the data directory, where ownCloud hosts user data, is a critical migration.
+
+Different steps need to be taken when migrating from an existing installation to a Dockerised one in the following scenarios using ownCloud Classic 11. *In both cases, updating the database is required*:
+
+. Local, no NFS: +
+Copy the `data` directory to a new location.
+
+. The `data` directory is part of an existing NFS export: +
+The old export can be removed and a new export with only the `data` directory needs to be provided and mounted.
+
+This guide assumes that:
+
+* The data directory of a local installation is: +
+`/var/www/owncloud/data`
+
+* The Docker volume data directory is: +
+`<mount-point>/files`
+
+* The internal data directory of a Dockerized installation is: +
+`/mnt/data/files`
+
+* The ownCloud's database name is: +
+`owncloud`
+
+Please change the paths above to reflect your environment.
+
+== Overview of Steps
+
+The following steps are necessary to migrate the data directory.
+
+. Stop browser access via the web proxy server
+. Enable maintenance mode
+. Sync / remount your Data directory
+. Adjust ownCloud's configuration
+. Check files
+. Disable maintenance mode
+. Reenable browser access via the web proxy server
+
+Look at each section below for a detailed description.
+
+== Preparation
+
+=== Prevent User Access via the Browser
+
+To prevent any active user connections to your ownCloud instance, stop access to it via the web (proxy) server. Refer to the web (proxy) server description to find out how to do this.
+
+=== Check the datadirectory Settings
+
+When using a Dockerized ownCloud deployment::
++
+--
+Run the following command to check the current datadirectory setting of the container:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix-docker} config:system:get datadirectory
+----
+
+This should print out the path which defaults to `/mnt/data/files`.
+--
+
+When using a native deployment you want to migrate to a dockerized deployment::
++
+--
+Run the following command to check the current datadirectory setting of the native installation:
+
+[source,bash,subs="attributes+"]
+----
+sudo -uwww-data ./occ config:system:get datadirectory
+----
+
+This should print out the path which defaults to `/var/www/owncloud/data`.
+--
+
+=== Enable Maintenance Mode
+
+It is necessary to enable maintenance mode to avoid running cron jobs. To enable maintenance mode, run the following command. Use the respective command for the native installation you want to migrate.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix-docker} maintenance:mode --on
+----
+
+=== Database
+
+Back up your database by making a copy or an export. This way, you can always revert if something goes horribly wrong.
+
+== Data Directory
+
+Depending on the Setup, the `data` directory either needs to be copied or remounted.
+
+For small instances with limited data, copying is probably the best option. For anything with more user data, such as an existing NFS mount, remounting to a different location is preferable. If you have more user data that you are currently hosting locally, now might be a good time to switch to NFS.
+
+=== Sync to a new Location
+
+Please note that the target mount point is used intentionally as the Docker volume mount point for ease of handling. In this example, the source and target are on the same server and the source path is the ownCloud's default. Adapt accordingly to suit your needs.
+
+[source,bash]
+----
+sudo rsync -avz /var/www/owncloud/data <mount_point>/files
+----
+
+=== Mounting with NFS
+
+If the data directory is already part of an NFS mount point such as `/mnt/owncloud/data`, unmount it, remove the export, create a new export including the data directory and mount it to `<mount_point>/files`.
+
+IMPORTANT: Only mount the data directory from the source and not the full owncloud directory including the data directory.
+
+For more information follow the complete MySQL {mysql-string-replace-function-url}[REPLACE] command syntax.
+
+== Adjust the ownCloud Database Configuration
+
+CAUTION: Please do not copy and paste this example verbatim, or any of the others. They are just examples.
+
+{mariadb-docker-url}#connecting-to-mariadb-from-outside-the-container[Connect to your database, window=_blank] and enter the following command to select the ownCloud database: Adapt the database name if it is not named as shown:
+
+[source,sql]
+----
+use owncloud;
+----
+
+=== Update the oc_storages Table
+
+First print all the affected paths to be changed:
+
+[source,sql]
+----
+SELECT * FROM oc_storages WHERE id LIKE 'local::%';
+----
+
+Then update the database paths and adapt them accordingly. Please note that the internal default for a Dockerized ownCloud deployment is `mnt/data/files` unless otherwise defined:
+
+[source,sql]
+----
+START TRANSACTION;
+
+UPDATE oc_storages
+  SET id = REPLACE(
+    id,
+    '/var/www/owncloud/data',
+    '/mnt/data/files'
+  )
+  WHERE id LIKE 'local::%';
+
+# check with the select statement above
+# in case something went wrong
+# ROLLBACK;
+
+# otherwise use
+# COMMIT;
+----
+
+=== Update the oc_accounts Table
+
+Next to be updated is the `home` column in the `oc_accounts` table. This column contains the _absolute path_ for user folders, for example, `/var/www/owncloud/data/my_user`.
+
+First print all the affected path to be changed. The path without the user component is important for the next step:
+
+[source,sql]
+----
+SELECT * FROM oc_accounts Where home LIKE '%';
+----
+
+Then update the database paths and adapt them accordingly. Please note that the internal default for a Dockerized ownCloud deployment is `/mnt/data/files` unless otherwise defined:
+
+[source,sql]
+----
+START TRANSACTION;
+
+UPDATE oc_accounts
+  SET home = REPLACE(
+    home,
+    '/var/www/owncloud/data',
+    '/mnt/data/files'
+  )
+  WHERE home LIKE '/var/www/owncloud/data%';
+
+# check with the select statement above
+# in case something went wrong
+# ROLLBACK;
+
+# otherwise use
+# COMMIT;
+----
+
+=== Update the oc_jobs table
+
+The next area to check is the `oc_jobs` table. The logrotate process may have hard-coded a non-standard (or old) value for the data path. To check it, run the SQL query below and see if any results are returned. Note the use of the backslash notation required for proper escaping:
+
+[source,sql]
+----
+SELECT * FROM oc_jobs WHERE class LIKE 'OC\\\\Log\\\\Rotate%';
+----
+
+If any results are returned, run the SQL query below to update them, changing the `id` value as necessary.
+
+[source,sql]
+----
+START TRANSACTION;
+
+UPDATE oc_jobs 
+  SET argument = REPLACE(
+    argument,
+    '\\/var\\/www\\/owncloud\\/data\\/',
+    '\\/mnt\\/data\\/files\\/'
+  )
+  WHERE id = <id of the incorrect record>;
+
+# check with the select statement above
+# in case something went wrong
+# ROLLBACK;
+
+# otherwise use
+# COMMIT;
+----
+
+CAUTION: The old data path will be written with `\/`. Therefore you must add one, additional, backslash, like this: `\\/`.
+
+== Scan the Files
+
+This command checks all files from all users. Please note that this can take a while.
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix-docker} files:scan --all
+----
+
+== Disable Maintenance Mode
+
+To disable maintenance mode of your instance run the following command:
+
+[source,bash,subs="attributes+"]
+----
+{occ-command-example-prefix-docker} maintenance:mode --off
+----
+
+== Reenable Browser Access
+
+Follow the web proxies server description for how to enable access to the ownCloud instance.

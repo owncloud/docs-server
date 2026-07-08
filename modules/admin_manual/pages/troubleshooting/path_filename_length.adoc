@@ -10,7 +10,7 @@ Depending on the underlying filesystem of a mount point, the maximum length of a
 
 == Limitations
 
-See the {fs-limits-url}[comparison of file systems] for in depth details on various filesystem path and file name limitations.
+See the {fs-limits-url}[comparison of file systems, window=_blank] for in depth details on various filesystem path and file name limitations.
 
 NOTE: While a filesystem can handle the limits as described in the table below, applications like Explorer, Finder, the Shell or other apps may have issues handling these limits. See the special notes below the table.
 

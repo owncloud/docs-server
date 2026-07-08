@@ -17,11 +17,15 @@
 :shibboleth-xml-metadata-provider-url: https://shibboleth.atlassian.net/wiki/spaces/SHIB2/pages/2577072307/NativeSPMetadataProvider
 :shibboleth-nativespservicesso-url: https://shibboleth.atlassian.net/wiki/spaces/SHIB2/pages/2577072444/NativeSPServiceSSO
 
+== Introduction
+
+IMPORTANT: The Docker image does not provide the necessary modules for the embedded Apache web server. A customised image must be built for Shibboleth authentication.
+
+The following description is based on a standard installation and must be adapted to work with the Dockerfile in order to create the required image.
+
 == Preparation
 
-Before you can setup SAML 2.0 based Single Sign-On with
-{adfs-url}[Active Directory Federation Services (ADFS)]
-and mod-shib, ask your ADFS admin for the relevant server URLs. These are:
+Before you can setup SAML 2.0 based Single Sign-On with {adfs-url}[Active Directory Federation Services (ADFS)] and mod-shib, ask your ADFS admin for the relevant server URLs. These are:
 
 - The SAML 2.0 single sign-on service URL, e.g., `\https://<ADFS server FQDN>/ADFS/ls`
 - The IdP metadata URL, e.g., `\https://<ADFS server FQDN>/FederationMetadata/2007-06/FederationMetadata.xml`

@@ -1,0 +1,509 @@
+= Environment Variables
+:toc: right
+:description: This page provides a list of available environment variables.
+
+{description}
+
+- `OWNCLOUD_ACCESSLOG_LOCATION=/dev/stdout` +
+  Location of the access log.
+- `OWNCLOUD_ACCOUNTS_ENABLE_MEDIAL_SEARCH=` +
+  Allow medial search on user account properties (see xref:configuration/server/config_sample_php_parameters.adoc#allow-medial-search-on-user-account-properties[documentation]).
+- `OWNCLOUD_ACTIVITY_EXPIRE_DAYS=` +
+  Activity expiration in days (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-activity[documentation]).
+- `OWNCLOUD_ADMIN_AUDIT_GROUPS=` +
+  Restrict audit logging to specific groups. Comma-separated list of group names (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-admin-audit[documentation]).
+- `OWNCLOUD_ANTIVIRUS_AV_CMD_OPTIONS=` +
+  Command line options for the clamscan antivirus scanner (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-files-antivirus[documentation]).
+- `OWNCLOUD_ANTIVIRUS_AV_PATH=` +
+  Path to the clamscan binary in the container (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-files-antivirus[documentation]).
+- `OWNCLOUD_ADMIN_PASSWORD=admin` +
+  ownCloud admin password.
+- `OWNCLOUD_ADMIN_USERNAME=admin` +
+  ownCloud admin username.
+- `OWNCLOUD_ALLOW_SUBADMINS=` +
+  Enable or disable the subadmin (group admin) feature. Set to `true` to enable; unset leaves it disabled (ownCloud core default) (see xref:configuration/server/config_sample_php_parameters.adoc#allow-or-disallow-the-group-administrator-subadmin-feature[documentation]).
+- `OWNCLOUD_ALLOW_USER_TO_CHANGE_DISPLAY_NAME=` +
+  Allow or disallow users to change their display names (see xref:configuration/server/config_sample_php_parameters.adoc#allow-or-disallow-users-to-change-their-display-names[documentation]).
+- `OWNCLOUD_ALLOW_USER_TO_CHANGE_MAIL_ADDRESS=` +
+  Allow or disallow users to change their email addresses (see xref:configuration/server/config_sample_php_parameters.adoc#allow-or-disallow-users-to-change-their-email-addresses[documentation]).
+- `OWNCLOUD_APPS_DEPRECATED=` +
+  List of deprecated apps that must be removed (automatically) before performing an ownCloud upgrade to avoid upgrade issues.
+- `OWNCLOUD_APPS_DISABLE=` +
+  List of apps to disable on container startup.
+- `OWNCLOUD_APPS_ENABLE=$\{OWNCLOUD_APPS_INSTALL}` +
+  List of apps to enable on container startup.
+- `OWNCLOUD_APPS_INSTALL=` +
+  List of apps to install on container startup.
+- `OWNCLOUD_APPS_INSTALL_MAJOR=false` +
+  By default ownCloud will not install a new major version of an already installed app. To enforce major updates for apps this option needs to be set to `true`.
+- `OWNCLOUD_APPS_UNINSTALL=` +
+  List of apps to remove on container startup.
+- `OWNCLOUD_BACKGROUND_MODE=cron` +
+  Service to execute ownCloud background jobs. It is recommended to keep the default (see xref:configuration/server/background_jobs_configuration.adoc[documentation]).
+- `OWNCLOUD_BLACKLISTED_FILES=` +
+  Define blacklisted files (see xref:configuration/server/config_sample_php_parameters.adoc#define-blacklisted-files[documentation]).
+- `OWNCLOUD_BLACKLISTED_FILES_REGEX=` +
+  Define blacklisted files using regular expressions. Comma-separated list of regex patterns (see xref:configuration/server/config_sample_php_parameters.adoc#define-blacklisted-files[documentation]).
+- `OWNCLOUD_CACHE_CHUNK_GC_TTL=` +
+  Define the TTL for garbage collection (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-ttl-for-garbage-collection[documentation]).
+- `OWNCLOUD_CACHE_PATH=` +
+  Define the location of the cache folder (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-location-of-the-cache-folder[documentation]).
+- `OWNCLOUD_CHECK_FOR_WORKING_WELLKNOWN_SETUP=` +
+  Check for a .well-known setup (see xref:configuration/server/config_sample_php_parameters.adoc#check-for-a-well-known-setup[documentation]).
+- `OWNCLOUD_CIPHER=` +
+  Define the default cipher for encrypting files (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-default-cipher-for-encrypting-files[documentation]).
+- `OWNCLOUD_COLLABORA_GROUP=` +
+  Restrict access to Collabora/Richdocuments to a specific group. Only one group can be defined. Default is empty (no restriction) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-richdocuments[documentation]).
+- `OWNCLOUD_COMMENTS_MANAGER_FACTORY=` +
+  Define an alternative Comments Manager (see xref:configuration/server/config_sample_php_parameters.adoc#define-an-alternative-comments-manager[documentation]).
+- `OWNCLOUD_CORS_ALLOWED_DOMAINS=` +
+  Define global list of CORS domains (see xref:configuration/server/config_sample_php_parameters.adoc#define-global-list-of-cors-domains[documentation]).
+- `OWNCLOUD_CROND_ENABLED=true` +
+  Enable or disable the system cron service. Required for `OWNCLOUD_BACKGROUND_MODE=cron`.
+- `OWNCLOUD_CROND_SCHEDULE="*/1 * * * *"` +
+  Cron schedule to run ownCloud background jobs.
+- `OWNCLOUD_CRON_LOG=` +
+  Define logging if cron ran successfully (see xref:configuration/server/config_sample_php_parameters.adoc#define-logging-if-cron-ran-successfully[documentation]).
+- `OWNCLOUD_CSRF_DISABLED=` +
+  Enable or disable ownCloud’s built-in CSRF protection mechanism (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-ownclouds-built-in-csrf-protection-mechanism[documentation]).
+- `OWNCLOUD_CUSTOMCLIENT_ANDROID=` +
+  Override the Android client download URL shown in the first-run wizard (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-firstrunwizard[documentation]).
+- `OWNCLOUD_CUSTOMCLIENT_DESKTOP=` +
+  Override the desktop client download URL shown in the first-run wizard (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-firstrunwizard[documentation]).
+- `OWNCLOUD_CUSTOMCLIENT_IOS=` +
+  Override the iOS client download URL shown in the first-run wizard (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-firstrunwizard[documentation]).
+- `OWNCLOUD_DAV_CHUNK_BASE_DIR=` +
+  Define the DAV chunk base directory (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-dav-chunk-base-directory[documentation]).
+- `OWNCLOUD_DAV_ENABLE_ASYNC=` +
+  Enable or disable async DAV extensions (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-async-dav-extensions[documentation]).
+- `OWNCLOUD_DAV_PROPFIND_DEPTH_INFINITY=` +
+  Allow Depth: infinity PROPFIND requests (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-async-dav-extensions[documentation]).
+- `OWNCLOUD_DB_FAIL=true` +
+  Exit container if the database can't be reached during the startup.
+- `OWNCLOUD_DB_HOST=` +
+  Define the database server host name (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-database-server-host-name[documentation]).
+- `OWNCLOUD_DB_NAME=owncloud` +
+  Define the ownCloud database name (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-owncloud-database-name[documentation]).
+- `OWNCLOUD_DB_PASSWORD=` +
+  Define the password for the database user (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-password-for-the-database-user[documentation]).
+- `OWNCLOUD_DB_PREFIX=oc_` +
+  Define the prefix for the ownCloud tables in the database (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-prefix-for-the-owncloud-tables-in-the-database[documentation]).
+- `OWNCLOUD_DB_TIMEOUT=180` +
+  Time to wait for a successful connection to the database on container startup.
+- `OWNCLOUD_DB_PLATFORM=` +
+  Force a specific Doctrine DBAL platform class, e.g. for MariaDB compatibility (see xref:configuration/server/config_sample_php_parameters.adoc#identify-the-database-used-with-this-installation[documentation]).
+- `OWNCLOUD_DB_TYPE=sqlite` +
+  Identify the database used with this installation (see xref:configuration/server/config_sample_php_parameters.adoc#identify-the-database-used-with-this-installation[documentation]).
+- `OWNCLOUD_DB_USERNAME=` +
+  Define the ownCloud database user (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-owncloud-database-user[documentation]).
+- `OWNCLOUD_DEBUG=` +
+  Place this ownCloud instance into debugging mode (see xref:configuration/server/config_sample_php_parameters.adoc#place-this-owncloud-instance-into-debugging-mode[documentation]).
+- `OWNCLOUD_DEFAULT_APP=` +
+  Define the default app to open on user login (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-default-app-to-open-on-user-login[documentation]).
+- `OWNCLOUD_DEFAULT_LANGUAGE=en` +
+  Define the default language of your ownCloud instance (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-default-language-of-your-owncloud-instance[documentation]).
+- `OWNCLOUD_DOMAIN=localhost` +
+  Base domain used in `OWNCLOUD_OVERWRITE_CLI_URL` by default.
+- `OWNCLOUD_TRUSTED_DOMAINS=$\{OWNCLOUD_DOMAIN}` +
+  List of trusted domains to prevent host header poisoning (see xref:configuration/server/config_sample_php_parameters.adoc#define-list-of-trusted-domains-that-users-can-log-into[documentation]). Multiple domains need to be comma-separated.
+- `OWNCLOUD_ENABLED_PREVIEW_PROVIDERS=` +
+  Define preview providers (see xref:configuration/server/config_sample_php_parameters.adoc#define-preview-providers[documentation]).
+- `OWNCLOUD_ENABLE_AVATARS=` +
+  Enable or disable avatars or user profile photos (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-avatars-or-user-profile-photos[documentation]).
+- `OWNCLOUD_ENABLE_CERTIFICATE_MANAGEMENT=` +
+  Allow the configuration of system-wide trusted certificates (see xref:configuration/server/config_sample_php_parameters.adoc#allow-the-configuration-of-system-wide-trusted-certificates[documentation]).
+- `OWNCLOUD_ENABLE_PREVIEWS=` +
+  Enable preview generation (see xref:configuration/server/config_sample_php_parameters.adoc#enable-preview-generation[documentation]).
+- `OWNCLOUD_ENABLE_OIDC_REWRITE_URL=false` +
+  Rewrites OpenID Connect wellknown URL `.well-known/openid-configuration` to the ownCloud OIDC configuration endpoint (see xref:configuration/user/oidc/oidc.adoc#set-up-service-discovery[documentation]).
+- `OWNCLOUD_ENTRYPOINT_INITIALIZED=true` +
+  Enable or disable loading of files from `/etc/entrypoint.d`. It is recommended to keep the default.
+- `OWNCLOUD_ERRORLOG_LOCATION=/dev/stderr` +
+  Output location for the Apache error log.
+- `OWNCLOUD_EXCLUDED_DIRECTORIES=` +
+  Define excluded directories (see xref:configuration/server/config_sample_php_parameters.adoc#define-excluded-directories[documentation]).
+- `OWNCLOUD_EXCLUDED_DIRECTORIES_REGEX=` +
+  Define excluded directories using regular expressions. Comma-separated list of regex patterns (see xref:configuration/server/config_sample_php_parameters.adoc#define-excluded-directories[documentation]).
+- `OWNCLOUD_FILELOCKING_ENABLED=${OWNCLOUD_LOCKING_ENABLED:-true}` +
+  Enable transactional file locking (see xref:configuration/server/config_sample_php_parameters.adoc#enable-transactional-file-locking[documentation]).
+- `OWNCLOUD_FILELOCKING_TTL=` +
+  Define the TTL for file locking (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-ttl-for-file-locking[documentation]).
+- `OWNCLOUD_FILESYSTEM_CACHE_READONLY=` +
+  Prevent cache changes due to changes in the filesystem (see xref:configuration/server/config_sample_php_parameters.adoc#prevent-cache-changes-due-to-changes-in-the-filesystem[documentation]).
+- `OWNCLOUD_FILESYSTEM_CHECK_CHANGES=` +
+  Define how often filesystem changes are detected (see xref:configuration/server/config_sample_php_parameters.adoc#define-how-often-filesystem-changes-are-detected[documentation]).
+- `OWNCLOUD_FILESYSTEM_MAX_MOUNTPOINT_MOVE_ATTEMPTS=` +
+  Maximum number of failed mountpoint rename attempts before giving up (see xref:configuration/server/config_sample_php_parameters.adoc#define-how-often-filesystem-changes-are-detected[documentation]).
+- `OWNCLOUD_FILES_EXTERNAL_ALLOW_NEW_LOCAL=$\{OWNCLOUD_ALLOW_EXTERNAL_LOCAL_STORAGE}` +
+  Enable or disable the files_external local mount option (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-the-files_external-local-mount-option[documentation]).
+- `OWNCLOUD_GRACE_PERIOD_DEMO_KEY_LINK=` +
+  Override the link shown in the grace period popup (see xref:installation/installing_with_docker.adoc#enterprise-license-keys[documentation]).
+- `OWNCLOUD_GRACE_PERIOD_DEMO_KEY_SHOW_POPUP=` +
+  Show or hide the grace period demo key popup (see xref:installation/installing_with_docker.adoc#enterprise-license-keys[documentation]).
+- `OWNCLOUD_FORWARDED_FOR_HEADERS=` +
+  Define forwarded_for_headers (see xref:configuration/server/config_sample_php_parameters.adoc#define-forwarded_for_headers[documentation]).
+- `OWNCLOUD_GROUPS_ENABLE_MEDIAL_SEARCH=` +
+  Allow medial search on group IDs (see xref:configuration/server/config_sample_php_parameters.adoc#allow-medial-search-on-user-account-properties[documentation]).
+- `OWNCLOUD_HASHING_COST=` +
+  Define the hashing cost (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-hashing-cost[documentation]).
+- `OWNCLOUD_HAS_INTERNET_CONNECTION=` +
+  Check for an internet connection (see xref:configuration/server/config_sample_php_parameters.adoc#check-for-an-internet-connection[documentation]).
+- `OWNCLOUD_INTERNET_CONNECTIVITY_DETECT_URL=` +
+  URL used to detect internet connectivity (see xref:configuration/server/config_sample_php_parameters.adoc#check-for-an-internet-connection[documentation]).
+- `OWNCLOUD_HTACCESS_REWRITE_BASE=$\{OWNCLOUD_SUB_URL}` +
+  Define clean URLs without /index.php (see xref:configuration/server/config_sample_php_parameters.adoc#define-clean-urls-without-index-php[documentation]).
+- `OWNCLOUD_HTTP_COOKIE_SAMESITE=` +
+  Define how to relax same site cookie settings (see xref:configuration/server/config_sample_php_parameters.adoc#define-how-to-relax-same-site-cookie-settings[documentation]).
+- `OWNCLOUD_INTEGRITY_EXCLUDED_FILES=` +
+  Define files that are excluded from integrity checking (see xref:configuration/server/config_sample_php_parameters.adoc#define-files-that-are-excluded-from-integrity-checking[documentation]).
+- `OWNCLOUD_INTEGRITY_IGNORE_MISSING_APP_SIGNATURE=` +
+  Define apps or themes that are excluded from integrity checking (see xref:configuration/server/config_sample_php_parameters.adoc#define-apps-or-themes-that-are-excluded-from-integrity-checking[documentation]).
+- `OWNCLOUD_LDAP_IGNORE_NAMING_RULES=` +
+  Ignore LDAP naming rules (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-ldap[documentation]).
+- `OWNCLOUD_LICENSE_KEY=` +
+  ownCloud Enterprise License Key (see xref:installation/installing_with_docker.adoc#enterprise-license-keys[documentation]).
+- `OWNCLOUD_LOGIN_ALTERNATIVES=` +
+  Define additional login buttons on the logon screen (see xref:configuration/server/config_sample_php_parameters.adoc#define-additional-login-buttons-on-the-logon-screen[documentation]).
+- `OWNCLOUD_LOGIN_POLICY_ORDER=` +
+  Ordered list of login policy class names. Comma-separated (see xref:configuration/server/config_sample_php_parameters.adoc#order-of-login-policies[documentation]).
+- `OWNCLOUD_LOG_CONDITIONS=` +
+  Define conditional logging rules as a JSON-encoded array of condition objects, e.g. `[{"apps":["files_external"],"loglevel":0}]` (see xref:configuration/server/config_sample_php_parameters.adoc#define-log-conditions[documentation]).
+- `OWNCLOUD_LOG_DATE_FORMAT=` +
+  Define the log date format (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-log-date-format[documentation]).
+- `OWNCLOUD_LOG_FILE=$\{OWNCLOUD_VOLUME_FILES}/owncloud.log` +
+  Define the log path (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-log-path[documentation]).
+- `OWNCLOUD_LOG_LEVEL=` +
+  Define the log level (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-log-level[documentation]).
+- `OWNCLOUD_LOG_ROTATE_SIZE=$\{OWNCLOUD_LOGSIZE}` +
+  Define the maximum log rotation file size (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-log-rotation-file-size[documentation]).
+- `OWNCLOUD_LOG_TIMEZONE=` +
+  Define the log timezone (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-log-timezone[documentation]).
+- `OWNCLOUD_LOST_PASSWORD_LINK=` +
+  Define a custom link to reset passwords (see xref:configuration/server/config_sample_php_parameters.adoc#define-a-custom-link-to-reset-passwords[documentation]).
+- `OWNCLOUD_MAIL_DOMAIN=` +
+  Define the email RETURN address (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-email-return-address[documentation]).
+- `OWNCLOUD_MAIL_FROM_ADDRESS=` +
+  Define the email FROM address (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-email-from-address[documentation]).
+- `OWNCLOUD_MAIL_REMOVE_SENDER_DISPLAY_NAME=` +
+  Strip the display name from the From header in sharing notification emails (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-email-from-address[documentation]).
+- `OWNCLOUD_MAIL_SMTP_AUTH=` +
+  Define the SMTP authentication (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-smtp-authentication[documentation]).
+- `OWNCLOUD_MAIL_SMTP_AUTH_TYPE=` +
+  Define the SMTP authentication type (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-smtp-authentication-type[documentation]).
+- `OWNCLOUD_MAIL_SMTP_DEBUG=` +
+  Enable or disable SMTP class debugging (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-smtp-class-debugging[documentation]).
+- `OWNCLOUD_MAIL_SMTP_HOST=` +
+  Define the IP address of your mail server host (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-ip-address-of-your-mail-server-host[documentation]).
+- `OWNCLOUD_MAIL_SMTP_MODE=` +
+  Define the mode for sending an email (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-mode-for-sending-an-email[documentation]).
+- `OWNCLOUD_MAIL_SMTP_NAME=` +
+  Define the SMTP authentication username (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-smtp-authentication-username[documentation]).
+- `OWNCLOUD_MAIL_SMTP_PASSWORD=` +
+  Define the SMTP authentication password (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-smtp-authentication-password[documentation]).
+- `OWNCLOUD_MAIL_SMTP_PORT=` +
+  Define the port for sending an email (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-port-for-sending-an-email[documentation]).
+- `OWNCLOUD_MAIL_SMTP_SECURE=` +
+  Define the SMTP security style (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-smtp-security-style[documentation]).
+- `OWNCLOUD_MAIL_SMTP_TIMEOUT=` +
+  Define the SMTP server timeout (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-smtp-server-timeout[documentation]).
+- `OWNCLOUD_MAINTENANCE=$\{OWNCLOUD_MAINTENANCE_MODE}` +
+  Enable maintenance mode to disable ownCloud (see xref:configuration/server/config_sample_php_parameters.adoc#enable-maintenance-mode-to-disable-owncloud[documentation]).
+- `OWNCLOUD_MARKETPLACE_CA=` +
+  Developer option to connect to Marketplace testing instances.
+- `OWNCLOUD_MARKETPLACE_KEY=$\{OWNCLOUD_MARKETPLACE_APIKEY}` +
+  Developer option to get access to unreleased Apps in your Marketplace account.
+- `OWNCLOUD_MEMCACHED_ENABLED=false` +
+  Enable memory caching via memcached (see xref:configuration/server/config_sample_php_parameters.adoc#memory-caching-backend-for-distributed-data[documentation]).
+- `OWNCLOUD_MEMCACHED_HOST=memcached` +
+  Defines the hosts for memcached (see xref:configuration/server/config_sample_php_parameters.adoc#define-server-details-for-memcached-servers-to-use-for-memory-caching[documentation]).
+- `OWNCLOUD_MEMCACHED_OPTIONS=` +
+  Define connection options for memcached (see xref:configuration/server/config_sample_php_parameters.adoc#define-connection-options-for-memcached[documentation]).
+- `OWNCLOUD_MEMCACHED_PORT=11211` +
+  Defines the ports for memcached (see xref:configuration/server/config_sample_php_parameters.adoc#define-server-details-for-memcached-servers-to-use-for-memory-caching[documentation]).
+- `OWNCLOUD_MEMCACHED_STARTUP_TIMEOUT=180` +
+  Time to wait for a successful connection to the memcached service on container startup.
+- `OWNCLOUD_MEMCACHE_LOCAL=${OWNCLOUD_CACHING_CLASS:-\\OC\\Memcache\\APCu}` +
+  Memory caching backend for locally stored data (see xref:configuration/server/config_sample_php_parameters.adoc#memory-caching-backend-for-locally-stored-data[documentation]).
+- `OWNCLOUD_MEMCACHE_LOCKING=` +
+  Define the memory caching backend for file locking (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-memory-caching-backend-for-file-locking[documentation]).
+- `OWNCLOUD_METRICS_SHARED_SECRET=` +
+  Secret required to access the Metrics dashboard (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-metrics[documentation]).
+- `OWNCLOUD_MAX_EXECUTION_TIME=3600` +
+  Sets PHP option `max_execution_time`. It is recommended to keep the default (see xref:configuration/files/big_file_upload_configuration.adoc[documentation]).
+- `OWNCLOUD_MAX_FILESIZE_ANIMATED_GIFS_PUBLIC_SHARING=` +
+  Define the maximum filesize for animated GIFs (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-filesize-for-animated-gifs[documentation]).
+- `OWNCLOUD_MAX_INPUT_TIME=3600` +
+  Sets PHP option `max_input_time`. It is recommended to keep the default (see xref:configuration/files/big_file_upload_configuration.adoc[documentation]).
+- `OWNCLOUD_MAX_UPLOAD=20G` +
+  Sets PHP option `upload_max_filesize` and `post_max_size`. It is recommended to keep the default (see xref:configuration/files/big_file_upload_configuration.adoc[documentation]).
+- `OWNCLOUD_MEMORY_LIMIT=512M` +
+  Sets PHP option `memory_limit`. It is recommended to keep the default (see xref:configuration/files/big_file_upload_configuration.adoc[documentation]).
+- `OWNCLOUD_MINIMUM_SUPPORTED_DESKTOP_VERSION=` +
+  Define the minimum supported ownCloud desktop client version (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-minimum-supported-owncloud-desktop-client-version[documentation]).
+- `OWNCLOUD_MYSQL_UTF8MB4=$\{owncloud_utf8mb4_enabled}` +
+  Define MySQL 3/4 byte character handling (see xref:configuration/server/config_sample_php_parameters.adoc#define-mysql-34-byte-character-handling[documentation]).
+- `OWNCLOUD_OBJECTSTORE_BUCKET=owncloud` +
+  Bucket name to store data.
+- `OWNCLOUD_OBJECTSTORE_CLASS=OCA\Files_Primary_S3\S3Storage` +
+  Class to use for the objectstore. It is recommended to keep the default (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OBJECTSTORE_ENABLED=false` +
+  Enables or disables the objectstore configuration.
+- `OWNCLOUD_OBJECTSTORE_ENDPOINT=https://s3.$\{OWNCLOUD_OBJECTSTORE_REGION}.amazonaws.com` +
+  Endpoint of the objectstore provider (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OBJECTSTORE_KEY=` +
+  Access key for the objectstore (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OBJECTSTORE_PATHSTYLE=false` +
+  Enables or disables path style for the objectstore (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OBJECTSTORE_REGION=us-east-1` +
+  Objectstore region to use (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OBJECTSTORE_SECRET=` +
+  Secret key for the objectstore (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OBJECTSTORE_VERSION=2006-03-01` +
+  Objectstore version to use (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OBJECTSTORE_PART_SIZE=5242880` +
+  Part size, in bytes, applies to uploads between ownCloud and S3 (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OBJECTSTORE_CONCURRENCY=3` +
+  Maximum number of concurrent UploadPart operations allowed during the multipart upload (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OBJECTSTORE_AVAILABLE_STORAGE=` +
+  Indicates available storage size in the objectstore in bytes (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OPENSSL_CONFIG=` +
+  Path to a custom `openssl.cnf` file, e.g. when using a custom PKI or CA in the container (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-default-cipher-for-encrypting-files[documentation]).
+- `OWNCLOUD_OPERATION_MODE=` +
+  Define ownCloud operation modes (see xref:configuration/server/config_sample_php_parameters.adoc#define-owncloud-operation-modes[documentation]).
+- `OWNCLOUD_OVERWRITE_CLI_URL=$\{OWNCLOUD_PROTOCOL}://$\{OWNCLOUD_DOMAIN}$\{OWNCLOUD_SUB_URL}` +
+  Override cli URL (see xref:configuration/server/config_sample_php_parameters.adoc#override-cli-url[documentation]).
+- `OWNCLOUD_OVERWRITE_COND_ADDR=` +
+  Override condition for the remote IP address with a regular expression (see xref:configuration/server/config_sample_php_parameters.adoc#override-condition-for-the-remote-ip-address-with-a-regular-expression[documentation]).
+- `OWNCLOUD_OVERWRITE_HOST=` +
+  Override automatic proxy detection (see xref:configuration/server/config_sample_php_parameters.adoc#override-automatic-proxy-detection[documentation]).
+- `OWNCLOUD_OVERWRITE_PROTOCOL=` +
+  Override protocol (http/https) usage (see xref:configuration/server/config_sample_php_parameters.adoc#override-protocol-httphttps-usage[documentation]).
+- `OWNCLOUD_OVERWRITE_WEBROOT=` +
+  Override ownCloud's webroot (see xref:configuration/server/config_sample_php_parameters.adoc#override-ownclouds-webroot[documentation]).
+- `OWNCLOUD_PDF_VIEWER_ENABLE_SCRIPTING=` +
+  Allow JavaScript execution in PDF files. Security risk — only enable if required (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-files-pdf-viewer[documentation]).
+- `OWNCLOUD_PART_FILE_IN_STORAGE=` +
+  Define where part files are located (see xref:configuration/server/config_sample_php_parameters.adoc#define-where-part-files-are-located[documentation]).
+- `OWNCLOUD_POLLINTERVAL=` +
+  Suggested client polling interval in milliseconds (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-suggested-poll-interval-for-clients[documentation]).
+- `OWNCLOUD_POST_CRONJOB_PATH=/etc/post_cronjob.d` +
+  Path to custom scripts that need to be executed after a cron run.
+- `OWNCLOUD_POST_INSTALL_PATH=/etc/post_install.d` +
+  Path to custom scripts that need to be executed after an ownCloud installation command.
+- `OWNCLOUD_POST_SERVER_PATH=/etc/post_server.d` +
+  Path to custom scripts that need to be executed after an ownCloud server startup.
+- `OWNCLOUD_PREVIEW_JPEG_IMAGE_DISPLAY_QUALITY=` +
+  JPEG preview display quality from 1 to 100 (`-1` uses the PHP default of ~75%) (see xref:configuration/server/config_sample_php_parameters.adoc#enable-preview-generation[documentation]).
+- `OWNCLOUD_PREVIEW_LIBREOFFICE_PATH=` +
+  Define the custom path for the LibreOffice / OpenOffice binary (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-custom-path-for-the-libreoffice-openoffice-binary[documentation]).
+- `OWNCLOUD_PREVIEW_MAX_DIMENSIONS=` +
+  Define the maximum dimensions of the original image for preview generation (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-dimensions-of-the-original-image-for-preview-generation[documentation]).
+- `OWNCLOUD_PREVIEW_MAX_FILESIZE_IMAGE=` +
+  Define the maximum preview filesize limit (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-preview-filesize-limit[documentation]).
+- `OWNCLOUD_PREVIEW_MAX_SCALE_FACTOR=` +
+  Define the maximum preview scale factor (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-preview-scale-factor[documentation]).
+- `OWNCLOUD_PREVIEW_MAX_X=` +
+  Define the maximum x-axis width for previews (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-x-axis-width-for-previews[documentation]).
+- `OWNCLOUD_PREVIEW_MAX_Y=` +
+  Define the maximum y-axis width for previews (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-y-axis-width-for-previews[documentation]).
+- `OWNCLOUD_PREVIEW_OFFICE_CL_PARAMETERS=` +
+  Define additional arguments for LibreOffice / OpenOffice (see xref:configuration/server/config_sample_php_parameters.adoc#define-additional-arguments-for-libreoffice-openoffice[documentation]).
+- `OWNCLOUD_PRE_CRONJOB_PATH=/etc/pre_cronjob.d` +
+  Path to custom scripts that need to be executed before a cron run.
+- `OWNCLOUD_PRE_INSTALL_PATH=/etc/pre_install.d` +
+  Path to custom scripts that need to be executed before an ownCloud installation command.
+- `OWNCLOUD_PRE_SERVER_PATH=/etc/pre_server.d` +
+  Path to custom scripts that need to be executed before an ownCloud server startup.
+- `OWNCLOUD_PROTOCOL=http` +
+  Protocol used in `OWNCLOUD_OVERWRITE_CLI_URL` by default.
+- `OWNCLOUD_PROXY_IGNORE=` +
+  Comma-separated list of hostnames that bypass the proxy (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-url-of-your-proxy-server[documentation]).
+- `OWNCLOUD_PROXY=` +
+  Define the URL of your proxy server (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-url-of-your-proxy-server[documentation]).
+- `OWNCLOUD_PROXY_USERPWD=` +
+  Define proxy authentication (see xref:configuration/server/config_sample_php_parameters.adoc#define-proxy-authentication[documentation]).
+- `OWNCLOUD_QUOTA_INCLUDE_EXTERNAL_STORAGE=` +
+  Define whether to include external storage in quota calculation (see xref:configuration/server/config_sample_php_parameters.adoc#define-whether-to-include-external-storage-in-quota-calculation[documentation]).
+- `OWNCLOUD_REDIS_DB=` +
+  Define Redis connection details. Sets the dbindex (see xref:configuration/server/config_sample_php_parameters.adoc#define-redis-connection-details[documentation]).
+- `OWNCLOUD_REDIS_ENABLED=false` +
+  Sets memcache to Redis (see xref:configuration/server/config_sample_php_parameters.adoc#memory-caching-backend-for-distributed-data[documentation]). If sessions need to be stored in redis as well, you must also set `OWNCLOUD_SESSION_SAVE_HANDLER=redis`.
+- `OWNCLOUD_REDIS_FAILOVER_MODE=` +
+  Sets redis failover mode (see xref:configuration/server/config_sample_php_parameters.adoc#define-redis-cluster-connection-details[documentation]). Possible values: `FAILOVER_NONE` for `\RedisCluster::FAILOVER_NONE`, `FAILOVER_ERROR` for `\RedisCluster::FAILOVER_ERROR` or `FAILOVER_DISTRIBUTE` for `\RedisCluster::FAILOVER_DISTRIBUTE`.
+- `OWNCLOUD_REDIS_HOST=redis` +
+  Sets redis host (see xref:configuration/server/config_sample_php_parameters.adoc#define-redis-connection-details[documentation]).
+- `OWNCLOUD_REDIS_PASSWORD=` +
+  Set redis password (see xref:configuration/server/config_sample_php_parameters.adoc#define-redis-connection-details[documentation]).
+- `OWNCLOUD_REDIS_PORT=6379` +
+  Set redis port (see xref:configuration/server/config_sample_php_parameters.adoc#define-redis-connection-details[documentation]).
+- `OWNCLOUD_REDIS_READ_TIMEOUT=` +
+  Sets redis read timeout (see xref:configuration/server/config_sample_php_parameters.adoc#define-redis-cluster-connection-details[documentation]).
+- `OWNCLOUD_REDIS_SEEDS=` +
+  Sets the redis cluster servers (see xref:configuration/server/config_sample_php_parameters.adoc#define-redis-cluster-connection-details[documentation]).
+- `OWNCLOUD_REDIS_SESSION_LOCKING_ENABLED=1` +
+  Sets PHP option `redis.session.locking_enabled` if `OWNCLOUD_SESSION_SAVE_HANDLER=redis`.
+- `OWNCLOUD_REDIS_SESSION_LOCK_RETRIES=750` +
+  Sets PHP option `redis.session.lock_retries` if `OWNCLOUD_SESSION_SAVE_HANDLER=redis`.
+- `OWNCLOUD_REDIS_SESSION_LOCK_WAIT_TIME=20000` +
+  Sets PHP option `redis.session.lock_wait_time` if `OWNCLOUD_SESSION_SAVE_HANDLER=redis`.
+- `OWNCLOUD_REDIS_STARTUP_TIMEOUT=180` +
+  Time to wait for a successful connection to the redis service on container startup.
+- `OWNCLOUD_REDIS_TIMEOUT=` +
+  Sets the redis timeout value (see xref:configuration/server/config_sample_php_parameters.adoc#define-redis-cluster-connection-details[documentation]).
+- `OWNCLOUD_REDIS_TLS_ALLOW_SELF_SIGNED=` +
+  Allow self-signed certificates on the Redis server (`true`/`false`) (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REDIS_TLS_CAFILE=` +
+  Path to CA certificate file for TLS-secured Redis connections (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REDIS_TLS_CAPATH=` +
+  Directory containing CA certificates for TLS-secured Redis connections (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REDIS_TLS_CIPHERS=` +
+  OpenSSL cipher list for Redis TLS connections (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REDIS_TLS_LOCAL_CERT=` +
+  Path to client certificate file for mutual TLS to Redis (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REDIS_TLS_LOCAL_PK=` +
+  Path to client private key file for mutual TLS to Redis (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REDIS_TLS_PASSPHRASE=` +
+  Passphrase for an encrypted Redis client private key (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REDIS_TLS_PEER_NAME=` +
+  Expected hostname in the Redis server certificate, overrides the connection host for SNI (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REDIS_TLS_VERIFY_PEER=` +
+  Validate the Redis server certificate against the CA (`true`/`false`) (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REDIS_TLS_VERIFY_PEER_NAME=` +
+  Validate that the Redis server certificate CN/SAN matches the peer name (`true`/`false`) (see the https://github.com/phpredis/phpredis[phpredis docs]).
+- `OWNCLOUD_REMEMBER_LOGIN_COOKIE_LIFETIME=` +
+  Define the lifetime of the remember-login cookie (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-lifetime-of-the-remember-login-cookie[documentation]).
+- `OWNCLOUD_SAVE_VERSION_METADATA=` +
+  Enable extended version metadata (see xref:configuration/files/file_versioning.adoc#extended-version-metadata[description] and xref:configuration/server/config_sample_php_parameters.adoc#save-additional-metadata-for-versions[documentation]).
+- `OWNCLOUD_SECRET=` +
+  Define ownCloud's internal secret (see xref:configuration/server/config_sample_php_parameters.adoc#define-ownclouds-internal-secret[documentation]).
+- `OWNCLOUD_SESSION_KEEPALIVE=` +
+  Enable or disable session keep-alive when a user is logged in to the Web UI (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-session-keep-alive-when-a-user-is-logged-in-to-the-web-ui[documentation]).
+- `OWNCLOUD_SESSION_LIFETIME=` +
+  Define the lifetime of a session after inactivity (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-lifetime-of-a-session-after-inactivity[documentation]).
+- `OWNCLOUD_SESSION_FORCED_LOGOUT_TIMEOUT=` +
+  Force the user to get logged out after the specified number of seconds when the tab or browser gets closed. Please read the documentation carefully before changing this option (see xref:configuration/server/config_sample_php_parameters.adoc#enable-to-force-user-logout[documentation]).
+- `OWNCLOUD_SESSION_SAVE_HANDLER=files` +
+  Sets PHP option `session.save_handler`.
+- `OWNCLOUD_DEFAULT_SOCKET_TIMEOUT=60` +
+  Sets PHP option `default_socket_timeout`.
+- `OWNCLOUD_SESSION_SAVE_PATH=$\{OWNCLOUD_VOLUME_SESSIONS}` +
+  Sets the PHP option `session.save_path`. If `OWNCLOUD_SESSION_SAVE_HANDLER=redis` is used, this must be set to a proper connection URL including authentication parameters if required by the redis server. It usually follows the following scheme: `tcp://IPADDRESS:PORT?auth=REDISPASSWORD`.
+- `OWNCLOUD_SHARE_FOLDER=` +
+  Define a default folder for shared files and folders other than root (see xref:configuration/server/config_sample_php_parameters.adoc#define-a-default-folder-for-shared-files-and-folders-other-than-root[documentation]).
+- `OWNCLOUD_SHARING_FEDERATION_ALLOW_HTTP_FALLBACK=` +
+  Allow schema fallback for federated sharing servers (see xref:configuration/server/config_sample_php_parameters.adoc#allow-schema-fallback-for-federated-sharing-servers[documentation]).
+- `OWNCLOUD_SHARING_MANAGER_FACTORY=` +
+  Define an alternative Share Provider (see xref:configuration/server/config_sample_php_parameters.adoc#define-an-alternative-share-provider[documentation]).
+- `OWNCLOUD_SHARING_SHOW_PUBLIC_LINK_QUICK_ACTION=` +
+  Show a quick-action button for creating public links in the file list (see xref:configuration/server/config_sample_php_parameters.adoc#show-a-quick-action-for-the-public-link-creation[documentation]).
+- `OWNCLOUD_SHOW_SERVER_HOSTNAME=` +
+  Show or hide the server hostname in status.php (see xref:configuration/server/config_sample_php_parameters.adoc#show-or-hide-the-server-hostname-in-status-php[documentation]).
+- `OWNCLOUD_SINGLEUSER=` +
+  Enable or disable single user mode (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-single-user-mode[documentation]).
+- `OWNCLOUD_SKELETON_DIRECTORY=` +
+  Define the directory where the skeleton files are located (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-directory-where-the-skeleton-files-are-located[documentation]).
+- `OWNCLOUD_SKIP_CHMOD=false` +
+  Enable or disable automatic file permissions correction on container startup.
+- `OWNCLOUD_SKIP_CHOWN=false` +
+  Enable or disable automatic file ownership correction on container startup.
+- `OWNCLOUD_SMB_LOGGING_ENABLE=` +
+  Enable or disable debug logging for SMB access (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-debug-logging-for-smb-access[documentation]).
+- `OWNCLOUD_SQLITE_JOURNAL_MODE=` +
+  Define sqlite3 journal mode (see xref:configuration/server/config_sample_php_parameters.adoc#define-sqlite3-journal-mode[documentation]).
+- `OWNCLOUD_STRICT_LOGIN_ENFORCED=` +
+  Only validate the exact login name entered by the user, not alternative formats (see xref:configuration/server/config_sample_php_parameters.adoc#enforce-a-strict-login-check-with-the-user-backend[documentation]).
+- `OWNCLOUD_SUB_URL=/` +
+  URL path if ownCloud is deployed to a URL sub-path of a domain.
+- `OWNCLOUD_SYSTEMTAGS_MANAGER_FACTORY=` +
+  Define an alternative System Tags Manager (see xref:configuration/server/config_sample_php_parameters.adoc#define-an-alternative-system-tags-manager[documentation]).
+- `OWNCLOUD_TELEMETRY_ENABLED=` +
+  Send daily telemetry reports (Enterprise only) (see xref:configuration/server/config_sample_php_parameters.adoc#enable-sending-telemetry-reports-for-enterprise-customers[documentation]).
+- `OWNCLOUD_TEMP_DIRECTORY=` +
+  Define the location for temporary files (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-location-for-temporary-files[documentation]).
+- `OWNCLOUD_TOKEN_AUTH_ENFORCED=` +
+  Enforce token only authentication for apps and clients connecting to ownCloud (see xref:configuration/server/config_sample_php_parameters.adoc#enforce-token-only-authentication-for-apps-and-clients-connecting-to-owncloud[documentation]).
+- `OWNCLOUD_TRASHBIN_SKIP_DIRECTORIES=` +
+  Comma-separated list of directory names that bypass the trash bin (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-trashbin-retention-obligation[documentation]).
+- `OWNCLOUD_TRASHBIN_SKIP_EXTENSIONS=` +
+  Comma-separated list of file extensions that bypass the trash bin (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-trashbin-retention-obligation[documentation]).
+- `OWNCLOUD_TRASHBIN_SKIP_SIZE_THRESHOLD=` +
+  Files larger than this size bypass the trash bin (e.g. `1GB`) (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-trashbin-retention-obligation[documentation]).
+- `OWNCLOUD_TRASHBIN_PURGE_LIMIT=` +
+  Define the trashbin purge limit (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-trashbin-purge-limit[documentation]).
+- `OWNCLOUD_TRASHBIN_RETENTION_OBLIGATION=` +
+  Define the trashbin retention obligation (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-trashbin-retention-obligation[documentation]).
+- `OWNCLOUD_TRUSTED_PROXIES=` +
+  Define list of trusted proxy servers (see xref:configuration/server/config_sample_php_parameters.adoc#define-list-of-trusted-proxy-servers[documentation]).
+- `OWNCLOUD_UPDATER_SERVER_URL=` +
+  Define the updatechecker URL (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-updatechecker-url[documentation]).
+- `OWNCLOUD_UPDATE_CHECKER=` +
+  Enable or disable updatechecker (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-updatechecker[documentation]).
+- `OWNCLOUD_UPGRADE_AUTOMATIC_APP_UPDATES=` +
+  Define whether or not to enable automatic update of market apps (see xref:configuration/server/config_sample_php_parameters.adoc#define-whether-or-not-to-enable-automatic-update-of-market-apps[documentation]).
+- `OWNCLOUD_USE_RELATIVE_DOMAIN_NAME=` +
+  Use only the short hostname (no FQDN) in `status.php` (see xref:configuration/server/config_sample_php_parameters.adoc#show-or-hide-the-server-hostname-in-status-php[documentation]).
+- `OWNCLOUD_USER_LDAP_ENABLE_MEDIAL_SEARCH=` +
+  Enable medial search in the LDAP user backend (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-ldap[documentation]).
+- `OWNCLOUD_USER_SEARCH_MIN_LENGTH=` +
+  Define minimum characters entered before a search returns results (see xref:configuration/server/config_sample_php_parameters.adoc#define-minimum-characters-entered-before-a-search-returns-results[documentation]).
+- `OWNCLOUD_WEB_BASEURL=` +
+  Base URL for the ownCloud Web UI (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-web-base-url[documentation]).
+- `OWNCLOUD_WEB_REWRITE_LINKS=` +
+  Redirect public/private links to the ownCloud Web UI (see xref:configuration/server/config_sample_php_parameters.adoc#define-rewrite-private-and-public-links[documentation]).
+- `OWNCLOUD_WND_ACTIVITY_REGISTER_EXTENSION=` +
+  Register the Windows Network Drive app with the Activity app to report what `wnd:process-queue` is doing (`true`/`false`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_ACTIVITY_SEND_TO_SHAREES=` +
+  Send activity notifications to sharees of Windows Network Drive files and folders; requires `OWNCLOUD_WND_ACTIVITY_REGISTER_EXTENSION` (`true`/`false`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_CONNECTOR_OPTS_TIMEOUT=` +
+  Timeout in milliseconds applied to all Windows Network Drive backend operations and connections (default `20000`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_ERROR_CODES_PASSWORD_RESET=` +
+  Comma-separated list of error codes that trigger a password reset for Windows Network Drive (default `13` = access denied); empty disables it (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_FILE_INFO_PARSE_ATTRS_MODE=` +
+  How Windows Network Drive evaluates file attributes: `none`, `stat` (default) or `getxattr` (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_GROUP_MEMBERSHIP_CHECK_USER_FIRST=` +
+  Make the Windows Network Drive group membership component assume an ACL entry is a user and check users first (`true`/`false`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_IN_MEMORY_NOTIFIER_ENABLE=` +
+  Enable the in-memory notifier so Windows Network Drive storages reset passwords on detecting a wrong password (`true`/`false`, default `true`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_LISTEN_EVENTS_SMB_ACL=` +
+  Listen to events from the `smb_acl` app to update Windows Network Drive storages when an ACL changes (`true`/`false`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_LISTEN_RECONNECT_AFTER_TIME=` +
+  Interval in seconds after which the Windows Network Drive listener reconnects to the database to avoid crashes from idle connections (default `28800`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_LOGGING_ENABLE=` +
+  Enable additional debug logging for the Windows Network Drive app (`true`/`false`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND_PERMISSION_MANAGER_CACHE_SIZE=` +
+  Maximum number of items in the Windows Network Drive permission manager per-request cache (default `512`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND2_CACHE_WRAPPER_NORMALIZE=` +
+  Probe both NFC/NFD UTF-8 forms in the Windows Network Drive collaborative cache wrapper, needed for macOS HFS+ mounts (`true`/`false`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WND2_CACHE_WRAPPER_TTL=` +
+  TTL in seconds for the Windows Network Drive collaborative cache wrapper (default `1800`); use a negative value to disable (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-windows-network-drive-wnd[documentation]).
+- `OWNCLOUD_WORKFLOW_RETENTION_ENGINE=` +
+  Retention engine for the workflow/tagging app: `tagbased` (default) or `userbased` (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-workflow-tagging[documentation]).
+- `OWNCLOUD_WOPI_BUSINESS_FLOW_ENABLED=` +
+  Enable the Microsoft Office 365 business flow for WOPI (`yes`/`no`) (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-microsoft-office-online-wopi[documentation]).
+- `OWNCLOUD_WOPI_GROUP=` +
+  Restrict Microsoft Office Online access to a specific group (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-microsoft-office-online-wopi[documentation]).
+- `OWNCLOUD_WOPI_OFFICE_ONLINE_SERVER=` +
+  URL of the Microsoft Office Online server (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-microsoft-office-online-wopi[documentation]).
+- `OWNCLOUD_WOPI_PROXY_URL=` +
+  Business proxy URL for Microsoft Office 365 (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-microsoft-office-online-wopi[documentation]).
+- `OWNCLOUD_WOPI_TOKEN_KEY=` +
+  Random key (minimum 32 bytes) used to sign WOPI JWT tokens (Enterprise only) (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-microsoft-office-online-wopi[documentation]).
+- `OWNCLOUD_VERSIONS_RETENTION_OBLIGATION=` +
+  Define the files versions retention obligation (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-files-versions-retention-obligation[documentation]).
+- `OWNCLOUD_VERSION_HIDE=` +
+  Show or hide the ownCloud version information in status.php (see xref:configuration/server/config_sample_php_parameters.adoc#show-or-hide-the-owncloud-version-information-in-status-php[documentation]).
+- `OWNCLOUD_VOLUME_APPS=$\{OWNCLOUD_VOLUME_ROOT}/apps` +
+  Base directory used to store custom installed apps.
+- `OWNCLOUD_VOLUME_CONFIG=$\{OWNCLOUD_VOLUME_ROOT}/config` +
+  Base directory used to store the ownCloud configuration.
+- `OWNCLOUD_VOLUME_FILES=$\{OWNCLOUD_VOLUME_ROOT}/files` +
+  Define the directory where user files are stored (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-directory-where-user-files-are-stored[documentation]).
+- `OWNCLOUD_VOLUME_ROOT=/mnt/data` +
+  Base data directory for ownCloud.
+- `OWNCLOUD_VOLUME_SESSIONS=$\{OWNCLOUD_VOLUME_ROOT}/sessions` +
+  Base directory to store session files. Only used if `OWNCLOUD_SESSION_SAVE_HANDLER=file`.
+- `OWNCLOUD_PHP_DISABLE_FUNCTIONS=pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,pcntl_unshare,system,phpinfo,show_source,fopen_with_path,dbmopen,dbase_open,filepro_retrieve,posix_mkfifo` +
+  Some insecure PHP functions are disabled by default, and this option should not be changed for production setup. Use it with caution.
+- `OWNCLOUD_IOC_SCANNER_CONFIRMATION=` +
+  To suppress Indicators of Compromise (IoC) messages the environment variable needs to be set to `EXECUTED_ON_ALL_NODES`. This feature requires a valid `OWNCLOUD_LICENSE_KEY`.
+  

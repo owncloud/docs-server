@@ -1,6 +1,6 @@
 = Deployment Recommendations
 :toc: right
-:toclevels: 2
+:page-aliases: installation/deployment_recommendations.adoc
 :owncloud-edition-url: https://owncloud.com/find-the-right-edition/
 :ibm-elastic-storage-server-url: https://www.ibm.com/us-en/marketplace/ibm-elastic-storage-server
 :redhat-ceph-url: https://www.redhat.com/en/technologies/storage/ceph

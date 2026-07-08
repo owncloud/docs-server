@@ -14,11 +14,9 @@ By default, the folder containing the relevant configuration is not part of the 
 
 [source,docker]
 ----
-/var/www/owncloud/resources           --> <mount-point-resources>
-/var/www/owncloud/core/img/filetypes  --> <mount-point-filetypes>
+<mount-point-resources> --> /var/www/owncloud/resources
+<mount-point-filetypes> --> /var/www/owncloud/core/img/filetypes
 ----
-
-
 
 The folder for the ownCloud config is already a mounted Docker volume and accessible under `<mount-point>/config`.
 

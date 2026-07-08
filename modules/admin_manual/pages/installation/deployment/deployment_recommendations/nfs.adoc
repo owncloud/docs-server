@@ -2,6 +2,7 @@
 :toc: right
 :toclevels: 1
 :keywords: nfs, network file system, nfsv4, mtu, async, noasync
+:page-aliases: installation/deployment_recommendations/nfs.adoc
 :description: This guide covers the official ownCloud NFS (Network File System) deployment recommendations.
 
 :autofs-url: https://help.ubuntu.com/community/Autofs

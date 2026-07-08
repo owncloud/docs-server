@@ -1,0 +1,145 @@
+= Migrating an Instance
+:toc: right
+:description: There are several situations where ownCloud needs to be migrated.
+
+== Introduction
+
+{description}
+
+The following scenarios are described here:
+
+. Migrating to a different host
+. Migrating to a different domain
+. Migrating from ownCloud Classic 10 to ownCloud Classic 11
+
+Note that any database migration is not covered here.
+
+IMPORTANT: During the migration process, do not make any changes to the original system except to put it into maintenance mode. This ensures that, should anything unforeseen happen, you can revert to your existing installation and resume its availability while debugging the problem.
+
+You can find details of the steps for your ownCloud instance in the xref:maintenance/upgrading/manual_upgrade.adoc[Manual ownCloud Upgrade] documentation.
+
+== Special Migrations
+
+=== Host Migration
+
+Migration to a different host is easy with Docker.
+
+. Enable maintenance mode.
+. Prevent browser access via the proxy.
+. Down the container.
+. Make the data available on the new host:
+.. Either copy the Docker volume if not using a shared mount point to the new host, or
+.. Create a new shared mount point.
+. Copy / adapt the compose yaml file to reflect your changes.
+. Bring up the container.
+. Disable maintenance mode.
+. Reconfigure proxy access to the ownCloud Instance.
+. Reenable browser access via the proxy.
+
+=== Domain Migration
+
+As the ownCloud Classic 11 image provides an embedded Apache web server, you need a proxy to handle security and other web-related settings anyway. To migrate or add a domain, two steps are required:
+
+. Update your proxy server settings.
+. Update the ownCloud trusted domain settings.
+
+==== Managing Trusted Domains
+
+All URLs used to access your ownCloud server must be white-listed using an environment variable. Users are allowed to log into ownCloud only when they point their browsers to a URL that is listed in the `OWNCLOUD_TRUSTED_DOMAINS` setting.
+
+NOTE: This setting is important when changing or moving to a new domain name. You may use IP addresses and domain names.
+
+NOTE: The loopback address, `127.0.0.1`, is automatically whitelisted. In the event that a load-balancer is in place, there will be no issues as long as it sends the correct `X-Forwarded-Host` header.
+
+A typical configuration looks like this:
+
+[source,.env]
+----
+OWNCLOUD_TRUSTED_DOMAINS='server1.example.com','192.168.1.50'
+----
+
+== ownCloud Classic Migration
+
+[IMPORTANT]
+====
+* The steps shown do not cover any measures that may be necessary when the ownCloud-provided image was or needs to be customised.
+* Any third party app used needs to be PHP 8 compliant. If in doubt, disable it and do not re-enable until this prerequisite is met.
+====
+
+[NOTE]
+====
+With a few exceptions, ownCloud 11 provides nearly all configuration keys as environment variables. Therefore, it is highly recommended that any configuration keys are migrated to envvars, if possible. See the xref:configuration/important_notes.adoc[Important Configuration Notes] documentation for more details.
+====
+
+=== Docker to Docker
+
+If you have previously used a Docker-based installation with ownCloud Classic 10, no data migration is required.
+
+The main migration steps are the following:
+
+* Put your instance into maintenance mode.
+* Disable and then delete any app that is provided by ownCloud. +
+The deleted ownCloud apps were written in PHP 7. +
+The updated apps, which are now compliant with PHP 8, are embedded in the image.
+* Prevent browser access via the proxy.
+* Down the compose environment.
+* Define the OC11 image that will be used with the container, then pull it.
+* Start the compose environment.
+* Turn Maintenance mode off.
+* Start the occ upgrade process.
+* Reenable browser access via the proxy.
+
+=== Native to Docker
+
+This section describes the migration of *ownCloud Classic 10* to *ownCloud Classic 11*, if ownCloud Classic 10 was installed natively.
+
+Due to the wide range of installation types, the description focuses on the main steps rather than the details. When using encryption with the ownCloud Classic 10 instance, the openSSL requirements must be met without circumventing retired ciphers. See the ownCloud Classic 10 encryption documentation for more details.
+
+[IMPORTANT]
+====
+* If you have used the following apps or customised particular settings, you must create your own image based on the provided one. This is because the provided image does not contain the required binaries.
+
+** The following apps or functionalities are affected: +
+xref:enterprise/authentication/kerberos.adoc[Kerberos Authentication], xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive] and the xref:configuration/files/previews_configuration.adoc[Preview Configuration].
+
+* The setup requires a proxy server that points to the Apache server embedded in the image. This proxy server handles all certificates and terminates the user access. This setup step is *NOT* covered here.
+====
+
+NOTE: This procedure assumes that the server hosting the native deployment of ownCloud Classic 10 is different from the server hosting ownCloud Classic 11. This is because the _old_ server required a native PHP 7 environment.
+
+. Prepare the server hosting ownCloud Classic 11.
+.. Plan your deployment with regards to the database and the cache that will be used.
+.. For details see the xref:installation/installing_with_docker.adoc[Installing with Docker] documentation.
+.. For more details see the xref:installation/mount_folder_structure.adoc[Mount Folder Structure] documentation.
+.. Please note that starting the container with the default compose configuration will create an empty instance with a new database. This can be beneficial to see if the deployment works but needs to be adapted for the final setup. The generated data must be destroyed!
+
+. Enable maintenance mode on ownCloud Classic 10.
+
+. Disable any app that is enabled in ownCloud Classic 10. +
+The old ownCloud apps were written in PHP 7. +
+The updated ownCloud apps, which are now compliant with PHP 8, are embedded in the image.
+
+. On the new server, create mount points to bind mount the required Docker volumes.
+
+. Migrate the data directory. +
+More details can be found in the xref:maintenance/migrate_owncloud/migrate-datadirectory.adoc[Migrate the Datadirectory] documentation.
+
+. Adapt the `docker-compose.yml` and the `.env` file to your needs.
++
+[IMPORTANT]
+====
+* Migrate any configurations formerly added to config.php to an environment variable.
+* Avoid redefining the `data` or `apps` directory based on your old config. Use the default settings the image provides.
+* If any config setting has no environment variable, read the xref:configuration/important_notes.adoc[Important Configuration Notes] documentation for more details.
+====
+
+. Migrate all apps from ownCloud Classic 10 that are *NOT* part of ownCloud Classic 11 and PHP 8 compliant into the `<mount_point>/apps` directory. +
+For more details see the xref:installation/apps_management_installation.adoc[Apps Management] documentation.
+
+. Bring up the ownCloud Classic 11 container.
+
+. Re-enable any available apps that were previously disabled.
+
+. Disable maintenance mode.
+
+. Enable user access via the proxy web server.

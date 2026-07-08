@@ -156,15 +156,15 @@ Only a few settings are required, these are:
 a| `{latest-server-download-version}` or `latest`
 
 | `OWNCLOUD_DOMAIN` *^1^*
-a| A single ownCloud domain
---
-IMPORTANT: Either use: +
+a| Only for use with a single ownCloud domain +
+The same rules for trusted domains apply to everything else.
+[IMPORTANT]
+====
+Either use: +
 pass:[&ensp;] `OWNCLOUD_DOMAIN` +
 pass:[&ensp;&ensp;] _OR_ +
-pass:[&ensp;] `OWNCLOUD_TRUSTED_DOMAINS`. +
-Only use a single domain. +
-The same trusted domains rules apply to everything else.
---
+pass:[&ensp;] `OWNCLOUD_TRUSTED_DOMAINS`.
+====
 
 | `my_domain` or `my_ip` ...
 

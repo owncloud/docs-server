@@ -314,6 +314,24 @@ These appear on the User page, on user's Personal pages and are used by some app
 'allow_user_to_change_mail_address' => true,
 ....
 
+=== Allow or disallow the group administrator (subadmin) feature
+`true` allows administrators to delegate user management of specific groups
+to non-admin users (group admins / subadmins).
+
+`false` (default) disables the feature entirely: existing group-admin
+assignments are ignored and no new ones can be created.
+
+SECURITY NOTE: this feature is disabled by default as a risk-mitigation.
+Only enable it if you require delegated group administration and understand
+that group admins can manage users within their groups.
+
+==== Code Sample
+
+[source,php]
+....
+'allow_subadmins' => false,
+....
+
 === Define the lifetime of the remember-login cookie
 The remember-login cookie is set when the user clicks the `remember` checkbox
 on the login screen. The default is 15 days, expressed in seconds.
@@ -1619,6 +1637,7 @@ server configuration above and perform HA on the hostname.
 Redis Cluster support requires the php module phpredis in version 3.0.0 or higher.
 
 Available failover modes:
+
 - \RedisCluster::FAILOVER_NONE       - only send commands to primary nodes (default)
 - \RedisCluster::FAILOVER_ERROR      - failover to replicas for read commands if primary is unavailable
 - \RedisCluster::FAILOVER_DISTRIBUTE - randomly distribute read commands across primary and replica nodes

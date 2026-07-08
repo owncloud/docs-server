@@ -9,6 +9,10 @@
 
 With the Kerberos app, you can reuse the authentication ticket generated from a user's Windows domain login for ownCloud and access file server resources via ownCloud without re-authentication.
 
+IMPORTANT: The Docker image does not provide the required Kerberos `krb5` PHP extension and the `krb5-user` CLI tool. This tool is an actual requirement, the Kerberos implementation in the WND app requires the `kvno` command which is contained in the package installed. To mitigate this issue, you need to manually create an image that installs and enables these requirements. Please note that the app will not be enabled unless the `kvno` tool exists.
+
+include::partial$manual_config_file.adoc[]
+
 == General Information
 
 When using the Kerberos app, the Windows login session from the user is taken to log in to ownCloud. This is very convenient, as the user does not need to re-authenticate for using ownCloud as he already has authenticated to his Domain. In addition by using the Kerberos ticket, the user can also use file resources via the xref:enterprise/external_storage/windows-network-drive_configuration.adoc[Windows Network Drive (WND)] app without the need to re-authenticate. This generates a seamless user experience. This is done by the configuration made, which enables the webserver to make the ticket available for PHP for further processing.
@@ -134,10 +138,6 @@ The administration server. This is typically the same as the LDAP/Active Directo
 * The host the ownCloud instance is running on must be part of the domain.
 ** If this is not the case, you need to https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member[Setting up Samba as a Domain Member].
 ////
-
-* {empty}
-+
-IMPORTANT: The Docker image does not provide the required Kerberos `krb5` PHP extension and the `krb5-user` CLI tool. This tool is an actual requirement, the Kerberos implementation in the WND app requires the `kvno` command which is contained in the package installed. To mitigate this issue, you need to manually create an image that installs and enables these requirements.
 
 * DNS records +
 Create a DNS record for the public FQDN of the ownCloud instance (`<FQDN>`).
@@ -442,7 +442,7 @@ Tickets destroyed
 Note that if you issue this command during regular operation, all sessions for users using ownCloud with Kerberos will end and need to re-login. 
 --
 
-. Create a new ownCloud config file `/path-to-owncloud/config/kerberos.config.php` with the following contents or add only the comment and key to an existing `config.php` file. More Kerberos config options can be found in the xref:configuration/server/config_apps_sample_php_parameters.adoc#app-kerberos[Config Apps Sample] description:
+. Add the following contents to your own config file. More Kerberos config options can be found in the xref:configuration/server/config_apps_sample_php_parameters.adoc#app-kerberos[Config Apps Sample] description:
 +
 --
 [source,php]
@@ -456,7 +456,6 @@ Note that if you issue this command during regular operation, all sessions for u
 ];
 ----
 --
-A new file will be read xref:configuration/server/config_sample_php_parameters.adoc#introduction[additionally] to existing config files. See the xref:configuration/server/config_apps_sample_php_parameters.adoc[Apps Config.php Parameters] for more Kerberos configuration options.
 
 ////
 === Webserver Side
@@ -478,15 +477,6 @@ A new file will be read xref:configuration/server/config_sample_php_parameters.a
 ----
 
 See the https://modauthkerb.sourceforge.net/configure.html[mod-auth-kerb,window=_blank] documentation for more details on the settings used.
---
-
-* Restart Apache:
-+
---
-[source,bash]
-----
-sudo apachectl -k graceful
-----
 --
 ////
 

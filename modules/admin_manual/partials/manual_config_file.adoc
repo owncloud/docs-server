@@ -1,0 +1,1 @@
+IMPORTANT: This setup requires a configuration with configuration keys. No environment variables are available. See the xref:configuration/important_notes.adoc[Important Configuration Notes] documentation for details.

@@ -29,7 +29,7 @@ Enable it if it was formerly disabled:
 === Generate via webUI
 
 To generate a config report using the webUI, navigate to: +
-menu:Settings[Admin > General > "Generate Config report" > "Download ownCloud config report"].
+menu:Settings[Admin > General > "Generate Config report" > "Download ownCloud config report"]
 
 === Generate via Command Line
 
@@ -49,18 +49,18 @@ menu:Settings[Admin > General > Log > "Download logfile"].
 
 === Generate via Command Line
 
-If the log file is too big, you will need to transfer it from the command line. By default it is named `owncloud.log` and located at the Docker Volume `<mount-point>/files`.
+If the log file is too big, transferring it via the GUI may cause issues and you will need to do this from the command line. By default it is named `owncloud.log` and located at the Docker Volume `<mount-point>/files`.
 
-Note that you may need to compress the logfile before uploading.
+The location of the logfile can be customized.
 
-When not using the default location for the logfile, it can be specified via your _additional_ xref:installation/configuration_notes.adoc#using-a-configuration-file[configuration file]:
+include::partial$manual_config_file.adoc[]
+
+NOTE: You must create a Docker Volume to make the configured path available to the host.
 
 [source,php]
 ----
 'logfile' => '<your-path>/owncloud.log',
 ----
-
-NOTE: You must create a Docker Volume to make the configured path available.
 
 == LDAP Config
 
