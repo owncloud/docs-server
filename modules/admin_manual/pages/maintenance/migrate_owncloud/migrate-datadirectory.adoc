@@ -114,7 +114,7 @@ sudo rsync -avz /var/www/owncloud/data <mount_point>/files
 
 === Mounting with NFS
 
-If the data directory is already part of a NFS mount point such as `/mnt/owncloud/data`, unmount it, remove the export, create a new export including the data directory and mount it to `<mount_point>/files`.
+If the data directory is already part of an NFS mount point such as `/mnt/owncloud/data`, unmount it, remove the export, create a new export including the data directory and mount it to `<mount_point>/files`.
 
 IMPORTANT: Only mount the data directory from the source and not the full owncloud directory including the data directory.
 

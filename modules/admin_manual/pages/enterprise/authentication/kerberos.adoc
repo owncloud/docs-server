@@ -9,7 +9,7 @@
 
 With the Kerberos app, you can reuse the authentication ticket generated from a user's Windows domain login for ownCloud and access file server resources via ownCloud without re-authentication.
 
-IMPORTANT: The Docker image does not provide the required Kerberos `krb5` PHP extension and the `krb5-user` CLI tool. This tool is an actual requirement, the Kerberos implementation in the WND app requires the `kvno` command which is contained in the package installed. To mitigate this issue, you need to manually create an image that installs and enables these requirements. Please note that the app will not enable unless the `kvno` tool exists. 
+IMPORTANT: The Docker image does not provide the required Kerberos `krb5` PHP extension and the `krb5-user` CLI tool. This tool is an actual requirement, the Kerberos implementation in the WND app requires the `kvno` command which is contained in the package installed. To mitigate this issue, you need to manually create an image that installs and enables these requirements. Please note that the app will not be enabled unless the `kvno` tool exists.
 
 include::partial$manual_config_file.adoc[]
 

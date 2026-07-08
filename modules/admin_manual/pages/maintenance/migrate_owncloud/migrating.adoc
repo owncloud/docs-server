@@ -45,7 +45,7 @@ As the ownCloud Classic 11 image provides an embedded Apache web server, you nee
 
 ==== Managing Trusted Domains
 
-All URLs used to access your ownCloud server must be white-listed using a environment variable. Users are allowed to log into ownCloud only when they point their browsers to a URL that is listed in the `OWNCLOUD_TRUSTED_DOMAINS` setting.
+All URLs used to access your ownCloud server must be white-listed using an environment variable. Users are allowed to log into ownCloud only when they point their browsers to a URL that is listed in the `OWNCLOUD_TRUSTED_DOMAINS` setting.
 
 NOTE: This setting is important when changing or moving to a new domain name. You may use IP addresses and domain names.
 
@@ -62,7 +62,7 @@ OWNCLOUD_TRUSTED_DOMAINS='server1.example.com','192.168.1.50'
 
 [IMPORTANT]
 ====
-* The steps shown do not cover any measures that may be necessary when the ownCloud-provided image was or needs to be customised .
+* The steps shown do not cover any measures that may be necessary when the ownCloud-provided image was or needs to be customised.
 * Any third party app used needs to be PHP 8 compliant. If in doubt, disable it and do not re-enable until this prerequisite is met.
 ====
 

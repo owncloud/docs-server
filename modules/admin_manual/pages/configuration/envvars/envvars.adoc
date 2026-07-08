@@ -231,7 +231,7 @@
 - `OWNCLOUD_MAX_EXECUTION_TIME=3600` +
   Sets PHP option `max_execution_time`. It is recommended to keep the default (see xref:configuration/files/big_file_upload_configuration.adoc[documentation]).
 - `OWNCLOUD_MAX_FILESIZE_ANIMATED_GIFS_PUBLIC_SHARING=` +
-  Define the maximum filesize for animated GIF´s (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-filesize-for-animated-gifs[documentation]).
+  Define the maximum filesize for animated GIFs (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-maximum-filesize-for-animated-gifs[documentation]).
 - `OWNCLOUD_MAX_INPUT_TIME=3600` +
   Sets PHP option `max_input_time`. It is recommended to keep the default (see xref:configuration/files/big_file_upload_configuration.adoc[documentation]).
 - `OWNCLOUD_MAX_UPLOAD=20G` +
@@ -279,7 +279,7 @@
 - `OWNCLOUD_OVERWRITE_PROTOCOL=` +
   Override protocol (http/https) usage (see xref:configuration/server/config_sample_php_parameters.adoc#override-protocol-httphttps-usage[documentation]).
 - `OWNCLOUD_OVERWRITE_WEBROOT=` +
-  Override ownClouds webroot (see xref:configuration/server/config_sample_php_parameters.adoc#override-ownclouds-webroot[documentation]).
+  Override ownCloud's webroot (see xref:configuration/server/config_sample_php_parameters.adoc#override-ownclouds-webroot[documentation]).
 - `OWNCLOUD_PDF_VIEWER_ENABLE_SCRIPTING=` +
   Allow JavaScript execution in PDF files. Security risk — only enable if required (see xref:configuration/server/config_apps_sample_php_parameters.adoc#app-files-pdf-viewer[documentation]).
 - `OWNCLOUD_PART_FILE_IN_STORAGE=` +
@@ -289,7 +289,7 @@
 - `OWNCLOUD_POST_CRONJOB_PATH=/etc/post_cronjob.d` +
   Path to custom scripts that need to be executed after a cron run.
 - `OWNCLOUD_POST_INSTALL_PATH=/etc/post_install.d` +
-  Path to custom scripts that need to be executed after an ownCoud installation command.
+  Path to custom scripts that need to be executed after an ownCloud installation command.
 - `OWNCLOUD_POST_SERVER_PATH=/etc/post_server.d` +
   Path to custom scripts that need to be executed after an ownCloud server startup.
 - `OWNCLOUD_PREVIEW_JPEG_IMAGE_DISPLAY_QUALITY=` +
@@ -311,7 +311,7 @@
 - `OWNCLOUD_PRE_CRONJOB_PATH=/etc/pre_cronjob.d` +
   Path to custom scripts that need to be executed before a cron run.
 - `OWNCLOUD_PRE_INSTALL_PATH=/etc/pre_install.d` +
-  Path to custom scripts that need to be executed before an ownCoud installation command.
+  Path to custom scripts that need to be executed before an ownCloud installation command.
 - `OWNCLOUD_PRE_SERVER_PATH=/etc/pre_server.d` +
   Path to custom scripts that need to be executed before an ownCloud server startup.
 - `OWNCLOUD_PROTOCOL=http` +
@@ -375,7 +375,7 @@
 - `OWNCLOUD_SAVE_VERSION_METADATA=` +
   Enable extended version metadata (see xref:configuration/files/file_versioning.adoc#extended-version-metadata[description] and xref:configuration/server/config_sample_php_parameters.adoc#save-additional-metadata-for-versions[documentation]).
 - `OWNCLOUD_SECRET=` +
-  Define ownClouds internal secret (see xref:configuration/server/config_sample_php_parameters.adoc#define-ownclouds-internal-secret[documentation]).
+  Define ownCloud's internal secret (see xref:configuration/server/config_sample_php_parameters.adoc#define-ownclouds-internal-secret[documentation]).
 - `OWNCLOUD_SESSION_KEEPALIVE=` +
   Enable or disable session keep-alive when a user is logged in to the Web UI (see xref:configuration/server/config_sample_php_parameters.adoc#enable-or-disable-session-keep-alive-when-a-user-is-logged-in-to-the-web-ui[documentation]).
 - `OWNCLOUD_SESSION_LIFETIME=` +
