@@ -163,66 +163,15 @@ The windows native WebDAV client might fail with the following error message:
 Error 0x80070043 "The network name cannot be found." while adding a network drive
 ----
 
-A known workaround for this issue is to update your web server configuration.
-
-*Apache*
-
-You need to add the following rule set to your main web server or virtual host configuration, or the `.htaccess` file in your document
-root.
-
-NOTE: Please keep in mind that the `.htaccess` file in the ownCloud directory will be overwritten on update. Post upgrading ownCloud, you need to manually restore these changes. See the section xref:maintenance/upgrading/manual_upgrade.adoc#backup-manual-changes-in-htaccess[Backup Manual Changes in .htaccess] for details.
-
-[source,apache]
-----
-# Fixes Windows WebDav client error 0x80070043 "The network name cannot be found."
-RewriteEngine On
-RewriteCond %{HTTP_USER_AGENT} ^(DavClnt)$
-RewriteCond %{REQUEST_METHOD} ^(OPTIONS)$
-RewriteRule .* - [R=401,L]
-----
+Please open an issue in the https://github.com/owncloud/core/issues[ownCloud Classic repo].
 
 == Troubleshooting Contacts & Calendar
 
 === Service Discovery
 
-Some clients - especially on iOS/Mac OS X - have problems finding the proper sync URL, even when explicitly configured to use it.
+Some clients - especially on iOS or macOS - may have problems finding the proper sync URL, even when explicitly configured to use it.
 
-If you want to use CalDAV or CardDAV clients together with ownCloud, it is important to have a correct working setup of the following URLs:
-
-[verse]
---
-`\https://example.com/.well-known/carddav`
-`\https://example.com/.well-known/caldav`
---
-
-Those need to be redirecting your clients to the correct DAV endpoints. If running ownCloud at the document root of your Web server the correct
-URL is:
-
-`\https://example.com/remote.php/dav`
-
-and if running in a subfolder like `owncloud`:
-
-`\https://example.com/owncloud/remote.php/dav`
-
-For the first case the `.htaccess` file shipped with ownCloud should do this work.
-
-If your ownCloud instance is installed in a subfolder called `owncloud`, edit the `.htaccess` file and add the following lines:
-
-[source,apache]
-----
-Redirect 301 /.well-known/carddav /owncloud/remote.php/dav
-Redirect 301 /.well-known/caldav /owncloud/remote.php/dav
-----
-
-Now change the URL in the client settings to just use:
-
-`\https://example.com`
-
-instead of e.g.
-
-`\https://example.com/owncloud/remote.php/dav/principals/username`.
-
-There are also several techniques to remedy this, which are described extensively at the http://sabre.io/dav/service-discovery/[Sabre DAV website].
+If problems raise while using CalDAV or CardDAV clients together with ownCloud, open an issue in the https://github.com/owncloud/core/issues[ownCloud Classic repo].
 
 === Unable to update Contacts or Events
 
