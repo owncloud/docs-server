@@ -118,8 +118,6 @@
   Allow the configuration of system-wide trusted certificates (see xref:configuration/server/config_sample_php_parameters.adoc#allow-the-configuration-of-system-wide-trusted-certificates[documentation]).
 - `OWNCLOUD_ENABLE_PREVIEWS=` +
   Enable preview generation (see xref:configuration/server/config_sample_php_parameters.adoc#enable-preview-generation[documentation]).
-- `OWNCLOUD_ENABLE_OIDC_REWRITE_URL=false` +
-  Rewrites OpenID Connect wellknown URL `.well-known/openid-configuration` to the ownCloud OIDC configuration endpoint (see xref:configuration/user/oidc/oidc.adoc#set-up-service-discovery[documentation]).
 - `OWNCLOUD_ENTRYPOINT_INITIALIZED=true` +
   Enable or disable loading of files from `/etc/entrypoint.d`. It is recommended to keep the default.
 - `OWNCLOUD_ERRORLOG_LOCATION=/dev/stderr` +
