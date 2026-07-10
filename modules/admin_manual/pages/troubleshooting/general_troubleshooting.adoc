@@ -171,7 +171,7 @@ Please open an issue in the https://github.com/owncloud/core/issues[ownCloud Cla
 
 Some clients - especially on iOS or macOS - may have problems finding the proper sync URL, even when explicitly configured to use it.
 
-If problems raise while using CalDAV or CardDAV clients together with ownCloud, open an issue in the https://github.com/owncloud/core/issues[ownCloud Classic repo].
+If problems arise while using CalDAV or CardDAV clients together with ownCloud, open an issue in the https://github.com/owncloud/core/issues[ownCloud Classic repo].
 
 === Unable to update Contacts or Events
 

@@ -1,6 +1,6 @@
 = User Authentication with IMAP, SMB, and FTP
 :toc: right
-:description: With opwnCloud, additional user backends can be configured.
+:description: With ownCloud, additional user backends can be configured.
 
 == Introduction
 
