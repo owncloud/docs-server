@@ -34,7 +34,7 @@ Here is a template how the scheme looks like:
 
 [source,.env]
 ----
-OWNCLOUD_LOGIN_POLICY_GROUP_FORBID_MAP={"<loginType>":{"allowOnly|reject":["<group1>",<group2>"]}}
+OWNCLOUD_LOGIN_POLICY_GROUP_FORBID_MAP={"<loginType>":{"allowOnly|reject":["<group1>","<group2>"]}}
 ----
 
 The following example gives an idea of how to configure the `Group Login Policy`:
