@@ -169,7 +169,7 @@ CAUTION: ownCloud provides many configuration options for Redis, including enhan
 
 === Memcached Configuration
 
-If you select Memcached, you must enable it via environment variables. The example value for the host setting assumes that you have used the ownCloud Docker Compose deployment example. Adapt this value for your setup.
+If you select Memcached, you must enable it via environment variables. The example value for the host setting assumes that you have used the ownCloud Docker Compose deployment example. Adapt the values for your setup. Note that this example assumes you only have one Memcached server:
 
 [source,.env]
 ----
@@ -178,14 +178,14 @@ OWNCLOUD_MEMCACHED_HOST=memcached
 OWNCLOUD_MEMCACHED_PORT=11211
 ----
 
-////
-[NOTE]
-====
-If you are using multiple memcached servers, omit `OWNCLOUD_MEMCACHED_PORT` and use the following notation:
+If you need to configure multiple Memcached servers, use the following example. Compared to the above example, you need to configure a tuple in the following format for each server `[host, port, weight]`:
 
-`OWNCLOUD_MEMCACHED_HOST="'host_1',port_1,'host_2',port_2"`
-====
-////
+[source,.env]
+----
+OWNCLOUD_MEMCACHED_SERVERS=[["memcached_1",11211,33],["memcached_2",11211,34]]
+----
+
+NOTE: Only one of the two configuration options must be used.
 
 Additional memcached options can be set with the environment variable `OWNCLOUD_MEMCACHED_OPTIONS`.
 
