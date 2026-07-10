@@ -274,6 +274,8 @@
   Maximum number of concurrent UploadPart operations allowed during the multipart upload (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
 - `OWNCLOUD_OBJECTSTORE_AVAILABLE_STORAGE=` +
   Indicates available storage size in the objectstore in bytes (see xref:configuration/files/external_storage/s3_compatible_object_storage_as_primary.adoc[documentation]).
+- `OWNCLOUD_OPENID_CONNECT=` +
+  OpenID Connect (`openid-connect`) app configuration as a JSON-encoded object, e.g. `{"provider-url":"https://idp.example.net","client-id":"...","client-secret":"...","loginButtonName":"OpenID Connect"}`. Supports the full nested structure (`provider-params`, `auto-provision`, ...) (see configuration/server/config_apps_sample_php_parameters.adoc#app-openid-connect-oidc[documentation]).
 - `OWNCLOUD_OPENSSL_CONFIG=` +
   Path to a custom `openssl.cnf` file, e.g. when using a custom PKI or CA in the container (see xref:configuration/server/config_sample_php_parameters.adoc#define-the-default-cipher-for-encrypting-files[documentation]).
 - `OWNCLOUD_OPERATION_MODE=` +

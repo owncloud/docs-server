@@ -45,9 +45,16 @@ TIP: It is recommended to first figure out all configurations on a test system a
 
 Follow this link to read more about the xref:configuration/server/config_apps_sample_php_parameters.adoc#app-openid-connect-oidc[OIDC config.php parameters] available to configure OpenID Connect on ownCloud Classic.
 
-==== Example config.php
+==== Example Setup
 
-An example snippet that can be added to `config.php` is shown below.
+The example snippet below can be added to the environment variables. Both environment variables listed below need to be added. 
+
+The following environment variable is used as template. It must be adapted according to the classic key scheme shown one step below.
+
+[source,.env]
+----
+OWNCLOUD_OPENID_CONNECT={"provider-url":"https://idp.example.net","client-id":"...","client-secret":"...","loginButtonName":"OpenID Connect"}
+----
 
 [source,php]
 ----
