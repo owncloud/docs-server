@@ -178,7 +178,7 @@ OWNCLOUD_MEMCACHED_HOST=memcached
 OWNCLOUD_MEMCACHED_PORT=11211
 ----
 
-If you need to configure multiple Memcached servers, use the following example. Compared to the above example, you need to configure a tuple in the following format for each server `[host, port, weight]`:
+If you need to configure multiple Memcached servers, use the following example. Compared to the above example, you need to configure a tuple in the following format for each server `[host, port, weight]`, where weight is optional:
 
 [source,.env]
 ----

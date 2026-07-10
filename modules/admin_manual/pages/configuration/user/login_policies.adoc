@@ -28,7 +28,9 @@ To enable login policies, use the following example. Multiple values are comma s
 OWNCLOUD_LOGIN_POLICY_ORDER='OC\Authentication\LoginPolicies\GroupLoginPolicy'
 ----
 
-After enabling the `loginPolicy.order`, the configuration of the `groupLoginPolicy` can be made. The value definition below must be set according to the needs and the description in xref:configuration/server/config_sample_php_parameters.adoc#configuration-of-the-group-login-policy[Configuration of the Group Login Policy]:
+After enabling the `loginPolicy.order`, the configuration of the `groupLoginPolicy` can be made. The value definition below must be set according to the needs and the description in xref:configuration/server/config_sample_php_parameters.adoc#configuration-of-the-group-login-policy[Configuration of the Group Login Policy].
+
+Here is a template how the scheme looks like:
 
 [source,.env]
 ----
@@ -45,8 +47,8 @@ The following example gives an idea of how to configure the `Group Login Policy`
 [source,.env]
 ----
 OWNCLOUD_LOGIN_POLICY_GROUP_FORBID_MAP={\
-  "password":{"allowOnly":["group1","group2"],reject:["group3"]},\
+  "password":{"allowOnly":["group1","group2"],"reject":["group3"]},\
   "token":{"reject":["admin"]},\
-  "OCA\OpenIdConnect\OpenIdConnectAuthModule":{"allowOnly:["group4"]}\
+  "OCA\OpenIdConnect\OpenIdConnectAuthModule":{"allowOnly":["group4"]}\
   }
 ----
