@@ -128,7 +128,7 @@ docker compose logs owncloud -f
 
 In a standard ownCloud installation the log level is set to `Normal`.
 
-* To find any issues you need to araise the log level to `All` or to `Everything` via the `OWNCLOUD_LOG_LEVEL` environment variable or via your ownCloud Admin page. Please see xref:configuration/server/logging/logging_configuration.adoc[Logging Configuration] for more information on these log levels.
+* To find any issues you need to raise the log level to `All` or to `Everything` via the `OWNCLOUD_LOG_LEVEL` environment variable or via your ownCloud Admin page. Please see xref:configuration/server/logging/logging_configuration.adoc[Logging Configuration] for more information on these log levels.
 
 * Some logging - for example JavaScript console logging - needs debugging enabled. +
 Edit the config and change `'debug' => false,` to `'debug' => true,` Be sure to change it back when you are finished.
