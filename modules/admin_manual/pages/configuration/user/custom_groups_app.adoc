@@ -1,15 +1,15 @@
 = Custom Groups App
 :toc: right
-
+:toclevels: 3
 :description: With Custom Groups, users are able to define their own groups and manage contributing users themselves.
 
 == Introduction
 
 {description} When the xref:configuration/user/guests_app.adoc[Guest App] has been enabled, you can also add external guests to custom groups.
 
-== Installation
+== Enable the App
 
-Enable the `Custom Groups` app if not already done so. The Custom Groups app requires the email settings to be configured in your ownCloud setup, because you need to be able to invite the group members by email.
+If not already done so, enable the `Custom Groups` app. This app requires you to configure the email settings in your ownCloud setup because you need to be able to invite group members by email.
 
 == Configuration
 
@@ -29,21 +29,18 @@ Depending on your custom groups and ownCloud's global settings, configured by th
 
 * Disable administration of custom groups by ownCloud administrators:
 +
-[source,php]
+[source,.env]
 ----
-'customgroups.disallow-admin-access-all' => true,
+OWNCLOUD_CUSTOMGROUPS_DISALLOW_ADMIN_ACCESS_ALL=true
 ----
 
 ==== Hide Custom Groups App Based on Group Membership
 
-The app can be hidden from a user's personal settings page if the user belongs to one or more disallowed groups.
-To specify the disallowed groups, list them against the `customgroups.disallowed-groups` key in `config/config.php` as in the following example.
+If the user belongs to one or more disallowed groups, the app can be hidden from their personal settings page. The disallowed groups can be specified by listing them against the `OWNCLOUD_CUSTOMGROUPS_DISALLOWED_GROUPS` environment variable, as shown in the following example, which hides the Custom Groups app for users in the groups `'no_guest_app_users'` and `'project5'`:
 
-[source,php]
+[source,.env]
 ----
-// Hide the Custom Groups app for users in the
-// 'no_guest_app_users' and 'project5' group.
-'customgroups.disallowed-groups' => ['no_guest_app_users', 'project5'],
+OWNCLOUD_CUSTOMGROUPS_DISALLOWED_GROUPS='no_guest_app_users','project5'
 ----
 
 ==== Set Custom Group Admins 

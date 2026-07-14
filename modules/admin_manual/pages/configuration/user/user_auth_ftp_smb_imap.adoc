@@ -1,25 +1,18 @@
 = User Authentication with IMAP, SMB, and FTP
 :toc: right
-:toclevels: 1
+:description: With ownCloud, additional user backends can be configured.
 
 == Introduction
 
+{description}
+
 NOTE: The described configurations are examples, see the xref:installation/configuration_notes.adoc[Configuration Notes] documentation for more options.
 
-You may configure additional user backends in ownCloud’s configuration file (`config/config.php`) using the following syntax:
+The value definition below must be set according to the needs and the description in xref:configuration/server/config_sample_php_parameters.adoc#define-the-user_backends-app[Define the user_backends app]:
 
-[source,php]
+[source,.env]
 ----
-<?php
-
-"user_backends" => [
-    0 => [
-        "class"     => ...,
-        "arguments" => [
-            0 => ...
-        ],
-    ],
-],
+OWNCLOUD_USER_BACKENDS={"class":..., "arguments":[...]}
 ----
 
 Currently the https://github.com/owncloud/user_external[External user support app] (user_external), _which is not enabled by default_, provides three backends. These are:
@@ -52,27 +45,21 @@ Provides authentication against IMAP servers.
 
 === Example
 
-[source,php]
+[source,.env]
 ----
-<?php
+OWNCLOUD_USER_BACKENDS=[{"class":"OC_User_IMAP","arguments":["{imap.example.com:993/imap/ssl}","example.com"]}]
+----
 
-"user_backends" => [
-    0 => [
-        "class"     => "OC_User_IMAP",
-        "arguments" => [
-            // The IMAP server to authenticate against
-            '{imap.gmail.com:993/imap/ssl}',
-            // The domain to send email from
-            'example.com'
-        ],
-    ],
-],
-----
+Please note the following in the example above:
+
+* "{imap.example.com:993/imap/ssl}" +
+The IMAP server to authenticate against.
+* "example.com" +
+The domain to send the email from.
 
 IMPORTANT: The second `arguments` parameter ensures that only users from that domain are allowed to login. When set, after a successful login, the domain will be stripped from the email address and the rest used as an ownCloud username. For example, if the email address is `guest.user@example.com`, then `guest.user` will be the username used by ownCloud.
 
-SMB
----
+== SMB
 
 Provides authentication against Samba servers.
 
@@ -93,22 +80,12 @@ Provides authentication against Samba servers.
 
 === Example
 
-[source,php]
+[source,.env]
 ----
-<?php
-
-"user_backends" => [
-    [
-        "class"     => "OC_User_SMB",
-        "arguments" => [
-            'localhost'
-        ],
-    ],
-],
+OWNCLOUD_USER_BACKENDS=[{"class":"OC_User_SMB","arguments":["localhost"]}]
 ----
 
-FTP
----
+== FTP
 
 Provides authentication against FTP servers.
 
@@ -127,16 +104,7 @@ Provides authentication against FTP servers.
 
 === Example
 
-[source,php]
+[source,.env]
 ----
-<?php
-
-"user_backends" => [
-    [
-        "class"     => "OC_User_FTP",
-        "arguments" => [
-            'localhost'
-        ],
-    ],
-],
+OWNCLOUD_USER_BACKENDS=[{"class":"OC_User_FTP","arguments":["localhost"]}]
 ----
