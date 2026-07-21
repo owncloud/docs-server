@@ -7,8 +7,6 @@ Starting with ownCloud 11, third-party app signing is *mandatory*: an unsigned o
 integrity
  integrity:check-app                 Check app integrity using a signature.
  integrity:check-core                Check core integrity using a signature.
- integrity:sign-app                  Signs an app using a private key. (deprecated)
- integrity:sign-core                 Sign core using a private key. (deprecated)
 ----
 
 Verify an app:
@@ -29,7 +27,7 @@ When the command returns nothing, verification succeeded. When it returns a mess
 
 [IMPORTANT]
 ====
-`integrity:sign-app` and `integrity:sign-core` are *deprecated*. Signing is now done with the standalone `ocsign` tool, which does not require a running ownCloud instance. See xref:developer_manual:app/advanced/code_signing.adoc[Code Signing] in the Developer Manual for the current signing workflow.
+Signing is done with the standalone `ocsign` tool, which does not require a running ownCloud instance. See xref:developer_manual:app/advanced/code_signing.adoc[Code Signing] in the Developer Manual for the current signing workflow.
 ====
 
 TIP: See xref:configuration/general_topics/code_signing.adoc[code signing] to learn more.

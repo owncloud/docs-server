@@ -54,8 +54,8 @@ the bundled certificate.
 The signing itself is done with the standalone
 {ocsign-repo-url}[`ocsign`] command-line tool. Unlike the previous method,
 `ocsign` does not require a running or bootstrapped ownCloud instance —
-it is a self-contained binary. This replaces the deprecated
-`occ integrity:sign-app` command.
+it is a self-contained binary. Signing no longer relies on a server-side `occ`
+command.
 
 == Get a Signing Certificate
 
@@ -248,14 +248,12 @@ own, do not use the issue form. Instead, file a report through the
 [#legacy-signatures]
 == Legacy Signatures
 
-Apps signed under the previous (pre-2026) scheme — using
-`occ integrity:sign-app` and a certificate obtained through
-`owncloud/appstore-issues` — are accepted *with a warning until 2026-12-31*. After
-that date, only signatures produced under the new PKI are trusted.
+Apps signed under the previous (pre-2026) scheme — using the old server-side
+signing command and a certificate obtained through `owncloud/appstore-issues` —
+are accepted *with a warning until 2026-12-31*. After that date, only signatures
+produced under the new PKI are trusted.
 
-CAUTION: Re-sign your apps with `ocsign` under the new PKI before 2026-12-31. The
-`occ integrity:sign-app` and `occ integrity:sign-core` commands are deprecated in
-favour of `ocsign`.
+CAUTION: Re-sign your apps with `ocsign` under the new PKI before 2026-12-31.
 
 == Verification and Errors
 
