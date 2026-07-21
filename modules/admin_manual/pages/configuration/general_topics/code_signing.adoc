@@ -8,6 +8,8 @@ ownCloud supports code signing for the core releases, and for ownCloud applicati
 
 It also ensures that all upgrades have been executed properly, so that no files are left behind, and all old files are properly replaced. In the past, invalid updates were a significant source of errors when updating ownCloud.
 
+Verification uses a public-key infrastructure (PKI): ownCloud ships the code-signing root certificate authority, validates the certificate chain of each app's signature, and rejects certificates listed on the published certificate revocation list (CRL). Signatures themselves are produced by developers with the standalone `ocsign` tool — see xref:developer_manual:app/advanced/code_signing.adoc[Code Signing] in the Developer Manual.
+
 All the possible errors and their explanations can be found xref:errors[here]
 
 == FAQ
@@ -18,17 +20,24 @@ By supporting Code Signing we add another layer of security by ensuring that nob
 
 === Do We Lock Down ownCloud?
 
-The ownCloud project is open source and always will be. We do not want to make it more difficult for our users to run ownCloud. Any code signing errors on upgrades will not prevent ownCloud from running, but will display a warning on the Admin page. For applications that are not tagged "Official" the code signing process is optional.
+The ownCloud project is open source and always will be. We do not want to make it more difficult for our users to run ownCloud. Core code-signing errors on upgrades will not prevent ownCloud from running, but will display a warning on the Admin page. Third-party apps, however, are subject to mandatory signing (see below).
 
 === Not Open Source Anymore?
 
-The ownCloud project is open source and always will be. The code signing process is optional, though highly recommended. The code check for the core parts of ownCloud is enabled when the ownCloud release version branch has been set to stable.
+The ownCloud project is open source and always will be. The code check for the core parts of ownCloud is enabled when the release version branch has been set to stable.
 
 For custom distributions of ownCloud it is recommended to change the release version branch in version.php to something else than "stable".
 
 === Is Code Signing Mandatory For Apps?
 
-Code signing is optional for all third-party applications.
+Starting with ownCloud 11, third-party app signing is *mandatory*. An unsigned or invalidly-signed app is *blocked* — not merely flagged with a warning — when it is installed, updated, or enabled.
+
+An administrator can deliberately disable validation for a specific app, but this is a logged action that forfeits the integrity and revocation protection for that app. Development installations (the `git` release channel) are exempt from enforcement.
+
+[NOTE]
+====
+Apps signed under the previous (pre-2026) scheme are accepted *with a warning until 2026-12-31*, after which only signatures produced under the new PKI are trusted. Ask app developers to ship a release re-signed under the new PKI before that date.
+====
 
 == Fixing Invalid Code Integrity Messages
 
@@ -210,7 +219,7 @@ The following errors can be encountered when trying to verify a code signature.
 **** The app has mandatory code signing enforced but no `signature.json` file has been found in its `appinfo` folder.
 
 *** `Certificate is not valid.`
-**** The certificate has not been issued by the official ownCloud Code Signing Root Authority.
+**** The certificate has not been issued by the official ownCloud code-signing PKI.
 
 *** `Certificate is not valid for required scope. (Requested: %s, current: %s)`
 **** The certificate is not valid for the defined application. Certificates are only valid for the defined app identifier and cannot be used for others.
