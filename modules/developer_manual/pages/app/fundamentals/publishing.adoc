@@ -25,6 +25,14 @@ Apps in the store are divided into three levels of trust:
 
 With each level come requirements and a position in the store.
 
+[IMPORTANT]
+====
+Apps uploaded to the Marketplace must carry a valid code signature. Starting with
+ownCloud 11, app signing is mandatory: an unsigned or invalidly-signed
+app is blocked on install, update, or enable. Sign your app with `ocsign` before
+uploading — see xref:developer_manual:app/advanced/code_signing.adoc[Code Signing].
+====
+
 === Official
 
 Official apps are developed by and within the ownCloud community and its

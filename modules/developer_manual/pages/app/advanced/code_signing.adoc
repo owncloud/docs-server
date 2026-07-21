@@ -1,179 +1,303 @@
 = Code Signing
 :page-aliases: go/admin-code-integrity.adoc,go/developer-code-integrity.adoc
+:toc: right
+:ocsign-repo-url: https://github.com/owncloud/ocsign
+:developer-certificates-url: https://github.com/owncloud/developer-certificates
 
-ownCloud supports code signing for the core releases, and for ownCloud
-applications. Code signing gives our users an additional layer of
-security by ensuring that nobody other than authorized individuals can
-push updates.
+ownCloud supports code signing for the core releases and for
+ownCloud applications. Code signing gives users an additional layer of
+security by ensuring that nobody other than authorized individuals can push
+updates.
 
-It also ensures that all upgrades have been executed properly, so that
-no files are left behind, and all old files are properly replaced. In
-the past, invalid updates were a significant source of errors when
-updating ownCloud.
+It also ensures that all upgrades have been executed properly, so that no files
+are left behind and all old files are properly replaced. In the past, invalid
+updates were a significant source of errors when updating ownCloud.
 
-== FAQ
+[IMPORTANT]
+====
+Starting with ownCloud 11, app code signing is *mandatory*. An unsigned
+or invalidly-signed third-party app is *blocked* — not merely flagged with a
+warning — when it is installed, updated, or enabled. See
+xref:legacy-signatures[Legacy Signatures] for the transition period that applies
+to apps signed under the previous scheme.
+====
 
-=== Why Did ownCloud Add Code Signing?
+== Overview
 
-By supporting Code Signing we add another layer of security which
-ensures that nobody, other than authorized individuals, can push updates
-for applications. This ensures proper upgrades.
+ownCloud uses an X.509 based approach to authenticate code. Signing and
+verification are handled by a public-key infrastructure (PKI) hosted in the
+{developer-certificates-url}[owncloud/developer-certificates] repository:
 
-=== Do We Lock Down ownCloud?
+* A three-tier certificate authority (the *ownCloud Code Signing Root CA G2* and
+  an intermediate CA) issues short-lived *leaf certificates*, each scoped to a
+  single application identifier through the certificate's `CN` attribute.
+* Each ownCloud release ships the root CA certificate so that the server
+  can verify the whole chain offline.
+* A public *issuance ledger* records which repository owns which app identifier,
+  and a published *certificate revocation list* (CRL) lets the server reject
+  revoked certificates.
 
-The ownCloud project is open source and always will be. We do not want
-to make it more difficult for our users to run ownCloud. Any code
-signing errors on upgrades will not prevent ownCloud from running, but
-will display a warning on the Admin page. For applications that are not
-tagged `Official` the code signing process is optional.
+Signing produces a `signature.json` file (schema v2) inside the application's
+`appinfo/` folder. It contains:
 
-=== Is ownCloud Not Open Source Anymore?
+*hashes*:: A canonical manifest of every file in the folder with its
+SHA-512 hash.
 
-The ownCloud project is open source and always will be. The code signing
-process is optional, though highly recommended. The code check for the
-core parts of ownCloud is enabled when the ownCloud release version
-branch has been set to stable.
+*certificate*:: The leaf certificate used for signing, together with the
+intermediate chain. Bundling the certificate means that even if a developer
+loses their key, future updates can still be verified once a new certificate is
+issued.
 
-For custom distributions of ownCloud it is recommended to change the
-release version branch in version.php to something else than `stable`.
+*signature*:: A signature over the canonical manifest that can be verified using
+the bundled certificate.
 
-=== Is Code Signing Mandatory For Apps?
+The signing itself is done with the standalone
+{ocsign-repo-url}[`ocsign`] command-line tool. Unlike the previous method,
+`ocsign` does not require a running or bootstrapped ownCloud instance —
+it is a self-contained binary. Signing no longer relies on a server-side `occ`
+command.
 
-If you intend to upload your app to the Marketplace, yes, code signing _is_ mandatory.
-If the app will only be installed directly in an ownCloud installation, then code signing is _optional_, for all third-party applications.
+== Get a Signing Certificate
 
-== Technical details
+Before you can sign an app you need a leaf certificate for its application
+identifier. The application identifier is the `id` declared in the app's
+`appinfo/info.xml` and must match the grammar `^[a-z][a-z0-9_.-]{2,63}$` (it must
+start with a letter, may contain lowercase letters, digits, `_`, `.` and `-`, and
+be at least three characters long).
 
-ownCloud uses a X.509 based approach to handle authentication of code.
-Each ownCloud release contains the certificate of a shipped ownCloud
-Code Signing Root Authority. The private key of this certificate is only
-accessible to the project leader, who may grant trusted project members
-with a copy of this private key.
+The following examples assume that you are signing an application named
+*`example-app`*.
 
-This Root Authority is only used for signing certificate signing
-requests (CSRs) for additional certificates. Certificates issued by the
-Root Authority must always to be limited to a specific scope, usually
-the application identifier. This enforcement is done using the `CN`
-attribute of the certificate.
+=== Step 1: Generate a Private Key and CSR
 
-Code signing is then done by creating a `signature.json` file with the
-following content:
+Your private key never leaves your machine. An EC P-384 key is preferred; an
+RSA-4096 key is supported as a fallback (for example when a hardware security
+module or CI environment cannot generate EC keys). The CSR's `CN` must equal your
+application identifier.
 
-*hashes*: This is an array of all files in the folder with their
-corresponding SHA-512 hashes.
-
-*certificate*: This is the certificate used for signing.
-
-* It has to be issued by the ownCloud Root Authority
-* Its CN needs to be permitted to perform the required action.
-
-*signature*: This is a signature of the hashes which can be verified
-using the certificate. Having the certificate bundled within the
-`signature.json` file has the advantage that even if a developer loses
-their certificate, future updates can still be ensured by having a new
-certificate issued.
-
-== How Code Signing Affects Apps in the ownCloud Marketplace
-
-* Unsigned apps can’t be uploaded to the marketplace. They can be
-installed manually, but the warning: `"Integrity check failed"`, will
-always be visible.
-* Apps which have been signed in a previous release *MUST* be
-code-signed in all future releases as well, otherwise the update will be
-refused.
-
-== How to Get Your App Signed
-
-The following commands require that you have OpenSSL installed on your
-machine. Ensure that you keep all generated files to sign your
-application. The following examples will assume that you are trying to
-sign an application named *`contacts`*.
-
-Firstly, generate a private key and CSR. This can be done with the
-following command.
-
+.EC P-384 (preferred)
+[source,console]
 ----
-# Replace "contacts" with your application identifier.
-openssl req -nodes -newkey rsa:4096 -keyout contacts.key -out contacts.csr -subj "/CN=contacts"
+openssl ecparam -name secp384r1 -genkey -noout -out example-app.key
+openssl req -new -key example-app.key -out example-app.csr -subj "/CN=example-app"
 ----
 
-Then, post the CSR on https://github.com/owncloud/appstore-issues, and
-configure your GitHub account to show your mail address in your profile.
-ownCloud might ask you for further information to verify that you’re the
-legitimate owner of the application. Make sure to keep the private key
-file (`contacts.key`) secret and not disclose it to any third-parties.
-
-ownCloud will then provide you with the signed certificate.
-
-Finally, run `./occ integrity:sign-app` to sign your application, and
-specify your private and the public key as well as the path to the
-application. A valid example looks like:
-
+.RSA-4096 (fallback)
+[source,console]
 ----
-./occ integrity:sign-app \
-  --privateKey=/home/user/contacts.key \
-  --certificate=/home/user/CA/contacts.crt \
-  --path=/home/user/Programming/contacts
+openssl genrsa -out example-app.key 4096
+openssl req -new -key example-app.key -out example-app.csr -subj "/CN=example-app"
 ----
 
-The occ tool will store a `signature.json` file within the `appinfo`
-folder of your application. Then compress the application folder, naming
-it `contacts.tar.gz`, and upload it to
-{oc-marketplace-url}/. Be aware that making any changes to
-the application, after it has been signed, requires it to be signed
-again. So if you do not want to have some files shipped remove them
-before running the signing command.
+IMPORTANT: Keep the private key file (`example-app.key`) secret and never disclose
+it to third parties.
 
-In case you lose your certificate please submit a new CSR as described
-above and mention that you have lost the previous one. ownCloud will
-revoke the old certificate.
+=== Step 2: Request the Certificate
 
-If you maintain an app together with multiple people it is recommended
-to designate a release manager responsible for the signing process as
-well as the uploading to {oc-marketplace-url}/[marketplace].
-If case this is not feasible, and multiple certificates are required,
-ownCloud can create them on a case by case basis. We do not recommend
-developers to share their private key.
+. Open a *Request a code-signing certificate* issue in the
+  {developer-certificates-url}[owncloud/developer-certificates] repository using
+  the provided issue form. Paste the contents of your CSR and enter your app's
+  source repository as `owner/name`.
+. The enrollment bot replies with a one-time *challenge value*.
+. Prove that you control the app repository by committing a file that contains
+  exactly that value to the repository's *default branch* at
+  `/.well-known/owncloud-codesigning-challenge.txt`. You have *72 hours* to do
+  this.
+. The bot verifies the challenge file and checks that the requested identifier
+  matches the `id` in your `appinfo/info.xml`. If the identifier is unclaimed — or
+  already owned by this repository — it issues the certificate and posts back the
+  *leaf certificate* and the *intermediate certificate*.
+. You may delete the challenge file afterwards.
 
-== Errors
+[NOTE]
+====
+Application identifiers are assigned on a first-come, first-served basis: an
+identifier is bound to the first repository that successfully claims it. This is
+recorded in the public issuance ledger and prevents identifier squatting.
+====
 
-The following errors can be encountered when trying to verify a code
-signature. For information about how to get access to those results
-please refer to
+== Sign the App With ocsign
+
+`ocsign` walks the application tree, builds the canonical file-hash manifest,
+signs it with your private key, and writes `appinfo/signature.json`.
+
+Download a release binary from the
+{ocsign-repo-url}/releases[ocsign releases page], or build it from source (Go is
+required):
+
+[source,console]
+----
+go build ./cmd/ocsign
+----
+
+Sign the application by pointing `ocsign` at the app directory, your private key,
+the issued leaf certificate, and the intermediate chain:
+
+[source,console]
+----
+ocsign --path ./example-app \
+       --key example-app.key \
+       --cert example-app-leaf.crt \
+       --chain intermediate.crt
+----
+
+This writes `example-app/appinfo/signature.json`. Ship that file inside the app;
+servers verify it when the app is installed, updated, or enabled.
+
+The most important flags are:
+
+[cols="25%,75%",options="header"]
+|===
+| Flag | Description
+
+| `--path` (required)
+| Path to the directory to sign. For an app, the directory whose
+`appinfo/info.xml` declares the app `id`.
+
+| `--key` (required)
+| Path to the signer's PEM private key (EC P-384, or RSA-4096 / RSA-2048
+fallback). Used locally only; never transmitted.
+
+| `--cert` (required)
+| Path to the issued leaf certificate (PEM). Its `CN` must equal the app
+identifier.
+
+| `--chain`
+| Path to a PEM file with the intermediate certificate(s) to embed in the
+signature.
+
+| `--out`
+| Override the output path (default: `<path>/appinfo/signature.json`).
+
+| `--dry-run`
+| Compute and print the manifest and the would-be `signature.json` to standard
+output without writing anything.
+
+| `--version`
+| Print the build version and exit.
+|===
+
+`ocsign` returns the following exit codes: `0` success; `1` usage or input error
+(missing flag, unreadable key, certificate, or path); `2` signing error (key and
+certificate mismatch, unsupported key type); `3` attestation error (see
+xref:mode-2-attestation[Mode 2]).
+
+[NOTE]
+====
+The signing algorithm follows the key type: an EC P-384 key produces an
+`ecdsa-p384-sha384` signature, and an RSA key produces an `rsa-pss-sha384`
+signature. Before signing, `ocsign` checks that the private key matches the
+certificate's public key and that the certificate `CN` equals the app identifier.
+====
+
+Any change to the app after signing invalidates the signature, so remove any
+files you do not want to ship *before* signing, then re-sign. After signing, the
+app can be uploaded to the {oc-marketplace-url}/[ownCloud Marketplace] — see
+xref:developer_manual:app/fundamentals/publishing.adoc[Publishing in the ownCloud
+Marketplace].
+
+[#mode-2-attestation]
+== Mode 2: Attestation (Planned)
+
+The scheme defines a second, optional mode that attaches an ownCloud attestation
+(a trusted timestamp) to the signature. Mode 2 lets a release keep verifying after
+its signing certificate has expired, and lets revocations apply precisely by time.
+It is requested with the `--attest` flag:
+
+[source,console]
+----
+ocsign --path ./example-app --key example-app.key \
+       --cert example-app-leaf.crt --chain intermediate.crt \
+       --attest --attest-repo owncloud/developer-certificates
+----
+
+IMPORTANT: Mode 2 attestation is *not yet available*. `ocsign` exits with a clear
+error if `--attest` is requested. Every app currently uses Mode 1 (the signature
+is valid while the certificate is valid, typically two years; re-sign on renewal).
+
+== Renew or Add a Certificate
+
+Leaf certificates are valid for two years. To renew, or to obtain an additional
+certificate for the same app (for example a separate CI key and release key), open
+another certificate request for the same identifier from the same repository. The
+bot re-verifies repository control and appends a fresh certificate to the ledger
+entry. Multiple concurrently valid certificates are allowed.
+
+== Revoke a Certificate
+
+If you still hold the private key, revoke a certificate yourself by opening a
+*Request revocation* issue in
+{developer-certificates-url}[owncloud/developer-certificates] and pasting a CMS
+revocation request:
+
+[source,console]
+----
+printf 'revoke' | openssl cms -sign \
+  -signer example-app-leaf.crt -inkey example-app.key \
+  -outform PEM -nodetach -out revocation-request.pem
+----
+
+The bot verifies the CMS signature, matches the embedded certificate against the
+ledger, and revokes it automatically.
+
+If you have *lost the key*, or you need to report a problematic app you do not
+own, do not use the issue form. Instead, file a report through the
+{developer-certificates-url}/security/advisories/new[GitHub Security Advisory
+(VDP)]; the security team verifies the request and revokes the certificate.
+
+[#legacy-signatures]
+== Legacy Signatures
+
+Apps signed under the previous (pre-2026) scheme — using the old server-side
+signing command and a certificate obtained through `owncloud/appstore-issues` —
+are accepted *with a warning until 2026-12-31*. After that date, only signatures
+produced under the new PKI are trusted.
+
+CAUTION: Re-sign your apps with `ocsign` under the new PKI before 2026-12-31.
+
+== Verification and Errors
+
+Administrators verify installed code with the `occ integrity:check-core` and
+`occ integrity:check-app` commands. The following errors can be encountered when
+verifying a code signature. For information about how to view these results, refer
+to
 xref:admin_manual:configuration/general_topics/code_signing.adoc#fixing-invalid-code-integrity-messages[the
-Issues section of the ownCloud Classic Administration manual].
+Issues section of the ownCloud Administration Manual].
 
-`INVALID_HASH`
+`INVALID_HASH`::
+The file has a different hash than specified within `signature.json`. This usually
+happens when the file has been modified after writing the signature data.
 
-* The file has a different hash than specified within `signature.json`.
-This usually happens when the file has been modified after writing the
-signature data.
+`FILE_MISSING`::
+The file cannot be found but has been specified within `signature.json`. Either a
+required file has been left out, or `signature.json` needs to be regenerated.
 
-`FILE_MISSING`
+`EXTRA_FILE`::
+The file does not exist in `signature.json`. This usually happens when a file has
+been added and `signature.json` has not been updated.
 
-* The file cannot be found but has been specified within
-`signature.json`. Either a required file has been left out, or
-`signature.json` needs to be edited.
+`EXCEPTION`::
+Another exception has prevented code verification. The following exceptions can
+occur:
++
+--
+`Signature data not found.`::: The app has mandatory code signing enforced but no
+`signature.json` file was found in its `appinfo` folder.
 
-`EXTRA_FILE`
+`Certificate is not valid.`::: The certificate was not issued by the official
+ownCloud code-signing PKI.
 
-* The file does not exist in `signature.json`. This usually happens when
-a file has been removed and `signature.json` has not been updated.
+`Certificate is not valid for required scope. (Requested: %s, current: %s)`:::
+The certificate is not valid for the app being checked. Certificates are only
+valid for the app identifier they were issued for.
 
-`EXCEPTION`
+`Signature could not get verified.`::: There was a problem verifying the signature
+of `signature.json`.
 
-* Another exception has prevented the code verification. There are
-currently these following exceptions:
-** `Signature data not found.`
-*** The app has mandatory code signing enforced but no `signature.json`
-file has been found in its `appinfo` folder.
-** `Certificate is not valid.`
-*** The certificate has not been issued by the official ownCloud Code
-Signing Root Authority.
-** `Certificate is not valid for required scope. (Requested: %s, current:  %s)`
-*** The certificate is not valid for the defined application.
-Certificates are only valid for the defined app identifier and cannot be
-used for others.
-** `Signature could not get verified.`
-*** There was a problem with verifying the signature of
-`signature.json`.
+`Certificate has been revoked.`::: The certificate used to sign the application
+was revoked.
+--
+
+TIP: The full developer guide for the code-signing PKI is maintained alongside the
+PKI itself in the {developer-certificates-url}[owncloud/developer-certificates]
+repository (`docs/developer-guide.md`).

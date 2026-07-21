@@ -1,35 +1,33 @@
 = Integrity Check
 
-Apps which have an official tag *must* be code signed. Unsigned official apps won't be installable anymore. Code signing is optional for all third-party applications.
+Starting with ownCloud 11, third-party app signing is *mandatory*: an unsigned or invalidly-signed app is blocked on install, update, or enable. Official (bundled) apps must also be signed.
 
 [source,plaintext]
 ----
 integrity
  integrity:check-app                 Check app integrity using a signature.
  integrity:check-core                Check core integrity using a signature.
- integrity:sign-app                  Signs an app using a private key.
- integrity:sign-core                 Sign core using a private key
 ----
 
-After creating your signing key, sign your app like this example:
-
-[source,docker,subs="attributes+"]
-----
-{occ-command-example-prefix-docker} integrity:sign-app \
-   --privateKey=/Users/karlmay/contacts.key \
-   --certificate=/Users/karlmay/CA/contacts.crt \
-   --path=/Users/karlmay/Programming/contacts
-----
-
-Verify your app:
+Verify an app:
 
 [source,docker,subs="attributes+"]
 ----
 {occ-command-example-prefix-docker} integrity:check-app --path=/pathto/app appname
 ----
 
-When it returns nothing, your app is signed correctly. When it returns a message then there is an error.
+Verify the core:
 
-`integrity:sign-core` is for ownCloud core developers only.
+[source,docker,subs="attributes+"]
+----
+{occ-command-example-prefix-docker} integrity:check-core
+----
+
+When the command returns nothing, verification succeeded. When it returns a message, there is an error.
+
+[IMPORTANT]
+====
+Signing is done with the standalone `ocsign` tool, which does not require a running ownCloud instance. See xref:developer_manual:app/advanced/code_signing.adoc[Code Signing] in the Developer Manual for the current signing workflow.
+====
 
 TIP: See xref:configuration/general_topics/code_signing.adoc[code signing] to learn more.
