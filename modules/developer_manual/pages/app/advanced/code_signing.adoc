@@ -274,7 +274,7 @@ required file has been left out, or `signature.json` needs to be regenerated.
 
 `EXTRA_FILE`::
 The file does not exist in `signature.json`. This usually happens when a file has
-been added or removed and `signature.json` has not been updated.
+been added and `signature.json` has not been updated.
 
 `EXCEPTION`::
 Another exception has prevented code verification. The following exceptions can
