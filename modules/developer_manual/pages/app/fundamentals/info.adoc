@@ -63,8 +63,10 @@ would be tried under `Myapp`.
 
 == category
 
-The ownCloud Marketplace category where you want to publish the application. 
-The following categories are available:
+The ownCloud Marketplace category where you want to publish the application.
+You can list more than one `<category>` element. Category values are matched
+case-insensitively, and any value outside the supported set is dropped during
+validation. The following categories are supported:
 
 [width="52%",cols="50%,50%",options="header",]
 |================
@@ -80,8 +82,8 @@ The following categories are available:
 | Customization
 | customization
 
-| External plugins
-| external-plugins
+| Files
+| files
 
 | Games
 | games
@@ -91,6 +93,9 @@ The following categories are available:
 
 | Multimedia
 | multimedia
+
+| PIM
+| pim
 
 | Productivity
 | productivity

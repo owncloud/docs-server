@@ -191,8 +191,8 @@ certificate's public key and that the certificate `CN` equals the app identifier
 ====
 
 Any change to the app after signing invalidates the signature, so remove any
-files you do not want to ship *before* signing, then re-sign. After signing, the
-app can be uploaded to the {oc-marketplace-url}/[ownCloud Marketplace] — see
+files you do not want to ship *before* signing, then re-sign. After signing, package
+the app and submit it to the {oc-marketplace-url}/[ownCloud Marketplace] — see
 xref:developer_manual:app/fundamentals/publishing.adoc[Publishing in the ownCloud
 Marketplace].
 
