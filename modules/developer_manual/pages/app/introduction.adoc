@@ -26,4 +26,5 @@ already does what you need. If there is, we strongly encourage you to
 contribute to existing applications before investing the time to develop
 your own.
 
-image:app/marketplace-home.png[The ownCloud Marketplace catalog]
+.The ownCloud Marketplace catalog
+image::app/marketplace-home.png[The ownCloud Marketplace catalog]

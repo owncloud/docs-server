@@ -110,14 +110,11 @@ validation. The following categories are supported:
 | tools
 |================
 
-[IMPORTANT] 
+[IMPORTANT]
 ====
-For publishing themes the category tag must be present — _but empty_ — as in the example below.
-
-[source,xml]
-----
-<category></category>
-----
+Every app — themes included — must declare at least one supported category. A release
+whose categories are all outside the supported set is rejected during validation. For
+themes, use `customization`.
 ====
 
 == summary

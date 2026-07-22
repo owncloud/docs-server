@@ -93,6 +93,7 @@ The validation workflow checks that:
 * the path components `<app-id>` and `<version>` match the `<id>` and `<version>` in
 `info.xml`;
 * the `info.xml` is schema-valid;
+* every commit carries a DCO `Signed-off-by` line *and* a valid PGP/GPG signature;
 * at least one `<category>` is one of the xref:_app_categories[supported categories]
 (unsupported category values are dropped; a release is rejected only when *none* of its
 categories are supported);
