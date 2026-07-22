@@ -15,8 +15,10 @@ in to — the Market app reads the catalog directly. Browse or search the availa
 click an app to view its details, and click btn:[Install] to download, install, and
 enable it.
 
-// TODO(marketplace-screenshot): capture a current Market app browse/detail view against
-// the new marketplace.owncloud.com and add it here if a fresh screenshot is warranted.
+image:apps/market/market-app.png[The Market app showing the ownCloud Marketplace catalog]
+
+Use the categories in the left-hand navigation to filter the catalog, or the search box
+to find an app by name.
 
 NOTE: If your ownCloud instance runs in a protected environment (DMZ) without internet
 access, the Market app cannot reach the marketplace. In that case, download apps manually

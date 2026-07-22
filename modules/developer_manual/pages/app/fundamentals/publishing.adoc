@@ -13,6 +13,8 @@ no server, no database, and no upload form. The Git repository at
 Continuous integration validates every submission, and once a pull request is merged
 the catalog, its JSON API, and the website are regenerated and deployed automatically.
 
+image:app/marketplace-home.png[The ownCloud Marketplace catalog]
+
 Every ownCloud instance ships with the xref:app/fundamentals/market_app.adoc[Market app],
 which reads this public catalog and lets administrators install and update apps directly
 from a running ownCloud instance.
