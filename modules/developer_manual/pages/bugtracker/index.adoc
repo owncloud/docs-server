@@ -14,9 +14,11 @@ https://github.com/owncloud/ios/issues[iOS repository]
 https://github.com/owncloud/android/issues[Android repository]
 * If the issue with with an ownCloud app, report it to where that app is
 developed
-* If the issue is with a Marketplace app, report it to the
-https://github.com/owncloud/marketplace-issues[Marketplace issue
-tracker]
+* If the issue is with an app you found on the Marketplace, report it to where that
+app is developed (its `repository`/`bugs` link in the app's `info.xml`)
+* If the issue is with the Marketplace itself — a listing, a submission, or the
+catalog — report it to the
+https://github.com/owncloud/marketplace/issues[Marketplace repository]
 * If the app is listed in our https://github.com/owncloud[main github
 repository] report it to the correct sub repository
 * If the app is listed in the
