@@ -44,6 +44,54 @@ not want to ship *before* signing, then package the signed app into the
 `package.tar.gz` you submit.
 ====
 
+== Package Your App
+
+The `package.tar.gz` is a gzip-compressed tarball with a *single top-level directory
+named after your app id*, containing only the files needed to run the app in
+production:
+
+[source]
+----
+package.tar.gz
+└── <app-id>/
+    ├── appinfo/
+    │   ├── info.xml
+    │   └── signature.json   # written by ocsign
+    ├── lib/
+    ├── templates/
+    ├── css/
+    ├── js/
+    └── …                    # only runtime files
+----
+
+Ship *only* the code and assets the app needs at runtime. Leave development and
+tooling files out of the tarball, for example:
+
+* `tests/` and test fixtures
+* `composer.json`, `composer.lock`, and `vendor-bin/`
+* `.github/`, CI config, and Git metadata (`.git/`, `.gitignore`)
+* linter and static-analysis config (`.php-cs-fixer.dist.php`, `phpcs.xml`,
+`phpstan.neon`, `.phan/`)
+* contributor docs such as `CODE_OF_CONDUCT.md` and `agents.md`
+
+The order matters, because signing covers exactly the files present at signing time:
+
+. Assemble a clean copy of the app that contains only the runtime files (install
+production dependencies with `composer install --no-dev` if your app uses Composer).
+. Sign that copy with `ocsign` — this writes `appinfo/signature.json` into it (see
+xref:developer_manual:app/advanced/code_signing.adoc[Code Signing]).
+. Create the tarball from the parent directory so the app id is the top-level entry:
++
+[source,console]
+----
+tar -czf package.tar.gz -C build/dist <app-id>
+----
+
+TIP: The xref:attachment$/core/Makefile.example[example `Makefile`] shipped with the
+developer manual automates this: its `dist` target runs `composer install --no-dev`,
+copies only the runtime source directories into `build/dist/<app-id>/`, and produces the
+tarball with the layout shown above.
+
 == The Submission Workflow
 
 Publishing an app is a single pull request that adds one file to the marketplace
