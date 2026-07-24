@@ -110,13 +110,19 @@ When running `docker ps` again, the entry for `oc-eval` should be gone.
 
 The example configuration:
 
-* Exposes ports {std-port-http}, allowing for HTTP connections.
+* Runs behind a https://traefik.io/traefik[Traefik] reverse proxy that terminates TLS and exposes ports `80` and `443`, redirecting HTTP to HTTPS.
 * Uses separate _MariaDB_ and _Redis_ containers.
 * Provides mounts plus a volume bind configuration example.
+* Includes a https://www.collaboraonline.com/code/[Collabora Online Development Edition (CODE)] container so documents can be edited in the browser. See xref:#enabling-collabora-online-code[Enabling Collabora Online (CODE)] below for the ownCloud-side wiring.
+
+[NOTE]
+====
+Because the Collabora editor is embedded into the ownCloud web UI in an iframe and communicates over a WebSocket, both ownCloud and Collabora *must* be served over HTTPS on their own hostnames. Browsers block the mixed HTTP/HTTPS content that a plain-HTTP setup would produce. For this reason the example is designed for a production-style deployment with a reverse proxy and real, publicly resolvable domains, rather than the `localhost` HTTP flow used in the xref:#quick-evaluation[Quick Evaluation] section.
+====
 
 === Compose Setup
 
-The following instructions assume you install locally. For remote access, the value of xref:#env-file[OWNCLOUD_DOMAIN] and xref:#env-file[OWNCLOUD_TRUSTED_DOMAINS] must be updated to represent the hostname(s) and/or IP addresses that the server is reachable at.
+The following instructions require two DNS names — one for ownCloud (`OWNCLOUD_DOMAIN`) and one for Collabora (`COLLABORA_DOMAIN`) — that both resolve to the host running this stack. Traefik uses them to obtain Let's Encrypt certificates automatically, so the host must be reachable from the internet on ports `80` and `443`. The value of xref:#env-file[OWNCLOUD_DOMAIN] and xref:#env-file[OWNCLOUD_TRUSTED_DOMAINS] must represent the hostname(s) that the server is reachable at.
 
 . Create a new project directory at a location of choice:
 +
@@ -175,8 +181,8 @@ See the config description for more details.
 | `my_host,my_ip,my_domain`
 
 a| xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL]
-| See the config description for more details.
-| `\http://localhost`
+| See the config description for more details. With the reverse proxy this must be the public HTTPS URL.
+| `\https://owncloud.example.com`
 
 | `ADMIN_USERNAME`
 | The webUI admin username
@@ -186,10 +192,6 @@ a| xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL]
 | The webUI admin user’s password
 | `admin`
 
-| `HTTP_PORT`
-| The HTTP port to bind to
-| `{std-port-http}`
-
 | `MARIADB_IMAGE`
 | The mariadb version
 | `10.11`
@@ -197,6 +199,35 @@ a| xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL]
 | `REDIS_IMAGE`
 | The redis version
 | `7`
+
+| `COLLABORA_DOMAIN`
+| The public hostname Collabora Online (CODE) is served at
+| `collabora.example.com`
+
+| `OWNCLOUD_DOMAIN_REGEX`
+a| The ownCloud host that CODE accepts as WOPI host, as a regular expression. +
+Escape every dot with a backslash.
+| `owncloud\.example\.com`
+
+| `COLLABORA_IMAGE`
+| The Collabora Online (CODE) version
+| `latest`
+
+| `COLLABORA_ADMIN_USERNAME`
+| The Collabora admin console username
+| `admin`
+
+| `COLLABORA_ADMIN_PASSWORD`
+| The Collabora admin console password
+| `admin`
+
+| `TRAEFIK_IMAGE`
+| The Traefik reverse proxy version
+| `v3.3`
+
+| `LETSENCRYPT_EMAIL`
+| The email address used for Let's Encrypt certificate registration
+| `admin@example.com`
 |===
 +
 [NOTE]
@@ -250,10 +281,20 @@ Check that all the containers have successfully started, by running `docker comp
 | owncloud_server
 | /usr/bin/entrypoint /usr/b ...
 | Up (healthy)
-| 0.0.0.0:{std-port-http}->{std-port-http}/tcp
+| 8080/tcp
+
+| owncloud_collabora
+| /start-collabora-online.sh ...
+| Up
+| 9980/tcp
+
+| owncloud_proxy
+| /entrypoint.sh --provider ...
+| Up
+| 0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp
 |===
 
-Here you can see, that the database, ownCloud and Redis containers are running, and that ownCloud is accessible via port {std-port-http} on the host machine.
+Here you can see that the database, ownCloud, Redis and Collabora containers are running, and that the Traefik `proxy` container publishes ports `80` and `443`. ownCloud and Collabora are reachable over HTTPS at their respective domains through the proxy.
 
 [TIP]
 ====
@@ -275,7 +316,7 @@ IMPORTANT: Any apps that came with the image will reappear when the container is
 
 === Logging In
 
-To log in to the ownCloud UI, open `pass:a[http://localhost:{std-port-http}]` (or the URL defined) in your browser of choice, where you see the standard ownCloud login screen as in the image below.
+To log in to the ownCloud UI, open `pass:a[https://owncloud.example.com]` (the `OWNCLOUD_DOMAIN` you defined) in your browser of choice, where you see the standard ownCloud login screen as in the image below.
 
 image::docker/owncloud-ui-login.png[The ownCloud UI via Docker,width=300]
 
@@ -305,6 +346,33 @@ docker compose exec owncloud occ <command>
 ----
 
 IMPORTANT: Don't use the `php` command prefix, this leads to several errors and is not intended to run in docker environments.
+
+=== Enabling Collabora Online (CODE)
+
+The `collabora` service in the compose file runs a self-hosted Collabora Online Development Edition (CODE) server. This is the office server that ownCloud connects to; once the containers are up, ownCloud still needs to be told where to reach it.
+
+ownCloud integrates with Collabora through the `richdocuments` app, acting as the WOPI host while CODE acts as the WOPI client. To wire them together:
+
+. Enable the `richdocuments` app:
++
+[source,docker,subs="attributes+"]
+----
+{occ-command-example-prefix-docker} app:enable richdocuments
+----
+
+. Point the app at the public HTTPS URL of the CODE server (`COLLABORA_DOMAIN`):
++
+[source,docker,subs="attributes+"]
+----
+{occ-command-example-prefix-docker} config:app:set richdocuments wopi_url --value='https://collabora.example.com'
+----
+
+After this, opening a supported document (for example a `.docx`) in the ownCloud web UI loads the Collabora editor in an iframe over HTTPS.
+
+[NOTE]
+====
+The `richdocuments` app and its Secure View capabilities are an Enterprise feature and its OC11 availability is subject to change. The `collabora` (CODE) container itself is edition-independent, but the ownCloud-side integration depends on the app being available in your installation. For the full list of `richdocuments` settings and the Secure View feature, see xref:enterprise/collaboration/collabora_secure_view.adoc[Collabora Online / Secure View] and the xref:configuration/server/occ_command.adoc#collabora-online-secure-view[Collabora related occ command set].
+====
 
 === Configuration
 
