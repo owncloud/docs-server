@@ -34,8 +34,14 @@ services:
     # Start the main ownCloud instance
     <<: *oc-common
     container_name: owncloud_server
-    ports:
-      - ${HTTP_PORT}:8080
+    # No ports are published directly. The Traefik reverse proxy (see the "proxy"
+    # service below) terminates TLS and forwards HTTPS traffic to port 8080.
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.owncloud.rule=Host(`${OWNCLOUD_DOMAIN}`)
+      - traefik.http.routers.owncloud.entrypoints=websecure
+      - traefik.http.routers.owncloud.tls.certresolver=letsencrypt
+      - traefik.http.services.owncloud.loadbalancer.server.port=8080
 
 #  owncloud-wnd-1:
 #    # Enterprise only: uncomment and configure it accordingly if WND is used !
@@ -44,6 +50,61 @@ services:
 #    <<: *oc-common
 #    container_name: owncloud-wnd-1
 #    command: ["/usr/bin/owncloud", "occ", "wnd:listen", "myhost", "myshare", "workgroup\myuser", "password"]
+
+  collabora:
+    # Collabora Online Development Edition (CODE): the self-hosted office server
+    # that ownCloud connects to as a WOPI client. See the "Enabling Collabora
+    # Online (CODE)" section of the documentation for the required occ wiring.
+    image: collabora/code:${COLLABORA_IMAGE}
+    container_name: owncloud_collabora
+    restart: always
+    environment:
+      # "domain" is a regex of the ownCloud host(s) CODE accepts as WOPI host.
+      # Dots must be escaped for the regex (e.g. owncloud\.example\.com).
+      - domain=${OWNCLOUD_DOMAIN_REGEX}
+      - aliasgroup1=https://${OWNCLOUD_DOMAIN}:443
+      - username=${COLLABORA_ADMIN_USERNAME}
+      - password=${COLLABORA_ADMIN_PASSWORD}
+      # TLS is terminated at the reverse proxy, so CODE itself speaks plain HTTP.
+      - extra_params=--o:ssl.enable=false --o:ssl.termination=true
+    cap_add:
+      - MKNOD
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.collabora.rule=Host(`${COLLABORA_DOMAIN}`)
+      - traefik.http.routers.collabora.entrypoints=websecure
+      - traefik.http.routers.collabora.tls.certresolver=letsencrypt
+      - traefik.http.services.collabora.loadbalancer.server.port=9980
+    networks:
+      - oc_network
+
+  proxy:
+    # Traefik terminates TLS (Let's Encrypt) and routes the two hostnames to the
+    # ownCloud and Collabora containers. Routing/TLS is driven by the labels on
+    # each service above; WebSocket upgrades (needed by CODE) are handled
+    # transparently by Traefik.
+    image: traefik:${TRAEFIK_IMAGE}
+    container_name: owncloud_proxy
+    restart: always
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      # Redirect all plain HTTP traffic to HTTPS.
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL}
+      - --certificatesresolvers.letsencrypt.acme.storage=/acme/acme.json
+      - --certificatesresolvers.letsencrypt.acme.tlschallenge=true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/acme
+    networks:
+      - oc_network
 
   mariadb:
     image: mariadb:${MARIADB_IMAGE}
@@ -109,6 +170,9 @@ volumes:
     driver: local
 # Use the above options when configuring bind mounts
   redis:
+    driver: local
+  acme:
+    # Stores the Let's Encrypt certificates issued for the reverse proxy.
     driver: local
 
 networks:
