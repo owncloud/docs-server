@@ -14,7 +14,7 @@ x-owncloud: &oc-common
       - OWNCLOUD_DB_TYPE=mysql
       - OWNCLOUD_DB_NAME=owncloud
       - OWNCLOUD_DB_USERNAME=owncloud
-      - OWNCLOUD_DB_PASSWORD=owncloud
+      - OWNCLOUD_DB_PASSWORD=${MYSQL_PASSWORD}
       - OWNCLOUD_DB_HOST=mariadb
       - OWNCLOUD_ADMIN_USERNAME=${ADMIN_USERNAME}
       - OWNCLOUD_ADMIN_PASSWORD=${ADMIN_PASSWORD}
@@ -26,7 +26,10 @@ x-owncloud: &oc-common
         source: oc_files
         target: /mnt/data
     networks:
-      - oc_network
+      # ownCloud needs both tiers: the proxy reaches it on "frontend", and it
+      # reaches MariaDB/Redis on "backend".
+      - frontend
+      - backend
 
 services:
 
@@ -42,6 +45,12 @@ services:
       - traefik.http.routers.owncloud.entrypoints=websecure
       - traefik.http.routers.owncloud.tls.certresolver=letsencrypt
       - traefik.http.services.owncloud.loadbalancer.server.port=8080
+      # Enable HSTS on ownCloud only. Do NOT add frame-ancestors/X-Frame-Options
+      # here or on Collabora: ownCloud embeds the Collabora editor in an iframe and
+      # a restrictive framing policy would break document editing.
+      - traefik.http.routers.owncloud.middlewares=owncloud-hsts
+      - traefik.http.middlewares.owncloud-hsts.headers.stsSeconds=15552000
+      - traefik.http.middlewares.owncloud-hsts.headers.stsIncludeSubdomains=true
 
 #  owncloud-wnd-1:
 #    # Enterprise only: uncomment and configure it accordingly if WND is used !
@@ -71,12 +80,23 @@ services:
       - MKNOD
     labels:
       - traefik.enable=true
+      # Public WOPI router: serves the document editor to ownCloud users.
       - traefik.http.routers.collabora.rule=Host(`${COLLABORA_DOMAIN}`)
       - traefik.http.routers.collabora.entrypoints=websecure
       - traefik.http.routers.collabora.tls.certresolver=letsencrypt
       - traefik.http.services.collabora.loadbalancer.server.port=9980
+      # Admin console router (higher priority): the CODE admin console and its
+      # WebSocket must NOT be reachable from the internet. Restrict them to
+      # trusted source ranges. WOPI clients never need these paths.
+      - traefik.http.routers.collabora-admin.rule=Host(`${COLLABORA_DOMAIN}`) && (PathPrefix(`/browser/dist/admincontrol`) || PathPrefix(`/cool/adminws`))
+      - traefik.http.routers.collabora-admin.entrypoints=websecure
+      - traefik.http.routers.collabora-admin.tls.certresolver=letsencrypt
+      - traefik.http.routers.collabora-admin.priority=100
+      - traefik.http.routers.collabora-admin.service=collabora
+      - traefik.http.routers.collabora-admin.middlewares=collabora-admin-allowlist
+      - traefik.http.middlewares.collabora-admin-allowlist.ipallowlist.sourcerange=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
     networks:
-      - oc_network
+      - frontend
 
   proxy:
     # Traefik terminates TLS (Let's Encrypt) and routes the two hostnames to the
@@ -101,40 +121,47 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      # NOTE: mounting the Docker socket gives Traefik full control of the Docker
+      # daemon, which is equivalent to root on the host. The ":ro" flag only makes
+      # the socket file read-only; it does NOT restrict the Docker API. For a
+      # hardened setup, put a scoped docker-socket-proxy in front of it instead.
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - acme:/acme
     networks:
-      - oc_network
+      # The proxy only needs the frontend tier; it must not reach MariaDB/Redis.
+      - frontend
 
   mariadb:
     image: mariadb:${MARIADB_IMAGE}
     container_name: owncloud_mariadb
     restart: always
-    ports:
-      - "3306:3306"
+    # No host ports are published. MariaDB is reached only by ownCloud over the
+    # internal "backend" network. Publishing 3306 to the host would expose the
+    # database to the internet on the public host this stack is designed for.
     environment:
-      - MYSQL_ROOT_PASSWORD=owncloud
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=owncloud
-      - MYSQL_PASSWORD=owncloud
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=owncloud
       - MARIADB_AUTO_UPGRADE=1
     command: ["--max-allowed-packet=128M", "--innodb-log-file-size=64M"]
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=owncloud"]
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=${MYSQL_ROOT_PASSWORD}"]
       interval: 10s
       timeout: 5s
       retries: 5
     volumes:
       - mysql:/var/lib/mysql
     networks:
-      - oc_network
+      - backend
 
   redis:
     image: redis:${REDIS_IMAGE}
     container_name: owncloud_redis
     restart: always
-    ports:
-      - "6379:6379"
+    # No host ports are published. Redis is reached only by ownCloud over the
+    # internal "backend" network. An unauthenticated Redis published to the host
+    # would be directly exploitable on a public server.
     command: ["--databases", "1"]
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -144,7 +171,7 @@ services:
     volumes:
       - redis:/data
     networks:
-      - oc_network
+      - backend
 
 # As alternative to Redis, you can enable Memcached.
 # See the caching configuration documentation for more details.
@@ -153,10 +180,8 @@ services:
 #    image: memcached:latest
 #    container_name: owncloud_memcached
 #    restart: always
-#    ports:
-#      - "11211:11211"
 #    networks:
-#      - oc_network
+#      - backend
 
 volumes:
   oc_files:
@@ -176,4 +201,8 @@ volumes:
     driver: local
 
 networks:
-  oc_network:
+  # "frontend" carries public traffic (proxy <-> ownCloud/Collabora).
+  # "backend" is internal only (ownCloud <-> MariaDB/Redis) so the internet-facing
+  # proxy and Collabora cannot reach the data tier directly.
+  frontend:
+  backend:

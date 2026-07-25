@@ -9,3 +9,7 @@ tmp/
 .DS_Store
 .vscode/
 .idea/
+
+# docker-compose smoke-test artifacts
+tests/docker-compose/acme/
+tests/docker-compose/.env

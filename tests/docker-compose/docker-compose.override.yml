@@ -1,0 +1,44 @@
+# LOCAL TEST OVERRIDE — do NOT use in production.
+#
+# This file layers on top of the shipped example
+# (modules/admin_manual/examples/installation/docker/docker-compose.yml) so the
+# stack can be booted locally / in CI without public DNS or Let's Encrypt.
+#
+# It changes exactly one thing versus the shipped file: TLS. The production
+# example obtains real certificates from Let's Encrypt via the ACME TLS-ALPN-01
+# challenge, which requires the public hostnames to resolve to this host — not
+# possible on a throwaway CI runner. Here we:
+#   1. drop the ACME command flags from Traefik, and
+#   2. blank each router's `tls.certresolver` label (set by the base file) and
+#      pin `tls=true`, so the routers stay TLS-enabled but serve Traefik's
+#      built-in self-signed certificate. (A router that still references the now
+#      removed `letsencrypt` resolver is rejected by Traefik and never attaches
+#      to the websecure entrypoint, which breaks routing entirely.)
+# The HTTPS path is still exercised end to end; smoke tests connect with
+# `curl -k`.
+#
+# The security-hardened topology (split networks, no DB/Redis host ports,
+# Collabora admin allowlist, HSTS) is inherited unchanged from the base file.
+# Compose merges these list-form labels by key, so the entries below override
+# only the matching keys from the base file and leave the rest intact.
+services:
+  owncloud:
+    labels:
+      - traefik.http.routers.owncloud.tls=true
+      - traefik.http.routers.owncloud.tls.certresolver=
+
+  collabora:
+    labels:
+      - traefik.http.routers.collabora.tls=true
+      - traefik.http.routers.collabora.tls.certresolver=
+      - traefik.http.routers.collabora-admin.tls=true
+      - traefik.http.routers.collabora-admin.tls.certresolver=
+
+  proxy:
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https

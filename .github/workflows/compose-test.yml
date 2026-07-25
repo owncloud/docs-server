@@ -1,0 +1,38 @@
+name: docker-compose example
+
+# Lints and smoke-tests the ownCloud + Collabora CODE docker-compose example
+# that ships in the admin manual. Runs only when the example, the test harness,
+# or this workflow change.
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'modules/admin_manual/examples/installation/docker/**'
+      - 'tests/docker-compose/**'
+      - '.github/workflows/compose-test.yml'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'modules/admin_manual/examples/installation/docker/**'
+      - 'tests/docker-compose/**'
+      - '.github/workflows/compose-test.yml'
+
+jobs:
+  smoke-test:
+    name: Lint and smoke-test the compose example
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Validate the merged compose configuration
+        run: |
+          docker compose \
+            --env-file tests/docker-compose/test.env \
+            -f modules/admin_manual/examples/installation/docker/docker-compose.yml \
+            -f tests/docker-compose/docker-compose.override.yml \
+            config
+
+      - name: Boot the stack and run smoke tests
+        run: tests/docker-compose/smoke-test.sh

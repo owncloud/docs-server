@@ -140,6 +140,17 @@ cd owncloud-server-docker
 ----
 include::example$installation/docker/docker-compose.yml[]
 ----
++
+[IMPORTANT]
+====
+This example is a *starting point*, not a hardened deployment. Before you expose it to the internet, review the following:
+
+* *Change every credential.* All passwords in the `.env` file are placeholders. Replace every `CHANGE_ME_*` value (database, ownCloud admin, Collabora admin) with a strong, unique secret. Remove the `ADMIN_*` variables after the first logon as described below.
+* *Keep the data tier private.* MariaDB and Redis are intentionally *not* published to the host and live on an internal `backend` network. Do not add `ports:` entries for them — an exposed, weakly-authenticated database or an unauthenticated Redis on a public host is trivially exploitable.
+* *Do not expose the Collabora admin console.* The example restricts the CODE admin console (`/browser/dist/admincontrol`, `/cool/adminws`) to private source ranges via a Traefik `ipallowlist` middleware. Adjust the ranges to match your network; never open these paths to the internet.
+* *Docker socket exposure.* The Traefik proxy mounts the Docker socket so it can read container labels. This grants control of the Docker daemon — effectively root on the host — and the `:ro` flag does *not* restrict the Docker API. For a hardened setup, place a scoped https://github.com/Tecnativa/docker-socket-proxy[docker-socket-proxy] in front of it.
+* *Pin image versions.* `OWNCLOUD_IMAGE` and `COLLABORA_IMAGE` default to a floating tag. Pin them to specific versions for reproducible, auditable upgrades (see xref:#upgrading-owncloud[Upgrading ownCloud]).
+====
 
 . Create an `.env` configuration file in the same directory, which contains the required configuration settings.
 +
@@ -190,7 +201,15 @@ a| xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL]
 
 | `ADMIN_PASSWORD`
 | The webUI admin user’s password
-| `admin`
+| `CHANGE_ME_ADMIN`
+
+| `MYSQL_ROOT_PASSWORD`
+| The MariaDB root password
+| `CHANGE_ME_DB_ROOT`
+
+| `MYSQL_PASSWORD`
+| The MariaDB `owncloud` user password (also used by ownCloud to connect)
+| `CHANGE_ME_DB_APP`
 
 | `MARIADB_IMAGE`
 | The mariadb version
@@ -219,7 +238,7 @@ Escape every dot with a backslash.
 
 | `COLLABORA_ADMIN_PASSWORD`
 | The Collabora admin console password
-| `admin`
+| `CHANGE_ME_COLLABORA`
 
 | `TRAEFIK_IMAGE`
 | The Traefik reverse proxy version
@@ -294,7 +313,7 @@ Check that all the containers have successfully started, by running `docker comp
 | 0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp
 |===
 
-Here you can see that the database, ownCloud, Redis and Collabora containers are running, and that the Traefik `proxy` container publishes ports `80` and `443`. ownCloud and Collabora are reachable over HTTPS at their respective domains through the proxy.
+Here you can see that the database, ownCloud, Redis and Collabora containers are running, and that only the Traefik `proxy` container publishes ports (`80` and `443`) to the host. MariaDB and Redis expose their ports on the internal network only, never to the host. ownCloud and Collabora are reachable over HTTPS at their respective domains through the proxy.
 
 [TIP]
 ====

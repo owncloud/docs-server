@@ -27,3 +27,17 @@ updates:
         update-types:
           - minor
           - patch
+
+  - package-ecosystem: docker
+    directory: "/modules/admin_manual/examples/installation/docker"
+    schedule:
+      interval: weekly
+      day: sunday
+      time: '22:00'
+      timezone: Etc/UTC
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
