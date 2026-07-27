@@ -124,6 +124,33 @@ Because the Collabora editor is embedded into the ownCloud web UI in an iframe a
 
 The following instructions require two DNS names — one for ownCloud (`OWNCLOUD_DOMAIN`) and one for Collabora (`COLLABORA_DOMAIN`) — that both resolve to the host running this stack. Traefik uses them to obtain Let's Encrypt certificates automatically, so the host must be reachable from the internet on ports `80` and `443`. The value of xref:#env-file[OWNCLOUD_DOMAIN] and xref:#env-file[OWNCLOUD_TRUSTED_DOMAINS] must represent the hostname(s) that the server is reachable at.
 
+[NOTE]
+.Internal-only, offline, or externally proxied deployments
+====
+Let's Encrypt validates a domain over the public internet, so the example's default configuration needs publicly resolvable names. Adapt it as follows if that does not describe your setup:
+
+* *No public DNS / air-gapped:* replace the ACME configuration on the `proxy` service with your own certificate. Drop the three `--certificatesresolvers.letsencrypt.*` flags, mount your certificate and key into the container, point a https://doc.traefik.io/traefik/https/tls/[TLS store or dynamic configuration file] at them, and replace `traefik.http.routers.<name>.tls.certresolver=letsencrypt` with `traefik.http.routers.<name>.tls=true` on both the `owncloud` and `collabora` services. A self-signed or internal-CA certificate works, but every browser and desktop/mobile client must trust it — Collabora is loaded in an iframe, and clients reject untrusted certificates.
+* *Plain IP address or a single host name:* not supported together with Collabora. The editor requires two distinct HTTPS host names, and a certificate cannot be issued for a bare IP address. Use hostnames from a domain you control, internal DNS plus an internal CA, or omit the `collabora` service.
+* *Your own reverse proxy in front:* see the tip below on publishing a port instead of using the bundled proxy.
+====
+
+[TIP]
+.Fronting the stack with an existing reverse proxy
+====
+If you already terminate TLS elsewhere (for example an existing nginx, HAProxy, or a hardware load balancer), you do not need the bundled `proxy` service. Remove it, then publish ownCloud's port on the host and forward to it from your own proxy:
+
+[source,yml]
+----
+  owncloud:
+    <<: *oc-common
+    container_name: owncloud_server
+    ports:
+      - "8080:8080"
+----
+
+Bind to a specific interface (for example `127.0.0.1:8080:8080`) if the proxy runs on the same host, so the unencrypted port is not reachable from the network. Your proxy must forward the `X-Forwarded-*` headers and be listed in the xref:configuration/server/reverse_proxy_configuration.adoc[reverse proxy configuration], and Collabora still needs its own HTTPS host name routed to port `9980` of the `collabora` container.
+====
+
 . Create a new project directory at a location of choice:
 +
 --

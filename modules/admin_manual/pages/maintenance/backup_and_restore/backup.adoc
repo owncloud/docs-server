@@ -98,6 +98,21 @@ sudo mysqldump \
   owncloud > owncloud-dbbackup_`date +"%Y%m%d"`.bak
 ----
 
+[NOTE]
+.Docker: the database is not reachable from the host
+====
+In the xref:installation/installing_with_docker.adoc[Docker Compose setup], MariaDB deliberately publishes no host port — it is only reachable on the stack's internal network, so `-h localhost` finds nothing on the host. Run the dump inside the database container instead, from the directory holding your `docker-compose.yml`:
+
+[source,bash]
+----
+docker compose exec -T mariadb \
+  mysqldump --single-transaction -u root -p"$MYSQL_ROOT_PASSWORD" \
+  owncloud > owncloud-dbbackup_`date +"%Y%m%d"`.bak
+----
+
+`-T` disables pseudo-TTY allocation, without which the redirected dump would be corrupted by carriage returns. Do not add a `ports:` entry for MariaDB just to enable a host-side backup; that exposes the database to the network.
+====
+
 === SQLite
 
 [source,bash]
