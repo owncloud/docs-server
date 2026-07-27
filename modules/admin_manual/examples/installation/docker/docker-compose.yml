@@ -1,3 +1,11 @@
+# Fixes the Compose project name, so the generated resource names (containers,
+# networks, volumes) do not depend on the directory the stack is launched from.
+# The "frontend" network at the bottom therefore always becomes
+# "owncloud_frontend", which is the name the traefik.docker.network label on the
+# ownCloud service refers to. If you run several copies of this stack on one
+# host, change this and update that label to match "<name>_frontend".
+name: owncloud
+
 # This oc-common template is a compose extension for ownCloud.
 # It is used for starting the main ownCloud instance and reused e.g. when defining listeners for WND.
 # This eases compose maintenance a lot.
@@ -92,13 +100,21 @@ services:
       - traefik.http.routers.collabora.entrypoints=websecure
       - traefik.http.routers.collabora.tls.certresolver=letsencrypt
       - traefik.http.services.collabora.loadbalancer.server.port=9980
+      # Pinned low, so the admin router below always wins regardless of how long
+      # COLLABORA_DOMAIN is (see the note there).
+      - traefik.http.routers.collabora.priority=100
       # Admin console router (higher priority): the CODE admin console and its
       # WebSocket must NOT be reachable from the internet. Restrict them to
       # trusted source ranges. WOPI clients never need these paths.
       - traefik.http.routers.collabora-admin.rule=Host(`${COLLABORA_DOMAIN}`) && (PathPrefix(`/browser/dist/admincontrol`) || PathPrefix(`/cool/adminws`))
       - traefik.http.routers.collabora-admin.entrypoints=websecure
       - traefik.http.routers.collabora-admin.tls.certresolver=letsencrypt
-      - traefik.http.routers.collabora-admin.priority=100
+      # Priority must beat the "collabora" router above. Traefik auto-computes an
+      # unpinned router's priority from its rule-string length, so a long enough
+      # COLLABORA_DOMAIN would out-rank a small fixed number here and steal these
+      # paths — bypassing the allowlist. Pinning both routers removes the
+      # dependency on the domain length entirely.
+      - traefik.http.routers.collabora-admin.priority=200
       - traefik.http.routers.collabora-admin.service=collabora
       - traefik.http.routers.collabora-admin.middlewares=collabora-admin-allowlist
       - traefik.http.middlewares.collabora-admin-allowlist.ipallowlist.sourcerange=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
@@ -111,7 +127,10 @@ services:
     # each service above; WebSocket upgrades (needed by CODE) are handled
     # transparently by Traefik.
     # Pinned tag maintained by Dependabot (see .github/dependabot.yml).
-    image: traefik:v3.3
+    # Must be >= v3.6: the Docker provider in earlier releases probes the daemon
+    # with API version 1.24 before negotiating, which Docker Engine >= 29 rejects
+    # ("client version 1.24 is too old"), leaving Traefik with no routing config.
+    image: traefik:v3.7
     container_name: owncloud_proxy
     restart: always
     command:
@@ -214,10 +233,10 @@ networks:
   # "frontend" carries public traffic (proxy <-> ownCloud/Collabora).
   # "backend" is internal only (ownCloud <-> MariaDB/Redis) so the internet-facing
   # proxy and Collabora cannot reach the data tier directly.
-  # Explicit names (instead of the compose-generated "<project>_frontend") so the
-  # traefik.docker.network label on the ownCloud service resolves regardless of
-  # the project/directory name the stack is launched from.
+  # These are project-scoped: the top-level "name: owncloud" above fixes the
+  # prefix, so they materialize as "owncloud_frontend" / "owncloud_backend".
+  # Traefik's traefik.docker.network label must name the *real* network; given a
+  # short name it warns and then silently falls back to the container's first
+  # network, which may be "backend" — unreachable from the proxy.
   frontend:
-    name: owncloud_frontend
   backend:
-    name: owncloud_backend
