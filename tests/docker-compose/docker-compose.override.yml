@@ -4,18 +4,26 @@
 # (modules/admin_manual/examples/installation/docker/docker-compose.yml) so the
 # stack can be booted locally / in CI without public DNS or Let's Encrypt.
 #
-# It changes exactly one thing versus the shipped file: TLS. The production
-# example obtains real certificates from Let's Encrypt via the ACME TLS-ALPN-01
-# challenge, which requires the public hostnames to resolve to this host — not
-# possible on a throwaway CI runner. Here we:
-#   1. drop the ACME command flags from Traefik, and
-#   2. blank each router's `tls.certresolver` label (set by the base file) and
-#      pin `tls=true`, so the routers stay TLS-enabled but serve Traefik's
-#      built-in self-signed certificate. (A router that still references the now
-#      removed `letsencrypt` resolver is rejected by Traefik and never attaches
-#      to the websecure entrypoint, which breaks routing entirely.)
-# The HTTPS path is still exercised end to end; smoke tests connect with
-# `curl -k`.
+# It changes exactly one thing versus the shipped file: which certificate the
+# TLS routers serve. The production example obtains real certificates from
+# Let's Encrypt via the ACME TLS-ALPN-01 challenge, which requires the public
+# hostnames to resolve to this host — not possible on a throwaway CI runner.
+# Here each router's `tls.certresolver` label (set by the base file) is blanked
+# and `tls=true` is pinned, so the routers stay TLS-enabled but serve Traefik's
+# built-in self-signed certificate. (A router that still references a certresolver
+# it cannot satisfy would fail to obtain a certificate.)
+#
+# Deliberately NOT overridden here:
+#
+#   * Traefik's `command:` list. Compose *replaces* list values rather than
+#     merging them, so re-listing the flags would freeze a copy of the base
+#     file's Traefik configuration and silently stop future flag changes from
+#     reaching the CI-tested config. The base file's ACME flags are therefore
+#     inherited as-is: defining a certresolver is harmless when no router
+#     references it — Traefik never places an ACME order, and the routers above
+#     serve TRAEFIK DEFAULT CERT.
+#
+#   * The Traefik `image:` tag. CI must exercise the same version the docs ship.
 #
 # The security-hardened topology (split networks, no DB/Redis host ports,
 # Collabora admin allowlist, HSTS) is inherited unchanged from the base file.
@@ -33,18 +41,3 @@ services:
       - traefik.http.routers.collabora.tls.certresolver=
       - traefik.http.routers.collabora-admin.tls=true
       - traefik.http.routers.collabora-admin.tls.certresolver=
-
-  proxy:
-    # Pinned to v3.6 for the test harness (the shipped example uses v3.3): the
-    # Docker provider in Traefik < 3.6 probes the daemon with API version 1.24
-    # before negotiating, which Docker Engine >= 29 refuses. v3.6 negotiates
-    # first, so the harness boots on modern local daemons and on CI alike. The
-    # routing/TLS behaviour under test is identical across these 3.x releases.
-    image: traefik:v3.6
-    command:
-      - --providers.docker=true
-      - --providers.docker.exposedbydefault=false
-      - --entrypoints.web.address=:80
-      - --entrypoints.websecure.address=:443
-      - --entrypoints.web.http.redirections.entrypoint.to=websecure
-      - --entrypoints.web.http.redirections.entrypoint.scheme=https

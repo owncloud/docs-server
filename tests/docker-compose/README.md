@@ -12,7 +12,7 @@ bootable **locally and in CI without changing the example itself**:
 
 | File | Purpose |
 | --- | --- |
-| `docker-compose.override.yml` | Drops the Let's Encrypt / ACME command flags so Traefik serves its built-in self-signed certificate. Everything else — split networks, no DB/Redis host ports, Collabora admin allowlist, HSTS — is inherited unchanged. |
+| `docker-compose.override.yml` | Blanks each router's ACME `certresolver` label so Traefik serves its built-in self-signed certificate. Everything else — the Traefik version and its `command:` flags, split networks, no DB/Redis host ports, Collabora admin allowlist, HSTS — is inherited unchanged, so CI exercises the version and configuration the docs actually ship. |
 | `test.env` | Concrete image pins, `*.localhost` hostnames, and throwaway credentials. |
 | `smoke-test.sh` | Boots the merged stack, waits for health, and asserts the endpoints and the security invariants. |
 
@@ -40,8 +40,15 @@ failure, and dumps container status + logs when something fails.
    WOPI `<wopi-discovery>` document.
 3. **Data tier is private (security regression guard)** — the merged
    `docker compose config` publishes no `3306`/`6379` host binding, and neither
-   port answers on `127.0.0.1`. This guards the hardening that removed the
-   MariaDB/Redis host ports from the example.
+   port accepts a TCP connection on `127.0.0.1`. This guards the hardening that
+   removed the MariaDB/Redis host ports from the example. The probe is a raw
+   `/dev/tcp` connect, not `curl`: MariaDB and Redis do not speak HTTP, so curl
+   never exits `0` against them even when the port is wide open, which would make
+   a curl-based check pass unconditionally.
+
+Because the harness reuses the example's fixed Compose project name (needed so
+the `traefik.docker.network` label resolves to the same network the example
+names), it cannot run alongside a real deployment of the example on one host.
 
 TLS is served with Traefik's self-signed certificate, so all requests use
 `curl -k --resolve <host>:443:127.0.0.1`.
