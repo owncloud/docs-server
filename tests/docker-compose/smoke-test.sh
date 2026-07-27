@@ -104,7 +104,10 @@ while true; do
   body=$(curl -sk --max-time 10 \
     --resolve "${OWNCLOUD_HOST}:443:127.0.0.1" \
     "https://${OWNCLOUD_HOST}/status.php" || true)
-  if printf '%s' "${body}" | grep -q '"installed":true'; then
+  # Pure-bash substring match: do NOT pipe into `grep -q`. Under `set -o
+  # pipefail`, grep -q closes the pipe on the first match, printf then dies with
+  # SIGPIPE, and the pipeline reports failure even though the match succeeded.
+  if [[ "${body}" == *'"installed":true'* ]]; then
     pass "status.php reports installed=true"
     printf '      %s\n' "${body}"
     break
@@ -116,22 +119,37 @@ while true; do
   sleep 5
 done
 
-# Collabora WOPI discovery.
+# Collabora WOPI discovery. CODE has no healthcheck (so the health-wait above
+# does not cover it) and, while it is still starting, the proxy returns 404/502
+# for this path. Poll until the discovery document is served or we time out.
 log "Checking Collabora https://${COLLABORA_HOST}/hosting/discovery"
-disco=$(curl -sk --max-time 15 \
-  --resolve "${COLLABORA_HOST}:443:127.0.0.1" \
-  "https://${COLLABORA_HOST}/hosting/discovery" || true)
-if printf '%s' "${disco}" | grep -q '<wopi-discovery>'; then
-  pass "Collabora returned a WOPI discovery document"
-else
-  fail "Collabora /hosting/discovery did not return a wopi-discovery document"
-  printf '      %s\n' "${disco}"
-  exit 1
-fi
+deadline=$(( $(date +%s) + INSTALL_TIMEOUT ))
+while true; do
+  disco=$(curl -sk --max-time 15 \
+    --resolve "${COLLABORA_HOST}:443:127.0.0.1" \
+    "https://${COLLABORA_HOST}/hosting/discovery" || true)
+  # Pure-bash substring match — see the status.php note above for why this must
+  # not be `printf ... | grep -q` under `set -o pipefail`.
+  if [[ "${disco}" == *'<wopi-discovery>'* ]]; then
+    pass "Collabora returned a WOPI discovery document"
+    break
+  fi
+  if [ "$(date +%s)" -ge "${deadline}" ]; then
+    fail "Collabora /hosting/discovery did not return a wopi-discovery document in time"
+    printf '      %s\n' "${disco}"
+    exit 1
+  fi
+  sleep 5
+done
 
 # Security regression guard: the data tier must NOT be published to the host.
+# Capture the config first, then match — piping `compose config` straight into
+# `grep -Eq` is unsafe under `set -o pipefail`: a match makes grep close the
+# pipe, compose dies with SIGPIPE, and the non-zero pipeline status inverts the
+# result, silently hiding a real port exposure.
 log "Asserting MariaDB/Redis are not published to the host"
-if compose config | grep -Eq 'published:\s*"?(3306|6379)"?'; then
+merged_config=$(compose config)
+if [[ "${merged_config}" =~ published:[[:space:]]*\"?(3306|6379)\"? ]]; then
   fail "compose config publishes a data-tier port (3306/6379) to the host"
   exit 1
 fi
