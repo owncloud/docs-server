@@ -149,7 +149,7 @@ This example is a *starting point*, not a hardened deployment. Before you expose
 * *Keep the data tier private.* MariaDB and Redis are intentionally *not* published to the host and live on an internal `backend` network. Do not add `ports:` entries for them — an exposed, weakly-authenticated database or an unauthenticated Redis on a public host is trivially exploitable.
 * *Do not expose the Collabora admin console.* The example restricts the CODE admin console (`/browser/dist/admincontrol`, `/cool/adminws`) to private source ranges via a Traefik `ipallowlist` middleware. Adjust the ranges to match your network; never open these paths to the internet.
 * *Docker socket exposure.* The Traefik proxy mounts the Docker socket so it can read container labels. This grants control of the Docker daemon — effectively root on the host — and the `:ro` flag does *not* restrict the Docker API. For a hardened setup, place a scoped https://github.com/Tecnativa/docker-socket-proxy[docker-socket-proxy] in front of it.
-* *Pin image versions.* `OWNCLOUD_IMAGE` and `COLLABORA_IMAGE` default to a floating tag. Pin them to specific versions for reproducible, auditable upgrades (see xref:#upgrading-owncloud[Upgrading ownCloud]).
+* *Pin image versions.* `COLLABORA_IMAGE` ships pinned to a specific version; keep it (and `OWNCLOUD_IMAGE`) pinned rather than tracking a floating `latest` tag, so upgrades are deliberate, reproducible, and auditable (see xref:#upgrading-owncloud[Upgrading ownCloud]).
 ====
 
 . Create an `.env` configuration file in the same directory, which contains the required configuration settings.
