@@ -45,6 +45,10 @@ services:
       - traefik.http.routers.owncloud.entrypoints=websecure
       - traefik.http.routers.owncloud.tls.certresolver=letsencrypt
       - traefik.http.services.owncloud.loadbalancer.server.port=8080
+      # ownCloud is attached to two networks (frontend + backend). Tell Traefik
+      # which one to use to reach it, otherwise it picks one at random and may
+      # choose "backend", which the proxy cannot reach — breaking all routing.
+      - traefik.docker.network=owncloud_frontend
       # Enable HSTS on ownCloud only. Do NOT add frame-ancestors/X-Frame-Options
       # here or on Collabora: ownCloud embeds the Collabora editor in an iframe and
       # a restrictive framing policy would break document editing.
@@ -204,5 +208,10 @@ networks:
   # "frontend" carries public traffic (proxy <-> ownCloud/Collabora).
   # "backend" is internal only (ownCloud <-> MariaDB/Redis) so the internet-facing
   # proxy and Collabora cannot reach the data tier directly.
+  # Explicit names (instead of the compose-generated "<project>_frontend") so the
+  # traefik.docker.network label on the ownCloud service resolves regardless of
+  # the project/directory name the stack is launched from.
   frontend:
+    name: owncloud_frontend
   backend:
+    name: owncloud_backend
