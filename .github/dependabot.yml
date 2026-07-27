@@ -27,3 +27,20 @@ updates:
         update-types:
           - minor
           - patch
+
+  # Docker images in the admin-manual compose example. Only literal image tags
+  # are updated here (owncloud/server uses ${OWNCLOUD_IMAGE} interpolation, which
+  # Dependabot cannot resolve, so it is intentionally left for manual bumps).
+  - package-ecosystem: docker
+    directory: "/modules/admin_manual/examples/installation/docker"
+    schedule:
+      interval: weekly
+      day: sunday
+      time: '22:00'
+      timezone: Etc/UTC
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch

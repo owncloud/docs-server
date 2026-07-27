@@ -68,7 +68,10 @@ services:
     # Collabora Online Development Edition (CODE): the self-hosted office server
     # that ownCloud connects to as a WOPI client. See the "Enabling Collabora
     # Online (CODE)" section of the documentation for the required occ wiring.
-    image: collabora/code:${COLLABORA_IMAGE}
+    # Image tag pinned here (not in .env) so Dependabot keeps it current — see
+    # .github/dependabot.yml. Do not re-parameterize it: Dependabot cannot read
+    # ${VAR} interpolation.
+    image: collabora/code:24.04.13.2.1
     container_name: owncloud_collabora
     restart: always
     environment:
@@ -107,7 +110,8 @@ services:
     # ownCloud and Collabora containers. Routing/TLS is driven by the labels on
     # each service above; WebSocket upgrades (needed by CODE) are handled
     # transparently by Traefik.
-    image: traefik:${TRAEFIK_IMAGE}
+    # Pinned tag maintained by Dependabot (see .github/dependabot.yml).
+    image: traefik:v3.3
     container_name: owncloud_proxy
     restart: always
     command:
@@ -136,7 +140,8 @@ services:
       - frontend
 
   mariadb:
-    image: mariadb:${MARIADB_IMAGE}
+    # Pinned tag maintained by Dependabot (see .github/dependabot.yml).
+    image: mariadb:10.11
     container_name: owncloud_mariadb
     restart: always
     # No host ports are published. MariaDB is reached only by ownCloud over the
@@ -160,7 +165,8 @@ services:
       - backend
 
   redis:
-    image: redis:${REDIS_IMAGE}
+    # Pinned tag maintained by Dependabot (see .github/dependabot.yml).
+    image: redis:7
     container_name: owncloud_redis
     restart: always
     # No host ports are published. Redis is reached only by ownCloud over the

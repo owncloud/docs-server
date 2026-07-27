@@ -149,7 +149,7 @@ This example is a *starting point*, not a hardened deployment. Before you expose
 * *Keep the data tier private.* MariaDB and Redis are intentionally *not* published to the host and live on an internal `backend` network. Do not add `ports:` entries for them — an exposed, weakly-authenticated database or an unauthenticated Redis on a public host is trivially exploitable.
 * *Do not expose the Collabora admin console.* The example restricts the CODE admin console (`/browser/dist/admincontrol`, `/cool/adminws`) to private source ranges via a Traefik `ipallowlist` middleware. Adjust the ranges to match your network; never open these paths to the internet.
 * *Docker socket exposure.* The Traefik proxy mounts the Docker socket so it can read container labels. This grants control of the Docker daemon — effectively root on the host — and the `:ro` flag does *not* restrict the Docker API. For a hardened setup, place a scoped https://github.com/Tecnativa/docker-socket-proxy[docker-socket-proxy] in front of it.
-* *Pin image versions.* `COLLABORA_IMAGE` ships pinned to a specific version; keep it (and `OWNCLOUD_IMAGE`) pinned rather than tracking a floating `latest` tag, so upgrades are deliberate, reproducible, and auditable (see xref:#upgrading-owncloud[Upgrading ownCloud]).
+* *Pin image versions.* The MariaDB, Redis, Collabora and Traefik images are pinned to specific tags directly in the `docker-compose.yml` file (kept current automatically via Dependabot in the docs repository); the ownCloud version is set with `OWNCLOUD_IMAGE` in the `.env` file. Keep them pinned rather than tracking a floating `latest` tag, so upgrades are deliberate, reproducible, and auditable (see xref:#upgrading-owncloud[Upgrading ownCloud]).
 ====
 
 . Create an `.env` configuration file in the same directory, which contains the required configuration settings.
@@ -211,14 +211,6 @@ a| xref:{config-sample}#override-cli-url[OWNCLOUD_OVERWRITE_CLI_URL]
 | The MariaDB `owncloud` user password (also used by ownCloud to connect)
 | `CHANGE_ME_DB_APP`
 
-| `MARIADB_IMAGE`
-| The mariadb version
-| `10.11`
-
-| `REDIS_IMAGE`
-| The redis version
-| `7`
-
 | `COLLABORA_DOMAIN`
 | The public hostname Collabora Online (CODE) is served at
 | `collabora.example.com`
@@ -228,10 +220,6 @@ a| The ownCloud host that CODE accepts as WOPI host, as a regular expression. +
 Escape every dot with a backslash.
 | `owncloud\.example\.com`
 
-| `COLLABORA_IMAGE`
-| The Collabora Online (CODE) version
-| `latest`
-
 | `COLLABORA_ADMIN_USERNAME`
 | The Collabora admin console username
 | `admin`
@@ -239,10 +227,6 @@ Escape every dot with a backslash.
 | `COLLABORA_ADMIN_PASSWORD`
 | The Collabora admin console password
 | `CHANGE_ME_COLLABORA`
-
-| `TRAEFIK_IMAGE`
-| The Traefik reverse proxy version
-| `v3.3`
 
 | `LETSENCRYPT_EMAIL`
 | The email address used for Let's Encrypt certificate registration

@@ -35,6 +35,12 @@ services:
       - traefik.http.routers.collabora-admin.tls.certresolver=
 
   proxy:
+    # Pinned to v3.6 for the test harness (the shipped example uses v3.3): the
+    # Docker provider in Traefik < 3.6 probes the daemon with API version 1.24
+    # before negotiating, which Docker Engine >= 29 refuses. v3.6 negotiates
+    # first, so the harness boots on modern local daemons and on CI alike. The
+    # routing/TLS behaviour under test is identical across these 3.x releases.
+    image: traefik:v3.6
     command:
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
