@@ -32,7 +32,11 @@ updates:
   # are updated here (owncloud/server uses ${OWNCLOUD_IMAGE} interpolation, which
   # Dependabot cannot resolve, so it is intentionally left for manual bumps).
   - package-ecosystem: docker
-    directory: "/modules/admin_manual/examples/installation/docker"
+    directories:
+      - "/modules/admin_manual/examples/installation/docker"
+      # The compose smoke-test harness. It inherits the example's image tags, but
+      # is listed so any image pinned here in future is tracked too.
+      - "/tests/docker-compose"
     schedule:
       interval: weekly
       day: sunday

@@ -26,13 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Validate the merged compose configuration
-        run: |
-          docker compose \
-            --env-file tests/docker-compose/test.env \
-            -f modules/admin_manual/examples/installation/docker/docker-compose.yml \
-            -f tests/docker-compose/docker-compose.override.yml \
-            config
-
+      # smoke-test.sh validates the merged compose config as its first action,
+      # then boots the stack and asserts on it.
       - name: Boot the stack and run smoke tests
         run: tests/docker-compose/smoke-test.sh
