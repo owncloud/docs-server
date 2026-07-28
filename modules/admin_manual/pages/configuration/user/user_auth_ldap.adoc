@@ -575,6 +575,15 @@ By default, the ownCloud server creates the user directory in your ownCloud data
 
 It is possible to override this setting and name it after an LDAP attribute value, e.g., `attr:cn`.  The attribute can return either an absolute path, e.g., `/mnt/storage43/alice`, or a relative path which must not begin with a `/`, e.g., `CloudUsers/CookieMonster`. This relative path is then created inside the data directory (e.g., `/mnt/data/files/CloudUsers/CookieMonster`).
 
+CAUTION: The home folder is confined to the data directory. An LDAP directory is not necessarily administered by the same people who administer the ownCloud server, so a home resolving *outside* of the data directory is refused - a home pointing at the ownCloud code directory would otherwise expose the application's own files, and allow overwriting them. The affected user cannot log in, and an error naming both the refused path and the configuration option below is written to the ownCloud log. Symbolic links are resolved before the check, so a symlinked data directory keeps working, while a symlink inside the data directory cannot be used to escape it.
+
+If your user home folders legitimately live outside of the data directory, for example on a separate NFS mount, list the permitted base directories in `config/config.php`, either in `user_ldap.home_base_dirs` for the LDAP backend alone, or in xref:configuration/server/config_sample_php_parameters.adoc#additional-base-directories-a-user-home-may-be-located-in[user.home_base_dirs] for every user backend. Existing installations must add the setting *before* upgrading, otherwise the affected users cannot log in afterwards.
+
+[source,php]
+----
+'user_ldap.home_base_dirs' => ['/mnt/storage43'],
+----
+
 Please note that the home folder rule is enforced. This means that once you set a home folder naming rule (get a home folder from an LDAP attribute), it must be available for all users. If it isn't available for a user, then that user will not be able to login. Also, the filesystem will not be set up for that user, so their file shares will not be available to other users. For older versions you may enforce the home folder rule with the `occ` command, like this example on Ubuntu:
 
 [source,bash,subs="attributes+"]
