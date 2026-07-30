@@ -27,7 +27,7 @@
 #   server
     latest-server-version: '10.15'
     previous-server-version: '10.14'
-    latest-server-download-version: '10.16.2'
+    latest-server-download-version: '10.16.4'
     current-server-version: '10.15'
     oc-changelog-url: 'https://owncloud.com/changelog/server/'
     oc-install-package-url: 'https://download.owncloud.com/server/stable/?sort=time&order=asc'
