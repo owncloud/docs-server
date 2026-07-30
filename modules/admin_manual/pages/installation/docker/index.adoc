@@ -5,6 +5,10 @@
 :linux-server-doc-url: https://docs.linuxserver.io/faq
 :docker-compose-build-url: https://docs.docker.com/compose/compose-file/build/
 :description: ownCloud can be installed using the official ownCloud Docker image.
+// the image version documented on this branch. this is intentionally a literal
+// and not an attribute, because the global -version attributes track the latest
+// release of the product and not this branch.
+:docker-image-version: 10.15.3
 
 == Introduction
 
@@ -48,10 +52,10 @@ For testing purposes or a quick hands-on to get familiar with the look and feel,
 
 [source,docker,subs="attributes+"]
 ----
-docker run --rm --name oc-eval -d -p{std-port-http}:{std-port-http} owncloud/server
+docker run --rm --name oc-eval -d -p{std-port-http}:{std-port-http} owncloud/server:{docker-image-version}
 ----
 
-This starts a docker container with the name "oc-eval" in the background (option `-d`). `owncloud/server` is the docker image downloaded from Docker Hub. If you don't start the container with option `-d`, the logs will be displayed in the shell. If you are running it in the background as in the example above, you can display the logs with the command:
+This starts a docker container with the name "oc-eval" in the background (option `-d`). `owncloud/server:{docker-image-version}` is the docker image downloaded from Docker Hub. Always name an explicit version tag, see the note on the `OWNCLOUD_VERSION` setting below. If you don't start the container with option `-d`, the logs will be displayed in the shell. If you are running it in the background as in the example above, you can display the logs with the command:
 
 [source,docker]
 ----
@@ -115,7 +119,7 @@ include::example$installation/docker/docker-compose.yml[]
 [source,bash,subs="attributes+"]
 ----
 cat << EOF > .env
-OWNCLOUD_VERSION={latest-server-version}
+OWNCLOUD_VERSION={docker-image-version}
 OWNCLOUD_DOMAIN=localhost:{std-port-http}
 OWNCLOUD_TRUSTED_DOMAINS=localhost
 ADMIN_USERNAME=admin
@@ -133,8 +137,9 @@ Only a few settings are required, these are:
 | Example
 
 | `OWNCLOUD_VERSION`
-| The ownCloud version
-| `latest`
+| The ownCloud version. +
+Always use an explicit version, never `latest`.
+| `{docker-image-version}`
 
 | `OWNCLOUD_DOMAIN`
 | The ownCloud domain
@@ -156,6 +161,8 @@ Only a few settings are required, these are:
 | The HTTP port to bind to
 | `{std-port-http}`
 |===
+
+NOTE: Pin `OWNCLOUD_VERSION` to a full version like `{docker-image-version}`. Do not use the `latest` tag: it does not necessarily point to the release line documented here, so a container restart can pull a different version than you expect.
 
 NOTE: `ADMIN_USERNAME` and `ADMIN_PASSWORD` will not change between deploys even if you change the
 values in the .env file. To change them, you'll need to do `docker volume prune`, which
