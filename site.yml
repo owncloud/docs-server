@@ -24,12 +24,12 @@ asciidoc:
 #   branch-specific-variables: 'see antora.yml'
 #   global attributes loaded via antora extension
 #   server
-    # note that the version attributes just need to be present and have next as key
-    # as they are just here for the test build
-    latest-server-version: 'next@'   # do not change, soft set, correctly defined via antora.yml
-    previous-server-version: 'next@' # do not change, soft set, correctly defined via antora.yml
-    latest-server-download-version: '10.16.4'
-    current-server-version: 'next@'         # do not change, soft set, correctly defined via antora.yml
+    # note that the version attributes just need to be present and match the version key
+    # of antora.yml as they are just here for the test build
+    latest-server-version: '11.0@'   # do not change, soft set, correctly defined via antora.yml
+    previous-server-version: '11.0@' # do not change, soft set, correctly defined via antora.yml
+    latest-server-download-version: '11.0.0'
+    current-server-version: '11.0@'         # do not change, soft set, correctly defined via antora.yml
   extensions:
     - ./ext-asciidoc/tabs.js
     - ./ext-asciidoc/remote-include-processor.js

@@ -31,9 +31,9 @@ Pull any or all of these Docker containers:
 ----
 docker pull selenium/standalone-chrome:3.141.59-oxygen
 docker pull selenium/standalone-chrome-debug:3.141.59-oxygen
-docker pull selenium/standalone-firefox
-docker pull selenium/standalone-firefox-debug
-docker pull inbucket/inbucket
+docker pull selenium/standalone-firefox:3.141.59-oxygen
+docker pull selenium/standalone-firefox-debug:3.141.59-oxygen
+docker pull inbucket/inbucket:3.1.1
 ----
 
 * A `vnc` viewer installed (in order to view the browser action as the UI tests run). For example:
@@ -62,7 +62,7 @@ taken to do the test.
 
 [source,console]
 ----
-docker run -p 4445:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-chrome-debug
+docker run -p 4445:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-chrome-debug:3.141.59-oxygen
 ----
 
 Ports on the Selenium Docker IP address are mapped to `localhost` so they can be accessed by the tests and the `vnc` viewer.
@@ -71,7 +71,7 @@ Ports on the Selenium Docker IP address are mapped to `localhost` so they can be
 
 [source]
 ----
-docker run -p 2500:2500 -p 9000:9000 inbucket/inbucket
+docker run -p 2500:2500 -p 9000:9000 inbucket/inbucket:3.1.1
 ----
 
 Ports on the InBucket docker IP address are mapped to `localhost` so they can be accessed by the tests.

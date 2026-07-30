@@ -1,6 +1,8 @@
 # Create a New Version Branch
 
-When doing a new release of this product documentation, a new version branch must be created based on `master`. It is necessary to do this in steps. Keep in mind that we only process master (version `next`) and the latest two named versions. Patch versions are excluded from this process and can be added in the product repo at any time without further notice. For patch versions, only content changes need to be added if any.
+When doing a new release of this product documentation, a new version branch must be created based on `master`. It is necessary to do this in steps. Keep in mind that we only process master and the latest named version. Patch versions are excluded from this process and can be added in the product repo at any time without further notice. For patch versions, only content changes need to be added if any.
+
+**Note that `master` carries the *released* version, not an unreleased `next`.** With ownCloud Classic 11.0.0, the `next` version was renamed to `11.0` and the `prerelease` key was dropped from `antora.yml`; there is no `next` version segment for this product any more. Antora selects the newest non-prerelease version of a component as its `latest`, so master being a released version is what makes `/server/latest/` point at the current documentation. Consequently a new version branch *freezes the outgoing version* off master, and master is then bumped to the new one — the reverse of the former `next`-based flow.
 
 Note that the `latest` version pointer mentioned below is virtual and not part of Antora but created by the webserver and redirects to the latest versioned product automatically.
 
@@ -16,7 +18,7 @@ Enable pushing a new branch.
 This step creates the branch locally, necessary for content changes and for the repo building process. 
 
 1.  Create a new `x.y` branch based on latest `origin/master`
-1.  In `.drone.star` set `latest_version` to `x.y` (on top in section `def main(ctx)`).
+1.  In `.github/workflows/ci.yml`, add the new `x.y` branch to `on.push.branches` and to `on.pull_request.branches`, and remove the branch that is being dropped. This is the list that decides which branches CI builds — there is no `.drone.star` in this repo any more.
 1.  Check in `site.yml` in section `content.sources` that the following value is set: `- url: .` and in `content.sources.url` the following value is set: `- HEAD`.
 1.  In `antora.yml`, set the `version:` key on top to the same as the branch name like `x.y`. Each branch must have it's unique version!
 1.  In `antora.yml`, in section `asciidoc.attributes`, DO NOT adjust relevant `-version` keys. They are required for local building.
@@ -36,9 +38,8 @@ The branch has been pushed, add it to the rule set for protected version branche
 This step is necessary to update the building process for content changes in this repo. 
 
 1. Create a new `changes_necessary_for_x.y` branch based on latest `origin/master`.
-1. In `.drone.star` set `latest_version` to `x.y` (on top in section `def main(ctx)`).
-1. In `antora.yml`, check if the `version:` key is set to `next`.
-1. In `site.yml` and in `antora.yml`, DO NOT adjust relevant `-version` keys.
+1. In `antora.yml`, set the `version:` key to the version master now carries. Do not add a `prerelease` key — master holds a released version, see the note at the top.
+1. In `site.yml` and in `antora.yml`, adjust the relevant `-version` keys to master's new version. They are only used for local building, but they must match the `version:` key so that a local build renders the same values as the assembled site.
 1. Run a build by entering `npm run antora-local`. No build errors or warnings should occur.
 1. Commit changes and push them. (Check the branch protection rules upfront so that the push passes.)
 1. Create a Pull Request `Changes necessary for x.y`, see the [text suggestion](#text-suggestion-for-step-4) below. When CI is green, all is done correctly, merge the PR when approved. This merge does NOT add the version to the main building process. You can now add at any time content changes to this version.
