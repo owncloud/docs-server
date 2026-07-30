@@ -1,5 +1,6 @@
 = Migrating an Instance
 :toc: right
+:page-aliases: maintenance/migrating.adoc
 :description: There are several situations where ownCloud needs to be migrated.
 
 == Introduction

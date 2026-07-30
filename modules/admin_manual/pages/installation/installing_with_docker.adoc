@@ -2,6 +2,8 @@
 :toc: right
 :description: ownCloud can be installed using the official ownCloud Docker image.
 :page-aliases: enterprise/installation/install.adoc, \
+installation/index.adoc, \
+installation/source_installation.adoc, \
 installation/manual_installation/manual_installation.adoc, \
 installation/quick_guides/ubuntu_20_04.adoc, \
 installation/quick_guides/ubuntu_22_04.adoc, \
