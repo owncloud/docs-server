@@ -11,8 +11,10 @@
 
 Note that this section always points to the latest server version available. In case you need a different version, select your topic and manually switch to one of the available ones.
 
-* xref:{latest-server-version}@server:admin_manual:installation/index.adoc[Manual Installation]
-* xref:{latest-server-version}@server:admin_manual:installation/docker/index.adoc[Installation with Docker]
+// note that these targets must use the page paths of the *latest* server
+// version, not this branch's: the latest version is a docker-only release and
+// has reorganized its installation and upgrading pages accordingly.
+* xref:{latest-server-version}@server:admin_manual:installation/installing_with_docker.adoc[Installation with Docker]
 * xref:{latest-server-version}@server:admin_manual:configuration/server/occ_command.adoc[OCC Commands]
 * xref:{latest-server-version}@server:admin_manual:configuration/server/caching_configuration.adoc#small-organization-single-server-setup[File Locking and Caching Configuration]
-* xref:{latest-server-version}@server:admin_manual:maintenance/manual_upgrade.adoc[Manual Upgrade]
+* xref:{latest-server-version}@server:admin_manual:maintenance/upgrading/manual_upgrade.adoc[Manual Upgrade]
