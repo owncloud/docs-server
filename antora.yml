@@ -1,7 +1,6 @@
 name: server
 title: ownCloud Classic
-version: next
-prerelease: true
+version: '11.0'
 start_page: ROOT:index.adoc
 nav:
 - modules/ROOT/partials/nav.adoc
@@ -11,7 +10,7 @@ asciidoc:
     latest-server-version: {page-component-version}   # do not change, this is the value of the version key
     previous-server-version: {page-component-version} # do not change, this is the value of the version key
     current-server-version: {page-component-version}  # do not change, this is the value of the version key
-    minimum-php-printed: '8.1.0'
-    recommended-php-version: '8.1' # note: admin docs
+    minimum-php-printed: '8.3.0'
+    recommended-php-version: '8.3' # note: admin docs
     format: 'html' # this attribute is a necessary legacy
     config-sample: configuration/server/config_sample_php_parameters.adoc

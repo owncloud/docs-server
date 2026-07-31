@@ -64,6 +64,8 @@ When defining your own preview providers, some things need to be considered. For
 
 Starting with version 7 of ImageMagick, additional file formats like SVG or HEIC and many others can be processed.
 
+NOTE: The ImageMagick command-line tools like `convert` are not part of the ownCloud image provided. To use the providers described here, build your own image based on it, see xref:installation/create_own_image.adoc[Create an own Docker Image]. The same applies to `ghostscript` and `ffmpeg` mentioned below.
+
 You can check your ImageMagick version, if installed in your image, by issuing the following command:
 
 [source,docker]

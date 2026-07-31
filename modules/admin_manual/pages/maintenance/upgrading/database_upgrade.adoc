@@ -54,11 +54,11 @@ Configure your web proxy server to prevent users from accessing ownCloud via the
 +
 --
 Follow the instructions in the respective {upgrade-mariadb-url}[Upgrading MariaDB] guide to upgrade MariaDB. +
-If required, run the `mysql_upgrade` command when using a compose setup including MySQL.
+If required, run the `mysql_upgrade` command when using a compose setup including MySQL. Note that the command ships with the database image, so it has to be run in the `mariadb` service and not in the `owncloud` one.
 
 [source,bash]
 ----
-docker compose exec owncloud mysql_upgrade -uroot -p
+docker compose exec mariadb mysql_upgrade -uroot -p
 ----
 --
 
